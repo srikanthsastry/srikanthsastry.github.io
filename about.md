@@ -26,9 +26,6 @@ fplayout:
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>You can contact me via email at &lt;my last name&gt;&lt;AT&gt;csail.mit.edu.</p>
+<p>You can contact me via email at srikanth@sastry.name.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
-<p>This website is hosted on <a title="Internet Hosting Cooperative" href="http://www.hcoop.net" target="_blank" rel="noopener">HCoop</a>, which is an awesome cooperative internet hosting service, and you should definitely consider becoming a member!</p>
-<!-- /wp:paragraph -->
