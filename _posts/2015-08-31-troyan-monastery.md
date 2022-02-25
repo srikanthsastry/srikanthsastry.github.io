@@ -21,7 +21,7 @@ format: image
 <!-- /wp:paragraph -->
 
 <!-- wp:image {"id":259,"align":"center"} -->
-<div class="wp-block-image"><figure class="aligncenter"><a href="http://srikanth.sastry.name/troyan-monastery/img_20150831_154933/"><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150831_154933-1024x760.jpg" alt="The entrance to Troyan Monastery; very simple, as expected. However, your attention diverts to the mosaic to the left." class="wp-image-259"/></a><figcaption>The entrance to Troyan Monastery; very simple, as expected. However, your attention diverts to the mosaic to the left.</figcaption></figure></div>
+<div class="wp-block-image"><figure class="aligncenter"><a href="/troyan-monastery/img_20150831_154933/"><img src="/wp-content/uploads/2015/08/IMG_20150831_154933-1024x760.jpg" alt="The entrance to Troyan Monastery; very simple, as expected. However, your attention diverts to the mosaic to the left." class="wp-image-259"/></a><figcaption>The entrance to Troyan Monastery; very simple, as expected. However, your attention diverts to the mosaic to the left.</figcaption></figure></div>
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->
@@ -33,7 +33,7 @@ format: image
 <!-- /wp:more -->
 
 <!-- wp:image {"id":261,"align":"center"} -->
-<div class="wp-block-image"><figure class="aligncenter"><a href="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150831_155017.jpg"><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150831_155017-760x1024.jpg" alt="Roman-style mosaic of virgin Mary and baby Christ." class="wp-image-261"/></a><figcaption>Roman-style mosaic of virgin Mary and baby Christ.</figcaption></figure></div>
+<div class="wp-block-image"><figure class="aligncenter"><a href="/wp-content/uploads/2015/08/IMG_20150831_155017.jpg"><img src="/wp-content/uploads/2015/08/IMG_20150831_155017-760x1024.jpg" alt="Roman-style mosaic of virgin Mary and baby Christ." class="wp-image-261"/></a><figcaption>Roman-style mosaic of virgin Mary and baby Christ.</figcaption></figure></div>
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->
@@ -49,7 +49,7 @@ format: image
 <!-- /wp:paragraph -->
 
 <!-- wp:image {"id":264,"align":"center"} -->
-<div class="wp-block-image"><figure class="aligncenter"><a href="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150831_160245.jpg"><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150831_160245-1024x760.jpg" alt="Simple, but adequate, dwellings in the monastery." class="wp-image-264"/></a><figcaption>Simple, but adequate, dwellings in the monastery.</figcaption></figure></div>
+<div class="wp-block-image"><figure class="aligncenter"><a href="/wp-content/uploads/2015/08/IMG_20150831_160245.jpg"><img src="/wp-content/uploads/2015/08/IMG_20150831_160245-1024x760.jpg" alt="Simple, but adequate, dwellings in the monastery." class="wp-image-264"/></a><figcaption>Simple, but adequate, dwellings in the monastery.</figcaption></figure></div>
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->
@@ -57,7 +57,7 @@ format: image
 <!-- /wp:paragraph -->
 
 <!-- wp:image {"id":265,"align":"center"} -->
-<div class="wp-block-image"><figure class="aligncenter"><a href="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150831_160420.jpg"><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150831_160420-1024x760.jpg" alt="19th century style fresco among the monastery rooms" class="wp-image-265"/></a><figcaption>19th century style fresco among the monastery rooms</figcaption></figure></div>
+<div class="wp-block-image"><figure class="aligncenter"><a href="/wp-content/uploads/2015/08/IMG_20150831_160420.jpg"><img src="/wp-content/uploads/2015/08/IMG_20150831_160420-1024x760.jpg" alt="19th century style fresco among the monastery rooms" class="wp-image-265"/></a><figcaption>19th century style fresco among the monastery rooms</figcaption></figure></div>
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->
@@ -68,17 +68,20 @@ format: image
 <p>Here is are views of the outer walls of the church from the lower ground level, and from a higher elevation.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
-<p>[gallery columns="2" size="large" ids="262,263"]</p>
-<!-- /wp:paragraph -->
+[![View of the church from the ground level that is lower than the surrounding land](/wp-content/uploads/2015/08/IMG_20150831_155051.jpg)](/wp-content/uploads/2015/08/IMG_20150831_155051.jpg)
+*View of the church from the ground level that is lower than the surrounding land*
+
+[![View of the church from a higher level (from the patriarchs’ graves)](/wp-content/uploads/2015/08/IMG_20150831_160950.jpg)](/wp-content/uploads/2015/08/IMG_20150831_160950.jpg)
+*View of the church from a higher level (from the patriarchs’ graves).*
 
 <!-- wp:paragraph -->
 <p>It is the 19th century frescos that impress the most. The pillars along the entrance walls make a favorable first impression.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
-<p>[gallery columns="2" link="file" size="large" ids="266,267"]</p>
-<!-- /wp:paragraph -->
+[![Notice the paintings along the frieze](/wp-content/uploads/2015/08/IMG_20150831_155120.jpg)](/wp-content/uploads/2015/08/IMG_20150831_155120.jpg)
+*Notice the paintings along the frieze*
+[![Another view of the frieze along both entrances to the church](/wp-content/uploads/2015/08/IMG_20150831_160219.jpg)](/wp-content/uploads/2015/08/IMG_20150831_160219.jpg)
+*Another view of the frieze along both entrances to the church*
 
 <!-- wp:paragraph -->
 <p>However, it is the frescos along the walls and ceilings both inside and outside the church that impress the most. While I did not take any photographs of the inside, here is a collection of the frescos on the outside that should give you an inkling of what lies inside the church.</p>
@@ -87,6 +90,12 @@ format: image
 <!-- wp:paragraph -->
 <p>[gallery link="file" size="large" ids="268,269,270"]</p>
 <!-- /wp:paragraph -->
+[![Fresco with a skeleton rowing in a sarcophagus and a fish in it swallowing a person. I have no idea what this is about.](/wp-content/uploads/2015/08/IMG_20150831_155159.jpg)](/wp-content/uploads/2015/08/IMG_20150831_155159.jpg)
+*Fresco with a skeleton rowing in a sarcophagus and a fish in it swallowing a person. I have no idea what this is about.*
+[![This is a continuation of fresco along the ceiling.](/wp-content/uploads/2015/08/IMG_20150831_155216.jpg)](/wp-content/uploads/2015/08/IMG_20150831_155216.jpg)
+*This is a continuation of fresco along the ceiling.*
+[![Another fresco at another part of the ceiling.](/wp-content/uploads/2015/08/IMG_20150831_155247.jpg)](/wp-content/uploads/2015/08/IMG_20150831_155247.jpg)
+*Another fresco at another part of the ceiling.*
 
 <!-- wp:paragraph -->
 <p>You will be much more impressed with what's inside the church. It is covered in murals along all walls and&nbsp;ceiling.</p>
@@ -97,7 +106,7 @@ format: image
 <!-- /wp:paragraph -->
 
 <!-- wp:image {"id":271,"align":"center"} -->
-<div class="wp-block-image"><figure class="aligncenter"><a href="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150831_160632.jpg"><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150831_160632-1024x760.jpg" alt="A sign that says that inside lies the bones of monks, freedom fighter, and area orthodox christians" class="wp-image-271"/></a><figcaption>A sign that says that inside lies the bones of monks, freedom fighters, and area orthodox christians</figcaption></figure></div>
+<div class="wp-block-image"><figure class="aligncenter"><a href="/wp-content/uploads/2015/08/IMG_20150831_160632.jpg"><img src="/wp-content/uploads/2015/08/IMG_20150831_160632-1024x760.jpg" alt="A sign that says that inside lies the bones of monks, freedom fighter, and area orthodox christians" class="wp-image-271"/></a><figcaption>A sign that says that inside lies the bones of monks, freedom fighters, and area orthodox christians</figcaption></figure></div>
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->
@@ -105,7 +114,7 @@ format: image
 <!-- /wp:paragraph -->
 
 <!-- wp:image {"id":272,"align":"center"} -->
-<div class="wp-block-image"><figure class="aligncenter"><a href="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150831_160549.jpg"><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150831_160549-760x1024.jpg" alt="The bones, as promised." class="wp-image-272"/></a><figcaption>The bones, as promised.</figcaption></figure></div>
+<div class="wp-block-image"><figure class="aligncenter"><a href="/wp-content/uploads/2015/08/IMG_20150831_160549.jpg"><img src="/wp-content/uploads/2015/08/IMG_20150831_160549-760x1024.jpg" alt="The bones, as promised." class="wp-image-272"/></a><figcaption>The bones, as promised.</figcaption></figure></div>
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->
@@ -113,5 +122,6 @@ format: image
 <!-- /wp:paragraph -->
 
 <!-- wp:gallery {"ids":[274,275],"columns":2,"linkTo":"attachment"} -->
-<ul class="wp-block-gallery columns-2 is-cropped"><li class="blocks-gallery-item"><figure><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150831_161018.jpg" alt="" data-id="274" class="wp-image-274"/></figure></li><li class="blocks-gallery-item"><figure><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150831_161112.jpg" alt="" data-id="275" class="wp-image-275"/></figure></li></ul>
+<figure><img src="/wp-content/uploads/2015/08/IMG_20150831_161018.jpg" alt="" data-id="274" class="wp-image-274"/></figure>
+<figure><img src="/wp-content/uploads/2015/08/IMG_20150831_161112.jpg" alt="" data-id="275" class="wp-image-275"/></figure>
 <!-- /wp:gallery -->
