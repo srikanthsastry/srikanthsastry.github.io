@@ -87,9 +87,7 @@ format: image
 <p>However, it is the frescos along the walls and ceilings both inside and outside the church that impress the most. While I did not take any photographs of the inside, here is a collection of the frescos on the outside that should give you an inkling of what lies inside the church.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:paragraph -->
-<p>[gallery link="file" size="large" ids="268,269,270"]</p>
-<!-- /wp:paragraph -->
+
 [![Fresco with a skeleton rowing in a sarcophagus and a fish in it swallowing a person. I have no idea what this is about.](/wp-content/uploads/2015/08/IMG_20150831_155159.jpg)](/wp-content/uploads/2015/08/IMG_20150831_155159.jpg)
 *Fresco with a skeleton rowing in a sarcophagus and a fish in it swallowing a person. I have no idea what this is about.*
 [![This is a continuation of fresco along the ceiling.](/wp-content/uploads/2015/08/IMG_20150831_155216.jpg)](/wp-content/uploads/2015/08/IMG_20150831_155216.jpg)
