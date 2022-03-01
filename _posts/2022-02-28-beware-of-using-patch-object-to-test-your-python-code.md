@@ -9,6 +9,7 @@ tags:
 categories:
     - Professional
 permalink: /beware-of-using-patch-object-to-test-your-python-code/
+layout: post
 ...
 ![Software Testing](/images/software-testing.jpg)
 
