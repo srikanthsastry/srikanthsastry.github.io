@@ -8,6 +8,7 @@ tags:
     - 'software engineering'
 categories:
     - Professional
+permalink: /beware-of-using-patch-object-to-test-your-python-code/
 ...
 ![Software Testing](/images/software-testing.jpg)
 
