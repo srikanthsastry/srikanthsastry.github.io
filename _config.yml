@@ -2,7 +2,7 @@
 title:               Srikanth Sastry
 tagline:             'A Techie in Boston'
 description:         'A personal website'
-url:                 https://srikanthsastry.github.io
+url:                 '//srikanth.sastry.name'
 baseurl:             ''
 paginate:            5
 permalink:           /:slug/
@@ -10,7 +10,7 @@ permalink:           /:slug/
 # About/contact
 author:
   name:              Srikanth Sastry
-  url:               https://srikanthsastry.github.io
+  url:               '//srikanth.sastry.name'
   email:             srikanth@sastry.name
 
 # Gems
