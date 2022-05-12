@@ -90,7 +90,7 @@ class TestHasThreeDigits(unittest.TestCase):
         output_value = has_three_digits(23)
         self.assertFalse(output_value)
 ```
-The code coverage is 100%, branch coverage is 100%. But `sef.counter` is never verified!
+The code coverage is 100%, branch coverage is 100%. But `self.counter` is never verified!
 ## Wait, there's more!
 Coverage metrics only consider the code the are under your project, and ignore all external libraries. However, your code is correct only if you are satisfying the preconditions of your external library calls, and test coverage metrics do not capture any of that. Here is an illustration with an contrived example.
 ```python
