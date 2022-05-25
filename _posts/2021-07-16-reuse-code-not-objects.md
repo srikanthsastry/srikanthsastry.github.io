@@ -11,6 +11,9 @@ categories:
 tags:
     - 'design pattern'
     - 'software engineering'
+excerpt: >
+  We all know of the importance of code reuse and DRY code.
+  It is important to remember that this applies to code, and not to objects!
 ---
 
 <!-- wp:image {"id":666} -->

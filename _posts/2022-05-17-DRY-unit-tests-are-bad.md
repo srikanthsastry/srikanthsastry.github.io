@@ -8,6 +8,11 @@ categories:
     - Professional
 permalink: /dry-unit-tests-are-bad/
 layout: post
+excerpt: >
+  "Don't Repeat Yourself" (DRY) is arguably one of the most important principles in software engineering.
+  It is considered a truism among many. 
+  A consequence of such dogmatic allegiance to DRYness is that we see a lot of DRY unit tests; this is where
+  the utility of the DRY principle breaks downs and starts causing more problems that it solves.
 ...
 ![DRY](/images/squeeze-cloth.jpg)
 

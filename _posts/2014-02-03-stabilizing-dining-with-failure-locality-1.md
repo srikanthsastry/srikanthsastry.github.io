@@ -10,6 +10,8 @@ fplayout:
     - default
 categories:
     - Professional
+tags:
+  - 'dining philosophers'
 ---
 
 This paper was presented in ICDCN 2014.

@@ -7,6 +7,12 @@ tags:
     - 'test doubles'
     - mocks
     - stubs
+
+excerpt: >
+  Test doubles are the standard mechanism to isolate your System-Under-Test (SUT) from external dependencies in unit tests.
+  Unsurprisingly, it is important to use the right test double for each use case for a maintainable and robust test suite.
+  However, I have seen a lot of misuse of test doubles, and suffered through the consequences of it enough number of times
+  to want to write down some (admittedly subjective) guidelines on when an how to use test doubles. 
 categories:
     - Professional
 permalink: /mocks-stubs-andhow-to-use-them/
