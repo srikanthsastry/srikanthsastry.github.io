@@ -12,9 +12,9 @@ author:
   name:              Srikanth Sastry
   url:               '//srikanth.sastry.name'
   email:             srikanth@sastry.name
-
 # Gems
 plugins:
+  - jekyll-feed
   - jekyll-paginate
 
 # Custom vars
