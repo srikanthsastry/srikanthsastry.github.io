@@ -19,7 +19,7 @@ permalink: /mocks-stubs-andhow-to-use-them/
 layout: post
 ---
 
-![Photo by Polina Kovaleva from Pexels](/images/masquerade-masks.jpg)
+![Photo by Polina Kovaleva from Pexels](/images/masquerade-masks.png)
 _Photo by [Polina Kovaleva](https://www.pexels.com/@polina-kovaleva?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels) from [Pexels](https://www.pexels.com/photo/close-up-of-masquerade-masks-on-purple-background-8404608/?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels)_
 
 [Test doubles](https://en.wikipedia.org/wiki/Test_double) are the standard mechanism to isolate your System-Under-Test (SUT) from external dependencies in unit tests. Unsurprisingly, it is important to use the right test double for each use case for a maintainable and robust test suite. However, I have seen a lot of misuse of test doubles, and suffered through the consequences of it enough number of times to want to write down some (admittedly subjective) guidelines on when an how to use test doubles. 
