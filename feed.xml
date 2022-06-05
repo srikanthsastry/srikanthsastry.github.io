@@ -1,0 +1,843 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="//srikanth.sastry.name/feed.xml" rel="self" type="application/atom+xml" /><link href="//srikanth.sastry.name/" rel="alternate" type="text/html" /><updated>2022-06-05T18:26:14+00:00</updated><id>//srikanth.sastry.name/feed.xml</id><title type="html">Srikanth Sastry</title><subtitle>A personal website</subtitle><author><name>Srikanth Sastry</name><email>srikanth@sastry.name</email></author><entry><title type="html">Unit test the brains and not the nerves</title><link href="//srikanth.sastry.name/unit-test-the-brains-and-not-the-nerves/" rel="alternate" type="text/html" title="Unit test the brains and not the nerves" /><published>2022-05-31T00:00:00+00:00</published><updated>2022-05-31T00:00:00+00:00</updated><id>//srikanth.sastry.name/unit-test-brains-and-not-nerves</id><content type="html" xml:base="//srikanth.sastry.name/unit-test-the-brains-and-not-the-nerves/"><![CDATA[<p><em>Note: This is inspired from the book “<a href="https://www.manning.com/books/unit-testing">Unit Testing: Principles, Practices, and Patterns</a>” by Vladimir Khorikov.</em></p>
+
+<p><img src="/images/brain-magnifying-glass.png" alt="brain" /></p>
+
+<p>Unit tests are typically your first line of defense against bugs. So, it is tempting to add unit tests for all functionality that your code supports. But that begs the following question. “Why do we need integration and end-to-end tests?”</p>
+
+<h2 id="categorizing-production-code">Categorizing production code</h2>
+<p>To better understand the primary motivations for unit tests vs. integration (and end-to-end) tests, it is helpful to categorize your production code into four categories along two dimensions: thinking, and talking.</p>
+
+<ul>
+  <li><em>Thinking code.</em> There are parts of your codebase that are focused mostly on the business logic and the complex algorithmic computations. I refer to these as the thinking code.</li>
+  <li><em>Talking code.</em> There are parts of your codebase that are focused mostly on communicating with other dependencies such as key-value stores, log servers, databases, etc. I refer to these as talking code.</li>
+</ul>
+
+<p>Each part of your codebase can be either thinking, talking, or both. Based on that observation, we can categorize each unit of code into one of four categories (in keeping with the biology theme).</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Thinking</th>
+      <th>Talking</th>
+      <th>Category</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Yes</td>
+      <td>No</td>
+      <td><em>Brain</em></td>
+    </tr>
+    <tr>
+      <td>No</td>
+      <td>Yes</td>
+      <td><em>Nerves</em></td>
+    </tr>
+    <tr>
+      <td>Yes</td>
+      <td>Yes</td>
+      <td><em>Ganglia</em></td>
+    </tr>
+    <tr>
+      <td>No</td>
+      <td>No</td>
+      <td><em>Synapse</em></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="testing-for-each-category">Testing for each category</h2>
+
+<p>Each category needs a distinct approach to testing.</p>
+
+<h3 id="brains--unit-tests">Brains → Unit Tests</h3>
+
+<p>Brains are one of the most complex parts of your codebase that often requires the most technical skill and domain knowledge to author, read, and maintain. Consequently, they are best tested with unit tests. Furthermore, they also have very few direct external dependencies, and as a result require limited use of test doubles.</p>
+
+<h3 id="nerves--integration-tests">Nerves → Integration Tests</h3>
+
+<p>Nerves have very little logic, but focus mostly on external communication with dependencies.
+As a result, there isn’t much to unit test here, except perhaps that the protocol translation from the outside world into the brains is happening correctly.
+By their very nature, the correctness of nerves cannot be tested hermetically, and therefore, are not at all well suited to be unit tested. Nerves should really be tested in your integration tests, where you hook your production code with real test instances of external dependencies.</p>
+
+<h3 id="ganglia--refactor">Ganglia → Refactor</h3>
+
+<p>Ganglia are units of code that have both complex business logic and have significant external dependencies. It is very difficult to unit test them thoroughly because such unit tests require heavy use of test doubles which can make the tests less readable and more brittle. You could try to test ganglia through integration tests, but it becomes very challenging to test low probability code paths, which is usually the source of difficult-to-debug issues. Therefore, my suggestion is to refactor such code into smaller pieces of code each of which are either a <em>brain</em> or a <em>nerve</em>, and tests each of those as described above.</p>
+
+<p>See Chapter 7 of “<a href="https://www.manning.com/books/unit-testing">Unit Testing: Principles, Practices, and Patterns</a>” for suggestions on how to refactor your code to make it more testable.</p>
+
+<h3 id="synapse--ignore">Synapse → Ignore</h3>
+
+<p>Synapses are trivial pieces of code (often utilities) that have neither complex business logic, nor do they have any external dependencies. My recommendation is to simply not focus on testing them. Adding unit tests for them simply increases the cost of testing and maintenance without really providing any benefit. They are often simple enough to be verified visually, and they exist only to serve either the brains or the nerves, and so will be indirectly tested via unit tests or integration tests.</p>]]></content><author><name>Srikanth Sastry</name><email>srikanth@sastry.name</email></author><category term="professional" /><category term="testing" /><category term="software engineering" /><category term="integration tests" /><category term="unit tests" /><summary type="html"><![CDATA[Unit tests are typically your first line of defense against bugs. So, it is tempting to add unit tests for all functionality that your code supports. But that begs the following question. "Why do we need integration and end-to-end tests?" Unit tests most benefit the most complex parts of your codebase that often requires the most technical skill and domain knowledge to author, read, and maintain. Integration tests disproportionately benefit the parts of your codebase that communicate with external dependencies.]]></summary></entry><entry><title type="html">Mocks, Stubs, and how to use them</title><link href="//srikanth.sastry.name/mocks-stubs-andhow-to-use-them/" rel="alternate" type="text/html" title="Mocks, Stubs, and how to use them" /><published>2022-05-25T00:00:00+00:00</published><updated>2022-05-25T00:00:00+00:00</updated><id>//srikanth.sastry.name/mocks-stubs-and-how-to-use-them</id><content type="html" xml:base="//srikanth.sastry.name/mocks-stubs-andhow-to-use-them/"><![CDATA[<p><img src="/images/masquerade-masks.png" alt="Photo by Polina Kovaleva from Pexels" />
+<em>Photo by <a href="https://www.pexels.com/@polina-kovaleva?utm_content=attributionCopyText&amp;utm_medium=referral&amp;utm_source=pexels">Polina Kovaleva</a> from <a href="https://www.pexels.com/photo/close-up-of-masquerade-masks-on-purple-background-8404608/?utm_content=attributionCopyText&amp;utm_medium=referral&amp;utm_source=pexels">Pexels</a></em></p>
+
+<p><a href="https://en.wikipedia.org/wiki/Test_double">Test doubles</a> are the standard mechanism to isolate your System-Under-Test (SUT) from external dependencies in unit tests. Unsurprisingly, it is important to use the right test double for each use case for a maintainable and robust test suite. However, I have seen a lot of misuse of test doubles, and suffered through the consequences of it enough number of times to want to write down some (admittedly subjective) guidelines on when an how to use test doubles.</p>
+
+<p>Briefly, test doubles are <a href="https://martinfowler.com/bliki/TestDouble.html">replacements for a production object used for testing</a>. Depending on who you ask, there are multiple different categorizations of test doubles; but two categories that appears in all of these categorizations are <a href="https://en.wikipedia.org/wiki/Mock_object">mocks</a> and <a href="https://en.wikipedia.org/wiki/Test_stub">stubs</a>. So I will focus on on these two. I have seen mocks and stubs often conflated together. The problem is made worse by all the test-double frameworks’ terminology: they are often referred to as ‘mocking’ frameworks, and the test doubles they generate are all called ‘mocks’.</p>
+
+<h2 id="mocks">Mocks</h2>
+
+<p><img src="/images/woman-wearing-emoji-mask.jpg" alt="woman wearing an emoji mask" /></p>
+
+<p><em>Image by <a href="https://pixabay.com/users/5697702-5697702/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2428737">Andii Samperio</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2428737">Pixabay</a></em></p>
+
+<p>Mocks are objects that are used to verify ‘outbound’ interactions of the SUT with external dependencies. This is different from the notion of ‘mocks’ that ‘mocking frameworks’ generate. Those ‘mocks’ are more correctly the superclass of test doubles.
+Examples where mocks are useful include the SUT logging to a log server, or sending an email, or filing a task/ticket in response to a given input/user journey. This becomes clearer with an illustration.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">unittest.mock</span> <span class="kn">import</span> <span class="n">MagicMock</span>
+
+<span class="k">class</span> <span class="nc">TestSUT</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">test_log_success</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">mock_log_server</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">spec</span><span class="o">=</span><span class="n">LogServerClass</span><span class="p">,</span> <span class="n">autospec</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">mock_log_server</span><span class="p">.</span><span class="n">log</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">sut</span> <span class="o">=</span> <span class="n">SUT</span><span class="p">(</span><span class="n">log_server</span><span class="o">=</span><span class="n">mock_log_server</span><span class="p">)</span>
+        
+        <span class="n">sut</span><span class="p">.</span><span class="n">test_method</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="s">"foo"</span><span class="p">)</span>
+        
+        <span class="c1"># This is ok!
+</span>        <span class="n">mock_log_server</span><span class="p">.</span><span class="n">log</span><span class="p">.</span><span class="n">assert_called_once_with</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s">"foo"</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<p>Note that in the above illustration, we verify that the message is sent to the the log server exactly once. This is an important part of the SUT’s specification. It the SUT were to start logging multiple messages/records for the request, then it could pollute the logs or even overwhelm the log server. Here, even though logging appears to be a side effect of <code class="language-plaintext highlighter-rouge">test_method</code>, this side effect is almost certainly part of SUT’s specification, and needs to be verified correctly. Mocks play a central role in such verifications.</p>
+
+<h2 id="stubs">Stubs</h2>
+
+<p><img src="/images/robot-imitating-family.jpg" alt="Robot imitating family" /></p>
+
+<p>Unlike mocks, stubs verify ‘inbound’ interactions from external dependencies to the SUT. Stubs are useful when replacing external dependencies that ‘send’ data to the SUT in order for the SUT to satisfy its specification. Examples include key value stores, databases, event listeners, etc. The important note here is that the outbound interaction to the stub <em>should not be asserted</em> in the tests; that’s an anti pattern (it results in over-specification)! Here is an illustration.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">unittest.mock</span> <span class="kn">import</span> <span class="n">MagicMock</span>
+
+<span class="k">class</span> <span class="nc">TestSUT</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">test_email_retrieval</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">stub_key_value_store</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">spec</span><span class="o">=</span><span class="n">KeyValueStoreClass</span><span class="p">,</span> <span class="n">autospec</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">stub_key_value_store</span><span class="p">.</span><span class="n">get</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="s">"user@special_domain.com"</span><span class="p">)</span>
+        <span class="n">sut</span> <span class="o">=</span> <span class="n">SUT</span><span class="p">(</span><span class="n">key_value_store</span><span class="o">=</span><span class="n">stub_key_value_store</span><span class="p">)</span>
+        
+        <span class="n">email_domain</span> <span class="o">=</span> <span class="n">sut</span><span class="p">.</span><span class="n">get_user_email_domin</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s">"foo"</span><span class="p">)</span>
+        
+        <span class="c1"># This is ok!
+</span>        <span class="bp">self</span><span class="p">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="s">"special_domain.com"</span><span class="p">,</span> <span class="n">email_domain</span><span class="p">)</span>
+        
+        <span class="c1"># THIS IS NOT OK!
+</span>        <span class="n">stub_key_value_store</span><span class="p">.</span><span class="n">get</span><span class="p">.</span><span class="n">assert_called_once_with</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s">"foo"</span><span class="p">)</span>
+
+</code></pre></div></div>
+<p>In the above illustration, we create a stub for the key value store (note that this is a stub even thought the object is a ‘mock’ class) that returns <code class="language-plaintext highlighter-rouge">"user@special_domain.com"</code> as a canned response to a <code class="language-plaintext highlighter-rouge">get</code> call. The test verifies that the SUT’s <code class="language-plaintext highlighter-rouge">get_user_email_domain</code> is called, it returns the correct email domain. What is important here is that we <em>should not</em> assert that there was a <code class="language-plaintext highlighter-rouge">get</code> call to the stub. Why? Because the call to the key value store is an implementation detail. Imagine a refactor that causes a previous value to be cached locally. If the unit tests were to assert on calls to the stubs, then such refactors would result in unit test failures, which undermines the utility, maintainability, and robustness of unit tests.</p>
+
+<h3 id="fakes-instead-of-stubs">Fakes, instead of stubs</h3>
+
+<p>A small detour here. When using a stub, always consider if you can use a fake instead. There are multiple definitions of a fake, and the one I am referring to is the following. A fake is a special kind of stub that implements the same API as the production dependency, but the implementation is much more lightweight. This implementation may be correct only within the context of the unit tests where it is used. Let’s reuse the previous illustration of using a stub, and replace the stub with a fake. Recall that we stubbed out the <code class="language-plaintext highlighter-rouge">get</code> method of <code class="language-plaintext highlighter-rouge">KeyValueStoreClass</code> to return the canned value <code class="language-plaintext highlighter-rouge">"user@special_domain.com"</code>. Instead, we can implement a fake <code class="language-plaintext highlighter-rouge">KeyValueStoreClass</code> that uses a <code class="language-plaintext highlighter-rouge">Dict</code> as follows.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">unittest.mock</span> <span class="kn">import</span> <span class="n">MagicMock</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
+
+<span class="c1"># We assume a simplistic API for KeyValueStoreClass with just
+# update and get methods.
+</span><span class="k">class</span> <span class="nc">KeyValueStoreClass</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="p">...</span>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="p">...</span>
+
+<span class="k">class</span> <span class="nc">FakeKeyValueStoreClassImpl</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">kvs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+    
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">kvs</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">kvs</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+
+
+<span class="k">class</span> <span class="nc">TestSUT</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">test_email_retrieval</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">FakeKeyValueStoreClass</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="n">FakeKeyValueStoreClassImpl</span><span class="p">())</span>
+        <span class="n">fake_key_value_store</span> <span class="o">=</span> <span class="n">FakeKeyValueStoreClass</span><span class="p">()</span>
+        <span class="n">fake_key_value_store</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="s">"foo"</span><span class="p">,</span> <span class="n">v</span><span class="o">=</span><span class="s">"user@special_domain.com"</span><span class="p">)</span>
+        <span class="n">sut</span> <span class="o">=</span> <span class="n">SUT</span><span class="p">(</span><span class="n">key_value_store</span><span class="o">=</span><span class="n">fake_key_value_store</span><span class="p">)</span>
+        
+        <span class="n">email_domain</span> <span class="o">=</span> <span class="n">sut</span><span class="p">.</span><span class="n">get_user_email_domin</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s">"foo"</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="p">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="s">"special_domain.com"</span><span class="p">,</span> <span class="n">email_domain</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>The advantage of using a fake is that the test becomes much more robust and is more resistant to refactoring. It also becomes more extensible. When using a stub, if we wanted to test a different user journey, we would need to inject a new return value for <code class="language-plaintext highlighter-rouge">KeyValueStoreClass.get</code> method. We would in one of two ways:  (1) resetting the mock, which is a bad anti-pattern, or (2) initialize the stub to return a preconfigured list of canned values, in order, which makes the test more brittle (consider what happens if the SUT chooses to call <code class="language-plaintext highlighter-rouge">get</code> for the same key twice vs. calls <code class="language-plaintext highlighter-rouge">get</code> for different keys once each). Using a fake sidesteps these issues.</p>
+
+<h2 id="but-my-dependency-has-both-inbound-and-outbound-interactions">But my dependency has both inbound and outbound interactions!</h2>
+
+<p><img src="/images/man-double-exposed-photo.jpg" alt="Photograph of man double exposure" /></p>
+
+<p>Despite all your efforts to separate out the test cases that need stubs and the ones that need mocks, you will inevitably find yourself needing to test a scenario in which you need to verify both inbound and outbound interactions with an external dependency. How do we address that?</p>
+
+<p>First, if you need to assert on the outbound interaction of the same call that is stubbed, then you really don’t need that test. Just use a stub/fake and do not assert on the outbound interaction. Next, the only legitimate case of needing to verify both inbound and outbound interactions is if they are on distinct APIs of the same dependency. For example, the SUT could be reading from a file, and you need to test that (1) the contents of the file were read correctly, and (2) the file object was closed after the file was read. In this case, it is perfectly ok to stub the file <code class="language-plaintext highlighter-rouge">read</code> method while mocking the <code class="language-plaintext highlighter-rouge">close</code> method. Here is an illustration.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">unittest.mock</span> <span class="kn">import</span> <span class="n">MagicMock</span><span class="p">,</span> <span class="n">patch</span>
+
+<span class="k">class</span> <span class="nc">TestSUT</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">test_file_read</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">file_mock_stub_combo</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+        <span class="c1"># Using this as a stub by injecting canned contents of the file
+</span>        <span class="n">file_mock_stub_combo</span><span class="p">.</span><span class="n">__iter__</span><span class="p">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="p">[</span><span class="s">"1234"</span><span class="p">]</span>
+        
+        <span class="c1"># Next, we treat the file open call as a mock.
+</span>        <span class="k">with</span> <span class="n">patch</span><span class="p">(</span><span class="s">"builtins.open"</span><span class="p">,</span>
+                   <span class="n">return_value</span><span class="o">=</span><span class="n">file_mock_stub_combo</span><span class="p">,</span> 
+                   <span class="n">create</span><span class="o">=</span><span class="bp">True</span>
+                  <span class="p">)</span> <span class="k">as</span> <span class="n">mock_file</span><span class="p">:</span>
+            <span class="n">sut</span> <span class="o">=</span> <span class="n">SUT</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s">"foo"</span><span class="p">)</span>
+            <span class="n">file_contents</span> <span class="o">=</span> <span class="n">sut</span><span class="p">.</span><span class="n">get_contents</span><span class="p">()</span>
+            
+            <span class="c1"># Assertions on call to file open.
+</span>            <span class="c1"># Treating the 'open' call as a mock.
+</span>            <span class="n">mock_file</span><span class="p">.</span><span class="n">assert_called_once_with</span><span class="p">(</span><span class="s">"foo"</span><span class="p">)</span>
+        
+            <span class="c1"># Assertion on the contents returned.
+</span>            <span class="c1"># Treating the `read` as a stub.
+</span>            <span class="bp">self</span><span class="p">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="s">"1234"</span><span class="p">,</span> <span class="n">file_contents</span><span class="p">)</span>
+        
+            <span class="c1"># Assertion on the outbound interaction of file close.
+</span>            <span class="c1"># Treating the 'close' call as a mock.
+</span>            <span class="n">file_mock_stub_combo</span><span class="p">.</span><span class="n">close</span><span class="p">.</span><span class="n">assert_called_once</span><span class="p">()</span>
+</code></pre></div></div>]]></content><author><name>Srikanth Sastry</name><email>srikanth@sastry.name</email></author><category term="Professional" /><category term="testing" /><category term="software engineering" /><category term="test doubles" /><category term="mocks" /><category term="stubs" /><summary type="html"><![CDATA[Test doubles are the standard mechanism to isolate your System-Under-Test (SUT) from external dependencies in unit tests. Unsurprisingly, it is important to use the right test double for each use case for a maintainable and robust test suite. However, I have seen a lot of misuse of test doubles, and suffered through the consequences of it enough number of times to want to write down some (admittedly subjective) guidelines on when an how to use test doubles.]]></summary></entry><entry><title type="html">DRY unit tests are bad… mkay</title><link href="//srikanth.sastry.name/dry-unit-tests-are-bad/" rel="alternate" type="text/html" title="DRY unit tests are bad… mkay" /><published>2022-05-17T00:00:00+00:00</published><updated>2022-05-17T00:00:00+00:00</updated><id>//srikanth.sastry.name/DRY-unit-tests-are-bad</id><content type="html" xml:base="//srikanth.sastry.name/dry-unit-tests-are-bad/"><![CDATA[<p><img src="/images/squeeze-cloth.jpg" alt="DRY" /></p>
+
+<p><a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself">“Don’t Repeat Yourself” (DRY)</a> is arguably one of the most important principles in software engineering. It is considered a truism among many. A consequence of such dogmatic allegiance to DRYness is that we see a lot of DRY unit tests; this is where the utility of the DRY principle breaks downs and starts causing more problems that it solves.</p>
+
+<h2 id="so-whats-wrong-with-dry-unit-tests">So, what’s wrong with DRY Unit Tests?</h2>
+<p>Presumably, we are all convinced of the benefits of DRYing your code (interested readers can go <a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself">the Wikipedia page</a>). It does have some downsides, and so you have the notion of the <a href="http://blog.jayfields.com/2006/05/dry-code-damp-dsls.html">DAMP</a>/<a href="https://startup-cto.net/moist-code-why-code-should-not-be-completely-dry/">MOIST</a>/<a href="https://kentcdodds.com/blog/aha-programming">AHA</a> principle. Interestingly, the reasons why DRYness doesn’t always work out in production code are different from why it is a bad idea to write DRY unit tests. I see five ways in which (a) test code is different from production code and (b) it contributes to why test code should not be DRY.</p>
+
+<ol>
+  <li>Tests (conceptually) do not yield well to common abstractions.</li>
+  <li>Test code’s readability always takes precedence over performance, but not so for production code.</li>
+  <li>Production code enjoys the safety net of test code, but test code has no such backstop.</li>
+  <li>DRY production code can speed up developer velocity, but DRY test code hinders developer velocity.</li>
+  <li>Complex changes to production code can be reviewed faster with pure green/pure red test code changes, but complex changes to test code cannot be reviewed easily.</li>
+</ol>
+
+<p>Let’s explore each one in more detail.</p>
+
+<h3 id="dryness-and-abstraction">DRYness and Abstraction</h3>
+<p><img src="/images/triangles-abstract.png" alt="Abstract" />
+In practice, DRYing out code results in building abstractions that <em>represents a collection of semantically identical operations</em> into common procedure. If done prematurely, then DRYing can result in poorer software. In fact, premature DRYing is the motivation for advocating the <a href="https://kentcdodds.com/blog/aha-programming">AHA</a> principle. While that argument against DRYness works well in production code, it does not apply for test code.</p>
+
+<p>Test code is often a collection of procedures, and each procedure steps the System-Under-Test (SUT) through a distinct user journey and compares the SUT’s behavior against pre-defined expectations. Thus, almost by design, test code does not yield itself semantically similar abstractions. The mistake that I have seen software engineers make is to mistake syntactic similarly for semantic similarity. Just because the tests’ ‘Arrange’ sections look similar does not mean that they are doing semantically the same thing in both places; in fact, they are almost certainly doing semantically different things because otherwise, the tests are duplicates of each other!</p>
+
+<p>By DRYing out such test code, you are effectively forcing abstractions where none exist, and that leads to the same issues that DRYness leads to in production code (See <a href="https://kentcdodds.com/blog/aha-programming">[1]</a>, <a href="https://sandimetz.com/blog/2016/1/20/the-wrong-abstraction">[2]</a>, <a href="https://evhaus.medium.com/using-dry-wet-damp-code-6ab3c8245bb2">[3]</a>, <a href="https://startup-cto.net/moist-code-why-code-should-not-be-completely-dry/">[4]</a> for examples).</p>
+
+<h3 id="readability">Readability</h3>
+<p><img src="/images/glasses-letters-clear.jpg" alt="Abstract" />
+Most code is read more often than is written/edited. Unsurprisingly, it is important to favor code readability, even in production code. However, in production code, if this comes at a steep cost in performance and/or efficiency, then it is common (and prudent) to favor performance over readability. Test code, on the other hand, is less subject to the (potential) tension between readability and performance. Yes, unit tests need to be ‘fast’, but given the minuscule amount of data/inputs that unit tests process, speed is not an issue with hermetic unit tests. The upshot here is that there is no practical drawback to keeping test code readable.</p>
+
+<p>DRYing out test code directly affects its readability. Why? Remember that we read unit tests to understand the expected behavior of the system-under-test (SUT), and we do so in the context of a user journey. So, a readable unit test needs to explain the user journey it is executing, the role played by the SUT in realizing that user journey, and what a successful user journey looks like. This is reflected in the <a href="https://java-design-patterns.com/patterns/arrange-act-assert/">Arrange-Act-Assert</a> structure of the unit test. When you DRY out your unit tests, you are also obfuscating at least one of those sections in your unit test. This is better illustrated with an example.</p>
+
+<p>A common DRYing in unit tests I have seen looks as follows:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">TestInput</span><span class="p">(</span><span class="n">typing</span><span class="p">.</span><span class="n">NamedTuple</span><span class="p">):</span>
+    <span class="n">param1</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">param2</span><span class="p">:</span> <span class="n">typing</span><span class="p">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>
+    <span class="p">...</span>
+
+<span class="k">class</span> <span class="nc">TestOutput</span><span class="p">(</span><span class="n">typing</span><span class="p">.</span><span class="n">NamedTuple</span><span class="p">):</span>
+    <span class="n">status</span><span class="p">:</span> <span class="n">SomeEnum</span>
+    <span class="n">return_value</span><span class="p">:</span> <span class="n">typing</span><span class="p">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>
+    <span class="n">exception</span><span class="p">:</span> <span class="n">typing</span><span class="p">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">Exception</span><span class="p">]</span>
+    <span class="p">...</span>
+
+<span class="k">class</span> <span class="nc">TestCase</span><span class="p">(</span><span class="n">typing</span><span class="p">.</span><span class="n">NamedTuple</span><span class="p">):</span>
+    <span class="nb">input</span><span class="p">:</span> <span class="n">TestInput</span>
+    <span class="n">expected_output</span><span class="p">:</span> <span class="n">TestOutput</span>
+        
+<span class="k">class</span> <span class="nc">TestSequence</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
+    
+    <span class="o">@</span><span class="n">parameterized</span><span class="p">.</span><span class="n">expand</span><span class="p">([</span>
+        <span class="p">[</span><span class="n">test_input1</span><span class="p">,</span> <span class="n">expected_output1</span><span class="p">],</span>
+        <span class="p">[</span><span class="n">test_input2</span><span class="p">,</span> <span class="n">expected_output2</span><span class="p">],</span>
+        <span class="p">...</span>
+    <span class="p">])</span>
+    <span class="k">def</span> <span class="nf">test_somethings</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">test_input</span><span class="p">:</span> <span class="n">TestInput</span><span class="p">,</span> <span class="n">expected_output</span><span class="p">:</span> <span class="n">TestOutput</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">_run_test</span><span class="p">(</span><span class="n">test_input</span><span class="p">,</span> <span class="n">expected_output</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">_run_test</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">test_input</span><span class="p">:</span> <span class="n">TestInput</span><span class="p">,</span> <span class="n">expected_output</span><span class="p">:</span> <span class="n">TestOutput</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">sut</span> <span class="o">=</span> <span class="n">SUT</span><span class="p">(...)</span>
+        <span class="n">prepare_sut_for_tests</span><span class="p">(</span><span class="n">sut</span><span class="p">,</span> <span class="n">test_input</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">sut</span><span class="p">.</span><span class="n">do_something</span><span class="p">(</span><span class="n">test_input</span><span class="p">.</span><span class="n">param2</span><span class="p">)</span>
+        <span class="n">test_output</span> <span class="o">=</span> <span class="n">make_test_output</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">sut</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">expected_output</span><span class="p">,</span> <span class="n">test_output</span><span class="p">)</span>
+</code></pre></div></div>
+<p>On the face of it, it looks like DRY organized code. But for someone reading this test to understand what SUT does, it is very challenging. They have no idea why the set of <code class="language-plaintext highlighter-rouge">test_input</code>s were chosen, what is the material difference among the inputs, what user journeys do each of those test cases represent, what are the preconditions that need to be satisfied for running <code class="language-plaintext highlighter-rouge">sut.do_something()</code>, why is the expected output the specified output, and so on.</p>
+
+<p>Instead, consider a non-DRY alternative.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">TestSequence</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
+    
+    <span class="k">def</span> <span class="nf">test_foo_input_under_bar_condition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">"""
+        This test verifies that when condition bar is true, then calling `do_something()`
+        with input foo results in sigma behavior
+        """</span>
+        <span class="n">sut</span> <span class="o">=</span> <span class="n">SUT</span><span class="p">()</span>
+        <span class="n">ensure_precondition_bar</span><span class="p">(</span><span class="n">sut</span><span class="p">,</span> <span class="n">param1</span><span class="o">=</span><span class="n">bar1</span><span class="p">,</span> <span class="n">param2</span><span class="o">=</span><span class="n">bar2</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">sut</span><span class="p">.</span><span class="n">do_something</span><span class="p">(</span><span class="n">foo</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
+</code></pre></div></div>
+<p>This code tests one user journey and is human readable at a glance by something who does not have in-depth understanding of SUT. We can similarly define all the other test cases with code duplication and greater readability, with negligible negative impact.</p>
+
+<h3 id="who-watches-the-watchmen">Who watches the watchmen?</h3>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Watchmen_graffiti_1.jpg/2560px-Watchmen_graffiti_1.jpg" alt="colink., CC BY-SA 2.0 &lt;https://creativecommons.org/licenses/by-sa/2.0&amp;gt" />
+<em>[<a href="https://www.flickr.com/photos/67458569@N00/7099293919">Original Image</a> posted to <a href="https://en.wikipedia.org/wiki/Flickr" title="en:Flickr">Flickr</a> by colink. License: <a href="https://creativecommons.org/licenses/by-sa/2.0/">Creative Commons ShareAlike</a>]</em></p>
+
+<p>Production code has the luxury of being fine tuned, optimized, DRY’d out, and subject to all sorts of gymnastics mostly because production code is defended by tests and test code. For instance, to improve performance, if you replaced a copy with a reference, and accidentally mutated that reference inside a function, you have a unit test that can catch such unintended mutations. However, test code has no such backstop. If you introduce a bug in your test code, then only a careful inspection by a human will catch it. The upshot is the following: the less simple/obvious the test code is, the more likely it is that a bug in that test code will go undetected, at least for a while. If a buggy test is passing, then it means your production code has a bug that is undetected. Conversely, if a test fails then, it might just denote a bug in the test code. If this happens, you lose confidence in your test suite, and nothing good can come from that.</p>
+
+<p>DRY code inevitably asks the reader to jump from one function to another and requires the reader to keep the previous context when navigating these functions. In other words, it increases the cognitive burden on the reader compared to straight line duplicated code. That makes it difficult to verify the correctness of the test code quickly and easily. So, when you DRY out your test code, you are increasing the odds that bugs creep into your test suite, and developers lose confidence in the tests, which in turn significantly reduces the utility if your tests.</p>
+
+<h3 id="developer-velocity">Developer Velocity</h3>
+<p><img src="/images/woman-developer-frustrated.jpg" alt="Woman developer" /></p>
+
+<p>Recall from the previous section that while tests might have duplicate code, they do not actually represent semantic abstractions replicated in multiple places. If you do mistake them for common semantic abstractions and DRY them out, then eventually there will an addition to the production code whose test breaks this semantic abstraction. At this point, the developer who is adding this feature will run into issues when trying to modify the existing test code to add the new test case. For instance, consider a class that is hermetic, stateless, and does not throw exceptions. It would not be surprising to organize DRY tests for this class that assumes that exceptions are never thrown. Now there is a new feature added to this class that requires an external dependency, and now can throw exceptions. Added a new test case into the DRY’d out unit test suite will not be easy or straightforward. The sunk cost fallacy associated with the existing test framework makes it more likely that the developer will try to force-fit the new test case(s) into existing framework. As a result:</p>
+
+<ol>
+  <li>It slows the developer down because they now have to grok the existing test framework, think of ways in which to extend it for a use case that it was not designed for, and make those changes without breaking existing tests.</li>
+  <li>Thanks to poor abstractions, you have now incurred more technical debt in your test code.</li>
+</ol>
+
+<h3 id="code-reviews">Code Reviews</h3>
+<p><img src="/images/black-women-developers.jpg" alt="Developers doing code reviews" /></p>
+
+<p>DRY’d out tests not only impede developer velocity, they also make it less easy to review code/diffs/pull requests. This is a second order effect of DRYing out your test code. Let’s revisit the example where we are adding a new feature to an existing piece of code, and this is a pure addition in behavior (not modification to existing behavior). If the tests were not DRY’d out, then adding tests for this new feature would involve just adding new test cases, and thus, just green lines in the generated diff. In contrast, recall from the previous subsection that adding tests with DRY test code is likely going to involve modifying existing code and then adding new test cases. In the former case, reviewing the tests is much easier, and as a result, reviewing that the new feature is behaving correctly is also that much easier. Reviewing the diff in the latter case is cognitively more taxing because not only does the reviewer need to verify that the new feature is implemented correctly, they also have to verify that the changes to the test code is also correct, and is not introducing new holes for bugs to escape testing. This can significantly slow down code reviews in two ways (1) it requires more time to review the code, and (2) because it requires longer to review the code, the reviewers are more likely to delay even starting the code review.</p>]]></content><author><name>Srikanth Sastry</name><email>srikanth@sastry.name</email></author><category term="Professional" /><category term="testing" /><category term="software engineering" /><summary type="html"><![CDATA["Don't Repeat Yourself" (DRY) is arguably one of the most important principles in software engineering. It is considered a truism among many. A consequence of such dogmatic allegiance to DRYness is that we see a lot of DRY unit tests; this is where the utility of the DRY principle breaks downs and starts causing more problems that it solves.]]></summary></entry><entry><title type="html">Do not index on test coverage metrics</title><link href="//srikanth.sastry.name/do-not-index-in-test-coverage/" rel="alternate" type="text/html" title="Do not index on test coverage metrics" /><published>2022-04-29T00:00:00+00:00</published><updated>2022-04-29T00:00:00+00:00</updated><id>//srikanth.sastry.name/do-not-index-on-test-coverage</id><content type="html" xml:base="//srikanth.sastry.name/do-not-index-in-test-coverage/"><![CDATA[<p><img src="/images/chart-coverage.png" alt="Coverage Chart" /></p>
+
+<p>We live in a data driven world, and as the saying goes “[…] What is not measured, cannot be improved. […]”</p>
+<blockquote>
+  <p>What is not defined cannot be measured. What is not measured, cannot be improved. What is not improved, is always degraded.</p>
+
+  <p>– William Thomson Kelvin</p>
+</blockquote>
+
+<p>The temptation, therefore, is to measure everything. Even the quality of your unit tests, and there where the trouble usually begins. For an detailed explanation of why indexing on the test coverage metrics is a bad idea, I highly recommend Jason Rudolph’s collection of posts on this topic <a href="https://jasonrudolph.com/blog/testing-anti-patterns-how-to-fail-with-100-test-coverage/">here</a>. To drive home the point more explicitly (and motivate you to actually go read Jason’s posts), here are some illustrative explanations.</p>
+
+<p>There are many coverage metrics including function coverage, statement coverage, line coverage, branch coverage, condition coverage, etc. Here, we will only look at line coverage and branch coverage, because those are the most popular.</p>
+
+<h2 id="line-coverage">Line coverage</h2>
+<p>Let’s start with <em>line coverage</em>, which is the number of lines of code executed by tests vs. the total number of lines of code. The most common target for the line coverage metric is 80%. That is, 80% of your code should be executed by your tests. While that might seem like a good idea, indexing on this metric can actually take you away from good quality test coverage! How? Consider the following (contrived example).</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">has_three_digits</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="n">strlen</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">strlen</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">True</span>
+    <span class="k">return</span> <span class="bp">False</span>
+
+<span class="k">class</span> <span class="nc">TestHasThreeDigits</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">test_has_three_digits_234</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">output_value</span> <span class="o">=</span> <span class="n">has_three_digits</span><span class="p">(</span><span class="mi">234</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">output_value</span><span class="p">)</span>
+</code></pre></div></div>
+<p>Clearly <code class="language-plaintext highlighter-rouge">TestHasThreeDigits</code> inadequate as a test suite for testing <code class="language-plaintext highlighter-rouge">has_three_digits</code>. Tests only the True case, and misses the False cases completely!
+The line coverage of the test suite is 3/4 = 75%. You could say that the test coverage is less than 80%, and therefore not adequate. Here, it appears that the line coverage metric does indeed point of inadequate testing. However, this confidence in the metric is severely misplaced! Consider the following refactoring of <code class="language-plaintext highlighter-rouge">has_three_digits</code></p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">has_three_digits</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="n">value_as_str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="n">strlen</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">value_as_str</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">strlen</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">True</span>
+    <span class="k">return</span> <span class="bp">False</span>
+</code></pre></div></div>
+<p>Now, <code class="language-plaintext highlighter-rouge">TestHasThreeDigits</code> line coverage magically improves to 4/5 = 80%, and as per the 80% target, the metrics seems to suggest adequate coverage! In fact, you can play this game some more and refactor <code class="language-plaintext highlighter-rouge">has_three_digits</code> to</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">has_three_digits</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="n">value_as_str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="n">strlen</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">value_as_str</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">strlen</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span>
+</code></pre></div></div>
+<p>Now, with the same test suite <code class="language-plaintext highlighter-rouge">TestHasThreeDigits</code> now has 100% coverage! Recall that semantically the test still do the same thing; they still test only the True case, and ignore the False case completely.</p>
+
+<h2 id="branch-coverage">Branch coverage</h2>
+<p>An easy retort to the above example is that line coverage is not a sufficiently nuanced metric, and what you really need is <em>branch coverage</em>, which is the number of branches executed by the tests vs. the number of branches in the code.</p>
+
+<p>Looking at the branch coverage of <code class="language-plaintext highlighter-rouge">TestHasThreeDigits</code>, we can see that it has a 50% branch coverage, which is inadequate. Well, here’s an easy way to improve that.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">TestHasThreeDigits</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">test_has_three_digits_true</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">true_output_value</span> <span class="o">=</span> <span class="n">has_three_digits</span><span class="p">(</span><span class="mi">234</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_has_three_digits_false</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">false_output_value</span> <span class="o">=</span> <span class="n">has_three_digits</span><span class="p">(</span><span class="mi">23</span><span class="p">)</span>
+</code></pre></div></div>
+<p>See, now the test suite has 100% branch coverage! However, not that it has no assertions at all. So, despite having 100% line and branch coverage, this test suite is completely useless! (This is a form of <a href="https://jasonrudolph.com/blog/2008/06/17/testing-anti-patterns-incidental-coverage/">incidental coverage anti-pattern</a>.)</p>
+
+<p>Here is a more nuanced example:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">HasThreeDigits</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+        
+    <span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span>
+    
+<span class="k">class</span> <span class="nc">TestHasThreeDigits</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">test_has_three_digits_234</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">output_value</span> <span class="o">=</span> <span class="n">has_three_digits</span><span class="p">(</span><span class="mi">234</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">output_value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_has_three_digits_23</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">output_value</span> <span class="o">=</span> <span class="n">has_three_digits</span><span class="p">(</span><span class="mi">23</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">output_value</span><span class="p">)</span>
+</code></pre></div></div>
+<p>The code coverage is 100%, branch coverage is 100%. But <code class="language-plaintext highlighter-rouge">self.counter</code> is never verified!</p>
+<h2 id="wait-theres-more">Wait, there’s more!</h2>
+<p>Coverage metrics only consider the code the are under your project, and ignore all external libraries. However, your code is correct only if you are satisfying the preconditions of your external library calls, and test coverage metrics do not capture any of that. Here is an illustration with an contrived example.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">external.lib</span> <span class="kn">import</span> <span class="n">convert_to_num</span>
+
+<span class="k">def</span> <span class="nf">has_three_digits</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">convert_to_num</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">v</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">v</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1000</span> <span class="ow">and</span> <span class="n">v</span> <span class="o">&lt;</span> <span class="mi">1000</span>
+</code></pre></div></div>
+<p>The above code is expected return True if <code class="language-plaintext highlighter-rouge">value</code> is and integer with 3 digits. Here is test suite.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">TestHasThreeDigits</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">test_has_three_digits_234</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">output_value</span> <span class="o">=</span> <span class="n">has_three_digits</span><span class="p">(</span><span class="s">'234'</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">output_value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_has_three_digits_23</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">output_value</span> <span class="o">=</span> <span class="n">has_three_digits</span><span class="p">(</span><span class="s">'23'</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">output_value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_has_three_digits_minus_23</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">output_value</span> <span class="o">=</span> <span class="n">has_three_digits</span><span class="p">(</span><span class="s">'-23'</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">output_value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_has_three_digits_minus_234</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">output_value</span> <span class="o">=</span> <span class="n">has_three_digits</span><span class="p">(</span><span class="s">'-234'</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">output_value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_has_three_digits_ten_times_ten</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">output_value</span> <span class="o">=</span> <span class="n">has_three_digits</span><span class="p">(</span><span class="s">'10*10'</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">output_value</span><span class="p">)</span>
+</code></pre></div></div>
+<p>The test suite looks reasonable. You line and branch coverage is a 100%, and so nothing in the metrics suggestg anything is amiss. Except that we have said nothing about how <code class="language-plaintext highlighter-rouge">convert_to_num</code> is implemented. It is easy to imagine some preconditions for the input to <code class="language-plaintext highlighter-rouge">convert_to_num</code>; for instance, it throws a ValueError exception if you pass in an input of the form <code class="language-plaintext highlighter-rouge">3/0</code>. Now, you can see how the test suite is not adequate! (<code class="language-plaintext highlighter-rouge">has_three_digits('10/0')</code> will throw an exception). But your test coverage metrics will never be able to help here.</p>]]></content><author><name>Srikanth Sastry</name><email>srikanth@sastry.name</email></author><category term="Professional" /><category term="testing" /><category term="software" /><category term="Python" /><category term="software engineering" /><summary type="html"><![CDATA[We live in a data driven world. The temptation, therefore, is to measure everything. Even the quality of your unit tests, and there where the trouble usually begins. For an detailed explanation of why indexing on the test coverage metrics is a bad idea, I highly recommend Jason Rudolph's collection of posts on this topic (https://jasonrudolph.com/blog/testing-anti-patterns-how-to-fail-with-100-test-coverage/). To drive home the point more explicitly (and motivate you to actually go read Jason's posts), here are some illustrative explanations.]]></summary></entry><entry><title type="html">Beware of using patch.object to test your Python code</title><link href="//srikanth.sastry.name/beware-of-using-patch-object-to-test-your-python-code/" rel="alternate" type="text/html" title="Beware of using patch.object to test your Python code" /><published>2022-02-28T00:00:00+00:00</published><updated>2022-02-28T00:00:00+00:00</updated><id>//srikanth.sastry.name/beware-of-using-patch-object-to-test-your-python-code</id><content type="html" xml:base="//srikanth.sastry.name/beware-of-using-patch-object-to-test-your-python-code/"><![CDATA[<p><img src="/images/software-testing.jpg" alt="Software Testing" /></p>
+
+<p><a href="https://en.wikipedia.org/wiki/Liskov_substitution_principle">Liskov substitution principle</a> states that a class and its subclass must be interchangeable without breaking the program. Unfortunately, Python’s <a href="https://docs.python.org/3/library/unittest.mock.html#patch-object"><code class="language-plaintext highlighter-rouge">patch.object</code></a> breaks this principle in a big way. In fact, <strong>this can make your tests untrustworthy and become a maintenance headache with failures every time you extended your base class</strong>. Here is a contrived, but concrete example.</p>
+
+<!-- more -->
+
+<p>Say, you decide to build a special class called <code class="language-plaintext highlighter-rouge">ImmutableList</code> with a factory that looks as follows:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Sequence</span>
+<span class="k">class</span> <span class="nc">ImmutableList</span><span class="p">:</span>
+  <span class="o">@</span><span class="nb">staticmethod</span>
+  <span class="k">def</span> <span class="nf">create_list</span><span class="p">(</span><span class="nb">input</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s">"ImmutableList"</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">ImmutableList</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="bp">self</span><span class="p">.</span><span class="n">_inner_list</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">get_inner_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+    <span class="bp">self</span><span class="p">.</span><span class="n">_inner_list</span>
+</code></pre></div></div>
+
+<p>Next, your system under test is a class <code class="language-plaintext highlighter-rouge">SUT</code> that uses an instance of <code class="language-plaintext highlighter-rouge">ImmutableList</code> as an injected dependency.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">SUT</span><span class="p">:</span>
+  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wrapper</span><span class="p">:</span> <span class="n">ImmutableList</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="bp">self</span><span class="p">.</span><span class="n">wrapper</span> <span class="o">=</span> <span class="n">wrapper</span>
+
+  <span class="k">def</span> <span class="nf">get_wrapper_length</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">wrapper</span><span class="p">.</span><span class="n">get_inner_list</span><span class="p">())</span>
+</code></pre></div></div>
+
+<p>Now, when testing <code class="language-plaintext highlighter-rouge">SUT</code>, say, we patch the <code class="language-plaintext highlighter-rouge">get_inner_list()</code> method with <code class="language-plaintext highlighter-rouge">patch.object</code>:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">unittest</span> <span class="kn">import</span> <span class="n">mock</span>
+
+<span class="k">with</span> <span class="n">mock</span><span class="p">.</span><span class="n">patch</span><span class="p">.</span><span class="nb">object</span><span class="p">(</span><span class="n">ImmutableList</span><span class="p">,</span> <span class="s">'get_inner_list'</span><span class="p">,</span> <span class="n">return_value</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span> <span class="k">as</span> <span class="n">mock_method</span><span class="p">:</span>
+  <span class="n">sut</span> <span class="o">=</span> <span class="n">SUT</span><span class="p">(</span><span class="n">ImmutableList</span><span class="p">.</span><span class="n">create_list</span><span class="p">([]))</span>
+  <span class="k">assert</span> <span class="n">sut</span><span class="p">.</span><span class="n">get_wrapper_length</span><span class="p">()</span> <span class="o">==</span> <span class="mi">3</span><span class="p">,</span> <span class="s">"FAILURE"</span>
+  <span class="k">print</span><span class="p">(</span><span class="s">"SUCCESS"</span><span class="p">)</span>
+</code></pre></div></div>
+<p>When you run this test, it does print <code class="language-plaintext highlighter-rouge">SUCCESS</code>, and therefore, works as intended.</p>
+
+<p>Now, let’s say that we found a special case of <code class="language-plaintext highlighter-rouge">ImmutableList</code> that corresponds to a zero length list, and we implement it as follows:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">ZeroLengthImmutableList</span><span class="p">(</span><span class="n">ImmutableList</span><span class="p">):</span>
+  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="nb">super</span><span class="p">().</span><span class="n">__init__</span><span class="p">([])</span>
+  
+  <span class="k">def</span> <span class="nf">get_inner_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+    <span class="k">return</span> <span class="nb">tuple</span><span class="p">()</span>
+</code></pre></div></div>
+<p>Next, we modify the factory method to return this <code class="language-plaintext highlighter-rouge">ZeroLengthImmutableList</code>, when the input is an empty list, as follows:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="o">@</span><span class="nb">staticmethod</span>
+  <span class="k">def</span> <span class="nf">create_list</span><span class="p">(</span><span class="nb">input</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s">"ImmutableList"</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+      <span class="k">return</span> <span class="n">ZeroLengthImmutableList</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">ImmutableList</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Thus, the two classes look as follows:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">ImmutableList</span><span class="p">:</span>
+  <span class="o">@</span><span class="nb">staticmethod</span>
+  <span class="k">def</span> <span class="nf">create_list</span><span class="p">(</span><span class="nb">input</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s">"ImmutableList"</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+      <span class="k">return</span> <span class="n">ZeroLengthImmutableList</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">ImmutableList</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="bp">self</span><span class="p">.</span><span class="n">_inner_list</span> <span class="o">=</span> <span class="nb">input</span>
+
+  <span class="k">def</span> <span class="nf">get_inner_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+    <span class="bp">self</span><span class="p">.</span><span class="n">_inner_list</span>
+
+<span class="k">class</span> <span class="nc">ZeroLengthImmutableList</span><span class="p">(</span><span class="n">ImmutableList</span><span class="p">):</span>
+  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="nb">super</span><span class="p">().</span><span class="n">__init__</span><span class="p">([])</span>
+  
+  <span class="k">def</span> <span class="nf">get_inner_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+    <span class="k">return</span> <span class="nb">tuple</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>Now, let’s go back to our test, which is still</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">unittest</span> <span class="kn">import</span> <span class="n">mock</span>
+
+<span class="k">with</span> <span class="n">mock</span><span class="p">.</span><span class="n">patch</span><span class="p">.</span><span class="nb">object</span><span class="p">(</span><span class="n">ImmutableList</span><span class="p">,</span> <span class="s">'get_inner_list'</span><span class="p">,</span> <span class="n">return_value</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span> <span class="k">as</span> <span class="n">mock_method</span><span class="p">:</span>
+  <span class="n">sut</span> <span class="o">=</span> <span class="n">SUT</span><span class="p">(</span><span class="n">ImmutableList</span><span class="p">.</span><span class="n">create_list</span><span class="p">([]))</span>
+  <span class="k">assert</span> <span class="n">sut</span><span class="p">.</span><span class="n">get_wrapper_length</span><span class="p">()</span> <span class="o">==</span> <span class="mi">3</span><span class="p">,</span> <span class="s">"FAILURE"</span>
+  <span class="k">print</span><span class="p">(</span><span class="s">"SUCCESS"</span><span class="p">)</span>
+</code></pre></div></div>
+<p>Since <code class="language-plaintext highlighter-rouge">sut.wrapper</code> is still an <code class="language-plaintext highlighter-rouge">ImmutableList</code>, by the Liskov Substitution Principle, <code class="language-plaintext highlighter-rouge">mock.patch.object(ImmutableList, 'get_inner_list', return_value=[1, 2, 3])</code> should still return <code class="language-plaintext highlighter-rouge">[1, 2, 3]</code> when <code class="language-plaintext highlighter-rouge">sut.get_wrapper_length()</code>. However, this does not happen! The above test fails with</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AssertionError                            Traceback (most recent call last)
+
+&lt;ipython-input-21-1c1b12b89ff3&gt; in &lt;module&gt;()
+     23 with mock.patch.object(ImmutableList, 'get_inner_list', return_value=[1, 2, 3]) as mock_method:
+     24   sut = SUT(ImmutableList.create_list([]))
+---&gt; 25   assert sut.get_wrapper_length() == 3, "FAILURE"
+     26   print("SUCCESS")
+
+AssertionError: FAILURE
+</code></pre></div></div>
+<p>This forces you to change the tests every time you refactor <code class="language-plaintext highlighter-rouge">ImmutableList.create_list</code> to return a ‘better’ implementation of <code class="language-plaintext highlighter-rouge">ImmutableList</code>!</p>]]></content><author><name>Srikanth Sastry</name><email>srikanth@sastry.name</email></author><category term="Professional" /><category term="python" /><category term="patch" /><category term="testing" /><category term="software engineering" /><summary type="html"><![CDATA[Liskov substitution principle states that a class and its subclass must be interchangeable without breaking the program. Unfortunately, Python's `patch.object` breaks this principle in a big way. In fact, this can make your tests untrustworthy and become a maintenance headache with failures every time you extended your base class.]]></summary></entry><entry><title type="html">When I first realized my privilege</title><link href="//srikanth.sastry.name/when-i-first-realized-my-privilege/" rel="alternate" type="text/html" title="When I first realized my privilege" /><published>2022-02-26T00:00:00+00:00</published><updated>2022-02-26T00:00:00+00:00</updated><id>//srikanth.sastry.name/when-i-first-realized-my-privilege</id><content type="html" xml:base="//srikanth.sastry.name/when-i-first-realized-my-privilege/"><![CDATA[<p><img src="/images/handcuffed.jpg" alt="Oppressed" /></p>
+
+<p>Ironically, a sure marker of privilege is not realizing your own privilege. I grew up being told that I am a Brahmin, which is the highest caste, and that it makes us superior and better than others. Unsurprisingly, I was taught that we were, in fact, an oppressed minority. The government reservations for the so-called Scheduled Castes and Scheduled Tribes were often cited as evidence of such oppression. So, naturally, I grew up knowing nothing about the privilege that I enjoyed.</p>
+
+<p>For the first 23 years of my life, I was convinced that everything that came my way was hard earned, and it was despite the oppression against our community. At 23, I was working as a young software engineer in Bangalore. I needed the house deep cleaned, and a contractor said that he would send a couple of people over who would take care of it for us. I was about to get my first glimpse into the privilege that I had enjoyed all my life.</p>
+
+<!-- more -->
+
+<p>The two people that the contractor send over were completely clueless. They had no idea how to go about the job. They showed up empty handed and asked us what they should be using to clean the house. They required constant supervision and direction, and it consumed most of our time, and defeated the purpose of hiring them in the first place. By the end of the day, less than half the work was done, I was completely frustrated.</p>
+
+<p>It is important to mention that these two folks’ work ethic was never in doubt. They worked as hard and diligently as you could be expected. They were from a village some hours away, quite illiterate, and desperate for work. They hadn’t seen houses in cities before, and so no idea what is involved in the upkeep of a proper house. They probably lived in shanty small houses, and this was all alien to them.</p>
+
+<p>Coming back to the main story, it was close to evening, and very little of the work was done. At this point, the they said that they had to leave because if they didn’t leave right away, then they’d miss the last bus to their village and they’d have to walk home. So if we could pay them, then they will be on their way (and settle the account with the contractor later).</p>
+
+<p>I was pretty upset at this point, and I told them that they hadn’t completed even half the work, and so I’ll pay them only half. They just looked at each other and simply nodded at me. They had this look of someone who has always been helpless and has resigned themselves to this fate for so long that they couldn’t imagine life any other way. I saw all of that, and but my frustration overrode that, and I gave them just half the agreed upon amount and sent them their way.</p>
+
+<p>As soon as they closed the gate behind them, I felt incredibly sorry for them. It wasn’t their fault that they were not skilled. It wasn’t their fault that the contractor sent them our way. And us paying them just half the amount simply means that the contractor will take a larger cut of the money. Despite all of that, all they did was meekly nod. Next, I felt shame and guilt. Me paying them the entire amount would not make a slightest difference to my finances. I spend more going out with friends on a weekend evening.</p>
+
+<p>All of this took about a minute to register, and I immediately called them back and gave them the full amount that was promised to them.</p>
+
+<p>That look of helplessness and resignation stayed with me a long time. But I simply couldn’t understand it in it’s larger context. For a while, I saw this as a fault in their character that will get them swindled, and almost felt good about me not being one of the many who cheated them out of what they earned. Nonetheless, this event stayed with me, as I learned more, I kept recasting that experience with new sociological lenses. It took me years to recognize it as a natural consequence of multi-generational societal oppression, and with that recognize my own privilege.</p>]]></content><author><name>Srikanth Sastry</name><email>srikanth@sastry.name</email></author><category term="Personal" /><category term="reflection" /><category term="privilege" /><summary type="html"><![CDATA[For the first 23 years of my life, I was convinced that everything that came my way was hard earned, and it was despite the oppression against our community. At 23, I was working as a young software engineer in Bangalore. I needed the house deep cleaned, and a contractor said that he would send a couple of people over who would take care of it for us. I was about to get my first glimpse into the privilege that I had enjoyed all my life.]]></summary></entry><entry><title type="html">Reuse Code, Not Objects</title><link href="//srikanth.sastry.name/reuse-code-not-objects/" rel="alternate" type="text/html" title="Reuse Code, Not Objects" /><published>2021-07-17T02:01:41+00:00</published><updated>2021-07-17T02:01:41+00:00</updated><id>//srikanth.sastry.name/reuse-code-not-objects</id><content type="html" xml:base="//srikanth.sastry.name/reuse-code-not-objects/"><![CDATA[<!-- wp:image {"id":666} -->
+<figure class="wp-block-image"><img src="https://srikanth.sastry.name/wp-content/uploads/2021/07/pexels-photo-5218009-edited.jpeg" alt="" class="wp-image-666" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>We all know of the importance of <a href="https://en.wikipedia.org/wiki/Code_reuse">code reuse</a> and <a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself">DRY</a> code. It is important to remember that this applies to code, and <em>not</em> to objects!<br />A common anti-pattern I see in stateful classes is something along the following lines:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>class SomeStatefulClass {
+  private ResponseType responseType;
+  private final ErrMessages errMessages;
+  
+  public SomeStatefulClass() {
+    this.ResponseType = null;
+    this.errMessages = new ErrMessages();
+  }
+  
+  public void init() {
+    errMessages.clear();
+  }
+  
+  public Response process(Request request) {
+    try {
+      // Process the request.
+      // Update stats.
+      // Update otherState.
+      Response response = computeResponse();
+      responseType = computeResponseType();
+      return response;
+    } catch (Exception e) {
+      this.errMessages.append(e);
+    }
+    return null;
+  }
+  
+  public LogMessages getErrMessages() {
+    return this.errMessages;
+  }
+  
+  public ResponseType getResponseType() {
+    return responseType;
+  }
+}</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>This design pattern is a major code smell. Ironically, such classes are prone to be <em>misused through reuse</em>. A common example of this is reusing the object within a loop:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>public void process(List&lt;Request&gt; requests) {
+  final SomeStatefulClass statefulObject
+      = new SomeStatefulClass();
+  Response response;
+  for (Request request: requests) {
+    statefulObject.init();
+    response = statefulObject.process(request);
+    appendResponse(response, statefulObject.getResponseType());
+    
+  }
+}</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>The issue here is subtle, but dangerous. Consider what happens if one of the requests in the list of requests passed to <code>process()</code> causes <code>statefulObject</code>to throw an exception inside <code>computeResponse()</code>. Dutifully, this exception is caught by <code>process()</code> and it returns <code>null</code>. However, note that the value of <code>responseType</code> in <code>statefulObject</code> was never modified by processing of this request, and therefore, it still hold the <code>ResponseType</code> of the previous request! Therefore, the line <code>appendResponse(response, statefulObject.getResponseType());</code> is now passing in a null response and the response type of the previous request!<br />These types of bugs are subtle and a pain to track down.<br />And this happened because we chose to reuse the <code>statefulObject</code>. If we were to use a new instance each time, this would not really be an issue.<br />Moral: If feasible, do not reuse objects; create new instances and throw them away when done!</p>
+<!-- /wp:paragraph -->]]></content><author><name>Srikanth Sastry</name></author><category term="Professional" /><category term="design pattern" /><category term="software engineering" /><summary type="html"><![CDATA[We all know of the importance of code reuse and DRY code. It is important to remember that this applies to code, and not to objects!]]></summary></entry><entry><title type="html">Code reuse can prevent bugs</title><link href="//srikanth.sastry.name/code-reuse-can-prevent-bugs/" rel="alternate" type="text/html" title="Code reuse can prevent bugs" /><published>2020-12-20T18:43:09+00:00</published><updated>2020-12-20T18:43:09+00:00</updated><id>//srikanth.sastry.name/code-reuse-can-prevent-bugs</id><content type="html" xml:base="//srikanth.sastry.name/code-reuse-can-prevent-bugs/"><![CDATA[<!-- wp:paragraph -->
+<p>I am as surprised as you are at the title. The statement does seem like "Duh!", but much to my embarrassment, I have seen enough code in many code bases to need to reiterate this.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The latest example was the following bug that I spotted. First some background. The caller to this function can choose any subset of a given set of 'modes' or 'features'. The caller represents this via a bit-mask. So 1 represents feature 1, 2 represents feature 2, 4 represents feature 3, 8 represents feature 4, and so on. So, if the caller requests with bit-mask 3, then it represents features 1 and 2, and bit-mask 10 represents features 2 and 4.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The following piece of code is support to filter out requests depending on the requested set of 'modes/'features'.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>if ((bitMask &amp; ModeEnum.FEATURE_FOO.getValue()) == 0) {
+  // FEATURE_FOO has already taken care off the by some other module. So do nothing here.
+  return null;
+}
+
+/* Some more code here */
+
+if ((bitMask &amp; ModeEnum.FEATURE_BAR.getValue()) == 0) {
+  // For now, we process the request only if caller explicitly specified FEATURE_BAR.
+  return null;
+}
+/* more code to process the request with FEATURE_BAR. */</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>The code above has a bug because the comment inside the first if-check does not match the if-check's logic. The intent was to skip processing the request if FEATURE_FOO is enabled. Instead, it does the exact opposite. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The naive way to fix it would be to replace </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre id="block-9dae83e5-31d7-43ad-952e-2674f85d9963" class="wp-block-code"><code>if ((bitMask &amp; ModeEnum.FEATURE_FOO.getValue()) == 0) {</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>with</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre id="block-9dae83e5-31d7-43ad-952e-2674f85d9963" class="wp-block-code"><code>if ((bitMask &amp; ModeEnum.FEATURE_FOO.getValue()) != 0) {</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>However, this misses the more important point of why this bug occurred in the first place. The simple answer to that question is that this bug occurred because the author ignored the <a href="https://en.wikipedia.org/wiki/Code_reuse">principle of code reuse</a>. By putting that principle into practice, a cleaner way to write this code (and therefore fix this bug and prevent similar bugs in the future) is as follows.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>We first encapsulate the logic to detecting various modes via this function</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>boolean hasRequestedFeature(int bitMask, ModeEnum feature) {
+  return (bitMask &amp; feature.getValue()) != 1;
+}</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>With that function in place, the new code looks as follows</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>if (!hasRequestedFeature(bitMask, ModeEnum.FEATURE_FOO)) {
+  // FEATURE_FOO has already taken care off the by some other module. So do nothing here.
+  return null;
+}
+
+/* Some more code here */
+
+if (hasRequestedFeature(bitMask, ModeEnum.FEATURE_BAR)) {
+  // For now, we process the request only if caller explicitly specified FEATURE_BAR.
+  return null;
+}
+/* more code to process the request with FEATURE_BAR. */</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>This make the code more readable, and as long as we reuse the <code>hasRequestedFeature()</code> function, such bitwise operation fragility will not reoccur in the code.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Is this obvious? I think so. Was it necessary to belabor the point? Empirical evidence seems to scream "YES!".</p>
+<!-- /wp:paragraph -->]]></content><author><name>Srikanth Sastry</name></author><category term="Professional" /><category term="software engineering" /><summary type="html"><![CDATA[I am as surprised as you are at the title. The statement does seem like "Duh!", but much to my embarrassment, I have seen enough code in many code bases to need to reiterate this.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="//srikanth.sastry.name/wp-content/uploads/2020/12/arrow-2756728_1280-740x430.png" /><media:content medium="image" url="//srikanth.sastry.name/wp-content/uploads/2020/12/arrow-2756728_1280-740x430.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Tale of two departures</title><link href="//srikanth.sastry.name/tale-of-two-departures/" rel="alternate" type="text/html" title="Tale of two departures" /><published>2020-03-02T15:00:00+00:00</published><updated>2020-03-02T15:00:00+00:00</updated><id>//srikanth.sastry.name/tale-of-two-departures</id><content type="html" xml:base="//srikanth.sastry.name/tale-of-two-departures/"><![CDATA[<!-- wp:image {"align":"center","id":580,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://srikanth.sastry.name/wp-content/uploads/2020/02/img_0143-1024x683.jpg" alt="" class="wp-image-580" /><figcaption>Image by <a href="https://pixabay.com/users/MIH83-464187/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1478118">Maret Hosemann</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1478118">Pixabay</a></figcaption></figure></div>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>Saying goodbye to a workplace where you have spent a considerable amount of time is never easy. But it can be made into a positive experience by the organization, or be made miserable. Netflix is famous for celebrating when an employee leaves by thanking them and wishing them well, and in contrast, Hubspot is know for firing something and calling it a ‘graduation’.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>I have two stories to share on how my departure from two different organizations played out. Both both these stories, there were only good intentions all around, but yet, the executions of the departure were very different. The juxtaposition is instructive on its own.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2><strong>First</strong> story: I said goodbye, and they said Au <strong>Revoir</strong></h2>
+<!-- /wp:heading -->
+
+<!-- wp:image {"id":581,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="https://srikanth.sastry.name/wp-content/uploads/2020/02/img_0144-1024x553.jpg" alt="" class="wp-image-581" /><figcaption>Image by <a href="https://pixabay.com/users/pixel2013-2364555/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2934257">S. Hermann &amp; F. Richter</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2934257">Pixabay</a></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>In the first story, I had a meeting with my manager and told him that I accepted an offer with another company, and so was leaving. His immediate response was to check with me if there was anything he could do that will make me change my mind (he also prefaced that by saying that he thinks that the answer is ‘no’). After I said that my mind was made up, he thanked me for everything I had done so far, and said that he will set up meetings with various folks to help me transition my responsibilities. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>With my consent, he immediately and discretely told members of my team, set up transition discussions, and then followed that up with an org wide announcement. Then, the entire team got together for a goodbye lunch, with everyone including the manager wishing me well. Finally, before I left, he said that he wishes me the best, but if things don’t work out with the new role, then I am always welcome back.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>Second Story: I said goodbye, and they said uh.. wait, what?</h2>
+<!-- /wp:heading -->
+
+<!-- wp:image {"id":582,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="https://srikanth.sastry.name/wp-content/uploads/2020/02/img_0145-1024x645.jpg" alt="" class="wp-image-582" /><figcaption>Image by <a href="https://pixabay.com/users/Alexas_Fotos-686414/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3109992">Alexas_Fotos</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3109992">Pixabay</a></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>In the second story, I had a meeting with my manager and told him that I did not see my skills fitting the role, and that it doesn’t play to my strengths. So, I think serves both the org and me well to plan a transition for me to move on. He tried to convince me otherwise, and this went on for some time. I indulged his thoughts and arguments and made a good faith effort to pursue the avenues he suggested, but it only served to strengthen my initial proposition. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>After I made my final decision, he asked to delay my decision until I had a new role. After I found a new role, he asked me to spend a month transitioning my responsibilities to someone else. But for over a week, I did not see any movement in the transition plan. Meanwhile, I am furiously preparing everything for the transition. Until about a week before my last day, there is no news of my departure, and no person or people to transition to. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>With just over a week left, on my request, my manager calls the team together to announce my departure, except that he had already mentioned this to each of them private well over a week ago, but didn’t really provide any guidelines to them or to me about who else had been looped in. So, no one spoke to me about it, or to each other, and kept acting like everything was business as usual. It had become an elephant in the room and made everything uncomfortable for no apparent benefit. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Finally, the last few days were a frantic meeting spree with my transition of responsibilities to other folks, and my brain dump spread across multiple documents that was hastily reviewed by the team as my last day at work came and went.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>My final goodbye was in an org-wide meeting where my manager thanked me for my contributions and wished me well.</p>
+<!-- /wp:paragraph -->]]></content><author><name>Srikanth Sastry</name></author><category term="Professional" /><category term="People management" /><category term="Quitting" /><summary type="html"><![CDATA[Image by Maret Hosemann from Pixabay]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="//srikanth.sastry.name/wp-content/uploads/2020/02/137FABBE-C7DC-4401-B0AB-299AA800D039-740x430.jpeg" /><media:content medium="image" url="//srikanth.sastry.name/wp-content/uploads/2020/02/137FABBE-C7DC-4401-B0AB-299AA800D039-740x430.jpeg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Donts of processes for upward communication</title><link href="//srikanth.sastry.name/donts-of-processes-for-upward-communication/" rel="alternate" type="text/html" title="Donts of processes for upward communication" /><published>2020-02-11T15:42:53+00:00</published><updated>2020-02-11T15:42:53+00:00</updated><id>//srikanth.sastry.name/donts-of-processes-for-upward-communication</id><content type="html" xml:base="//srikanth.sastry.name/donts-of-processes-for-upward-communication/"><![CDATA[<!-- wp:image {"align":"center","id":566,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://srikanth.sastry.name/wp-content/uploads/2020/02/pexels-photo-3532005-1024x682.jpg" alt="" class="wp-image-566" /></figure></div>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>Upward communication critical to organizational well-being and effectiveness. It is also notoriously difficult to get right due to the inherent power/authority differential involved in the hierarchy of any organization. Almost every place that I have seen upward communication done right focuses on mitigating this differential. Unfortunately, many organizations seem to be completely oblivious of how the existing power differential within a hierarchy can jeopardize upward communication. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Does your organization share this blind spot? For obvious reasons, it doesn’t help to ask the organization leaders about a blind spot. However, there are symptoms you can look for. Here are some examples, that I hope will help you see whether and why upward communication is failing in your organization.  Note that all my experiences are from the software industry, and so I am focused only on software engineering organizations. So please keep that in mind as you read on.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Here are four IMHO important symptoms to look for.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul><li>Focusing on the format instead of a well thought out framework</li><li>Asymmetric commitment from the leadership on communciation</li><li>No reacting/responding to the contents of the communication</li><li>Not getting engineers’ buy-in</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2>Format instead of framework</h2>
+<!-- /wp:heading -->
+
+<!-- wp:image {"align":"center","id":568,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://srikanth.sastry.name/wp-content/uploads/2020/02/img_0141.jpg" alt="" class="wp-image-568" /></figure></div>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>Any sort of ongoing upward communication tends to be only marginally useful if the organization does not have a framework within which the receive and process the communication. For instance, an organization may care about cross team collaboration, and could get information about this from employees through upward communication channels. However, without a framework for the employees to provide that feedback, the organization may not be able to glean much. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Unfortunately, organizations tend to conflate framework with format/template. When this happens you tend to see rigid templates or formats within which upward communication takes place leaving little space for nuance, reflection, and awareness to unforeseen issues. An example should make this clearer. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>I worked in an organization which asked employees to fill out a weekly report. This report had mandatory questions such as “On a scale of 1 to 10, how happy were you working with other teams?” On the face of it, it might seem reasonable. But consider the following scenario.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>An engineer who has had a bad week at work and wants to communicate that upward. She fills out her weekly report outlining her frustrations and why she hasn’t made as much progress and what’s blocking her. She proceeds to submit her feedback, but the tool rejects her submission because she didn’t answer the mandatory question. Effectively, the organization is saying “unless you give the information we seek, in the form that we prescribed, we are not interested in listening to you”.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>When scenarios like these repeat themselves often enough, both the organization and the employees end up with blinders on what can and should be communicated. And that creates blind spots in the organization. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2><strong>Asymmetric</strong> <strong>commitment</strong> for <strong>communication</strong> </h2>
+<!-- /wp:heading -->
+
+<!-- wp:image {"align":"center","id":569,"sizeSlug":"large"} -->
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://srikanth.sastry.name/wp-content/uploads/2020/02/img_0142.jpg" alt="" class="wp-image-569" /></figure></div>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>When an organization sets up expectations for upward communication, it is automatically asking its employees to invest time and effort into it. If the organization does make a corresponding commitment on its end, it becomes demotivating for the employees, and any upward communication becomes either perfunctory or severely biased. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>I recall a case where senior leadership wanted regular progress updates from all teams, for slightly different audiences and use cases, the content was required to be slightly different. The 'solution' to this issue was that team leads fill out almost identical, but slightly different, contents in an online form, a doc, a presentation, and a spreadsheet so it is all available for senior leadership when they want to review it. This is a really good example of asymmetric commitment. The effort here is expected entirely from the employees, and little from the leadership. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>In contrast, I worked in organizations where management and leadership worked on upward communication along multiple avenues depending on how the engineers worked, and how the engineers liked to communicate. There were weekly/monthly sync up meetings where the management and leadership took notes, which the engineers communicated in the manner that was most convenient for them (including just talking, or presentations, or code changes, or screenshots, or even demos). Apart from that, the managers were also always sitting with the teams they supported, paying attention to the chatter among engineers and engaging when they realized some important decision were being made. The mangers participated in the decision making by proving additional context as appropriate, noted the decision that the engineers took, and made it a point to follow up on its execution while making an effort to not be intrusive.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>That is an example of the leadership and management demonstrating their commitment to upward communication.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>Reaction to upward communication, or the lack thereof</h2>
+<!-- /wp:heading -->
+
+<!-- wp:image {"id":571,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="https://srikanth.sastry.name/wp-content/uploads/2020/02/pexels-photo-1669158-1024x682.jpg" alt="" class="wp-image-571" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>One of the expectations following upward communication is that the leadership with react to the communication, and then follow through on their commitment to address the issues brought into focus. When this redressal and follow through is missing, the impact is palpable and the consequences can be detrimental.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A common example where I have seen this is when the teams are expected to report progress and roadblocks, but the roadblocks are ignored by the leadership with the assumption 'the team will figure it out'. Or worse, at times, the leadership actually does not know what to do, but instead of making that a discussion, they choose to remain silent (for reasons that could constitute its own blog post). I assume I need not elaborate on the negative consequences of that behavior!</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>In cases where the leadership acts on upward communication, the impact can be dramatic and hugely positive. I recall two distinct cases in two different organizations I worked at, where the entire team had an unfavorable review of their manager. In response, the leadership immediately asked the managers to transition to a non-managerial role and re-org’d the teams so that they can have a different (and hopefully) more effective manager to support them.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>Not getting engineers’ buy-in</h2>
+<!-- /wp:heading -->
+
+<!-- wp:image {"id":572,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="https://srikanth.sastry.name/wp-content/uploads/2020/02/pexels-photo-791765-1024x682.jpg" alt="" class="wp-image-572" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>Any upward communication process that does not get the engineers’ buy-in is bound to have limited success. Interestingly, this precipitates more communication processes that also do not have employee buy-in, and the cycle continues.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>In one of the organizations I was at, the leadership, for reasons unknown, determined that a bespoke task tracking/project management tool be used. Very few engineers, if any, liked this tool. Yet, this was the tool of choice and decreed to be so. Not surprisingly, the tool was not well used, and so the leadership did not get the information they were looking for with respect to work done/progress made, etc. In response, the leadership created a new role that was focused on upward communication, and insisted that every team dedicate one person to perform this role. This not only took away one engineer from already resource-constrained teams, it also asked that engineer to execute a role that they weren’t really selected/skilled for. Naturally, that didn’t fare well either. There was improvement in upward communication as far as the leadership was concern, but it was not sufficient. So, the leadership decided that, harkening back to the Industrial Age, all teams should follow the exact same and synchronous development cadence and report progress on that exact cadence of the leadership. This cadence fit some teams better than others, and you can imagine the morale in the teams that ended with the short end of the stick there.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>At no point during this entire affair did the leadership actually sit down with the engineers in various teams and actually ask them how the teams like to get work done, and how leadership could work with each team to accomplish the goals of the upward communication that was being sought.</p>
+<!-- /wp:paragraph -->]]></content><author><name>Srikanth Sastry</name></author><category term="Professional" /><category term="People management" /><summary type="html"><![CDATA[]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="//srikanth.sastry.name/wp-content/uploads/2020/01/img_0526-740x430.jpg" /><media:content medium="image" url="//srikanth.sastry.name/wp-content/uploads/2020/01/img_0526-740x430.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>

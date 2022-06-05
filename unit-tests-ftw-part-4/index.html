@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <link rel="alternate" type="application/atom+xml" title="Srikanth Sastry" href="/feed.xml">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Unit tests FTW! — Part 4 &middot; Srikanth Sastry
+    
+  </title>
+
+  
+  <link rel="canonical" href="//srikanth.sastry.name/unit-tests-ftw-part-4/">
+  
+
+  <link rel="stylesheet" href="//srikanth.sastry.name/public/css/poole.css">
+  <link rel="stylesheet" href="//srikanth.sastry.name/public/css/syntax.css">
+  <link rel="stylesheet" href="//srikanth.sastry.name/public/css/lanyon.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
+
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="//srikanth.sastry.name/public/apple-touch-icon-precomposed.png">
+  <link rel="shortcut icon" href="//srikanth.sastry.name/public/favicon.ico">
+
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="//srikanth.sastry.name/atom.xml">
+
+  
+</head>
+
+
+  <body class="sidebar-overlay">
+
+    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
+     styles, `#sidebar-checkbox` for behavior. -->
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
+
+<!-- Toggleable sidebar -->
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p>A personal website</p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item" href="//srikanth.sastry.name/">Home</a>
+
+    
+
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="//srikanth.sastry.name/about/">About</a>
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="//srikanth.sastry.name/publications/">Publications</a>
+        
+      
+    
+      
+        
+          <a class="sidebar-nav-item" href="//srikanth.sastry.name/touchstone-radio-episodes/">Touchstone Radio Episodes</a>
+        
+      
+    
+    <a class="sidebar-nav-item" href="//srikanth.sastry.name/archives">Archives</a>
+    <!-- <a class="sidebar-nav-item" href="/archive/v1.1.0.zip">Download</a>
+    <a class="sidebar-nav-item" href="">GitHub project</a>
+    <span class="sidebar-nav-item">Currently v1.1.0</span> -->
+  </nav>
+  <div class="sidebar-item">
+  <p>
+  <a class="navbar-item" href="/feed.xml" target="_blank">Feed</a>
+  </p>
+  </div>
+  <div class="sidebar-item">
+    <p>
+      &copy; 2022. All rights reserved.
+    </p>
+  </div>
+</div>
+
+
+    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
+         content to avoid any CSS collisions with our real content. -->
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="/" title="Home">Srikanth Sastry</a>
+            <small>A Techie in Boston</small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+        <div class="post">
+  <h1 class="post-title">Unit tests FTW! — Part 4</h1>
+  <span class="post-date">28 Nov 2017</span>
+  <!-- wp:paragraph {"backgroundColor":"pale-cyan-blue"} -->
+<p class="has-background has-pale-cyan-blue-background-color">Cross posted on <a href="https://www.linkedin.com/pulse/unit-tests-ftw-part-4-srikanth-sastry/">LinkedIn</a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>In the previous three  parts of this series, I have talked about how unit tests are useful in a  lot more than just verifying that your code works. We've talked its  uses for <a rel="noreferrer noopener" aria-label="documentation (opens in a new tab)" href="http://srikanth.sastry.name/merits-of-unit-tests-part-1/" target="_blank">documentation</a>, <a rel="noreferrer noopener" aria-label="refactoring and code health (opens in a new tab)" href="http://srikanth.sastry.name/the-merits-of-unit-tests-part-2/" target="_blank">refactoring and code health</a>, and <a rel="noreferrer noopener" aria-label="writing better software (opens in a new tab)" href="http://srikanth.sastry.name/the-merits-of-unit-tests-part-3/" target="_blank">writing better software</a>. Next, we'll see how unit tests helps you debug issues in production. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:more -->
+<!--more-->
+<!-- /wp:more -->
+
+<!-- wp:heading {"level":3} -->
+<h3>Debugging </h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>A single unit test is supposed to test a single code path within your
+ class. I don't always follow this maxim, but it is nevertheless a very 
+good rule of thumb. Given that the number of code paths within a given 
+code if often increases exponentially with the size of the code, unit 
+tests are often a lot more lines of code than the actual production code
+ itself. This is a good thing when it comes to debugging.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>If your unit tests cover sufficiently many code paths (which any good
+ unit test suite should do), then when an issue arises in production, 
+and you narrow it down to your code, then you know that the offending 
+code path could not have been the several code paths that your unit 
+tests already covered. This pruning makes your debugging a lot simpler 
+than before.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:quote -->
+<blockquote class="wp-block-quote"><p>
+  Unit tests can prune the possible set of offending code paths to make debugging tractable, 
+</p></blockquote>
+<!-- /wp:quote -->
+
+<!-- wp:paragraph -->
+<p><strong>EXAMPLE</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Let's go back to the example I gave you in <a href="https://www.linkedin.com/pulse/merits-unit-tests-part-3-srikanth-sastry/" target="_blank" rel="noreferrer noopener">Part 3</a>.
+ Here is that piece of code. Recall that it takes a large query, splits 
+it up into multiple subqueries, sends them off in parallel, collects 
+their responses back, munges them and returns the munged response to the
+ caller via a callback </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">public class QueryManager {<br />   void sendRequest(Query query, Callback queryCallback) {<br />     List&lt;Subquery&gt; subqueries = splitQuery(query);<br />     for (Subquery subquery : subqueries) {<br />       sendQuery(subquery, new Subquery.Callback() {<br />           @Override<br />           public onSuccess(Response response) {<br />             // Do some processing. ...<br />             if (allResponses()) {<br />               queryCallback.finalResult();<br />              } else {<br />                queryCallback.incrementalResult();<br />              }<br />            }<br />            @Override<br />            public onFailure(Error e) {<br />              // Do some error handling. ... <br />              if (allResponses()) {<br />                queryCallback.finalResult();<br />              }<br />            }<br />          });<br />     }<br />   }<br />     // Other methods. ... <br />} </pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:paragraph -->
+<p>I ran into this code because of an issue that we were seeing in production. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Every so often the logs showed a really really long query that timed 
+out, but it did manage to serve the response back to the user. Digging 
+into it some more, I managed to narrow it down to this class. But beyond
+ that, things were a mystery. Recall that in my last post I mentioned 
+how there were no unit tests here, and the code actually needed 
+refactoring to pull out the anonymous class. We pick up the story here 
+after all that.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Once I had all the unit tests put in, I discovered that the root cause for the bug is actually a race condition.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The unit tests had ruled out sufficiently many code paths to lead me 
+to a strong suspicion that it was a race condition in the allresponses()
+ function causing two overlapping 'last' responses to both trigger the 
+incrementalResult() callback function, and so the finalResult() method 
+was never invoked. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Once you have a candidate cause, reproducing and verifying it becomes
+ pretty straightforward (not necessarily easy or simple, but 
+straightforward), and the rest is just mundane software engineering. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>See, unit tests are more than a one trick pony! :)</p>
+<!-- /wp:paragraph -->
+
+</div>
+
+
+<div class="related">
+  <h2>Posts mentioning this post (backlinks)</h2>
+  <ul class="related-posts">
+    
+    <li>
+      <h3>
+        <a class="internal-link" href="/merits-of-unit-tests-part-1/">My code is bugfree! Why should I unit test?</a>
+      </h3>
+    </li>
+    
+    <li>
+      <h3>
+        <a class="internal-link" href="/merits-of-unit-tests-part-5/">Merits of unit tests &#8212; part 5</a>
+      </h3>
+    </li>
+    
+  </ul>
+</div>
+
+
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+    <script src='/public/js/script.js'></script>
+  </body>
+</html>
