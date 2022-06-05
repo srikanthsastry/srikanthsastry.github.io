@@ -4,7 +4,7 @@
  <title>Srikanth Sastry</title>
  <link href="//srikanth.sastry.name/atom.xml" rel="self"/>
  <link href="//srikanth.sastry.name/"/>
- <updated>2022-06-05T18:51:51+00:00</updated>
+ <updated>2022-06-05T19:04:59+00:00</updated>
  <id>//srikanth.sastry.name</id>
  <author>
    <name>Srikanth Sastry</name>
@@ -1186,12 +1186,12 @@ if (hasRequestedFeature(bitMask, ModeEnum.FEATURE_BAR)) {
    <updated>2019-08-21T18:23:48+00:00</updated>
    <id>//srikanth.sastry.name/when-should-you-build-for-survival</id>
    <content type="html">&lt;!-- wp:image {&quot;align&quot;:&quot;center&quot;,&quot;id&quot;:463} --&gt;
-&lt;div class=&quot;wp-block-image&quot;&gt;&lt;figure class=&quot;aligncenter&quot;&gt;&lt;img src=&quot;https://srikanth.sastry.name/wp-content/uploads/2019/08/Are-You-Succeeding-Blog-thegem-blog-default-1024x512.jpg&quot; alt=&quot;&quot; class=&quot;wp-image-463&quot; /&gt;&lt;figcaption&gt;source: http://beaconbusinessmarketing.com/success-vs-survival/&lt;/figcaption&gt;&lt;/figure&gt;&lt;/div&gt;
+&lt;div class=&quot;wp-block-image&quot;&gt;&lt;figure class=&quot;aligncenter&quot;&gt;&lt;img src=&quot;https://srikanth.sastry.name/wp-content/uploads/2019/08/Are-You-Succeeding-Blog-thegem-blog-default-1024x512.jpg&quot; alt=&quot;&quot; class=&quot;wp-image-463&quot; /&gt;&lt;!-- &lt;figcaption&gt;source: http://beaconbusinessmarketing.com/success-vs-survival/&lt;/figcaption&gt; --&gt; &lt;/figure&gt;&lt;/div&gt;
 &lt;!-- /wp:image --&gt;
 
 &lt;!-- wp:paragraph --&gt;
-&lt;p&gt;Previously, I wrote about &lt;a href=&quot;https://srikanth.sastry.name/are-you-building-for-survival-or-excellence/&quot;&gt;building for survival vs. success&lt;/a&gt;. Briefly, when building for survival, your only goal to get the product working for the specific usecase, and in contrast, when building for success, you are building to solve a bigger class of problems within the broader context of your solution space. In this post, I will talk about when you should be build for survival, and when for success.&lt;/p&gt;
-&lt;!-- /wp:paragraph --&gt;
+&lt;p&gt;Previously, I wrote about &lt;a href=&quot;/are-you-building-for-survival-or-excellence/&quot;&gt;building for survival vs. success&lt;/a&gt; building for survival vs. success. Briefly, when building for survival, your only goal to get the product working for the specific usecase, and in contrast, when building for success, you are building to solve a bigger class of problems within the broader context of your solution space. In this post, I will talk about when you should be build for survival, and when for success.
+&lt;!-- /wp:paragraph --&gt;&lt;/p&gt;
 
 &lt;!-- wp:more --&gt;
 &lt;!--more--&gt;
@@ -1202,7 +1202,7 @@ if (hasRequestedFeature(bitMask, ModeEnum.FEATURE_BAR)) {
 &lt;!-- /wp:heading --&gt;
 
 &lt;!-- wp:image {&quot;align&quot;:&quot;center&quot;,&quot;id&quot;:464,&quot;width&quot;:349,&quot;height&quot;:262} --&gt;
-&lt;div class=&quot;wp-block-image&quot;&gt;&lt;figure class=&quot;aligncenter is-resized&quot;&gt;&lt;img src=&quot;https://srikanth.sastry.name/wp-content/uploads/2019/08/Meet-You-Strawman.jpg&quot; alt=&quot;&quot; class=&quot;wp-image-464&quot; width=&quot;349&quot; height=&quot;262&quot; /&gt;&lt;figcaption&gt;source: https://prepareforchange.net/wp-content/uploads/2016/06/Meet-You-Strawman.jpg&lt;/figcaption&gt;&lt;/figure&gt;&lt;/div&gt;
+&lt;div class=&quot;wp-block-image&quot;&gt;&lt;figure class=&quot;aligncenter is-resized&quot;&gt;&lt;img src=&quot;https://srikanth.sastry.name/wp-content/uploads/2019/08/Meet-You-Strawman.jpg&quot; alt=&quot;&quot; class=&quot;wp-image-464&quot; width=&quot;349&quot; height=&quot;262&quot; /&gt;&lt;!--&lt;figcaption&gt;source: https://prepareforchange.net/wp-content/uploads/2016/06/Meet-You-Strawman.jpg&lt;/figcaption&gt;--&gt;&lt;/figure&gt;&lt;/div&gt;
 &lt;!-- /wp:image --&gt;
 
 &lt;!-- wp:paragraph --&gt;
@@ -1254,7 +1254,7 @@ if (hasRequestedFeature(bitMask, ModeEnum.FEATURE_BAR)) {
 &lt;!-- /wp:heading --&gt;
 
 &lt;!-- wp:image {&quot;align&quot;:&quot;center&quot;,&quot;id&quot;:465,&quot;width&quot;:234,&quot;height&quot;:156} --&gt;
-&lt;div class=&quot;wp-block-image&quot;&gt;&lt;figure class=&quot;aligncenter is-resized&quot;&gt;&lt;img src=&quot;https://srikanth.sastry.name/wp-content/uploads/2019/08/product-resource-graphic01.png&quot; alt=&quot;&quot; class=&quot;wp-image-465&quot; width=&quot;234&quot; height=&quot;156&quot; /&gt;&lt;figcaption&gt;source: https://www.triskellsoftware.com/wp-content/uploads/2016/01/product-resource-graphic01.png&lt;/figcaption&gt;&lt;/figure&gt;&lt;/div&gt;
+&lt;div class=&quot;wp-block-image&quot;&gt;&lt;figure class=&quot;aligncenter is-resized&quot;&gt;&lt;img src=&quot;https://srikanth.sastry.name/wp-content/uploads/2019/08/product-resource-graphic01.png&quot; alt=&quot;&quot; class=&quot;wp-image-465&quot; width=&quot;234&quot; height=&quot;156&quot; /&gt;&lt;!-- &lt;figcaption&gt;source: https://www.triskellsoftware.com/wp-content/uploads/2016/01/product-resource-graphic01.png&lt;/figcaption&gt; --&gt;&lt;/figure&gt;&lt;/div&gt;
 &lt;!-- /wp:image --&gt;
 
 &lt;!-- wp:paragraph --&gt;
@@ -1266,7 +1266,7 @@ if (hasRequestedFeature(bitMask, ModeEnum.FEATURE_BAR)) {
 &lt;!-- /wp:heading --&gt;
 
 &lt;!-- wp:image {&quot;align&quot;:&quot;center&quot;,&quot;id&quot;:466,&quot;width&quot;:349,&quot;height&quot;:349} --&gt;
-&lt;div class=&quot;wp-block-image&quot;&gt;&lt;figure class=&quot;aligncenter is-resized&quot;&gt;&lt;img src=&quot;https://srikanth.sastry.name/wp-content/uploads/2019/08/Uncertainty-Reigns-Supreme-for-Fixed-Income-Investors-in-2015-e1505506674364.png&quot; alt=&quot;&quot; class=&quot;wp-image-466&quot; width=&quot;349&quot; height=&quot;349&quot; /&gt;&lt;figcaption&gt;source: https://blogs.cfainstitute.org/investor/2015/09/08/uncertainty-reigns-supreme-for-fixed-income-investors-in-2015/&lt;/figcaption&gt;&lt;/figure&gt;&lt;/div&gt;
+&lt;div class=&quot;wp-block-image&quot;&gt;&lt;figure class=&quot;aligncenter is-resized&quot;&gt;&lt;img src=&quot;https://srikanth.sastry.name/wp-content/uploads/2019/08/Uncertainty-Reigns-Supreme-for-Fixed-Income-Investors-in-2015-e1505506674364.png&quot; alt=&quot;&quot; class=&quot;wp-image-466&quot; width=&quot;349&quot; height=&quot;349&quot; /&gt; &lt;!-- &lt;figcaption&gt;source: https://blogs.cfainstitute.org/investor/2015/09/08/uncertainty-reigns-supreme-for-fixed-income-investors-in-2015/&lt;/figcaption&gt; --&gt; &lt;/figure&gt;&lt;/div&gt;
 &lt;!-- /wp:image --&gt;
 
 &lt;!-- wp:paragraph --&gt;
@@ -1278,7 +1278,7 @@ if (hasRequestedFeature(bitMask, ModeEnum.FEATURE_BAR)) {
 &lt;!-- /wp:heading --&gt;
 
 &lt;!-- wp:image {&quot;align&quot;:&quot;center&quot;,&quot;id&quot;:467,&quot;width&quot;:376,&quot;height&quot;:349} --&gt;
-&lt;div class=&quot;wp-block-image&quot;&gt;&lt;figure class=&quot;aligncenter is-resized&quot;&gt;&lt;img src=&quot;https://srikanth.sastry.name/wp-content/uploads/2019/08/stakeholders.png&quot; alt=&quot;&quot; class=&quot;wp-image-467&quot; width=&quot;376&quot; height=&quot;349&quot; /&gt;&lt;figcaption&gt;source: https://corporatefinanceinstitute.com/resources/knowledge/finance/stakeholder/&lt;/figcaption&gt;&lt;/figure&gt;&lt;/div&gt;
+&lt;div class=&quot;wp-block-image&quot;&gt;&lt;figure class=&quot;aligncenter is-resized&quot;&gt;&lt;img src=&quot;https://srikanth.sastry.name/wp-content/uploads/2019/08/stakeholders.png&quot; alt=&quot;&quot; class=&quot;wp-image-467&quot; width=&quot;376&quot; height=&quot;349&quot; /&gt; &lt;!-- &lt;figcaption&gt;source: https://corporatefinanceinstitute.com/resources/knowledge/finance/stakeholder/&lt;/figcaption&gt; --&gt; &lt;/figure&gt;&lt;/div&gt;
 &lt;!-- /wp:image --&gt;
 
 &lt;!-- wp:paragraph --&gt;
@@ -1294,7 +1294,7 @@ if (hasRequestedFeature(bitMask, ModeEnum.FEATURE_BAR)) {
 &lt;!-- /wp:heading --&gt;
 
 &lt;!-- wp:image {&quot;align&quot;:&quot;center&quot;,&quot;id&quot;:468} --&gt;
-&lt;div class=&quot;wp-block-image&quot;&gt;&lt;figure class=&quot;aligncenter&quot;&gt;&lt;img src=&quot;https://srikanth.sastry.name/wp-content/uploads/2019/08/Throw-away-Prototyping-Model.jpg&quot; alt=&quot;&quot; class=&quot;wp-image-468&quot; /&gt;&lt;figcaption&gt;source: https://prototypeinfo.com/evolutionary-prototyping-and-throw-away-prototyping/&lt;/figcaption&gt;&lt;/figure&gt;&lt;/div&gt;
+&lt;div class=&quot;wp-block-image&quot;&gt;&lt;figure class=&quot;aligncenter&quot;&gt;&lt;img src=&quot;https://srikanth.sastry.name/wp-content/uploads/2019/08/Throw-away-Prototyping-Model.jpg&quot; alt=&quot;&quot; class=&quot;wp-image-468&quot; /&gt; &lt;!-- &lt;figcaption&gt;source: https://prototypeinfo.com/evolutionary-prototyping-and-throw-away-prototyping/&lt;/figcaption&gt;  --&gt; &lt;/figure&gt;&lt;/div&gt;
 &lt;!-- /wp:image --&gt;
 
 &lt;!-- wp:paragraph --&gt;
@@ -1312,7 +1312,7 @@ if (hasRequestedFeature(bitMask, ModeEnum.FEATURE_BAR)) {
  </entry>
  
  <entry>
-   <title>Are you building for survival or Survival?</title>
+   <title>Are you building for Survival or Excellence?</title>
    <link href="//srikanth.sastry.name/are-you-building-for-survival-or-excellence/"/>
    <updated>2019-08-15T19:53:45+00:00</updated>
    <id>//srikanth.sastry.name/are-you-building-for-survival-or-excellence</id>
