@@ -1,6 +1,6 @@
 ---
 id: 444
-title: 'Are you building for survival or Survival?'
+title: 'Are you building for Survival or Excellence?'
 date: '2019-08-15T15:53:45-04:00'
 author: 'Srikanth Sastry'
 layout: post

@@ -14,11 +14,11 @@ tags:
 ---
 
 <!-- wp:image {"align":"center","id":463} -->
-<div class="wp-block-image"><figure class="aligncenter"><img src="https://srikanth.sastry.name/wp-content/uploads/2019/08/Are-You-Succeeding-Blog-thegem-blog-default-1024x512.jpg" alt="" class="wp-image-463"/><figcaption>source: http://beaconbusinessmarketing.com/success-vs-survival/</figcaption></figure></div>
+<div class="wp-block-image"><figure class="aligncenter"><img src="https://srikanth.sastry.name/wp-content/uploads/2019/08/Are-You-Succeeding-Blog-thegem-blog-default-1024x512.jpg" alt="" class="wp-image-463"/><!-- <figcaption>source: http://beaconbusinessmarketing.com/success-vs-survival/</figcaption> --> </figure></div>
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->
-<p>Previously, I wrote about <a href="https://srikanth.sastry.name/are-you-building-for-survival-or-excellence/">building for survival vs. success</a>. Briefly, when building for survival, your only goal to get the product working for the specific usecase, and in contrast, when building for success, you are building to solve a bigger class of problems within the broader context of your solution space. In this post, I will talk about when you should be build for survival, and when for success.</p>
+Previously, I wrote about [building for survival vs. success]({% post_url 2019-08-15-are-you-building-for-survival-or-excellence %}) building for survival vs. success. Briefly, when building for survival, your only goal to get the product working for the specific usecase, and in contrast, when building for success, you are building to solve a bigger class of problems within the broader context of your solution space. In this post, I will talk about when you should be build for survival, and when for success.
 <!-- /wp:paragraph -->
 
 <!-- wp:more -->
@@ -30,7 +30,7 @@ tags:
 <!-- /wp:heading -->
 
 <!-- wp:image {"align":"center","id":464,"width":349,"height":262} -->
-<div class="wp-block-image"><figure class="aligncenter is-resized"><img src="https://srikanth.sastry.name/wp-content/uploads/2019/08/Meet-You-Strawman.jpg" alt="" class="wp-image-464" width="349" height="262"/><figcaption>source: https://prepareforchange.net/wp-content/uploads/2016/06/Meet-You-Strawman.jpg</figcaption></figure></div>
+<div class="wp-block-image"><figure class="aligncenter is-resized"><img src="https://srikanth.sastry.name/wp-content/uploads/2019/08/Meet-You-Strawman.jpg" alt="" class="wp-image-464" width="349" height="262"/><!--<figcaption>source: https://prepareforchange.net/wp-content/uploads/2016/06/Meet-You-Strawman.jpg</figcaption>--></figure></div>
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->
@@ -82,7 +82,7 @@ tags:
 <!-- /wp:heading -->
 
 <!-- wp:image {"align":"center","id":465,"width":234,"height":156} -->
-<div class="wp-block-image"><figure class="aligncenter is-resized"><img src="https://srikanth.sastry.name/wp-content/uploads/2019/08/product-resource-graphic01.png" alt="" class="wp-image-465" width="234" height="156"/><figcaption>source: https://www.triskellsoftware.com/wp-content/uploads/2016/01/product-resource-graphic01.png</figcaption></figure></div>
+<div class="wp-block-image"><figure class="aligncenter is-resized"><img src="https://srikanth.sastry.name/wp-content/uploads/2019/08/product-resource-graphic01.png" alt="" class="wp-image-465" width="234" height="156"/><!-- <figcaption>source: https://www.triskellsoftware.com/wp-content/uploads/2016/01/product-resource-graphic01.png</figcaption> --></figure></div>
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->
@@ -94,7 +94,7 @@ tags:
 <!-- /wp:heading -->
 
 <!-- wp:image {"align":"center","id":466,"width":349,"height":349} -->
-<div class="wp-block-image"><figure class="aligncenter is-resized"><img src="https://srikanth.sastry.name/wp-content/uploads/2019/08/Uncertainty-Reigns-Supreme-for-Fixed-Income-Investors-in-2015-e1505506674364.png" alt="" class="wp-image-466" width="349" height="349"/><figcaption>source: https://blogs.cfainstitute.org/investor/2015/09/08/uncertainty-reigns-supreme-for-fixed-income-investors-in-2015/</figcaption></figure></div>
+<div class="wp-block-image"><figure class="aligncenter is-resized"><img src="https://srikanth.sastry.name/wp-content/uploads/2019/08/Uncertainty-Reigns-Supreme-for-Fixed-Income-Investors-in-2015-e1505506674364.png" alt="" class="wp-image-466" width="349" height="349"/> <!-- <figcaption>source: https://blogs.cfainstitute.org/investor/2015/09/08/uncertainty-reigns-supreme-for-fixed-income-investors-in-2015/</figcaption> --> </figure></div>
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->
@@ -106,7 +106,7 @@ tags:
 <!-- /wp:heading -->
 
 <!-- wp:image {"align":"center","id":467,"width":376,"height":349} -->
-<div class="wp-block-image"><figure class="aligncenter is-resized"><img src="https://srikanth.sastry.name/wp-content/uploads/2019/08/stakeholders.png" alt="" class="wp-image-467" width="376" height="349"/><figcaption>source: https://corporatefinanceinstitute.com/resources/knowledge/finance/stakeholder/</figcaption></figure></div>
+<div class="wp-block-image"><figure class="aligncenter is-resized"><img src="https://srikanth.sastry.name/wp-content/uploads/2019/08/stakeholders.png" alt="" class="wp-image-467" width="376" height="349"/> <!-- <figcaption>source: https://corporatefinanceinstitute.com/resources/knowledge/finance/stakeholder/</figcaption> --> </figure></div>
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->
@@ -122,7 +122,7 @@ tags:
 <!-- /wp:heading -->
 
 <!-- wp:image {"align":"center","id":468} -->
-<div class="wp-block-image"><figure class="aligncenter"><img src="https://srikanth.sastry.name/wp-content/uploads/2019/08/Throw-away-Prototyping-Model.jpg" alt="" class="wp-image-468"/><figcaption>source: https://prototypeinfo.com/evolutionary-prototyping-and-throw-away-prototyping/</figcaption></figure></div>
+<div class="wp-block-image"><figure class="aligncenter"><img src="https://srikanth.sastry.name/wp-content/uploads/2019/08/Throw-away-Prototyping-Model.jpg" alt="" class="wp-image-468"/> <!-- <figcaption>source: https://prototypeinfo.com/evolutionary-prototyping-and-throw-away-prototyping/</figcaption>  --> </figure></div>
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->
