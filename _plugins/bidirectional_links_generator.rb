@@ -2,14 +2,14 @@
 
 class BidirectionalLinksGenerator < Jekyll::Generator
   def generate(site)
-    notes = site.collections['posts'].docs
+    posts = site.collections['posts'].docs
 
-    notes.each do |current_note|
-      notes_linking_to_current_note = notes.filter do |e|
-        e.content.include?(current_note.url)
+    posts.each do |current_post|
+      posts_linking_to_current_post = posts.filter do |e|
+        e.content.include?(current_post.url)
       end
 
-      current_note.data['backlinks'] = notes_linking_to_current_note
+      current_post.data['backlinks'] = posts_linking_to_current_post
     end
   end
 end

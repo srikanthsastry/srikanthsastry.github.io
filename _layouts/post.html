@@ -15,7 +15,7 @@ layout: default
     {% for backlink in page.backlinks %}
     <li>
       <h3>
-        <a class="internal-link" href="{{ site.baseurl }}{{ backlink.url }}{%- if site.use_html_extension -%}.html{%- endif -%}">{{ backlink.title }}</a>
+        <a href="{{ site.baseurl }}{{ backlink.url }}{%- if site.use_html_extension -%}.html{%- endif -%}">{{ backlink.title }}</a>
       </h3>
     </li>
     {% endfor %}
