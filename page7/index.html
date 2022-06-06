@@ -105,6 +105,10 @@
     
       
         
+      
+    
+      
+        
           <a class="sidebar-nav-item" href="//srikanth.sastry.name/publications/">Publications</a>
         
       
@@ -146,6 +150,23 @@
 
       <div class="container content">
         <div class="posts">
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="//srikanth.sastry.name/stabilizing-dining-with-failure-locality-1/">
+        Stabilizing Dining with Failure Locality 1
+      </a>
+    </h1>
+
+    <span class="post-date">04 Feb 2014</span>
+
+    <p>This paper was presented in ICDCN 2014.</p>
+
+<p><strong>Abstract:</strong> We propose two algorithm for solving self-stabilizing dining with Crash Locality 1 in asynchronous shared-memory systems with safe registers. Since this problem cannot be solved in pure asynchrony, we augment the shared-memory system with failure detectors. Specifically, we introduce the anonymous eventually perfect failure detector ?&lt;&gt;P (a variant of the anonymous perfect failure detector introduced by Guerraoui et al.), and show that this failure detector is sufficient to solve the problem at hand.</p>
+
+<p>The preprint is available for download <a title="Stabilizing Dining with Failure Locality 1" href="http://srikanth.sastry.name/documents/research/icdcn2014_fl1ssdining.pdf" target="_blank">here</a>.</p>
+
+  </div>
   
   <div class="post">
     <h1 class="post-title">
@@ -214,23 +235,6 @@
 <!--more-->
 
 <p><em><strong>Abstract: </strong></em>Failure detectors — oracles that provide information about process crashes — are an important abstraction for crash tolerance in distributed systems. Although current failure-detector theory provides great generality and expressiveness, it also poses significant challenges in developing a robust hierarchy of failure detectors. We address some of these challenges by proposing a variant of failure detectors called asynchronous failure detectors and an associated modeling framework. Unlike the traditional failure-detector framework, our framework eschews real time completely. We show that asynchronous failure detectors are sufficiently expressive to include several popular failure detectors. Additionally, we show that asynchronous failure detectors satisfy many desirable properties: they are self-implementable, guarantee that stronger asynchronous failure detectors solve more problems, and ensure that their outputs encode no information other than process crashes. We introduce the notion of a failure detector being representative of a problem to capture the idea that some problems encode the same information about process crashes as their weakest failure detectors do. We show that a large class of problems, called finite problems, do not have representative failure detectors.</p>
-
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="//srikanth.sastry.name/failure-detectors-encapsulate-fairness/">
-        Failure Detectors Encapsulate Fairness
-      </a>
-    </h1>
-
-    <span class="post-date">17 Feb 2012</span>
-
-    <p>The full version of my OPODIS 2010 paper “Failure Detectors Encapsulate Fairness” (<a href="documents/research/opodis2010.pdf" target="_blank">preprint</a>) has been accepted for publication with the journal Distributed Computing. You can find a <a href="/documents/research/journal/FD_encapsulate_fairness_preprint.pdf" target="_blank">preprint of the paper here [pdf]</a>.</p>
-
-<!--more-->
-
-<p><em><strong>Abstract: </strong></em>Failure detectors have long been viewed as abstractions for the synchronism present in distributed system models. However, investigations into the exact amount of synchronism encapsulated by a given failure detector have met with limited success. The reason for this is that traditionally, models of partial synchrony are specified with respect to real time, but failure detectors do not encapsulate real time. Instead, we argue that failure detectors encapsulate the fairness in computation and communication. Fairness is a measure of the number of steps executed by one process relative either to the number of steps taken by another process or relative to the duration for which a message is in transit. We argue that failure detectors are substitutable for the fairness properties (rather than real-time properties) of partially synchronous systems. We propose four fairness-based models of partial synchrony and demonstrate that they are, in fact, the ‘weakest system models’ to implement the canonical failure detectors from the Chandra-Toueg hierarchy. We also propose a set of fairness-based models which encapsulate the $Gc$ parametric failure detectors which eventually and permanently suspect crashed processes, and eventually and permanently trust some fixed set of c correct processes.</p>
 
   </div>
   
