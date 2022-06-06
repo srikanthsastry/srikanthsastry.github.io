@@ -4,6 +4,7 @@ id: 20220517094546
 tags:
     - testing
     - 'software engineering'
+    - 'unit tests'
 categories:
     - Professional
 permalink: /dry-unit-tests-are-bad/
