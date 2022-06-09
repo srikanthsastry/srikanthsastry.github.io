@@ -4,7 +4,7 @@
  <title>Srikanth Sastry</title>
  <link href="//srikanth.sastry.name/atom.xml" rel="self"/>
  <link href="//srikanth.sastry.name/"/>
- <updated>2022-06-06T14:16:34+00:00</updated>
+ <updated>2022-06-09T14:55:08+00:00</updated>
  <id>//srikanth.sastry.name</id>
  <author>
    <name>Srikanth Sastry</name>
@@ -311,6 +311,8 @@ Examples where mocks are useful include the SUT logging to a log server, or send
    <content type="html">&lt;p&gt;&lt;img src=&quot;/images/squeeze-cloth.jpg&quot; alt=&quot;DRY&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/Don%27t_repeat_yourself&quot;&gt;“Don’t Repeat Yourself” (DRY)&lt;/a&gt; is arguably one of the most important principles in software engineering. It is considered a truism among many. A consequence of such dogmatic allegiance to DRYness is that we see a lot of DRY unit tests; this is where the utility of the DRY principle breaks downs and starts causing more problems that it solves.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;TL;DR.&lt;/strong&gt; &lt;em&gt;Simplicity&lt;/em&gt; should be a core property of unit tests. This is motivated, both by arguments in this post against DRY unit tests, and by &lt;a href=&quot;https://srikanth.sastry.name/the-big-why-about-unit-tests/&quot;&gt;software maintainability as the primary motivation for unit tests&lt;/a&gt;. Unit tests should be as simple as reasonable. It should be easy to ready, understand, and modify (it should be easy to modify any single test in isolation). It is perfectly acceptable for this simplicity to come at the expense of code-reuse, performance, and efficiency.&lt;/p&gt;
 
 &lt;h2 id=&quot;so-whats-wrong-with-dry-unit-tests&quot;&gt;So, what’s wrong with DRY Unit Tests?&lt;/h2&gt;
 &lt;p&gt;Presumably, we are all convinced of the benefits of DRYing your code (interested readers can go &lt;a href=&quot;https://en.wikipedia.org/wiki/Don%27t_repeat_yourself&quot;&gt;the Wikipedia page&lt;/a&gt;). It does have some downsides, and so you have the notion of the &lt;a href=&quot;http://blog.jayfields.com/2006/05/dry-code-damp-dsls.html&quot;&gt;DAMP&lt;/a&gt;/&lt;a href=&quot;https://startup-cto.net/moist-code-why-code-should-not-be-completely-dry/&quot;&gt;MOIST&lt;/a&gt;/&lt;a href=&quot;https://kentcdodds.com/blog/aha-programming&quot;&gt;AHA&lt;/a&gt; principle. Interestingly, the reasons why DRYness doesn’t always work out in production code are different from why it is a bad idea to write DRY unit tests. I see five ways in which (a) test code is different from production code and (b) it contributes to why test code should not be DRY.&lt;/p&gt;
