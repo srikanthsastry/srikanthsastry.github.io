@@ -10,14 +10,14 @@ categories:
 permalink: /dry-unit-tests-are-bad/
 layout: post
 excerpt: >
-  "Don't Repeat Yourself" (DRY) is arguably one of the most important principles in software engineering.
-  It is considered a truism among many. 
-  A consequence of such dogmatic allegiance to DRYness is that we see a lot of DRY unit tests; this is where
-  the utility of the DRY principle breaks downs and starts causing more problems that it solves.
+  Simplicity should be a core property of unit tests. This is motivated, both by arguments in this post against DRY unit tests, and by software maintainability as the primary motivation for unit tests. Unit tests should be as simple as reasonable. It should be easy to ready, understand, and modify (it should be easy to modify any single test in isolation). It is perfectly acceptable for this simplicity to come at the expense of code-reuse, performance, and efficiency.
+
 ...
 ![DRY](/images/squeeze-cloth.jpg)
 
 ["Don't Repeat Yourself" (DRY)](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) is arguably one of the most important principles in software engineering. It is considered a truism among many. A consequence of such dogmatic allegiance to DRYness is that we see a lot of DRY unit tests; this is where the utility of the DRY principle breaks downs and starts causing more problems that it solves.
+
+**TL;DR.** _Simplicity_ should be a core property of unit tests. This is motivated, both by arguments in this post against DRY unit tests, and by [software maintainability as the primary motivation for unit tests](https://srikanth.sastry.name/the-big-why-about-unit-tests/). Unit tests should be as simple as reasonable. It should be easy to ready, understand, and modify (it should be easy to modify any single test in isolation). It is perfectly acceptable for this simplicity to come at the expense of code-reuse, performance, and efficiency.
 
 ## So, what's wrong with DRY Unit Tests?
 Presumably, we are all convinced of the benefits of DRYing your code (interested readers can go [the Wikipedia page](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself)). It does have some downsides, and so you have the notion of the [DAMP](http://blog.jayfields.com/2006/05/dry-code-damp-dsls.html)/[MOIST](https://startup-cto.net/moist-code-why-code-should-not-be-completely-dry/)/[AHA](https://kentcdodds.com/blog/aha-programming) principle. Interestingly, the reasons why DRYness doesn't always work out in production code are different from why it is a bad idea to write DRY unit tests. I see five ways in which (a) test code is different from production code and (b) it contributes to why test code should not be DRY.
