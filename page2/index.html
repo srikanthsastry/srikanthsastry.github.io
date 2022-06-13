@@ -153,6 +153,125 @@
   
   <div class="post">
     <h1 class="post-title">
+      <a href="//srikanth.sastry.name/do-not-index-in-test-coverage/">
+        Do not index on test coverage metrics
+      </a>
+    </h1>
+
+    <span class="post-date">29 Apr 2022</span>
+
+    <p><img src="/images/chart-coverage.png" alt="Coverage Chart" /></p>
+
+<p>We live in a data driven world, and as the saying goes “[…] What is not measured, cannot be improved. […]”</p>
+<blockquote>
+  <p>What is not defined cannot be measured. What is not measured, cannot be improved. What is not improved, is always degraded.</p>
+
+  <p>– William Thomson Kelvin</p>
+</blockquote>
+
+<p>The temptation, therefore, is to measure everything. Even the quality of your unit tests, and there where the trouble usually begins. For an detailed explanation of why indexing on the test coverage metrics is a bad idea, I highly recommend Jason Rudolph’s collection of posts on this topic <a href="https://jasonrudolph.com/blog/testing-anti-patterns-how-to-fail-with-100-test-coverage/">here</a>. To drive home the point more explicitly (and motivate you to actually go read Jason’s posts), here are some illustrative explanations.</p>
+
+<p>There are many coverage metrics including function coverage, statement coverage, line coverage, branch coverage, condition coverage, etc. Here, we will only look at line coverage and branch coverage, because those are the most popular.</p>
+
+<h2 id="line-coverage">Line coverage</h2>
+<p>Let’s start with <em>line coverage</em>, which is the number of lines of code executed by tests vs. the total number of lines of code. The most common target for the line coverage metric is 80%. That is, 80% of your code should be executed by your tests. While that might seem like a good idea, indexing on this metric can actually take you away from good quality test coverage! How? Consider the following (contrived example).</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">has_three_digits</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="n">strlen</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">strlen</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">True</span>
+    <span class="k">return</span> <span class="bp">False</span>
+
+<span class="k">class</span> <span class="nc">TestHasThreeDigits</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">test_has_three_digits_234</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">output_value</span> <span class="o">=</span> <span class="n">has_three_digits</span><span class="p">(</span><span class="mi">234</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">output_value</span><span class="p">)</span>
+</code></pre></div></div>
+<p>Clearly <code class="language-plaintext highlighter-rouge">TestHasThreeDigits</code> inadequate as a test suite for testing <code class="language-plaintext highlighter-rouge">has_three_digits</code>. Tests only the True case, and misses the False cases completely!
+The line coverage of the test suite is 3/4 = 75%. You could say that the test coverage is less than 80%, and therefore not adequate. Here, it appears that the line coverage metric does indeed point of inadequate testing. However, this confidence in the metric is severely misplaced! Consider the following refactoring of <code class="language-plaintext highlighter-rouge">has_three_digits</code></p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">has_three_digits</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="n">value_as_str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="n">strlen</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">value_as_str</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">strlen</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">True</span>
+    <span class="k">return</span> <span class="bp">False</span>
+</code></pre></div></div>
+<p>Now, <code class="language-plaintext highlighter-rouge">TestHasThreeDigits</code> line coverage magically improves to 4/5 = 80%, and as per the 80% target, the metrics seems to suggest adequate coverage! In fact, you can play this game some more and refactor <code class="language-plaintext highlighter-rouge">has_three_digits</code> to</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">has_three_digits</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="n">value_as_str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="n">strlen</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">value_as_str</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">strlen</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span>
+</code></pre></div></div>
+<p>Now, with the same test suite <code class="language-plaintext highlighter-rouge">TestHasThreeDigits</code> now has 100% coverage! Recall that semantically the test still do the same thing; they still test only the True case, and ignore the False case completely.</p>
+
+<h2 id="branch-coverage">Branch coverage</h2>
+<p>An easy retort to the above example is that line coverage is not a sufficiently nuanced metric, and what you really need is <em>branch coverage</em>, which is the number of branches executed by the tests vs. the number of branches in the code.</p>
+
+<p>Looking at the branch coverage of <code class="language-plaintext highlighter-rouge">TestHasThreeDigits</code>, we can see that it has a 50% branch coverage, which is inadequate. Well, here’s an easy way to improve that.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">TestHasThreeDigits</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">test_has_three_digits_true</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">true_output_value</span> <span class="o">=</span> <span class="n">has_three_digits</span><span class="p">(</span><span class="mi">234</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_has_three_digits_false</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">false_output_value</span> <span class="o">=</span> <span class="n">has_three_digits</span><span class="p">(</span><span class="mi">23</span><span class="p">)</span>
+</code></pre></div></div>
+<p>See, now the test suite has 100% branch coverage! However, not that it has no assertions at all. So, despite having 100% line and branch coverage, this test suite is completely useless! (This is a form of <a href="https://jasonrudolph.com/blog/2008/06/17/testing-anti-patterns-incidental-coverage/">incidental coverage anti-pattern</a>.)</p>
+
+<p>Here is a more nuanced example:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">HasThreeDigits</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+        
+    <span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span>
+    
+<span class="k">class</span> <span class="nc">TestHasThreeDigits</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">test_has_three_digits_234</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">output_value</span> <span class="o">=</span> <span class="n">has_three_digits</span><span class="p">(</span><span class="mi">234</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">output_value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_has_three_digits_23</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">output_value</span> <span class="o">=</span> <span class="n">has_three_digits</span><span class="p">(</span><span class="mi">23</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">output_value</span><span class="p">)</span>
+</code></pre></div></div>
+<p>The code coverage is 100%, branch coverage is 100%. But <code class="language-plaintext highlighter-rouge">self.counter</code> is never verified!</p>
+<h2 id="wait-theres-more">Wait, there’s more!</h2>
+<p>Coverage metrics only consider the code the are under your project, and ignore all external libraries. However, your code is correct only if you are satisfying the preconditions of your external library calls, and test coverage metrics do not capture any of that. Here is an illustration with an contrived example.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">external.lib</span> <span class="kn">import</span> <span class="n">convert_to_num</span>
+
+<span class="k">def</span> <span class="nf">has_three_digits</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">convert_to_num</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">v</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">v</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1000</span> <span class="ow">and</span> <span class="n">v</span> <span class="o">&lt;</span> <span class="mi">1000</span>
+</code></pre></div></div>
+<p>The above code is expected return True if <code class="language-plaintext highlighter-rouge">value</code> is and integer with 3 digits. Here is test suite.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">TestHasThreeDigits</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">test_has_three_digits_234</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">output_value</span> <span class="o">=</span> <span class="n">has_three_digits</span><span class="p">(</span><span class="s">'234'</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">output_value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_has_three_digits_23</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">output_value</span> <span class="o">=</span> <span class="n">has_three_digits</span><span class="p">(</span><span class="s">'23'</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">output_value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_has_three_digits_minus_23</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">output_value</span> <span class="o">=</span> <span class="n">has_three_digits</span><span class="p">(</span><span class="s">'-23'</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">output_value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_has_three_digits_minus_234</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">output_value</span> <span class="o">=</span> <span class="n">has_three_digits</span><span class="p">(</span><span class="s">'-234'</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">output_value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test_has_three_digits_ten_times_ten</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">output_value</span> <span class="o">=</span> <span class="n">has_three_digits</span><span class="p">(</span><span class="s">'10*10'</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">output_value</span><span class="p">)</span>
+</code></pre></div></div>
+<p>The test suite looks reasonable. You line and branch coverage is a 100%, and so nothing in the metrics suggestg anything is amiss. Except that we have said nothing about how <code class="language-plaintext highlighter-rouge">convert_to_num</code> is implemented. It is easy to imagine some preconditions for the input to <code class="language-plaintext highlighter-rouge">convert_to_num</code>; for instance, it throws a ValueError exception if you pass in an input of the form <code class="language-plaintext highlighter-rouge">3/0</code>. Now, you can see how the test suite is not adequate! (<code class="language-plaintext highlighter-rouge">has_three_digits('10/0')</code> will throw an exception). But your test coverage metrics will never be able to help here.</p>
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="//srikanth.sastry.name/beware-of-using-patch-object-to-test-your-python-code/">
         Beware of using patch.object to test your Python code
       </a>
@@ -467,73 +586,6 @@ if (hasRequestedFeature(bitMask, ModeEnum.FEATURE_BAR)) {
 
 <!-- wp:paragraph -->
 <p>Is this obvious? I think so. Was it necessary to belabor the point? Empirical evidence seems to scream "YES!".</p>
-<!-- /wp:paragraph -->
-
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="//srikanth.sastry.name/tale-of-two-departures/">
-        Tale of two departures
-      </a>
-    </h1>
-
-    <span class="post-date">02 Mar 2020</span>
-
-    <!-- wp:image {"align":"center","id":580,"sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://srikanth.sastry.name/wp-content/uploads/2020/02/img_0143-1024x683.jpg" alt="" class="wp-image-580" /><figcaption>Image by <a href="https://pixabay.com/users/MIH83-464187/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1478118">Maret Hosemann</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1478118">Pixabay</a></figcaption></figure></div>
-<!-- /wp:image -->
-
-<!-- wp:paragraph -->
-<p>Saying goodbye to a workplace where you have spent a considerable amount of time is never easy. But it can be made into a positive experience by the organization, or be made miserable. Netflix is famous for celebrating when an employee leaves by thanking them and wishing them well, and in contrast, Hubspot is know for firing something and calling it a ‘graduation’.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>I have two stories to share on how my departure from two different organizations played out. Both both these stories, there were only good intentions all around, but yet, the executions of the departure were very different. The juxtaposition is instructive on its own.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:heading -->
-<h2><strong>First</strong> story: I said goodbye, and they said Au <strong>Revoir</strong></h2>
-<!-- /wp:heading -->
-
-<!-- wp:image {"id":581,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="https://srikanth.sastry.name/wp-content/uploads/2020/02/img_0144-1024x553.jpg" alt="" class="wp-image-581" /><figcaption>Image by <a href="https://pixabay.com/users/pixel2013-2364555/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2934257">S. Hermann &amp; F. Richter</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2934257">Pixabay</a></figcaption></figure>
-<!-- /wp:image -->
-
-<!-- wp:paragraph -->
-<p>In the first story, I had a meeting with my manager and told him that I accepted an offer with another company, and so was leaving. His immediate response was to check with me if there was anything he could do that will make me change my mind (he also prefaced that by saying that he thinks that the answer is ‘no’). After I said that my mind was made up, he thanked me for everything I had done so far, and said that he will set up meetings with various folks to help me transition my responsibilities. </p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>With my consent, he immediately and discretely told members of my team, set up transition discussions, and then followed that up with an org wide announcement. Then, the entire team got together for a goodbye lunch, with everyone including the manager wishing me well. Finally, before I left, he said that he wishes me the best, but if things don’t work out with the new role, then I am always welcome back.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:heading -->
-<h2>Second Story: I said goodbye, and they said uh.. wait, what?</h2>
-<!-- /wp:heading -->
-
-<!-- wp:image {"id":582,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="https://srikanth.sastry.name/wp-content/uploads/2020/02/img_0145-1024x645.jpg" alt="" class="wp-image-582" /><figcaption>Image by <a href="https://pixabay.com/users/Alexas_Fotos-686414/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3109992">Alexas_Fotos</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3109992">Pixabay</a></figcaption></figure>
-<!-- /wp:image -->
-
-<!-- wp:paragraph -->
-<p>In the second story, I had a meeting with my manager and told him that I did not see my skills fitting the role, and that it doesn’t play to my strengths. So, I think serves both the org and me well to plan a transition for me to move on. He tried to convince me otherwise, and this went on for some time. I indulged his thoughts and arguments and made a good faith effort to pursue the avenues he suggested, but it only served to strengthen my initial proposition. </p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>After I made my final decision, he asked to delay my decision until I had a new role. After I found a new role, he asked me to spend a month transitioning my responsibilities to someone else. But for over a week, I did not see any movement in the transition plan. Meanwhile, I am furiously preparing everything for the transition. Until about a week before my last day, there is no news of my departure, and no person or people to transition to. </p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>With just over a week left, on my request, my manager calls the team together to announce my departure, except that he had already mentioned this to each of them private well over a week ago, but didn’t really provide any guidelines to them or to me about who else had been looped in. So, no one spoke to me about it, or to each other, and kept acting like everything was business as usual. It had become an elephant in the room and made everything uncomfortable for no apparent benefit. </p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>Finally, the last few days were a frantic meeting spree with my transition of responsibilities to other folks, and my brain dump spread across multiple documents that was hastily reviewed by the team as my last day at work came and went.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>My final goodbye was in an org-wide meeting where my manager thanked me for my contributions and wished me well.</p>
 <!-- /wp:paragraph -->
 
   </div>

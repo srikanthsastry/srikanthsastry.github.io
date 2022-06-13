@@ -153,6 +153,67 @@
   
   <div class="post">
     <h1 class="post-title">
+      <a href="//srikanth.sastry.name/unit-test-attributes-and-their-trade-offs/">
+        Primary attributes of unit tests and their tradeoffs
+      </a>
+    </h1>
+
+    <span class="post-date">13 Jun 2022</span>
+
+    <p><img src="/images/accuracy-completeness-speed.png" alt="" />
+Unit test suites have three primary attributes.</p>
+
+<ol>
+  <li>accuracy,</li>
+  <li>completeness, and</li>
+  <li>speed.</li>
+</ol>
+
+<p><em>Accuracy</em> says that if a test fails, then there is a bug. <em>Completeness</em> says that if there is a bug, then a unit test will fail. <em>Speed</em> says that tests will run ‘fast’. These three attributes are in opposition with each other, and you can only satisfy any two of the three attributes!</p>
+
+<p>Before discussing these attributes, it is important to note that they are not properties of test suite at rest, but rather, of the test suite during changes. That is, these attributes are measured only when you are making changes to the code and running the test suite in response to those changes. Also, these attributes are not applicable to a single unit test. Instead, they apply to the test suite as a whole. Furthermore, the quality of your test suite is determined by how well the suite measures up along these attributes.</p>
+
+<h3 id="attributes-descriptions">Attributes’ descriptions</h3>
+<p>Let’s describe each of these attributes, and then we can see any unit test suite is forced to trade off these attributes.</p>
+
+<ol>
+  <li><em>Accuracy.</em> It is a measure of robustness of the test suite to changes in the production code. If you make a change to the production code <em>without changing your unit tests</em>, and your test suite has a failure, then how likely is it that your changes introduced a bug? Accuracy is a measure of this likelihood. High quality unit tests typically have very good accuracy. If your test suite has poor accuracy, then it suggests that either your tests are brittle, they are actually testing implementation details instead of functionality, or your production code is poorly designed with leaky abstractions. Inaccurate tests reduce your ability to detect regressions. They fail to provide early warning when a diff breaks existing functionality (because the developer cannot be sure that the test failure is a genuine bug, and not an artifact of test brittleness). As a result, developers are more likely to ignore test failure, or modify the tests to make it ‘pass’, and thus introduce bugs in their code.</li>
+  <li><em>Completeness</em>. This is a measure of how comprehensive the test suite really is. If you make a change to the production code <em>without changing your unit tests</em>, and you introduce a bug in <em>an existing functionality</em>, then how likely is it that your test suite will fail? Completeness is a measure of this likelihood. A lot of the test coverage metrics try to mimic the completeness of your test suite. However, <a href="TODO:LINK TO CODE COVERAGE POST">we have seen how coverage metrics are often a poor proxy for completeness</a>.</li>
+  <li><em>Speed</em>. This is simply a measure of how quickly a test suite runs. If tests are hermetic with the right use of <a href="TODO: LINK TO MOCKS AND STUBS">test doubles</a>, then each test runs pretty quickly. However, if the tests are of poor quality or the test suite is very large, then they can get pretty slow. It is most noticeable when you are iterating on a feature, and with each small change, you need to run the test suite that seems to take forever to complete. Slow tests can have a disproportionate impact on developer velocity. It will make developer less likely to run tests eagerly, it increases the time between iterations, and it increases the CI/CD latency to where the gap between your code landing and the changes making it to prod can be unreasonably large. If this gets bad enough, it will discourage developers from running tests as needed, and thus allow bugs to creep in.</li>
+</ol>
+
+<h3 id="attribute-constraints-and-trade-offs">Attribute constraints and trade offs</h3>
+
+<p>There is a tension among attributes, and how these attributes contribute to overall unit test suite quality.</p>
+
+<p>Among accuracy, completeness, and speed, you cannot maximize all three; that is, you cannot have a <em>fast</em> test suite that will fail if <em>and only if</em> there is a bug. Maximizing any two will minimize the third.</p>
+<ul>
+  <li>A prefect test suite with high accuracy and completeness will inevitably be huge, and thus very slow.</li>
+  <li>A fast test suite with high accuracy will often only test only the most common user journeys, and thus be incomplete.</li>
+  <li>A test suite with very high coverage is often made ‘fast’ through extensive use of test doubles and ends up coupling tests with the implementation details, which makes the tests brittle, and therefore inaccurate.</li>
+</ul>
+
+<h3 id="whats-the-right-trade-off">What’s the right trade off?</h3>
+<p><img src="/images/balance-scale.jpg" alt="Image not found: /images/balance-scale.jpg" title="Image not found: /images/balance-scale.jpg" /></p>
+
+<p>A natural follow up to the trade offs among accuracy, completeness, and speed is <em>“What is the right trade off?”</em>. It helps to notice that, empirically, we are always making this trade off and naturally settling on some point in the trade-off surface. What is this natural resting point for these trade offs? Let’s examine a few things to help us answer the above question.</p>
+
+<ol>
+  <li>From experience, we know that bugs in software are inevitable, and we have learned to deal with it. While bug-free code might be the ideal, no one reasonably expects bug-free software, and we accept some level of incorrectness in our implementations.</li>
+  <li>Flaky/brittle tests can have very significant negative consequences. Such tests are inherently untrustworthy, and therefore, serve no useful purpose. In the end, we tend to ignore such tests, and for all practical purposes they just don’t exist in our test suite.</li>
+  <li>While extremely slow tests are an issue, we have figured out ways to improve test speeds through infrastructure developments. For instance,our CI/CD systems can run multiple tests in the test suite in parallel, and thus we are delayed only by the slowests tests in the test suite; we have figured out how to prune the affected tests in a diff by being smart about the build and test targets affected by the changes, and thus, we need not run the entire test suite for a small change; the machines that execute tests have just gotten faster, thus alleviating some of the latency issues, etc.</li>
+</ol>
+
+<p>From the above three observations, we can reasonably conclude that we cannot sacrifice accuracy. Accurate tests are the bedrock of trustworthy (and therefore, useful) test suites. Once we maximize accuracy, that leaves us with completeness and speed. Here there is a sliding scale between completeness and speed, and we could potentially rest anywhere on this scale.</p>
+
+<p>So, is it ok to rest anywhere on the tradeoff spectrum between completeness and accuracy? Not quite. If you dial completeness all the way up and ignore speed, then you end up with a test suite that no one wants to run, and therefore, not useful at all. On the other hand, if you ignore completeness in favor of speed, then you are likely going to see a lot of regressions in your software and completely undermine consumer confidence in your product/service. In effect, <strong>the quality of your test suite is determined by the lowest score among the three attributes.</strong> Therefore, it is important to rest between completeness and speed, depending on the tolerance to errors and the minimum developer velocity you can sustain. For instance, if you are developing software for medical imaging, then your tolerance to errors is very very low, and so you should be favoring completeness at the expense of speed (and this is evident in how long it takes to make changes to software in the area of medical sciences). On the other hand, if you are building a web service that can be rolled back to a safe state quickly and with minimal external damage, then you probably want to favor speed over completeness (but only to a point; remember that your test quality is now determined by the completeness, or the lack thereof).</p>
+
+<p>Thus, in conclusion, always maximize accuracy, and trade off between completeness and speed, depending on your tolerance of failures in production.</p>
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="//srikanth.sastry.name/the-big-why-about-unit-tests/">
         The big WHY about unit tests
       </a>
@@ -568,125 +629,6 @@ Most code is read more often than is written/edited. Unsurprisingly, it is impor
 <p><img src="/images/black-women-developers.jpg" alt="Developers doing code reviews" /></p>
 
 <p>DRY’d out tests not only impede developer velocity, they also make it less easy to review code/diffs/pull requests. This is a second order effect of DRYing out your test code. Let’s revisit the example where we are adding a new feature to an existing piece of code, and this is a pure addition in behavior (not modification to existing behavior). If the tests were not DRY’d out, then adding tests for this new feature would involve just adding new test cases, and thus, just green lines in the generated diff. In contrast, recall from the previous subsection that adding tests with DRY test code is likely going to involve modifying existing code and then adding new test cases. In the former case, reviewing the tests is much easier, and as a result, reviewing that the new feature is behaving correctly is also that much easier. Reviewing the diff in the latter case is cognitively more taxing because not only does the reviewer need to verify that the new feature is implemented correctly, they also have to verify that the changes to the test code is also correct, and is not introducing new holes for bugs to escape testing. This can significantly slow down code reviews in two ways (1) it requires more time to review the code, and (2) because it requires longer to review the code, the reviewers are more likely to delay even starting the code review.</p>
-
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="//srikanth.sastry.name/do-not-index-in-test-coverage/">
-        Do not index on test coverage metrics
-      </a>
-    </h1>
-
-    <span class="post-date">29 Apr 2022</span>
-
-    <p><img src="/images/chart-coverage.png" alt="Coverage Chart" /></p>
-
-<p>We live in a data driven world, and as the saying goes “[…] What is not measured, cannot be improved. […]”</p>
-<blockquote>
-  <p>What is not defined cannot be measured. What is not measured, cannot be improved. What is not improved, is always degraded.</p>
-
-  <p>– William Thomson Kelvin</p>
-</blockquote>
-
-<p>The temptation, therefore, is to measure everything. Even the quality of your unit tests, and there where the trouble usually begins. For an detailed explanation of why indexing on the test coverage metrics is a bad idea, I highly recommend Jason Rudolph’s collection of posts on this topic <a href="https://jasonrudolph.com/blog/testing-anti-patterns-how-to-fail-with-100-test-coverage/">here</a>. To drive home the point more explicitly (and motivate you to actually go read Jason’s posts), here are some illustrative explanations.</p>
-
-<p>There are many coverage metrics including function coverage, statement coverage, line coverage, branch coverage, condition coverage, etc. Here, we will only look at line coverage and branch coverage, because those are the most popular.</p>
-
-<h2 id="line-coverage">Line coverage</h2>
-<p>Let’s start with <em>line coverage</em>, which is the number of lines of code executed by tests vs. the total number of lines of code. The most common target for the line coverage metric is 80%. That is, 80% of your code should be executed by your tests. While that might seem like a good idea, indexing on this metric can actually take you away from good quality test coverage! How? Consider the following (contrived example).</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">has_three_digits</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-    <span class="n">strlen</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
-    <span class="k">if</span> <span class="n">strlen</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">True</span>
-    <span class="k">return</span> <span class="bp">False</span>
-
-<span class="k">class</span> <span class="nc">TestHasThreeDigits</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">test_has_three_digits_234</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">output_value</span> <span class="o">=</span> <span class="n">has_three_digits</span><span class="p">(</span><span class="mi">234</span><span class="p">)</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">output_value</span><span class="p">)</span>
-</code></pre></div></div>
-<p>Clearly <code class="language-plaintext highlighter-rouge">TestHasThreeDigits</code> inadequate as a test suite for testing <code class="language-plaintext highlighter-rouge">has_three_digits</code>. Tests only the True case, and misses the False cases completely!
-The line coverage of the test suite is 3/4 = 75%. You could say that the test coverage is less than 80%, and therefore not adequate. Here, it appears that the line coverage metric does indeed point of inadequate testing. However, this confidence in the metric is severely misplaced! Consider the following refactoring of <code class="language-plaintext highlighter-rouge">has_three_digits</code></p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">has_three_digits</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-    <span class="n">value_as_str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-    <span class="n">strlen</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">value_as_str</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">strlen</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">True</span>
-    <span class="k">return</span> <span class="bp">False</span>
-</code></pre></div></div>
-<p>Now, <code class="language-plaintext highlighter-rouge">TestHasThreeDigits</code> line coverage magically improves to 4/5 = 80%, and as per the 80% target, the metrics seems to suggest adequate coverage! In fact, you can play this game some more and refactor <code class="language-plaintext highlighter-rouge">has_three_digits</code> to</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">has_three_digits</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-    <span class="n">value_as_str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-    <span class="n">strlen</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">value_as_str</span><span class="p">)</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">strlen</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span>
-</code></pre></div></div>
-<p>Now, with the same test suite <code class="language-plaintext highlighter-rouge">TestHasThreeDigits</code> now has 100% coverage! Recall that semantically the test still do the same thing; they still test only the True case, and ignore the False case completely.</p>
-
-<h2 id="branch-coverage">Branch coverage</h2>
-<p>An easy retort to the above example is that line coverage is not a sufficiently nuanced metric, and what you really need is <em>branch coverage</em>, which is the number of branches executed by the tests vs. the number of branches in the code.</p>
-
-<p>Looking at the branch coverage of <code class="language-plaintext highlighter-rouge">TestHasThreeDigits</code>, we can see that it has a 50% branch coverage, which is inadequate. Well, here’s an easy way to improve that.</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">TestHasThreeDigits</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">test_has_three_digits_true</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">true_output_value</span> <span class="o">=</span> <span class="n">has_three_digits</span><span class="p">(</span><span class="mi">234</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">test_has_three_digits_false</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">false_output_value</span> <span class="o">=</span> <span class="n">has_three_digits</span><span class="p">(</span><span class="mi">23</span><span class="p">)</span>
-</code></pre></div></div>
-<p>See, now the test suite has 100% branch coverage! However, not that it has no assertions at all. So, despite having 100% line and branch coverage, this test suite is completely useless! (This is a form of <a href="https://jasonrudolph.com/blog/2008/06/17/testing-anti-patterns-incidental-coverage/">incidental coverage anti-pattern</a>.)</p>
-
-<p>Here is a more nuanced example:</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">HasThreeDigits</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
-        
-    <span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">return</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span>
-    
-<span class="k">class</span> <span class="nc">TestHasThreeDigits</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">test_has_three_digits_234</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">output_value</span> <span class="o">=</span> <span class="n">has_three_digits</span><span class="p">(</span><span class="mi">234</span><span class="p">)</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">output_value</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">test_has_three_digits_23</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">output_value</span> <span class="o">=</span> <span class="n">has_three_digits</span><span class="p">(</span><span class="mi">23</span><span class="p">)</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">output_value</span><span class="p">)</span>
-</code></pre></div></div>
-<p>The code coverage is 100%, branch coverage is 100%. But <code class="language-plaintext highlighter-rouge">self.counter</code> is never verified!</p>
-<h2 id="wait-theres-more">Wait, there’s more!</h2>
-<p>Coverage metrics only consider the code the are under your project, and ignore all external libraries. However, your code is correct only if you are satisfying the preconditions of your external library calls, and test coverage metrics do not capture any of that. Here is an illustration with an contrived example.</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">external.lib</span> <span class="kn">import</span> <span class="n">convert_to_num</span>
-
-<span class="k">def</span> <span class="nf">has_three_digits</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-    <span class="n">v</span> <span class="o">=</span> <span class="n">convert_to_num</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">v</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">v</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1000</span> <span class="ow">and</span> <span class="n">v</span> <span class="o">&lt;</span> <span class="mi">1000</span>
-</code></pre></div></div>
-<p>The above code is expected return True if <code class="language-plaintext highlighter-rouge">value</code> is and integer with 3 digits. Here is test suite.</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">TestHasThreeDigits</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">test_has_three_digits_234</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">output_value</span> <span class="o">=</span> <span class="n">has_three_digits</span><span class="p">(</span><span class="s">'234'</span><span class="p">)</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">output_value</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">test_has_three_digits_23</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">output_value</span> <span class="o">=</span> <span class="n">has_three_digits</span><span class="p">(</span><span class="s">'23'</span><span class="p">)</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">output_value</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">test_has_three_digits_minus_23</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">output_value</span> <span class="o">=</span> <span class="n">has_three_digits</span><span class="p">(</span><span class="s">'-23'</span><span class="p">)</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">output_value</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">test_has_three_digits_minus_234</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">output_value</span> <span class="o">=</span> <span class="n">has_three_digits</span><span class="p">(</span><span class="s">'-234'</span><span class="p">)</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">output_value</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">test_has_three_digits_ten_times_ten</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">output_value</span> <span class="o">=</span> <span class="n">has_three_digits</span><span class="p">(</span><span class="s">'10*10'</span><span class="p">)</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">output_value</span><span class="p">)</span>
-</code></pre></div></div>
-<p>The test suite looks reasonable. You line and branch coverage is a 100%, and so nothing in the metrics suggestg anything is amiss. Except that we have said nothing about how <code class="language-plaintext highlighter-rouge">convert_to_num</code> is implemented. It is easy to imagine some preconditions for the input to <code class="language-plaintext highlighter-rouge">convert_to_num</code>; for instance, it throws a ValueError exception if you pass in an input of the form <code class="language-plaintext highlighter-rouge">3/0</code>. Now, you can see how the test suite is not adequate! (<code class="language-plaintext highlighter-rouge">has_three_digits('10/0')</code> will throw an exception). But your test coverage metrics will never be able to help here.</p>
 
   </div>
   

@@ -1,4 +1,52 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="//srikanth.sastry.name/feed.xml" rel="self" type="application/atom+xml" /><link href="//srikanth.sastry.name/" rel="alternate" type="text/html" /><updated>2022-06-09T14:55:08+00:00</updated><id>//srikanth.sastry.name/feed.xml</id><title type="html">Srikanth Sastry</title><subtitle>A personal website</subtitle><author><name>Srikanth Sastry</name><email>srikanth@sastry.name</email></author><entry><title type="html">The big WHY about unit tests</title><link href="//srikanth.sastry.name/the-big-why-about-unit-tests/" rel="alternate" type="text/html" title="The big WHY about unit tests" /><published>2022-06-06T00:00:00+00:00</published><updated>2022-06-06T00:00:00+00:00</updated><id>//srikanth.sastry.name/the-big-why-about-unit-tests</id><content type="html" xml:base="//srikanth.sastry.name/the-big-why-about-unit-tests/"><![CDATA[<p><img src="/images/question_mark_person_leaning.png" alt="Why unit test?" />
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="//srikanth.sastry.name/feed.xml" rel="self" type="application/atom+xml" /><link href="//srikanth.sastry.name/" rel="alternate" type="text/html" /><updated>2022-06-13T13:52:52+00:00</updated><id>//srikanth.sastry.name/feed.xml</id><title type="html">Srikanth Sastry</title><subtitle>A personal website</subtitle><author><name>Srikanth Sastry</name><email>srikanth@sastry.name</email></author><entry><title type="html">Primary attributes of unit tests and their tradeoffs</title><link href="//srikanth.sastry.name/unit-test-attributes-and-their-trade-offs/" rel="alternate" type="text/html" title="Primary attributes of unit tests and their tradeoffs" /><published>2022-06-13T00:00:00+00:00</published><updated>2022-06-13T00:00:00+00:00</updated><id>//srikanth.sastry.name/unit-test-attributes-and-their-trade-offs</id><content type="html" xml:base="//srikanth.sastry.name/unit-test-attributes-and-their-trade-offs/"><![CDATA[<p><img src="/images/accuracy-completeness-speed.png" alt="" />
+Unit test suites have three primary attributes.</p>
+
+<ol>
+  <li>accuracy,</li>
+  <li>completeness, and</li>
+  <li>speed.</li>
+</ol>
+
+<p><em>Accuracy</em> says that if a test fails, then there is a bug. <em>Completeness</em> says that if there is a bug, then a unit test will fail. <em>Speed</em> says that tests will run ‘fast’. These three attributes are in opposition with each other, and you can only satisfy any two of the three attributes!</p>
+
+<p>Before discussing these attributes, it is important to note that they are not properties of test suite at rest, but rather, of the test suite during changes. That is, these attributes are measured only when you are making changes to the code and running the test suite in response to those changes. Also, these attributes are not applicable to a single unit test. Instead, they apply to the test suite as a whole. Furthermore, the quality of your test suite is determined by how well the suite measures up along these attributes.</p>
+
+<h3 id="attributes-descriptions">Attributes’ descriptions</h3>
+<p>Let’s describe each of these attributes, and then we can see any unit test suite is forced to trade off these attributes.</p>
+
+<ol>
+  <li><em>Accuracy.</em> It is a measure of robustness of the test suite to changes in the production code. If you make a change to the production code <em>without changing your unit tests</em>, and your test suite has a failure, then how likely is it that your changes introduced a bug? Accuracy is a measure of this likelihood. High quality unit tests typically have very good accuracy. If your test suite has poor accuracy, then it suggests that either your tests are brittle, they are actually testing implementation details instead of functionality, or your production code is poorly designed with leaky abstractions. Inaccurate tests reduce your ability to detect regressions. They fail to provide early warning when a diff breaks existing functionality (because the developer cannot be sure that the test failure is a genuine bug, and not an artifact of test brittleness). As a result, developers are more likely to ignore test failure, or modify the tests to make it ‘pass’, and thus introduce bugs in their code.</li>
+  <li><em>Completeness</em>. This is a measure of how comprehensive the test suite really is. If you make a change to the production code <em>without changing your unit tests</em>, and you introduce a bug in <em>an existing functionality</em>, then how likely is it that your test suite will fail? Completeness is a measure of this likelihood. A lot of the test coverage metrics try to mimic the completeness of your test suite. However, <a href="TODO:LINK TO CODE COVERAGE POST">we have seen how coverage metrics are often a poor proxy for completeness</a>.</li>
+  <li><em>Speed</em>. This is simply a measure of how quickly a test suite runs. If tests are hermetic with the right use of <a href="TODO: LINK TO MOCKS AND STUBS">test doubles</a>, then each test runs pretty quickly. However, if the tests are of poor quality or the test suite is very large, then they can get pretty slow. It is most noticeable when you are iterating on a feature, and with each small change, you need to run the test suite that seems to take forever to complete. Slow tests can have a disproportionate impact on developer velocity. It will make developer less likely to run tests eagerly, it increases the time between iterations, and it increases the CI/CD latency to where the gap between your code landing and the changes making it to prod can be unreasonably large. If this gets bad enough, it will discourage developers from running tests as needed, and thus allow bugs to creep in.</li>
+</ol>
+
+<h3 id="attribute-constraints-and-trade-offs">Attribute constraints and trade offs</h3>
+
+<p>There is a tension among attributes, and how these attributes contribute to overall unit test suite quality.</p>
+
+<p>Among accuracy, completeness, and speed, you cannot maximize all three; that is, you cannot have a <em>fast</em> test suite that will fail if <em>and only if</em> there is a bug. Maximizing any two will minimize the third.</p>
+<ul>
+  <li>A prefect test suite with high accuracy and completeness will inevitably be huge, and thus very slow.</li>
+  <li>A fast test suite with high accuracy will often only test only the most common user journeys, and thus be incomplete.</li>
+  <li>A test suite with very high coverage is often made ‘fast’ through extensive use of test doubles and ends up coupling tests with the implementation details, which makes the tests brittle, and therefore inaccurate.</li>
+</ul>
+
+<h3 id="whats-the-right-trade-off">What’s the right trade off?</h3>
+<p><img src="/images/balance-scale.jpg" alt="Image not found: /images/balance-scale.jpg" title="Image not found: /images/balance-scale.jpg" /></p>
+
+<p>A natural follow up to the trade offs among accuracy, completeness, and speed is <em>“What is the right trade off?”</em>. It helps to notice that, empirically, we are always making this trade off and naturally settling on some point in the trade-off surface. What is this natural resting point for these trade offs? Let’s examine a few things to help us answer the above question.</p>
+
+<ol>
+  <li>From experience, we know that bugs in software are inevitable, and we have learned to deal with it. While bug-free code might be the ideal, no one reasonably expects bug-free software, and we accept some level of incorrectness in our implementations.</li>
+  <li>Flaky/brittle tests can have very significant negative consequences. Such tests are inherently untrustworthy, and therefore, serve no useful purpose. In the end, we tend to ignore such tests, and for all practical purposes they just don’t exist in our test suite.</li>
+  <li>While extremely slow tests are an issue, we have figured out ways to improve test speeds through infrastructure developments. For instance,our CI/CD systems can run multiple tests in the test suite in parallel, and thus we are delayed only by the slowests tests in the test suite; we have figured out how to prune the affected tests in a diff by being smart about the build and test targets affected by the changes, and thus, we need not run the entire test suite for a small change; the machines that execute tests have just gotten faster, thus alleviating some of the latency issues, etc.</li>
+</ol>
+
+<p>From the above three observations, we can reasonably conclude that we cannot sacrifice accuracy. Accurate tests are the bedrock of trustworthy (and therefore, useful) test suites. Once we maximize accuracy, that leaves us with completeness and speed. Here there is a sliding scale between completeness and speed, and we could potentially rest anywhere on this scale.</p>
+
+<p>So, is it ok to rest anywhere on the tradeoff spectrum between completeness and accuracy? Not quite. If you dial completeness all the way up and ignore speed, then you end up with a test suite that no one wants to run, and therefore, not useful at all. On the other hand, if you ignore completeness in favor of speed, then you are likely going to see a lot of regressions in your software and completely undermine consumer confidence in your product/service. In effect, <strong>the quality of your test suite is determined by the lowest score among the three attributes.</strong> Therefore, it is important to rest between completeness and speed, depending on the tolerance to errors and the minimum developer velocity you can sustain. For instance, if you are developing software for medical imaging, then your tolerance to errors is very very low, and so you should be favoring completeness at the expense of speed (and this is evident in how long it takes to make changes to software in the area of medical sciences). On the other hand, if you are building a web service that can be rolled back to a safe state quickly and with minimal external damage, then you probably want to favor speed over completeness (but only to a point; remember that your test quality is now determined by the completeness, or the lack thereof).</p>
+
+<p>Thus, in conclusion, always maximize accuracy, and trade off between completeness and speed, depending on your tolerance of failures in production.</p>]]></content><author><name>Srikanth Sastry</name><email>srikanth@sastry.name</email></author><category term="professional" /><category term="unit tests" /><category term="software engineering" /><summary type="html"><![CDATA[Unit test suites have three primary attributes.]]></summary></entry><entry><title type="html">The big WHY about unit tests</title><link href="//srikanth.sastry.name/the-big-why-about-unit-tests/" rel="alternate" type="text/html" title="The big WHY about unit tests" /><published>2022-06-06T00:00:00+00:00</published><updated>2022-06-06T00:00:00+00:00</updated><id>//srikanth.sastry.name/the-big-why-about-unit-tests</id><content type="html" xml:base="//srikanth.sastry.name/the-big-why-about-unit-tests/"><![CDATA[<p><img src="/images/question_mark_person_leaning.png" alt="Why unit test?" />
 When you ask “why do we write need unit tests?”, you will get several answers including</p>
 <ul>
   <li>To find common bugs in your code</li>
@@ -738,58 +786,4 @@ if (hasRequestedFeature(bitMask, ModeEnum.FEATURE_BAR)) {
 
 <!-- wp:paragraph -->
 <p>Is this obvious? I think so. Was it necessary to belabor the point? Empirical evidence seems to scream "YES!".</p>
-<!-- /wp:paragraph -->]]></content><author><name>Srikanth Sastry</name></author><category term="Professional" /><category term="software engineering" /><summary type="html"><![CDATA[I am as surprised as you are at the title. The statement does seem like "Duh!", but much to my embarrassment, I have seen enough code in many code bases to need to reiterate this.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="//srikanth.sastry.name/wp-content/uploads/2020/12/arrow-2756728_1280-740x430.png" /><media:content medium="image" url="//srikanth.sastry.name/wp-content/uploads/2020/12/arrow-2756728_1280-740x430.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Tale of two departures</title><link href="//srikanth.sastry.name/tale-of-two-departures/" rel="alternate" type="text/html" title="Tale of two departures" /><published>2020-03-02T15:00:00+00:00</published><updated>2020-03-02T15:00:00+00:00</updated><id>//srikanth.sastry.name/tale-of-two-departures</id><content type="html" xml:base="//srikanth.sastry.name/tale-of-two-departures/"><![CDATA[<!-- wp:image {"align":"center","id":580,"sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://srikanth.sastry.name/wp-content/uploads/2020/02/img_0143-1024x683.jpg" alt="" class="wp-image-580" /><figcaption>Image by <a href="https://pixabay.com/users/MIH83-464187/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1478118">Maret Hosemann</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1478118">Pixabay</a></figcaption></figure></div>
-<!-- /wp:image -->
-
-<!-- wp:paragraph -->
-<p>Saying goodbye to a workplace where you have spent a considerable amount of time is never easy. But it can be made into a positive experience by the organization, or be made miserable. Netflix is famous for celebrating when an employee leaves by thanking them and wishing them well, and in contrast, Hubspot is know for firing something and calling it a ‘graduation’.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>I have two stories to share on how my departure from two different organizations played out. Both both these stories, there were only good intentions all around, but yet, the executions of the departure were very different. The juxtaposition is instructive on its own.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:heading -->
-<h2><strong>First</strong> story: I said goodbye, and they said Au <strong>Revoir</strong></h2>
-<!-- /wp:heading -->
-
-<!-- wp:image {"id":581,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="https://srikanth.sastry.name/wp-content/uploads/2020/02/img_0144-1024x553.jpg" alt="" class="wp-image-581" /><figcaption>Image by <a href="https://pixabay.com/users/pixel2013-2364555/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2934257">S. Hermann &amp; F. Richter</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2934257">Pixabay</a></figcaption></figure>
-<!-- /wp:image -->
-
-<!-- wp:paragraph -->
-<p>In the first story, I had a meeting with my manager and told him that I accepted an offer with another company, and so was leaving. His immediate response was to check with me if there was anything he could do that will make me change my mind (he also prefaced that by saying that he thinks that the answer is ‘no’). After I said that my mind was made up, he thanked me for everything I had done so far, and said that he will set up meetings with various folks to help me transition my responsibilities. </p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>With my consent, he immediately and discretely told members of my team, set up transition discussions, and then followed that up with an org wide announcement. Then, the entire team got together for a goodbye lunch, with everyone including the manager wishing me well. Finally, before I left, he said that he wishes me the best, but if things don’t work out with the new role, then I am always welcome back.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:heading -->
-<h2>Second Story: I said goodbye, and they said uh.. wait, what?</h2>
-<!-- /wp:heading -->
-
-<!-- wp:image {"id":582,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="https://srikanth.sastry.name/wp-content/uploads/2020/02/img_0145-1024x645.jpg" alt="" class="wp-image-582" /><figcaption>Image by <a href="https://pixabay.com/users/Alexas_Fotos-686414/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3109992">Alexas_Fotos</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3109992">Pixabay</a></figcaption></figure>
-<!-- /wp:image -->
-
-<!-- wp:paragraph -->
-<p>In the second story, I had a meeting with my manager and told him that I did not see my skills fitting the role, and that it doesn’t play to my strengths. So, I think serves both the org and me well to plan a transition for me to move on. He tried to convince me otherwise, and this went on for some time. I indulged his thoughts and arguments and made a good faith effort to pursue the avenues he suggested, but it only served to strengthen my initial proposition. </p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>After I made my final decision, he asked to delay my decision until I had a new role. After I found a new role, he asked me to spend a month transitioning my responsibilities to someone else. But for over a week, I did not see any movement in the transition plan. Meanwhile, I am furiously preparing everything for the transition. Until about a week before my last day, there is no news of my departure, and no person or people to transition to. </p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>With just over a week left, on my request, my manager calls the team together to announce my departure, except that he had already mentioned this to each of them private well over a week ago, but didn’t really provide any guidelines to them or to me about who else had been looped in. So, no one spoke to me about it, or to each other, and kept acting like everything was business as usual. It had become an elephant in the room and made everything uncomfortable for no apparent benefit. </p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>Finally, the last few days were a frantic meeting spree with my transition of responsibilities to other folks, and my brain dump spread across multiple documents that was hastily reviewed by the team as my last day at work came and went.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>My final goodbye was in an org-wide meeting where my manager thanked me for my contributions and wished me well.</p>
-<!-- /wp:paragraph -->]]></content><author><name>Srikanth Sastry</name></author><category term="Professional" /><category term="People management" /><category term="Quitting" /><summary type="html"><![CDATA[Image by Maret Hosemann from Pixabay]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="//srikanth.sastry.name/wp-content/uploads/2020/02/137FABBE-C7DC-4401-B0AB-299AA800D039-740x430.jpeg" /><media:content medium="image" url="//srikanth.sastry.name/wp-content/uploads/2020/02/137FABBE-C7DC-4401-B0AB-299AA800D039-740x430.jpeg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+<!-- /wp:paragraph -->]]></content><author><name>Srikanth Sastry</name></author><category term="Professional" /><category term="software engineering" /><summary type="html"><![CDATA[I am as surprised as you are at the title. The statement does seem like "Duh!", but much to my embarrassment, I have seen enough code in many code bases to need to reiterate this.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="//srikanth.sastry.name/wp-content/uploads/2020/12/arrow-2756728_1280-740x430.png" /><media:content medium="image" url="//srikanth.sastry.name/wp-content/uploads/2020/12/arrow-2756728_1280-740x430.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
