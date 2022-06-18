@@ -1,5 +1,5 @@
 ---
-title: "Primary attributes of unit tests and their tradeoffs"
+title: "Primary attributes of unit test suites and their tradeoffs"
 date: 2022-06-13
 id: 20220612092019
 tags:
@@ -9,6 +9,10 @@ categories:
   - professional
 layout: post
 permalink: /unit-test-attributes-and-their-trade-offs/
+excerpt: >
+  Unit test suites have three attributes: accuracy, completeness, and speed. 
+  You can maximize any two, but not all three. 
+  So how do you choose what to maximize?
 ...
 ![](/images/accuracy-completeness-speed.png)
 Unit test suites have three primary attributes.
