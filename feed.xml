@@ -1,4 +1,62 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="//srikanth.sastry.name/feed.xml" rel="self" type="application/atom+xml" /><link href="//srikanth.sastry.name/" rel="alternate" type="text/html" /><updated>2022-06-13T14:14:01+00:00</updated><id>//srikanth.sastry.name/feed.xml</id><title type="html">Srikanth Sastry</title><subtitle>A personal website</subtitle><author><name>Srikanth Sastry</name><email>srikanth@sastry.name</email></author><entry><title type="html">Primary attributes of unit tests and their tradeoffs</title><link href="//srikanth.sastry.name/unit-test-attributes-and-their-trade-offs/" rel="alternate" type="text/html" title="Primary attributes of unit tests and their tradeoffs" /><published>2022-06-13T00:00:00+00:00</published><updated>2022-06-13T00:00:00+00:00</updated><id>//srikanth.sastry.name/unit-test-attributes-and-their-trade-offs</id><content type="html" xml:base="//srikanth.sastry.name/unit-test-attributes-and-their-trade-offs/"><![CDATA[<p><img src="/images/accuracy-completeness-speed.png" alt="" />
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="//srikanth.sastry.name/feed.xml" rel="self" type="application/atom+xml" /><link href="//srikanth.sastry.name/" rel="alternate" type="text/html" /><updated>2022-06-18T12:32:38+00:00</updated><id>//srikanth.sastry.name/feed.xml</id><title type="html">Srikanth Sastry</title><subtitle>A personal website</subtitle><author><name>Srikanth Sastry</name><email>srikanth@sastry.name</email></author><entry><title type="html">Defining unit tests: two schools of thought</title><link href="//srikanth.sastry.name/defining-unit-tests-two-schools-of-thought/" rel="alternate" type="text/html" title="Defining unit tests: two schools of thought" /><published>2022-06-18T00:00:00+00:00</published><updated>2022-06-18T00:00:00+00:00</updated><id>//srikanth.sastry.name/defining-unit-tests-two-schools-of-thought</id><content type="html" xml:base="//srikanth.sastry.name/defining-unit-tests-two-schools-of-thought/"><![CDATA[<h3 id="definitions-what-is-a-unit-test">Definitions: What is a unit test?</h3>
+<p><img src="/images/london-detroit.jpg" alt="" /></p>
+
+<p>There are several definitions for unit tests. <a href="https://www.artofunittesting.com/definition-of-a-unit-test">Roy Osherove</a> defines it as “piece of code that invokes a unit of work in the system and then checks a single assumption about the behavior of that unit of work”; Kent Beck turns the idea of defining unit tests on it’s head by <a href="https://tidyfirst.substack.com/p/desirable-unit-tests">simply stating a list of properties</a>, and any code that satisfies those properties in a “unit test”.</p>
+
+<p>I like Vladimir Khorikov’s definition of a unit test in his book <a href="https://www.manning.com/books/unit-testing">Unit Testing Principles, Practices, and Patterns</a>. According to him, a unit test is a piece of code that (1) verifies a unit of software, (2) in isolation, and (3) quickly. The above definition only balkanizes a <em>unit test</em> into three undefined terms: (1) unit of software, (2) isolation, and (3) quick/fast/speed. Of the three, the third one is the easiest to understand intuitively. Being <em>fast</em> simply means that you should be able to run the test in real time and get the results quickly enough to enable interactive iteration of modifying the unit of software you are changing. However, the other two terms: <em>unit of software</em>, and <em>isolation</em> merit more discussion.</p>
+
+<h3 id="are-you-from-detroit-or-london">Are you from Detroit, or London?</h3>
+
+<p>In fact, there are two schools of thought around how the above two terms should be defined. The ‘original/classic/Detroit’ school, and the ‘mockist/London’ school. Not surprisingly, the school of thought you subscribe to has a significant impact on how you write unit tests. For a more detailed treatment of the two schools of thought, I suggest Martin Folwer’s <a href="https://martinfowler.com/articles/mocksArentStubs.html#ClassicalAndMockistTesting">excellent article on the subject of Mocks and Stubs</a>. Chapter 2 of Khorikov’s book <a href="https://www.manning.com/books/unit-testing">Unit Testing Principles, Practices, and Patterns</a> also has some good insights into it. I have distilled their contents as it pertains to unit test definitions.</p>
+
+<h4 id="the-detroit-school">The Detroit School</h4>
+
+<p>The Classical or Detroit school of thought originated with Kent Beck’s “<a href="https://www.oreilly.com/library/view/test-driven-development/0321146530/">Test Driven Development</a>”.</p>
+
+<p><strong>Unit of software.</strong> According to this school, the unit of software to test is a “behavior”. This behavior could be implemented in a single class, or a collection of classes. The important property here is that the the code that comprises the unit must be (1) internal to the software, (2) connected with each other in the dependency tree, and (3) not shared by another other part of the software.</p>
+
+<p>Thus, a unit of software cannot include external entities such as databases, log servers, file systems etc. They also cannot include external (but local) libraries such as system time and timers. Importantly, it is <em>ok</em> to include a class that depends on another class via a private non-shared dependency.</p>
+
+<p><strong>Isolation.</strong> Given the above notion of a “unit” of software, isolation simply means that the test is not dependent on anything outside that unit of software. In practical terms, it means that a unit test needs to replace all external and shared dependencies with <a href="/mocks-stubs-andhow-to-use-them/">test doubles</a>.</p>
+
+<h4 id="the-london-school">The London School</h4>
+
+<p>The mockist or London school of thought was popularized by <a href="https://www.linkedin.com/in/stevefreeman">Steve Freeman</a> (<a href="https://twitter.com/sf105">twitter</a>) and <a href="http://www.natpryce.com/bio.html">Nat Pryce</a> in their book “<a href="http://growing-object-oriented-software.com/">Growing Object- Oriented Software, Guided by Tests</a>”.</p>
+
+<p><strong>Unit of Software.</strong> Given the heavy bias Object-Oriented software, unsurprisingly, the unit of software for a unit test is a single class (in some cases, it can be a single method). This is strictly so. ANy other class that this the ‘class under test’ depends on cannot be part of the unit being tested.</p>
+
+<p><strong>Isolation.</strong> What follows from the above notion of a “unit” is that <em>everything</em> that is not the class under test must be replaced by test doubles. If you are instantiating another class inside the class under test, then you must replace that instantiation with an injected instance or a factory that can be replaced with a test double in the tests.</p>
+
+<p>Here is a quick summary of the definitions of a unit tests under the two schools.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>School</th>
+      <th>Unit</th>
+      <th>Isolation</th>
+      <th>Speed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Classical</td>
+      <td>Behavior</td>
+      <td>mock out shared and external dependencies</td>
+      <td>‘fast’</td>
+    </tr>
+    <tr>
+      <td>London</td>
+      <td>Class</td>
+      <td>out all dependencies (internal, external, shared, etc.)</td>
+      <td>‘fast’</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="what-does-this-mean">What does this mean?</h3>
+
+<p>The school of thought you subscribe to can have a significant impact on your software design and testing. There is nothing I can say here that hasn’t already been explained by Martin Fowler in his article “<a href="https://martinfowler.com/articles/mocksArentStubs.html">Mocks aren’t stubs</a>”. So, I highly recommend you read it for yourself.</p>]]></content><author><name>Srikanth Sastry</name><email>srikanth@sastry.name</email></author><category term="professional" /><category term="unit tests" /><category term="software engineering" /><category term="classical school" /><category term="london school" /><summary type="html"><![CDATA[A unit test is a piece of code that verifies a "unit" of software, in "isolation", and quickly. There are two schools of thought on the notion of "unit" and "isolation", and that makes all the difference.]]></summary></entry><entry><title type="html">Primary attributes of unit test suites and their tradeoffs</title><link href="//srikanth.sastry.name/unit-test-attributes-and-their-trade-offs/" rel="alternate" type="text/html" title="Primary attributes of unit test suites and their tradeoffs" /><published>2022-06-13T00:00:00+00:00</published><updated>2022-06-13T00:00:00+00:00</updated><id>//srikanth.sastry.name/unit-test-attributes-and-their-trade-offs</id><content type="html" xml:base="//srikanth.sastry.name/unit-test-attributes-and-their-trade-offs/"><![CDATA[<p><img src="/images/accuracy-completeness-speed.png" alt="" />
 Unit test suites have three primary attributes.</p>
 
 <ol>
@@ -46,7 +104,7 @@ Unit test suites have three primary attributes.</p>
 
 <p>So, is it ok to rest anywhere on the tradeoff spectrum between completeness and accuracy? Not quite. If you dial completeness all the way up and ignore speed, then you end up with a test suite that no one wants to run, and therefore, not useful at all. On the other hand, if you ignore completeness in favor of speed, then you are likely going to see a lot of regressions in your software and completely undermine consumer confidence in your product/service. In effect, <strong>the quality of your test suite is determined by the lowest score among the three attributes.</strong> Therefore, it is important to rest between completeness and speed, depending on the tolerance to errors and the minimum developer velocity you can sustain. For instance, if you are developing software for medical imaging, then your tolerance to errors is very very low, and so you should be favoring completeness at the expense of speed (and this is evident in how long it takes to make changes to software in the area of medical sciences). On the other hand, if you are building a web service that can be rolled back to a safe state quickly and with minimal external damage, then you probably want to favor speed over completeness (but only to a point; remember that your test quality is now determined by the completeness, or the lack thereof).</p>
 
-<p>Thus, in conclusion, always maximize accuracy, and trade off between completeness and speed, depending on your tolerance of failures in production.</p>]]></content><author><name>Srikanth Sastry</name><email>srikanth@sastry.name</email></author><category term="professional" /><category term="unit tests" /><category term="software engineering" /><summary type="html"><![CDATA[Unit test suites have three primary attributes.]]></summary></entry><entry><title type="html">The big WHY about unit tests</title><link href="//srikanth.sastry.name/the-big-why-about-unit-tests/" rel="alternate" type="text/html" title="The big WHY about unit tests" /><published>2022-06-06T00:00:00+00:00</published><updated>2022-06-06T00:00:00+00:00</updated><id>//srikanth.sastry.name/the-big-why-about-unit-tests</id><content type="html" xml:base="//srikanth.sastry.name/the-big-why-about-unit-tests/"><![CDATA[<p><img src="/images/question_mark_person_leaning.png" alt="Why unit test?" />
+<p>Thus, in conclusion, always maximize accuracy, and trade off between completeness and speed, depending on your tolerance of failures in production.</p>]]></content><author><name>Srikanth Sastry</name><email>srikanth@sastry.name</email></author><category term="professional" /><category term="unit tests" /><category term="software engineering" /><summary type="html"><![CDATA[Unit test suites have three attributes: accuracy, completeness, and speed. You can maximize any two, but not all three. So how do you choose what to maximize?]]></summary></entry><entry><title type="html">The big WHY about unit tests</title><link href="//srikanth.sastry.name/the-big-why-about-unit-tests/" rel="alternate" type="text/html" title="The big WHY about unit tests" /><published>2022-06-06T00:00:00+00:00</published><updated>2022-06-06T00:00:00+00:00</updated><id>//srikanth.sastry.name/the-big-why-about-unit-tests</id><content type="html" xml:base="//srikanth.sastry.name/the-big-why-about-unit-tests/"><![CDATA[<p><img src="/images/question_mark_person_leaning.png" alt="Why unit test?" />
 When you ask “why do we write need unit tests?”, you will get several answers including</p>
 <ul>
   <li>To find common bugs in your code</li>
@@ -700,90 +758,4 @@ AssertionError: FAILURE
 
 <!-- wp:paragraph -->
 <p>The issue here is subtle, but dangerous. Consider what happens if one of the requests in the list of requests passed to <code>process()</code> causes <code>statefulObject</code>to throw an exception inside <code>computeResponse()</code>. Dutifully, this exception is caught by <code>process()</code> and it returns <code>null</code>. However, note that the value of <code>responseType</code> in <code>statefulObject</code> was never modified by processing of this request, and therefore, it still hold the <code>ResponseType</code> of the previous request! Therefore, the line <code>appendResponse(response, statefulObject.getResponseType());</code> is now passing in a null response and the response type of the previous request!<br />These types of bugs are subtle and a pain to track down.<br />And this happened because we chose to reuse the <code>statefulObject</code>. If we were to use a new instance each time, this would not really be an issue.<br />Moral: If feasible, do not reuse objects; create new instances and throw them away when done!</p>
-<!-- /wp:paragraph -->]]></content><author><name>Srikanth Sastry</name></author><category term="Professional" /><category term="design pattern" /><category term="software engineering" /><summary type="html"><![CDATA[We all know of the importance of code reuse and DRY code. It is important to remember that this applies to code, and not to objects!]]></summary></entry><entry><title type="html">Code reuse can prevent bugs</title><link href="//srikanth.sastry.name/code-reuse-can-prevent-bugs/" rel="alternate" type="text/html" title="Code reuse can prevent bugs" /><published>2020-12-20T18:43:09+00:00</published><updated>2020-12-20T18:43:09+00:00</updated><id>//srikanth.sastry.name/code-reuse-can-prevent-bugs</id><content type="html" xml:base="//srikanth.sastry.name/code-reuse-can-prevent-bugs/"><![CDATA[<!-- wp:paragraph -->
-<p>I am as surprised as you are at the title. The statement does seem like "Duh!", but much to my embarrassment, I have seen enough code in many code bases to need to reiterate this.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>The latest example was the following bug that I spotted. First some background. The caller to this function can choose any subset of a given set of 'modes' or 'features'. The caller represents this via a bit-mask. So 1 represents feature 1, 2 represents feature 2, 4 represents feature 3, 8 represents feature 4, and so on. So, if the caller requests with bit-mask 3, then it represents features 1 and 2, and bit-mask 10 represents features 2 and 4.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>The following piece of code is support to filter out requests depending on the requested set of 'modes/'features'.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:code -->
-<pre class="wp-block-code"><code>if ((bitMask &amp; ModeEnum.FEATURE_FOO.getValue()) == 0) {
-  // FEATURE_FOO has already taken care off the by some other module. So do nothing here.
-  return null;
-}
-
-/* Some more code here */
-
-if ((bitMask &amp; ModeEnum.FEATURE_BAR.getValue()) == 0) {
-  // For now, we process the request only if caller explicitly specified FEATURE_BAR.
-  return null;
-}
-/* more code to process the request with FEATURE_BAR. */</code></pre>
-<!-- /wp:code -->
-
-<!-- wp:paragraph -->
-<p>The code above has a bug because the comment inside the first if-check does not match the if-check's logic. The intent was to skip processing the request if FEATURE_FOO is enabled. Instead, it does the exact opposite. </p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>The naive way to fix it would be to replace </p>
-<!-- /wp:paragraph -->
-
-<!-- wp:code -->
-<pre id="block-9dae83e5-31d7-43ad-952e-2674f85d9963" class="wp-block-code"><code>if ((bitMask &amp; ModeEnum.FEATURE_FOO.getValue()) == 0) {</code></pre>
-<!-- /wp:code -->
-
-<!-- wp:paragraph -->
-<p>with</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:code -->
-<pre id="block-9dae83e5-31d7-43ad-952e-2674f85d9963" class="wp-block-code"><code>if ((bitMask &amp; ModeEnum.FEATURE_FOO.getValue()) != 0) {</code></pre>
-<!-- /wp:code -->
-
-<!-- wp:paragraph -->
-<p>However, this misses the more important point of why this bug occurred in the first place. The simple answer to that question is that this bug occurred because the author ignored the <a href="https://en.wikipedia.org/wiki/Code_reuse">principle of code reuse</a>. By putting that principle into practice, a cleaner way to write this code (and therefore fix this bug and prevent similar bugs in the future) is as follows.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>We first encapsulate the logic to detecting various modes via this function</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:code -->
-<pre class="wp-block-code"><code>boolean hasRequestedFeature(int bitMask, ModeEnum feature) {
-  return (bitMask &amp; feature.getValue()) != 1;
-}</code></pre>
-<!-- /wp:code -->
-
-<!-- wp:paragraph -->
-<p>With that function in place, the new code looks as follows</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:code -->
-<pre class="wp-block-code"><code>if (!hasRequestedFeature(bitMask, ModeEnum.FEATURE_FOO)) {
-  // FEATURE_FOO has already taken care off the by some other module. So do nothing here.
-  return null;
-}
-
-/* Some more code here */
-
-if (hasRequestedFeature(bitMask, ModeEnum.FEATURE_BAR)) {
-  // For now, we process the request only if caller explicitly specified FEATURE_BAR.
-  return null;
-}
-/* more code to process the request with FEATURE_BAR. */</code></pre>
-<!-- /wp:code -->
-
-<!-- wp:paragraph -->
-<p>This make the code more readable, and as long as we reuse the <code>hasRequestedFeature()</code> function, such bitwise operation fragility will not reoccur in the code.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>Is this obvious? I think so. Was it necessary to belabor the point? Empirical evidence seems to scream "YES!".</p>
-<!-- /wp:paragraph -->]]></content><author><name>Srikanth Sastry</name></author><category term="Professional" /><category term="software engineering" /><summary type="html"><![CDATA[I am as surprised as you are at the title. The statement does seem like "Duh!", but much to my embarrassment, I have seen enough code in many code bases to need to reiterate this.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="//srikanth.sastry.name/wp-content/uploads/2020/12/arrow-2756728_1280-740x430.png" /><media:content medium="image" url="//srikanth.sastry.name/wp-content/uploads/2020/12/arrow-2756728_1280-740x430.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+<!-- /wp:paragraph -->]]></content><author><name>Srikanth Sastry</name></author><category term="Professional" /><category term="design pattern" /><category term="software engineering" /><summary type="html"><![CDATA[We all know of the importance of code reuse and DRY code. It is important to remember that this applies to code, and not to objects!]]></summary></entry></feed>
