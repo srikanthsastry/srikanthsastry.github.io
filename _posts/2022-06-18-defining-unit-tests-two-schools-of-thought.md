@@ -6,6 +6,7 @@ tags:
   - "unit tests"
   - "software engineering"
   - "classical school"
+  - "detroit school"
   - "london school"
 categories:
   - professional
