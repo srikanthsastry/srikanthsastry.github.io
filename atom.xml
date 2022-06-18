@@ -4,7 +4,7 @@
  <title>Srikanth Sastry</title>
  <link href="//srikanth.sastry.name/atom.xml" rel="self"/>
  <link href="//srikanth.sastry.name/"/>
- <updated>2022-06-18T14:02:26+00:00</updated>
+ <updated>2022-06-18T21:08:33+00:00</updated>
  <id>//srikanth.sastry.name</id>
  <author>
    <name>Srikanth Sastry</name>
@@ -17,18 +17,19 @@
    <link href="//srikanth.sastry.name/defining-unit-tests-two-schools-of-thought/"/>
    <updated>2022-06-18T00:00:00+00:00</updated>
    <id>//srikanth.sastry.name/defining-unit-tests-two-schools-of-thought</id>
-   <content type="html">&lt;h3 id=&quot;definitions-what-is-a-unit-test&quot;&gt;Definitions: What is a unit test?&lt;/h3&gt;
-&lt;p&gt;&lt;img src=&quot;/images/london-detroit.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+   <content type="html">&lt;p&gt;&lt;img src=&quot;/images/london-detroit.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;definitions-what-is-a-unit-test&quot;&gt;Definitions: What is a unit test?&lt;/h2&gt;
 
 &lt;p&gt;There are several definitions for unit tests. &lt;a href=&quot;https://www.artofunittesting.com/definition-of-a-unit-test&quot;&gt;Roy Osherove&lt;/a&gt; defines it as “piece of code that invokes a unit of work in the system and then checks a single assumption about the behavior of that unit of work”; Kent Beck turns the idea of defining unit tests on it’s head by &lt;a href=&quot;https://tidyfirst.substack.com/p/desirable-unit-tests&quot;&gt;simply stating a list of properties&lt;/a&gt;, and any code that satisfies those properties in a “unit test”.&lt;/p&gt;
 
 &lt;p&gt;I like Vladimir Khorikov’s definition of a unit test in his book &lt;a href=&quot;https://www.manning.com/books/unit-testing&quot;&gt;Unit Testing Principles, Practices, and Patterns&lt;/a&gt;. According to him, a unit test is a piece of code that (1) verifies a unit of software, (2) in isolation, and (3) quickly. The above definition only balkanizes a &lt;em&gt;unit test&lt;/em&gt; into three undefined terms: (1) unit of software, (2) isolation, and (3) quick/fast/speed. Of the three, the third one is the easiest to understand intuitively. Being &lt;em&gt;fast&lt;/em&gt; simply means that you should be able to run the test in real time and get the results quickly enough to enable interactive iteration of modifying the unit of software you are changing. However, the other two terms: &lt;em&gt;unit of software&lt;/em&gt;, and &lt;em&gt;isolation&lt;/em&gt; merit more discussion.&lt;/p&gt;
 
-&lt;h3 id=&quot;are-you-from-detroit-or-london&quot;&gt;Are you from Detroit, or London?&lt;/h3&gt;
+&lt;h2 id=&quot;are-you-from-detroit-or-london&quot;&gt;Are you from Detroit, or London?&lt;/h2&gt;
 
 &lt;p&gt;In fact, there are two schools of thought around how the above two terms should be defined. The ‘original/classic/Detroit’ school, and the ‘mockist/London’ school. Not surprisingly, the school of thought you subscribe to has a significant impact on how you write unit tests. For a more detailed treatment of the two schools of thought, I suggest Martin Folwer’s &lt;a href=&quot;https://martinfowler.com/articles/mocksArentStubs.html#ClassicalAndMockistTesting&quot;&gt;excellent article on the subject of Mocks and Stubs&lt;/a&gt;. Chapter 2 of Khorikov’s book &lt;a href=&quot;https://www.manning.com/books/unit-testing&quot;&gt;Unit Testing Principles, Practices, and Patterns&lt;/a&gt; also has some good insights into it. I have distilled their contents as it pertains to unit test definitions.&lt;/p&gt;
 
-&lt;h4 id=&quot;the-detroit-school&quot;&gt;The Detroit School&lt;/h4&gt;
+&lt;h3 id=&quot;the-detroit-school&quot;&gt;The Detroit School&lt;/h3&gt;
 
 &lt;p&gt;The Classical or Detroit school of thought originated with Kent Beck’s “&lt;a href=&quot;https://www.oreilly.com/library/view/test-driven-development/0321146530/&quot;&gt;Test Driven Development&lt;/a&gt;”.&lt;/p&gt;
 
@@ -38,7 +39,7 @@
 
 &lt;p&gt;&lt;strong&gt;Isolation.&lt;/strong&gt; Given the above notion of a “unit” of software, isolation simply means that the test is not dependent on anything outside that unit of software. In practical terms, it means that a unit test needs to replace all external and shared dependencies with &lt;a href=&quot;/mocks-stubs-andhow-to-use-them/&quot;&gt;test doubles&lt;/a&gt;.&lt;/p&gt;
 
-&lt;h4 id=&quot;the-london-school&quot;&gt;The London School&lt;/h4&gt;
+&lt;h3 id=&quot;the-london-school&quot;&gt;The London School&lt;/h3&gt;
 
 &lt;p&gt;The mockist or London school of thought was popularized by &lt;a href=&quot;https://www.linkedin.com/in/stevefreeman&quot;&gt;Steve Freeman&lt;/a&gt; (&lt;a href=&quot;https://twitter.com/sf105&quot;&gt;twitter&lt;/a&gt;) and &lt;a href=&quot;http://www.natpryce.com/bio.html&quot;&gt;Nat Pryce&lt;/a&gt; in their book “&lt;a href=&quot;http://growing-object-oriented-software.com/&quot;&gt;Growing Object- Oriented Software, Guided by Tests&lt;/a&gt;”.&lt;/p&gt;
 
@@ -73,7 +74,7 @@
   &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;h3 id=&quot;what-does-this-mean&quot;&gt;What does this mean?&lt;/h3&gt;
+&lt;h2 id=&quot;what-does-this-mean&quot;&gt;What does this mean?&lt;/h2&gt;
 
 &lt;p&gt;The school of thought you subscribe to can have a significant impact on your software design and testing. There is nothing I can say here that hasn’t already been explained by Martin Fowler in his article “&lt;a href=&quot;https://martinfowler.com/articles/mocksArentStubs.html&quot;&gt;Mocks aren’t stubs&lt;/a&gt;”. So, I highly recommend you read it for yourself.&lt;/p&gt;
 </content>

@@ -160,18 +160,19 @@
 
     <span class="post-date">18 Jun 2022</span>
 
-    <h3 id="definitions-what-is-a-unit-test">Definitions: What is a unit test?</h3>
-<p><img src="/images/london-detroit.jpg" alt="" /></p>
+    <p><img src="/images/london-detroit.jpg" alt="" /></p>
+
+<h2 id="definitions-what-is-a-unit-test">Definitions: What is a unit test?</h2>
 
 <p>There are several definitions for unit tests. <a href="https://www.artofunittesting.com/definition-of-a-unit-test">Roy Osherove</a> defines it as “piece of code that invokes a unit of work in the system and then checks a single assumption about the behavior of that unit of work”; Kent Beck turns the idea of defining unit tests on it’s head by <a href="https://tidyfirst.substack.com/p/desirable-unit-tests">simply stating a list of properties</a>, and any code that satisfies those properties in a “unit test”.</p>
 
 <p>I like Vladimir Khorikov’s definition of a unit test in his book <a href="https://www.manning.com/books/unit-testing">Unit Testing Principles, Practices, and Patterns</a>. According to him, a unit test is a piece of code that (1) verifies a unit of software, (2) in isolation, and (3) quickly. The above definition only balkanizes a <em>unit test</em> into three undefined terms: (1) unit of software, (2) isolation, and (3) quick/fast/speed. Of the three, the third one is the easiest to understand intuitively. Being <em>fast</em> simply means that you should be able to run the test in real time and get the results quickly enough to enable interactive iteration of modifying the unit of software you are changing. However, the other two terms: <em>unit of software</em>, and <em>isolation</em> merit more discussion.</p>
 
-<h3 id="are-you-from-detroit-or-london">Are you from Detroit, or London?</h3>
+<h2 id="are-you-from-detroit-or-london">Are you from Detroit, or London?</h2>
 
 <p>In fact, there are two schools of thought around how the above two terms should be defined. The ‘original/classic/Detroit’ school, and the ‘mockist/London’ school. Not surprisingly, the school of thought you subscribe to has a significant impact on how you write unit tests. For a more detailed treatment of the two schools of thought, I suggest Martin Folwer’s <a href="https://martinfowler.com/articles/mocksArentStubs.html#ClassicalAndMockistTesting">excellent article on the subject of Mocks and Stubs</a>. Chapter 2 of Khorikov’s book <a href="https://www.manning.com/books/unit-testing">Unit Testing Principles, Practices, and Patterns</a> also has some good insights into it. I have distilled their contents as it pertains to unit test definitions.</p>
 
-<h4 id="the-detroit-school">The Detroit School</h4>
+<h3 id="the-detroit-school">The Detroit School</h3>
 
 <p>The Classical or Detroit school of thought originated with Kent Beck’s “<a href="https://www.oreilly.com/library/view/test-driven-development/0321146530/">Test Driven Development</a>”.</p>
 
@@ -181,7 +182,7 @@
 
 <p><strong>Isolation.</strong> Given the above notion of a “unit” of software, isolation simply means that the test is not dependent on anything outside that unit of software. In practical terms, it means that a unit test needs to replace all external and shared dependencies with <a href="/mocks-stubs-andhow-to-use-them/">test doubles</a>.</p>
 
-<h4 id="the-london-school">The London School</h4>
+<h3 id="the-london-school">The London School</h3>
 
 <p>The mockist or London school of thought was popularized by <a href="https://www.linkedin.com/in/stevefreeman">Steve Freeman</a> (<a href="https://twitter.com/sf105">twitter</a>) and <a href="http://www.natpryce.com/bio.html">Nat Pryce</a> in their book “<a href="http://growing-object-oriented-software.com/">Growing Object- Oriented Software, Guided by Tests</a>”.</p>
 
@@ -216,7 +217,7 @@
   </tbody>
 </table>
 
-<h3 id="what-does-this-mean">What does this mean?</h3>
+<h2 id="what-does-this-mean">What does this mean?</h2>
 
 <p>The school of thought you subscribe to can have a significant impact on your software design and testing. There is nothing I can say here that hasn’t already been explained by Martin Fowler in his article “<a href="https://martinfowler.com/articles/mocksArentStubs.html">Mocks aren’t stubs</a>”. So, I highly recommend you read it for yourself.</p>
 
