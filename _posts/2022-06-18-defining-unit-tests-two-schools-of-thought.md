@@ -49,10 +49,10 @@ The mockist or London school of thought was popularized by [Steve Freeman](https
 
 Here is a quick summary of the definitions of a unit tests under the two schools.
 
-| School | Unit | Isolation|  Speed |
-|---|---|---|---|
-| Classical | Behavior |  mock out shared and external dependencies | 'fast' |
-| London | Class  |  out all dependencies (internal, external, shared, etc.) | 'fast' |
+| School  | Unit     | Isolation                                                                     | Speed  |
+|---------|----------|-------------------------------------------------------------------------------|--------|
+| Detroit | Behavior | Replace shared and external dependencies with test doubles                    | 'fast' |
+| London  | Class    | Replace all dependencies (internal, external, shared, etc.) with test doubles | 'fast' |
 
 ## What does this mean?
 
