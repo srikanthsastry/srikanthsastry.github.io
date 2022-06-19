@@ -14,13 +14,15 @@ categories:
 layout: post
 permalink: /in-unit-tests-favor-detroit-over-london/
 ...
+![](/images/detroit-wall-frame.jpg)
 
 [Recall]({%post_url 2022-06-18-defining-unit-tests-two-schools-of-thought %}) the two schools of thought around unit test: Detroit, and London. Briefly, the Detroit school considers a 'unit' of software to be tested as a 'behavior' that consists of one or more classes, and unit tests replace only shared and/or external dependencies with test doubles. In contrast, the London school consider a 'unit' to be a single class, and replaces all dependencies with test doubles. 
 
 | School    | Unit     | Isolation                                                                     | Speed  |
 |-----------|----------|-------------------------------------------------------------------------------|--------|
-| Classical | Behavior | Replace shared and external dependencies with test doubles                    | 'fast' |
+| Detroit   | Behavior | Replace shared and external dependencies with test doubles                    | 'fast' |
 | London    | Class    | Replace all dependencies (internal, external, shared, etc.) with test doubles | 'fast' |
+
 See this [note]({%post_url 2022-06-18-defining-unit-tests-two-schools-of-thought %}) for a more detailed discussion on the two schools.
 
 Each school have it's proponents and each school of thought has it's advantages. I, personally, prefer the Detroit school over the London school. I have noticed that following the Detroit school has made my test suite more [accurate and complete]({%post_url 2022-06-13-unit-test-attributes-and-their-trade-offs %}).
