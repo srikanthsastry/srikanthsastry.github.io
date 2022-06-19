@@ -4,7 +4,7 @@
  <title>Srikanth Sastry</title>
  <link href="//srikanth.sastry.name/atom.xml" rel="self"/>
  <link href="//srikanth.sastry.name/"/>
- <updated>2022-06-18T21:08:33+00:00</updated>
+ <updated>2022-06-19T15:55:05+00:00</updated>
  <id>//srikanth.sastry.name</id>
  <author>
    <name>Srikanth Sastry</name>
@@ -60,15 +60,15 @@
   &lt;/thead&gt;
   &lt;tbody&gt;
     &lt;tr&gt;
-      &lt;td&gt;Classical&lt;/td&gt;
+      &lt;td&gt;Detroit&lt;/td&gt;
       &lt;td&gt;Behavior&lt;/td&gt;
-      &lt;td&gt;mock out shared and external dependencies&lt;/td&gt;
+      &lt;td&gt;Replace shared and external dependencies with test doubles&lt;/td&gt;
       &lt;td&gt;‘fast’&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;London&lt;/td&gt;
       &lt;td&gt;Class&lt;/td&gt;
-      &lt;td&gt;out all dependencies (internal, external, shared, etc.)&lt;/td&gt;
+      &lt;td&gt;Replace all dependencies (internal, external, shared, etc.) with test doubles&lt;/td&gt;
       &lt;td&gt;‘fast’&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="//srikanth.sastry.name/feed.xml" rel="self" type="application/atom+xml" /><link href="//srikanth.sastry.name/" rel="alternate" type="text/html" /><updated>2022-06-18T21:08:33+00:00</updated><id>//srikanth.sastry.name/feed.xml</id><title type="html">Srikanth Sastry</title><subtitle>A personal website</subtitle><author><name>Srikanth Sastry</name><email>srikanth@sastry.name</email></author><entry><title type="html">Defining unit tests: two schools of thought</title><link href="//srikanth.sastry.name/defining-unit-tests-two-schools-of-thought/" rel="alternate" type="text/html" title="Defining unit tests: two schools of thought" /><published>2022-06-18T00:00:00+00:00</published><updated>2022-06-18T00:00:00+00:00</updated><id>//srikanth.sastry.name/defining-unit-tests-two-schools-of-thought</id><content type="html" xml:base="//srikanth.sastry.name/defining-unit-tests-two-schools-of-thought/"><![CDATA[<p><img src="/images/london-detroit.jpg" alt="" /></p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="//srikanth.sastry.name/feed.xml" rel="self" type="application/atom+xml" /><link href="//srikanth.sastry.name/" rel="alternate" type="text/html" /><updated>2022-06-19T15:55:05+00:00</updated><id>//srikanth.sastry.name/feed.xml</id><title type="html">Srikanth Sastry</title><subtitle>A personal website</subtitle><author><name>Srikanth Sastry</name><email>srikanth@sastry.name</email></author><entry><title type="html">Defining unit tests: two schools of thought</title><link href="//srikanth.sastry.name/defining-unit-tests-two-schools-of-thought/" rel="alternate" type="text/html" title="Defining unit tests: two schools of thought" /><published>2022-06-18T00:00:00+00:00</published><updated>2022-06-18T00:00:00+00:00</updated><id>//srikanth.sastry.name/defining-unit-tests-two-schools-of-thought</id><content type="html" xml:base="//srikanth.sastry.name/defining-unit-tests-two-schools-of-thought/"><![CDATA[<p><img src="/images/london-detroit.jpg" alt="" /></p>
 
 <h2 id="definitions-what-is-a-unit-test">Definitions: What is a unit test?</h2>
 
@@ -41,15 +41,15 @@
   </thead>
   <tbody>
     <tr>
-      <td>Classical</td>
+      <td>Detroit</td>
       <td>Behavior</td>
-      <td>mock out shared and external dependencies</td>
+      <td>Replace shared and external dependencies with test doubles</td>
       <td>‘fast’</td>
     </tr>
     <tr>
       <td>London</td>
       <td>Class</td>
-      <td>out all dependencies (internal, external, shared, etc.)</td>
+      <td>Replace all dependencies (internal, external, shared, etc.) with test doubles</td>
       <td>‘fast’</td>
     </tr>
   </tbody>
