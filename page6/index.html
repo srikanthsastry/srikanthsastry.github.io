@@ -153,6 +153,137 @@
   
   <div class="post">
     <h1 class="post-title">
+      <a href="//srikanth.sastry.name/merits-of-unit-tests-part-1/">
+        My code is bugfree! Why should I unit test?
+      </a>
+    </h1>
+
+    <span class="post-date">01 Nov 2017</span>
+
+    <!-- wp:paragraph -->
+<p>There are multiple reasons to write unit tests. Verification is only one of them, and the least interesting. This is part 1 of a five part series on why you should write unit tests (apart from the obvious): Documentation!</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:more -->
+<!--more-->
+<!-- /wp:more -->
+
+<!-- wp:paragraph {"textColor":"very-dark-gray","backgroundColor":"pale-cyan-blue"} -->
+<p class="has-text-color has-background has-very-dark-gray-color has-pale-cyan-blue-background-color">I posted this article on <a href="https://www.linkedin.com/pulse/my-code-bugfree-why-should-i-unit-tests-srikanth-sastry/">LinkedIn</a> and am reposting it here cuz' this is the authoritative source for it :)</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>We have all heard this 
+repeatedly: “You have to have unit tests. Unit tests are how you find 
+issues in your code and fix them before they hit the trunk.” Ok, so that
+ argument sounded a little weak. Here is a much stronger version of the 
+same argument.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><em>You have to write unit tests because unit tests are a </em><a href="https://l.facebook.com/l.php?u=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FScientific_method&amp;h=ATNU99lLyWx55l8BBlgT8AIDwdfUHBUjrSOtbRUQbP42vH_k7pVzTOXviC2N0Ze44RbFVdkFCWKSsvNoCovWLh8gaOuHG9eEAsu4GKloIbcHKwPbQdRFAdhFdNCPSDHmdBjCaYcBKEXAxhC-i735nThHQPOCEuD39p2iuu6K8bulWw" target="_blank" rel="noreferrer noopener"><em>scientific</em></a><em>
+ mechanism to verify that your implementation satisfies the 
+specification (that is, you code does what you say it does). To 
+elaborate, your claim of what your code does is a </em><a href="https://l.facebook.com/l.php?u=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FFalsifiability&amp;h=ATPEcKK4eeXOCNWcc8BCYwdplxHx1zCDAuE74Z4TapMJOVwgCqukHCEuH21QaLSEGYvUA1ouxan-XttxS4n2cgnjJBzJY5CWV-quFVTNq18bpJSTq2l3NZyjuw2yd1-O3mWdupeKygwazafitDpYrhAWIt8nLBIlTkuxKG0nTn0oSA" target="_blank" rel="noreferrer noopener"><em>falsifiable</em></a><em>
+ hypothesis in that it is possible to conceive of an observation that 
+could negate your claim. Unit tests are the experiments that can be 
+performed to test your hypothesis. If all your unit tests pass, then it 
+is increasingly likely that your claim is correct. (Note that we cannot 
+claim to have proved correctness; that is an impossible task in the 
+general case).</em></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>This still an unsatisfying argument at best. What if I were a perfect
+ developer who writes perfect code, and everyone around me agrees that I
+ write perfect code. Do I still need to write unit tests? Or what about 
+the cases where visual inspection of the code makes correctness obvious.
+ Do I still need to spend precious time writing unit tests?</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>While verification is an important reason to have unit tests, IMHO, 
+it is also the least interesting. There are many more reasons to be 
+rigorous about unit tests.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Let's start with my favorite.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3>Documentation</h3>
+<!-- /wp:heading -->
+
+<!-- wp:image {"id":370,"align":"center","linkDestination":"custom"} -->
+<div class="wp-block-image"><figure class="aligncenter"><a href="http://www.quickmeme.com/meme/3t1i87" target="_blank" rel="noreferrer noopener"><img src="http://srikanth.sastry.name/wp-content/uploads/2019/01/a0a8c4ab0bec170a748228f0982da6795e6af515a8048b11c2b4c9e794d7b4f9.jpg" alt="" class="wp-image-370" /></a></figure></div>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>Unit tests makes the best documentation for your code. We were all 
+hired as software engineers because we can write good software. That 
+means a lot of us are not very good at technical writing, and for many 
+of us, English isn't our native tongue. This creates barriers for us in 
+communicating what our software does so that others can use it well.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>We could write wiki/docs describing what our code does, but that has three major issues.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list {"ordered":true} -->
+<ol><li>The documentation doesn't live anywhere near the code, and so discoverability is difficult</li><li>English is not the primary language for a lot of us, and technical 
+writing is not our strong suit, and so the quality of the writing can be
+ suspect</li><li>As the code evolves, the documentation becomes obsolete. The only thing worse than no documentation is wrong documentation!</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>We could write comments in the code itself. So discoverability is not
+ a problem. However, the other two issues still remain. (Raise your hand
+ if you have seen comments that are out of sync with the code that it is
+ supposed to clarify.)</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>What we could really use it a mechanism that leverages our strength 
+(writing software) to create documentation, and automation to ensure 
+that documentation is never obsolete. Unit tests turn out to be the 
+perfect tool for this!</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Think of each unit test as a how-do example of how to use your code. 
+So, if anyone wants to use the code that your wrote, all they need to do
+ is look at your unit tests, the job is done!</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>EXAMPLE</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>A great example is the <a href="https://github.com/facebook/folly" target="_blank" rel="noreferrer noopener">folly</a> library. Let's take folly Futures for instance. The primary header file <a href="https://github.com/facebook/folly/blob/master/folly/futures/Future.h" target="_blank" rel="noreferrer noopener">Future.h</a> tells you the API, but figuring out how to use it is not straightforward from there. However, go over to the unit tests at <a href="https://l.facebook.com/l.php?u=https%3A%2F%2Fgithub.com%2Ffacebook%2Ffolly%2Fblob%2Fmaster%2Ffolly%2Ffutures%2Ftest%2FFutureTest.cpp&amp;h=ATNiTV-rdTNS1lEjxiC29ETboF-w94bQpQhXUxFugGI897McF_YyCo-jvJX_kzLzDyVSjokYlYY9wbhcS4dJsTQlrgkVGXW8Fw7BBKx537cGoHDELiJcF4gBHMQq2CzZXV158ToPWPV0j0Xbt4WNDiLY13bFtRv7cWPEgKLJZsHe0Q" target="_blank" rel="noreferrer noopener">FutureTest.cpp</a>,
+ and you will come away knowing how to use Futures for your use case in a
+ matter of minutes. For each minute spent by a folly developer to write 
+these unit tests, it has saved thousands of developers countless hours.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3>But wait, there more!</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>There are many other things that work better when you have unit tests.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul><li><a rel="noreferrer noopener" aria-label="Refactoring (opens in a new tab)" href="http://srikanth.sastry.name/the-merits-of-unit-tests-part-2/" target="_blank">Refactoring</a>.</li><li><a rel="noreferrer noopener" href="https://www.linkedin.com/pulse/merits-unit-tests-part-3-srikanth-sastry/" target="_blank">Better code design.</a></li><li><a rel="noreferrer noopener" aria-label=" (opens in a new tab)" href="http://srikanth.sastry.name/unit-tests-ftw-part-4/" target="_blank">Debugging prod issues.</a></li><li><a href="http://srikanth.sastry.name/merits-of-unit-tests-part-5/">API usability</a>.</li></ul>
+<!-- /wp:list -->
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="//srikanth.sastry.name/sevlievo/">
         Small town Bulgaria
       </a>
@@ -492,157 +623,6 @@
 
 <p><a href="/wp-content/uploads/2015/08/IMG_20150831_151540.jpg"><img src="/wp-content/uploads/2015/08/IMG_20150831_151540.jpg" alt="Chapel to the right of the wooden cannon" /></a>
 <em>Chapel to the right of the wooden cannon</em></p>
-
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="//srikanth.sastry.name/tsarevets-a-photo-essay/">
-        Tsarevets: a photo essay
-      </a>
-    </h1>
-
-    <span class="post-date">30 Aug 2015</span>
-
-    <!-- wp:paragraph {"className":"firstHeading"} -->
-<p class="firstHeading"><a href="https://en.wikipedia.org/wiki/Tsarevets_(fortress)">Tsarevets fortress</a> was a medieval stronghold of the erstwhile <a href="https://en.wikipedia.org/wiki/Second_Bulgarian_Empire">Second Bulgarian Empire</a> located near the city of&nbsp;<a href="https://en.wikipedia.org/wiki/Veliko_Tarnovo">Veliko Tarnovo</a>&nbsp;(which was also the capital city of that empire).&nbsp;While the fortress is in ruins, the recent reconstructions and restorations make it worth visiting.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:image {"id":141,"align":"none"} -->
-<figure class="wp-block-image alignnone"><a href="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150829_110825-e1440950848706.jpg"><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150829_110825-e1440950848706.jpg" alt="View of the fortress from the city." class="wp-image-141" /></a><figcaption>View of the fortress from the city.</figcaption></figure>
-<!-- /wp:image -->
-
-<!-- wp:paragraph -->
-<p>The fortress itself is situated on top of a hill of the same name. The stronghold consisted of two forts, one on each hill. You can see the ruins of the second fort on the hill in the left hand side of the photograph above. The second fort is not reconstructed well enough to attract tourists.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>Let's step inside.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:more -->
-<!--more-->
-<!-- /wp:more -->
-
-<!-- wp:heading -->
-<h2>Entry</h2>
-<!-- /wp:heading -->
-
-<!-- wp:image {"id":142,"align":"none"} -->
-<figure class="wp-block-image alignnone"><a href="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150829_111416.jpg"><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150829_111416-1024x760.jpg" alt="You enter the fort complex from the city on a ridge" class="wp-image-142" /></a><figcaption>You enter the fort complex from the city on a ridge</figcaption></figure>
-<!-- /wp:image -->
-
-<!-- wp:paragraph -->
-<p>The ridge separating the fortress and the city is more apparent when viewing the city from inside the fort.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:image {"id":143,"align":"none"} -->
-<figure class="wp-block-image alignnone"><a href="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150829_112018.jpg"><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150829_112018-1024x760.jpg" alt="Notice the ridge that connects Veliko Tarnovo city to the fortress" class="wp-image-143" /></a><figcaption>Notice the ridge that connects Veliko Tarnovo city to the fortress.</figcaption></figure>
-<!-- /wp:image -->
-
-<!-- wp:paragraph -->
-<p>From the Tsarevets fortress, you can see parts of the reconstructions of the second fortress (Trapezitsa) on the neighboring hill.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:image {"id":145,"align":"none"} -->
-<figure class="wp-block-image alignnone"><a href="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150829_112024.jpg"><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150829_112024-e1440951061942.jpg" alt="Reconstructed watch tower of Trapezitsa as seen from Tsarevets." class="wp-image-145" /></a><figcaption>Reconstructed watch tower on Trapezitsa as seen from Tsarevets.</figcaption></figure>
-<!-- /wp:image -->
-
-<!-- wp:heading -->
-<h2>Ruins</h2>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph -->
-<p>The ruins in the fortress have been well preserved, for the most part.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:image {"id":146,"align":"none"} -->
-<figure class="wp-block-image alignnone"><a href="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150829_122506.jpg"><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150829_122506-e1440951090373.jpg" alt="Well preserved ruins" class="wp-image-146" /></a><figcaption>Well preserved ruins.</figcaption></figure>
-<!-- /wp:image -->
-
-<!-- wp:image {"id":147,"align":"none"} -->
-<figure class="wp-block-image alignnone"><a href="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150829_123317-e1440951114883.jpg"><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150829_123317-e1440951114883.jpg" alt="Most of these ruins were civilian buildings. After all this was the capital city." class="wp-image-147" /></a><figcaption>Most of these ruins were civilian buildings. After all this was part of the capital city.</figcaption></figure>
-<!-- /wp:image -->
-
-<!-- wp:heading -->
-<h2>Reconstructions</h2>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph -->
-<p>Also, there are a lot of reconstructions, especially along the outer wall of the fortress.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:image {"id":148,"align":"left"} -->
-<div class="wp-block-image"><figure class="alignleft"><a href="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150829_120235-e1440951134858.jpg"><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150829_120235-e1440951134858.jpg" alt="This is a reconstructed small chamber attached to outer wall." class="wp-image-148" /></a><figcaption>This is a reconstructed small chamber attached to outer wall.</figcaption></figure></div>
-<!-- /wp:image -->
-
-<!-- wp:image {"id":149,"align":"left"} -->
-<div class="wp-block-image"><figure class="alignleft"><a href="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150829_122451-e1440951158106.jpg"><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150829_122451-e1440951158106.jpg" alt="Only the outer wall is reconstructed. The inner buildings' ruins remain as just plans on the ground." class="wp-image-149" /></a><figcaption>Only the outer wall is reconstructed. The inner buildings' ruins remain as just plans on the ground.</figcaption></figure></div>
-<!-- /wp:image -->
-
-<!-- wp:image {"id":150,"align":"left"} -->
-<div class="wp-block-image"><figure class="alignleft"><a href="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150829_122457-e1440951268695.jpg"><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150829_122457-e1440951268695.jpg" alt="Part of the outer wall is reconstructed. Notice the reconstructed turret." class="wp-image-150" /></a><figcaption>Part of the outer wall is reconstructed. Notice the reconstructed turret.</figcaption></figure></div>
-<!-- /wp:image -->
-
-<!-- wp:image {"id":151,"align":"left"} -->
-<div class="wp-block-image"><figure class="alignleft"><a href="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150829_123355.jpg"><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150829_123355-e1440951294652.jpg" alt="The outer wall reconstruction is impressive. Notice the reconstructed watch tower" class="wp-image-151" /></a><figcaption>The outer wall reconstruction is impressive. Notice the reconstructed watch tower and a reconstructed turret.</figcaption></figure></div>
-<!-- /wp:image -->
-
-<!-- wp:heading -->
-<h2>Church</h2>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph -->
-<p>At the top of the fortress is a reconstruction of the church that once stood there. The church is called the <a href="https://en.wikipedia.org/wiki/Patriarchal_Cathedral_of_the_Holy_Ascension_of_God">Patriarchal Cathedral of the Holy Ascension of God</a>. It was built in the place of an early Christian church.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:image {"id":152,"align":"none"} -->
-<figure class="wp-block-image alignnone"><a href="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150829_115024-e1440951320333.jpg"><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150829_115024-e1440951320333.jpg" alt="The reconstructed church. While the outside looks simple, the inside is simply beautiful." class="wp-image-152" /></a><figcaption>The reconstructed church. <br />While the outside looks simple, the inside is simply beautiful.</figcaption></figure>
-<!-- /wp:image -->
-
-<!-- wp:paragraph -->
-<p>When you step inside the church, you realize that this is really not a reconstruction, but in fact, a complete reimagining of an early christian church with a modernist abstract expression.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>For instance, consider this painting of Christ&nbsp;at the altar.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:image {"id":153,"align":"none"} -->
-<figure class="wp-block-image alignnone"><a href="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150829_113900.jpg"><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150829_113900-760x1024.jpg" alt="Christ and Mary at the altar of the church. The style is very modernist." class="wp-image-153" /></a><figcaption>Christ and Mary at the altar of the church. The style is very modernist.</figcaption></figure>
-<!-- /wp:image -->
-
-<!-- wp:paragraph -->
-<p>The murals along the walls and ceilings are absolutely stunning. Take a look.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:gallery {"ids":[160,159,158,157,156,155,154]} -->
-<ul class="wp-block-gallery columns-3 is-cropped"><li class="blocks-gallery-item"><figure><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150829_114523-760x1024.jpg" alt="" data-id="160" data-link="http://srikanth.sastry.name/tsarevets-a-photo-essay/img_20150829_114523/" class="wp-image-160" /></figure></li><li class="blocks-gallery-item"><figure><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150829_114123-e1440929171895-1024x760.jpg" alt="" data-id="159" data-link="http://srikanth.sastry.name/tsarevets-a-photo-essay/img_20150829_114123/" class="wp-image-159" /></figure></li><li class="blocks-gallery-item"><figure><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150829_114056-760x1024.jpg" alt="" data-id="158" data-link="http://srikanth.sastry.name/tsarevets-a-photo-essay/img_20150829_114056/" class="wp-image-158" /></figure></li><li class="blocks-gallery-item"><figure><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150829_114014-760x1024.jpg" alt="" data-id="157" data-link="http://srikanth.sastry.name/tsarevets-a-photo-essay/img_20150829_114014/" class="wp-image-157" /></figure></li><li class="blocks-gallery-item"><figure><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150829_113946-760x1024.jpg" alt="" data-id="156" data-link="http://srikanth.sastry.name/tsarevets-a-photo-essay/img_20150829_113946/" class="wp-image-156" /></figure></li><li class="blocks-gallery-item"><figure><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150829_113921-760x1024.jpg" alt="" data-id="155" data-link="http://srikanth.sastry.name/tsarevets-a-photo-essay/img_20150829_113921/" class="wp-image-155" /></figure></li><li class="blocks-gallery-item"><figure><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150829_113833-760x1024.jpg" alt="" data-id="154" data-link="http://srikanth.sastry.name/tsarevets-a-photo-essay/img_20150829_113833/" class="wp-image-154" /></figure></li></ul>
-<!-- /wp:gallery -->
-
-<!-- wp:paragraph -->
-<p>The city seems to have taken this style in pretty well. You can see murals in a similar style all over the city. Here is an example.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:image {"id":163,"align":"none"} -->
-<figure class="wp-block-image alignnone"><a href="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150829_110451.jpg"><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150829_110451-e1440951390918.jpg" alt="Modernist mural in Veliko Tarnovo" class="wp-image-163" /></a><figcaption>Modernist mural in Veliko Tarnovo</figcaption></figure>
-<!-- /wp:image -->
-
-<!-- wp:paragraph -->
-<p>In all, it was a very interesting visit, and worth your time, if you are a history buff.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>Oh, and two&nbsp;notable missing images are that of Baldwin's tower and the palace ruins. Unfortunately, I just forgot to photograph them. So here are images from the web as consolation.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:image {"align":"left"} -->
-<div class="wp-block-image"><figure class="alignleft"><a href="https://upload.wikimedia.org/wikipedia/commons/a/a4/Bal.Kyla.jpg"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Bal.Kyla.jpg" alt="" /></a><figcaption>Baldwin's tower.</figcaption></figure></div>
-<!-- /wp:image -->
-
-<!-- wp:image {"align":"center"} -->
-<div class="wp-block-image"><figure class="aligncenter"><a href="https://upload.wikimedia.org/wikipedia/commons/5/57/Veliko_Tarnovo_%28%D0%92%D0%B5%D0%BB%D0%B8%D0%BA%D0%BE_%D0%A2%D1%8A%D1%80%D0%BD%D0%BE%D0%B2%D0%BE%29_-_Tsarevets_%28Palace%29.JPG"><img src="https://upload.wikimedia.org/wikipedia/commons/5/57/Veliko_Tarnovo_%28%D0%92%D0%B5%D0%BB%D0%B8%D0%BA%D0%BE_%D0%A2%D1%8A%D1%80%D0%BD%D0%BE%D0%B2%D0%BE%29_-_Tsarevets_%28Palace%29.JPG" alt="" /></a><figcaption>Ruins of the palace</figcaption></figure></div>
-<!-- /wp:image -->
 
   </div>
   

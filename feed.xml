@@ -1,4 +1,88 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="//srikanth.sastry.name/feed.xml" rel="self" type="application/atom+xml" /><link href="//srikanth.sastry.name/" rel="alternate" type="text/html" /><updated>2022-06-19T15:55:05+00:00</updated><id>//srikanth.sastry.name/feed.xml</id><title type="html">Srikanth Sastry</title><subtitle>A personal website</subtitle><author><name>Srikanth Sastry</name><email>srikanth@sastry.name</email></author><entry><title type="html">Defining unit tests: two schools of thought</title><link href="//srikanth.sastry.name/defining-unit-tests-two-schools-of-thought/" rel="alternate" type="text/html" title="Defining unit tests: two schools of thought" /><published>2022-06-18T00:00:00+00:00</published><updated>2022-06-18T00:00:00+00:00</updated><id>//srikanth.sastry.name/defining-unit-tests-two-schools-of-thought</id><content type="html" xml:base="//srikanth.sastry.name/defining-unit-tests-two-schools-of-thought/"><![CDATA[<p><img src="/images/london-detroit.jpg" alt="" /></p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="//srikanth.sastry.name/feed.xml" rel="self" type="application/atom+xml" /><link href="//srikanth.sastry.name/" rel="alternate" type="text/html" /><updated>2022-06-27T20:02:43+00:00</updated><id>//srikanth.sastry.name/feed.xml</id><title type="html">Srikanth Sastry</title><subtitle>A personal website</subtitle><author><name>Srikanth Sastry</name><email>srikanth@sastry.name</email></author><entry><title type="html">In unit tests, I favor Detroit over London</title><link href="//srikanth.sastry.name/in-unit-tests-favor-detroit-over-london/" rel="alternate" type="text/html" title="In unit tests, I favor Detroit over London" /><published>2022-06-26T00:00:00+00:00</published><updated>2022-06-26T00:00:00+00:00</updated><id>//srikanth.sastry.name/in-unit-tests-i-favor-detroit-over-london</id><content type="html" xml:base="//srikanth.sastry.name/in-unit-tests-favor-detroit-over-london/"><![CDATA[<p><img src="/images/detroit-wall-frame.jpg" alt="" /></p>
+
+<p><a href="/defining-unit-tests-two-schools-of-thought/">Recall</a> the two schools of thought around unit test: Detroit, and London. Briefly, the Detroit school considers a ‘unit’ of software to be tested as a ‘behavior’ that consists of one or more classes, and unit tests replace only shared and/or external dependencies with test doubles. In contrast, the London school consider a ‘unit’ to be a single class, and replaces all dependencies with test doubles.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>School</th>
+      <th>Unit</th>
+      <th>Isolation</th>
+      <th>Speed</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Detroit</td>
+      <td>Behavior</td>
+      <td>Replace shared and external dependencies with test doubles</td>
+      <td>‘fast’</td>
+    </tr>
+    <tr>
+      <td>London</td>
+      <td>Class</td>
+      <td>Replace all dependencies (internal, external, shared, etc.) with test doubles</td>
+      <td>‘fast’</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>See this <a href="/defining-unit-tests-two-schools-of-thought/">note</a> for a more detailed discussion on the two schools.</p>
+
+<p>Each school have it’s proponents and each school of thought has it’s advantages. I, personally, prefer the Detroit school over the London school. I have noticed that following the Detroit school has made my test suite more <a href="/unit-test-attributes-and-their-trade-offs/">accurate and complete</a>.</p>
+
+<h2 id="improved-accuracy-when-refactoring">Improved Accuracy (when refactoring)</h2>
+
+<p>In <a href="/unit-test-attributes-and-their-trade-offs/">the post on attributes of a unit test suite</a>, I defined <em>accuracy</em> as the measure of how likely it is that a test failure denotes a bug in your diff. I have noticed that unit test suites that follow the Detroit school tended to have high accuracy when your codebase has a lot of classes that are public <em>de jour</em>, but private <em>de facto</em>.</p>
+
+<p>Codebases I have worked in typically have hundreds of classes, but only a handful of those classes are actually referenced by external classes/services. Most of the classes are part of a private API that is internal to the service. Let’s take a concrete illustration. Say, there is a class <code class="language-plaintext highlighter-rouge">Util</code> that is used only by classes <code class="language-plaintext highlighter-rouge">Feature1</code> and <code class="language-plaintext highlighter-rouge">Feature2</code> within the codebase, and has no other callers; in fact, <code class="language-plaintext highlighter-rouge">Util</code> exists only to help classes <code class="language-plaintext highlighter-rouge">Feature1</code> and <code class="language-plaintext highlighter-rouge">Feature2</code> implement their respective user journies. Here although <code class="language-plaintext highlighter-rouge">Util</code> is a class with public methods, in reality <code class="language-plaintext highlighter-rouge">Util</code> really represents the common implementation details for <code class="language-plaintext highlighter-rouge">Feature1</code> and <code class="language-plaintext highlighter-rouge">Feature2</code>.</p>
+
+<h3 id="in-london">In London</h3>
+<p>According to the London school, all unit tests for <code class="language-plaintext highlighter-rouge">Feature1</code> and <code class="language-plaintext highlighter-rouge">Fearure2</code> should be replacing <code class="language-plaintext highlighter-rouge">Util</code> with a test double. Thus, tests for <code class="language-plaintext highlighter-rouge">Feature1</code> and <code class="language-plaintext highlighter-rouge">Feature2</code> look as follows.
+<img src="/images/London-School-Accuracy-Before.png" alt="" /></p>
+
+<p>Now, say we want to do some refactoring that spans <code class="language-plaintext highlighter-rouge">Feature1</code>, <code class="language-plaintext highlighter-rouge">Feature2</code>, and <code class="language-plaintext highlighter-rouge">Util</code>. Since <code class="language-plaintext highlighter-rouge">Util</code> is really has a private API with <code class="language-plaintext highlighter-rouge">Feature1</code> and <code class="language-plaintext highlighter-rouge">Feature2</code>, we can change the API of <code class="language-plaintext highlighter-rouge">Util</code> in concert with <code class="language-plaintext highlighter-rouge">Feature1</code> and <code class="language-plaintext highlighter-rouge">Feature2</code> in a single diff. Now, since the tests for <code class="language-plaintext highlighter-rouge">Feature1</code> and <code class="language-plaintext highlighter-rouge">Feature2</code> use test doubles for <code class="language-plaintext highlighter-rouge">Util</code>, and we have changed <code class="language-plaintext highlighter-rouge">Util</code>’s API, we need to change the test doubles’ implementation to match the new API. After making these changes, say, the tests for <code class="language-plaintext highlighter-rouge">Util</code> pass, but the tests for <code class="language-plaintext highlighter-rouge">Feature1</code> fail.</p>
+
+<p><img src="/images/London-School-Accuracy-After.png" alt="" /></p>
+
+<p>Now, does the test failure denote a bug in our refactoring, or does it denote an error in how we modified the tests? This is not easy to determine except by stepping through the tests manually. Thus, the test suite does not have high accuracy.</p>
+
+<h3 id="in-detroit">In Detroit</h3>
+<p>In contrast, according to the Detroit school, the unit tests for <code class="language-plaintext highlighter-rouge">Feature1</code> and <code class="language-plaintext highlighter-rouge">Feature2</code> can use <code class="language-plaintext highlighter-rouge">Util</code> as such (without test doubles). The tests for <code class="language-plaintext highlighter-rouge">Feature1</code> and <code class="language-plaintext highlighter-rouge">Feature2</code> look as follows.</p>
+
+<p><img src="/images/Detroit-School-Accuracy-Before.png" alt="" /></p>
+
+<p>If we do the same refactoring across <code class="language-plaintext highlighter-rouge">Feature1</code>, <code class="language-plaintext highlighter-rouge">Feature2</code>, and <code class="language-plaintext highlighter-rouge">Util</code> classes, note that we do not need to make any changes to the tests for <code class="language-plaintext highlighter-rouge">Feature1</code> and <code class="language-plaintext highlighter-rouge">Feature2</code>. If the tests fail, then we have a very high signal that the refactoring has a bug in it; this makes for a high accuracy test suite!</p>
+
+<p><img src="/images/Detroit-School-Accuracy-After.png" alt="" /></p>
+
+<p>Furthermore, since <code class="language-plaintext highlighter-rouge">Util</code> exists only to serve <code class="language-plaintext highlighter-rouge">Feature1</code> and <code class="language-plaintext highlighter-rouge">Feature2</code>, you can argue that <code class="language-plaintext highlighter-rouge">Util</code> doesn’t even need any unit tests of it’s own; the tests for <code class="language-plaintext highlighter-rouge">Feature1</code> and <code class="language-plaintext highlighter-rouge">Feature2</code> cover the spread!</p>
+
+<h2 id="improved-completeness-around-regressions">Improved Completeness (around regressions)</h2>
+<p>In <a href="/unit-test-attributes-and-their-trade-offs/">the post on attributes of a unit test suite</a>, I defined <em>completeness</em> as the measure of how likely a bug introduced by your diff is caught by your test suite. I have seen unit tests following the Detroit school catching bugs/regressions more easily, especially when the bugs are introduced by API contract violations.</p>
+
+<p>It easier to see this with an example. Say, there is a class <code class="language-plaintext highlighter-rouge">Outer</code> that uses a class <code class="language-plaintext highlighter-rouge">Inner</code>, and <code class="language-plaintext highlighter-rouge">Inner</code> is an internal non-shared dependency. Let’s say that the class <code class="language-plaintext highlighter-rouge">Outer</code> depends on a specific contract, (let’s call it) alpha, that <code class="language-plaintext highlighter-rouge">Inner</code>’s API satisfies, for correctness. Recall that we practically trade off between the speed of a test suite and it’s completeness, let us posit that the incompleteness here is that we do not have a test for <code class="language-plaintext highlighter-rouge">Inner</code> satisfying contract alpha.</p>
+
+<h3 id="in-london-1">In London</h3>
+
+<p>Following the London school, the tests for <code class="language-plaintext highlighter-rouge">Outer</code> replace the instance of <code class="language-plaintext highlighter-rouge">Inner</code> with a test double, and since the test double is a replacement for <code class="language-plaintext highlighter-rouge">Inner</code>, it also satisfies contract alpha. See the illustration below for clarity.</p>
+
+<p><img src="/images/London-School-Completeness-Before.png" alt="Image not found: /images/London-School-Completeness-Before.png" title="Image not found: /images/London-School-Completeness-Before.png" /></p>
+
+<p>Now, let’s assume that we have a diff that ‘refactors’ <code class="language-plaintext highlighter-rouge">Inner</code>, but in that process, it introduces a bug that violates contract alpha. Since we have assumed an incompleteness in our test suite around contract alpha, the unit test for <code class="language-plaintext highlighter-rouge">Inner</code> does not catch this regression. Also, since the tests for <code class="language-plaintext highlighter-rouge">Outer</code> use a test double for <code class="language-plaintext highlighter-rouge">Inner</code> (which satisfies contract alpha), those tests do not detect this regression either.</p>
+
+<p><img src="/images/London-School-Completeness-After.png" alt="" /></p>
+
+<h3 id="in-detroit-1">In Detroit</h3>
+
+<p>If we were to follow the Detroit school instead, then the unit tests for <code class="language-plaintext highlighter-rouge">Outer</code> instantiate and use <code class="language-plaintext highlighter-rouge">Inner</code> when testing the correctness of <code class="language-plaintext highlighter-rouge">Outer</code>, as shown below. Note that the test incompletness w.r.t. contract alpha still exists.
+<img src="/images/Detroit-School-Completeness-Before.png" alt="" /></p>
+
+<p>Here, like before, assume that we have a diff that ‘refactors’ <code class="language-plaintext highlighter-rouge">Inner</code> and breaks contract alpha. This time around, although the test suite for <code class="language-plaintext highlighter-rouge">Inner</code> does not catch the regression, the test suite for <code class="language-plaintext highlighter-rouge">Outer</code> will catch the regression. Why? Because the correctness of <code class="language-plaintext highlighter-rouge">Outer</code> depends on <code class="language-plaintext highlighter-rouge">Inner</code> satisfying contract alpha. When that contract is violated <code class="language-plaintext highlighter-rouge">Outer</code> fails to satisfy correctness, and is therefore, it’s unit tests fail/</p>
+
+<p><img src="/images/Detroit-School-Completeness-After.png" alt="" /></p>
+
+<p>In effect, even though we did not have an explicit test for contract alpha, the unit tests written according to the Detroit school tend to have better completeness than the ones written following the London school.</p>]]></content><author><name>Srikanth Sastry</name><email>srikanth@sastry.name</email></author><category term="professional" /><category term="unit tests" /><category term="software engineering" /><category term="london school" /><category term="detroit school" /><category term="classical school" /><category term="mockist school" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Defining unit tests: two schools of thought</title><link href="//srikanth.sastry.name/defining-unit-tests-two-schools-of-thought/" rel="alternate" type="text/html" title="Defining unit tests: two schools of thought" /><published>2022-06-18T00:00:00+00:00</published><updated>2022-06-18T00:00:00+00:00</updated><id>//srikanth.sastry.name/defining-unit-tests-two-schools-of-thought</id><content type="html" xml:base="//srikanth.sastry.name/defining-unit-tests-two-schools-of-thought/"><![CDATA[<p><img src="/images/london-detroit.jpg" alt="" /></p>
 
 <h2 id="definitions-what-is-a-unit-test">Definitions: What is a unit test?</h2>
 
@@ -693,70 +777,4 @@ AssertionError: FAILURE
 
 <p>All of this took about a minute to register, and I immediately called them back and gave them the full amount that was promised to them.</p>
 
-<p>That look of helplessness and resignation stayed with me a long time. But I simply couldn’t understand it in it’s larger context. For a while, I saw this as a fault in their character that will get them swindled, and almost felt good about me not being one of the many who cheated them out of what they earned. Nonetheless, this event stayed with me, as I learned more, I kept recasting that experience with new sociological lenses. It took me years to recognize it as a natural consequence of multi-generational societal oppression, and with that recognize my own privilege.</p>]]></content><author><name>Srikanth Sastry</name><email>srikanth@sastry.name</email></author><category term="Personal" /><category term="reflection" /><category term="privilege" /><summary type="html"><![CDATA[For the first 23 years of my life, I was convinced that everything that came my way was hard earned, and it was despite the oppression against our community. At 23, I was working as a young software engineer in Bangalore. I needed the house deep cleaned, and a contractor said that he would send a couple of people over who would take care of it for us. I was about to get my first glimpse into the privilege that I had enjoyed all my life.]]></summary></entry><entry><title type="html">Reuse Code, Not Objects</title><link href="//srikanth.sastry.name/reuse-code-not-objects/" rel="alternate" type="text/html" title="Reuse Code, Not Objects" /><published>2021-07-17T02:01:41+00:00</published><updated>2021-07-17T02:01:41+00:00</updated><id>//srikanth.sastry.name/reuse-code-not-objects</id><content type="html" xml:base="//srikanth.sastry.name/reuse-code-not-objects/"><![CDATA[<!-- wp:image {"id":666} -->
-<figure class="wp-block-image"><img src="https://srikanth.sastry.name/wp-content/uploads/2021/07/pexels-photo-5218009-edited.jpeg" alt="" class="wp-image-666" /></figure>
-<!-- /wp:image -->
-
-<!-- wp:paragraph -->
-<p>We all know of the importance of <a href="https://en.wikipedia.org/wiki/Code_reuse">code reuse</a> and <a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself">DRY</a> code. It is important to remember that this applies to code, and <em>not</em> to objects!<br />A common anti-pattern I see in stateful classes is something along the following lines:</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:code -->
-<pre class="wp-block-code"><code>class SomeStatefulClass {
-  private ResponseType responseType;
-  private final ErrMessages errMessages;
-  
-  public SomeStatefulClass() {
-    this.ResponseType = null;
-    this.errMessages = new ErrMessages();
-  }
-  
-  public void init() {
-    errMessages.clear();
-  }
-  
-  public Response process(Request request) {
-    try {
-      // Process the request.
-      // Update stats.
-      // Update otherState.
-      Response response = computeResponse();
-      responseType = computeResponseType();
-      return response;
-    } catch (Exception e) {
-      this.errMessages.append(e);
-    }
-    return null;
-  }
-  
-  public LogMessages getErrMessages() {
-    return this.errMessages;
-  }
-  
-  public ResponseType getResponseType() {
-    return responseType;
-  }
-}</code></pre>
-<!-- /wp:code -->
-
-<!-- wp:paragraph -->
-<p>This design pattern is a major code smell. Ironically, such classes are prone to be <em>misused through reuse</em>. A common example of this is reusing the object within a loop:</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:code -->
-<pre class="wp-block-code"><code>public void process(List&lt;Request&gt; requests) {
-  final SomeStatefulClass statefulObject
-      = new SomeStatefulClass();
-  Response response;
-  for (Request request: requests) {
-    statefulObject.init();
-    response = statefulObject.process(request);
-    appendResponse(response, statefulObject.getResponseType());
-    
-  }
-}</code></pre>
-<!-- /wp:code -->
-
-<!-- wp:paragraph -->
-<p>The issue here is subtle, but dangerous. Consider what happens if one of the requests in the list of requests passed to <code>process()</code> causes <code>statefulObject</code>to throw an exception inside <code>computeResponse()</code>. Dutifully, this exception is caught by <code>process()</code> and it returns <code>null</code>. However, note that the value of <code>responseType</code> in <code>statefulObject</code> was never modified by processing of this request, and therefore, it still hold the <code>ResponseType</code> of the previous request! Therefore, the line <code>appendResponse(response, statefulObject.getResponseType());</code> is now passing in a null response and the response type of the previous request!<br />These types of bugs are subtle and a pain to track down.<br />And this happened because we chose to reuse the <code>statefulObject</code>. If we were to use a new instance each time, this would not really be an issue.<br />Moral: If feasible, do not reuse objects; create new instances and throw them away when done!</p>
-<!-- /wp:paragraph -->]]></content><author><name>Srikanth Sastry</name></author><category term="Professional" /><category term="design pattern" /><category term="software engineering" /><summary type="html"><![CDATA[We all know of the importance of code reuse and DRY code. It is important to remember that this applies to code, and not to objects!]]></summary></entry></feed>
+<p>That look of helplessness and resignation stayed with me a long time. But I simply couldn’t understand it in it’s larger context. For a while, I saw this as a fault in their character that will get them swindled, and almost felt good about me not being one of the many who cheated them out of what they earned. Nonetheless, this event stayed with me, as I learned more, I kept recasting that experience with new sociological lenses. It took me years to recognize it as a natural consequence of multi-generational societal oppression, and with that recognize my own privilege.</p>]]></content><author><name>Srikanth Sastry</name><email>srikanth@sastry.name</email></author><category term="Personal" /><category term="reflection" /><category term="privilege" /><summary type="html"><![CDATA[For the first 23 years of my life, I was convinced that everything that came my way was hard earned, and it was despite the oppression against our community. At 23, I was working as a young software engineer in Bangalore. I needed the house deep cleaned, and a contractor said that he would send a couple of people over who would take care of it for us. I was about to get my first glimpse into the privilege that I had enjoyed all my life.]]></summary></entry></feed>

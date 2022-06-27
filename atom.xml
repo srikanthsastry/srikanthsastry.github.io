@@ -4,13 +4,106 @@
  <title>Srikanth Sastry</title>
  <link href="//srikanth.sastry.name/atom.xml" rel="self"/>
  <link href="//srikanth.sastry.name/"/>
- <updated>2022-06-19T15:55:05+00:00</updated>
+ <updated>2022-06-27T20:02:43+00:00</updated>
  <id>//srikanth.sastry.name</id>
  <author>
    <name>Srikanth Sastry</name>
    <email>srikanth@sastry.name</email>
  </author>
 
+ 
+ <entry>
+   <title>In unit tests, I favor Detroit over London</title>
+   <link href="//srikanth.sastry.name/in-unit-tests-favor-detroit-over-london/"/>
+   <updated>2022-06-26T00:00:00+00:00</updated>
+   <id>//srikanth.sastry.name/in-unit-tests-i-favor-detroit-over-london</id>
+   <content type="html">&lt;p&gt;&lt;img src=&quot;/images/detroit-wall-frame.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/defining-unit-tests-two-schools-of-thought/&quot;&gt;Recall&lt;/a&gt; the two schools of thought around unit test: Detroit, and London. Briefly, the Detroit school considers a ‘unit’ of software to be tested as a ‘behavior’ that consists of one or more classes, and unit tests replace only shared and/or external dependencies with test doubles. In contrast, the London school consider a ‘unit’ to be a single class, and replaces all dependencies with test doubles.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;School&lt;/th&gt;
+      &lt;th&gt;Unit&lt;/th&gt;
+      &lt;th&gt;Isolation&lt;/th&gt;
+      &lt;th&gt;Speed&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Detroit&lt;/td&gt;
+      &lt;td&gt;Behavior&lt;/td&gt;
+      &lt;td&gt;Replace shared and external dependencies with test doubles&lt;/td&gt;
+      &lt;td&gt;‘fast’&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;London&lt;/td&gt;
+      &lt;td&gt;Class&lt;/td&gt;
+      &lt;td&gt;Replace all dependencies (internal, external, shared, etc.) with test doubles&lt;/td&gt;
+      &lt;td&gt;‘fast’&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;See this &lt;a href=&quot;/defining-unit-tests-two-schools-of-thought/&quot;&gt;note&lt;/a&gt; for a more detailed discussion on the two schools.&lt;/p&gt;
+
+&lt;p&gt;Each school have it’s proponents and each school of thought has it’s advantages. I, personally, prefer the Detroit school over the London school. I have noticed that following the Detroit school has made my test suite more &lt;a href=&quot;/unit-test-attributes-and-their-trade-offs/&quot;&gt;accurate and complete&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;improved-accuracy-when-refactoring&quot;&gt;Improved Accuracy (when refactoring)&lt;/h2&gt;
+
+&lt;p&gt;In &lt;a href=&quot;/unit-test-attributes-and-their-trade-offs/&quot;&gt;the post on attributes of a unit test suite&lt;/a&gt;, I defined &lt;em&gt;accuracy&lt;/em&gt; as the measure of how likely it is that a test failure denotes a bug in your diff. I have noticed that unit test suites that follow the Detroit school tended to have high accuracy when your codebase has a lot of classes that are public &lt;em&gt;de jour&lt;/em&gt;, but private &lt;em&gt;de facto&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Codebases I have worked in typically have hundreds of classes, but only a handful of those classes are actually referenced by external classes/services. Most of the classes are part of a private API that is internal to the service. Let’s take a concrete illustration. Say, there is a class &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Util&lt;/code&gt; that is used only by classes &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Feature1&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Feature2&lt;/code&gt; within the codebase, and has no other callers; in fact, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Util&lt;/code&gt; exists only to help classes &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Feature1&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Feature2&lt;/code&gt; implement their respective user journies. Here although &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Util&lt;/code&gt; is a class with public methods, in reality &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Util&lt;/code&gt; really represents the common implementation details for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Feature1&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Feature2&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;in-london&quot;&gt;In London&lt;/h3&gt;
+&lt;p&gt;According to the London school, all unit tests for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Feature1&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Fearure2&lt;/code&gt; should be replacing &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Util&lt;/code&gt; with a test double. Thus, tests for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Feature1&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Feature2&lt;/code&gt; look as follows.
+&lt;img src=&quot;/images/London-School-Accuracy-Before.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now, say we want to do some refactoring that spans &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Feature1&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Feature2&lt;/code&gt;, and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Util&lt;/code&gt;. Since &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Util&lt;/code&gt; is really has a private API with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Feature1&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Feature2&lt;/code&gt;, we can change the API of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Util&lt;/code&gt; in concert with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Feature1&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Feature2&lt;/code&gt; in a single diff. Now, since the tests for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Feature1&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Feature2&lt;/code&gt; use test doubles for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Util&lt;/code&gt;, and we have changed &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Util&lt;/code&gt;’s API, we need to change the test doubles’ implementation to match the new API. After making these changes, say, the tests for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Util&lt;/code&gt; pass, but the tests for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Feature1&lt;/code&gt; fail.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/London-School-Accuracy-After.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now, does the test failure denote a bug in our refactoring, or does it denote an error in how we modified the tests? This is not easy to determine except by stepping through the tests manually. Thus, the test suite does not have high accuracy.&lt;/p&gt;
+
+&lt;h3 id=&quot;in-detroit&quot;&gt;In Detroit&lt;/h3&gt;
+&lt;p&gt;In contrast, according to the Detroit school, the unit tests for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Feature1&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Feature2&lt;/code&gt; can use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Util&lt;/code&gt; as such (without test doubles). The tests for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Feature1&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Feature2&lt;/code&gt; look as follows.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/Detroit-School-Accuracy-Before.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;If we do the same refactoring across &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Feature1&lt;/code&gt;, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Feature2&lt;/code&gt;, and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Util&lt;/code&gt; classes, note that we do not need to make any changes to the tests for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Feature1&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Feature2&lt;/code&gt;. If the tests fail, then we have a very high signal that the refactoring has a bug in it; this makes for a high accuracy test suite!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/Detroit-School-Accuracy-After.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Furthermore, since &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Util&lt;/code&gt; exists only to serve &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Feature1&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Feature2&lt;/code&gt;, you can argue that &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Util&lt;/code&gt; doesn’t even need any unit tests of it’s own; the tests for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Feature1&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Feature2&lt;/code&gt; cover the spread!&lt;/p&gt;
+
+&lt;h2 id=&quot;improved-completeness-around-regressions&quot;&gt;Improved Completeness (around regressions)&lt;/h2&gt;
+&lt;p&gt;In &lt;a href=&quot;/unit-test-attributes-and-their-trade-offs/&quot;&gt;the post on attributes of a unit test suite&lt;/a&gt;, I defined &lt;em&gt;completeness&lt;/em&gt; as the measure of how likely a bug introduced by your diff is caught by your test suite. I have seen unit tests following the Detroit school catching bugs/regressions more easily, especially when the bugs are introduced by API contract violations.&lt;/p&gt;
+
+&lt;p&gt;It easier to see this with an example. Say, there is a class &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Outer&lt;/code&gt; that uses a class &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Inner&lt;/code&gt;, and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Inner&lt;/code&gt; is an internal non-shared dependency. Let’s say that the class &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Outer&lt;/code&gt; depends on a specific contract, (let’s call it) alpha, that &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Inner&lt;/code&gt;’s API satisfies, for correctness. Recall that we practically trade off between the speed of a test suite and it’s completeness, let us posit that the incompleteness here is that we do not have a test for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Inner&lt;/code&gt; satisfying contract alpha.&lt;/p&gt;
+
+&lt;h3 id=&quot;in-london-1&quot;&gt;In London&lt;/h3&gt;
+
+&lt;p&gt;Following the London school, the tests for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Outer&lt;/code&gt; replace the instance of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Inner&lt;/code&gt; with a test double, and since the test double is a replacement for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Inner&lt;/code&gt;, it also satisfies contract alpha. See the illustration below for clarity.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/London-School-Completeness-Before.png&quot; alt=&quot;Image not found: /images/London-School-Completeness-Before.png&quot; title=&quot;Image not found: /images/London-School-Completeness-Before.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Now, let’s assume that we have a diff that ‘refactors’ &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Inner&lt;/code&gt;, but in that process, it introduces a bug that violates contract alpha. Since we have assumed an incompleteness in our test suite around contract alpha, the unit test for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Inner&lt;/code&gt; does not catch this regression. Also, since the tests for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Outer&lt;/code&gt; use a test double for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Inner&lt;/code&gt; (which satisfies contract alpha), those tests do not detect this regression either.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/London-School-Completeness-After.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;in-detroit-1&quot;&gt;In Detroit&lt;/h3&gt;
+
+&lt;p&gt;If we were to follow the Detroit school instead, then the unit tests for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Outer&lt;/code&gt; instantiate and use &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Inner&lt;/code&gt; when testing the correctness of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Outer&lt;/code&gt;, as shown below. Note that the test incompletness w.r.t. contract alpha still exists.
+&lt;img src=&quot;/images/Detroit-School-Completeness-Before.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Here, like before, assume that we have a diff that ‘refactors’ &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Inner&lt;/code&gt; and breaks contract alpha. This time around, although the test suite for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Inner&lt;/code&gt; does not catch the regression, the test suite for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Outer&lt;/code&gt; will catch the regression. Why? Because the correctness of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Outer&lt;/code&gt; depends on &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Inner&lt;/code&gt; satisfying contract alpha. When that contract is violated &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Outer&lt;/code&gt; fails to satisfy correctness, and is therefore, it’s unit tests fail/&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/Detroit-School-Completeness-After.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In effect, even though we did not have an explicit test for contract alpha, the unit tests written according to the Detroit school tend to have better completeness than the ones written following the London school.&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Defining unit tests: two schools of thought</title>
