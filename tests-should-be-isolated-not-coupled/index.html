@@ -10,12 +10,12 @@
 
   <title>
     
-      Srikanth Sastry &middot; A Techie in Boston
+      Tests should be isolated from each other; not coupled &middot; Srikanth Sastry
     
   </title>
 
   
-  <link rel="canonical" href="//srikanth.sastry.name/">
+  <link rel="canonical" href="//srikanth.sastry.name/tests-should-be-isolated-not-coupled/">
   
 
   <link rel="stylesheet" href="//srikanth.sastry.name/public/css/poole.css">
@@ -45,7 +45,7 @@
   </div>
 
   <nav class="sidebar-nav">
-    <a class="sidebar-nav-item active" href="//srikanth.sastry.name/">Home</a>
+    <a class="sidebar-nav-item" href="//srikanth.sastry.name/">Home</a>
 
     
 
@@ -149,18 +149,10 @@
       </div>
 
       <div class="container content">
-        <div class="posts">
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="//srikanth.sastry.name/tests-should-be-isolated-not-coupled/">
-        Tests should be isolated from each other; not coupled
-      </a>
-    </h1>
-
-    <span class="post-date">03 Jul 2022</span>
-
-    <p><img src="/images/carabiners-connected.jpg" alt="" />
+        <div class="post">
+  <h1 class="post-title">Tests should be isolated from each other; not coupled</h1>
+  <span class="post-date">03 Jul 2022</span>
+  <p><img src="/images/carabiners-connected.jpg" alt="" />
 Unit tests should be <em>isolated</em> from its (external, shared) dependencies; furthermore, tests should be <em>isolated</em> from each other. When one test starts to affect another test, the two tests are said to be <em>coupled</em>. Alternatively, if changes to one test <em>can</em> negatively impact the correctness of another test, then the two tests are said to be <em>coupled</em>.</p>
 
 <p>Coupled tests are problematic in two ways.</p>
@@ -402,321 +394,10 @@ Unit tests should be <em>isolated</em> from its (external, shared) dependencies;
 </span>        <span class="bp">self</span><span class="p">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">excepted_error_code</span><span class="p">,</span> <span class="n">exception</span><span class="p">.</span><span class="n">error_code</span><span class="p">)</span>
 </code></pre></div></div>
 
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="//srikanth.sastry.name/in-unit-tests-favor-detroit-over-london/">
-        In unit tests, I favor Detroit over London
-      </a>
-    </h1>
-
-    <span class="post-date">26 Jun 2022</span>
-
-    <p><img src="/images/detroit-wall-frame.jpg" alt="" /></p>
-
-<p><a href="/defining-unit-tests-two-schools-of-thought/">Recall</a> the two schools of thought around unit test: Detroit, and London. Briefly, the Detroit school considers a ‘unit’ of software to be tested as a ‘behavior’ that consists of one or more classes, and unit tests replace only shared and/or external dependencies with test doubles. In contrast, the London school consider a ‘unit’ to be a single class, and replaces all dependencies with test doubles.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>School</th>
-      <th>Unit</th>
-      <th>Isolation</th>
-      <th>Speed</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Detroit</td>
-      <td>Behavior</td>
-      <td>Replace shared and external dependencies with test doubles</td>
-      <td>‘fast’</td>
-    </tr>
-    <tr>
-      <td>London</td>
-      <td>Class</td>
-      <td>Replace all dependencies (internal, external, shared, etc.) with test doubles</td>
-      <td>‘fast’</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>See this <a href="/defining-unit-tests-two-schools-of-thought/">note</a> for a more detailed discussion on the two schools.</p>
-
-<p>Each school have it’s proponents and each school of thought has it’s advantages. I, personally, prefer the Detroit school over the London school. I have noticed that following the Detroit school has made my test suite more <a href="/unit-test-attributes-and-their-trade-offs/">accurate and complete</a>.</p>
-
-<h2 id="improved-accuracy-when-refactoring">Improved Accuracy (when refactoring)</h2>
-
-<p>In <a href="/unit-test-attributes-and-their-trade-offs/">the post on attributes of a unit test suite</a>, I defined <em>accuracy</em> as the measure of how likely it is that a test failure denotes a bug in your diff. I have noticed that unit test suites that follow the Detroit school tended to have high accuracy when your codebase has a lot of classes that are public <em>de jour</em>, but private <em>de facto</em>.</p>
-
-<p>Codebases I have worked in typically have hundreds of classes, but only a handful of those classes are actually referenced by external classes/services. Most of the classes are part of a private API that is internal to the service. Let’s take a concrete illustration. Say, there is a class <code class="language-plaintext highlighter-rouge">Util</code> that is used only by classes <code class="language-plaintext highlighter-rouge">Feature1</code> and <code class="language-plaintext highlighter-rouge">Feature2</code> within the codebase, and has no other callers; in fact, <code class="language-plaintext highlighter-rouge">Util</code> exists only to help classes <code class="language-plaintext highlighter-rouge">Feature1</code> and <code class="language-plaintext highlighter-rouge">Feature2</code> implement their respective user journies. Here although <code class="language-plaintext highlighter-rouge">Util</code> is a class with public methods, in reality <code class="language-plaintext highlighter-rouge">Util</code> really represents the common implementation details for <code class="language-plaintext highlighter-rouge">Feature1</code> and <code class="language-plaintext highlighter-rouge">Feature2</code>.</p>
-
-<h3 id="in-london">In London</h3>
-<p>According to the London school, all unit tests for <code class="language-plaintext highlighter-rouge">Feature1</code> and <code class="language-plaintext highlighter-rouge">Fearure2</code> should be replacing <code class="language-plaintext highlighter-rouge">Util</code> with a test double. Thus, tests for <code class="language-plaintext highlighter-rouge">Feature1</code> and <code class="language-plaintext highlighter-rouge">Feature2</code> look as follows.
-<img src="/images/London-School-Accuracy-Before.png" alt="" /></p>
-
-<p>Now, say we want to do some refactoring that spans <code class="language-plaintext highlighter-rouge">Feature1</code>, <code class="language-plaintext highlighter-rouge">Feature2</code>, and <code class="language-plaintext highlighter-rouge">Util</code>. Since <code class="language-plaintext highlighter-rouge">Util</code> is really has a private API with <code class="language-plaintext highlighter-rouge">Feature1</code> and <code class="language-plaintext highlighter-rouge">Feature2</code>, we can change the API of <code class="language-plaintext highlighter-rouge">Util</code> in concert with <code class="language-plaintext highlighter-rouge">Feature1</code> and <code class="language-plaintext highlighter-rouge">Feature2</code> in a single diff. Now, since the tests for <code class="language-plaintext highlighter-rouge">Feature1</code> and <code class="language-plaintext highlighter-rouge">Feature2</code> use test doubles for <code class="language-plaintext highlighter-rouge">Util</code>, and we have changed <code class="language-plaintext highlighter-rouge">Util</code>’s API, we need to change the test doubles’ implementation to match the new API. After making these changes, say, the tests for <code class="language-plaintext highlighter-rouge">Util</code> pass, but the tests for <code class="language-plaintext highlighter-rouge">Feature1</code> fail.</p>
-
-<p><img src="/images/London-School-Accuracy-After.png" alt="" /></p>
-
-<p>Now, does the test failure denote a bug in our refactoring, or does it denote an error in how we modified the tests? This is not easy to determine except by stepping through the tests manually. Thus, the test suite does not have high accuracy.</p>
-
-<h3 id="in-detroit">In Detroit</h3>
-<p>In contrast, according to the Detroit school, the unit tests for <code class="language-plaintext highlighter-rouge">Feature1</code> and <code class="language-plaintext highlighter-rouge">Feature2</code> can use <code class="language-plaintext highlighter-rouge">Util</code> as such (without test doubles). The tests for <code class="language-plaintext highlighter-rouge">Feature1</code> and <code class="language-plaintext highlighter-rouge">Feature2</code> look as follows.</p>
-
-<p><img src="/images/Detroit-School-Accuracy-Before.png" alt="" /></p>
-
-<p>If we do the same refactoring across <code class="language-plaintext highlighter-rouge">Feature1</code>, <code class="language-plaintext highlighter-rouge">Feature2</code>, and <code class="language-plaintext highlighter-rouge">Util</code> classes, note that we do not need to make any changes to the tests for <code class="language-plaintext highlighter-rouge">Feature1</code> and <code class="language-plaintext highlighter-rouge">Feature2</code>. If the tests fail, then we have a very high signal that the refactoring has a bug in it; this makes for a high accuracy test suite!</p>
-
-<p><img src="/images/Detroit-School-Accuracy-After.png" alt="" /></p>
-
-<p>Furthermore, since <code class="language-plaintext highlighter-rouge">Util</code> exists only to serve <code class="language-plaintext highlighter-rouge">Feature1</code> and <code class="language-plaintext highlighter-rouge">Feature2</code>, you can argue that <code class="language-plaintext highlighter-rouge">Util</code> doesn’t even need any unit tests of it’s own; the tests for <code class="language-plaintext highlighter-rouge">Feature1</code> and <code class="language-plaintext highlighter-rouge">Feature2</code> cover the spread!</p>
-
-<h2 id="improved-completeness-around-regressions">Improved Completeness (around regressions)</h2>
-<p>In <a href="/unit-test-attributes-and-their-trade-offs/">the post on attributes of a unit test suite</a>, I defined <em>completeness</em> as the measure of how likely a bug introduced by your diff is caught by your test suite. I have seen unit tests following the Detroit school catching bugs/regressions more easily, especially when the bugs are introduced by API contract violations.</p>
-
-<p>It easier to see this with an example. Say, there is a class <code class="language-plaintext highlighter-rouge">Outer</code> that uses a class <code class="language-plaintext highlighter-rouge">Inner</code>, and <code class="language-plaintext highlighter-rouge">Inner</code> is an internal non-shared dependency. Let’s say that the class <code class="language-plaintext highlighter-rouge">Outer</code> depends on a specific contract, (let’s call it) alpha, that <code class="language-plaintext highlighter-rouge">Inner</code>’s API satisfies, for correctness. Recall that we practically trade off between the speed of a test suite and it’s completeness, let us posit that the incompleteness here is that we do not have a test for <code class="language-plaintext highlighter-rouge">Inner</code> satisfying contract alpha.</p>
-
-<h3 id="in-london-1">In London</h3>
-
-<p>Following the London school, the tests for <code class="language-plaintext highlighter-rouge">Outer</code> replace the instance of <code class="language-plaintext highlighter-rouge">Inner</code> with a test double, and since the test double is a replacement for <code class="language-plaintext highlighter-rouge">Inner</code>, it also satisfies contract alpha. See the illustration below for clarity.</p>
-
-<p><img src="/images/London-School-Completeness-Before.png" alt="Image not found: /images/London-School-Completeness-Before.png" title="Image not found: /images/London-School-Completeness-Before.png" /></p>
-
-<p>Now, let’s assume that we have a diff that ‘refactors’ <code class="language-plaintext highlighter-rouge">Inner</code>, but in that process, it introduces a bug that violates contract alpha. Since we have assumed an incompleteness in our test suite around contract alpha, the unit test for <code class="language-plaintext highlighter-rouge">Inner</code> does not catch this regression. Also, since the tests for <code class="language-plaintext highlighter-rouge">Outer</code> use a test double for <code class="language-plaintext highlighter-rouge">Inner</code> (which satisfies contract alpha), those tests do not detect this regression either.</p>
-
-<p><img src="/images/London-School-Completeness-After.png" alt="" /></p>
-
-<h3 id="in-detroit-1">In Detroit</h3>
-
-<p>If we were to follow the Detroit school instead, then the unit tests for <code class="language-plaintext highlighter-rouge">Outer</code> instantiate and use <code class="language-plaintext highlighter-rouge">Inner</code> when testing the correctness of <code class="language-plaintext highlighter-rouge">Outer</code>, as shown below. Note that the test incompletness w.r.t. contract alpha still exists.
-<img src="/images/Detroit-School-Completeness-Before.png" alt="" /></p>
-
-<p>Here, like before, assume that we have a diff that ‘refactors’ <code class="language-plaintext highlighter-rouge">Inner</code> and breaks contract alpha. This time around, although the test suite for <code class="language-plaintext highlighter-rouge">Inner</code> does not catch the regression, the test suite for <code class="language-plaintext highlighter-rouge">Outer</code> will catch the regression. Why? Because the correctness of <code class="language-plaintext highlighter-rouge">Outer</code> depends on <code class="language-plaintext highlighter-rouge">Inner</code> satisfying contract alpha. When that contract is violated <code class="language-plaintext highlighter-rouge">Outer</code> fails to satisfy correctness, and is therefore, it’s unit tests fail/</p>
-
-<p><img src="/images/Detroit-School-Completeness-After.png" alt="" /></p>
-
-<p>In effect, even though we did not have an explicit test for contract alpha, the unit tests written according to the Detroit school tend to have better completeness than the ones written following the London school.</p>
-
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="//srikanth.sastry.name/defining-unit-tests-two-schools-of-thought/">
-        Defining unit tests: two schools of thought
-      </a>
-    </h1>
-
-    <span class="post-date">18 Jun 2022</span>
-
-    <p><img src="/images/london-detroit.jpg" alt="" /></p>
-
-<h2 id="definitions-what-is-a-unit-test">Definitions: What is a unit test?</h2>
-
-<p>There are several definitions for unit tests. <a href="https://www.artofunittesting.com/definition-of-a-unit-test">Roy Osherove</a> defines it as “piece of code that invokes a unit of work in the system and then checks a single assumption about the behavior of that unit of work”; Kent Beck turns the idea of defining unit tests on it’s head by <a href="https://tidyfirst.substack.com/p/desirable-unit-tests">simply stating a list of properties</a>, and any code that satisfies those properties in a “unit test”.</p>
-
-<p>I like Vladimir Khorikov’s definition of a unit test in his book <a href="https://www.manning.com/books/unit-testing">Unit Testing Principles, Practices, and Patterns</a>. According to him, a unit test is a piece of code that (1) verifies a unit of software, (2) in isolation, and (3) quickly. The above definition only balkanizes a <em>unit test</em> into three undefined terms: (1) unit of software, (2) isolation, and (3) quick/fast/speed. Of the three, the third one is the easiest to understand intuitively. Being <em>fast</em> simply means that you should be able to run the test in real time and get the results quickly enough to enable interactive iteration of modifying the unit of software you are changing. However, the other two terms: <em>unit of software</em>, and <em>isolation</em> merit more discussion.</p>
-
-<h2 id="are-you-from-detroit-or-london">Are you from Detroit, or London?</h2>
-
-<p>In fact, there are two schools of thought around how the above two terms should be defined. The ‘original/classic/Detroit’ school, and the ‘mockist/London’ school. Not surprisingly, the school of thought you subscribe to has a significant impact on how you write unit tests. For a more detailed treatment of the two schools of thought, I suggest Martin Folwer’s <a href="https://martinfowler.com/articles/mocksArentStubs.html#ClassicalAndMockistTesting">excellent article on the subject of Mocks and Stubs</a>. Chapter 2 of Khorikov’s book <a href="https://www.manning.com/books/unit-testing">Unit Testing Principles, Practices, and Patterns</a> also has some good insights into it. I have distilled their contents as it pertains to unit test definitions.</p>
-
-<h3 id="the-detroit-school">The Detroit School</h3>
-
-<p>The Classical or Detroit school of thought originated with Kent Beck’s “<a href="https://www.oreilly.com/library/view/test-driven-development/0321146530/">Test Driven Development</a>”.</p>
-
-<p><strong>Unit of software.</strong> According to this school, the unit of software to test is a “behavior”. This behavior could be implemented in a single class, or a collection of classes. The important property here is that the the code that comprises the unit must be (1) internal to the software, (2) connected with each other in the dependency tree, and (3) not shared by another other part of the software.</p>
-
-<p>Thus, a unit of software cannot include external entities such as databases, log servers, file systems etc. They also cannot include external (but local) libraries such as system time and timers. Importantly, it is <em>ok</em> to include a class that depends on another class via a private non-shared dependency.</p>
-
-<p><strong>Isolation.</strong> Given the above notion of a “unit” of software, isolation simply means that the test is not dependent on anything outside that unit of software. In practical terms, it means that a unit test needs to replace all external and shared dependencies with <a href="/mocks-stubs-andhow-to-use-them/">test doubles</a>.</p>
-
-<h3 id="the-london-school">The London School</h3>
-
-<p>The mockist or London school of thought was popularized by <a href="https://www.linkedin.com/in/stevefreeman">Steve Freeman</a> (<a href="https://twitter.com/sf105">twitter</a>) and <a href="http://www.natpryce.com/bio.html">Nat Pryce</a> in their book “<a href="http://growing-object-oriented-software.com/">Growing Object- Oriented Software, Guided by Tests</a>”.</p>
-
-<p><strong>Unit of Software.</strong> Given the heavy bias Object-Oriented software, unsurprisingly, the unit of software for a unit test is a single class (in some cases, it can be a single method). This is strictly so. ANy other class that this the ‘class under test’ depends on cannot be part of the unit being tested.</p>
-
-<p><strong>Isolation.</strong> What follows from the above notion of a “unit” is that <em>everything</em> that is not the class under test must be replaced by test doubles. If you are instantiating another class inside the class under test, then you must replace that instantiation with an injected instance or a factory that can be replaced with a test double in the tests.</p>
-
-<p>Here is a quick summary of the definitions of a unit tests under the two schools.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>School</th>
-      <th>Unit</th>
-      <th>Isolation</th>
-      <th>Speed</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Detroit</td>
-      <td>Behavior</td>
-      <td>Replace shared and external dependencies with test doubles</td>
-      <td>‘fast’</td>
-    </tr>
-    <tr>
-      <td>London</td>
-      <td>Class</td>
-      <td>Replace all dependencies (internal, external, shared, etc.) with test doubles</td>
-      <td>‘fast’</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="what-does-this-mean">What does this mean?</h2>
-
-<p>The school of thought you subscribe to can have a significant impact on your software design and testing. There is nothing I can say here that hasn’t already been explained by Martin Fowler in his article “<a href="https://martinfowler.com/articles/mocksArentStubs.html">Mocks aren’t stubs</a>”. So, I highly recommend you read it for yourself.</p>
-
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="//srikanth.sastry.name/unit-test-attributes-and-their-trade-offs/">
-        Primary attributes of unit test suites and their tradeoffs
-      </a>
-    </h1>
-
-    <span class="post-date">13 Jun 2022</span>
-
-    <p><img src="/images/accuracy-completeness-speed.png" alt="" />
-Unit test suites have three primary attributes.</p>
-
-<ol>
-  <li>accuracy,</li>
-  <li>completeness, and</li>
-  <li>speed.</li>
-</ol>
-
-<p><em>Accuracy</em> says that if a test fails, then there is a bug. <em>Completeness</em> says that if there is a bug, then a unit test will fail. <em>Speed</em> says that tests will run ‘fast’. These three attributes are in opposition with each other, and you can only satisfy any two of the three attributes!</p>
-
-<p>Before discussing these attributes, it is important to note that they are not properties of test suite at rest, but rather, of the test suite during changes. That is, these attributes are measured only when you are making changes to the code and running the test suite in response to those changes. Also, these attributes are not applicable to a single unit test. Instead, they apply to the test suite as a whole. Furthermore, the quality of your test suite is determined by how well the suite measures up along these attributes.</p>
-
-<h3 id="attributes-descriptions">Attributes’ descriptions</h3>
-<p>Let’s describe each of these attributes, and then we can see any unit test suite is forced to trade off these attributes.</p>
-
-<ol>
-  <li><em>Accuracy.</em> It is a measure of robustness of the test suite to changes in the production code. If you make a change to the production code <em>without changing your unit tests</em>, and your test suite has a failure, then how likely is it that your changes introduced a bug? Accuracy is a measure of this likelihood. High quality unit tests typically have very good accuracy. If your test suite has poor accuracy, then it suggests that either your tests are brittle, they are actually testing implementation details instead of functionality, or your production code is poorly designed with leaky abstractions. Inaccurate tests reduce your ability to detect regressions. They fail to provide early warning when a diff breaks existing functionality (because the developer cannot be sure that the test failure is a genuine bug, and not an artifact of test brittleness). As a result, developers are more likely to ignore test failure, or modify the tests to make it ‘pass’, and thus introduce bugs in their code.</li>
-  <li><em>Completeness</em>. This is a measure of how comprehensive the test suite really is. If you make a change to the production code <em>without changing your unit tests</em>, and you introduce a bug in <em>an existing functionality</em>, then how likely is it that your test suite will fail? Completeness is a measure of this likelihood. A lot of the test coverage metrics try to mimic the completeness of your test suite. However, <a href="/do-not-index-in-test-coverage/">we have seen how coverage metrics are often a poor proxy for completeness</a>.</li>
-  <li><em>Speed</em>. This is simply a measure of how quickly a test suite runs. If tests are hermetic with the right use of <a href="/mocks-stubs-andhow-to-use-them/">test doubles</a>, then each test runs pretty quickly. However, if the tests are of poor quality or the test suite is very large, then they can get pretty slow. It is most noticeable when you are iterating on a feature, and with each small change, you need to run the test suite that seems to take forever to complete. Slow tests can have a disproportionate impact on developer velocity. It will make developer less likely to run tests eagerly, it increases the time between iterations, and it increases the CI/CD latency to where the gap between your code landing and the changes making it to prod can be unreasonably large. If this gets bad enough, it will discourage developers from running tests as needed, and thus allow bugs to creep in.</li>
-</ol>
-
-<h3 id="attribute-constraints-and-trade-offs">Attribute constraints and trade offs</h3>
-
-<p>There is a tension among attributes, and how these attributes contribute to overall unit test suite quality.</p>
-
-<p>Among accuracy, completeness, and speed, you cannot maximize all three; that is, you cannot have a <em>fast</em> test suite that will fail if <em>and only if</em> there is a bug. Maximizing any two will minimize the third.</p>
-<ul>
-  <li>A prefect test suite with high accuracy and completeness will inevitably be huge, and thus very slow.</li>
-  <li>A fast test suite with high accuracy will often only test only the most common user journeys, and thus be incomplete.</li>
-  <li>A test suite with very high coverage is often made ‘fast’ through extensive use of test doubles and ends up coupling tests with the implementation details, which makes the tests brittle, and therefore inaccurate.</li>
-</ul>
-
-<h3 id="whats-the-right-trade-off">What’s the right trade off?</h3>
-<p><img src="/images/balance-scale.jpg" alt="Image not found: /images/balance-scale.jpg" title="Image not found: /images/balance-scale.jpg" /></p>
-
-<p>A natural follow up to the trade offs among accuracy, completeness, and speed is <em>“What is the right trade off?”</em>. It helps to notice that, empirically, we are always making this trade off and naturally settling on some point in the trade-off surface. What is this natural resting point for these trade offs? Let’s examine a few things to help us answer the above question.</p>
-
-<ol>
-  <li>From experience, we know that bugs in software are inevitable, and we have learned to deal with it. While bug-free code might be the ideal, no one reasonably expects bug-free software, and we accept some level of incorrectness in our implementations.</li>
-  <li>Flaky/brittle tests can have very significant negative consequences. Such tests are inherently untrustworthy, and therefore, serve no useful purpose. In the end, we tend to ignore such tests, and for all practical purposes they just don’t exist in our test suite.</li>
-  <li>While extremely slow tests are an issue, we have figured out ways to improve test speeds through infrastructure developments. For instance,our CI/CD systems can run multiple tests in the test suite in parallel, and thus we are delayed only by the slowests tests in the test suite; we have figured out how to prune the affected tests in a diff by being smart about the build and test targets affected by the changes, and thus, we need not run the entire test suite for a small change; the machines that execute tests have just gotten faster, thus alleviating some of the latency issues, etc.</li>
-</ol>
-
-<p>From the above three observations, we can reasonably conclude that we cannot sacrifice accuracy. Accurate tests are the bedrock of trustworthy (and therefore, useful) test suites. Once we maximize accuracy, that leaves us with completeness and speed. Here there is a sliding scale between completeness and speed, and we could potentially rest anywhere on this scale.</p>
-
-<p>So, is it ok to rest anywhere on the tradeoff spectrum between completeness and accuracy? Not quite. If you dial completeness all the way up and ignore speed, then you end up with a test suite that no one wants to run, and therefore, not useful at all. On the other hand, if you ignore completeness in favor of speed, then you are likely going to see a lot of regressions in your software and completely undermine consumer confidence in your product/service. In effect, <strong>the quality of your test suite is determined by the lowest score among the three attributes.</strong> Therefore, it is important to rest between completeness and speed, depending on the tolerance to errors and the minimum developer velocity you can sustain. For instance, if you are developing software for medical imaging, then your tolerance to errors is very very low, and so you should be favoring completeness at the expense of speed (and this is evident in how long it takes to make changes to software in the area of medical sciences). On the other hand, if you are building a web service that can be rolled back to a safe state quickly and with minimal external damage, then you probably want to favor speed over completeness (but only to a point; remember that your test quality is now determined by the completeness, or the lack thereof).</p>
-
-<p>Thus, in conclusion, always maximize accuracy, and trade off between completeness and speed, depending on your tolerance of failures in production.</p>
-
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="//srikanth.sastry.name/the-big-why-about-unit-tests/">
-        The big WHY about unit tests
-      </a>
-    </h1>
-
-    <span class="post-date">06 Jun 2022</span>
-
-    <p><img src="/images/question_mark_person_leaning.png" alt="Why unit test?" />
-When you ask “why do we write need unit tests?”, you will get several answers including</p>
-<ul>
-  <li>To find common bugs in your code</li>
-  <li><a href="/the-merits-of-unit-tests-part-2/">As protection against regression</a></li>
-  <li><a href="/merits-of-unit-tests-part-1/">To act as a de facto documentation of your code</a></li>
-  <li><a href="/the-merits-of-unit-tests-part-3/">To help improve software design</a></li>
-  <li><a href="/unit-tests-ftw-part-4/">To help debug issues in production</a></li>
-  <li><a href="/merits-of-unit-tests-part-5/">Improve your APIs’ usability</a></li>
-  <li>etc.</li>
-</ul>
-
-<p>These seems like a collection of very good reasons, but it seems inelegant to state that the common phenomenon of unit testing has such disparate causes. 
-There must be a ‘higher’ cause for writing unit tests. I argue that this cause is “maintainability”.</p>
-
-<h3 id="maintainability">Maintainability</h3>
-<p><img src="/images/website-wrench-cog.png" alt="Maintainable software" />
-Here is a potentially provocative statement; “The final cause of unit tests is software maintainability”.
-To put it differently, if your software was immutable and could not be altered in any way, then that software does not need any unit tests.</p>
-
-<p>Given that almost all software is mutable, unit tests exist to ensure that we can mutate the software to improve upon its utility in a sustainable manner. All the aforementioned answers to the question “why do we write unit tests” are ultimately subsumed by the cause of maintainability.</p>
-
-<ul>
-  <li>Unit tests help you find bugs in your code, thus allowing safe mutations that add functionality.</li>
-  <li>Unit tests protect against regression, especially when refactoring, thus allowing safe mutation of the software in preparation for functional changes.</li>
-  <li>Unit tests act as de facto documentation. It allows developers who change the code to communicate across time and space on how best to use existing code for mutating other code.</li>
-  <li>Unit tests help improve software design. It some code/class is difficult to unit test, then the software design is poor. So, you iterate until unit testing becomes easier.</li>
-  <li>Unit test help improve the usability of your API. Unit tests are the first customers of your API. If unit tests using your API are inelegant, then you iterate towards more usuable APIs. A more usable API is often a more used API, and thus, aids software evolution.</li>
-</ul>
-
-<p>Interestingly, looking at maintainability as the primary motivation for unit tests allows us to look at some aspects of unit tests differently.</p>
-
-<h3 id="looking-at-unit-tests-differently">Looking at unit tests differently</h3>
-
-<h4 id="unit-tests-incur-a-maintenance-cost">Unit tests incur a maintenance cost.</h4>
-<p><img src="/images/calculator-sheet.png" alt="" /></p>
-
-<p>If it code incurs a maintenance cost, and unit tests help reduce that cost, then you can naturally ask the following; <em>since unit tests are also code, do they not incur a maintenance cost?</em></p>
-
-<p>Obviously the answer to the question above is an unequivocal “yes!”. Thus, unit tests are only useful if the cost of maintaining them exceeds the savings they provide as a buttress against production code. This observation has significant implications for how to design and write unit tests. For instance, unit tests must be simple straight line code that is human readable, even at the expense of performance and redundancy. See the post on <a href="https://srikanth.sastry.name/dry-unit-tests-are-bad/">DRY unit tests</a> for a more detailed treatment on this topic.</p>
-
-<h4 id="unit-tests-can-have-diminishing-returns">Unit tests can have diminishing returns.</h4>
-<p><img src="/images/down-graph-arrow.png" alt="" /></p>
-
-<p>If unit tests incur a maintenance cost, then their utility is the difference between the maintainability they provide and the cost they incur. Since software is a living/evolving entity, both this utility changes over time. Consequently, if you are not careful with your tests, then could become the proverbial Albatross across your neck.
-   Consequently, it is important to tend to your unit test suite and pay attention when the utility of a test starts to diminish. Importantly, refactor your tests to ensure that you do not hit the point of diminishing, or even negative returns on your unit test.</p>
-
-<h4 id="unit-tests-should-be-cognitively-simple">Unit tests should be cognitively simple.</h4>
-<p><img src="/images/simple-chair-wall-painting-white.png" alt="" /></p>
-
-<p>An almost necessary way to reduce the maintenance cost of a unit tests is to make it very simple to read and understand. It helps with maintenance in two ways. First, it makes it easy to understand the intent of the test, and the coverage that the test provides. Second, it makes it easy to modify the test (if needed) without having to worry about an unintended consequences such modifications might have; a degenerate case is that of tests that have hit the point of diminishing returns; more simple a test is, the easier it is to refactor and/or delete it. See the post on <a href="https://srikanth.sastry.name/dry-unit-tests-are-bad/">DRY unit tests</a> for mote details.</p>
-
-<h4 id="a-bad-unit-test-is-worse-than-no-unit-test">A bad unit test is worse than no unit test.</h4>
-<p><img src="/images/sad-face-spray-paint.png" alt="" /></p>
-
-<p>If unit test incur a maintenance cost, then a bad unit test has all the costs associated with unit tests and none of the benefits. It is a net loss. Your code base is much better off without that unit test. In fact, a bad unit test can have an even higher cost if it sends developers on a wild goose chase looking for bugs when such unit tests fail. So, unless a unit test is of high quality, don’t bother with it. Just delete it.</p>
-
-<h4 id="a-flaky-unit-test-is-the-worst">A flaky unit test is the worst.</h4>
-<p><img src="/images/yes-no.png" alt="" /></p>
-
-<p>This is a corollary of the previous observation, but deserves some explanation. Flaky tests have the side effect of undermining the trust in the entire test suite. If a test is flaky, then developers are more likely to ignore red builds, because ‘that flaky test is the culprit, and so the failure can be ignored’. However, inevitably, some legitimate failure does occur. But, at this point, developers have been conditioned to ignore build/test failures. Consequently, a buggy commit makes it’s way to prod and causes a regression, which would never have happened if you didn’t have that flaky test.</p>
-
-  </div>
-  
 </div>
 
-<div class="pagination">
-  
-    <a class="pagination-item older" href="//srikanth.sastry.name/page2">Older</a>
-  
-  
-    <span class="pagination-item newer">Newer</span>
-  
-</div>
+
+
 
       </div>
     </div>
