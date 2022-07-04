@@ -153,18 +153,16 @@
   <h1 class="post-title">Tests should be isolated from each other; not coupled</h1>
   <span class="post-date">03 Jul 2022</span>
   <p><img src="/images/carabiners-connected.jpg" alt="" />
-Unit tests should be <em>isolated</em> from its (external, shared) dependencies; furthermore, tests should be <em>isolated</em> from each other. When one test starts to affect another test, the two tests are said to be <em>coupled</em>. Alternatively, if changes to one test <em>can</em> negatively impact the correctness of another test, then the two tests are said to be <em>coupled</em>.</p>
+Almost <a href="/defining-unit-tests-two-schools-of-thought/">by definition</a> unit tests should be <em>isolated</em> from its (external, shared) dependencies. But, equally importantly, unit tests should also be isolated <em>from each other</em>. When one test starts to affect another test, the two tests are said to be <em>coupled</em>. Alternatively, if changes to one test <em>can</em> negatively impact the correctness of another test, then the two tests are said to be <em>coupled</em>.</p>
 
 <p>Coupled tests are problematic in two ways.</p>
 
 <ol>
-  <li>Tests become less readable. Reading the code for a single unit test does not necessarily communicate what the test does. We also need to understand the ‘coupling’ between that test and other tests to grok what a single test does. This coupling can be subtle and not easy to follow.</li>
-  <li>Tests becomes less <a href="/unit-test-attributes-and-their-trade-offs/">accurate</a>. When one test affects another, it becomes difficult to make changes to a single test in isolation. For instance, if a diff makes changes to the some production and test code, and then a test fails, then it is not always clear why the test failed. The failure could due to a bug, or an artifact the coupled tests. Thus, your tests are no longer trustworthy, and therefore, less accurate.</li>
+  <li><em>Tests become less readable.</em> Reading the code for a single unit test does not necessarily communicate what the test does. We also need to understand the ‘coupling’ between that test and other tests to grok what a single test does. This coupling can be subtle and not easy to follow.</li>
+  <li><em>Tests become less <a href="/unit-test-attributes-and-their-trade-offs/">accurate</a>.</em> When one test affects another, it becomes difficult to make changes to a single test in isolation. For instance, if a diff makes changes to the some production and test code, and then a test fails, then it is not always clear why the test failed. The failure could due to a bug, or an artifact the coupled tests. Thus, your tests are no longer trustworthy, and therefore, less accurate.</li>
 </ol>
 
-<p>Coupling can happen in many ways. The obvious ones include (1) using the same shared dependency (like when you use the same random number generator in all tests), and (2) relying on the post-condition of one test as a precondition of another test. Such cases are also obvious to detect, and fix.</p>
-
-<p>There are two more ways in which tests can be coupled, which are both subtle and more prevalent.</p>
+<p>Coupling can happen in many ways. The obvious ones include (1) using the same shared dependency (like when you use the same temp file name in all tests), and (2) relying on the post-condition of one test as a precondition of another test. Such cases are also obvious to detect, and to fix. There are two more following ways in which tests can be coupled; but these are more subtle, and more prevalent.</p>
 
 <ol>
   <li>Precondition setting in test fixtures</li>
