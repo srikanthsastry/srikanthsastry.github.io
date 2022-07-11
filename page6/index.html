@@ -109,6 +109,10 @@
     
       
         
+      
+    
+      
+        
           <a class="sidebar-nav-item" href="//srikanth.sastry.name/publications/">Publications</a>
         
       
@@ -150,6 +154,160 @@
 
       <div class="container content">
         <div class="posts">
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="//srikanth.sastry.name/the-merits-of-unit-tests-part-3/">
+        The merits of unit tests — Part 3
+      </a>
+    </h1>
+
+    <span class="post-date">22 Nov 2017</span>
+
+    <!-- wp:paragraph {"backgroundColor":"pale-cyan-blue"} -->
+<p class="has-background has-pale-cyan-blue-background-color">Cross posted on <a href="https://www.linkedin.com/pulse/merits-unit-tests-part-3-srikanth-sastry/">LinkedIn</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Previously, I talked about how unit tests serve purposes other than verifying code functionality; I talked about <a rel="noreferrer noopener" aria-label=" (opens in a new tab)" href="http://srikanth.sastry.name/merits-of-unit-tests-part-1/" target="_blank">unit tests serving as defacto documentation</a>, and <a href="http://srikanth.sastry.name/the-merits-of-unit-tests-part-2/" target="_blank" rel="noreferrer noopener" aria-label=" (opens in a new tab)">unit tests helping you refactor without fear</a>. In this post, I'll talk about yet another benefit to unit tests: writing better software.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:more -->
+<!--more-->
+<!-- /wp:more -->
+
+<!-- wp:heading -->
+<h2>Better software design</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>I am not talking about writing bug-free software here. Sure, good 
+unit tests help you discover/avoid large classes of bugs, but that's not
+ the point. Unit tests also help you enforce good design patterns and 
+modularity in your software.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Unit tests help you with software design in two complementary ways. 
+First, they help you establish optimal boundaries of modularity in terms
+ of methods, and classes, and second, they help you understand your 
+dependencies better and almost force you to use good dependency 
+injection hygiene.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3>Modularity</h3>
+<!-- /wp:heading -->
+
+<!-- wp:image {"id":386} -->
+<figure class="wp-block-image"><img src="http://srikanth.sastry.name/wp-content/uploads/2019/01/0-2.jpg" alt="" class="wp-image-386" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>How do you know that your class or method does 'too much', or that it
+ has undesirable side-effects? A pretty good way to discover it is to 
+start writing unit tests for it. If you find yourself having to test for
+ too many different types of inputs, then your methods are doing too 
+much. If you find yourself having to test for too many orderings of 
+operations, when your methods have too many side effects. It really is 
+just as simple as that!</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>For instance, some time ago, I came across a piece of code that 
+essentially took a large query, split it up into multiple subqueries, 
+sent them off in parallel, collected their responses back, munged them 
+and returned the munged response to the caller via a callback. The code 
+looked something like this:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">public class QueryManager {<br />   void sendRequest(Query query, Callback queryCallback) {<br />     List&lt;Subquery&gt; subqueries = splitQuery(query);<br />     for (Subquery subquery : subqueries) {<br />       sendQuery(subquery, new Subquery.Callback() {<br />           @Override<br />           public onSuccess(Response response) {<br />             // Do some processing. ...<br />             if (allResponses()) {<br />               queryCallback.finalResult();<br />              } else {<br />                queryCallback.incrementalResult();<br />              }<br />            }<br />            @Override<br />            public onFailure(Error e) {<br />              // Do some error handling. ... <br />              if (allResponses()) {<br />                queryCallback.finalResult();<br />              }<br />            }<br />          });<br />     }<br />   }<br />     // Other methods. ... <br />} </pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:paragraph -->
+<p>This code makes for an interesting case study on multiple fronts, and  I will come back to it in a later post. For now, it is sufficient to  state that I wanted to make changes to this code, but it was pretty  thorny because (you guessed it!) it has no unit tests.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Naturally, the first step is to write unit tests for this class, and 
+that was when I realized why there were no unit tests here. This class 
+is incredibly tricky to unit test. Getting the subqueries to respond 
+under various conditions and ordering resulted in a combinatorial 
+explosion of test cases making the task intractable. This was very 
+strong code smell.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>As you have probably figured out already, this was a classic case of a
+ single class doing too much. The primary culprit was the anonymous 
+class that implemented the Subquery.Callback interface. It should really
+ have been its own class with its own unit tests.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>After I pulled out that anonymous class into its own class, it became
+ a lot easier to unit test both the Subquery.Callback and the 
+QueryManager individually, and with that, the code became much more 
+modular, easier to read, and much easier to maintain.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3>Dependency</h3>
+<!-- /wp:heading -->
+
+<!-- wp:image {"id":387} -->
+<figure class="wp-block-image"><img src="http://srikanth.sastry.name/wp-content/uploads/2019/01/0-3.jpg" alt="" class="wp-image-387" /></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>If your code does not do a decent job of<a href="https://en.wikipedia.org/wiki/Dependency_injection" target="_blank" rel="noreferrer noopener"> injecting its dependencies</a>
+ from outside, you are gonna have a bad time! Having good unit tests 
+will actually keep you from getting into this pitfall pretty 
+effectively. Consider the following contrived example. You have a piece 
+of code that writes to an external service, and your code throttles the 
+rate of writes because going over your approved rate/quota can be pretty
+ expensive. So, your code could look something like this:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">class RateLimiter {<br />   void writeToExternalService(const vector&lt;Entries&gt;&amp; stuff) {<br />     auto service = new ExternalService(ConnectionParameters foo);<br />     for (auto entry : stuff) {<br />       waitUntilQuotaAvailable();<br />       service.write(entry);<br />     }<br />   }<br />} </pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:paragraph -->
+<p>Remember how I said that going over the rate/quota is bad? How do you
+ verify that it will not happen? Well, you could set up an elaborate 
+testbed that has an ExternalService simulator, and you can run your code
+ through all sorts of inputs and verify that the simulator says that the
+ rate limiting is work. But that's expensive, and if you choose to go 
+with a different external service, then well, good luck with that!</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Instead, you could try to unit test it. But how? You need to have 
+access to the ExternalService to do that, which we have already 
+established is expensive! Well, this is where unit testing it will force
+ you into healthy dependency injection. For this contrived example, you 
+can inject the dependency as follows.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">class RateLimiter {<br />   void writeToExternalService(<br />       const vector&lt;Entries&gt;&amp; stuff, <br />       ExternalService service) {<br />     for (auto entry : stuff) {<br />       waitUntilQuotaAvailable();<br />       service.write(entry);<br />     }<br />   }<br />} </pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:paragraph -->
+<p>Your unit tests could do this:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">TEST(AwesomeTestCase, testWrite) {<br />   vector&lt;Entries&gt; stuff = generateLotsOfStuff();<br />   RateLimits limit;  // Set your limits here.<br />   ExternalService svc = MockExternalService(limit);<br />   RateLimiter rateLimiter = new RateLimiter(limit); <br />   rateLimiter.writeToExternalService(stuff, svc);<br />   ASSERT_TRUE(svc.writesWithinLimits()); <br />} </pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:paragraph -->
+<p>And you can put your implementation through the wringer without breaking a sweat.</p>
+<!-- /wp:paragraph -->
+
+  </div>
   
   <div class="post">
     <h1 class="post-title">
@@ -579,128 +737,6 @@ these unit tests, it has saved thousands of developers countless hours.</p>
 
 <!-- wp:gallery {"ids":[294,293],"columns":1,"linkTo":"attachment"} -->
 <ul class="wp-block-gallery columns-1 is-cropped"><li class="blocks-gallery-item"><figure><img src="http://srikanth.sastry.name/wp-content/uploads/2015/09/IMG_20150901_135137.jpg" alt="" data-id="294" class="wp-image-294" /></figure></li><li class="blocks-gallery-item"><figure><img src="http://srikanth.sastry.name/wp-content/uploads/2015/09/IMG_20150901_135040.jpg" alt="" data-id="293" class="wp-image-293" /></figure></li></ul>
-<!-- /wp:gallery -->
-
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="//srikanth.sastry.name/troyan-monastery/">
-        Troyan Monastery
-      </a>
-    </h1>
-
-    <span class="post-date">31 Aug 2015</span>
-
-    <!-- wp:paragraph -->
-<p>If you are in northern Bulgarian, I recommend stopping by <a href="https://en.wikipedia.org/wiki/Troyan_Monastery">Troyan Monastery</a>.&nbsp;&nbsp;It is definitely worth a couple of hours of your time.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>Walking up to it, the entrance is fairly simplistic, which is to be expected from a monastery.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:image {"id":259,"align":"center"} -->
-<div class="wp-block-image"><figure class="aligncenter"><a href="/troyan-monastery/img_20150831_154933/"><img src="/wp-content/uploads/2015/08/IMG_20150831_154933-1024x760.jpg" alt="The entrance to Troyan Monastery; very simple, as expected. However, your attention diverts to the mosaic to the left." class="wp-image-259" /></a><figcaption>The entrance to Troyan Monastery; very simple, as expected. However, your attention diverts to the mosaic to the left.</figcaption></figure></div>
-<!-- /wp:image -->
-
-<!-- wp:paragraph -->
-<p>The mosaic on top of the left entrance doorway is a new modern day recreation of a roman style mosaic of virgin Mary with baby Christ.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:more -->
-<!--more-->
-<!-- /wp:more -->
-
-<!-- wp:image {"id":261,"align":"center"} -->
-<div class="wp-block-image"><figure class="aligncenter"><a href="/wp-content/uploads/2015/08/IMG_20150831_155017.jpg"><img src="/wp-content/uploads/2015/08/IMG_20150831_155017-760x1024.jpg" alt="Roman-style mosaic of virgin Mary and baby Christ." class="wp-image-261" /></a><figcaption>Roman-style mosaic of virgin Mary and baby Christ.</figcaption></figure></div>
-<!-- /wp:image -->
-
-<!-- wp:paragraph -->
-<p>Virgin Mary has a special place in this monastery. The church here is home to the three handed virgin. Here is an <a href="https://en.wikipedia.org/wiki/Troyan_Monastery#/media/File:Three_Handed_Virgin_of_Troyan_Monastery.JPG">image of it from wikipedia</a>.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:image {"align":"center"} -->
-<div class="wp-block-image"><figure class="aligncenter"><a href="https://upload.wikimedia.org/wikipedia/commons/d/d8/Three_Handed_Virgin_of_Troyan_Monastery.JPG"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d8/Three_Handed_Virgin_of_Troyan_Monastery.JPG" alt="" /></a><figcaption>Three handed virgin; considered holy in Bulgarian Orthodox Christianity. Maybe the artist was tripping and drew 3 hands, which then became holy. [Image source: wikipedia]</figcaption></figure></div>
-<!-- /wp:image -->
-
-<!-- wp:paragraph -->
-<p>The dwellings in the monastery are simple as well.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:image {"id":264,"align":"center"} -->
-<div class="wp-block-image"><figure class="aligncenter"><a href="/wp-content/uploads/2015/08/IMG_20150831_160245.jpg"><img src="/wp-content/uploads/2015/08/IMG_20150831_160245-1024x760.jpg" alt="Simple, but adequate, dwellings in the monastery." class="wp-image-264" /></a><figcaption>Simple, but adequate, dwellings in the monastery.</figcaption></figure></div>
-<!-- /wp:image -->
-
-<!-- wp:paragraph -->
-<p>The only splash of "opulence" I saw among the dwellings was this&nbsp;fresco.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:image {"id":265,"align":"center"} -->
-<div class="wp-block-image"><figure class="aligncenter"><a href="/wp-content/uploads/2015/08/IMG_20150831_160420.jpg"><img src="/wp-content/uploads/2015/08/IMG_20150831_160420-1024x760.jpg" alt="19th century style fresco among the monastery rooms" class="wp-image-265" /></a><figcaption>19th century style fresco among the monastery rooms</figcaption></figure></div>
-<!-- /wp:image -->
-
-<!-- wp:paragraph -->
-<p>However, the church located in the middle is pretty impressive. It built on a low elevation, much like many other churches build during the Ottoman rule. This is largely because the law during the Ottoman rule was that no church should be taller than the mosque in town, and so churches were build at low elevation so that they can build high ceilings without it looming higher than the local mosque.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>Here is are views of the outer walls of the church from the lower ground level, and from a higher elevation.</p>
-<!-- /wp:paragraph -->
-
-<p><a href="/wp-content/uploads/2015/08/IMG_20150831_155051.jpg"><img src="/wp-content/uploads/2015/08/IMG_20150831_155051.jpg" alt="View of the church from the ground level that is lower than the surrounding land" /></a>
-<em>View of the church from the ground level that is lower than the surrounding land</em></p>
-
-<p><a href="/wp-content/uploads/2015/08/IMG_20150831_160950.jpg"><img src="/wp-content/uploads/2015/08/IMG_20150831_160950.jpg" alt="View of the church from a higher level (from the patriarchs’ graves)" /></a>
-<em>View of the church from a higher level (from the patriarchs’ graves).</em></p>
-
-<!-- wp:paragraph -->
-<p>It is the 19th century frescos that impress the most. The pillars along the entrance walls make a favorable first impression.</p>
-<!-- /wp:paragraph -->
-
-<p><a href="/wp-content/uploads/2015/08/IMG_20150831_155120.jpg"><img src="/wp-content/uploads/2015/08/IMG_20150831_155120.jpg" alt="Notice the paintings along the frieze" /></a>
-<em>Notice the paintings along the frieze</em>
-<a href="/wp-content/uploads/2015/08/IMG_20150831_160219.jpg"><img src="/wp-content/uploads/2015/08/IMG_20150831_160219.jpg" alt="Another view of the frieze along both entrances to the church" /></a>
-<em>Another view of the frieze along both entrances to the church</em></p>
-
-<!-- wp:paragraph -->
-<p>However, it is the frescos along the walls and ceilings both inside and outside the church that impress the most. While I did not take any photographs of the inside, here is a collection of the frescos on the outside that should give you an inkling of what lies inside the church.</p>
-<!-- /wp:paragraph -->
-
-<p><a href="/wp-content/uploads/2015/08/IMG_20150831_155159.jpg"><img src="/wp-content/uploads/2015/08/IMG_20150831_155159.jpg" alt="Fresco with a skeleton rowing in a sarcophagus and a fish in it swallowing a person. I have no idea what this is about." /></a>
-<em>Fresco with a skeleton rowing in a sarcophagus and a fish in it swallowing a person. I have no idea what this is about.</em>
-<a href="/wp-content/uploads/2015/08/IMG_20150831_155216.jpg"><img src="/wp-content/uploads/2015/08/IMG_20150831_155216.jpg" alt="This is a continuation of fresco along the ceiling." /></a>
-<em>This is a continuation of fresco along the ceiling.</em>
-<a href="/wp-content/uploads/2015/08/IMG_20150831_155247.jpg"><img src="/wp-content/uploads/2015/08/IMG_20150831_155247.jpg" alt="Another fresco at another part of the ceiling." /></a>
-<em>Another fresco at another part of the ceiling.</em></p>
-
-<!-- wp:paragraph -->
-<p>You will be much more impressed with what's inside the church. It is covered in murals along all walls and&nbsp;ceiling.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>At the side of the church, I came across a small entrance with some writing on it.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:image {"id":271,"align":"center"} -->
-<div class="wp-block-image"><figure class="aligncenter"><a href="/wp-content/uploads/2015/08/IMG_20150831_160632.jpg"><img src="/wp-content/uploads/2015/08/IMG_20150831_160632-1024x760.jpg" alt="A sign that says that inside lies the bones of monks, freedom fighter, and area orthodox christians" class="wp-image-271" /></a><figcaption>A sign that says that inside lies the bones of monks, freedom fighters, and area orthodox christians</figcaption></figure></div>
-<!-- /wp:image -->
-
-<!-- wp:paragraph -->
-<p>Based on the sign at the entrance, I had to go see it for myself, and it did not disappoint.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:image {"id":272,"align":"center"} -->
-<div class="wp-block-image"><figure class="aligncenter"><a href="/wp-content/uploads/2015/08/IMG_20150831_160549.jpg"><img src="/wp-content/uploads/2015/08/IMG_20150831_160549-760x1024.jpg" alt="The bones, as promised." class="wp-image-272" /></a><figcaption>The bones, as promised.</figcaption></figure></div>
-<!-- /wp:image -->
-
-<!-- wp:paragraph -->
-<p>The place also has a separate section for the patriarchs' graves, and a bell tower, but it really didn't offer much to an atheist tourist :)</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:gallery {"ids":[274,275],"columns":2,"linkTo":"attachment"} -->
-<figure><img src="/wp-content/uploads/2015/08/IMG_20150831_161018.jpg" alt="" data-id="274" class="wp-image-274" /></figure>
-<figure><img src="/wp-content/uploads/2015/08/IMG_20150831_161112.jpg" alt="" data-id="275" class="wp-image-275" /></figure>
 <!-- /wp:gallery -->
 
   </div>

@@ -109,6 +109,10 @@
     
       
         
+      
+    
+      
+        
           <a class="sidebar-nav-item" href="//srikanth.sastry.name/publications/">Publications</a>
         
       
@@ -150,6 +154,129 @@
 
       <div class="container content">
         <div class="posts">
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="//srikanth.sastry.name/object-composition-for-service-migration/">
+        Object Composition for Service Migration
+      </a>
+    </h1>
+
+    <span class="post-date">24 Jan 2019</span>
+
+    <!-- wp:paragraph -->
+<p><a href="https://en.wikipedia.org/wiki/Object_composition">Object Composition</a> is a very powerful and pervasive software design technique. Yet, paradoxically, it is an underutilized design pattern whose lack of usage is the root of many anti-patterns in software development. One that I continue to come across regularly has to do with not using composition to test and migrate a piece of software from one service to another.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Briefly, <em>Object Composition</em> is combining two or more objects to create more complex objects while keeping definitions of the constituent objects unchanged (unlike <a href="https://en.wikipedia.org/wiki/Inheritance_(object-oriented_programming)">inheritance</a>, which extends these definitions)</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:more -->
+<!--more-->
+<!-- /wp:more -->
+
+<!-- wp:heading -->
+<h2>Set Up </h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Say you have an existing backend service that your code currently uses. It has evolved over time to become a chimera that needs replacing, and you have a brand new implementation of that service that can replace your old service. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Say, the two client implementations looks something like the following:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">class OldAndBusted implements ServiceClient {<br />  @override<br />  Response process(Request request) {<br />    // Hacky code.<br />    if (request.type == A) {<br />      // Ugly code.<br />    } else if (request.type == B) {<br />      // Even uglier code.<br />    } else {<br />      // A monstrosity that needs to be killed with fire<br />    }<br />    return response;<br />  }<br />}<br /><br />class NewHotness implements ServiceClient {<br />  @override<br />  Response process(Request request) {<br />    // Best code ever written.<br />    return response;<br />  }<br />}</pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:paragraph -->
+<p>The goal is to migrate your code from using OldAndBusted to NewHotness. There are several ways to do this wrong. So it is easier if I demonstrate a right way to do this using Object Composition.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>A right way</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>There are really four steps to such a migration.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list {"ordered":true} -->
+<ol><li><em>Verify equivalence</em>: Shadow a percentage of your calls to the new service, log mismatches in the response, and fix all such mismatches.</li><li><em>Configure migration</em>: Setup service migration to proceed in phases.</li><li><em>Migrate and clean up</em>: Complete migration and delete the old service.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading {"level":3} -->
+<h3>Step 1. Verify equivalence</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The goal here is to ensure that before we start migration, the new service is functionally identical to the old service. We accomplish this through composition of old and new service as sketched out next.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">class ClientWithShadow implements ServiceClient {<br />  ClientWithShadow(ServiceClient oldAndBusted, <br />                   ServiceClient newHotness) {<br />    this.oldAndBusted = oldAndBusted;<br />    this.newHotness = newHotness;<br />  }<br />  @override<br />  Response process(Request request) {<br />    oldResponse = oldAndBusted.process(request);<br />    if (shouldShadow(request)) {<br />      newResponse = newHotness.process(request);<br />      if (!oldResponse.equals(newResponse)) {<br />        logMismatch(oldResponse, newResponse);<br />      }<br />    }<br />    return newResponse;<br />  }<br /><br /></pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:paragraph -->
+<p>The pseudocode code above simply delegates calls to the old service, and if shadowing is requires, it additionally delegates to the new service as well and compares the two outputs. It logs any mismatches it sees so that the developer can then take a look at it to ensure that it is addressed.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>You simply replace all calls to OldAndBusted with calls to ClientWithShadow.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3>Step 2. Configure migration</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>After you have determined that the two services are indeed functionally alike, we can then prep for migration. Again, object composition helps us set this up cleanly.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Pseudocode for setting up such a migration follows next. Here, I assume that there is a Config object that contains the migration related config.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">class MigrationClient implements ServiceClient {<br />  MigrationClient(ServiceClient oldAndBusted, <br />                  ServiceClient newHotness,<br />                  Config migrationConfig) {<br />    this.oldAndBusted = oldAndBusted;<br />    this.newHotness = newHotness;<br />    this.migrationConfig = migrationConfig;<br />  }<br />  @override<br />  Response process(Request request) {<br />    if (migrationConfig.useNewService(request)) {<br />     return newHotness.process(request);<br />    }<br />    return oldAndBusted.process(request);<br />  }</pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:paragraph -->
+<p>You simply replace all instances of ClientWithShadow with MigrationClient. Yes, it really is that simple! The migration config has all the info it needs to figure out whether a given request should use the new service or the old service.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3>Step 3. Migrate and clean up</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Here, we do the actual migration. We set up the config to slowly start shifting some of the load from the old service to the new one, while monitoring to make sure everything is going well. We can always roll back the migration by editing the config without actually modifying the code, which is a big deal here.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>After migration to the new service a 100%, you can simply replace MigrationClient instances with NewHotness instances, and delete all the old code (OldAndBusted, ClientWithShadow, and MigrationClient). And you are all cleaned up. Profit!</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>So many wrong ways<br /></h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Unfortunately, I have seen this done in way too many wrong ways.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul><li> I have seen use of inheritance to extend OldAndBusted to NewHotness, and some hacky switch inside the NewHotness implementation to do shadowing and migration.</li><li>I have seen hacky if-else modification of OldAndBusted that the new if-block implementing NewHotness functionality.</li><li>I have seen developers skip shadowing entirely only to cause major service incidents.</li><li>Many more ways that are not that interesting, except for disaster tourism.</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>So, object composition is useful, it is powerful, and please use it more!</p>
+<!-- /wp:paragraph -->
+
+  </div>
   
   <div class="post">
     <h1 class="post-title">
@@ -496,160 +623,6 @@ straightforward), and the rest is just mundane software engineering. </p>
 
 <!-- wp:paragraph -->
 <p>See, unit tests are more than a one trick pony! :)</p>
-<!-- /wp:paragraph -->
-
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="//srikanth.sastry.name/the-merits-of-unit-tests-part-3/">
-        The merits of unit tests — Part 3
-      </a>
-    </h1>
-
-    <span class="post-date">22 Nov 2017</span>
-
-    <!-- wp:paragraph {"backgroundColor":"pale-cyan-blue"} -->
-<p class="has-background has-pale-cyan-blue-background-color">Cross posted on <a href="https://www.linkedin.com/pulse/merits-unit-tests-part-3-srikanth-sastry/">LinkedIn</a>.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>Previously, I talked about how unit tests serve purposes other than verifying code functionality; I talked about <a rel="noreferrer noopener" aria-label=" (opens in a new tab)" href="http://srikanth.sastry.name/merits-of-unit-tests-part-1/" target="_blank">unit tests serving as defacto documentation</a>, and <a href="http://srikanth.sastry.name/the-merits-of-unit-tests-part-2/" target="_blank" rel="noreferrer noopener" aria-label=" (opens in a new tab)">unit tests helping you refactor without fear</a>. In this post, I'll talk about yet another benefit to unit tests: writing better software.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:more -->
-<!--more-->
-<!-- /wp:more -->
-
-<!-- wp:heading -->
-<h2>Better software design</h2>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph -->
-<p>I am not talking about writing bug-free software here. Sure, good 
-unit tests help you discover/avoid large classes of bugs, but that's not
- the point. Unit tests also help you enforce good design patterns and 
-modularity in your software.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>Unit tests help you with software design in two complementary ways. 
-First, they help you establish optimal boundaries of modularity in terms
- of methods, and classes, and second, they help you understand your 
-dependencies better and almost force you to use good dependency 
-injection hygiene.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:heading {"level":3} -->
-<h3>Modularity</h3>
-<!-- /wp:heading -->
-
-<!-- wp:image {"id":386} -->
-<figure class="wp-block-image"><img src="http://srikanth.sastry.name/wp-content/uploads/2019/01/0-2.jpg" alt="" class="wp-image-386" /></figure>
-<!-- /wp:image -->
-
-<!-- wp:paragraph -->
-<p>How do you know that your class or method does 'too much', or that it
- has undesirable side-effects? A pretty good way to discover it is to 
-start writing unit tests for it. If you find yourself having to test for
- too many different types of inputs, then your methods are doing too 
-much. If you find yourself having to test for too many orderings of 
-operations, when your methods have too many side effects. It really is 
-just as simple as that!</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>For instance, some time ago, I came across a piece of code that 
-essentially took a large query, split it up into multiple subqueries, 
-sent them off in parallel, collected their responses back, munged them 
-and returned the munged response to the caller via a callback. The code 
-looked something like this:</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:preformatted -->
-<pre class="wp-block-preformatted">public class QueryManager {<br />   void sendRequest(Query query, Callback queryCallback) {<br />     List&lt;Subquery&gt; subqueries = splitQuery(query);<br />     for (Subquery subquery : subqueries) {<br />       sendQuery(subquery, new Subquery.Callback() {<br />           @Override<br />           public onSuccess(Response response) {<br />             // Do some processing. ...<br />             if (allResponses()) {<br />               queryCallback.finalResult();<br />              } else {<br />                queryCallback.incrementalResult();<br />              }<br />            }<br />            @Override<br />            public onFailure(Error e) {<br />              // Do some error handling. ... <br />              if (allResponses()) {<br />                queryCallback.finalResult();<br />              }<br />            }<br />          });<br />     }<br />   }<br />     // Other methods. ... <br />} </pre>
-<!-- /wp:preformatted -->
-
-<!-- wp:paragraph -->
-<p>This code makes for an interesting case study on multiple fronts, and  I will come back to it in a later post. For now, it is sufficient to  state that I wanted to make changes to this code, but it was pretty  thorny because (you guessed it!) it has no unit tests.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>Naturally, the first step is to write unit tests for this class, and 
-that was when I realized why there were no unit tests here. This class 
-is incredibly tricky to unit test. Getting the subqueries to respond 
-under various conditions and ordering resulted in a combinatorial 
-explosion of test cases making the task intractable. This was very 
-strong code smell.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>As you have probably figured out already, this was a classic case of a
- single class doing too much. The primary culprit was the anonymous 
-class that implemented the Subquery.Callback interface. It should really
- have been its own class with its own unit tests.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>After I pulled out that anonymous class into its own class, it became
- a lot easier to unit test both the Subquery.Callback and the 
-QueryManager individually, and with that, the code became much more 
-modular, easier to read, and much easier to maintain.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:heading {"level":3} -->
-<h3>Dependency</h3>
-<!-- /wp:heading -->
-
-<!-- wp:image {"id":387} -->
-<figure class="wp-block-image"><img src="http://srikanth.sastry.name/wp-content/uploads/2019/01/0-3.jpg" alt="" class="wp-image-387" /></figure>
-<!-- /wp:image -->
-
-<!-- wp:paragraph -->
-<p>If your code does not do a decent job of<a href="https://en.wikipedia.org/wiki/Dependency_injection" target="_blank" rel="noreferrer noopener"> injecting its dependencies</a>
- from outside, you are gonna have a bad time! Having good unit tests 
-will actually keep you from getting into this pitfall pretty 
-effectively. Consider the following contrived example. You have a piece 
-of code that writes to an external service, and your code throttles the 
-rate of writes because going over your approved rate/quota can be pretty
- expensive. So, your code could look something like this:</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:preformatted -->
-<pre class="wp-block-preformatted">class RateLimiter {<br />   void writeToExternalService(const vector&lt;Entries&gt;&amp; stuff) {<br />     auto service = new ExternalService(ConnectionParameters foo);<br />     for (auto entry : stuff) {<br />       waitUntilQuotaAvailable();<br />       service.write(entry);<br />     }<br />   }<br />} </pre>
-<!-- /wp:preformatted -->
-
-<!-- wp:paragraph -->
-<p>Remember how I said that going over the rate/quota is bad? How do you
- verify that it will not happen? Well, you could set up an elaborate 
-testbed that has an ExternalService simulator, and you can run your code
- through all sorts of inputs and verify that the simulator says that the
- rate limiting is work. But that's expensive, and if you choose to go 
-with a different external service, then well, good luck with that!</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>Instead, you could try to unit test it. But how? You need to have 
-access to the ExternalService to do that, which we have already 
-established is expensive! Well, this is where unit testing it will force
- you into healthy dependency injection. For this contrived example, you 
-can inject the dependency as follows.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:preformatted -->
-<pre class="wp-block-preformatted">class RateLimiter {<br />   void writeToExternalService(<br />       const vector&lt;Entries&gt;&amp; stuff, <br />       ExternalService service) {<br />     for (auto entry : stuff) {<br />       waitUntilQuotaAvailable();<br />       service.write(entry);<br />     }<br />   }<br />} </pre>
-<!-- /wp:preformatted -->
-
-<!-- wp:paragraph -->
-<p>Your unit tests could do this:</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:preformatted -->
-<pre class="wp-block-preformatted">TEST(AwesomeTestCase, testWrite) {<br />   vector&lt;Entries&gt; stuff = generateLotsOfStuff();<br />   RateLimits limit;  // Set your limits here.<br />   ExternalService svc = MockExternalService(limit);<br />   RateLimiter rateLimiter = new RateLimiter(limit); <br />   rateLimiter.writeToExternalService(stuff, svc);<br />   ASSERT_TRUE(svc.writesWithinLimits()); <br />} </pre>
-<!-- /wp:preformatted -->
-
-<!-- wp:paragraph -->
-<p>And you can put your implementation through the wringer without breaking a sweat.</p>
 <!-- /wp:paragraph -->
 
   </div>

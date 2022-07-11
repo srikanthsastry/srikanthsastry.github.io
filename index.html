@@ -109,6 +109,10 @@
     
       
         
+      
+    
+      
+        
           <a class="sidebar-nav-item" href="//srikanth.sastry.name/publications/">Publications</a>
         
       
@@ -150,6 +154,34 @@
 
       <div class="container content">
         <div class="posts">
+  
+  <div class="post">
+    <h1 class="post-title">
+      <a href="//srikanth.sastry.name/privatize-your-classes-for-better-unit-testing/">
+        'Privatize' your classes for better unit testing
+      </a>
+    </h1>
+
+    <span class="post-date">11 Jul 2022</span>
+
+    <p><img src="images/amber-iceberg-under-water.jpg" alt="" />
+You service may be massive, but it’s public API surface is pretty small; it has just a handful of APIs/endpoints. Everything else behind those APIs are ‘private’ and ‘implementation details’. It is highly advisable to follow this pattern even when designing the implementation of your service, almost like a fractal. This will pay dividends in the quality of your test suite.</p>
+
+<p>For instance, you service implementation should be split into ‘modules’ where each module has a well defined API through which other modules interact with it. This API boundary has to be strict. Avoid the temptation of breaking this abstraction because your module need this ‘one tiny bit’ of information that is available inside the implementation of another module. You will regret breaking encapsulation, I guarantee it!</p>
+
+<p>If you follow this pattern, you will eventually reach a class that has a public API, has all of its external/shared dependencies shared, and delegates a lot of it’s business logic and complex computation to multiple ‘private’ classes that are practically hermetic and have no external/shared dependencies. At this point, treat all these ‘private’ classes as, well, private. That is, DO NOT WRITE UNIT TESTS FOR SUCH CLASSES!</p>
+
+<p>Yes, that statement seems to fly in the face of all things sane about software testing, but it is a sane statement, nonetheless. These private classes should be tested indirectly via unit tests for the public class that they serve/support. This will make your tests a lot more accurate. Let me explain.</p>
+
+<p>Say, you have a public class <code class="language-plaintext highlighter-rouge">CallMe</code> and it uses a private class <code class="language-plaintext highlighter-rouge">HideMe</code>, and furthermore, <code class="language-plaintext highlighter-rouge">HideMe</code> is used only by <code class="language-plaintext highlighter-rouge">CallMe</code>, and the software design enforces this restriction. Assume that both <code class="language-plaintext highlighter-rouge">CallMe</code> and <code class="language-plaintext highlighter-rouge">HideMe</code> have their own unit tests, and the tests do an excellent job. At this point, there is a new requirement that necessitates that we refactor <code class="language-plaintext highlighter-rouge">CallMe</code>’s implementation, and as part of that refactoring, we need to modify the API contract between <code class="language-plaintext highlighter-rouge">CallMe</code> and <code class="language-plaintext highlighter-rouge">HideMe</code>. Since <code class="language-plaintext highlighter-rouge">HideMe</code>’s only  caller is <code class="language-plaintext highlighter-rouge">CallMe</code>, it is completely safe to treat this API contract as an implementation detail and modify it as we see fit. Since we are modifying the specification of <code class="language-plaintext highlighter-rouge">HideMe</code>, we have to change the tests for <code class="language-plaintext highlighter-rouge">HideMe</code> as well.</p>
+
+<p>Now, you run the tests, and the tests for <code class="language-plaintext highlighter-rouge">HideMe</code> fail. What information does that give you? Does that mean that there is a bug in <code class="language-plaintext highlighter-rouge">HideMe</code>; or does it mean that we did not modify the tests correctly? You cannot determine this until you either manually inspect <code class="language-plaintext highlighter-rouge">HideMe</code>’s test code, or until you run the tests for <code class="language-plaintext highlighter-rouge">CallMe</code>. If <code class="language-plaintext highlighter-rouge">CallMe</code>’s tests fail, then (since this is a refactoring diff) there must be a bug in <code class="language-plaintext highlighter-rouge">HideMe</code> and/or <code class="language-plaintext highlighter-rouge">CallMe</code>, but if the tests don’t fail, then it must be an issue in <code class="language-plaintext highlighter-rouge">HideMe</code>’s tests.</p>
+
+<p>Thus, it turns out that the failure in <code class="language-plaintext highlighter-rouge">HideMe</code> tests gives you no additional information compared to failure in <code class="language-plaintext highlighter-rouge">CallMe</code>’s tests. Thus, tests for <code class="language-plaintext highlighter-rouge">HideMe</code> have zero benefits and a non-zero maintenance cost! In other words, testing <code class="language-plaintext highlighter-rouge">HideMe</code> directly is useless!</p>
+
+<p>By aggressively refactoring your code to push as much of you logic into private classes, you are limiting the API surface of your software that needs direct testing, and simultaneously, ensuring that your tests suite is not too large, has very <a href="/unit-test-attributes-and-their-trade-offs/">high accuracy, with reasonable completeness</a>.</p>
+
+  </div>
   
   <div class="post">
     <h1 class="post-title">
@@ -629,79 +661,6 @@ Unit test suites have three primary attributes.</p>
 <p>So, is it ok to rest anywhere on the tradeoff spectrum between completeness and accuracy? Not quite. If you dial completeness all the way up and ignore speed, then you end up with a test suite that no one wants to run, and therefore, not useful at all. On the other hand, if you ignore completeness in favor of speed, then you are likely going to see a lot of regressions in your software and completely undermine consumer confidence in your product/service. In effect, <strong>the quality of your test suite is determined by the lowest score among the three attributes.</strong> Therefore, it is important to rest between completeness and speed, depending on the tolerance to errors and the minimum developer velocity you can sustain. For instance, if you are developing software for medical imaging, then your tolerance to errors is very very low, and so you should be favoring completeness at the expense of speed (and this is evident in how long it takes to make changes to software in the area of medical sciences). On the other hand, if you are building a web service that can be rolled back to a safe state quickly and with minimal external damage, then you probably want to favor speed over completeness (but only to a point; remember that your test quality is now determined by the completeness, or the lack thereof).</p>
 
 <p>Thus, in conclusion, always maximize accuracy, and trade off between completeness and speed, depending on your tolerance of failures in production.</p>
-
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="//srikanth.sastry.name/the-big-why-about-unit-tests/">
-        The big WHY about unit tests
-      </a>
-    </h1>
-
-    <span class="post-date">06 Jun 2022</span>
-
-    <p><img src="/images/question_mark_person_leaning.png" alt="Why unit test?" />
-When you ask “why do we write need unit tests?”, you will get several answers including</p>
-<ul>
-  <li>To find common bugs in your code</li>
-  <li><a href="/the-merits-of-unit-tests-part-2/">As protection against regression</a></li>
-  <li><a href="/merits-of-unit-tests-part-1/">To act as a de facto documentation of your code</a></li>
-  <li><a href="/the-merits-of-unit-tests-part-3/">To help improve software design</a></li>
-  <li><a href="/unit-tests-ftw-part-4/">To help debug issues in production</a></li>
-  <li><a href="/merits-of-unit-tests-part-5/">Improve your APIs’ usability</a></li>
-  <li>etc.</li>
-</ul>
-
-<p>These seems like a collection of very good reasons, but it seems inelegant to state that the common phenomenon of unit testing has such disparate causes. 
-There must be a ‘higher’ cause for writing unit tests. I argue that this cause is “maintainability”.</p>
-
-<h3 id="maintainability">Maintainability</h3>
-<p><img src="/images/website-wrench-cog.png" alt="Maintainable software" />
-Here is a potentially provocative statement; “The final cause of unit tests is software maintainability”.
-To put it differently, if your software was immutable and could not be altered in any way, then that software does not need any unit tests.</p>
-
-<p>Given that almost all software is mutable, unit tests exist to ensure that we can mutate the software to improve upon its utility in a sustainable manner. All the aforementioned answers to the question “why do we write unit tests” are ultimately subsumed by the cause of maintainability.</p>
-
-<ul>
-  <li>Unit tests help you find bugs in your code, thus allowing safe mutations that add functionality.</li>
-  <li>Unit tests protect against regression, especially when refactoring, thus allowing safe mutation of the software in preparation for functional changes.</li>
-  <li>Unit tests act as de facto documentation. It allows developers who change the code to communicate across time and space on how best to use existing code for mutating other code.</li>
-  <li>Unit tests help improve software design. It some code/class is difficult to unit test, then the software design is poor. So, you iterate until unit testing becomes easier.</li>
-  <li>Unit test help improve the usability of your API. Unit tests are the first customers of your API. If unit tests using your API are inelegant, then you iterate towards more usuable APIs. A more usable API is often a more used API, and thus, aids software evolution.</li>
-</ul>
-
-<p>Interestingly, looking at maintainability as the primary motivation for unit tests allows us to look at some aspects of unit tests differently.</p>
-
-<h3 id="looking-at-unit-tests-differently">Looking at unit tests differently</h3>
-
-<h4 id="unit-tests-incur-a-maintenance-cost">Unit tests incur a maintenance cost.</h4>
-<p><img src="/images/calculator-sheet.png" alt="" /></p>
-
-<p>If it code incurs a maintenance cost, and unit tests help reduce that cost, then you can naturally ask the following; <em>since unit tests are also code, do they not incur a maintenance cost?</em></p>
-
-<p>Obviously the answer to the question above is an unequivocal “yes!”. Thus, unit tests are only useful if the cost of maintaining them exceeds the savings they provide as a buttress against production code. This observation has significant implications for how to design and write unit tests. For instance, unit tests must be simple straight line code that is human readable, even at the expense of performance and redundancy. See the post on <a href="https://srikanth.sastry.name/dry-unit-tests-are-bad/">DRY unit tests</a> for a more detailed treatment on this topic.</p>
-
-<h4 id="unit-tests-can-have-diminishing-returns">Unit tests can have diminishing returns.</h4>
-<p><img src="/images/down-graph-arrow.png" alt="" /></p>
-
-<p>If unit tests incur a maintenance cost, then their utility is the difference between the maintainability they provide and the cost they incur. Since software is a living/evolving entity, both this utility changes over time. Consequently, if you are not careful with your tests, then could become the proverbial Albatross across your neck.
-   Consequently, it is important to tend to your unit test suite and pay attention when the utility of a test starts to diminish. Importantly, refactor your tests to ensure that you do not hit the point of diminishing, or even negative returns on your unit test.</p>
-
-<h4 id="unit-tests-should-be-cognitively-simple">Unit tests should be cognitively simple.</h4>
-<p><img src="/images/simple-chair-wall-painting-white.png" alt="" /></p>
-
-<p>An almost necessary way to reduce the maintenance cost of a unit tests is to make it very simple to read and understand. It helps with maintenance in two ways. First, it makes it easy to understand the intent of the test, and the coverage that the test provides. Second, it makes it easy to modify the test (if needed) without having to worry about an unintended consequences such modifications might have; a degenerate case is that of tests that have hit the point of diminishing returns; more simple a test is, the easier it is to refactor and/or delete it. See the post on <a href="https://srikanth.sastry.name/dry-unit-tests-are-bad/">DRY unit tests</a> for mote details.</p>
-
-<h4 id="a-bad-unit-test-is-worse-than-no-unit-test">A bad unit test is worse than no unit test.</h4>
-<p><img src="/images/sad-face-spray-paint.png" alt="" /></p>
-
-<p>If unit test incur a maintenance cost, then a bad unit test has all the costs associated with unit tests and none of the benefits. It is a net loss. Your code base is much better off without that unit test. In fact, a bad unit test can have an even higher cost if it sends developers on a wild goose chase looking for bugs when such unit tests fail. So, unless a unit test is of high quality, don’t bother with it. Just delete it.</p>
-
-<h4 id="a-flaky-unit-test-is-the-worst">A flaky unit test is the worst.</h4>
-<p><img src="/images/yes-no.png" alt="" /></p>
-
-<p>This is a corollary of the previous observation, but deserves some explanation. Flaky tests have the side effect of undermining the trust in the entire test suite. If a test is flaky, then developers are more likely to ignore red builds, because ‘that flaky test is the culprit, and so the failure can be ignored’. However, inevitably, some legitimate failure does occur. But, at this point, developers have been conditioned to ignore build/test failures. Consequently, a buggy commit makes it’s way to prod and causes a regression, which would never have happened if you didn’t have that flaky test.</p>
 
   </div>
   

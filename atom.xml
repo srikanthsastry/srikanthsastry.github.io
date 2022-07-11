@@ -4,13 +4,37 @@
  <title>Srikanth Sastry</title>
  <link href="//srikanth.sastry.name/atom.xml" rel="self"/>
  <link href="//srikanth.sastry.name/"/>
- <updated>2022-07-04T00:13:53+00:00</updated>
+ <updated>2022-07-11T13:31:21+00:00</updated>
  <id>//srikanth.sastry.name</id>
  <author>
    <name>Srikanth Sastry</name>
    <email>srikanth@sastry.name</email>
  </author>
 
+ 
+ <entry>
+   <title>'Privatize' your classes for better unit testing</title>
+   <link href="//srikanth.sastry.name/privatize-your-classes-for-better-unit-testing/"/>
+   <updated>2022-07-11T00:00:00+00:00</updated>
+   <id>//srikanth.sastry.name/privatize-your-classes-for-better-unit-testing</id>
+   <content type="html">&lt;p&gt;&lt;img src=&quot;images/amber-iceberg-under-water.jpg&quot; alt=&quot;&quot; /&gt;
+You service may be massive, but it’s public API surface is pretty small; it has just a handful of APIs/endpoints. Everything else behind those APIs are ‘private’ and ‘implementation details’. It is highly advisable to follow this pattern even when designing the implementation of your service, almost like a fractal. This will pay dividends in the quality of your test suite.&lt;/p&gt;
+
+&lt;p&gt;For instance, you service implementation should be split into ‘modules’ where each module has a well defined API through which other modules interact with it. This API boundary has to be strict. Avoid the temptation of breaking this abstraction because your module need this ‘one tiny bit’ of information that is available inside the implementation of another module. You will regret breaking encapsulation, I guarantee it!&lt;/p&gt;
+
+&lt;p&gt;If you follow this pattern, you will eventually reach a class that has a public API, has all of its external/shared dependencies shared, and delegates a lot of it’s business logic and complex computation to multiple ‘private’ classes that are practically hermetic and have no external/shared dependencies. At this point, treat all these ‘private’ classes as, well, private. That is, DO NOT WRITE UNIT TESTS FOR SUCH CLASSES!&lt;/p&gt;
+
+&lt;p&gt;Yes, that statement seems to fly in the face of all things sane about software testing, but it is a sane statement, nonetheless. These private classes should be tested indirectly via unit tests for the public class that they serve/support. This will make your tests a lot more accurate. Let me explain.&lt;/p&gt;
+
+&lt;p&gt;Say, you have a public class &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CallMe&lt;/code&gt; and it uses a private class &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HideMe&lt;/code&gt;, and furthermore, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HideMe&lt;/code&gt; is used only by &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CallMe&lt;/code&gt;, and the software design enforces this restriction. Assume that both &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CallMe&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HideMe&lt;/code&gt; have their own unit tests, and the tests do an excellent job. At this point, there is a new requirement that necessitates that we refactor &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CallMe&lt;/code&gt;’s implementation, and as part of that refactoring, we need to modify the API contract between &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CallMe&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HideMe&lt;/code&gt;. Since &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HideMe&lt;/code&gt;’s only  caller is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CallMe&lt;/code&gt;, it is completely safe to treat this API contract as an implementation detail and modify it as we see fit. Since we are modifying the specification of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HideMe&lt;/code&gt;, we have to change the tests for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HideMe&lt;/code&gt; as well.&lt;/p&gt;
+
+&lt;p&gt;Now, you run the tests, and the tests for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HideMe&lt;/code&gt; fail. What information does that give you? Does that mean that there is a bug in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HideMe&lt;/code&gt;; or does it mean that we did not modify the tests correctly? You cannot determine this until you either manually inspect &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HideMe&lt;/code&gt;’s test code, or until you run the tests for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CallMe&lt;/code&gt;. If &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CallMe&lt;/code&gt;’s tests fail, then (since this is a refactoring diff) there must be a bug in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HideMe&lt;/code&gt; and/or &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CallMe&lt;/code&gt;, but if the tests don’t fail, then it must be an issue in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HideMe&lt;/code&gt;’s tests.&lt;/p&gt;
+
+&lt;p&gt;Thus, it turns out that the failure in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HideMe&lt;/code&gt; tests gives you no additional information compared to failure in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CallMe&lt;/code&gt;’s tests. Thus, tests for &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HideMe&lt;/code&gt; have zero benefits and a non-zero maintenance cost! In other words, testing &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HideMe&lt;/code&gt; directly is useless!&lt;/p&gt;
+
+&lt;p&gt;By aggressively refactoring your code to push as much of you logic into private classes, you are limiting the API surface of your software that needs direct testing, and simultaneously, ensuring that your tests suite is not too large, has very &lt;a href=&quot;/unit-test-attributes-and-their-trade-offs/&quot;&gt;high accuracy, with reasonable completeness&lt;/a&gt;.&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Tests should be isolated from each other; not coupled</title>
