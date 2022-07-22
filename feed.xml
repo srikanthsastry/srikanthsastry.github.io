@@ -1,4 +1,141 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="//srikanth.sastry.name/feed.xml" rel="self" type="application/atom+xml" /><link href="//srikanth.sastry.name/" rel="alternate" type="text/html" /><updated>2022-07-11T13:31:21+00:00</updated><id>//srikanth.sastry.name/feed.xml</id><title type="html">Srikanth Sastry</title><subtitle>A personal website</subtitle><author><name>Srikanth Sastry</name><email>srikanth@sastry.name</email></author><entry><title type="html">‘Privatize’ your classes for better unit testing</title><link href="//srikanth.sastry.name/privatize-your-classes-for-better-unit-testing/" rel="alternate" type="text/html" title="‘Privatize’ your classes for better unit testing" /><published>2022-07-11T00:00:00+00:00</published><updated>2022-07-11T00:00:00+00:00</updated><id>//srikanth.sastry.name/privatize-your-classes-for-better-unit-testing</id><content type="html" xml:base="//srikanth.sastry.name/privatize-your-classes-for-better-unit-testing/"><![CDATA[<p><img src="images/amber-iceberg-under-water.jpg" alt="" />
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="//srikanth.sastry.name/feed.xml" rel="self" type="application/atom+xml" /><link href="//srikanth.sastry.name/" rel="alternate" type="text/html" /><updated>2022-07-22T14:05:55+00:00</updated><id>//srikanth.sastry.name/feed.xml</id><title type="html">Srikanth Sastry</title><subtitle>A personal website</subtitle><author><name>Srikanth Sastry</name><email>srikanth@sastry.name</email></author><entry><title type="html">The Law of Demeter and unit tests</title><link href="//srikanth.sastry.name/law-of-demeter-and-unit-tests/" rel="alternate" type="text/html" title="The Law of Demeter and unit tests" /><published>2022-07-22T00:00:00+00:00</published><updated>2022-07-22T00:00:00+00:00</updated><id>//srikanth.sastry.name/the-law-of-demeter-and-unit-tests</id><content type="html" xml:base="//srikanth.sastry.name/law-of-demeter-and-unit-tests/"><![CDATA[<p><img src="/images/demeter-sketch-bw.jpg" alt="" />
+The <a href="https://en.wikipedia.org/wiki/Law_of_Demeter">Law of Demeter</a> essentially says that each unit should only talk to its ‘immediate friends’ or ‘immediate dependencies’, and in spirit, it is pointing to the principle that each unit only have the information it needs to meet its purpose. In that spirit, the Law of Demeter takes two forms that are relevant to making your code more testable: (1) object chains, and (2) fat parameters.</p>
+
+<h2 id="object-chains">Object Chains</h2>
+
+<p>This is the more classic violation of the Law of Demeter<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup>. This happens when a class <code class="language-plaintext highlighter-rouge">C</code> has a dependency <code class="language-plaintext highlighter-rouge">D</code>, and <code class="language-plaintext highlighter-rouge">D</code> has method <code class="language-plaintext highlighter-rouge">m</code> that returns an instance of another class <code class="language-plaintext highlighter-rouge">A</code>. The violation happens when <code class="language-plaintext highlighter-rouge">C</code> accesses <code class="language-plaintext highlighter-rouge">A</code> and calls a method in <code class="language-plaintext highlighter-rouge">A</code>. Note that only <code class="language-plaintext highlighter-rouge">D</code> is the ‘immediate’ collaborator/dependency of <code class="language-plaintext highlighter-rouge">C</code>, and not <code class="language-plaintext highlighter-rouge">A</code>. The Law of Demeter says that <code class="language-plaintext highlighter-rouge">C</code> should not be accessing the method in <code class="language-plaintext highlighter-rouge">A</code>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># A violation of the Law of Demeter looks as follows.
+## Example 1:
+</span><span class="n">c</span><span class="p">.</span><span class="n">d</span><span class="p">.</span><span class="n">m</span><span class="p">().</span><span class="n">methodInA</span><span class="p">()</span>
+
+<span class="c1">## Example 2:
+</span><span class="n">d</span><span class="p">:</span> <span class="n">D</span> <span class="o">=</span> <span class="n">c</span><span class="p">.</span><span class="n">d</span>
+<span class="n">a</span><span class="p">:</span> <span class="n">A</span> <span class="o">=</span> <span class="n">d</span><span class="p">.</span><span class="n">m</span><span class="p">()</span>
+<span class="n">a</span><span class="p">.</span><span class="n">methodInA</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>What is the problem with violating the Law of Demeter?  Consider the following production code:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">UpdateKVStore</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client</span><span class="p">:</span> <span class="n">KVStoreClient</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">client</span>
+        
+    <span class="k">def</span> <span class="nf">update_value</span><span class="p">(</span><span class="n">new_content</span><span class="p">:</span> <span class="n">Content</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Status</span><span class="p">:</span>
+        <span class="n">transaction</span><span class="p">:</span> <span class="n">KVStoreClient</span><span class="p">.</span><span class="n">Transaction</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="n">new_transaction</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">transaction</span><span class="p">.</span><span class="n">get_content</span><span class="p">()</span> <span class="o">==</span> <span class="n">new_content</span><span class="p">:</span>
+            <span class="c1"># Nothing to update
+</span>            <span class="n">transaction</span><span class="p">.</span><span class="n">end</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">Status</span><span class="p">.</span><span class="n">SUCCESS_UNCHANGED</span>
+        <span class="n">mutation_request</span><span class="p">:</span> <span class="n">KVStoreClient</span><span class="p">.</span><span class="n">MutationRequest</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">transaction</span><span class="p">.</span><span class="n">mutation_request</span><span class="p">().</span><span class="n">set_content</span><span class="p">(</span><span class="n">new_content</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">mutation</span> <span class="o">=</span> <span class="n">mutation_request</span><span class="p">.</span><span class="n">prepare</span><span class="p">()</span>
+        <span class="n">status</span><span class="p">:</span> <span class="n">KVStoreClient</span><span class="p">.</span><span class="n">Mutation</span> <span class="o">=</span> <span class="n">mutation</span><span class="p">.</span><span class="n">land</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">status</span>
+</code></pre></div></div>
+
+<p>Now how would you unit test this? The test doubles for testing this code will look something like this</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mock_client</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">spec</span><span class="o">=</span><span class="n">KVStoreClient</span><span class="p">)</span>
+<span class="n">mock_transaction</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">spec</span><span class="o">=</span><span class="n">KVStoreClient</span><span class="p">.</span><span class="n">Transaction</span><span class="p">)</span>
+<span class="n">mock_mutation_request</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">spec</span><span class="o">=</span><span class="n">KVStoreClient</span><span class="p">.</span><span class="n">MutationRequest</span><span class="p">)</span>
+<span class="n">mock_mutation</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">spec</span><span class="o">=</span><span class="n">KVStoreClient</span><span class="p">.</span><span class="n">Mutation</span><span class="p">)</span>
+
+<span class="n">mock_client</span><span class="p">.</span><span class="n">new_transaction</span><span class="p">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="n">mock_transaction</span>
+<span class="n">mock_transaction</span><span class="p">.</span><span class="n">mutation_request</span><span class="p">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="n">mock_mutation_request</span>
+<span class="n">mock_mutation_request</span><span class="p">.</span><span class="n">prepare</span><span class="p">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="n">mock_mutation</span>
+</code></pre></div></div>
+
+<p>Now you can see how much the class <code class="language-plaintext highlighter-rouge">UpdateKVStore</code> and its unit tests need to know about the internals of the <code class="language-plaintext highlighter-rouge">KVStoreClient</code>. Any changes to how the <code class="language-plaintext highlighter-rouge">KVStoreClient</code> implements the transaction will cascade into test failures on all its clients! That’s a recipe for a <a href="https://srikanth.sastry.name/unit-test-attributes-and-their-trade-offs/">low accuracy</a> test suite.</p>
+
+<p>There are a few ways to address this. Instead, if <code class="language-plaintext highlighter-rouge">KVStoreClient</code> could be recast as a <code class="language-plaintext highlighter-rouge">Transaction</code> factory, and then encapsulate all operations associated with the transactions within the <code class="language-plaintext highlighter-rouge">Transaction</code> class, then <code class="language-plaintext highlighter-rouge">UpdateKVStore</code> can be modified as follows:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">UpdateKVStore</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client</span><span class="p">:</span> <span class="n">KVStoreClient</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">client</span>  <span class="c1"># Now a Factory class for Transaction.
+</span>        
+    <span class="k">def</span> <span class="nf">update_value</span><span class="p">(</span><span class="n">new_content</span><span class="p">:</span> <span class="n">Content</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Status</span><span class="p">:</span>
+        <span class="n">transaction</span><span class="p">:</span> <span class="n">KVStoreClient</span><span class="p">.</span><span class="n">Transaction</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="n">new_transaction</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">transaction</span><span class="p">.</span><span class="n">get_content</span><span class="p">()</span> <span class="o">==</span> <span class="n">new_content</span><span class="p">:</span>
+            <span class="c1"># Nothing to update
+</span>            <span class="n">transaction</span><span class="p">.</span><span class="n">end</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">Status</span><span class="p">.</span><span class="n">SUCCESS_UNCHANGED</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="n">transaction</span><span class="p">.</span><span class="n">update_and_land</span><span class="p">(</span><span class="n">new_content</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">status</span>
+</code></pre></div></div>
+
+<p>When testing the new <code class="language-plaintext highlighter-rouge">UpdateKVStore</code>, you only need to replace the <code class="language-plaintext highlighter-rouge">KVStoreClient</code> and the <code class="language-plaintext highlighter-rouge">Transaction</code>, both of which are (explicit or implicit) direct dependencies, with test doubles. This makes the code much easier and straightforward to test.</p>
+
+<h2 id="fat-parameters">Fat Parameters</h2>
+
+<p>While the anti-pattern of ‘fat parameters’ does follow directly from the Law of Demeter, it does follow from the spirit of passing in only the information that the class needs to perform its function. So, what are fat parameters? They are data objects that as passed in as an argument to a class, and they contain more information than what is needed by the class.</p>
+
+<p>For instance, say you have a class <code class="language-plaintext highlighter-rouge">EmailDispatcher</code> whose method <code class="language-plaintext highlighter-rouge">setRecipient</code> only needs a customer name and email address. The method signature for <code class="language-plaintext highlighter-rouge">setRecipient</code> should only require the name and email, and not the entire <code class="language-plaintext highlighter-rouge">Customer</code> object that contains a whole lot more.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">@</span><span class="n">dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">Customer</span><span class="p">:</span>
+    <span class="p">...</span> <span class="c1"># data class members.
+</span>    <span class="k">def</span> <span class="nf">getFullName</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="p">...</span>
+    <span class="k">def</span> <span class="nf">getEmail</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="p">...</span>
+    <span class="k">def</span> <span class="nf">getPhysicalAddress</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="p">...</span>
+    <span class="k">def</span> <span class="nf">getPostalCode</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="p">...</span>
+    <span class="k">def</span> <span class="nf">getCountry</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="p">...</span>
+    <span class="k">def</span> <span class="nf">getState</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="p">...</span>
+    <span class="k">def</span> <span class="nf">getCustomerId</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="p">...</span>
+    <span class="c1"># and so on.
+</span>    
+ <span class="k">class</span> <span class="nc">EmailDispatcher</span><span class="p">:</span>
+     <span class="p">...</span>
+     <span class="k">def</span> <span class="nf">setRecipient</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+         <span class="p">...</span>
+     <span class="k">def</span> <span class="nf">setRecipientWithFatParameter</span><span class="p">(</span><span class="n">customer</span><span class="p">:</span> <span class="n">Customer</span><span class="p">):</span>
+         <span class="p">...</span>
+     <span class="k">def</span> <span class="nf">sendMessage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">):</span>
+         <span class="p">...</span>
+</code></pre></div></div>
+
+<p>In the pseudocode above, the class <code class="language-plaintext highlighter-rouge">EmailDispatcher</code> has two methods <code class="language-plaintext highlighter-rouge">setRecipient</code> and <code class="language-plaintext highlighter-rouge">setRecipientWithFatParameter</code>. The former uses only the information it needs, and the latter passed in the entire <code class="language-plaintext highlighter-rouge">Customer</code> object as a fat parameter.</p>
+
+<p>The convenience of passing in the entire <code class="language-plaintext highlighter-rouge">Customer</code> object is straightforward. It allows gives you a simple method signature. It makes it easier for the method to evolve to use richer information about the customer without needing to change its API contract. It allows you to define a common <code class="language-plaintext highlighter-rouge">Dispatcher</code> interface with multiple <code class="language-plaintext highlighter-rouge">Dispatcher</code>s that use different properties of the <code class="language-plaintext highlighter-rouge">Customer</code> class.</p>
+
+<p>However, when it comes to unit testing, such fat parameters present a problem. Consider how you would test the <code class="language-plaintext highlighter-rouge">EmailDispatcher</code>’s <code class="language-plaintext highlighter-rouge">setRecipientWithFatParameter</code> method. The tests will need to create fake <code class="language-plaintext highlighter-rouge">Customer</code> objects. So, your fake <code class="language-plaintext highlighter-rouge">Customers</code> might look like this:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fakeCustomer</span> <span class="o">=</span> <span class="n">Customer</span><span class="p">(</span>
+    <span class="n">first_name</span><span class="o">=</span><span class="s">"bob"</span><span class="p">,</span>
+    <span class="n">last_name</span><span class="o">=</span><span class="s">"marley"</span><span class="p">,</span> 
+    <span class="n">email</span><span class="o">=</span><span class="s">"bob@doobie.com"</span><span class="p">,</span> 
+    <span class="n">address</span><span class="o">=</span><span class="n">Address</span><span class="p">(</span>
+        <span class="s">"420 High St."</span><span class="p">,</span> 
+      <span class="s">""</span><span class="p">,</span> 
+      <span class="s">"Mary Jane"</span><span class="p">,</span> 
+      <span class="s">"Ganga Nation"</span><span class="p">,</span> 
+      <span class="s">"7232"</span>
+    <span class="p">),</span> 
+    <span class="nb">id</span><span class="o">=</span><span class="mi">12345</span><span class="p">,</span> 
+    <span class="n">postal_code</span><span class="o">=</span><span class="s">"7232"</span><span class="p">,</span> 
+    <span class="p">...</span>
+<span class="p">)</span>
+</code></pre></div></div>
+
+<p>When someone reads this unit test, do they know what is relevant here? Does it matter that the second parameter of <code class="language-plaintext highlighter-rouge">address</code> is empty string? Should the last parameter of <code class="language-plaintext highlighter-rouge">address</code> match the value of <code class="language-plaintext highlighter-rouge">postal_code</code>? While we might be able to guess it in this case, it gets more confusing in cases where the fat parameter is encapsulating a much more complicated entity, such as a database table.</p>
+
+<p>When refactoring or making changes to the <code class="language-plaintext highlighter-rouge">EmailDispatcher</code>, if the unit test fails, then figuring out why the test failed becomes a non-trivial exercise, and could end up slowing you down a lot more than you expected. All this just leads to high maintenance costs for tests, low readability <sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote" rel="footnote">2</a></sup>, poor DevX, and limited benefits.</p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>You can read about it <a href="https://wouterdekort.com/2012/03/27/unit-testing-hell-or-heaven/">here</a>, <a href="https://hermanradtke.com/2010/01/17/unit-testing-and-the-law-of-demeter.html/">here</a>, <a href="https://wiki.c2.com/?LawOfDemeterMakesUnitTestsEasier">here</a>, and <a href="https://testing.googleblog.com/2008/07/breaking-law-of-demeter-is-like-looking.html">here</a>, and really just search for “Law of Demeter” on the Internet <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2" role="doc-endnote">
+      <p>For more details on why we should care about readability, see the section on Readability <a href="https://srikanth.sastry.name/dry-unit-tests-are-bad/">here</a>. <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>]]></content><author><name>Srikanth Sastry</name><email>srikanth@sastry.name</email></author><category term="professional" /><category term="unit tests" /><category term="software engineering" /><summary type="html"><![CDATA[The Law of Demeter essentially says that each unit should only talk to its ‘immediate friends’ or ‘immediate dependencies’, and in spirit, it is pointing to the principle that each unit only have the information it needs to meet its purpose. In that spirit, the Law of Demeter takes two forms that are relevant to making your code more testable: (1) object chains, and (2) fat parameters.]]></summary></entry><entry><title type="html">‘Privatize’ your classes for better unit testing</title><link href="//srikanth.sastry.name/privatize-your-classes-for-better-unit-testing/" rel="alternate" type="text/html" title="‘Privatize’ your classes for better unit testing" /><published>2022-07-11T00:00:00+00:00</published><updated>2022-07-11T00:00:00+00:00</updated><id>//srikanth.sastry.name/privatize-your-classes-for-better-unit-testing</id><content type="html" xml:base="//srikanth.sastry.name/privatize-your-classes-for-better-unit-testing/"><![CDATA[<p><img src="images/amber-iceberg-under-water.jpg" alt="" />
 You service may be massive, but it’s public API surface is pretty small; it has just a handful of APIs/endpoints. Everything else behind those APIs are ‘private’ and ‘implementation details’. It is highly advisable to follow this pattern even when designing the implementation of your service, almost like a fractal. This will pay dividends in the quality of your test suite.</p>
 
 <p>For instance, you service implementation should be split into ‘modules’ where each module has a well defined API through which other modules interact with it. This API boundary has to be strict. Avoid the temptation of breaking this abstraction because your module need this ‘one tiny bit’ of information that is available inside the implementation of another module. You will regret breaking encapsulation, I guarantee it!</p>
@@ -808,110 +945,4 @@ Most code is read more often than is written/edited. Unsurprisingly, it is impor
 <h3 id="code-reviews">Code Reviews</h3>
 <p><img src="/images/black-women-developers.jpg" alt="Developers doing code reviews" /></p>
 
-<p>DRY’d out tests not only impede developer velocity, they also make it less easy to review code/diffs/pull requests. This is a second order effect of DRYing out your test code. Let’s revisit the example where we are adding a new feature to an existing piece of code, and this is a pure addition in behavior (not modification to existing behavior). If the tests were not DRY’d out, then adding tests for this new feature would involve just adding new test cases, and thus, just green lines in the generated diff. In contrast, recall from the previous subsection that adding tests with DRY test code is likely going to involve modifying existing code and then adding new test cases. In the former case, reviewing the tests is much easier, and as a result, reviewing that the new feature is behaving correctly is also that much easier. Reviewing the diff in the latter case is cognitively more taxing because not only does the reviewer need to verify that the new feature is implemented correctly, they also have to verify that the changes to the test code is also correct, and is not introducing new holes for bugs to escape testing. This can significantly slow down code reviews in two ways (1) it requires more time to review the code, and (2) because it requires longer to review the code, the reviewers are more likely to delay even starting the code review.</p>]]></content><author><name>Srikanth Sastry</name><email>srikanth@sastry.name</email></author><category term="Professional" /><category term="testing" /><category term="software engineering" /><category term="unit tests" /><summary type="html"><![CDATA[Simplicity should be a core property of unit tests. This is motivated, both by arguments in this post against DRY unit tests, and by software maintainability as the primary motivation for unit tests. Unit tests should be as simple as reasonable. It should be easy to ready, understand, and modify (it should be easy to modify any single test in isolation). It is perfectly acceptable for this simplicity to come at the expense of code-reuse, performance, and efficiency.]]></summary></entry><entry><title type="html">Do not index on test coverage metrics</title><link href="//srikanth.sastry.name/do-not-index-in-test-coverage/" rel="alternate" type="text/html" title="Do not index on test coverage metrics" /><published>2022-04-29T00:00:00+00:00</published><updated>2022-04-29T00:00:00+00:00</updated><id>//srikanth.sastry.name/do-not-index-on-test-coverage</id><content type="html" xml:base="//srikanth.sastry.name/do-not-index-in-test-coverage/"><![CDATA[<p><img src="/images/chart-coverage.png" alt="Coverage Chart" /></p>
-
-<p>We live in a data driven world, and as the saying goes “[…] What is not measured, cannot be improved. […]”</p>
-<blockquote>
-  <p>What is not defined cannot be measured. What is not measured, cannot be improved. What is not improved, is always degraded.</p>
-
-  <p>– William Thomson Kelvin</p>
-</blockquote>
-
-<p>The temptation, therefore, is to measure everything. Even the quality of your unit tests, and there where the trouble usually begins. For an detailed explanation of why indexing on the test coverage metrics is a bad idea, I highly recommend Jason Rudolph’s collection of posts on this topic <a href="https://jasonrudolph.com/blog/testing-anti-patterns-how-to-fail-with-100-test-coverage/">here</a>. To drive home the point more explicitly (and motivate you to actually go read Jason’s posts), here are some illustrative explanations.</p>
-
-<p>There are many coverage metrics including function coverage, statement coverage, line coverage, branch coverage, condition coverage, etc. Here, we will only look at line coverage and branch coverage, because those are the most popular.</p>
-
-<h2 id="line-coverage">Line coverage</h2>
-<p>Let’s start with <em>line coverage</em>, which is the number of lines of code executed by tests vs. the total number of lines of code. The most common target for the line coverage metric is 80%. That is, 80% of your code should be executed by your tests. While that might seem like a good idea, indexing on this metric can actually take you away from good quality test coverage! How? Consider the following (contrived example).</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">has_three_digits</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-    <span class="n">strlen</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
-    <span class="k">if</span> <span class="n">strlen</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">True</span>
-    <span class="k">return</span> <span class="bp">False</span>
-
-<span class="k">class</span> <span class="nc">TestHasThreeDigits</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">test_has_three_digits_234</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">output_value</span> <span class="o">=</span> <span class="n">has_three_digits</span><span class="p">(</span><span class="mi">234</span><span class="p">)</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">output_value</span><span class="p">)</span>
-</code></pre></div></div>
-<p>Clearly <code class="language-plaintext highlighter-rouge">TestHasThreeDigits</code> inadequate as a test suite for testing <code class="language-plaintext highlighter-rouge">has_three_digits</code>. Tests only the True case, and misses the False cases completely!
-The line coverage of the test suite is 3/4 = 75%. You could say that the test coverage is less than 80%, and therefore not adequate. Here, it appears that the line coverage metric does indeed point of inadequate testing. However, this confidence in the metric is severely misplaced! Consider the following refactoring of <code class="language-plaintext highlighter-rouge">has_three_digits</code></p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">has_three_digits</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-    <span class="n">value_as_str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-    <span class="n">strlen</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">value_as_str</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">strlen</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">True</span>
-    <span class="k">return</span> <span class="bp">False</span>
-</code></pre></div></div>
-<p>Now, <code class="language-plaintext highlighter-rouge">TestHasThreeDigits</code> line coverage magically improves to 4/5 = 80%, and as per the 80% target, the metrics seems to suggest adequate coverage! In fact, you can play this game some more and refactor <code class="language-plaintext highlighter-rouge">has_three_digits</code> to</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">has_three_digits</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-    <span class="n">value_as_str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-    <span class="n">strlen</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">value_as_str</span><span class="p">)</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">strlen</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span>
-</code></pre></div></div>
-<p>Now, with the same test suite <code class="language-plaintext highlighter-rouge">TestHasThreeDigits</code> now has 100% coverage! Recall that semantically the test still do the same thing; they still test only the True case, and ignore the False case completely.</p>
-
-<h2 id="branch-coverage">Branch coverage</h2>
-<p>An easy retort to the above example is that line coverage is not a sufficiently nuanced metric, and what you really need is <em>branch coverage</em>, which is the number of branches executed by the tests vs. the number of branches in the code.</p>
-
-<p>Looking at the branch coverage of <code class="language-plaintext highlighter-rouge">TestHasThreeDigits</code>, we can see that it has a 50% branch coverage, which is inadequate. Well, here’s an easy way to improve that.</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">TestHasThreeDigits</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">test_has_three_digits_true</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">true_output_value</span> <span class="o">=</span> <span class="n">has_three_digits</span><span class="p">(</span><span class="mi">234</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">test_has_three_digits_false</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">false_output_value</span> <span class="o">=</span> <span class="n">has_three_digits</span><span class="p">(</span><span class="mi">23</span><span class="p">)</span>
-</code></pre></div></div>
-<p>See, now the test suite has 100% branch coverage! However, not that it has no assertions at all. So, despite having 100% line and branch coverage, this test suite is completely useless! (This is a form of <a href="https://jasonrudolph.com/blog/2008/06/17/testing-anti-patterns-incidental-coverage/">incidental coverage anti-pattern</a>.)</p>
-
-<p>Here is a more nuanced example:</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">HasThreeDigits</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
-        
-    <span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">return</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span>
-    
-<span class="k">class</span> <span class="nc">TestHasThreeDigits</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">test_has_three_digits_234</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">output_value</span> <span class="o">=</span> <span class="n">has_three_digits</span><span class="p">(</span><span class="mi">234</span><span class="p">)</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">output_value</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">test_has_three_digits_23</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">output_value</span> <span class="o">=</span> <span class="n">has_three_digits</span><span class="p">(</span><span class="mi">23</span><span class="p">)</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">output_value</span><span class="p">)</span>
-</code></pre></div></div>
-<p>The code coverage is 100%, branch coverage is 100%. But <code class="language-plaintext highlighter-rouge">self.counter</code> is never verified!</p>
-<h2 id="wait-theres-more">Wait, there’s more!</h2>
-<p>Coverage metrics only consider the code the are under your project, and ignore all external libraries. However, your code is correct only if you are satisfying the preconditions of your external library calls, and test coverage metrics do not capture any of that. Here is an illustration with an contrived example.</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">external.lib</span> <span class="kn">import</span> <span class="n">convert_to_num</span>
-
-<span class="k">def</span> <span class="nf">has_three_digits</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-    <span class="n">v</span> <span class="o">=</span> <span class="n">convert_to_num</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">v</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">v</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1000</span> <span class="ow">and</span> <span class="n">v</span> <span class="o">&lt;</span> <span class="mi">1000</span>
-</code></pre></div></div>
-<p>The above code is expected return True if <code class="language-plaintext highlighter-rouge">value</code> is and integer with 3 digits. Here is test suite.</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">TestHasThreeDigits</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">test_has_three_digits_234</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">output_value</span> <span class="o">=</span> <span class="n">has_three_digits</span><span class="p">(</span><span class="s">'234'</span><span class="p">)</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">output_value</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">test_has_three_digits_23</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">output_value</span> <span class="o">=</span> <span class="n">has_three_digits</span><span class="p">(</span><span class="s">'23'</span><span class="p">)</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">output_value</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">test_has_three_digits_minus_23</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">output_value</span> <span class="o">=</span> <span class="n">has_three_digits</span><span class="p">(</span><span class="s">'-23'</span><span class="p">)</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">output_value</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">test_has_three_digits_minus_234</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">output_value</span> <span class="o">=</span> <span class="n">has_three_digits</span><span class="p">(</span><span class="s">'-234'</span><span class="p">)</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">output_value</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">test_has_three_digits_ten_times_ten</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">output_value</span> <span class="o">=</span> <span class="n">has_three_digits</span><span class="p">(</span><span class="s">'10*10'</span><span class="p">)</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">output_value</span><span class="p">)</span>
-</code></pre></div></div>
-<p>The test suite looks reasonable. You line and branch coverage is a 100%, and so nothing in the metrics suggestg anything is amiss. Except that we have said nothing about how <code class="language-plaintext highlighter-rouge">convert_to_num</code> is implemented. It is easy to imagine some preconditions for the input to <code class="language-plaintext highlighter-rouge">convert_to_num</code>; for instance, it throws a ValueError exception if you pass in an input of the form <code class="language-plaintext highlighter-rouge">3/0</code>. Now, you can see how the test suite is not adequate! (<code class="language-plaintext highlighter-rouge">has_three_digits('10/0')</code> will throw an exception). But your test coverage metrics will never be able to help here.</p>]]></content><author><name>Srikanth Sastry</name><email>srikanth@sastry.name</email></author><category term="Professional" /><category term="testing" /><category term="software" /><category term="Python" /><category term="software engineering" /><summary type="html"><![CDATA[We live in a data driven world. The temptation, therefore, is to measure everything. Even the quality of your unit tests, and there where the trouble usually begins. For an detailed explanation of why indexing on the test coverage metrics is a bad idea, I highly recommend Jason Rudolph's collection of posts on this topic (https://jasonrudolph.com/blog/testing-anti-patterns-how-to-fail-with-100-test-coverage/). To drive home the point more explicitly (and motivate you to actually go read Jason's posts), here are some illustrative explanations.]]></summary></entry></feed>
+<p>DRY’d out tests not only impede developer velocity, they also make it less easy to review code/diffs/pull requests. This is a second order effect of DRYing out your test code. Let’s revisit the example where we are adding a new feature to an existing piece of code, and this is a pure addition in behavior (not modification to existing behavior). If the tests were not DRY’d out, then adding tests for this new feature would involve just adding new test cases, and thus, just green lines in the generated diff. In contrast, recall from the previous subsection that adding tests with DRY test code is likely going to involve modifying existing code and then adding new test cases. In the former case, reviewing the tests is much easier, and as a result, reviewing that the new feature is behaving correctly is also that much easier. Reviewing the diff in the latter case is cognitively more taxing because not only does the reviewer need to verify that the new feature is implemented correctly, they also have to verify that the changes to the test code is also correct, and is not introducing new holes for bugs to escape testing. This can significantly slow down code reviews in two ways (1) it requires more time to review the code, and (2) because it requires longer to review the code, the reviewers are more likely to delay even starting the code review.</p>]]></content><author><name>Srikanth Sastry</name><email>srikanth@sastry.name</email></author><category term="Professional" /><category term="testing" /><category term="software engineering" /><category term="unit tests" /><summary type="html"><![CDATA[Simplicity should be a core property of unit tests. This is motivated, both by arguments in this post against DRY unit tests, and by software maintainability as the primary motivation for unit tests. Unit tests should be as simple as reasonable. It should be easy to ready, understand, and modify (it should be easy to modify any single test in isolation). It is perfectly acceptable for this simplicity to come at the expense of code-reuse, performance, and efficiency.]]></summary></entry></feed>
