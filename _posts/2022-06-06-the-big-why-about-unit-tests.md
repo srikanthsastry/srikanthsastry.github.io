@@ -48,7 +48,7 @@ Interestingly, looking at maintainability as the primary motivation for unit tes
 
 If it code incurs a maintenance cost, and unit tests help reduce that cost, then you can naturally ask the following; _since unit tests are also code, do they not incur a maintenance cost?_
 
-Obviously the answer to the question above is an unequivocal "yes!". Thus, unit tests are only useful if the cost of maintaining them exceeds the savings they provide as a buttress against production code. This observation has significant implications for how to design and write unit tests. For instance, unit tests must be simple straight line code that is human readable, even at the expense of performance and redundancy. See the post on [DRY unit tests](https://srikanth.sastry.name/dry-unit-tests-are-bad/) for a more detailed treatment on this topic.
+Obviously the answer to the question above is an unequivocal "yes!". Thus, unit tests are only useful if the cost of maintaining them DOES NOT EXCEED the savings they provide as a buttress against production code. This observation has significant implications for how to design and write unit tests. For instance, unit tests must be simple straight line code that is human readable, even at the expense of performance and redundancy. See the post on [DRY unit tests](https://srikanth.sastry.name/dry-unit-tests-are-bad/) for a more detailed treatment on this topic.
 
 #### Unit tests can have diminishing returns.
 ![](/images/down-graph-arrow.png)
