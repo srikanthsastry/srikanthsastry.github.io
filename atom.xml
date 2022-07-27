@@ -4,7 +4,7 @@
  <title>Srikanth Sastry</title>
  <link href="//srikanth.sastry.name/atom.xml" rel="self"/>
  <link href="//srikanth.sastry.name/"/>
- <updated>2022-07-22T14:05:55+00:00</updated>
+ <updated>2022-07-27T13:50:54+00:00</updated>
  <id>//srikanth.sastry.name</id>
  <author>
    <name>Srikanth Sastry</name>
@@ -691,7 +691,7 @@ To put it differently, if your software was immutable and could not be altered i
 
 &lt;p&gt;If it code incurs a maintenance cost, and unit tests help reduce that cost, then you can naturally ask the following; &lt;em&gt;since unit tests are also code, do they not incur a maintenance cost?&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;Obviously the answer to the question above is an unequivocal “yes!”. Thus, unit tests are only useful if the cost of maintaining them exceeds the savings they provide as a buttress against production code. This observation has significant implications for how to design and write unit tests. For instance, unit tests must be simple straight line code that is human readable, even at the expense of performance and redundancy. See the post on &lt;a href=&quot;https://srikanth.sastry.name/dry-unit-tests-are-bad/&quot;&gt;DRY unit tests&lt;/a&gt; for a more detailed treatment on this topic.&lt;/p&gt;
+&lt;p&gt;Obviously the answer to the question above is an unequivocal “yes!”. Thus, unit tests are only useful if the cost of maintaining them DOES NOT EXCEED the savings they provide as a buttress against production code. This observation has significant implications for how to design and write unit tests. For instance, unit tests must be simple straight line code that is human readable, even at the expense of performance and redundancy. See the post on &lt;a href=&quot;https://srikanth.sastry.name/dry-unit-tests-are-bad/&quot;&gt;DRY unit tests&lt;/a&gt; for a more detailed treatment on this topic.&lt;/p&gt;
 
 &lt;h4 id=&quot;unit-tests-can-have-diminishing-returns&quot;&gt;Unit tests can have diminishing returns.&lt;/h4&gt;
 &lt;p&gt;&lt;img src=&quot;/images/down-graph-arrow.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
