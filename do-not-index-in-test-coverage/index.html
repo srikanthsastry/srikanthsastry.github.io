@@ -134,7 +134,7 @@
   </div>
   <div class="sidebar-item">
     <p>
-      &copy; 2023. All rights reserved.
+      &copy; 2025. All rights reserved.
     </p>
   </div>
 </div>
@@ -173,30 +173,30 @@
 <p>Let’s start with <em>line coverage</em>, which is the number of lines of code executed by tests vs. the total number of lines of code. The most common target for the line coverage metric is 80%. That is, 80% of your code should be executed by your tests. While that might seem like a good idea, indexing on this metric can actually take you away from good quality test coverage! How? Consider the following (contrived example).</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">has_three_digits</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-    <span class="n">strlen</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+    <span class="n">strlen</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
     <span class="k">if</span> <span class="n">strlen</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">True</span>
     <span class="k">return</span> <span class="bp">False</span>
 
 <span class="k">class</span> <span class="nc">TestHasThreeDigits</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">test_has_three_digits_234</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">output_value</span> <span class="o">=</span> <span class="n">has_three_digits</span><span class="p">(</span><span class="mi">234</span><span class="p">)</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">output_value</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">test_has_three_digits_234</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">output_value</span> <span class="o">=</span> <span class="nf">has_three_digits</span><span class="p">(</span><span class="mi">234</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="nf">assertTrue</span><span class="p">(</span><span class="n">output_value</span><span class="p">)</span>
 </code></pre></div></div>
 <p>Clearly <code class="language-plaintext highlighter-rouge">TestHasThreeDigits</code> inadequate as a test suite for testing <code class="language-plaintext highlighter-rouge">has_three_digits</code>. Tests only the True case, and misses the False cases completely!
 The line coverage of the test suite is 3/4 = 75%. You could say that the test coverage is less than 80%, and therefore not adequate. Here, it appears that the line coverage metric does indeed point of inadequate testing. However, this confidence in the metric is severely misplaced! Consider the following refactoring of <code class="language-plaintext highlighter-rouge">has_three_digits</code></p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">has_three_digits</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-    <span class="n">value_as_str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-    <span class="n">strlen</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">value_as_str</span><span class="p">)</span>
+    <span class="n">value_as_str</span> <span class="o">=</span> <span class="nf">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="n">strlen</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">value_as_str</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">strlen</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">True</span>
     <span class="k">return</span> <span class="bp">False</span>
 </code></pre></div></div>
 <p>Now, <code class="language-plaintext highlighter-rouge">TestHasThreeDigits</code> line coverage magically improves to 4/5 = 80%, and as per the 80% target, the metrics seems to suggest adequate coverage! In fact, you can play this game some more and refactor <code class="language-plaintext highlighter-rouge">has_three_digits</code> to</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">has_three_digits</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-    <span class="n">value_as_str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-    <span class="n">strlen</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">value_as_str</span><span class="p">)</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">strlen</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span>
+    <span class="n">value_as_str</span> <span class="o">=</span> <span class="nf">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="n">strlen</span> <span class="o">=</span> <span class="nf">len</span><span class="p">(</span><span class="n">value_as_str</span><span class="p">)</span>
+    <span class="nf">return </span><span class="p">(</span><span class="n">strlen</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span>
 </code></pre></div></div>
 <p>Now, with the same test suite <code class="language-plaintext highlighter-rouge">TestHasThreeDigits</code> now has 100% coverage! Recall that semantically the test still do the same thing; they still test only the True case, and ignore the False case completely.</p>
 
@@ -205,62 +205,62 @@ The line coverage of the test suite is 3/4 = 75%. You could say that the test co
 
 <p>Looking at the branch coverage of <code class="language-plaintext highlighter-rouge">TestHasThreeDigits</code>, we can see that it has a 50% branch coverage, which is inadequate. Well, here’s an easy way to improve that.</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">TestHasThreeDigits</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">test_has_three_digits_true</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">true_output_value</span> <span class="o">=</span> <span class="n">has_three_digits</span><span class="p">(</span><span class="mi">234</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">test_has_three_digits_true</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">true_output_value</span> <span class="o">=</span> <span class="nf">has_three_digits</span><span class="p">(</span><span class="mi">234</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">test_has_three_digits_false</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">false_output_value</span> <span class="o">=</span> <span class="n">has_three_digits</span><span class="p">(</span><span class="mi">23</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">test_has_three_digits_false</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">false_output_value</span> <span class="o">=</span> <span class="nf">has_three_digits</span><span class="p">(</span><span class="mi">23</span><span class="p">)</span>
 </code></pre></div></div>
 <p>See, now the test suite has 100% branch coverage! However, not that it has no assertions at all. So, despite having 100% line and branch coverage, this test suite is completely useless! (This is a form of <a href="https://jasonrudolph.com/blog/2008/06/17/testing-anti-patterns-incidental-coverage/">incidental coverage anti-pattern</a>.)</p>
 
 <p>Here is a more nuanced example:</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">HasThreeDigits</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
         
     <span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
-        <span class="k">return</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="nf">return </span><span class="p">(</span><span class="nf">len</span><span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span>
     
 <span class="k">class</span> <span class="nc">TestHasThreeDigits</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">test_has_three_digits_234</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">output_value</span> <span class="o">=</span> <span class="n">has_three_digits</span><span class="p">(</span><span class="mi">234</span><span class="p">)</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">output_value</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">test_has_three_digits_234</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">output_value</span> <span class="o">=</span> <span class="nf">has_three_digits</span><span class="p">(</span><span class="mi">234</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="nf">assertTrue</span><span class="p">(</span><span class="n">output_value</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">test_has_three_digits_23</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">output_value</span> <span class="o">=</span> <span class="n">has_three_digits</span><span class="p">(</span><span class="mi">23</span><span class="p">)</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">output_value</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">test_has_three_digits_23</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">output_value</span> <span class="o">=</span> <span class="nf">has_three_digits</span><span class="p">(</span><span class="mi">23</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="nf">assertFalse</span><span class="p">(</span><span class="n">output_value</span><span class="p">)</span>
 </code></pre></div></div>
 <p>The code coverage is 100%, branch coverage is 100%. But <code class="language-plaintext highlighter-rouge">self.counter</code> is never verified!</p>
 <h2 id="wait-theres-more">Wait, there’s more!</h2>
 <p>Coverage metrics only consider the code the are under your project, and ignore all external libraries. However, your code is correct only if you are satisfying the preconditions of your external library calls, and test coverage metrics do not capture any of that. Here is an illustration with an contrived example.</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">external.lib</span> <span class="kn">import</span> <span class="n">convert_to_num</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">external.lib</span> <span class="kn">import</span> <span class="n">convert_to_num</span>
 
 <span class="k">def</span> <span class="nf">has_three_digits</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-    <span class="n">v</span> <span class="o">=</span> <span class="n">convert_to_num</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="nf">convert_to_num</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">v</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">v</span> <span class="o">&gt;</span> <span class="o">-</span><span class="mi">1000</span> <span class="ow">and</span> <span class="n">v</span> <span class="o">&lt;</span> <span class="mi">1000</span>
 </code></pre></div></div>
 <p>The above code is expected return True if <code class="language-plaintext highlighter-rouge">value</code> is and integer with 3 digits. Here is test suite.</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">TestHasThreeDigits</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">test_has_three_digits_234</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">output_value</span> <span class="o">=</span> <span class="n">has_three_digits</span><span class="p">(</span><span class="s">'234'</span><span class="p">)</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">output_value</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">test_has_three_digits_234</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">output_value</span> <span class="o">=</span> <span class="nf">has_three_digits</span><span class="p">(</span><span class="sh">'</span><span class="s">234</span><span class="sh">'</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="nf">assertTrue</span><span class="p">(</span><span class="n">output_value</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">test_has_three_digits_23</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">output_value</span> <span class="o">=</span> <span class="n">has_three_digits</span><span class="p">(</span><span class="s">'23'</span><span class="p">)</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">output_value</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">test_has_three_digits_23</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">output_value</span> <span class="o">=</span> <span class="nf">has_three_digits</span><span class="p">(</span><span class="sh">'</span><span class="s">23</span><span class="sh">'</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="nf">assertFalse</span><span class="p">(</span><span class="n">output_value</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">test_has_three_digits_minus_23</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">output_value</span> <span class="o">=</span> <span class="n">has_three_digits</span><span class="p">(</span><span class="s">'-23'</span><span class="p">)</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">assertFalse</span><span class="p">(</span><span class="n">output_value</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">test_has_three_digits_minus_23</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">output_value</span> <span class="o">=</span> <span class="nf">has_three_digits</span><span class="p">(</span><span class="sh">'</span><span class="s">-23</span><span class="sh">'</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="nf">assertFalse</span><span class="p">(</span><span class="n">output_value</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">test_has_three_digits_minus_234</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">output_value</span> <span class="o">=</span> <span class="n">has_three_digits</span><span class="p">(</span><span class="s">'-234'</span><span class="p">)</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">output_value</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">test_has_three_digits_minus_234</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">output_value</span> <span class="o">=</span> <span class="nf">has_three_digits</span><span class="p">(</span><span class="sh">'</span><span class="s">-234</span><span class="sh">'</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="nf">assertTrue</span><span class="p">(</span><span class="n">output_value</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">test_has_three_digits_ten_times_ten</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">output_value</span> <span class="o">=</span> <span class="n">has_three_digits</span><span class="p">(</span><span class="s">'10*10'</span><span class="p">)</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">output_value</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">test_has_three_digits_ten_times_ten</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">output_value</span> <span class="o">=</span> <span class="nf">has_three_digits</span><span class="p">(</span><span class="sh">'</span><span class="s">10*10</span><span class="sh">'</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="nf">assertTrue</span><span class="p">(</span><span class="n">output_value</span><span class="p">)</span>
 </code></pre></div></div>
 <p>The test suite looks reasonable. You line and branch coverage is a 100%, and so nothing in the metrics suggestg anything is amiss. Except that we have said nothing about how <code class="language-plaintext highlighter-rouge">convert_to_num</code> is implemented. It is easy to imagine some preconditions for the input to <code class="language-plaintext highlighter-rouge">convert_to_num</code>; for instance, it throws a ValueError exception if you pass in an input of the form <code class="language-plaintext highlighter-rouge">3/0</code>. Now, you can see how the test suite is not adequate! (<code class="language-plaintext highlighter-rouge">has_three_digits('10/0')</code> will throw an exception). But your test coverage metrics will never be able to help here.</p>
 

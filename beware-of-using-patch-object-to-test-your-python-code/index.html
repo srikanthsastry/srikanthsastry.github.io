@@ -134,7 +134,7 @@
   </div>
   <div class="sidebar-item">
     <p>
-      &copy; 2023. All rights reserved.
+      &copy; 2025. All rights reserved.
     </p>
   </div>
 </div>
@@ -163,83 +163,83 @@
 <!-- more -->
 
 <p>Say, you decide to build a special class called <code class="language-plaintext highlighter-rouge">ImmutableList</code> with a factory that looks as follows:</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Sequence</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Sequence</span>
 <span class="k">class</span> <span class="nc">ImmutableList</span><span class="p">:</span>
-  <span class="o">@</span><span class="nb">staticmethod</span>
-  <span class="k">def</span> <span class="nf">create_list</span><span class="p">(</span><span class="nb">input</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s">"ImmutableList"</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">ImmutableList</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+  <span class="nd">@staticmethod</span>
+  <span class="k">def</span> <span class="nf">create_list</span><span class="p">(</span><span class="nb">input</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="sh">"</span><span class="s">ImmutableList</span><span class="sh">"</span><span class="p">:</span>
+    <span class="k">return</span> <span class="nc">ImmutableList</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
 
-  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-    <span class="bp">self</span><span class="p">.</span><span class="n">_inner_list</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">_inner_list</span> <span class="o">=</span> <span class="nf">tuple</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
 
-  <span class="k">def</span> <span class="nf">get_inner_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
-    <span class="bp">self</span><span class="p">.</span><span class="n">_inner_list</span>
+  <span class="k">def</span> <span class="nf">get_inner_list</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">_inner_list</span>
 </code></pre></div></div>
 
 <p>Next, your system under test is a class <code class="language-plaintext highlighter-rouge">SUT</code> that uses an instance of <code class="language-plaintext highlighter-rouge">ImmutableList</code> as an injected dependency.</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">SUT</span><span class="p">:</span>
-  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wrapper</span><span class="p">:</span> <span class="n">ImmutableList</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-    <span class="bp">self</span><span class="p">.</span><span class="n">wrapper</span> <span class="o">=</span> <span class="n">wrapper</span>
+  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">wrapper</span><span class="p">:</span> <span class="n">ImmutableList</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">wrapper</span> <span class="o">=</span> <span class="n">wrapper</span>
 
-  <span class="k">def</span> <span class="nf">get_wrapper_length</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">wrapper</span><span class="p">.</span><span class="n">get_inner_list</span><span class="p">())</span>
+  <span class="k">def</span> <span class="nf">get_wrapper_length</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">return</span> <span class="nf">len</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">wrapper</span><span class="p">.</span><span class="nf">get_inner_list</span><span class="p">())</span>
 </code></pre></div></div>
 
 <p>Now, when testing <code class="language-plaintext highlighter-rouge">SUT</code>, say, we patch the <code class="language-plaintext highlighter-rouge">get_inner_list()</code> method with <code class="language-plaintext highlighter-rouge">patch.object</code>:</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">unittest</span> <span class="kn">import</span> <span class="n">mock</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">unittest</span> <span class="kn">import</span> <span class="n">mock</span>
 
-<span class="k">with</span> <span class="n">mock</span><span class="p">.</span><span class="n">patch</span><span class="p">.</span><span class="nb">object</span><span class="p">(</span><span class="n">ImmutableList</span><span class="p">,</span> <span class="s">'get_inner_list'</span><span class="p">,</span> <span class="n">return_value</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span> <span class="k">as</span> <span class="n">mock_method</span><span class="p">:</span>
-  <span class="n">sut</span> <span class="o">=</span> <span class="n">SUT</span><span class="p">(</span><span class="n">ImmutableList</span><span class="p">.</span><span class="n">create_list</span><span class="p">([]))</span>
-  <span class="k">assert</span> <span class="n">sut</span><span class="p">.</span><span class="n">get_wrapper_length</span><span class="p">()</span> <span class="o">==</span> <span class="mi">3</span><span class="p">,</span> <span class="s">"FAILURE"</span>
-  <span class="k">print</span><span class="p">(</span><span class="s">"SUCCESS"</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">mock</span><span class="p">.</span><span class="n">patch</span><span class="p">.</span><span class="nf">object</span><span class="p">(</span><span class="n">ImmutableList</span><span class="p">,</span> <span class="sh">'</span><span class="s">get_inner_list</span><span class="sh">'</span><span class="p">,</span> <span class="n">return_value</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span> <span class="k">as</span> <span class="n">mock_method</span><span class="p">:</span>
+  <span class="n">sut</span> <span class="o">=</span> <span class="nc">SUT</span><span class="p">(</span><span class="n">ImmutableList</span><span class="p">.</span><span class="nf">create_list</span><span class="p">([]))</span>
+  <span class="k">assert</span> <span class="n">sut</span><span class="p">.</span><span class="nf">get_wrapper_length</span><span class="p">()</span> <span class="o">==</span> <span class="mi">3</span><span class="p">,</span> <span class="sh">"</span><span class="s">FAILURE</span><span class="sh">"</span>
+  <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">SUCCESS</span><span class="sh">"</span><span class="p">)</span>
 </code></pre></div></div>
 <p>When you run this test, it does print <code class="language-plaintext highlighter-rouge">SUCCESS</code>, and therefore, works as intended.</p>
 
 <p>Now, let’s say that we found a special case of <code class="language-plaintext highlighter-rouge">ImmutableList</code> that corresponds to a zero length list, and we implement it as follows:</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">ZeroLengthImmutableList</span><span class="p">(</span><span class="n">ImmutableList</span><span class="p">):</span>
-  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="nb">super</span><span class="p">().</span><span class="n">__init__</span><span class="p">([])</span>
+  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+    <span class="nf">super</span><span class="p">().</span><span class="nf">__init__</span><span class="p">([])</span>
   
-  <span class="k">def</span> <span class="nf">get_inner_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
-    <span class="k">return</span> <span class="nb">tuple</span><span class="p">()</span>
+  <span class="k">def</span> <span class="nf">get_inner_list</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+    <span class="k">return</span> <span class="nf">tuple</span><span class="p">()</span>
 </code></pre></div></div>
 <p>Next, we modify the factory method to return this <code class="language-plaintext highlighter-rouge">ZeroLengthImmutableList</code>, when the input is an empty list, as follows:</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="o">@</span><span class="nb">staticmethod</span>
-  <span class="k">def</span> <span class="nf">create_list</span><span class="p">(</span><span class="nb">input</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s">"ImmutableList"</span><span class="p">:</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-      <span class="k">return</span> <span class="n">ZeroLengthImmutableList</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">ImmutableList</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nd">@staticmethod</span>
+  <span class="k">def</span> <span class="nf">create_list</span><span class="p">(</span><span class="nb">input</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="sh">"</span><span class="s">ImmutableList</span><span class="sh">"</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+      <span class="k">return</span> <span class="nc">ZeroLengthImmutableList</span><span class="p">()</span>
+    <span class="k">return</span> <span class="nc">ImmutableList</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>Thus, the two classes look as follows:</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">ImmutableList</span><span class="p">:</span>
-  <span class="o">@</span><span class="nb">staticmethod</span>
-  <span class="k">def</span> <span class="nf">create_list</span><span class="p">(</span><span class="nb">input</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="s">"ImmutableList"</span><span class="p">:</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-      <span class="k">return</span> <span class="n">ZeroLengthImmutableList</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">ImmutableList</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+  <span class="nd">@staticmethod</span>
+  <span class="k">def</span> <span class="nf">create_list</span><span class="p">(</span><span class="nb">input</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="sh">"</span><span class="s">ImmutableList</span><span class="sh">"</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nf">len</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+      <span class="k">return</span> <span class="nc">ZeroLengthImmutableList</span><span class="p">()</span>
+    <span class="k">return</span> <span class="nc">ImmutableList</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
 
-  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-    <span class="bp">self</span><span class="p">.</span><span class="n">_inner_list</span> <span class="o">=</span> <span class="nb">input</span>
+  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">_inner_list</span> <span class="o">=</span> <span class="nb">input</span>
 
-  <span class="k">def</span> <span class="nf">get_inner_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
-    <span class="bp">self</span><span class="p">.</span><span class="n">_inner_list</span>
+  <span class="k">def</span> <span class="nf">get_inner_list</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+    <span class="n">self</span><span class="p">.</span><span class="n">_inner_list</span>
 
 <span class="k">class</span> <span class="nc">ZeroLengthImmutableList</span><span class="p">(</span><span class="n">ImmutableList</span><span class="p">):</span>
-  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="nb">super</span><span class="p">().</span><span class="n">__init__</span><span class="p">([])</span>
+  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+    <span class="nf">super</span><span class="p">().</span><span class="nf">__init__</span><span class="p">([])</span>
   
-  <span class="k">def</span> <span class="nf">get_inner_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
-    <span class="k">return</span> <span class="nb">tuple</span><span class="p">()</span>
+  <span class="k">def</span> <span class="nf">get_inner_list</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+    <span class="k">return</span> <span class="nf">tuple</span><span class="p">()</span>
 </code></pre></div></div>
 
 <p>Now, let’s go back to our test, which is still</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">unittest</span> <span class="kn">import</span> <span class="n">mock</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">unittest</span> <span class="kn">import</span> <span class="n">mock</span>
 
-<span class="k">with</span> <span class="n">mock</span><span class="p">.</span><span class="n">patch</span><span class="p">.</span><span class="nb">object</span><span class="p">(</span><span class="n">ImmutableList</span><span class="p">,</span> <span class="s">'get_inner_list'</span><span class="p">,</span> <span class="n">return_value</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span> <span class="k">as</span> <span class="n">mock_method</span><span class="p">:</span>
-  <span class="n">sut</span> <span class="o">=</span> <span class="n">SUT</span><span class="p">(</span><span class="n">ImmutableList</span><span class="p">.</span><span class="n">create_list</span><span class="p">([]))</span>
-  <span class="k">assert</span> <span class="n">sut</span><span class="p">.</span><span class="n">get_wrapper_length</span><span class="p">()</span> <span class="o">==</span> <span class="mi">3</span><span class="p">,</span> <span class="s">"FAILURE"</span>
-  <span class="k">print</span><span class="p">(</span><span class="s">"SUCCESS"</span><span class="p">)</span>
+<span class="k">with</span> <span class="n">mock</span><span class="p">.</span><span class="n">patch</span><span class="p">.</span><span class="nf">object</span><span class="p">(</span><span class="n">ImmutableList</span><span class="p">,</span> <span class="sh">'</span><span class="s">get_inner_list</span><span class="sh">'</span><span class="p">,</span> <span class="n">return_value</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span> <span class="k">as</span> <span class="n">mock_method</span><span class="p">:</span>
+  <span class="n">sut</span> <span class="o">=</span> <span class="nc">SUT</span><span class="p">(</span><span class="n">ImmutableList</span><span class="p">.</span><span class="nf">create_list</span><span class="p">([]))</span>
+  <span class="k">assert</span> <span class="n">sut</span><span class="p">.</span><span class="nf">get_wrapper_length</span><span class="p">()</span> <span class="o">==</span> <span class="mi">3</span><span class="p">,</span> <span class="sh">"</span><span class="s">FAILURE</span><span class="sh">"</span>
+  <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">SUCCESS</span><span class="sh">"</span><span class="p">)</span>
 </code></pre></div></div>
 <p>Since <code class="language-plaintext highlighter-rouge">sut.wrapper</code> is still an <code class="language-plaintext highlighter-rouge">ImmutableList</code>, by the Liskov Substitution Principle, <code class="language-plaintext highlighter-rouge">mock.patch.object(ImmutableList, 'get_inner_list', return_value=[1, 2, 3])</code> should still return <code class="language-plaintext highlighter-rouge">[1, 2, 3]</code> when <code class="language-plaintext highlighter-rouge">sut.get_wrapper_length()</code>. However, this does not happen! The above test fails with</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>AssertionError                            Traceback (most recent call last)

@@ -134,7 +134,7 @@
   </div>
   <div class="sidebar-item">
     <p>
-      &copy; 2023. All rights reserved.
+      &copy; 2025. All rights reserved.
     </p>
   </div>
 </div>
@@ -193,13 +193,13 @@ Most code is read more often than is written/edited. Unsurprisingly, it is impor
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">TestInput</span><span class="p">(</span><span class="n">typing</span><span class="p">.</span><span class="n">NamedTuple</span><span class="p">):</span>
     <span class="n">param1</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">param2</span><span class="p">:</span> <span class="n">typing</span><span class="p">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>
-    <span class="p">...</span>
+    <span class="bp">...</span>
 
 <span class="k">class</span> <span class="nc">TestOutput</span><span class="p">(</span><span class="n">typing</span><span class="p">.</span><span class="n">NamedTuple</span><span class="p">):</span>
     <span class="n">status</span><span class="p">:</span> <span class="n">SomeEnum</span>
     <span class="n">return_value</span><span class="p">:</span> <span class="n">typing</span><span class="p">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>
     <span class="n">exception</span><span class="p">:</span> <span class="n">typing</span><span class="p">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">Exception</span><span class="p">]</span>
-    <span class="p">...</span>
+    <span class="bp">...</span>
 
 <span class="k">class</span> <span class="nc">TestCase</span><span class="p">(</span><span class="n">typing</span><span class="p">.</span><span class="n">NamedTuple</span><span class="p">):</span>
     <span class="nb">input</span><span class="p">:</span> <span class="n">TestInput</span>
@@ -207,35 +207,35 @@ Most code is read more often than is written/edited. Unsurprisingly, it is impor
         
 <span class="k">class</span> <span class="nc">TestSequence</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
     
-    <span class="o">@</span><span class="n">parameterized</span><span class="p">.</span><span class="n">expand</span><span class="p">([</span>
+    <span class="nd">@parameterized.expand</span><span class="p">([</span>
         <span class="p">[</span><span class="n">test_input1</span><span class="p">,</span> <span class="n">expected_output1</span><span class="p">],</span>
         <span class="p">[</span><span class="n">test_input2</span><span class="p">,</span> <span class="n">expected_output2</span><span class="p">],</span>
-        <span class="p">...</span>
+        <span class="bp">...</span>
     <span class="p">])</span>
-    <span class="k">def</span> <span class="nf">test_somethings</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">test_input</span><span class="p">:</span> <span class="n">TestInput</span><span class="p">,</span> <span class="n">expected_output</span><span class="p">:</span> <span class="n">TestOutput</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">_run_test</span><span class="p">(</span><span class="n">test_input</span><span class="p">,</span> <span class="n">expected_output</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">test_somethings</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">test_input</span><span class="p">:</span> <span class="n">TestInput</span><span class="p">,</span> <span class="n">expected_output</span><span class="p">:</span> <span class="n">TestOutput</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">self</span><span class="p">.</span><span class="nf">_run_test</span><span class="p">(</span><span class="n">test_input</span><span class="p">,</span> <span class="n">expected_output</span><span class="p">)</span>
         
-    <span class="k">def</span> <span class="nf">_run_test</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">test_input</span><span class="p">:</span> <span class="n">TestInput</span><span class="p">,</span> <span class="n">expected_output</span><span class="p">:</span> <span class="n">TestOutput</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">sut</span> <span class="o">=</span> <span class="n">SUT</span><span class="p">(...)</span>
-        <span class="n">prepare_sut_for_tests</span><span class="p">(</span><span class="n">sut</span><span class="p">,</span> <span class="n">test_input</span><span class="p">)</span>
-        <span class="n">output</span> <span class="o">=</span> <span class="n">sut</span><span class="p">.</span><span class="n">do_something</span><span class="p">(</span><span class="n">test_input</span><span class="p">.</span><span class="n">param2</span><span class="p">)</span>
-        <span class="n">test_output</span> <span class="o">=</span> <span class="n">make_test_output</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">sut</span><span class="p">)</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">expected_output</span><span class="p">,</span> <span class="n">test_output</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">_run_test</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">test_input</span><span class="p">:</span> <span class="n">TestInput</span><span class="p">,</span> <span class="n">expected_output</span><span class="p">:</span> <span class="n">TestOutput</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">sut</span> <span class="o">=</span> <span class="nc">SUT</span><span class="p">(...)</span>
+        <span class="nf">prepare_sut_for_tests</span><span class="p">(</span><span class="n">sut</span><span class="p">,</span> <span class="n">test_input</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">sut</span><span class="p">.</span><span class="nf">do_something</span><span class="p">(</span><span class="n">test_input</span><span class="p">.</span><span class="n">param2</span><span class="p">)</span>
+        <span class="n">test_output</span> <span class="o">=</span> <span class="nf">make_test_output</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">sut</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="nf">assertEquals</span><span class="p">(</span><span class="n">expected_output</span><span class="p">,</span> <span class="n">test_output</span><span class="p">)</span>
 </code></pre></div></div>
 <p>On the face of it, it looks like DRY organized code. But for someone reading this test to understand what SUT does, it is very challenging. They have no idea why the set of <code class="language-plaintext highlighter-rouge">test_input</code>s were chosen, what is the material difference among the inputs, what user journeys do each of those test cases represent, what are the preconditions that need to be satisfied for running <code class="language-plaintext highlighter-rouge">sut.do_something()</code>, why is the expected output the specified output, and so on.</p>
 
 <p>Instead, consider a non-DRY alternative.</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">TestSequence</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
     
-    <span class="k">def</span> <span class="nf">test_foo_input_under_bar_condition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="s">"""
+    <span class="k">def</span> <span class="nf">test_foo_input_under_bar_condition</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">
         This test verifies that when condition bar is true, then calling `do_something()`
         with input foo results in sigma behavior
-        """</span>
-        <span class="n">sut</span> <span class="o">=</span> <span class="n">SUT</span><span class="p">()</span>
-        <span class="n">ensure_precondition_bar</span><span class="p">(</span><span class="n">sut</span><span class="p">,</span> <span class="n">param1</span><span class="o">=</span><span class="n">bar1</span><span class="p">,</span> <span class="n">param2</span><span class="o">=</span><span class="n">bar2</span><span class="p">)</span>
-        <span class="n">output</span> <span class="o">=</span> <span class="n">sut</span><span class="p">.</span><span class="n">do_something</span><span class="p">(</span><span class="n">foo</span><span class="p">)</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
+        </span><span class="sh">"""</span>
+        <span class="n">sut</span> <span class="o">=</span> <span class="nc">SUT</span><span class="p">()</span>
+        <span class="nf">ensure_precondition_bar</span><span class="p">(</span><span class="n">sut</span><span class="p">,</span> <span class="n">param1</span><span class="o">=</span><span class="n">bar1</span><span class="p">,</span> <span class="n">param2</span><span class="o">=</span><span class="n">bar2</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">sut</span><span class="p">.</span><span class="nf">do_something</span><span class="p">(</span><span class="n">foo</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="nf">assertEquals</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
 </code></pre></div></div>
 <p>This code tests one user journey and is human readable at a glance by something who does not have in-depth understanding of SUT. We can similarly define all the other test cases with code duplication and greater readability, with negligible negative impact.</p>
 

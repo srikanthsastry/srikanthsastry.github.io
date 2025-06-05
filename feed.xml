@@ -1,44 +1,44 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="//srikanth.sastry.name/feed.xml" rel="self" type="application/atom+xml" /><link href="//srikanth.sastry.name/" rel="alternate" type="text/html" /><updated>2023-04-23T13:00:13+00:00</updated><id>//srikanth.sastry.name/feed.xml</id><title type="html">Srikanth Sastry</title><subtitle>A personal website</subtitle><author><name>Srikanth Sastry</name><email>srikanth@sastry.name</email></author><entry><title type="html">The Law of Demeter and unit tests</title><link href="//srikanth.sastry.name/law-of-demeter-and-unit-tests/" rel="alternate" type="text/html" title="The Law of Demeter and unit tests" /><published>2022-07-22T00:00:00+00:00</published><updated>2022-07-22T00:00:00+00:00</updated><id>//srikanth.sastry.name/the-law-of-demeter-and-unit-tests</id><content type="html" xml:base="//srikanth.sastry.name/law-of-demeter-and-unit-tests/"><![CDATA[<p><img src="/images/demeter-sketch-bw.jpg" alt="" />
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="//srikanth.sastry.name/feed.xml" rel="self" type="application/atom+xml" /><link href="//srikanth.sastry.name/" rel="alternate" type="text/html" /><updated>2025-06-05T01:58:59+00:00</updated><id>//srikanth.sastry.name/feed.xml</id><title type="html">Srikanth Sastry</title><subtitle>A personal website</subtitle><author><name>Srikanth Sastry</name><email>srikanth@sastry.name</email></author><entry><title type="html">The Law of Demeter and unit tests</title><link href="//srikanth.sastry.name/law-of-demeter-and-unit-tests/" rel="alternate" type="text/html" title="The Law of Demeter and unit tests" /><published>2022-07-22T00:00:00+00:00</published><updated>2022-07-22T00:00:00+00:00</updated><id>//srikanth.sastry.name/the-law-of-demeter-and-unit-tests</id><content type="html" xml:base="//srikanth.sastry.name/law-of-demeter-and-unit-tests/"><![CDATA[<p><img src="/images/demeter-sketch-bw.jpg" alt="" />
 The <a href="https://en.wikipedia.org/wiki/Law_of_Demeter">Law of Demeter</a> essentially says that each unit should only talk to its ‘immediate friends’ or ‘immediate dependencies’, and in spirit, it is pointing to the principle that each unit only have the information it needs to meet its purpose. In that spirit, the Law of Demeter takes two forms that are relevant to making your code more testable: (1) object chains, and (2) fat parameters.</p>
 
 <h2 id="object-chains">Object Chains</h2>
 
-<p>This is the more classic violation of the Law of Demeter<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup>. This happens when a class <code class="language-plaintext highlighter-rouge">C</code> has a dependency <code class="language-plaintext highlighter-rouge">D</code>, and <code class="language-plaintext highlighter-rouge">D</code> has method <code class="language-plaintext highlighter-rouge">m</code> that returns an instance of another class <code class="language-plaintext highlighter-rouge">A</code>. The violation happens when <code class="language-plaintext highlighter-rouge">C</code> accesses <code class="language-plaintext highlighter-rouge">A</code> and calls a method in <code class="language-plaintext highlighter-rouge">A</code>. Note that only <code class="language-plaintext highlighter-rouge">D</code> is the ‘immediate’ collaborator/dependency of <code class="language-plaintext highlighter-rouge">C</code>, and not <code class="language-plaintext highlighter-rouge">A</code>. The Law of Demeter says that <code class="language-plaintext highlighter-rouge">C</code> should not be accessing the method in <code class="language-plaintext highlighter-rouge">A</code>.</p>
+<p>This is the more classic violation of the Law of Demeter<sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>. This happens when a class <code class="language-plaintext highlighter-rouge">C</code> has a dependency <code class="language-plaintext highlighter-rouge">D</code>, and <code class="language-plaintext highlighter-rouge">D</code> has method <code class="language-plaintext highlighter-rouge">m</code> that returns an instance of another class <code class="language-plaintext highlighter-rouge">A</code>. The violation happens when <code class="language-plaintext highlighter-rouge">C</code> accesses <code class="language-plaintext highlighter-rouge">A</code> and calls a method in <code class="language-plaintext highlighter-rouge">A</code>. Note that only <code class="language-plaintext highlighter-rouge">D</code> is the ‘immediate’ collaborator/dependency of <code class="language-plaintext highlighter-rouge">C</code>, and not <code class="language-plaintext highlighter-rouge">A</code>. The Law of Demeter says that <code class="language-plaintext highlighter-rouge">C</code> should not be accessing the method in <code class="language-plaintext highlighter-rouge">A</code>.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># A violation of the Law of Demeter looks as follows.
 ## Example 1:
-</span><span class="n">c</span><span class="p">.</span><span class="n">d</span><span class="p">.</span><span class="n">m</span><span class="p">().</span><span class="n">methodInA</span><span class="p">()</span>
+</span><span class="n">c</span><span class="p">.</span><span class="n">d</span><span class="p">.</span><span class="nf">m</span><span class="p">().</span><span class="nf">methodInA</span><span class="p">()</span>
 
 <span class="c1">## Example 2:
 </span><span class="n">d</span><span class="p">:</span> <span class="n">D</span> <span class="o">=</span> <span class="n">c</span><span class="p">.</span><span class="n">d</span>
-<span class="n">a</span><span class="p">:</span> <span class="n">A</span> <span class="o">=</span> <span class="n">d</span><span class="p">.</span><span class="n">m</span><span class="p">()</span>
-<span class="n">a</span><span class="p">.</span><span class="n">methodInA</span><span class="p">()</span>
+<span class="n">a</span><span class="p">:</span> <span class="n">A</span> <span class="o">=</span> <span class="n">d</span><span class="p">.</span><span class="nf">m</span><span class="p">()</span>
+<span class="n">a</span><span class="p">.</span><span class="nf">methodInA</span><span class="p">()</span>
 </code></pre></div></div>
 
 <p>What is the problem with violating the Law of Demeter?  Consider the following production code:</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">UpdateKVStore</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client</span><span class="p">:</span> <span class="n">KVStoreClient</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">client</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">client</span><span class="p">:</span> <span class="n">KVStoreClient</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">client</span>
         
     <span class="k">def</span> <span class="nf">update_value</span><span class="p">(</span><span class="n">new_content</span><span class="p">:</span> <span class="n">Content</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Status</span><span class="p">:</span>
-        <span class="n">transaction</span><span class="p">:</span> <span class="n">KVStoreClient</span><span class="p">.</span><span class="n">Transaction</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="n">new_transaction</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">transaction</span><span class="p">.</span><span class="n">get_content</span><span class="p">()</span> <span class="o">==</span> <span class="n">new_content</span><span class="p">:</span>
+        <span class="n">transaction</span><span class="p">:</span> <span class="n">KVStoreClient</span><span class="p">.</span><span class="n">Transaction</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="nf">new_transaction</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">transaction</span><span class="p">.</span><span class="nf">get_content</span><span class="p">()</span> <span class="o">==</span> <span class="n">new_content</span><span class="p">:</span>
             <span class="c1"># Nothing to update
-</span>            <span class="n">transaction</span><span class="p">.</span><span class="n">end</span><span class="p">()</span>
+</span>            <span class="n">transaction</span><span class="p">.</span><span class="nf">end</span><span class="p">()</span>
             <span class="k">return</span> <span class="n">Status</span><span class="p">.</span><span class="n">SUCCESS_UNCHANGED</span>
         <span class="n">mutation_request</span><span class="p">:</span> <span class="n">KVStoreClient</span><span class="p">.</span><span class="n">MutationRequest</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">transaction</span><span class="p">.</span><span class="n">mutation_request</span><span class="p">().</span><span class="n">set_content</span><span class="p">(</span><span class="n">new_content</span><span class="p">)</span>
+            <span class="n">transaction</span><span class="p">.</span><span class="nf">mutation_request</span><span class="p">().</span><span class="nf">set_content</span><span class="p">(</span><span class="n">new_content</span><span class="p">)</span>
         <span class="p">)</span>
-        <span class="n">mutation</span> <span class="o">=</span> <span class="n">mutation_request</span><span class="p">.</span><span class="n">prepare</span><span class="p">()</span>
-        <span class="n">status</span><span class="p">:</span> <span class="n">KVStoreClient</span><span class="p">.</span><span class="n">Mutation</span> <span class="o">=</span> <span class="n">mutation</span><span class="p">.</span><span class="n">land</span><span class="p">()</span>
+        <span class="n">mutation</span> <span class="o">=</span> <span class="n">mutation_request</span><span class="p">.</span><span class="nf">prepare</span><span class="p">()</span>
+        <span class="n">status</span><span class="p">:</span> <span class="n">KVStoreClient</span><span class="p">.</span><span class="n">Mutation</span> <span class="o">=</span> <span class="n">mutation</span><span class="p">.</span><span class="nf">land</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">status</span>
 </code></pre></div></div>
 
 <p>Now how would you unit test this? The test doubles for testing this code will look something like this</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mock_client</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">spec</span><span class="o">=</span><span class="n">KVStoreClient</span><span class="p">)</span>
-<span class="n">mock_transaction</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">spec</span><span class="o">=</span><span class="n">KVStoreClient</span><span class="p">.</span><span class="n">Transaction</span><span class="p">)</span>
-<span class="n">mock_mutation_request</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">spec</span><span class="o">=</span><span class="n">KVStoreClient</span><span class="p">.</span><span class="n">MutationRequest</span><span class="p">)</span>
-<span class="n">mock_mutation</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">spec</span><span class="o">=</span><span class="n">KVStoreClient</span><span class="p">.</span><span class="n">Mutation</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mock_client</span> <span class="o">=</span> <span class="nc">MagicMock</span><span class="p">(</span><span class="n">spec</span><span class="o">=</span><span class="n">KVStoreClient</span><span class="p">)</span>
+<span class="n">mock_transaction</span> <span class="o">=</span> <span class="nc">MagicMock</span><span class="p">(</span><span class="n">spec</span><span class="o">=</span><span class="n">KVStoreClient</span><span class="p">.</span><span class="n">Transaction</span><span class="p">)</span>
+<span class="n">mock_mutation_request</span> <span class="o">=</span> <span class="nc">MagicMock</span><span class="p">(</span><span class="n">spec</span><span class="o">=</span><span class="n">KVStoreClient</span><span class="p">.</span><span class="n">MutationRequest</span><span class="p">)</span>
+<span class="n">mock_mutation</span> <span class="o">=</span> <span class="nc">MagicMock</span><span class="p">(</span><span class="n">spec</span><span class="o">=</span><span class="n">KVStoreClient</span><span class="p">.</span><span class="n">Mutation</span><span class="p">)</span>
 
 <span class="n">mock_client</span><span class="p">.</span><span class="n">new_transaction</span><span class="p">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="n">mock_transaction</span>
 <span class="n">mock_transaction</span><span class="p">.</span><span class="n">mutation_request</span><span class="p">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="n">mock_mutation_request</span>
@@ -50,16 +50,16 @@ The <a href="https://en.wikipedia.org/wiki/Law_of_Demeter">Law of Demeter</a> es
 <p>There are a few ways to address this. Instead, if <code class="language-plaintext highlighter-rouge">KVStoreClient</code> could be recast as a <code class="language-plaintext highlighter-rouge">Transaction</code> factory, and then encapsulate all operations associated with the transactions within the <code class="language-plaintext highlighter-rouge">Transaction</code> class, then <code class="language-plaintext highlighter-rouge">UpdateKVStore</code> can be modified as follows:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">UpdateKVStore</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client</span><span class="p">:</span> <span class="n">KVStoreClient</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">client</span>  <span class="c1"># Now a Factory class for Transaction.
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">client</span><span class="p">:</span> <span class="n">KVStoreClient</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">client</span>  <span class="c1"># Now a Factory class for Transaction.
 </span>        
     <span class="k">def</span> <span class="nf">update_value</span><span class="p">(</span><span class="n">new_content</span><span class="p">:</span> <span class="n">Content</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Status</span><span class="p">:</span>
-        <span class="n">transaction</span><span class="p">:</span> <span class="n">KVStoreClient</span><span class="p">.</span><span class="n">Transaction</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="n">new_transaction</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">transaction</span><span class="p">.</span><span class="n">get_content</span><span class="p">()</span> <span class="o">==</span> <span class="n">new_content</span><span class="p">:</span>
+        <span class="n">transaction</span><span class="p">:</span> <span class="n">KVStoreClient</span><span class="p">.</span><span class="n">Transaction</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="nf">new_transaction</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">transaction</span><span class="p">.</span><span class="nf">get_content</span><span class="p">()</span> <span class="o">==</span> <span class="n">new_content</span><span class="p">:</span>
             <span class="c1"># Nothing to update
-</span>            <span class="n">transaction</span><span class="p">.</span><span class="n">end</span><span class="p">()</span>
+</span>            <span class="n">transaction</span><span class="p">.</span><span class="nf">end</span><span class="p">()</span>
             <span class="k">return</span> <span class="n">Status</span><span class="p">.</span><span class="n">SUCCESS_UNCHANGED</span>
-        <span class="n">status</span> <span class="o">=</span> <span class="n">transaction</span><span class="p">.</span><span class="n">update_and_land</span><span class="p">(</span><span class="n">new_content</span><span class="p">)</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="n">transaction</span><span class="p">.</span><span class="nf">update_and_land</span><span class="p">(</span><span class="n">new_content</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">status</span>
 </code></pre></div></div>
 
@@ -71,33 +71,33 @@ The <a href="https://en.wikipedia.org/wiki/Law_of_Demeter">Law of Demeter</a> es
 
 <p>For instance, say you have a class <code class="language-plaintext highlighter-rouge">EmailDispatcher</code> whose method <code class="language-plaintext highlighter-rouge">setRecipient</code> only needs a customer name and email address. The method signature for <code class="language-plaintext highlighter-rouge">setRecipient</code> should only require the name and email, and not the entire <code class="language-plaintext highlighter-rouge">Customer</code> object that contains a whole lot more.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">@</span><span class="n">dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">Customer</span><span class="p">:</span>
     <span class="p">...</span> <span class="c1"># data class members.
-</span>    <span class="k">def</span> <span class="nf">getFullName</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="p">...</span>
-    <span class="k">def</span> <span class="nf">getEmail</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="p">...</span>
-    <span class="k">def</span> <span class="nf">getPhysicalAddress</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="p">...</span>
-    <span class="k">def</span> <span class="nf">getPostalCode</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="p">...</span>
-    <span class="k">def</span> <span class="nf">getCountry</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="p">...</span>
-    <span class="k">def</span> <span class="nf">getState</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="p">...</span>
-    <span class="k">def</span> <span class="nf">getCustomerId</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="p">...</span>
+</span>    <span class="k">def</span> <span class="nf">getFullName</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="bp">...</span>
+    <span class="k">def</span> <span class="nf">getEmail</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="bp">...</span>
+    <span class="k">def</span> <span class="nf">getPhysicalAddress</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="bp">...</span>
+    <span class="k">def</span> <span class="nf">getPostalCode</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="bp">...</span>
+    <span class="k">def</span> <span class="nf">getCountry</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="bp">...</span>
+    <span class="k">def</span> <span class="nf">getState</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="bp">...</span>
+    <span class="k">def</span> <span class="nf">getCustomerId</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="bp">...</span>
     <span class="c1"># and so on.
 </span>    
  <span class="k">class</span> <span class="nc">EmailDispatcher</span><span class="p">:</span>
-     <span class="p">...</span>
+     <span class="bp">...</span>
      <span class="k">def</span> <span class="nf">setRecipient</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-         <span class="p">...</span>
+         <span class="bp">...</span>
      <span class="k">def</span> <span class="nf">setRecipientWithFatParameter</span><span class="p">(</span><span class="n">customer</span><span class="p">:</span> <span class="n">Customer</span><span class="p">):</span>
-         <span class="p">...</span>
-     <span class="k">def</span> <span class="nf">sendMessage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">):</span>
-         <span class="p">...</span>
+         <span class="bp">...</span>
+     <span class="k">def</span> <span class="nf">sendMessage</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">):</span>
+         <span class="bp">...</span>
 </code></pre></div></div>
 
 <p>In the pseudocode above, the class <code class="language-plaintext highlighter-rouge">EmailDispatcher</code> has two methods <code class="language-plaintext highlighter-rouge">setRecipient</code> and <code class="language-plaintext highlighter-rouge">setRecipientWithFatParameter</code>. The former uses only the information it needs, and the latter passed in the entire <code class="language-plaintext highlighter-rouge">Customer</code> object as a fat parameter.</p>
@@ -105,33 +105,33 @@ The <a href="https://en.wikipedia.org/wiki/Law_of_Demeter">Law of Demeter</a> es
 <p>The convenience of passing in the entire <code class="language-plaintext highlighter-rouge">Customer</code> object is straightforward. It allows gives you a simple method signature. It makes it easier for the method to evolve to use richer information about the customer without needing to change its API contract. It allows you to define a common <code class="language-plaintext highlighter-rouge">Dispatcher</code> interface with multiple <code class="language-plaintext highlighter-rouge">Dispatcher</code>s that use different properties of the <code class="language-plaintext highlighter-rouge">Customer</code> class.</p>
 
 <p>However, when it comes to unit testing, such fat parameters present a problem. Consider how you would test the <code class="language-plaintext highlighter-rouge">EmailDispatcher</code>’s <code class="language-plaintext highlighter-rouge">setRecipientWithFatParameter</code> method. The tests will need to create fake <code class="language-plaintext highlighter-rouge">Customer</code> objects. So, your fake <code class="language-plaintext highlighter-rouge">Customers</code> might look like this:</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fakeCustomer</span> <span class="o">=</span> <span class="n">Customer</span><span class="p">(</span>
-    <span class="n">first_name</span><span class="o">=</span><span class="s">"bob"</span><span class="p">,</span>
-    <span class="n">last_name</span><span class="o">=</span><span class="s">"marley"</span><span class="p">,</span> 
-    <span class="n">email</span><span class="o">=</span><span class="s">"bob@doobie.com"</span><span class="p">,</span> 
-    <span class="n">address</span><span class="o">=</span><span class="n">Address</span><span class="p">(</span>
-        <span class="s">"420 High St."</span><span class="p">,</span> 
-      <span class="s">""</span><span class="p">,</span> 
-      <span class="s">"Mary Jane"</span><span class="p">,</span> 
-      <span class="s">"Ganga Nation"</span><span class="p">,</span> 
-      <span class="s">"7232"</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fakeCustomer</span> <span class="o">=</span> <span class="nc">Customer</span><span class="p">(</span>
+    <span class="n">first_name</span><span class="o">=</span><span class="sh">"</span><span class="s">bob</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">last_name</span><span class="o">=</span><span class="sh">"</span><span class="s">marley</span><span class="sh">"</span><span class="p">,</span> 
+    <span class="n">email</span><span class="o">=</span><span class="sh">"</span><span class="s">bob@doobie.com</span><span class="sh">"</span><span class="p">,</span> 
+    <span class="n">address</span><span class="o">=</span><span class="nc">Address</span><span class="p">(</span>
+        <span class="sh">"</span><span class="s">420 High St.</span><span class="sh">"</span><span class="p">,</span> 
+      <span class="sh">""</span><span class="p">,</span> 
+      <span class="sh">"</span><span class="s">Mary Jane</span><span class="sh">"</span><span class="p">,</span> 
+      <span class="sh">"</span><span class="s">Ganga Nation</span><span class="sh">"</span><span class="p">,</span> 
+      <span class="sh">"</span><span class="s">7232</span><span class="sh">"</span>
     <span class="p">),</span> 
     <span class="nb">id</span><span class="o">=</span><span class="mi">12345</span><span class="p">,</span> 
-    <span class="n">postal_code</span><span class="o">=</span><span class="s">"7232"</span><span class="p">,</span> 
-    <span class="p">...</span>
+    <span class="n">postal_code</span><span class="o">=</span><span class="sh">"</span><span class="s">7232</span><span class="sh">"</span><span class="p">,</span> 
+    <span class="bp">...</span>
 <span class="p">)</span>
 </code></pre></div></div>
 
 <p>When someone reads this unit test, do they know what is relevant here? Does it matter that the second parameter of <code class="language-plaintext highlighter-rouge">address</code> is empty string? Should the last parameter of <code class="language-plaintext highlighter-rouge">address</code> match the value of <code class="language-plaintext highlighter-rouge">postal_code</code>? While we might be able to guess it in this case, it gets more confusing in cases where the fat parameter is encapsulating a much more complicated entity, such as a database table.</p>
 
-<p>When refactoring or making changes to the <code class="language-plaintext highlighter-rouge">EmailDispatcher</code>, if the unit test fails, then figuring out why the test failed becomes a non-trivial exercise, and could end up slowing you down a lot more than you expected. All this just leads to high maintenance costs for tests, low readability <sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote" rel="footnote">2</a></sup>, poor DevX, and limited benefits.</p>
+<p>When refactoring or making changes to the <code class="language-plaintext highlighter-rouge">EmailDispatcher</code>, if the unit test fails, then figuring out why the test failed becomes a non-trivial exercise, and could end up slowing you down a lot more than you expected. All this just leads to high maintenance costs for tests, low readability <sup id="fnref:2"><a href="#fn:2" class="footnote" rel="footnote" role="doc-noteref">2</a></sup>, poor DevX, and limited benefits.</p>
 
 <div class="footnotes" role="doc-endnotes">
   <ol>
-    <li id="fn:1" role="doc-endnote">
+    <li id="fn:1">
       <p>You can read about it <a href="https://wouterdekort.com/2012/03/27/unit-testing-hell-or-heaven/">here</a>, <a href="https://hermanradtke.com/2010/01/17/unit-testing-and-the-law-of-demeter.html/">here</a>, <a href="https://wiki.c2.com/?LawOfDemeterMakesUnitTestsEasier">here</a>, and <a href="https://testing.googleblog.com/2008/07/breaking-law-of-demeter-is-like-looking.html">here</a>, and really just search for “Law of Demeter” on the Internet <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
-    <li id="fn:2" role="doc-endnote">
+    <li id="fn:2">
       <p>For more details on why we should care about readability, see the section on Readability <a href="https://srikanth.sastry.name/dry-unit-tests-are-bad/">here</a>. <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>
@@ -174,68 +174,68 @@ Almost <a href="/defining-unit-tests-two-schools-of-thought/">by definition</a> 
 <p>Say, your SUT has a dependency called <code class="language-plaintext highlighter-rouge">Helper</code>, and initially, for the two tests in your unit tests for the SUT, you initialize your <code class="language-plaintext highlighter-rouge">Helper</code> stub with contents <code class="language-plaintext highlighter-rouge">valueA</code>, and <code class="language-plaintext highlighter-rouge">valueB</code>. Since both tests share the same initial state, you include the initialization code in the <code class="language-plaintext highlighter-rouge">SetUp</code> of the unit tests.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">SUTTestCase</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">helper</span> <span class="o">=</span> <span class="n">StubHelper</span><span class="p">()</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">helper</span><span class="p">.</span><span class="n">add_contents</span><span class="p">([</span><span class="n">valueA</span><span class="p">,</span> <span class="n">valueB</span><span class="p">])</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">sut</span> <span class="o">=</span> <span class="n">SUT</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">helper</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">helper</span> <span class="o">=</span> <span class="nc">StubHelper</span><span class="p">()</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">helper</span><span class="p">.</span><span class="nf">add_contents</span><span class="p">([</span><span class="n">valueA</span><span class="p">,</span> <span class="n">valueB</span><span class="p">])</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">sut</span> <span class="o">=</span> <span class="nc">SUT</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">helper</span><span class="p">)</span>
         
-    <span class="k">def</span> <span class="nf">test_behavior1</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">test_behavior1</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
         <span class="p">...</span>  <span class="c1"># Assumes self.helper set with contents=[valueA, valueB]
 </span>    
-    <span class="k">def</span> <span class="nf">test_behavior2</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">test_behavior2</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
         <span class="p">...</span>  <span class="c1"># Assumes self.helper set with contents=[valueA, valueB]
 </span></code></pre></div></div>
 
 <p>Next, you modify SUT to add features to it. In order to test those features, the <code class="language-plaintext highlighter-rouge">Helper</code> stub needs to include <code class="language-plaintext highlighter-rouge">controllerA</code>. But these are useful only in the new tests being added. However, looking at the unit test you already have, it is easiest to to simply add <code class="language-plaintext highlighter-rouge">controllerA</code> to <code class="language-plaintext highlighter-rouge">self.helper</code>. So, your unit tests look as follows:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">SUTTestCase</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">helper</span> <span class="o">=</span> <span class="n">StubHelper</span><span class="p">()</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">helper</span><span class="p">.</span><span class="n">add_contents</span><span class="p">([</span><span class="n">valueA</span><span class="p">,</span> <span class="n">valueB</span><span class="p">])</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">helper</span><span class="p">.</span><span class="n">add_controller</span><span class="p">(</span><span class="n">controllerA</span><span class="p">)</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">sut</span> <span class="o">=</span> <span class="n">SUT</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">helper</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">helper</span> <span class="o">=</span> <span class="nc">StubHelper</span><span class="p">()</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">helper</span><span class="p">.</span><span class="nf">add_contents</span><span class="p">([</span><span class="n">valueA</span><span class="p">,</span> <span class="n">valueB</span><span class="p">])</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">helper</span><span class="p">.</span><span class="nf">add_controller</span><span class="p">(</span><span class="n">controllerA</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">sut</span> <span class="o">=</span> <span class="nc">SUT</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">helper</span><span class="p">)</span>
         
-    <span class="k">def</span> <span class="nf">test_behavior1</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">test_behavior1</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
         <span class="p">...</span>  <span class="c1"># Assumes self.helper set with contents=[valueA, valueB]
 </span>             <span class="c1"># But this test assumes nothing about self.helper's controller
 </span>
-    <span class="k">def</span> <span class="nf">test_behavior2</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">test_behavior2</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
         <span class="p">...</span>  <span class="c1"># Assumes self.helper set with contents=[valueA, valueB]
 </span>             <span class="c1"># But this test assumes nothing about self.helper's controller
 </span>
-    <span class="k">def</span> <span class="nf">test_behavior3</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">test_behavior3</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
         <span class="p">...</span>  <span class="c1"># Assumes self.helper set with contents=[valueA, valueB], and controller=controllerA
 </span>
-    <span class="k">def</span> <span class="nf">test_behavior4</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">test_behavior4</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
         <span class="p">...</span>  <span class="c1"># Assumes self.helper set with contents=[valueA, valueB], and controller=controllerA
 </span></code></pre></div></div>
 
 <p>Then you discover a gap in testing that requires the initial state of the <code class="language-plaintext highlighter-rouge">Helper</code> stub to have just the content <code class="language-plaintext highlighter-rouge">valueA</code> and include <code class="language-plaintext highlighter-rouge">controllerA</code>. Now, when adding this new unit test to suite, the simplest way to do this would be to remove <code class="language-plaintext highlighter-rouge">valueB</code> from <code class="language-plaintext highlighter-rouge">self.helper</code> at the start of the new test. So, now, your test suite looks as follows:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">SUTTestCase</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">helper</span> <span class="o">=</span> <span class="n">StubHelper</span><span class="p">()</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">helper</span><span class="p">.</span><span class="n">add_contents</span><span class="p">([</span><span class="n">valueA</span><span class="p">,</span> <span class="n">valueB</span><span class="p">])</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">helper</span><span class="p">.</span><span class="n">add_controller</span><span class="p">(</span><span class="n">controllerA</span><span class="p">)</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">sut</span> <span class="o">=</span> <span class="n">SUT</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">helper</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">helper</span> <span class="o">=</span> <span class="nc">StubHelper</span><span class="p">()</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">helper</span><span class="p">.</span><span class="nf">add_contents</span><span class="p">([</span><span class="n">valueA</span><span class="p">,</span> <span class="n">valueB</span><span class="p">])</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">helper</span><span class="p">.</span><span class="nf">add_controller</span><span class="p">(</span><span class="n">controllerA</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">sut</span> <span class="o">=</span> <span class="nc">SUT</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">helper</span><span class="p">)</span>
         
-    <span class="k">def</span> <span class="nf">test_behavior1</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">test_behavior1</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
         <span class="p">...</span>  <span class="c1"># Assumes self.helper set with contents=[valueA, valueB]
 </span>             <span class="c1"># But this test assumes nothing about self.helper's controller
 </span>
-    <span class="k">def</span> <span class="nf">test_behavior2</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">test_behavior2</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
         <span class="p">...</span>  <span class="c1"># Assumes self.helper set with contents=[valueA, valueB]
 </span>             <span class="c1"># But this test assumes nothing about self.helper's controller
 </span>
-    <span class="k">def</span> <span class="nf">test_behavior3</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">test_behavior3</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
         <span class="p">...</span>  <span class="c1"># Assumes self.helper set with contents=[valueA, valueB], and controller=controllerA
 </span>
-    <span class="k">def</span> <span class="nf">test_behavior4</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">test_behavior4</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
         <span class="p">...</span>  <span class="c1"># Assumes self.helper set with contents=[valueA, valueB], and controller=controllerA
 </span>
-    <span class="k">def</span> <span class="nf">test_behavior5</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">test_behavior5</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
         <span class="c1"># Assumes self.helper set with contents=[valueA, valueB] (because of other tests' setup)
-</span>        <span class="bp">self</span><span class="p">.</span><span class="n">helper</span><span class="p">.</span><span class="n">remove_content</span><span class="p">(</span><span class="n">valueB</span><span class="p">)</span>
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">helper</span><span class="p">.</span><span class="nf">remove_content</span><span class="p">(</span><span class="n">valueB</span><span class="p">)</span>
         <span class="c1"># Now assumes self.helper set with contents=[valueA]
 </span>        <span class="p">...</span>  
 </code></pre></div></div>
@@ -251,40 +251,40 @@ Almost <a href="/defining-unit-tests-two-schools-of-thought/">by definition</a> 
 <p>Use the <code class="language-plaintext highlighter-rouge">setUp</code> method to simply set up your dependencies, but not to enforce any precondition. Instead, make setting preconditions part of the <em>arrange</em> step of each unit test. You can even encapsulate the precondition setting into a function (with the right parameters) so that the <em>arrange</em> section does not get too bloated, and yet the test code is readable. Consider the following refactoring of the tests:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">SUTTestCase</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">helper</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">StubHelper</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">sut</span> <span class="o">=</span> <span class="n">SUT</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">helper</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">helper</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">StubHelper</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">sut</span> <span class="o">=</span> <span class="nc">SUT</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">helper</span><span class="p">)</span>
         
-    <span class="k">def</span> <span class="nf">prepare_helper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">contents</span><span class="p">:</span><span class="n">List</span><span class="p">[</span><span class="n">Value</span><span class="p">],</span> <span class="n">controller</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Controller</span><span class="p">]</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">helper</span> <span class="o">=</span> <span class="n">StubHelper</span><span class="p">()</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">helper</span><span class="p">.</span><span class="n">add_contents</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">prepare_helper</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">contents</span><span class="p">:</span><span class="n">List</span><span class="p">[</span><span class="n">Value</span><span class="p">],</span> <span class="n">controller</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Controller</span><span class="p">]</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">helper</span> <span class="o">=</span> <span class="nc">StubHelper</span><span class="p">()</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">helper</span><span class="p">.</span><span class="nf">add_contents</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">controller</span><span class="p">:</span>
-            <span class="bp">self</span><span class="p">.</span><span class="n">helper</span><span class="p">.</span><span class="n">add_controller</span><span class="p">(</span><span class="n">controller</span><span class="p">)</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">helper</span><span class="p">.</span><span class="nf">add_controller</span><span class="p">(</span><span class="n">controller</span><span class="p">)</span>
         
-    <span class="k">def</span> <span class="nf">test_behavior1</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">test_behavior1</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
         <span class="c1"># Assumes self.helper is a fresh object.
-</span>        <span class="bp">self</span><span class="p">.</span><span class="n">prepare_helper</span><span class="p">(</span><span class="n">contents</span><span class="o">=</span><span class="p">[</span><span class="n">valueA</span><span class="p">,</span> <span class="n">valueB</span><span class="p">])</span>
-        <span class="p">...</span>
+</span>        <span class="n">self</span><span class="p">.</span><span class="nf">prepare_helper</span><span class="p">(</span><span class="n">contents</span><span class="o">=</span><span class="p">[</span><span class="n">valueA</span><span class="p">,</span> <span class="n">valueB</span><span class="p">])</span>
+        <span class="bp">...</span>
 
-    <span class="k">def</span> <span class="nf">test_behavior2</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">test_behavior2</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
         <span class="c1"># Assumes self.helper is a fresh object.
-</span>        <span class="bp">self</span><span class="p">.</span><span class="n">prepare_helper</span><span class="p">(</span><span class="n">contents</span><span class="o">=</span><span class="p">[</span><span class="n">valueA</span><span class="p">,</span> <span class="n">valueB</span><span class="p">])</span>
+</span>        <span class="n">self</span><span class="p">.</span><span class="nf">prepare_helper</span><span class="p">(</span><span class="n">contents</span><span class="o">=</span><span class="p">[</span><span class="n">valueA</span><span class="p">,</span> <span class="n">valueB</span><span class="p">])</span>
         <span class="p">...</span>    
 
-    <span class="k">def</span> <span class="nf">test_behavior3</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">test_behavior3</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
         <span class="c1"># Assumes self.helper is a fresh object.
-</span>        <span class="bp">self</span><span class="p">.</span><span class="n">prepare_helper</span><span class="p">(</span><span class="n">contents</span><span class="o">=</span><span class="p">[</span><span class="n">valueA</span><span class="p">,</span> <span class="n">valueB</span><span class="p">],</span> <span class="n">controller</span><span class="o">=</span><span class="n">controllerA</span><span class="p">)</span>
-        <span class="p">...</span>
+</span>        <span class="n">self</span><span class="p">.</span><span class="nf">prepare_helper</span><span class="p">(</span><span class="n">contents</span><span class="o">=</span><span class="p">[</span><span class="n">valueA</span><span class="p">,</span> <span class="n">valueB</span><span class="p">],</span> <span class="n">controller</span><span class="o">=</span><span class="n">controllerA</span><span class="p">)</span>
+        <span class="bp">...</span>
 
-    <span class="k">def</span> <span class="nf">test_behavior4</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">test_behavior4</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
         <span class="c1"># Assumes self.helper is a fresh object.
-</span>        <span class="bp">self</span><span class="p">.</span><span class="n">prepare_helper</span><span class="p">(</span><span class="n">contents</span><span class="o">=</span><span class="p">[</span><span class="n">valueA</span><span class="p">,</span> <span class="n">valueB</span><span class="p">],</span> <span class="n">controller</span><span class="o">=</span><span class="n">controllerA</span><span class="p">)</span>
-        <span class="p">...</span>
+</span>        <span class="n">self</span><span class="p">.</span><span class="nf">prepare_helper</span><span class="p">(</span><span class="n">contents</span><span class="o">=</span><span class="p">[</span><span class="n">valueA</span><span class="p">,</span> <span class="n">valueB</span><span class="p">],</span> <span class="n">controller</span><span class="o">=</span><span class="n">controllerA</span><span class="p">)</span>
+        <span class="bp">...</span>
 
-    <span class="k">def</span> <span class="nf">test_behavior5</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">test_behavior5</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
         <span class="c1"># Assumes self.helper is a fresh object.
-</span>        <span class="bp">self</span><span class="p">.</span><span class="n">prepare_helper</span><span class="p">(</span><span class="n">contents</span><span class="o">=</span><span class="p">[</span><span class="n">valueA</span><span class="p">],</span> <span class="n">controller</span><span class="o">=</span><span class="n">controllerA</span><span class="p">)</span>
-        <span class="p">...</span>
+</span>        <span class="n">self</span><span class="p">.</span><span class="nf">prepare_helper</span><span class="p">(</span><span class="n">contents</span><span class="o">=</span><span class="p">[</span><span class="n">valueA</span><span class="p">],</span> <span class="n">controller</span><span class="o">=</span><span class="n">controllerA</span><span class="p">)</span>
+        <span class="bp">...</span>
 </code></pre></div></div>
 
 <h2 id="coupling-in-parameterized-tests">Coupling in parameterized tests</h2>
@@ -295,24 +295,24 @@ Almost <a href="/defining-unit-tests-two-schools-of-thought/">by definition</a> 
     <span class="n">status</span><span class="p">:</span> <span class="n">StatusEnum</span>
     <span class="n">return_value</span><span class="p">:</span> <span class="n">typing</span><span class="p">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>
     <span class="n">exception</span><span class="p">:</span> <span class="n">typing</span><span class="p">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">Exception</span><span class="p">]</span>
-    <span class="p">...</span>
+    <span class="bp">...</span>
 
 <span class="k">class</span> <span class="nc">TestSequence</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
   
-    <span class="o">@</span><span class="n">parameterized</span><span class="p">.</span><span class="n">expand</span><span class="p">([</span>
+    <span class="nd">@parameterized.expand</span><span class="p">([</span>
         <span class="p">[</span><span class="n">test_input1</span><span class="p">,</span> <span class="n">expected_output1</span><span class="p">],</span>
         <span class="p">[</span><span class="n">test_input2</span><span class="p">,</span> <span class="n">expected_output2</span><span class="p">],</span>
-        <span class="p">...</span>
+        <span class="bp">...</span>
     <span class="p">])</span>
-    <span class="k">def</span> <span class="nf">test_something</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">test_input</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">expected_output</span><span class="p">:</span> <span class="n">TestOutput</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">_run_test</span><span class="p">(</span><span class="n">test_input</span><span class="p">,</span> <span class="n">expected_output</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">test_something</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">test_input</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">expected_output</span><span class="p">:</span> <span class="n">TestOutput</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">self</span><span class="p">.</span><span class="nf">_run_test</span><span class="p">(</span><span class="n">test_input</span><span class="p">,</span> <span class="n">expected_output</span><span class="p">)</span>
     
-    <span class="k">def</span> <span class="nf">_run_test</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">test_input</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">expected_output</span><span class="p">:</span> <span class="n">TestOutput</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">sut</span> <span class="o">=</span> <span class="n">SUT</span><span class="p">(...)</span>
-        <span class="n">prepare_sut_for_tests</span><span class="p">(</span><span class="n">sut</span><span class="p">,</span> <span class="n">test_input</span><span class="p">)</span>
-        <span class="n">output</span> <span class="o">=</span> <span class="n">sut</span><span class="p">.</span><span class="n">do_something</span><span class="p">(</span><span class="n">test_input</span><span class="p">)</span>
-        <span class="n">test_output</span> <span class="o">=</span> <span class="n">make_test_output</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">sut</span><span class="p">)</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">expected_output</span><span class="p">,</span> <span class="n">test_output</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">_run_test</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">test_input</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">expected_output</span><span class="p">:</span> <span class="n">TestOutput</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">sut</span> <span class="o">=</span> <span class="nc">SUT</span><span class="p">(...)</span>
+        <span class="nf">prepare_sut_for_tests</span><span class="p">(</span><span class="n">sut</span><span class="p">,</span> <span class="n">test_input</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">sut</span><span class="p">.</span><span class="nf">do_something</span><span class="p">(</span><span class="n">test_input</span><span class="p">)</span>
+        <span class="n">test_output</span> <span class="o">=</span> <span class="nf">make_test_output</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">sut</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="nf">assertEquals</span><span class="p">(</span><span class="n">expected_output</span><span class="p">,</span> <span class="n">test_output</span><span class="p">)</span>
 
 </code></pre></div></div>
 
@@ -323,71 +323,71 @@ Almost <a href="/defining-unit-tests-two-schools-of-thought/">by definition</a> 
 <p>There are some fairly straightforward ways to decouple such tests. First, is that we should be very conservative about how we organize these tests. For example, we can group all positive tests and group all negative tests separately; similarly, we can further subgroup the tests based on the type of assertions on the output. In the above example, we can have three subgroups: positive tests that verify only output status, positive tests that verify return value, and negative tests that verify exception. Thus you now have three parameterized test classes that look something like this:</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">TestDoSomething</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
   
-    <span class="o">@</span><span class="n">parameterized</span><span class="p">.</span><span class="n">expand</span><span class="p">([</span>
+    <span class="nd">@parameterized.expand</span><span class="p">([</span>
         <span class="p">[</span><span class="n">test_status_input1</span><span class="p">,</span> <span class="n">expected_status_output1</span><span class="p">],</span>
         <span class="p">[</span><span class="n">test_status_input2</span><span class="p">,</span> <span class="n">expected_status_output2</span><span class="p">],</span>
-        <span class="p">...</span>
+        <span class="bp">...</span>
     <span class="p">])</span>
     <span class="k">def</span> <span class="nf">test_something_status_only</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> 
+        <span class="n">self</span><span class="p">,</span> 
         <span class="n">test_input</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> 
         <span class="n">expected_output</span><span class="p">:</span> <span class="n">StatusEnum</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
         <span class="c1"># Arrange
-</span>        <span class="n">sut</span> <span class="o">=</span> <span class="n">SUT</span><span class="p">(...)</span>
+</span>        <span class="n">sut</span> <span class="o">=</span> <span class="nc">SUT</span><span class="p">(...)</span>
         <span class="p">...</span>  <span class="c1"># More 'arrange' code
 </span>        
         <span class="c1"># Act
-</span>        <span class="n">output</span> <span class="o">=</span> <span class="n">sut</span><span class="p">.</span><span class="n">do_something</span><span class="p">(</span><span class="n">test_input</span><span class="p">)</span>
+</span>        <span class="n">output</span> <span class="o">=</span> <span class="n">sut</span><span class="p">.</span><span class="nf">do_something</span><span class="p">(</span><span class="n">test_input</span><span class="p">)</span>
         <span class="n">output_status</span> <span class="o">=</span> <span class="n">output</span><span class="p">.</span><span class="n">status</span>
         
         <span class="c1"># Assert
-</span>        <span class="bp">self</span><span class="p">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">expected_output</span><span class="p">,</span> <span class="n">output_status</span><span class="p">)</span>
+</span>        <span class="n">self</span><span class="p">.</span><span class="nf">assertEquals</span><span class="p">(</span><span class="n">expected_output</span><span class="p">,</span> <span class="n">output_status</span><span class="p">)</span>
         
-    <span class="o">@</span><span class="n">parameterized</span><span class="p">.</span><span class="n">expand</span><span class="p">([</span>
+    <span class="nd">@parameterized.expand</span><span class="p">([</span>
         <span class="p">[</span><span class="n">test_return_value_input1</span><span class="p">,</span> <span class="n">expected_return_value_output1</span><span class="p">],</span>
         <span class="p">[</span><span class="n">test_return_value_input2</span><span class="p">,</span> <span class="n">expected_return_value_output2</span><span class="p">],</span>
-        <span class="p">...</span>
+        <span class="bp">...</span>
     <span class="p">])</span>
     <span class="k">def</span> <span class="nf">test_something_return_value_only</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> 
+        <span class="n">self</span><span class="p">,</span> 
         <span class="n">test_input</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> 
         <span class="n">expected_output</span><span class="p">:</span> <span class="nb">int</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
         <span class="c1"># Arrange
-</span>        <span class="n">sut</span> <span class="o">=</span> <span class="n">SUT</span><span class="p">(...)</span>
+</span>        <span class="n">sut</span> <span class="o">=</span> <span class="nc">SUT</span><span class="p">(...)</span>
         <span class="p">...</span>  <span class="c1"># More 'arrange' code
 </span>        
         <span class="c1"># Act
-</span>        <span class="n">output</span> <span class="o">=</span> <span class="n">sut</span><span class="p">.</span><span class="n">do_something</span><span class="p">(</span><span class="n">test_input</span><span class="p">)</span>
+</span>        <span class="n">output</span> <span class="o">=</span> <span class="n">sut</span><span class="p">.</span><span class="nf">do_something</span><span class="p">(</span><span class="n">test_input</span><span class="p">)</span>
         <span class="n">output_status</span> <span class="o">=</span> <span class="n">output</span><span class="p">.</span><span class="n">status</span>
         <span class="n">output_value</span> <span class="o">=</span> <span class="n">output</span><span class="p">.</span><span class="n">value</span>
         
         <span class="c1"># Assert
-</span>        <span class="bp">self</span><span class="p">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">SomeEnum</span><span class="p">.</span><span class="n">SUCCESS</span><span class="p">,</span> <span class="n">output_status</span><span class="p">)</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">expected_output</span><span class="p">,</span> <span class="n">output_value</span><span class="p">)</span>
+</span>        <span class="n">self</span><span class="p">.</span><span class="nf">assertEquals</span><span class="p">(</span><span class="n">SomeEnum</span><span class="p">.</span><span class="n">SUCCESS</span><span class="p">,</span> <span class="n">output_status</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="nf">assertEquals</span><span class="p">(</span><span class="n">expected_output</span><span class="p">,</span> <span class="n">output_value</span><span class="p">)</span>
 
-    <span class="o">@</span><span class="n">parameterized</span><span class="p">.</span><span class="n">expand</span><span class="p">([</span>
+    <span class="nd">@parameterized.expand</span><span class="p">([</span>
         <span class="p">[</span><span class="n">test_return_value_input1</span><span class="p">,</span> <span class="n">expected_error_code_output1</span><span class="p">],</span>
         <span class="p">[</span><span class="n">test_return_value_input2</span><span class="p">,</span> <span class="n">expected_error_code_output2</span><span class="p">],</span>
-        <span class="p">...</span>
+        <span class="bp">...</span>
     <span class="p">])</span>
     <span class="k">def</span> <span class="nf">test_something_throws_exception</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">self</span><span class="p">,</span>
         <span class="n">test_input</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">expected_error_code</span><span class="p">:</span> <span class="nb">int</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
         <span class="c1"># Arrange
-</span>        <span class="n">sut</span> <span class="o">=</span> <span class="n">SUT</span><span class="p">(...)</span>
+</span>        <span class="n">sut</span> <span class="o">=</span> <span class="nc">SUT</span><span class="p">(...)</span>
         <span class="p">...</span>  <span class="c1"># More 'arrange' code
 </span>        
         <span class="c1"># Act
-</span>        <span class="k">with</span> <span class="bp">self</span><span class="p">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="n">SomeSUTException</span><span class="p">)</span> <span class="k">as</span> <span class="n">exception_context</span><span class="p">:</span>
-            <span class="n">sut</span><span class="p">.</span><span class="n">do_something</span><span class="p">(</span><span class="n">test_input</span><span class="p">)</span>
+</span>        <span class="k">with</span> <span class="n">self</span><span class="p">.</span><span class="nf">assertRaises</span><span class="p">(</span><span class="n">SomeSUTException</span><span class="p">)</span> <span class="k">as</span> <span class="n">exception_context</span><span class="p">:</span>
+            <span class="n">sut</span><span class="p">.</span><span class="nf">do_something</span><span class="p">(</span><span class="n">test_input</span><span class="p">)</span>
         <span class="n">exception</span> <span class="o">=</span> <span class="n">exception_context</span><span class="p">.</span><span class="n">exception</span>
         
         <span class="c1"># Assert
-</span>        <span class="bp">self</span><span class="p">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">excepted_error_code</span><span class="p">,</span> <span class="n">exception</span><span class="p">.</span><span class="n">error_code</span><span class="p">)</span>
+</span>        <span class="n">self</span><span class="p">.</span><span class="nf">assertEquals</span><span class="p">(</span><span class="n">excepted_error_code</span><span class="p">,</span> <span class="n">exception</span><span class="p">.</span><span class="n">error_code</span><span class="p">)</span>
 </code></pre></div></div>]]></content><author><name>Srikanth Sastry</name><email>srikanth@sastry.name</email></author><category term="Professional" /><category term="unit tests" /><category term="software engineering" /><summary type="html"><![CDATA[Almost by definition unit tests should be isolated from its (external, shared) dependencies. But, equally importantly, unit tests should also be isolated from each other. When one test starts to affect another test, the two tests are said to be coupled. Alternatively, if changes to one test can negatively impact the correctness of another test, then the two tests are said to be coupled.]]></summary></entry><entry><title type="html">In unit tests, I favor Detroit over London</title><link href="//srikanth.sastry.name/in-unit-tests-favor-detroit-over-london/" rel="alternate" type="text/html" title="In unit tests, I favor Detroit over London" /><published>2022-06-26T00:00:00+00:00</published><updated>2022-06-26T00:00:00+00:00</updated><id>//srikanth.sastry.name/in-unit-tests-i-favor-detroit-over-london</id><content type="html" xml:base="//srikanth.sastry.name/in-unit-tests-favor-detroit-over-london/"><![CDATA[<p><img src="/images/detroit-wall-frame.jpg" alt="" /></p>
 
 <p><a href="/defining-unit-tests-two-schools-of-thought/">Recall</a> the two schools of thought around unit test: Detroit, and London. Briefly, the Detroit school considers a ‘unit’ of software to be tested as a ‘behavior’ that consists of one or more classes, and unit tests replace only shared and/or external dependencies with test doubles. In contrast, the London school consider a ‘unit’ to be a single class, and replaces all dependencies with test doubles.</p>
@@ -725,18 +725,18 @@ By their very nature, the correctness of nerves cannot be tested hermetically, a
 <p>Mocks are objects that are used to verify ‘outbound’ interactions of the SUT with external dependencies. This is different from the notion of ‘mocks’ that ‘mocking frameworks’ generate. Those ‘mocks’ are more correctly the superclass of test doubles.
 Examples where mocks are useful include the SUT logging to a log server, or sending an email, or filing a task/ticket in response to a given input/user journey. This becomes clearer with an illustration.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">unittest.mock</span> <span class="kn">import</span> <span class="n">MagicMock</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">unittest.mock</span> <span class="kn">import</span> <span class="n">MagicMock</span>
 
 <span class="k">class</span> <span class="nc">TestSUT</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">test_log_success</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">mock_log_server</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">spec</span><span class="o">=</span><span class="n">LogServerClass</span><span class="p">,</span> <span class="n">autospec</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-        <span class="n">mock_log_server</span><span class="p">.</span><span class="n">log</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-        <span class="n">sut</span> <span class="o">=</span> <span class="n">SUT</span><span class="p">(</span><span class="n">log_server</span><span class="o">=</span><span class="n">mock_log_server</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">test_log_success</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">mock_log_server</span> <span class="o">=</span> <span class="nc">MagicMock</span><span class="p">(</span><span class="n">spec</span><span class="o">=</span><span class="n">LogServerClass</span><span class="p">,</span> <span class="n">autospec</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">mock_log_server</span><span class="p">.</span><span class="n">log</span> <span class="o">=</span> <span class="nc">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">sut</span> <span class="o">=</span> <span class="nc">SUT</span><span class="p">(</span><span class="n">log_server</span><span class="o">=</span><span class="n">mock_log_server</span><span class="p">)</span>
         
-        <span class="n">sut</span><span class="p">.</span><span class="n">test_method</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="s">"foo"</span><span class="p">)</span>
+        <span class="n">sut</span><span class="p">.</span><span class="nf">test_method</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="sh">"</span><span class="s">foo</span><span class="sh">"</span><span class="p">)</span>
         
         <span class="c1"># This is ok!
-</span>        <span class="n">mock_log_server</span><span class="p">.</span><span class="n">log</span><span class="p">.</span><span class="n">assert_called_once_with</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s">"foo"</span><span class="p">)</span>
+</span>        <span class="n">mock_log_server</span><span class="p">.</span><span class="n">log</span><span class="p">.</span><span class="nf">assert_called_once_with</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="sh">"</span><span class="s">foo</span><span class="sh">"</span><span class="p">)</span>
 
 </code></pre></div></div>
 
@@ -748,21 +748,21 @@ Examples where mocks are useful include the SUT logging to a log server, or send
 
 <p>Unlike mocks, stubs verify ‘inbound’ interactions from external dependencies to the SUT. Stubs are useful when replacing external dependencies that ‘send’ data to the SUT in order for the SUT to satisfy its specification. Examples include key value stores, databases, event listeners, etc. The important note here is that the outbound interaction to the stub <em>should not be asserted</em> in the tests; that’s an anti pattern (it results in over-specification)! Here is an illustration.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">unittest.mock</span> <span class="kn">import</span> <span class="n">MagicMock</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">unittest.mock</span> <span class="kn">import</span> <span class="n">MagicMock</span>
 
 <span class="k">class</span> <span class="nc">TestSUT</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">test_email_retrieval</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">stub_key_value_store</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">spec</span><span class="o">=</span><span class="n">KeyValueStoreClass</span><span class="p">,</span> <span class="n">autospec</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-        <span class="n">stub_key_value_store</span><span class="p">.</span><span class="n">get</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="s">"user@special_domain.com"</span><span class="p">)</span>
-        <span class="n">sut</span> <span class="o">=</span> <span class="n">SUT</span><span class="p">(</span><span class="n">key_value_store</span><span class="o">=</span><span class="n">stub_key_value_store</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">test_email_retrieval</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">stub_key_value_store</span> <span class="o">=</span> <span class="nc">MagicMock</span><span class="p">(</span><span class="n">spec</span><span class="o">=</span><span class="n">KeyValueStoreClass</span><span class="p">,</span> <span class="n">autospec</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">stub_key_value_store</span><span class="p">.</span><span class="n">get</span> <span class="o">=</span> <span class="nc">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="sh">"</span><span class="s">user@special_domain.com</span><span class="sh">"</span><span class="p">)</span>
+        <span class="n">sut</span> <span class="o">=</span> <span class="nc">SUT</span><span class="p">(</span><span class="n">key_value_store</span><span class="o">=</span><span class="n">stub_key_value_store</span><span class="p">)</span>
         
-        <span class="n">email_domain</span> <span class="o">=</span> <span class="n">sut</span><span class="p">.</span><span class="n">get_user_email_domin</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s">"foo"</span><span class="p">)</span>
+        <span class="n">email_domain</span> <span class="o">=</span> <span class="n">sut</span><span class="p">.</span><span class="nf">get_user_email_domin</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="sh">"</span><span class="s">foo</span><span class="sh">"</span><span class="p">)</span>
         
         <span class="c1"># This is ok!
-</span>        <span class="bp">self</span><span class="p">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="s">"special_domain.com"</span><span class="p">,</span> <span class="n">email_domain</span><span class="p">)</span>
+</span>        <span class="n">self</span><span class="p">.</span><span class="nf">assertEquals</span><span class="p">(</span><span class="sh">"</span><span class="s">special_domain.com</span><span class="sh">"</span><span class="p">,</span> <span class="n">email_domain</span><span class="p">)</span>
         
         <span class="c1"># THIS IS NOT OK!
-</span>        <span class="n">stub_key_value_store</span><span class="p">.</span><span class="n">get</span><span class="p">.</span><span class="n">assert_called_once_with</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s">"foo"</span><span class="p">)</span>
+</span>        <span class="n">stub_key_value_store</span><span class="p">.</span><span class="n">get</span><span class="p">.</span><span class="nf">assert_called_once_with</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="sh">"</span><span class="s">foo</span><span class="sh">"</span><span class="p">)</span>
 
 </code></pre></div></div>
 <p>In the above illustration, we create a stub for the key value store (note that this is a stub even thought the object is a ‘mock’ class) that returns <code class="language-plaintext highlighter-rouge">"user@special_domain.com"</code> as a canned response to a <code class="language-plaintext highlighter-rouge">get</code> call. The test verifies that the SUT’s <code class="language-plaintext highlighter-rouge">get_user_email_domain</code> is called, it returns the correct email domain. What is important here is that we <em>should not</em> assert that there was a <code class="language-plaintext highlighter-rouge">get</code> call to the stub. Why? Because the call to the key value store is an implementation detail. Imagine a refactor that causes a previous value to be cached locally. If the unit tests were to assert on calls to the stubs, then such refactors would result in unit test failures, which undermines the utility, maintainability, and robustness of unit tests.</p>
@@ -771,38 +771,38 @@ Examples where mocks are useful include the SUT logging to a log server, or send
 
 <p>A small detour here. When using a stub, always consider if you can use a fake instead. There are multiple definitions of a fake, and the one I am referring to is the following. A fake is a special kind of stub that implements the same API as the production dependency, but the implementation is much more lightweight. This implementation may be correct only within the context of the unit tests where it is used. Let’s reuse the previous illustration of using a stub, and replace the stub with a fake. Recall that we stubbed out the <code class="language-plaintext highlighter-rouge">get</code> method of <code class="language-plaintext highlighter-rouge">KeyValueStoreClass</code> to return the canned value <code class="language-plaintext highlighter-rouge">"user@special_domain.com"</code>. Instead, we can implement a fake <code class="language-plaintext highlighter-rouge">KeyValueStoreClass</code> that uses a <code class="language-plaintext highlighter-rouge">Dict</code> as follows.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">unittest.mock</span> <span class="kn">import</span> <span class="n">MagicMock</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">unittest.mock</span> <span class="kn">import</span> <span class="n">MagicMock</span>
+<span class="kn">from</span> <span class="n">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
 
 <span class="c1"># We assume a simplistic API for KeyValueStoreClass with just
 # update and get methods.
 </span><span class="k">class</span> <span class="nc">KeyValueStoreClass</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="p">...</span>
-    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="p">...</span>
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="bp">...</span>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="bp">...</span>
 
 <span class="k">class</span> <span class="nc">FakeKeyValueStoreClassImpl</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">kvs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">kvs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
     
-    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">kvs</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">kvs</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
 
-    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">kvs</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">kvs</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
 
 
 <span class="k">class</span> <span class="nc">TestSUT</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">test_email_retrieval</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">FakeKeyValueStoreClass</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="n">FakeKeyValueStoreClassImpl</span><span class="p">())</span>
-        <span class="n">fake_key_value_store</span> <span class="o">=</span> <span class="n">FakeKeyValueStoreClass</span><span class="p">()</span>
-        <span class="n">fake_key_value_store</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="s">"foo"</span><span class="p">,</span> <span class="n">v</span><span class="o">=</span><span class="s">"user@special_domain.com"</span><span class="p">)</span>
-        <span class="n">sut</span> <span class="o">=</span> <span class="n">SUT</span><span class="p">(</span><span class="n">key_value_store</span><span class="o">=</span><span class="n">fake_key_value_store</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">test_email_retrieval</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">FakeKeyValueStoreClass</span> <span class="o">=</span> <span class="nc">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="nc">FakeKeyValueStoreClassImpl</span><span class="p">())</span>
+        <span class="n">fake_key_value_store</span> <span class="o">=</span> <span class="nc">FakeKeyValueStoreClass</span><span class="p">()</span>
+        <span class="n">fake_key_value_store</span><span class="p">.</span><span class="nf">update</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="sh">"</span><span class="s">foo</span><span class="sh">"</span><span class="p">,</span> <span class="n">v</span><span class="o">=</span><span class="sh">"</span><span class="s">user@special_domain.com</span><span class="sh">"</span><span class="p">)</span>
+        <span class="n">sut</span> <span class="o">=</span> <span class="nc">SUT</span><span class="p">(</span><span class="n">key_value_store</span><span class="o">=</span><span class="n">fake_key_value_store</span><span class="p">)</span>
         
-        <span class="n">email_domain</span> <span class="o">=</span> <span class="n">sut</span><span class="p">.</span><span class="n">get_user_email_domin</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s">"foo"</span><span class="p">)</span>
+        <span class="n">email_domain</span> <span class="o">=</span> <span class="n">sut</span><span class="p">.</span><span class="nf">get_user_email_domin</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="sh">"</span><span class="s">foo</span><span class="sh">"</span><span class="p">)</span>
         
-        <span class="bp">self</span><span class="p">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="s">"special_domain.com"</span><span class="p">,</span> <span class="n">email_domain</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="nf">assertEquals</span><span class="p">(</span><span class="sh">"</span><span class="s">special_domain.com</span><span class="sh">"</span><span class="p">,</span> <span class="n">email_domain</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>The advantage of using a fake is that the test becomes much more robust and is more resistant to refactoring. It also becomes more extensible. When using a stub, if we wanted to test a different user journey, we would need to inject a new return value for <code class="language-plaintext highlighter-rouge">KeyValueStoreClass.get</code> method. We would in one of two ways:  (1) resetting the mock, which is a bad anti-pattern, or (2) initialize the stub to return a preconfigured list of canned values, in order, which makes the test more brittle (consider what happens if the SUT chooses to call <code class="language-plaintext highlighter-rouge">get</code> for the same key twice vs. calls <code class="language-plaintext highlighter-rouge">get</code> for different keys once each). Using a fake sidesteps these issues.</p>
@@ -814,33 +814,33 @@ Examples where mocks are useful include the SUT logging to a log server, or send
 <p>Despite all your efforts to separate out the test cases that need stubs and the ones that need mocks, you will inevitably find yourself needing to test a scenario in which you need to verify both inbound and outbound interactions with an external dependency. How do we address that?</p>
 
 <p>First, if you need to assert on the outbound interaction of the same call that is stubbed, then you really don’t need that test. Just use a stub/fake and do not assert on the outbound interaction. Next, the only legitimate case of needing to verify both inbound and outbound interactions is if they are on distinct APIs of the same dependency. For example, the SUT could be reading from a file, and you need to test that (1) the contents of the file were read correctly, and (2) the file object was closed after the file was read. In this case, it is perfectly ok to stub the file <code class="language-plaintext highlighter-rouge">read</code> method while mocking the <code class="language-plaintext highlighter-rouge">close</code> method. Here is an illustration.</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">unittest.mock</span> <span class="kn">import</span> <span class="n">MagicMock</span><span class="p">,</span> <span class="n">patch</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">unittest.mock</span> <span class="kn">import</span> <span class="n">MagicMock</span><span class="p">,</span> <span class="n">patch</span>
 
 <span class="k">class</span> <span class="nc">TestSUT</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">test_file_read</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">file_mock_stub_combo</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">()</span>
+    <span class="k">def</span> <span class="nf">test_file_read</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">file_mock_stub_combo</span> <span class="o">=</span> <span class="nc">MagicMock</span><span class="p">()</span>
         <span class="c1"># Using this as a stub by injecting canned contents of the file
-</span>        <span class="n">file_mock_stub_combo</span><span class="p">.</span><span class="n">__iter__</span><span class="p">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="p">[</span><span class="s">"1234"</span><span class="p">]</span>
+</span>        <span class="n">file_mock_stub_combo</span><span class="p">.</span><span class="n">__iter__</span><span class="p">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="p">[</span><span class="sh">"</span><span class="s">1234</span><span class="sh">"</span><span class="p">]</span>
         
         <span class="c1"># Next, we treat the file open call as a mock.
-</span>        <span class="k">with</span> <span class="n">patch</span><span class="p">(</span><span class="s">"builtins.open"</span><span class="p">,</span>
+</span>        <span class="k">with</span> <span class="nf">patch</span><span class="p">(</span><span class="sh">"</span><span class="s">builtins.open</span><span class="sh">"</span><span class="p">,</span>
                    <span class="n">return_value</span><span class="o">=</span><span class="n">file_mock_stub_combo</span><span class="p">,</span> 
                    <span class="n">create</span><span class="o">=</span><span class="bp">True</span>
                   <span class="p">)</span> <span class="k">as</span> <span class="n">mock_file</span><span class="p">:</span>
-            <span class="n">sut</span> <span class="o">=</span> <span class="n">SUT</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s">"foo"</span><span class="p">)</span>
-            <span class="n">file_contents</span> <span class="o">=</span> <span class="n">sut</span><span class="p">.</span><span class="n">get_contents</span><span class="p">()</span>
+            <span class="n">sut</span> <span class="o">=</span> <span class="nc">SUT</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="sh">"</span><span class="s">foo</span><span class="sh">"</span><span class="p">)</span>
+            <span class="n">file_contents</span> <span class="o">=</span> <span class="n">sut</span><span class="p">.</span><span class="nf">get_contents</span><span class="p">()</span>
             
             <span class="c1"># Assertions on call to file open.
 </span>            <span class="c1"># Treating the 'open' call as a mock.
-</span>            <span class="n">mock_file</span><span class="p">.</span><span class="n">assert_called_once_with</span><span class="p">(</span><span class="s">"foo"</span><span class="p">)</span>
+</span>            <span class="n">mock_file</span><span class="p">.</span><span class="nf">assert_called_once_with</span><span class="p">(</span><span class="sh">"</span><span class="s">foo</span><span class="sh">"</span><span class="p">)</span>
         
             <span class="c1"># Assertion on the contents returned.
 </span>            <span class="c1"># Treating the `read` as a stub.
-</span>            <span class="bp">self</span><span class="p">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="s">"1234"</span><span class="p">,</span> <span class="n">file_contents</span><span class="p">)</span>
+</span>            <span class="n">self</span><span class="p">.</span><span class="nf">assertEquals</span><span class="p">(</span><span class="sh">"</span><span class="s">1234</span><span class="sh">"</span><span class="p">,</span> <span class="n">file_contents</span><span class="p">)</span>
         
             <span class="c1"># Assertion on the outbound interaction of file close.
 </span>            <span class="c1"># Treating the 'close' call as a mock.
-</span>            <span class="n">file_mock_stub_combo</span><span class="p">.</span><span class="n">close</span><span class="p">.</span><span class="n">assert_called_once</span><span class="p">()</span>
+</span>            <span class="n">file_mock_stub_combo</span><span class="p">.</span><span class="n">close</span><span class="p">.</span><span class="nf">assert_called_once</span><span class="p">()</span>
 </code></pre></div></div>]]></content><author><name>Srikanth Sastry</name><email>srikanth@sastry.name</email></author><category term="Professional" /><category term="testing" /><category term="software engineering" /><category term="test doubles" /><category term="unit tests" /><category term="mocks" /><category term="stubs" /><summary type="html"><![CDATA[Test doubles are the standard mechanism to isolate your System-Under-Test (SUT) from external dependencies in unit tests. Unsurprisingly, it is important to use the right test double for each use case for a maintainable and robust test suite. However, I have seen a lot of misuse of test doubles, and suffered through the consequences of it enough number of times to want to write down some (admittedly subjective) guidelines on when an how to use test doubles.]]></summary></entry><entry><title type="html">DRY unit tests are bad… mkay</title><link href="//srikanth.sastry.name/dry-unit-tests-are-bad/" rel="alternate" type="text/html" title="DRY unit tests are bad… mkay" /><published>2022-05-17T00:00:00+00:00</published><updated>2022-05-17T00:00:00+00:00</updated><id>//srikanth.sastry.name/DRY-unit-tests-are-bad</id><content type="html" xml:base="//srikanth.sastry.name/dry-unit-tests-are-bad/"><![CDATA[<p><img src="/images/squeeze-cloth.jpg" alt="DRY" /></p>
 
 <p><a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself">“Don’t Repeat Yourself” (DRY)</a> is arguably one of the most important principles in software engineering. It is considered a truism among many. A consequence of such dogmatic allegiance to DRYness is that we see a lot of DRY unit tests; this is where the utility of the DRY principle breaks downs and starts causing more problems that it solves.</p>
@@ -878,13 +878,13 @@ Most code is read more often than is written/edited. Unsurprisingly, it is impor
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">TestInput</span><span class="p">(</span><span class="n">typing</span><span class="p">.</span><span class="n">NamedTuple</span><span class="p">):</span>
     <span class="n">param1</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">param2</span><span class="p">:</span> <span class="n">typing</span><span class="p">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>
-    <span class="p">...</span>
+    <span class="bp">...</span>
 
 <span class="k">class</span> <span class="nc">TestOutput</span><span class="p">(</span><span class="n">typing</span><span class="p">.</span><span class="n">NamedTuple</span><span class="p">):</span>
     <span class="n">status</span><span class="p">:</span> <span class="n">SomeEnum</span>
     <span class="n">return_value</span><span class="p">:</span> <span class="n">typing</span><span class="p">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>
     <span class="n">exception</span><span class="p">:</span> <span class="n">typing</span><span class="p">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">Exception</span><span class="p">]</span>
-    <span class="p">...</span>
+    <span class="bp">...</span>
 
 <span class="k">class</span> <span class="nc">TestCase</span><span class="p">(</span><span class="n">typing</span><span class="p">.</span><span class="n">NamedTuple</span><span class="p">):</span>
     <span class="nb">input</span><span class="p">:</span> <span class="n">TestInput</span>
@@ -892,35 +892,35 @@ Most code is read more often than is written/edited. Unsurprisingly, it is impor
         
 <span class="k">class</span> <span class="nc">TestSequence</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
     
-    <span class="o">@</span><span class="n">parameterized</span><span class="p">.</span><span class="n">expand</span><span class="p">([</span>
+    <span class="nd">@parameterized.expand</span><span class="p">([</span>
         <span class="p">[</span><span class="n">test_input1</span><span class="p">,</span> <span class="n">expected_output1</span><span class="p">],</span>
         <span class="p">[</span><span class="n">test_input2</span><span class="p">,</span> <span class="n">expected_output2</span><span class="p">],</span>
-        <span class="p">...</span>
+        <span class="bp">...</span>
     <span class="p">])</span>
-    <span class="k">def</span> <span class="nf">test_somethings</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">test_input</span><span class="p">:</span> <span class="n">TestInput</span><span class="p">,</span> <span class="n">expected_output</span><span class="p">:</span> <span class="n">TestOutput</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">_run_test</span><span class="p">(</span><span class="n">test_input</span><span class="p">,</span> <span class="n">expected_output</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">test_somethings</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">test_input</span><span class="p">:</span> <span class="n">TestInput</span><span class="p">,</span> <span class="n">expected_output</span><span class="p">:</span> <span class="n">TestOutput</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">self</span><span class="p">.</span><span class="nf">_run_test</span><span class="p">(</span><span class="n">test_input</span><span class="p">,</span> <span class="n">expected_output</span><span class="p">)</span>
         
-    <span class="k">def</span> <span class="nf">_run_test</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">test_input</span><span class="p">:</span> <span class="n">TestInput</span><span class="p">,</span> <span class="n">expected_output</span><span class="p">:</span> <span class="n">TestOutput</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">sut</span> <span class="o">=</span> <span class="n">SUT</span><span class="p">(...)</span>
-        <span class="n">prepare_sut_for_tests</span><span class="p">(</span><span class="n">sut</span><span class="p">,</span> <span class="n">test_input</span><span class="p">)</span>
-        <span class="n">output</span> <span class="o">=</span> <span class="n">sut</span><span class="p">.</span><span class="n">do_something</span><span class="p">(</span><span class="n">test_input</span><span class="p">.</span><span class="n">param2</span><span class="p">)</span>
-        <span class="n">test_output</span> <span class="o">=</span> <span class="n">make_test_output</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">sut</span><span class="p">)</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">expected_output</span><span class="p">,</span> <span class="n">test_output</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">_run_test</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">test_input</span><span class="p">:</span> <span class="n">TestInput</span><span class="p">,</span> <span class="n">expected_output</span><span class="p">:</span> <span class="n">TestOutput</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">sut</span> <span class="o">=</span> <span class="nc">SUT</span><span class="p">(...)</span>
+        <span class="nf">prepare_sut_for_tests</span><span class="p">(</span><span class="n">sut</span><span class="p">,</span> <span class="n">test_input</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">sut</span><span class="p">.</span><span class="nf">do_something</span><span class="p">(</span><span class="n">test_input</span><span class="p">.</span><span class="n">param2</span><span class="p">)</span>
+        <span class="n">test_output</span> <span class="o">=</span> <span class="nf">make_test_output</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">sut</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="nf">assertEquals</span><span class="p">(</span><span class="n">expected_output</span><span class="p">,</span> <span class="n">test_output</span><span class="p">)</span>
 </code></pre></div></div>
 <p>On the face of it, it looks like DRY organized code. But for someone reading this test to understand what SUT does, it is very challenging. They have no idea why the set of <code class="language-plaintext highlighter-rouge">test_input</code>s were chosen, what is the material difference among the inputs, what user journeys do each of those test cases represent, what are the preconditions that need to be satisfied for running <code class="language-plaintext highlighter-rouge">sut.do_something()</code>, why is the expected output the specified output, and so on.</p>
 
 <p>Instead, consider a non-DRY alternative.</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">TestSequence</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
     
-    <span class="k">def</span> <span class="nf">test_foo_input_under_bar_condition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="s">"""
+    <span class="k">def</span> <span class="nf">test_foo_input_under_bar_condition</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="sh">"""</span><span class="s">
         This test verifies that when condition bar is true, then calling `do_something()`
         with input foo results in sigma behavior
-        """</span>
-        <span class="n">sut</span> <span class="o">=</span> <span class="n">SUT</span><span class="p">()</span>
-        <span class="n">ensure_precondition_bar</span><span class="p">(</span><span class="n">sut</span><span class="p">,</span> <span class="n">param1</span><span class="o">=</span><span class="n">bar1</span><span class="p">,</span> <span class="n">param2</span><span class="o">=</span><span class="n">bar2</span><span class="p">)</span>
-        <span class="n">output</span> <span class="o">=</span> <span class="n">sut</span><span class="p">.</span><span class="n">do_something</span><span class="p">(</span><span class="n">foo</span><span class="p">)</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
+        </span><span class="sh">"""</span>
+        <span class="n">sut</span> <span class="o">=</span> <span class="nc">SUT</span><span class="p">()</span>
+        <span class="nf">ensure_precondition_bar</span><span class="p">(</span><span class="n">sut</span><span class="p">,</span> <span class="n">param1</span><span class="o">=</span><span class="n">bar1</span><span class="p">,</span> <span class="n">param2</span><span class="o">=</span><span class="n">bar2</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">sut</span><span class="p">.</span><span class="nf">do_something</span><span class="p">(</span><span class="n">foo</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="nf">assertEquals</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
 </code></pre></div></div>
 <p>This code tests one user journey and is human readable at a glance by something who does not have in-depth understanding of SUT. We can similarly define all the other test cases with code duplication and greater readability, with negligible negative impact.</p>
 
