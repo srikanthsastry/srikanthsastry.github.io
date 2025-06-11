@@ -4,13 +4,58 @@
  <title>Srikanth Sastry</title>
  <link href="//srikanth.sastry.name/atom.xml" rel="self"/>
  <link href="//srikanth.sastry.name/"/>
- <updated>2025-06-08T02:25:23+00:00</updated>
+ <updated>2025-06-11T21:40:56+00:00</updated>
  <id>//srikanth.sastry.name</id>
  <author>
    <name>Srikanth Sastry</name>
    <email>srikanth@sastry.name</email>
  </author>
 
+ 
+ <entry>
+   <title>Let Sleeping Engineers Lie: Why Your Alerts Should Match Your SEVs</title>
+   <link href="//srikanth.sastry.name/sync-your-alerts-to-your-sev-criteria/"/>
+   <updated>2025-06-07T00:00:00+00:00</updated>
+   <id>//srikanth.sastry.name/let-sleeping-engineers-lie-why-your-alerts-should-match-your-sevs</id>
+   <content type="html">&lt;p&gt;&lt;img src=&quot;/images/sleepy-engineer-cursing-laptop.png&quot; alt=&quot;&quot; /&gt;
+At work, I had a customer team that aspired to be &lt;em&gt;“customer first.”&lt;/em&gt; To them, that meant fixing issues &lt;em&gt;before&lt;/em&gt; they became SEVs. That was all and good, except that the way they went about it was to fire alerts well &lt;em&gt;before&lt;/em&gt; their SLOs were close to being breached. Of course, I knew nothing about it until I was the receiving end of their ‘aspiration’.&lt;/p&gt;
+
+&lt;p&gt;It’s 4 AM, and I am in deep sleep. Suddenly, my phone, overriding all silencing setting starts ringing like there is no tomorrow. Naturally, I was being paged. I wake up bleary eyed, acknowledge the page, and join the team channel. Helpfully, the customer team oncall has message for me: &lt;strong&gt;“Your service has a latency spike. Please look into it.”&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;I drag myself to a laptop, check the graphs, and yes — there &lt;em&gt;was&lt;/em&gt; a p99 latency spike, it lasted about half hour, and is already waning. Our SLOs were fine; our latency SLOs at these latency levels don’t breach for another 30 minutes. I double-checked &lt;em&gt;their&lt;/em&gt; SEV criteria, and they are also still green! So why the 4 AM fire drill?&lt;/p&gt;
+
+&lt;p&gt;Turns out, they’d set up their alerts to go off when their p99 latency went above the normal limits for 30 minutes, but their SLO wouldn’t be breached until the elevated p99 persisted for 60 minutes. A twitcy alert if you ask me!&lt;/p&gt;
+
+&lt;p&gt;Their on-call had no idea what to do with the alert, saw my service mentioned, and did the classic move:&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;“When in doubt, escalate!”&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;So now &lt;em&gt;I’m&lt;/em&gt; awake, trying to make sense of a 30-minute p99 latency increase that is fixing itself. I asked:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;“Where’s the SEV’?&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I imagine the scene something like this.
+&lt;img src=&quot;/images/where-sev-where-impact.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Silence. Five minutes later, “Here is the SEV number…” The SEV was created two minutes ago. Facepalm!&lt;/p&gt;
+
+&lt;p&gt;Here’s what actually happened:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;The latency spike lasted about 30 minutes.&lt;/li&gt;
+  &lt;li&gt;The system auto-healed.&lt;/li&gt;
+  &lt;li&gt;The affected service was user-facing, but this was deep in the off-hours.&lt;/li&gt;
+  &lt;li&gt;Total estimated user impact: somewhere between &lt;em&gt;“negligible”&lt;/em&gt; and &lt;em&gt;“none.”&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We could’ve all just slept through it and looked at it with fresh eyes in the morning. Instead, two engineers got pulled into zombie mode to stare at graphs that improved all by themselves. It was like debugging a ghost.&lt;/p&gt;
+
+&lt;h3 id=&quot;moral-of-the-story&quot;&gt;Moral of the story:&lt;/h3&gt;
+&lt;p&gt;If your alert is going to wake someone up at 4 AM, it better be for something that &lt;em&gt;actually&lt;/em&gt; matters. If there’s no SEV, no SLO breach, and no clear user impact — maybe let sleeping engineers lie.&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>The Law of Demeter and unit tests</title>

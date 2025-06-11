@@ -157,6 +157,29 @@
   
   <div class="post">
     <h1 class="post-title">
+      <a href="//srikanth.sastry.name/leader-election-using-loneliness-detection/">
+        Leader Election Using Loneliness Detection
+      </a>
+    </h1>
+
+    <span class="post-date">11 Oct 2012</span>
+
+    <p>My recent work titled “Leader Election Using Loneliness Detection” is accepted for presentation at the 25th International Symposium on DIStributed Computing (DISC) in Rome, and in the journal Distributed Computing. Briefly, the work focuses on the ‘gap in the computational power’ in single-hop wireless systems when the information about message loss in the system is varied.</p>
+
+<!--more-->
+
+<p>We assume that the cause of message loss in wireless networks is collision, which happens when multiple nodes in the system transmit concurrently. We consider two models — weak collision detection (WCD) and strong collision detection (SCD) — which differ only with respect to the information that they provide about message loss. Specifically, when message collision occurs, in WCD systems, all the nodes that are not transmitting (and therefore listening) receive information about the collision whereas the transmitting processes do not receive any such information, and in SCD systems, all the nodes (both transmitting and receiving nodes) receive information about the collision. Intuitively, it makes sense to argue that SCD systems are more `powerful’ than WCD systems because SCD systems provide more information about message collision than WCD systems; however, that does not answer the question: How much more powerful are SCD systems than WCD systems; how can the ‘gap’ be characterized? Alternatively, we may ask: how do we quantify the amount of information that is provided to transmitting processes when they are notified of a message collision?</p>
+
+<p>We showed that the ‘gap’ between SCD and WCD systems is captured by the answer to the question: Is there exactly one node in the system? In other words, if WCD systems were to be augmented with an oracle that provides the answer to the foregoing question, then such a system would be able to solve all the problems solvable in SCD systems with the same time and message complexity (modulo a constant factor). We call such an oracle a Loneliness Detector (or LD, for short). We showed that LD can be implemented in WCD systems in O(log u - log n) time deterministically (where u is an upper bound on the number of nodes in the system and n is the actual number of nodes in the system) and in O(1) time with high probability. We then used LD to compare the time complexity of solving leader election in SCD and WCD systems. We showed that in both SCD and WCD systems, leader election may be solved in O(log u) time deterministically and in O(loglog n + log(1/epsilon)) time probabilistically, where epsilon is the error probability. We also provided matching lower bounds for each of the upper bounds presented, thus demonstrating the efficiency of our algorithms.</p>
+
+<p><em><strong>Abstract:</strong></em></p>
+<blockquote>We consider the problem of leader election (LE) in single-hop radio networks with synchronized time slots for transmitting and receiving messages. We assume that the actual number n of processes is unknown, while the size u of the ID space is known, but is possibly much larger. We consider two types of collision detection: strong (SCD), whereby all processes detect collisions, and weak (WCD), whereby only non-transmitting processes detect collisions. We introduce loneliness detection (LD) as a key subproblem for solving LE in WCD systems. LD informs all processes whether the system contains exactly one process or more than one. We show that LD captures the difference in power between SCD and WCD, by providing an implementation of SCD over WCD and LD. We present two algorithms that solve deterministic and probabilistic LD in WCD systems with time costs of O(log u/n ) and O(min(log u/n , log(1/epsilon)/n)), respectively, where epsilon is the error probability. We also provide matching lower bounds. We present two algorithms that solve deterministic and probabilistic LE in SCD systems with time costs of O(log u) and O(min(log u, log log n + log( 1/epsilon ))), respectively, where epsilon is the error probability. We provide matching lower bounds.</blockquote>
+<p>The full version of the paper may be <a href="http://hdl.handle.net/1721.1/66224">found here [link]</a>.</p>
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="//srikanth.sastry.name/asynchronous-failure-detectors/">
         Asynchronous Failure Detectors
       </a>
@@ -485,38 +508,6 @@ kind of trinkets that they can. Only they can survive in this harsh landscape.</
 <p>I thank my advisors Scott Pike and Jennifer Welch for all their help, support, and guidance.</p>
 
 <p>A copy of my dissertation (in PDF format) can be accessed <a title="Srikanth Sastry's Dissertation titled &quot;A Prescription For Partial Synchrony&quot;" href="documents/research/srikanthSastryDissertation.pdf">here</a>.</p>
-
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="//srikanth.sastry.name/proposing-a-new-radio-show/">
-        Proposing a new radio show
-      </a>
-    </h1>
-
-    <span class="post-date">27 Aug 2008</span>
-
-    <p>I am proposing a new music show on <a title="KEOS" href="http://www.keos.org/" target="_self">KEOS 89.1FM</a> Community Radio. Below is the proposal I will be submitting to the KEOS mangement team.</p>
-
-<hr align="center" size="2" width="100%" />
-
-<p align="center"><b>  KEOS Show Proposal</b></p>
-<p><i><b>Name:</b></i> Srikanth Sastry<i><b>
-Date:</b></i> August 27, 2008<i><b>
-Show Description:</b></i> I propose a music show focusing exclusively on Trance music. The show will showcase various sub genres of trance including Progressive Trance, Acid Trance, Psychedelic Trance, Vocal Trance, Ambient Trance, and such. The show will feature artists like ATB, Paul Oakenfold, Paul Van Dyke, Tiesto, Robert Miles, Astral Projection, Buddha Bar, and such. The nature of trance music and the associated culture is such that it favors long sessions of continuous music, so the show will have very few breaks. All the mandated PSAs, promos, and station ID will either be played together so as to provide a longer continuous music session, or will be played over the music (the music will be potted down, of course). Since this makes it difficult to communicate the play-list to the listeners I propose serve the play-list online.</p>
-
-<hr id="system-readmore" />
-
-<p><i><b>Show Format:</b></i> It will be a 2 hr. show consisting of ~30-minute sessions of continuous music.
-<i><b>Audience:</b></i> Anyone interested in trance music, or is curious about it. There is a significant minority counter/alternative culture in the B/CS area who listen to trance, house, and ambient music. Unfortunately the airways carry very little music in those genres. I expect this program to fill that void, at least partially.
-<i><b>Longevity:</b></i> Trance is an extremely active music genre. Having developed in the 1990s, it is a relatively new form of music. Despite its nascence Trance DJs are extremely prolific in their creations and several artists release albums every year, not to mention recordings from various trance festivals and jam sessions. Although trance is not very well known in the US, it is extremely popular in Europe and shows no signs of waning down.
-<i><b>Fidelity to KEOS Mission:</b></i> This show will play music from a genre that is chronically and acutely underplayed on all radio stations. Its audience includes a demographic which is severely under-served on the Bryan-College Station airwaves. The show has the potential to attract new listener-ship to KEOS, thus diversifying both the music played on the station, and the people who listen to KEOS.
-<i><b>Resources:</b></i> I have legal copies of all the music that I’d like to play on the air. I need only the resources already available in the On-Air studio for my show. Wireless Internet would be a desirable, but not necessary, resource.
-<i><b>Suggested Titles:</b></i> Trance Texas Corridor; Trance Nocturna; Alchemical Hours; Android Dreams; One Nation Under Trance
-<i><b>Possible Time Slots:</b></i> Monday 11PM-1AM; Tuesday 9-11PM. 11PM-1AM
-<i><b>Co-Hosting:</b></i> Currently, I do not have a co-host, but am open to the idea of having one. My backup, in case I cannot host during some weeks, is Martin Codrington.
-<i><b>Start Date:</b></i> First week of October</p>
 
   </div>
   

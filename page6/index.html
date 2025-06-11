@@ -157,6 +157,107 @@
   
   <div class="post">
     <h1 class="post-title">
+      <a href="//srikanth.sastry.name/merits-of-unit-tests-part-5/">
+        Merits of unit tests &#8212; part 5
+      </a>
+    </h1>
+
+    <span class="post-date">28 Dec 2017</span>
+
+    <!-- wp:paragraph {"backgroundColor":"pale-cyan-blue"} -->
+<p class="has-background has-pale-cyan-blue-background-color">Cross posted on <a href="https://www.linkedin.com/pulse/merits-unit-tests-part-5-srikanth-sastry/">LinkedIn</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>This is the fifth, and final, post in my series of notes on unit tests. So far, we've talked about how unit tests help us in <a rel="noreferrer noopener" aria-label="documenting our code (opens in a new tab)" href="http://srikanth.sastry.name/merits-of-unit-tests-part-1/" target="_blank">documenting our code</a>, <a rel="noreferrer noopener" aria-label="reliably refactor software (opens in a new tab)" href="http://srikanth.sastry.name/the-merits-of-unit-tests-part-2/" target="_blank">reliably refactor software</a>, <a rel="noreferrer noopener" aria-label="build better code (opens in a new tab)" href="http://srikanth.sastry.name/the-merits-of-unit-tests-part-3/" target="_blank">build better code</a>, and even <a href="http://srikanth.sastry.name/unit-tests-ftw-part-4/" target="_blank" rel="noreferrer noopener" aria-label="help debugging in prod (opens in a new tab)">help debugging in prod</a>.  In this post, we'll discuss how unit tests (more precisely, the act of  writing unit tests) help us improve the usability of our code.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:more -->
+<!--more-->
+<!-- /wp:more -->
+
+<!-- wp:heading -->
+<h2>Usability</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>It is fairly accurate to state that the simpler and more usable your 
+API is, the less likely it is to be misunderstood, misused, and abused. 
+Also, simpler API constrains your possible code paths making it more 
+testable and less bug-prone. I claim that the very act of making unit 
+tests will help you write more usable code/API. (Of course, this assumes
+ an earnest effort in writing good quality unit tests, which can be a 
+topic of discussion in its own right).</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The reason for my claim is simple, by writing extensive unit tests 
+that account for all your use cases, you effectively become your own 
+first customer. This forces you you to wear your customer's hat and 
+really probe the user experience of your API. In fact, it is not 
+uncommon for me to iterate on my APIs multiple times simply because I am
+ not happy with how difficult it is to set up and execute my unit tests.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:quote -->
+<blockquote class="wp-block-quote"><p>
+  by writing extensive unit tests that account for all your use cases, you effectively become your own first customer 
+</p></blockquote>
+<!-- /wp:quote -->
+
+<!-- wp:paragraph -->
+<p>Let's take a fictional example of a class that does the following: It
+ retrieves either a URL, or the content of the URL for a given handle 
+that could potentially need to be authenticated as a specific user, and 
+it can do so periodically. Here is a first crack at the API and usage 
+for it.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">class UrlRetriever {<br />   // Unauthenticated, one-time<br />   UrlRetriever(Handle handle);<br />   // Authenticated, one-time<br />   UrlRetriever(String user, Handle handle);<br />   // Authenticated, periodic<br />   UrlRetriever(String user, Handle handler, int periodInSeconds);<br />   // Unauthenticated, periodic<br />   UrlRetriever(Handle handler, int periodInSeconds);<br />   <br />   String getUrl();<br />   Blob getContents();<br />   void getContentsPeriodically(Callback cb);<br />   void getUrlPeriodically(Callback cb)<br />} </pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:paragraph -->
+<p>When you start writing unit tests for this, you start seeing issues 
+with usability. For example, you have to consider all possible 
+constructions of UrlRetriever with getUrl() or getContents() call. 
+Worse, what happens if the UrlRetriever is constructed without a 
+periodInSeconds argument, and someone invokes getContentsPeriodically() 
+on it? Sure, it is nonsensical, but you still need a test case for it, 
+right? Which means, the clients could potentially misuse the class in 
+this fashion, in part because the usability of this API is poor. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Making an honest attempt at writing unit tests can actually help you 
+detect such usability issues! Consider the next iteration for the same 
+use case, informed (or constrained) by the unit tests.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">class UrlRetriever {<br />   UrlRetriever(Handle handle);<br />   AuthenticatedUrlRetriever withAuth(String user);<br />   String getUrl();<br />   Blob getContents();<br />   void getPeriodically(ContentCallback cb, int periodInSeconds);<br />   void getPeriodically(UrlCallback cb, int periodInSeconds); <br />} <br />class AuthenticatedUrlRetriever inherits UrlRetriever {<br />   // Does not make sense to authenticate with another user.<br />   AuthenticatedUrlRetriever withAuth(String user) throws exception;<br />} </pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:paragraph -->
+<p>You will see that writing unit tests for it is much easier, and 
+furthermore, there is less chance of misusing this API. Both of this is 
+true because the API is more usable. The clients can use it in multiple,
+ but limited/tractable. Here is how it ends up looking in the unit 
+tests. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">// one-time unauthenticated <br />url = UrlRetriever(handle).getUrl();<br /> // periodic unauthenticated (1)<br /> // -- MyCallback inherits UrlCallback.<br />urlCallback = new MyCallback(); <br />UrlRetriever(handle).getPeriodically(urlCallback, 30);<br />  // periodic unauthenticated (2)<br /> // -- MyCallback inherits ContentCallback. <br />contentCallback = new MyCallback(); UrlRetriever(handle).getPeriodically(contentCallback, 30);<br />  // Authenticated<br />foo = UrlRetriever(handle).withAuth(user);<br /> //  -- one-time<br />blob = foo.getContents();<br /> //  -- periodic <br />foo.getPeriodically(contentCallback, 60); </pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:paragraph -->
+<p>Much better eh? :)</p>
+<!-- /wp:paragraph -->
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="//srikanth.sastry.name/unit-tests-ftw-part-4/">
         Unit tests FTW! — Part 4
       </a>
@@ -655,145 +756,6 @@ these unit tests, it has saved thousands of developers countless hours.</p>
 <!-- wp:list -->
 <ul><li><a rel="noreferrer noopener" aria-label="Refactoring (opens in a new tab)" href="http://srikanth.sastry.name/the-merits-of-unit-tests-part-2/" target="_blank">Refactoring</a>.</li><li><a rel="noreferrer noopener" href="https://www.linkedin.com/pulse/merits-unit-tests-part-3-srikanth-sastry/" target="_blank">Better code design.</a></li><li><a rel="noreferrer noopener" aria-label=" (opens in a new tab)" href="http://srikanth.sastry.name/unit-tests-ftw-part-4/" target="_blank">Debugging prod issues.</a></li><li><a href="http://srikanth.sastry.name/merits-of-unit-tests-part-5/">API usability</a>.</li></ul>
 <!-- /wp:list -->
-
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="//srikanth.sastry.name/sevlievo/">
-        Small town Bulgaria
-      </a>
-    </h1>
-
-    <span class="post-date">05 Sep 2015</span>
-
-    <!-- wp:paragraph -->
-<p>I had a really good time visiting Mira's family in <a href="https://en.wikipedia.org/wiki/Sevlievo">Sevlievo, Bulgaria</a>. &nbsp;I am intrigued by the culture and sensibilities in small town Bulgaria.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>We started with visiting the old St. Prophet Eliah Church. The last place I was allowed to take photos was the entrance. It was pretty quaint on the inside, but we were not allowed to take any pictures.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:gallery {"ids":[130,131],"linkTo":"attachment","align":"center","className":"aligncenter"} -->
-<ul class="wp-block-gallery aligncenter columns-2 is-cropped"><li class="blocks-gallery-item"><figure><a href="http://srikanth.sastry.name/sevlievo/img_20150828_100426/"><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150828_100426-768x1024.jpg" alt="" data-id="130" data-link="http://srikanth.sastry.name/sevlievo/img_20150828_100426/" class="wp-image-130" /></a><figcaption>St Prophet Eliah Church</figcaption></figure></li><li class="blocks-gallery-item"><figure><a href="http://srikanth.sastry.name/sevlievo/img_20150828_100506/"><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150828_100506-768x1024.jpg" alt="" data-id="131" data-link="http://srikanth.sastry.name/sevlievo/img_20150828_100506/" class="wp-image-131" /></a><figcaption>Church entrance</figcaption></figure></li></ul>
-<!-- /wp:gallery -->
-
-<!-- wp:more -->
-<!--more-->
-<!-- /wp:more -->
-
-<!-- wp:paragraph -->
-<p>There are a few more churches around the corner, and none are like the churches I am used to seeing in India and in the US.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:gallery {"ids":[186,187]} -->
-<ul class="wp-block-gallery columns-2 is-cropped"><li class="blocks-gallery-item"><figure><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150830_095912_low-1024x760.jpg" alt="" data-id="186" data-link="http://srikanth.sastry.name/sevlievo/img_20150830_095912_low/" class="wp-image-186" /><figcaption>Another orthodox church</figcaption></figure></li><li class="blocks-gallery-item"><figure><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150830_095706-1024x760.jpg" alt="" data-id="187" data-link="http://srikanth.sastry.name/sevlievo/img_20150830_095706/" class="wp-image-187" /><figcaption>Yet another orthodox church</figcaption></figure></li></ul>
-<!-- /wp:gallery -->
-
-<!-- wp:paragraph -->
-<p>Interestingly, the insignia on one of the church doors, often associated with the Byzantine empire, looked a lot like <a href="https://en.wikipedia.org/wiki/Gandaberunda">Gandaberunda</a>, the official emblem of the state of <a href="https://en.wikipedia.org/wiki/Karnataka">Karnataka</a>.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:gallery {"ids":[194,360],"align":"center"} -->
-<ul class="wp-block-gallery aligncenter columns-2 is-cropped"><li class="blocks-gallery-item"><figure><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150830_095753-775x1024.jpg" alt="" data-id="194" data-link="http://srikanth.sastry.name/sevlievo/img_20150830_095753/" class="wp-image-194" /><figcaption>Notice the double headed eagle on the church door</figcaption></figure></li><li class="blocks-gallery-item"><figure><img src="http://srikanth.sastry.name/wp-content/uploads/2019/01/GBerunda.jpg" alt="" data-id="360" data-link="http://srikanth.sastry.name/sevlievo/gberunda/" class="wp-image-360" /><figcaption>Karnataka state insignia</figcaption></figure></li></ul>
-<!-- /wp:gallery -->
-
-<!-- wp:paragraph -->
-<p></p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>As I read up more about it, I discovered that two headed birds are ubiquitous in <a href="https://en.wikipedia.org/wiki/Double-headed_eagle">state insignias</a> and <a href="http://www.hubert-herald.nl/TwoHeadedEagle.htm">mythologies</a>.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>As it turns out, there is a mosque in town as well, but only muslims are allowed in. So this is pretty much all I got to see.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:image {"id":135,"align":"center"} -->
-<div class="wp-block-image"><figure class="aligncenter"><a href="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150828_102614.jpg" rel="attachment wp-att-135"><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150828_102614-450x334.jpg" alt="Mosque" class="wp-image-135" /></a><figcaption>The only mosque in town, and we are not allowed in.</figcaption></figure></div>
-<!-- /wp:image -->
-
-<!-- wp:paragraph -->
-<p>Next, we head to the city center. The old town. Not the most happening place, but nice nevertheless. Mostly clean streets with plenty of space to relax and lounge. Here is a sample of small-town Bulgarian main streets.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:gallery {"ids":[132,134,133,198],"columns":2} -->
-<ul class="wp-block-gallery columns-2 is-cropped"><li class="blocks-gallery-item"><figure><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150828_101405-1024x768.jpg" alt="" data-id="132" data-link="http://srikanth.sastry.name/sevlievo/img_20150828_101405/" class="wp-image-132" /><figcaption>The main street continues on with businesses on either side</figcaption></figure></li><li class="blocks-gallery-item"><figure><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150828_101504-1024x760.jpg" alt="" data-id="134" data-link="http://srikanth.sastry.name/sevlievo/img_20150828_101504/" class="wp-image-134" /><figcaption>Start of a main street in town center largely for pedestrians</figcaption></figure></li><li class="blocks-gallery-item"><figure><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150828_101414-1024x768.jpg" alt="" data-id="133" data-link="http://srikanth.sastry.name/sevlievo/img_20150828_101414/" class="wp-image-133" /><figcaption>The other side of the same main street.</figcaption></figure></li><li class="blocks-gallery-item"><figure><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150830_094414-1024x760.jpg" alt="" data-id="198" data-link="http://srikanth.sastry.name/sevlievo/img_20150830_094414/" class="wp-image-198" /><figcaption>Notice the wide sidewalk , and benches to sit on.</figcaption></figure></li></ul>
-<!-- /wp:gallery -->
-
-<!-- wp:paragraph -->
-<p>The city center also has an impressive statue on a pillar. Apparently, the pillar it stands on is an original Roman pillar from the <a href="https://en.wikipedia.org/wiki/Nicopolis_ad_Istrum">Nicopolis ad Istrum</a>, and the statue was made in Vienna.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:gallery {"ids":[200,242],"linkTo":"attachment","align":"center"} -->
-<ul class="wp-block-gallery aligncenter columns-2 is-cropped"><li class="blocks-gallery-item"><figure><a href="http://srikanth.sastry.name/sevlievo/img_20150830_093907/"><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150830_093907-763x1024.jpg" alt="" data-id="200" data-link="http://srikanth.sastry.name/sevlievo/img_20150830_093907/" class="wp-image-200" /></a><figcaption>The pillar is from Nicopolis ad Istrum</figcaption></figure></li><li class="blocks-gallery-item"><figure><a href="http://srikanth.sastry.name/img_20150830_093927/"><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150830_093927-1024x780.jpg" alt="" data-id="242" data-link="http://srikanth.sastry.name/img_20150830_093927/" class="wp-image-242" /></a><figcaption>Close up of the statue from Vienna</figcaption></figure></li></ul>
-<!-- /wp:gallery -->
-
-<!-- wp:paragraph -->
-<p>In true European fashion, Sevlievo is also home to some old european houses that once belonged to the rich, but are now run down, but maintained. I remember seeing similar houses in New Castle Upon Tyne, Madrid, and other old cities in Europe.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:gallery {"ids":[202,203]} -->
-<ul class="wp-block-gallery columns-2 is-cropped"><li class="blocks-gallery-item"><figure><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150830_093339-1024x760.jpg" alt="" data-id="202" data-link="http://srikanth.sastry.name/sevlievo/img_20150830_093339/" class="wp-image-202" /><figcaption>Medieval aristocrat's dwelling? At least, it looks like it.</figcaption></figure></li><li class="blocks-gallery-item"><figure><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150830_095233-1024x760.jpg" alt="" data-id="203" data-link="http://srikanth.sastry.name/sevlievo/img_20150830_095233/" class="wp-image-203" /><figcaption>Looks like an old time house whose owner was a rich and influential person.</figcaption></figure></li></ul>
-<!-- /wp:gallery -->
-
-<!-- wp:paragraph -->
-<p>Interestingly, Sevlievo is also home to <a href="http://www.bulgariainside.eu/en/articles/Sevlievos-Clock-Tower/542/1">one of the oldest clock towers</a> in Bulgaria, built in 1777/1779.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:image {"id":136,"align":"center"} -->
-<div class="wp-block-image"><figure class="aligncenter"><a href="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150828_104216.jpg" rel="attachment wp-att-136"><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150828_104216-334x450.jpg" alt="Clock Tower" class="wp-image-136" /></a><figcaption>One of the oldest clock towers in Bulgaria.</figcaption></figure></div>
-<!-- /wp:image -->
-
-<!-- wp:paragraph -->
-<p>Moving on, the city also has a "palace of culture", which ironically looks rather drab.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:image {"id":205,"align":"center"} -->
-<div class="wp-block-image"><figure class="aligncenter"><a href="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150830_094659.jpg" rel="attachment wp-att-205"><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150830_094659-450x334.jpg" alt="Palace of culture" class="wp-image-205" /></a><figcaption>Palace of culture</figcaption></figure></div>
-<!-- /wp:image -->
-
-<!-- wp:paragraph -->
-<p>Speaking of culture, the town also has plenty of monuments and installations from the communist days. I was surprised by the monotony of these installations. Here is a sample to give you an idea of what I mean.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:gallery {"ids":[210,209,208]} -->
-<ul class="wp-block-gallery columns-3 is-cropped"><li class="blocks-gallery-item"><figure><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150830_103142-760x1024.jpg" alt="" data-id="210" data-link="http://srikanth.sastry.name/sevlievo/img_20150830_103142/" class="wp-image-210" /></figure></li><li class="blocks-gallery-item"><figure><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150830_102617-776x1024.jpg" alt="" data-id="209" data-link="http://srikanth.sastry.name/sevlievo/img_20150830_102617/" class="wp-image-209" /></figure></li><li class="blocks-gallery-item"><figure><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150830_094731-760x1024.jpg" alt="" data-id="208" data-link="http://srikanth.sastry.name/sevlievo/img_20150830_094731/" class="wp-image-208" /></figure></li></ul>
-<!-- /wp:gallery -->
-
-<!-- wp:paragraph -->
-<p>In fact, it appears that everything was pretty monotonous during the communist days. Sevlievo retains some a of communist-era buildings that served as&nbsp;stores and supermarkets. Here are a couple of them.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:gallery {"ids":[213,214]} -->
-<ul class="wp-block-gallery columns-2 is-cropped"><li class="blocks-gallery-item"><figure><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150830_103711-1024x760.jpg" alt="" data-id="213" data-link="http://srikanth.sastry.name/sevlievo/img_20150830_103711/" class="wp-image-213" /></figure></li><li class="blocks-gallery-item"><figure><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150830_103722-1024x760.jpg" alt="" data-id="214" data-link="http://srikanth.sastry.name/sevlievo/img_20150830_103722/" class="wp-image-214" /></figure></li></ul>
-<!-- /wp:gallery -->
-
-<!-- wp:paragraph -->
-<p>For contrast, compare them to the new bookstore that right down the street.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:image {"id":215,"align":"center"} -->
-<div class="wp-block-image"><figure class="aligncenter"><a href="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150830_103805.jpg" rel="attachment wp-att-215"><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150830_103805-334x450.jpg" alt="The bookstore looks a lot more like in the west." class="wp-image-215" /></a><figcaption>The bookstore looks a lot more like in the west.</figcaption></figure></div>
-<!-- /wp:image -->
-
-<!-- wp:paragraph -->
-<p>Among all the things uniquely Bulgarian, the most intriguing is the death notice. We are all familiar with the <a href="https://en.wikipedia.org/wiki/Obituary">obituary section</a> in the newspapers. In Bulgaria, there are such obituary notices all over town to announce a death, or a death anniversary. For instance, here is a tree that is used as a obituary notice board.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:image {"id":212,"align":"center"} -->
-<div class="wp-block-image"><figure class="aligncenter"><a href="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150830_093301.jpg" rel="attachment wp-att-212"><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150830_093301-334x450.jpg" alt="A tree trunk used as a obituary notice board" class="wp-image-212" /></a><figcaption>A tree trunk used as a obituary notice board.</figcaption></figure></div>
-<!-- /wp:image -->
-
-<!-- wp:paragraph -->
-<p>People also post similar notices on the doors of their homes as well, and at times, it is accompanied by a black ribbon tie.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:gallery {"ids":[297,298],"columns":2,"linkTo":"attachment"} -->
-<ul class="wp-block-gallery columns-2 is-cropped"><li class="blocks-gallery-item"><figure><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150830_104750.jpg" alt="" data-id="297" class="wp-image-297" /></figure></li><li class="blocks-gallery-item"><figure><img src="http://srikanth.sastry.name/wp-content/uploads/2015/08/IMG_20150901_185800.jpg" alt="" data-id="298" class="wp-image-298" /></figure></li></ul>
-<!-- /wp:gallery -->
 
   </div>
   

@@ -157,6 +157,55 @@
   
   <div class="post">
     <h1 class="post-title">
+      <a href="//srikanth.sastry.name/sync-your-alerts-to-your-sev-criteria/">
+        Let Sleeping Engineers Lie: Why Your Alerts Should Match Your SEVs
+      </a>
+    </h1>
+
+    <span class="post-date">07 Jun 2025</span>
+
+    <p><img src="/images/sleepy-engineer-cursing-laptop.png" alt="" />
+At work, I had a customer team that aspired to be <em>“customer first.”</em> To them, that meant fixing issues <em>before</em> they became SEVs. That was all and good, except that the way they went about it was to fire alerts well <em>before</em> their SLOs were close to being breached. Of course, I knew nothing about it until I was the receiving end of their ‘aspiration’.</p>
+
+<p>It’s 4 AM, and I am in deep sleep. Suddenly, my phone, overriding all silencing setting starts ringing like there is no tomorrow. Naturally, I was being paged. I wake up bleary eyed, acknowledge the page, and join the team channel. Helpfully, the customer team oncall has message for me: <strong>“Your service has a latency spike. Please look into it.”</strong></p>
+
+<p>I drag myself to a laptop, check the graphs, and yes — there <em>was</em> a p99 latency spike, it lasted about half hour, and is already waning. Our SLOs were fine; our latency SLOs at these latency levels don’t breach for another 30 minutes. I double-checked <em>their</em> SEV criteria, and they are also still green! So why the 4 AM fire drill?</p>
+
+<p>Turns out, they’d set up their alerts to go off when their p99 latency went above the normal limits for 30 minutes, but their SLO wouldn’t be breached until the elevated p99 persisted for 60 minutes. A twitcy alert if you ask me!</p>
+
+<p>Their on-call had no idea what to do with the alert, saw my service mentioned, and did the classic move:</p>
+<blockquote>
+  <p><em>“When in doubt, escalate!”</em></p>
+</blockquote>
+
+<p>So now <em>I’m</em> awake, trying to make sense of a 30-minute p99 latency increase that is fixing itself. I asked:</p>
+
+<blockquote>
+  <p><strong>“Where’s the SEV’?</strong></p>
+</blockquote>
+
+<p>I imagine the scene something like this.
+<img src="/images/where-sev-where-impact.jpg" alt="" /></p>
+
+<p>Silence. Five minutes later, “Here is the SEV number…” The SEV was created two minutes ago. Facepalm!</p>
+
+<p>Here’s what actually happened:</p>
+<ul>
+  <li>The latency spike lasted about 30 minutes.</li>
+  <li>The system auto-healed.</li>
+  <li>The affected service was user-facing, but this was deep in the off-hours.</li>
+  <li>Total estimated user impact: somewhere between <em>“negligible”</em> and <em>“none.”</em></li>
+</ul>
+
+<p>We could’ve all just slept through it and looked at it with fresh eyes in the morning. Instead, two engineers got pulled into zombie mode to stare at graphs that improved all by themselves. It was like debugging a ghost.</p>
+
+<h3 id="moral-of-the-story">Moral of the story:</h3>
+<p>If your alert is going to wake someone up at 4 AM, it better be for something that <em>actually</em> matters. If there’s no SEV, no SLO breach, and no clear user impact — maybe let sleeping engineers lie.</p>
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="//srikanth.sastry.name/law-of-demeter-and-unit-tests/">
         The Law of Demeter and unit tests
       </a>
@@ -678,78 +727,6 @@ Almost <a href="/defining-unit-tests-two-schools-of-thought/">by definition</a> 
 <p><img src="/images/Detroit-School-Completeness-After.png" alt="" /></p>
 
 <p>In effect, even though we did not have an explicit test for contract alpha, the unit tests written according to the Detroit school tend to have better completeness than the ones written following the London school.</p>
-
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="//srikanth.sastry.name/defining-unit-tests-two-schools-of-thought/">
-        Defining unit tests: two schools of thought
-      </a>
-    </h1>
-
-    <span class="post-date">18 Jun 2022</span>
-
-    <p><img src="/images/london-detroit.jpg" alt="" /></p>
-
-<h2 id="definitions-what-is-a-unit-test">Definitions: What is a unit test?</h2>
-
-<p>There are several definitions for unit tests. <a href="https://www.artofunittesting.com/definition-of-a-unit-test">Roy Osherove</a> defines it as “piece of code that invokes a unit of work in the system and then checks a single assumption about the behavior of that unit of work”; Kent Beck turns the idea of defining unit tests on it’s head by <a href="https://tidyfirst.substack.com/p/desirable-unit-tests">simply stating a list of properties</a>, and any code that satisfies those properties in a “unit test”.</p>
-
-<p>I like Vladimir Khorikov’s definition of a unit test in his book <a href="https://www.manning.com/books/unit-testing">Unit Testing Principles, Practices, and Patterns</a>. According to him, a unit test is a piece of code that (1) verifies a unit of software, (2) in isolation, and (3) quickly. The above definition only balkanizes a <em>unit test</em> into three undefined terms: (1) unit of software, (2) isolation, and (3) quick/fast/speed. Of the three, the third one is the easiest to understand intuitively. Being <em>fast</em> simply means that you should be able to run the test in real time and get the results quickly enough to enable interactive iteration of modifying the unit of software you are changing. However, the other two terms: <em>unit of software</em>, and <em>isolation</em> merit more discussion.</p>
-
-<h2 id="are-you-from-detroit-or-london">Are you from Detroit, or London?</h2>
-
-<p>In fact, there are two schools of thought around how the above two terms should be defined. The ‘original/classic/Detroit’ school, and the ‘mockist/London’ school. Not surprisingly, the school of thought you subscribe to has a significant impact on how you write unit tests. For a more detailed treatment of the two schools of thought, I suggest Martin Folwer’s <a href="https://martinfowler.com/articles/mocksArentStubs.html#ClassicalAndMockistTesting">excellent article on the subject of Mocks and Stubs</a>. Chapter 2 of Khorikov’s book <a href="https://www.manning.com/books/unit-testing">Unit Testing Principles, Practices, and Patterns</a> also has some good insights into it. I have distilled their contents as it pertains to unit test definitions.</p>
-
-<h3 id="the-detroit-school">The Detroit School</h3>
-
-<p>The Classical or Detroit school of thought originated with Kent Beck’s “<a href="https://www.oreilly.com/library/view/test-driven-development/0321146530/">Test Driven Development</a>”.</p>
-
-<p><strong>Unit of software.</strong> According to this school, the unit of software to test is a “behavior”. This behavior could be implemented in a single class, or a collection of classes. The important property here is that the the code that comprises the unit must be (1) internal to the software, (2) connected with each other in the dependency tree, and (3) not shared by another other part of the software.</p>
-
-<p>Thus, a unit of software cannot include external entities such as databases, log servers, file systems etc. They also cannot include external (but local) libraries such as system time and timers. Importantly, it is <em>ok</em> to include a class that depends on another class via a private non-shared dependency.</p>
-
-<p><strong>Isolation.</strong> Given the above notion of a “unit” of software, isolation simply means that the test is not dependent on anything outside that unit of software. In practical terms, it means that a unit test needs to replace all external and shared dependencies with <a href="/mocks-stubs-andhow-to-use-them/">test doubles</a>.</p>
-
-<h3 id="the-london-school">The London School</h3>
-
-<p>The mockist or London school of thought was popularized by <a href="https://www.linkedin.com/in/stevefreeman">Steve Freeman</a> (<a href="https://twitter.com/sf105">twitter</a>) and <a href="http://www.natpryce.com/bio.html">Nat Pryce</a> in their book “<a href="http://growing-object-oriented-software.com/">Growing Object- Oriented Software, Guided by Tests</a>”.</p>
-
-<p><strong>Unit of Software.</strong> Given the heavy bias Object-Oriented software, unsurprisingly, the unit of software for a unit test is a single class (in some cases, it can be a single method). This is strictly so. ANy other class that this the ‘class under test’ depends on cannot be part of the unit being tested.</p>
-
-<p><strong>Isolation.</strong> What follows from the above notion of a “unit” is that <em>everything</em> that is not the class under test must be replaced by test doubles. If you are instantiating another class inside the class under test, then you must replace that instantiation with an injected instance or a factory that can be replaced with a test double in the tests.</p>
-
-<p>Here is a quick summary of the definitions of a unit tests under the two schools.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>School</th>
-      <th>Unit</th>
-      <th>Isolation</th>
-      <th>Speed</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Detroit</td>
-      <td>Behavior</td>
-      <td>Replace shared and external dependencies with test doubles</td>
-      <td>‘fast’</td>
-    </tr>
-    <tr>
-      <td>London</td>
-      <td>Class</td>
-      <td>Replace all dependencies (internal, external, shared, etc.) with test doubles</td>
-      <td>‘fast’</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="what-does-this-mean">What does this mean?</h2>
-
-<p>The school of thought you subscribe to can have a significant impact on your software design and testing. There is nothing I can say here that hasn’t already been explained by Martin Fowler in his article “<a href="https://martinfowler.com/articles/mocksArentStubs.html">Mocks aren’t stubs</a>”. So, I highly recommend you read it for yourself.</p>
 
   </div>
   
