@@ -12,25 +12,26 @@ author: Srikanth Sastry
 permalink: /sync-your-alerts-to-your-sev-criteria/
 ...
 ![](/images/sleepy-engineer-cursing-laptop.png)
-At work, I had a customer team that was all-in on being *“customer first.”* To them, that meant fixing issues *before* they became SEVs. Admirable! Except their plan was to fire alerts well *before* their SLOs were even close to being breached.
+At work, I had a customer team that aspired to be *“customer first.”* To them, that meant fixing issues *before* they became SEVs. That was all and good, except that the way they went about it was to fire alerts well *before* their SLOs were close to being breached. Of course, I knew nothing about it until I was the receiving end of their 'aspiration'.
 
-You can probably guess where this is going.
 
-It’s 4 AM. I’m in REM sleep, dreaming of a world where on-call rotations don’t exist, when my phone buzzes. I’m being paged. A message follows:  
-**“Your service has a latency spike. Please look into it.”**
+It’s 4 AM, and I am in deep sleep. Suddenly, my phone, overriding all silencing setting starts ringing like there is no tomorrow. Naturally, I was being paged. I wake up bleary eyed, acknowledge the page, and join the team channel. Helpfully, the customer team oncall has message for me: **“Your service has a latency spike. Please look into it.”**
 
-No *“hi,”* no context — just pure panic vibes.
+I drag myself to a laptop, check the graphs, and yes — there *was* a p99 latency spike, it lasted about half hour, and is already waning. Our SLOs were fine; our latency SLOs at these latency levels don't breach for another 30 minutes. I double-checked *their* SEV criteria, and they are also still green! So why the 4 AM fire drill?
 
-I drag myself to a laptop, check the graphs, and yes — there *was* a latency spike. But it had already resolved itself, and our SLOs were fine. I double-checked *their* SEV criteria. Still green. So why the 4 AM fire drill?
-
-Turns out, they’d set up their alerts to go off at the *slightest* hint of trouble. Basically, their alerts were the technical equivalent of a chihuahua: loud, jumpy, and guaranteed to wake the whole neighborhood.
+Turns out, they’d set up their alerts to go off when their p99 latency went above the normal limits for 30 minutes, but their SLO wouldn't be breached until the elevated p99 persisted for 60 minutes. A twitcy alert if you ask me!
 
 Their on-call had no idea what to do with the alert, saw my service mentioned, and did the classic move:  
 > *“When in doubt, escalate!”*
 
-So now *I’m* awake, trying to make sense of a 15-minute latency blip that fixed itself. I asked:  
-**“Is this a SEV? Have we breached any SLOs? What’s the user impact?”**  
-Cue awkward silence.
+So now *I’m* awake, trying to make sense of a 30-minute p99 latency increase that is fixing itself. I asked: 
+
+> **“Where's the SEV'?**
+
+I imagine the scene something like this.
+![](/images/where-sev-where-impact.jpg)
+
+Silence. Five minutes later, "Here is the SEV number..." The SEV was created two minutes ago. Facepalm!
 
 Here’s what actually happened:  
 - The latency spike lasted about 30 minutes.  
