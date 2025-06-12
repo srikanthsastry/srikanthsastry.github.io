@@ -157,6 +157,152 @@
   
   <div class="post">
     <h1 class="post-title">
+      <a href="//srikanth.sastry.name/mocks-stubs-andhow-to-use-them/">
+        Mocks, Stubs, and how to use them
+      </a>
+    </h1>
+
+    <span class="post-date">25 May 2022</span>
+
+    <p><img src="/images/masquerade-masks.png" alt="Photo by Polina Kovaleva from Pexels" />
+<em>Photo by <a href="https://www.pexels.com/@polina-kovaleva?utm_content=attributionCopyText&amp;utm_medium=referral&amp;utm_source=pexels">Polina Kovaleva</a> from <a href="https://www.pexels.com/photo/close-up-of-masquerade-masks-on-purple-background-8404608/?utm_content=attributionCopyText&amp;utm_medium=referral&amp;utm_source=pexels">Pexels</a></em></p>
+
+<p><a href="https://en.wikipedia.org/wiki/Test_double">Test doubles</a> are the standard mechanism to isolate your System-Under-Test (SUT) from external dependencies in unit tests. Unsurprisingly, it is important to use the right test double for each use case for a maintainable and robust test suite. However, I have seen a lot of misuse of test doubles, and suffered through the consequences of it enough number of times to want to write down some (admittedly subjective) guidelines on when an how to use test doubles.</p>
+
+<p>Briefly, test doubles are <a href="https://martinfowler.com/bliki/TestDouble.html">replacements for a production object used for testing</a>. Depending on who you ask, there are multiple different categorizations of test doubles; but two categories that appears in all of these categorizations are <a href="https://en.wikipedia.org/wiki/Mock_object">mocks</a> and <a href="https://en.wikipedia.org/wiki/Test_stub">stubs</a>. So I will focus on on these two. I have seen mocks and stubs often conflated together. The problem is made worse by all the test-double frameworks’ terminology: they are often referred to as ‘mocking’ frameworks, and the test doubles they generate are all called ‘mocks’.</p>
+
+<h2 id="mocks">Mocks</h2>
+
+<p><img src="/images/woman-wearing-emoji-mask.jpg" alt="woman wearing an emoji mask" /></p>
+
+<p><em>Image by <a href="https://pixabay.com/users/5697702-5697702/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2428737">Andii Samperio</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2428737">Pixabay</a></em></p>
+
+<p>Mocks are objects that are used to verify ‘outbound’ interactions of the SUT with external dependencies. This is different from the notion of ‘mocks’ that ‘mocking frameworks’ generate. Those ‘mocks’ are more correctly the superclass of test doubles.
+Examples where mocks are useful include the SUT logging to a log server, or sending an email, or filing a task/ticket in response to a given input/user journey. This becomes clearer with an illustration.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">unittest.mock</span> <span class="kn">import</span> <span class="n">MagicMock</span>
+
+<span class="k">class</span> <span class="nc">TestSUT</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">test_log_success</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">mock_log_server</span> <span class="o">=</span> <span class="nc">MagicMock</span><span class="p">(</span><span class="n">spec</span><span class="o">=</span><span class="n">LogServerClass</span><span class="p">,</span> <span class="n">autospec</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">mock_log_server</span><span class="p">.</span><span class="n">log</span> <span class="o">=</span> <span class="nc">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">sut</span> <span class="o">=</span> <span class="nc">SUT</span><span class="p">(</span><span class="n">log_server</span><span class="o">=</span><span class="n">mock_log_server</span><span class="p">)</span>
+        
+        <span class="n">sut</span><span class="p">.</span><span class="nf">test_method</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="sh">"</span><span class="s">foo</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="c1"># This is ok!
+</span>        <span class="n">mock_log_server</span><span class="p">.</span><span class="n">log</span><span class="p">.</span><span class="nf">assert_called_once_with</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="sh">"</span><span class="s">foo</span><span class="sh">"</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<p>Note that in the above illustration, we verify that the message is sent to the the log server exactly once. This is an important part of the SUT’s specification. It the SUT were to start logging multiple messages/records for the request, then it could pollute the logs or even overwhelm the log server. Here, even though logging appears to be a side effect of <code class="language-plaintext highlighter-rouge">test_method</code>, this side effect is almost certainly part of SUT’s specification, and needs to be verified correctly. Mocks play a central role in such verifications.</p>
+
+<h2 id="stubs">Stubs</h2>
+
+<p><img src="/images/robot-imitating-family.jpg" alt="Robot imitating family" /></p>
+
+<p>Unlike mocks, stubs verify ‘inbound’ interactions from external dependencies to the SUT. Stubs are useful when replacing external dependencies that ‘send’ data to the SUT in order for the SUT to satisfy its specification. Examples include key value stores, databases, event listeners, etc. The important note here is that the outbound interaction to the stub <em>should not be asserted</em> in the tests; that’s an anti pattern (it results in over-specification)! Here is an illustration.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">unittest.mock</span> <span class="kn">import</span> <span class="n">MagicMock</span>
+
+<span class="k">class</span> <span class="nc">TestSUT</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">test_email_retrieval</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">stub_key_value_store</span> <span class="o">=</span> <span class="nc">MagicMock</span><span class="p">(</span><span class="n">spec</span><span class="o">=</span><span class="n">KeyValueStoreClass</span><span class="p">,</span> <span class="n">autospec</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">stub_key_value_store</span><span class="p">.</span><span class="n">get</span> <span class="o">=</span> <span class="nc">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="sh">"</span><span class="s">user@special_domain.com</span><span class="sh">"</span><span class="p">)</span>
+        <span class="n">sut</span> <span class="o">=</span> <span class="nc">SUT</span><span class="p">(</span><span class="n">key_value_store</span><span class="o">=</span><span class="n">stub_key_value_store</span><span class="p">)</span>
+        
+        <span class="n">email_domain</span> <span class="o">=</span> <span class="n">sut</span><span class="p">.</span><span class="nf">get_user_email_domin</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="sh">"</span><span class="s">foo</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="c1"># This is ok!
+</span>        <span class="n">self</span><span class="p">.</span><span class="nf">assertEquals</span><span class="p">(</span><span class="sh">"</span><span class="s">special_domain.com</span><span class="sh">"</span><span class="p">,</span> <span class="n">email_domain</span><span class="p">)</span>
+        
+        <span class="c1"># THIS IS NOT OK!
+</span>        <span class="n">stub_key_value_store</span><span class="p">.</span><span class="n">get</span><span class="p">.</span><span class="nf">assert_called_once_with</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="sh">"</span><span class="s">foo</span><span class="sh">"</span><span class="p">)</span>
+
+</code></pre></div></div>
+<p>In the above illustration, we create a stub for the key value store (note that this is a stub even thought the object is a ‘mock’ class) that returns <code class="language-plaintext highlighter-rouge">"user@special_domain.com"</code> as a canned response to a <code class="language-plaintext highlighter-rouge">get</code> call. The test verifies that the SUT’s <code class="language-plaintext highlighter-rouge">get_user_email_domain</code> is called, it returns the correct email domain. What is important here is that we <em>should not</em> assert that there was a <code class="language-plaintext highlighter-rouge">get</code> call to the stub. Why? Because the call to the key value store is an implementation detail. Imagine a refactor that causes a previous value to be cached locally. If the unit tests were to assert on calls to the stubs, then such refactors would result in unit test failures, which undermines the utility, maintainability, and robustness of unit tests.</p>
+
+<h3 id="fakes-instead-of-stubs">Fakes, instead of stubs</h3>
+
+<p>A small detour here. When using a stub, always consider if you can use a fake instead. There are multiple definitions of a fake, and the one I am referring to is the following. A fake is a special kind of stub that implements the same API as the production dependency, but the implementation is much more lightweight. This implementation may be correct only within the context of the unit tests where it is used. Let’s reuse the previous illustration of using a stub, and replace the stub with a fake. Recall that we stubbed out the <code class="language-plaintext highlighter-rouge">get</code> method of <code class="language-plaintext highlighter-rouge">KeyValueStoreClass</code> to return the canned value <code class="language-plaintext highlighter-rouge">"user@special_domain.com"</code>. Instead, we can implement a fake <code class="language-plaintext highlighter-rouge">KeyValueStoreClass</code> that uses a <code class="language-plaintext highlighter-rouge">Dict</code> as follows.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">unittest.mock</span> <span class="kn">import</span> <span class="n">MagicMock</span>
+<span class="kn">from</span> <span class="n">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
+
+<span class="c1"># We assume a simplistic API for KeyValueStoreClass with just
+# update and get methods.
+</span><span class="k">class</span> <span class="nc">KeyValueStoreClass</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="bp">...</span>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="bp">...</span>
+
+<span class="k">class</span> <span class="nc">FakeKeyValueStoreClassImpl</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">kvs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+    
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">kvs</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">self</span><span class="p">.</span><span class="n">kvs</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+
+
+<span class="k">class</span> <span class="nc">TestSUT</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">test_email_retrieval</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">FakeKeyValueStoreClass</span> <span class="o">=</span> <span class="nc">MagicMock</span><span class="p">(</span><span class="n">return_value</span><span class="o">=</span><span class="nc">FakeKeyValueStoreClassImpl</span><span class="p">())</span>
+        <span class="n">fake_key_value_store</span> <span class="o">=</span> <span class="nc">FakeKeyValueStoreClass</span><span class="p">()</span>
+        <span class="n">fake_key_value_store</span><span class="p">.</span><span class="nf">update</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="sh">"</span><span class="s">foo</span><span class="sh">"</span><span class="p">,</span> <span class="n">v</span><span class="o">=</span><span class="sh">"</span><span class="s">user@special_domain.com</span><span class="sh">"</span><span class="p">)</span>
+        <span class="n">sut</span> <span class="o">=</span> <span class="nc">SUT</span><span class="p">(</span><span class="n">key_value_store</span><span class="o">=</span><span class="n">fake_key_value_store</span><span class="p">)</span>
+        
+        <span class="n">email_domain</span> <span class="o">=</span> <span class="n">sut</span><span class="p">.</span><span class="nf">get_user_email_domin</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="sh">"</span><span class="s">foo</span><span class="sh">"</span><span class="p">)</span>
+        
+        <span class="n">self</span><span class="p">.</span><span class="nf">assertEquals</span><span class="p">(</span><span class="sh">"</span><span class="s">special_domain.com</span><span class="sh">"</span><span class="p">,</span> <span class="n">email_domain</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>The advantage of using a fake is that the test becomes much more robust and is more resistant to refactoring. It also becomes more extensible. When using a stub, if we wanted to test a different user journey, we would need to inject a new return value for <code class="language-plaintext highlighter-rouge">KeyValueStoreClass.get</code> method. We would in one of two ways:  (1) resetting the mock, which is a bad anti-pattern, or (2) initialize the stub to return a preconfigured list of canned values, in order, which makes the test more brittle (consider what happens if the SUT chooses to call <code class="language-plaintext highlighter-rouge">get</code> for the same key twice vs. calls <code class="language-plaintext highlighter-rouge">get</code> for different keys once each). Using a fake sidesteps these issues.</p>
+
+<h2 id="but-my-dependency-has-both-inbound-and-outbound-interactions">But my dependency has both inbound and outbound interactions!</h2>
+
+<p><img src="/images/man-double-exposed-photo.jpg" alt="Photograph of man double exposure" /></p>
+
+<p>Despite all your efforts to separate out the test cases that need stubs and the ones that need mocks, you will inevitably find yourself needing to test a scenario in which you need to verify both inbound and outbound interactions with an external dependency. How do we address that?</p>
+
+<p>First, if you need to assert on the outbound interaction of the same call that is stubbed, then you really don’t need that test. Just use a stub/fake and do not assert on the outbound interaction. Next, the only legitimate case of needing to verify both inbound and outbound interactions is if they are on distinct APIs of the same dependency. For example, the SUT could be reading from a file, and you need to test that (1) the contents of the file were read correctly, and (2) the file object was closed after the file was read. In this case, it is perfectly ok to stub the file <code class="language-plaintext highlighter-rouge">read</code> method while mocking the <code class="language-plaintext highlighter-rouge">close</code> method. Here is an illustration.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">unittest.mock</span> <span class="kn">import</span> <span class="n">MagicMock</span><span class="p">,</span> <span class="n">patch</span>
+
+<span class="k">class</span> <span class="nc">TestSUT</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">test_file_read</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">file_mock_stub_combo</span> <span class="o">=</span> <span class="nc">MagicMock</span><span class="p">()</span>
+        <span class="c1"># Using this as a stub by injecting canned contents of the file
+</span>        <span class="n">file_mock_stub_combo</span><span class="p">.</span><span class="n">__iter__</span><span class="p">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="p">[</span><span class="sh">"</span><span class="s">1234</span><span class="sh">"</span><span class="p">]</span>
+        
+        <span class="c1"># Next, we treat the file open call as a mock.
+</span>        <span class="k">with</span> <span class="nf">patch</span><span class="p">(</span><span class="sh">"</span><span class="s">builtins.open</span><span class="sh">"</span><span class="p">,</span>
+                   <span class="n">return_value</span><span class="o">=</span><span class="n">file_mock_stub_combo</span><span class="p">,</span> 
+                   <span class="n">create</span><span class="o">=</span><span class="bp">True</span>
+                  <span class="p">)</span> <span class="k">as</span> <span class="n">mock_file</span><span class="p">:</span>
+            <span class="n">sut</span> <span class="o">=</span> <span class="nc">SUT</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="sh">"</span><span class="s">foo</span><span class="sh">"</span><span class="p">)</span>
+            <span class="n">file_contents</span> <span class="o">=</span> <span class="n">sut</span><span class="p">.</span><span class="nf">get_contents</span><span class="p">()</span>
+            
+            <span class="c1"># Assertions on call to file open.
+</span>            <span class="c1"># Treating the 'open' call as a mock.
+</span>            <span class="n">mock_file</span><span class="p">.</span><span class="nf">assert_called_once_with</span><span class="p">(</span><span class="sh">"</span><span class="s">foo</span><span class="sh">"</span><span class="p">)</span>
+        
+            <span class="c1"># Assertion on the contents returned.
+</span>            <span class="c1"># Treating the `read` as a stub.
+</span>            <span class="n">self</span><span class="p">.</span><span class="nf">assertEquals</span><span class="p">(</span><span class="sh">"</span><span class="s">1234</span><span class="sh">"</span><span class="p">,</span> <span class="n">file_contents</span><span class="p">)</span>
+        
+            <span class="c1"># Assertion on the outbound interaction of file close.
+</span>            <span class="c1"># Treating the 'close' call as a mock.
+</span>            <span class="n">file_mock_stub_combo</span><span class="p">.</span><span class="n">close</span><span class="p">.</span><span class="nf">assert_called_once</span><span class="p">()</span>
+</code></pre></div></div>
+
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="//srikanth.sastry.name/dry-unit-tests-are-bad/">
         DRY unit tests are bad... mkay
       </a>
@@ -530,85 +676,6 @@ AssertionError: FAILURE
 <p>All of this took about a minute to register, and I immediately called them back and gave them the full amount that was promised to them.</p>
 
 <p>That look of helplessness and resignation stayed with me a long time. But I simply couldn’t understand it in it’s larger context. For a while, I saw this as a fault in their character that will get them swindled, and almost felt good about me not being one of the many who cheated them out of what they earned. Nonetheless, this event stayed with me, as I learned more, I kept recasting that experience with new sociological lenses. It took me years to recognize it as a natural consequence of multi-generational societal oppression, and with that recognize my own privilege.</p>
-
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="//srikanth.sastry.name/reuse-code-not-objects/">
-        Reuse Code, Not Objects
-      </a>
-    </h1>
-
-    <span class="post-date">17 Jul 2021</span>
-
-    <!-- wp:image {"id":666} -->
-<figure class="wp-block-image"><img src="https://srikanth.sastry.name/wp-content/uploads/2021/07/pexels-photo-5218009-edited.jpeg" alt="" class="wp-image-666" /></figure>
-<!-- /wp:image -->
-
-<!-- wp:paragraph -->
-<p>We all know of the importance of <a href="https://en.wikipedia.org/wiki/Code_reuse">code reuse</a> and <a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself">DRY</a> code. It is important to remember that this applies to code, and <em>not</em> to objects!<br />A common anti-pattern I see in stateful classes is something along the following lines:</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:code -->
-<pre class="wp-block-code"><code>class SomeStatefulClass {
-  private ResponseType responseType;
-  private final ErrMessages errMessages;
-  
-  public SomeStatefulClass() {
-    this.ResponseType = null;
-    this.errMessages = new ErrMessages();
-  }
-  
-  public void init() {
-    errMessages.clear();
-  }
-  
-  public Response process(Request request) {
-    try {
-      // Process the request.
-      // Update stats.
-      // Update otherState.
-      Response response = computeResponse();
-      responseType = computeResponseType();
-      return response;
-    } catch (Exception e) {
-      this.errMessages.append(e);
-    }
-    return null;
-  }
-  
-  public LogMessages getErrMessages() {
-    return this.errMessages;
-  }
-  
-  public ResponseType getResponseType() {
-    return responseType;
-  }
-}</code></pre>
-<!-- /wp:code -->
-
-<!-- wp:paragraph -->
-<p>This design pattern is a major code smell. Ironically, such classes are prone to be <em>misused through reuse</em>. A common example of this is reusing the object within a loop:</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:code -->
-<pre class="wp-block-code"><code>public void process(List&lt;Request&gt; requests) {
-  final SomeStatefulClass statefulObject
-      = new SomeStatefulClass();
-  Response response;
-  for (Request request: requests) {
-    statefulObject.init();
-    response = statefulObject.process(request);
-    appendResponse(response, statefulObject.getResponseType());
-    
-  }
-}</code></pre>
-<!-- /wp:code -->
-
-<!-- wp:paragraph -->
-<p>The issue here is subtle, but dangerous. Consider what happens if one of the requests in the list of requests passed to <code>process()</code> causes <code>statefulObject</code>to throw an exception inside <code>computeResponse()</code>. Dutifully, this exception is caught by <code>process()</code> and it returns <code>null</code>. However, note that the value of <code>responseType</code> in <code>statefulObject</code> was never modified by processing of this request, and therefore, it still hold the <code>ResponseType</code> of the previous request! Therefore, the line <code>appendResponse(response, statefulObject.getResponseType());</code> is now passing in a null response and the response type of the previous request!<br />These types of bugs are subtle and a pain to track down.<br />And this happened because we chose to reuse the <code>statefulObject</code>. If we were to use a new instance each time, this would not really be an issue.<br />Moral: If feasible, do not reuse objects; create new instances and throw them away when done!</p>
-<!-- /wp:paragraph -->
 
   </div>
   

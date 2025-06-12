@@ -4,13 +4,96 @@
  <title>Srikanth Sastry</title>
  <link href="//srikanth.sastry.name/atom.xml" rel="self"/>
  <link href="//srikanth.sastry.name/"/>
- <updated>2025-06-11T21:40:56+00:00</updated>
+ <updated>2025-06-12T01:56:47+00:00</updated>
  <id>//srikanth.sastry.name</id>
  <author>
    <name>Srikanth Sastry</name>
    <email>srikanth@sastry.name</email>
  </author>
 
+ 
+ <entry>
+   <title>TDD for Bug Fixes</title>
+   <link href="//srikanth.sastry.name/tdd-for-bug-fixes/"/>
+   <updated>2025-06-11T00:00:00+00:00</updated>
+   <id>//srikanth.sastry.name/tdd-for-bug-fixes</id>
+   <content type="html">&lt;p&gt;&lt;img src=&quot;/images/bug-stabbing-software-engineer-in-the-back.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I have seen way too many ‘senior’ engineers get bug fixing wrong. It is common to see an engineer sent a pull request titled “bug fix: &lt;something&gt;&quot; and the PR has changes to the functional code that fixes the bug and a correspond test case that shows that the bug is fixed. If that sounds reasonable, THINK AGAIN — you’ve walked right into the classic trap!&lt;/something&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;If you are sending PRs for bug fixes with functional code change and an added test case in the same PR/commit, then you are doing it wrong!&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;The crux of the problem is the following: HOW DO YOU &lt;em&gt;KNOW&lt;/em&gt; YOU’RE SMASHING THAT BUG? HOW CAN YOU BE SURE YOUR TEST ISN’T A DUD?! Your answer better not be &lt;em&gt;VIBE CHECKS&lt;/em&gt; or just &lt;em&gt;STARING REALLY HARD&lt;/em&gt;! If you are having to deploy your entire service/library and run an end-to-end test to demonstrate correctness, then you are doing too much, and you still haven’t demonstrated that the unit test actually captures the previously errneous behavior.&lt;/p&gt;
+
+&lt;p&gt;There is this shiny little concept called &lt;a href=&quot;https://en.wikipedia.org/wiki/Test-driven_development&quot;&gt;Test Driven Development (TDD)&lt;/a&gt; that is mighty useful here. You can peruse the wikipedia link to figure out what TDD is exactly. This note will show you how to use TDD for bug fixes.&lt;/p&gt;
+
+&lt;p&gt;Here are simple steps to fixing bugs using TDD:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;🕵️ Discover the bug. BAM! There it is! Your nemesis!&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;🧪 Create a PR that creates a new unit test that exposes the unit test. YAWZA!&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;🔧 Create a second PR on top the first PR that makes the functional code change and changes the expectation on the unit test accordingly. That should squash the bug! KAPOW!&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;💰 Justice is served! PROFIT!&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/tdd-bug-lifecycle.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Still not sure? Let’s demonstrate this with an example. Say, there is a bug that you discovered and know how to fix it.&lt;/p&gt;
+
+&lt;p&gt;First, you create a PR that demonstrates the bug by invoking your SUT with the offending input, and sets the expected value to be &lt;em&gt;incorrect&lt;/em&gt; so that the test case actually &lt;em&gt;passes&lt;/em&gt; with this incorrect value; thus demonstrating the bug.&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;TestSUT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;unittest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;TestCase&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;bp&quot;&gt;...&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;test_bug_b12345&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;None&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;sh&quot;&gt;&apos;&apos;&apos;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;
+        Test to expose bug b12345
+        &lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&apos;&apos;&apos;&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;# Arrange
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;sut&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SUT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(...)&lt;/span&gt;
+        
+        &lt;span class=&quot;c1&quot;&gt;# Act
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;actual&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sut&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;test_method&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;bad-input&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+        &lt;span class=&quot;c1&quot;&gt;# Assert
+&lt;/span&gt;        &lt;span class=&quot;n&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;assertEqual&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;actual&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;sh&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;bad buggy output&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;# The assertion above demonstartes the bug b12345
+&lt;/span&gt;        &lt;span class=&quot;c1&quot;&gt;# The right expected value should be &quot;correct output&quot;.
+&lt;/span&gt;        &lt;span class=&quot;c1&quot;&gt;# self.assertEqual(actual, &quot;correct output&quot;)
+&lt;/span&gt;        
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;You can send that PR out for review and merge it in. Now you have a solid proof that you have found a bug, and reproduced it.&lt;/p&gt;
+
+&lt;p&gt;Next, you have a new PR that fixes that bug. If you bug fix is correct, then the test &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;test_bug_b12345&lt;/code&gt; should not start failing. The output of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sut.test_method(input=&quot;bad-input&quot;)&lt;/code&gt; should be &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&quot;correct output&quot;&lt;/code&gt; and not &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;&quot;bad buggy output&quot;&lt;/code&gt;. So, you now modify the unit test &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;test_bug_b12345&lt;/code&gt; in that same PR that looks as follows:&lt;/p&gt;
+&lt;div class=&quot;language-diff highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;    def test_bug_b12345(self) -&amp;gt; None:
+        &apos;&apos;&apos;
+        Test to expose bug b12345
+        &apos;&apos;&apos;
+        # Arrange
+        sut = SUT(...)
+        
+        # Act
+        actual = sut.test_method(input=&quot;bad-input&quot;)
+&lt;span class=&quot;err&quot;&gt;
+&lt;/span&gt;        # Assert
+&lt;span class=&quot;gd&quot;&gt;-       self.assertEqual(actual, &quot;bad buggy output&quot;)
+-       # The assertion above demonstartes the bug b12345
+-       # The right expected value should be &quot;correct output&quot;.
+-       # self.assertEqual(actual, &quot;correct output&quot;)
+&lt;/span&gt;&lt;span class=&quot;gi&quot;&gt;+       self.assertEqual(actual, &quot;correct output&quot;)
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Now your test should pass. This second PR is conclusive proof that your diff now fixes the bug! So, merge it in. Deploy with confidence. &lt;strong&gt;BOOM — PROFIT!&lt;/strong&gt;&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Let Sleeping Engineers Lie: Why Your Alerts Should Match Your SEVs</title>

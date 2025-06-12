@@ -157,6 +157,93 @@
   
   <div class="post">
     <h1 class="post-title">
+      <a href="//srikanth.sastry.name/tdd-for-bug-fixes/">
+        TDD for Bug Fixes
+      </a>
+    </h1>
+
+    <span class="post-date">11 Jun 2025</span>
+
+    <p><img src="/images/bug-stabbing-software-engineer-in-the-back.png" alt="" /></p>
+
+<p>I have seen way too many ‘senior’ engineers get bug fixing wrong. It is common to see an engineer sent a pull request titled “bug fix: <something>" and the PR has changes to the functional code that fixes the bug and a correspond test case that shows that the bug is fixed. If that sounds reasonable, THINK AGAIN — you’ve walked right into the classic trap!</something></p>
+
+<p><strong>If you are sending PRs for bug fixes with functional code change and an added test case in the same PR/commit, then you are doing it wrong!</strong></p>
+
+<p>The crux of the problem is the following: HOW DO YOU <em>KNOW</em> YOU’RE SMASHING THAT BUG? HOW CAN YOU BE SURE YOUR TEST ISN’T A DUD?! Your answer better not be <em>VIBE CHECKS</em> or just <em>STARING REALLY HARD</em>! If you are having to deploy your entire service/library and run an end-to-end test to demonstrate correctness, then you are doing too much, and you still haven’t demonstrated that the unit test actually captures the previously errneous behavior.</p>
+
+<p>There is this shiny little concept called <a href="https://en.wikipedia.org/wiki/Test-driven_development">Test Driven Development (TDD)</a> that is mighty useful here. You can peruse the wikipedia link to figure out what TDD is exactly. This note will show you how to use TDD for bug fixes.</p>
+
+<p>Here are simple steps to fixing bugs using TDD:</p>
+
+<ol>
+  <li>
+    <p>🕵️ Discover the bug. BAM! There it is! Your nemesis!</p>
+  </li>
+  <li>
+    <p>🧪 Create a PR that creates a new unit test that exposes the unit test. YAWZA!</p>
+  </li>
+  <li>
+    <p>🔧 Create a second PR on top the first PR that makes the functional code change and changes the expectation on the unit test accordingly. That should squash the bug! KAPOW!</p>
+  </li>
+  <li>
+    <p>💰 Justice is served! PROFIT!</p>
+  </li>
+</ol>
+
+<p><img src="/images/tdd-bug-lifecycle.png" alt="" /></p>
+
+<p>Still not sure? Let’s demonstrate this with an example. Say, there is a bug that you discovered and know how to fix it.</p>
+
+<p>First, you create a PR that demonstrates the bug by invoking your SUT with the offending input, and sets the expected value to be <em>incorrect</em> so that the test case actually <em>passes</em> with this incorrect value; thus demonstrating the bug.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">TestSUT</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="bp">...</span>
+    <span class="k">def</span> <span class="nf">test_bug_b12345</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="sh">'''</span><span class="s">
+        Test to expose bug b12345
+        </span><span class="sh">'''</span>
+        <span class="c1"># Arrange
+</span>        <span class="n">sut</span> <span class="o">=</span> <span class="nc">SUT</span><span class="p">(...)</span>
+        
+        <span class="c1"># Act
+</span>        <span class="n">actual</span> <span class="o">=</span> <span class="n">sut</span><span class="p">.</span><span class="nf">test_method</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="sh">"</span><span class="s">bad-input</span><span class="sh">"</span><span class="p">)</span>
+
+        <span class="c1"># Assert
+</span>        <span class="n">self</span><span class="p">.</span><span class="nf">assertEqual</span><span class="p">(</span><span class="n">actual</span><span class="p">,</span> <span class="sh">"</span><span class="s">bad buggy output</span><span class="sh">"</span><span class="p">)</span>
+        <span class="c1"># The assertion above demonstartes the bug b12345
+</span>        <span class="c1"># The right expected value should be "correct output".
+</span>        <span class="c1"># self.assertEqual(actual, "correct output")
+</span>        
+</code></pre></div></div>
+
+<p>You can send that PR out for review and merge it in. Now you have a solid proof that you have found a bug, and reproduced it.</p>
+
+<p>Next, you have a new PR that fixes that bug. If you bug fix is correct, then the test <code class="language-plaintext highlighter-rouge">test_bug_b12345</code> should not start failing. The output of <code class="language-plaintext highlighter-rouge">sut.test_method(input="bad-input")</code> should be <code class="language-plaintext highlighter-rouge">"correct output"</code> and not <code class="language-plaintext highlighter-rouge">"bad buggy output"</code>. So, you now modify the unit test <code class="language-plaintext highlighter-rouge">test_bug_b12345</code> in that same PR that looks as follows:</p>
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    def test_bug_b12345(self) -&gt; None:
+        '''
+        Test to expose bug b12345
+        '''
+        # Arrange
+        sut = SUT(...)
+        
+        # Act
+        actual = sut.test_method(input="bad-input")
+<span class="err">
+</span>        # Assert
+<span class="gd">-       self.assertEqual(actual, "bad buggy output")
+-       # The assertion above demonstartes the bug b12345
+-       # The right expected value should be "correct output".
+-       # self.assertEqual(actual, "correct output")
+</span><span class="gi">+       self.assertEqual(actual, "correct output")
+</span></code></pre></div></div>
+
+<p>Now your test should pass. This second PR is conclusive proof that your diff now fixes the bug! So, merge it in. Deploy with confidence. <strong>BOOM — PROFIT!</strong></p>
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="//srikanth.sastry.name/sync-your-alerts-to-your-sev-criteria/">
         Let Sleeping Engineers Lie: Why Your Alerts Should Match Your SEVs
       </a>
@@ -630,103 +717,6 @@ Almost <a href="/defining-unit-tests-two-schools-of-thought/">by definition</a> 
         <span class="c1"># Assert
 </span>        <span class="n">self</span><span class="p">.</span><span class="nf">assertEquals</span><span class="p">(</span><span class="n">excepted_error_code</span><span class="p">,</span> <span class="n">exception</span><span class="p">.</span><span class="n">error_code</span><span class="p">)</span>
 </code></pre></div></div>
-
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="//srikanth.sastry.name/in-unit-tests-favor-detroit-over-london/">
-        In unit tests, I favor Detroit over London
-      </a>
-    </h1>
-
-    <span class="post-date">26 Jun 2022</span>
-
-    <p><img src="/images/detroit-wall-frame.jpg" alt="" /></p>
-
-<p><a href="/defining-unit-tests-two-schools-of-thought/">Recall</a> the two schools of thought around unit test: Detroit, and London. Briefly, the Detroit school considers a ‘unit’ of software to be tested as a ‘behavior’ that consists of one or more classes, and unit tests replace only shared and/or external dependencies with test doubles. In contrast, the London school consider a ‘unit’ to be a single class, and replaces all dependencies with test doubles.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>School</th>
-      <th>Unit</th>
-      <th>Isolation</th>
-      <th>Speed</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Detroit</td>
-      <td>Behavior</td>
-      <td>Replace shared and external dependencies with test doubles</td>
-      <td>‘fast’</td>
-    </tr>
-    <tr>
-      <td>London</td>
-      <td>Class</td>
-      <td>Replace all dependencies (internal, external, shared, etc.) with test doubles</td>
-      <td>‘fast’</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>See this <a href="/defining-unit-tests-two-schools-of-thought/">note</a> for a more detailed discussion on the two schools.</p>
-
-<p>Each school have it’s proponents and each school of thought has it’s advantages. I, personally, prefer the Detroit school over the London school. I have noticed that following the Detroit school has made my test suite more <a href="/unit-test-attributes-and-their-trade-offs/">accurate and complete</a>.</p>
-
-<h2 id="improved-accuracy-when-refactoring">Improved Accuracy (when refactoring)</h2>
-
-<p>In <a href="/unit-test-attributes-and-their-trade-offs/">the post on attributes of a unit test suite</a>, I defined <em>accuracy</em> as the measure of how likely it is that a test failure denotes a bug in your diff. I have noticed that unit test suites that follow the Detroit school tended to have high accuracy when your codebase has a lot of classes that are public <em>de jour</em>, but private <em>de facto</em>.</p>
-
-<p>Codebases I have worked in typically have hundreds of classes, but only a handful of those classes are actually referenced by external classes/services. Most of the classes are part of a private API that is internal to the service. Let’s take a concrete illustration. Say, there is a class <code class="language-plaintext highlighter-rouge">Util</code> that is used only by classes <code class="language-plaintext highlighter-rouge">Feature1</code> and <code class="language-plaintext highlighter-rouge">Feature2</code> within the codebase, and has no other callers; in fact, <code class="language-plaintext highlighter-rouge">Util</code> exists only to help classes <code class="language-plaintext highlighter-rouge">Feature1</code> and <code class="language-plaintext highlighter-rouge">Feature2</code> implement their respective user journies. Here although <code class="language-plaintext highlighter-rouge">Util</code> is a class with public methods, in reality <code class="language-plaintext highlighter-rouge">Util</code> really represents the common implementation details for <code class="language-plaintext highlighter-rouge">Feature1</code> and <code class="language-plaintext highlighter-rouge">Feature2</code>.</p>
-
-<h3 id="in-london">In London</h3>
-<p>According to the London school, all unit tests for <code class="language-plaintext highlighter-rouge">Feature1</code> and <code class="language-plaintext highlighter-rouge">Fearure2</code> should be replacing <code class="language-plaintext highlighter-rouge">Util</code> with a test double. Thus, tests for <code class="language-plaintext highlighter-rouge">Feature1</code> and <code class="language-plaintext highlighter-rouge">Feature2</code> look as follows.
-<img src="/images/London-School-Accuracy-Before.png" alt="" /></p>
-
-<p>Now, say we want to do some refactoring that spans <code class="language-plaintext highlighter-rouge">Feature1</code>, <code class="language-plaintext highlighter-rouge">Feature2</code>, and <code class="language-plaintext highlighter-rouge">Util</code>. Since <code class="language-plaintext highlighter-rouge">Util</code> is really has a private API with <code class="language-plaintext highlighter-rouge">Feature1</code> and <code class="language-plaintext highlighter-rouge">Feature2</code>, we can change the API of <code class="language-plaintext highlighter-rouge">Util</code> in concert with <code class="language-plaintext highlighter-rouge">Feature1</code> and <code class="language-plaintext highlighter-rouge">Feature2</code> in a single diff. Now, since the tests for <code class="language-plaintext highlighter-rouge">Feature1</code> and <code class="language-plaintext highlighter-rouge">Feature2</code> use test doubles for <code class="language-plaintext highlighter-rouge">Util</code>, and we have changed <code class="language-plaintext highlighter-rouge">Util</code>’s API, we need to change the test doubles’ implementation to match the new API. After making these changes, say, the tests for <code class="language-plaintext highlighter-rouge">Util</code> pass, but the tests for <code class="language-plaintext highlighter-rouge">Feature1</code> fail.</p>
-
-<p><img src="/images/London-School-Accuracy-After.png" alt="" /></p>
-
-<p>Now, does the test failure denote a bug in our refactoring, or does it denote an error in how we modified the tests? This is not easy to determine except by stepping through the tests manually. Thus, the test suite does not have high accuracy.</p>
-
-<h3 id="in-detroit">In Detroit</h3>
-<p>In contrast, according to the Detroit school, the unit tests for <code class="language-plaintext highlighter-rouge">Feature1</code> and <code class="language-plaintext highlighter-rouge">Feature2</code> can use <code class="language-plaintext highlighter-rouge">Util</code> as such (without test doubles). The tests for <code class="language-plaintext highlighter-rouge">Feature1</code> and <code class="language-plaintext highlighter-rouge">Feature2</code> look as follows.</p>
-
-<p><img src="/images/Detroit-School-Accuracy-Before.png" alt="" /></p>
-
-<p>If we do the same refactoring across <code class="language-plaintext highlighter-rouge">Feature1</code>, <code class="language-plaintext highlighter-rouge">Feature2</code>, and <code class="language-plaintext highlighter-rouge">Util</code> classes, note that we do not need to make any changes to the tests for <code class="language-plaintext highlighter-rouge">Feature1</code> and <code class="language-plaintext highlighter-rouge">Feature2</code>. If the tests fail, then we have a very high signal that the refactoring has a bug in it; this makes for a high accuracy test suite!</p>
-
-<p><img src="/images/Detroit-School-Accuracy-After.png" alt="" /></p>
-
-<p>Furthermore, since <code class="language-plaintext highlighter-rouge">Util</code> exists only to serve <code class="language-plaintext highlighter-rouge">Feature1</code> and <code class="language-plaintext highlighter-rouge">Feature2</code>, you can argue that <code class="language-plaintext highlighter-rouge">Util</code> doesn’t even need any unit tests of it’s own; the tests for <code class="language-plaintext highlighter-rouge">Feature1</code> and <code class="language-plaintext highlighter-rouge">Feature2</code> cover the spread!</p>
-
-<h2 id="improved-completeness-around-regressions">Improved Completeness (around regressions)</h2>
-<p>In <a href="/unit-test-attributes-and-their-trade-offs/">the post on attributes of a unit test suite</a>, I defined <em>completeness</em> as the measure of how likely a bug introduced by your diff is caught by your test suite. I have seen unit tests following the Detroit school catching bugs/regressions more easily, especially when the bugs are introduced by API contract violations.</p>
-
-<p>It easier to see this with an example. Say, there is a class <code class="language-plaintext highlighter-rouge">Outer</code> that uses a class <code class="language-plaintext highlighter-rouge">Inner</code>, and <code class="language-plaintext highlighter-rouge">Inner</code> is an internal non-shared dependency. Let’s say that the class <code class="language-plaintext highlighter-rouge">Outer</code> depends on a specific contract, (let’s call it) alpha, that <code class="language-plaintext highlighter-rouge">Inner</code>’s API satisfies, for correctness. Recall that we practically trade off between the speed of a test suite and it’s completeness, let us posit that the incompleteness here is that we do not have a test for <code class="language-plaintext highlighter-rouge">Inner</code> satisfying contract alpha.</p>
-
-<h3 id="in-london-1">In London</h3>
-
-<p>Following the London school, the tests for <code class="language-plaintext highlighter-rouge">Outer</code> replace the instance of <code class="language-plaintext highlighter-rouge">Inner</code> with a test double, and since the test double is a replacement for <code class="language-plaintext highlighter-rouge">Inner</code>, it also satisfies contract alpha. See the illustration below for clarity.</p>
-
-<p><img src="/images/London-School-Completeness-Before.png" alt="Image not found: /images/London-School-Completeness-Before.png" title="Image not found: /images/London-School-Completeness-Before.png" /></p>
-
-<p>Now, let’s assume that we have a diff that ‘refactors’ <code class="language-plaintext highlighter-rouge">Inner</code>, but in that process, it introduces a bug that violates contract alpha. Since we have assumed an incompleteness in our test suite around contract alpha, the unit test for <code class="language-plaintext highlighter-rouge">Inner</code> does not catch this regression. Also, since the tests for <code class="language-plaintext highlighter-rouge">Outer</code> use a test double for <code class="language-plaintext highlighter-rouge">Inner</code> (which satisfies contract alpha), those tests do not detect this regression either.</p>
-
-<p><img src="/images/London-School-Completeness-After.png" alt="" /></p>
-
-<h3 id="in-detroit-1">In Detroit</h3>
-
-<p>If we were to follow the Detroit school instead, then the unit tests for <code class="language-plaintext highlighter-rouge">Outer</code> instantiate and use <code class="language-plaintext highlighter-rouge">Inner</code> when testing the correctness of <code class="language-plaintext highlighter-rouge">Outer</code>, as shown below. Note that the test incompletness w.r.t. contract alpha still exists.
-<img src="/images/Detroit-School-Completeness-Before.png" alt="" /></p>
-
-<p>Here, like before, assume that we have a diff that ‘refactors’ <code class="language-plaintext highlighter-rouge">Inner</code> and breaks contract alpha. This time around, although the test suite for <code class="language-plaintext highlighter-rouge">Inner</code> does not catch the regression, the test suite for <code class="language-plaintext highlighter-rouge">Outer</code> will catch the regression. Why? Because the correctness of <code class="language-plaintext highlighter-rouge">Outer</code> depends on <code class="language-plaintext highlighter-rouge">Inner</code> satisfying contract alpha. When that contract is violated <code class="language-plaintext highlighter-rouge">Outer</code> fails to satisfy correctness, and is therefore, it’s unit tests fail/</p>
-
-<p><img src="/images/Detroit-School-Completeness-After.png" alt="" /></p>
-
-<p>In effect, even though we did not have an explicit test for contract alpha, the unit tests written according to the Detroit school tend to have better completeness than the ones written following the London school.</p>
 
   </div>
   
