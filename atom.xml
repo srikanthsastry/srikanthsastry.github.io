@@ -4,7 +4,7 @@
  <title>Srikanth Sastry</title>
  <link href="//srikanth.sastry.name/atom.xml" rel="self"/>
  <link href="//srikanth.sastry.name/"/>
- <updated>2025-06-18T00:43:00+00:00</updated>
+ <updated>2025-06-18T11:14:50+00:00</updated>
  <id>//srikanth.sastry.name</id>
  <author>
    <name>Srikanth Sastry</name>
@@ -19,7 +19,7 @@
    <id>//srikanth.sastry.name/reduce-cyclomatic-complexity</id>
    <content type="html">&lt;p&gt;&lt;img src=&quot;/images/cpu-in-maze-pixel-art.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 &lt;h2 id=&quot;what-even-is-cyclomatic-complexity&quot;&gt;What even &lt;em&gt;is&lt;/em&gt; Cyclomatic Complexity?&lt;/h2&gt;
-&lt;p&gt;Ever spend 20 minutes trying to figure out why a config isn’t applying — only to realize you missed a buried branch in someone’s 10-path function? That’s &lt;a href=&quot;https://en.wikipedia.org/wiki/Cyclomatic_complexity&quot;&gt;Cyclomatic Complexity&lt;/a&gt; in action. Intuitively, you can think of Cyclomatic Complexity as the number of possible paths a single execution of a function can take.&lt;/p&gt;
+&lt;p&gt;Ever spend 20 minutes trying to figure out why your bug fix or feature code isn’t triggering or being executed — only to realize you missed a buried branch in someone’s 10-path function? That’s &lt;a href=&quot;https://en.wikipedia.org/wiki/Cyclomatic_complexity&quot;&gt;Cyclomatic Complexity&lt;/a&gt; in action. Intuitively, you can think of Cyclomatic Complexity as the number of possible paths a single execution of a function can take.&lt;/p&gt;
 
 &lt;p&gt;For example, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;a = b + c&lt;/code&gt; has a cyclomatic complexity of one, and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;a = b + c if foo else d + e&lt;/code&gt; has a cyclomatic complexity of two: one path is when &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;foo&lt;/code&gt; is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;True&lt;/code&gt; and the effective logic is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;a = b + c&lt;/code&gt;, and the other path is when &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;foo&lt;/code&gt; is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;False&lt;/code&gt; and the effective logic is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;a = d + e&lt;/code&gt;.&lt;/p&gt;
 

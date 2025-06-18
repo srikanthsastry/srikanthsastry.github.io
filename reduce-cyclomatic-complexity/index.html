@@ -158,7 +158,7 @@
   <span class="post-date">17 Jun 2025</span>
   <p><img src="/images/cpu-in-maze-pixel-art.png" alt="" /></p>
 <h2 id="what-even-is-cyclomatic-complexity">What even <em>is</em> Cyclomatic Complexity?</h2>
-<p>Ever spend 20 minutes trying to figure out why a config isn’t applying — only to realize you missed a buried branch in someone’s 10-path function? That’s <a href="https://en.wikipedia.org/wiki/Cyclomatic_complexity">Cyclomatic Complexity</a> in action. Intuitively, you can think of Cyclomatic Complexity as the number of possible paths a single execution of a function can take.</p>
+<p>Ever spend 20 minutes trying to figure out why your bug fix or feature code isn’t triggering or being executed — only to realize you missed a buried branch in someone’s 10-path function? That’s <a href="https://en.wikipedia.org/wiki/Cyclomatic_complexity">Cyclomatic Complexity</a> in action. Intuitively, you can think of Cyclomatic Complexity as the number of possible paths a single execution of a function can take.</p>
 
 <p>For example, <code class="language-plaintext highlighter-rouge">a = b + c</code> has a cyclomatic complexity of one, and <code class="language-plaintext highlighter-rouge">a = b + c if foo else d + e</code> has a cyclomatic complexity of two: one path is when <code class="language-plaintext highlighter-rouge">foo</code> is <code class="language-plaintext highlighter-rouge">True</code> and the effective logic is <code class="language-plaintext highlighter-rouge">a = b + c</code>, and the other path is when <code class="language-plaintext highlighter-rouge">foo</code> is <code class="language-plaintext highlighter-rouge">False</code> and the effective logic is <code class="language-plaintext highlighter-rouge">a = d + e</code>.</p>
 
