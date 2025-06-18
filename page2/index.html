@@ -157,6 +157,257 @@
   
   <div class="post">
     <h1 class="post-title">
+      <a href="//srikanth.sastry.name/tests-should-be-isolated-not-coupled/">
+        Tests should be isolated from each other; not coupled
+      </a>
+    </h1>
+
+    <span class="post-date">03 Jul 2022</span>
+
+    <p><img src="/images/carabiners-connected.jpg" alt="" />
+Almost <a href="/defining-unit-tests-two-schools-of-thought/">by definition</a> unit tests should be <em>isolated</em> from its (external, shared) dependencies. But, equally importantly, unit tests should also be isolated <em>from each other</em>. When one test starts to affect another test, the two tests are said to be <em>coupled</em>. Alternatively, if changes to one test <em>can</em> negatively impact the correctness of another test, then the two tests are said to be <em>coupled</em>.</p>
+
+<p>Coupled tests are problematic in two ways.</p>
+
+<ol>
+  <li><em>Tests become less readable.</em> Reading the code for a single unit test does not necessarily communicate what the test does. We also need to understand the ‘coupling’ between that test and other tests to grok what a single test does. This coupling can be subtle and not easy to follow.</li>
+  <li><em>Tests become less <a href="/unit-test-attributes-and-their-trade-offs/">accurate</a>.</em> When one test affects another, it becomes difficult to make changes to a single test in isolation. For instance, if a diff makes changes to the some production and test code, and then a test fails, then it is not always clear why the test failed. The failure could due to a bug, or an artifact the coupled tests. Thus, your tests are no longer trustworthy, and therefore, less accurate.</li>
+</ol>
+
+<p>Coupling can happen in many ways. The obvious ones include (1) using the same shared dependency (like when you use the same temp file name in all tests), and (2) relying on the post-condition of one test as a precondition of another test. Such cases are also obvious to detect, and to fix. There are two more following ways in which tests can be coupled; but these are more subtle, and more prevalent.</p>
+
+<ol>
+  <li>Precondition setting in test fixtures</li>
+  <li>Parameterized tests for heterogeneous tests</li>
+</ol>
+
+<p>The rest of this note is focused on the above two anti-patterns of test coupling.</p>
+
+<h2 id="coupling-through-test-fixtures">Coupling through test fixtures</h2>
+
+<p>Say, your SUT has a dependency called <code class="language-plaintext highlighter-rouge">Helper</code>, and initially, for the two tests in your unit tests for the SUT, you initialize your <code class="language-plaintext highlighter-rouge">Helper</code> stub with contents <code class="language-plaintext highlighter-rouge">valueA</code>, and <code class="language-plaintext highlighter-rouge">valueB</code>. Since both tests share the same initial state, you include the initialization code in the <code class="language-plaintext highlighter-rouge">SetUp</code> of the unit tests.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">SUTTestCase</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">helper</span> <span class="o">=</span> <span class="nc">StubHelper</span><span class="p">()</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">helper</span><span class="p">.</span><span class="nf">add_contents</span><span class="p">([</span><span class="n">valueA</span><span class="p">,</span> <span class="n">valueB</span><span class="p">])</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">sut</span> <span class="o">=</span> <span class="nc">SUT</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">helper</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">test_behavior1</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="p">...</span>  <span class="c1"># Assumes self.helper set with contents=[valueA, valueB]
+</span>    
+    <span class="k">def</span> <span class="nf">test_behavior2</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="p">...</span>  <span class="c1"># Assumes self.helper set with contents=[valueA, valueB]
+</span></code></pre></div></div>
+
+<p>Next, you modify SUT to add features to it. In order to test those features, the <code class="language-plaintext highlighter-rouge">Helper</code> stub needs to include <code class="language-plaintext highlighter-rouge">controllerA</code>. But these are useful only in the new tests being added. However, looking at the unit test you already have, it is easiest to to simply add <code class="language-plaintext highlighter-rouge">controllerA</code> to <code class="language-plaintext highlighter-rouge">self.helper</code>. So, your unit tests look as follows:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">SUTTestCase</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">helper</span> <span class="o">=</span> <span class="nc">StubHelper</span><span class="p">()</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">helper</span><span class="p">.</span><span class="nf">add_contents</span><span class="p">([</span><span class="n">valueA</span><span class="p">,</span> <span class="n">valueB</span><span class="p">])</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">helper</span><span class="p">.</span><span class="nf">add_controller</span><span class="p">(</span><span class="n">controllerA</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">sut</span> <span class="o">=</span> <span class="nc">SUT</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">helper</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">test_behavior1</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="p">...</span>  <span class="c1"># Assumes self.helper set with contents=[valueA, valueB]
+</span>             <span class="c1"># But this test assumes nothing about self.helper's controller
+</span>
+    <span class="k">def</span> <span class="nf">test_behavior2</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="p">...</span>  <span class="c1"># Assumes self.helper set with contents=[valueA, valueB]
+</span>             <span class="c1"># But this test assumes nothing about self.helper's controller
+</span>
+    <span class="k">def</span> <span class="nf">test_behavior3</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="p">...</span>  <span class="c1"># Assumes self.helper set with contents=[valueA, valueB], and controller=controllerA
+</span>
+    <span class="k">def</span> <span class="nf">test_behavior4</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="p">...</span>  <span class="c1"># Assumes self.helper set with contents=[valueA, valueB], and controller=controllerA
+</span></code></pre></div></div>
+
+<p>Then you discover a gap in testing that requires the initial state of the <code class="language-plaintext highlighter-rouge">Helper</code> stub to have just the content <code class="language-plaintext highlighter-rouge">valueA</code> and include <code class="language-plaintext highlighter-rouge">controllerA</code>. Now, when adding this new unit test to suite, the simplest way to do this would be to remove <code class="language-plaintext highlighter-rouge">valueB</code> from <code class="language-plaintext highlighter-rouge">self.helper</code> at the start of the new test. So, now, your test suite looks as follows:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">SUTTestCase</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">helper</span> <span class="o">=</span> <span class="nc">StubHelper</span><span class="p">()</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">helper</span><span class="p">.</span><span class="nf">add_contents</span><span class="p">([</span><span class="n">valueA</span><span class="p">,</span> <span class="n">valueB</span><span class="p">])</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">helper</span><span class="p">.</span><span class="nf">add_controller</span><span class="p">(</span><span class="n">controllerA</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">sut</span> <span class="o">=</span> <span class="nc">SUT</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">helper</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">test_behavior1</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="p">...</span>  <span class="c1"># Assumes self.helper set with contents=[valueA, valueB]
+</span>             <span class="c1"># But this test assumes nothing about self.helper's controller
+</span>
+    <span class="k">def</span> <span class="nf">test_behavior2</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="p">...</span>  <span class="c1"># Assumes self.helper set with contents=[valueA, valueB]
+</span>             <span class="c1"># But this test assumes nothing about self.helper's controller
+</span>
+    <span class="k">def</span> <span class="nf">test_behavior3</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="p">...</span>  <span class="c1"># Assumes self.helper set with contents=[valueA, valueB], and controller=controllerA
+</span>
+    <span class="k">def</span> <span class="nf">test_behavior4</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="p">...</span>  <span class="c1"># Assumes self.helper set with contents=[valueA, valueB], and controller=controllerA
+</span>
+    <span class="k">def</span> <span class="nf">test_behavior5</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="c1"># Assumes self.helper set with contents=[valueA, valueB] (because of other tests' setup)
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">helper</span><span class="p">.</span><span class="nf">remove_content</span><span class="p">(</span><span class="n">valueB</span><span class="p">)</span>
+        <span class="c1"># Now assumes self.helper set with contents=[valueA]
+</span>        <span class="p">...</span>  
+</code></pre></div></div>
+
+<p>Let pause here and inspect the state of the unit test. The tests are coupled. Why? Because modifying one test ends up affecting other tests. In the example above, if we replace <code class="language-plaintext highlighter-rouge">self.helper.add_contents([valueA, valueB])</code> with <code class="language-plaintext highlighter-rouge">self.helper.add_contents(valueA)</code> for tests <code class="language-plaintext highlighter-rouge">test_behavior1</code> and <code class="language-plaintext highlighter-rouge">test_behavior2</code>, it will result in a failure in <code class="language-plaintext highlighter-rouge">test_behavior5</code> because <code class="language-plaintext highlighter-rouge">self.helper.remove_content(valueB)</code> will end up throwing an error!</p>
+
+<p>Furthermore, for anyone reading these tests, it is not entirely clear that <code class="language-plaintext highlighter-rouge">test_behavior1</code>, and <code class="language-plaintext highlighter-rouge">test_behavior2</code> need <code class="language-plaintext highlighter-rouge">self.helper</code> to be initialized with values <code class="language-plaintext highlighter-rouge">[valueA, valueB]</code>, but do not need for <code class="language-plaintext highlighter-rouge">controllerA</code> in <code class="language-plaintext highlighter-rouge">self.helper</code>. The preconditions for <code class="language-plaintext highlighter-rouge">test_behavior1</code> and <code class="language-plaintext highlighter-rouge">test_behavior2</code> are coupled with the preconditions for <code class="language-plaintext highlighter-rouge">test_behavior3</code>.</p>
+
+<p>It also results in test incompleteness in that, if we introduce a bug that causes <code class="language-plaintext highlighter-rouge">behavior1</code> to fail when <code class="language-plaintext highlighter-rouge">self.helper.add_controller(controllerA)</code> is not set, we might not catch that bug because we have initialized the test for <code class="language-plaintext highlighter-rouge">behavior1</code> with <code class="language-plaintext highlighter-rouge">self.helper.add_controller(controllerA)</code>.</p>
+
+<h3 id="how-to-decouple-such-tests">How to decouple such tests?</h3>
+
+<p>Use the <code class="language-plaintext highlighter-rouge">setUp</code> method to simply set up your dependencies, but not to enforce any precondition. Instead, make setting preconditions part of the <em>arrange</em> step of each unit test. You can even encapsulate the precondition setting into a function (with the right parameters) so that the <em>arrange</em> section does not get too bloated, and yet the test code is readable. Consider the following refactoring of the tests:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">SUTTestCase</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">helper</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">StubHelper</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">sut</span> <span class="o">=</span> <span class="nc">SUT</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">helper</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">prepare_helper</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">contents</span><span class="p">:</span><span class="n">List</span><span class="p">[</span><span class="n">Value</span><span class="p">],</span> <span class="n">controller</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Controller</span><span class="p">]</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">helper</span> <span class="o">=</span> <span class="nc">StubHelper</span><span class="p">()</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">helper</span><span class="p">.</span><span class="nf">add_contents</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">controller</span><span class="p">:</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">helper</span><span class="p">.</span><span class="nf">add_controller</span><span class="p">(</span><span class="n">controller</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">test_behavior1</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="c1"># Assumes self.helper is a fresh object.
+</span>        <span class="n">self</span><span class="p">.</span><span class="nf">prepare_helper</span><span class="p">(</span><span class="n">contents</span><span class="o">=</span><span class="p">[</span><span class="n">valueA</span><span class="p">,</span> <span class="n">valueB</span><span class="p">])</span>
+        <span class="bp">...</span>
+
+    <span class="k">def</span> <span class="nf">test_behavior2</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="c1"># Assumes self.helper is a fresh object.
+</span>        <span class="n">self</span><span class="p">.</span><span class="nf">prepare_helper</span><span class="p">(</span><span class="n">contents</span><span class="o">=</span><span class="p">[</span><span class="n">valueA</span><span class="p">,</span> <span class="n">valueB</span><span class="p">])</span>
+        <span class="p">...</span>    
+
+    <span class="k">def</span> <span class="nf">test_behavior3</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="c1"># Assumes self.helper is a fresh object.
+</span>        <span class="n">self</span><span class="p">.</span><span class="nf">prepare_helper</span><span class="p">(</span><span class="n">contents</span><span class="o">=</span><span class="p">[</span><span class="n">valueA</span><span class="p">,</span> <span class="n">valueB</span><span class="p">],</span> <span class="n">controller</span><span class="o">=</span><span class="n">controllerA</span><span class="p">)</span>
+        <span class="bp">...</span>
+
+    <span class="k">def</span> <span class="nf">test_behavior4</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="c1"># Assumes self.helper is a fresh object.
+</span>        <span class="n">self</span><span class="p">.</span><span class="nf">prepare_helper</span><span class="p">(</span><span class="n">contents</span><span class="o">=</span><span class="p">[</span><span class="n">valueA</span><span class="p">,</span> <span class="n">valueB</span><span class="p">],</span> <span class="n">controller</span><span class="o">=</span><span class="n">controllerA</span><span class="p">)</span>
+        <span class="bp">...</span>
+
+    <span class="k">def</span> <span class="nf">test_behavior5</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="c1"># Assumes self.helper is a fresh object.
+</span>        <span class="n">self</span><span class="p">.</span><span class="nf">prepare_helper</span><span class="p">(</span><span class="n">contents</span><span class="o">=</span><span class="p">[</span><span class="n">valueA</span><span class="p">],</span> <span class="n">controller</span><span class="o">=</span><span class="n">controllerA</span><span class="p">)</span>
+        <span class="bp">...</span>
+</code></pre></div></div>
+
+<h2 id="coupling-in-parameterized-tests">Coupling in parameterized tests</h2>
+
+<p><a href="https://dl.acm.org/doi/10.1145/1095430.1081749">Parameterized tests</a> are a collection of tests that run the same verification, but with different inputs. While this is a very useful feature (available in almost all unit test frameworks), it is also very easy to abuse. A few common ways I have seen it abused is in conjunction with <a href="https://srikanth.sastry.name/dry-unit-tests-are-bad/">DRYing</a>, and the use ‘if’ checks, and that often results in coupling all the tests denoted by the parameterized list. Consider the following illustration:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">TestOutput</span><span class="p">(</span><span class="n">typing</span><span class="p">.</span><span class="n">NamedTuple</span><span class="p">):</span>
+    <span class="n">status</span><span class="p">:</span> <span class="n">StatusEnum</span>
+    <span class="n">return_value</span><span class="p">:</span> <span class="n">typing</span><span class="p">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>
+    <span class="n">exception</span><span class="p">:</span> <span class="n">typing</span><span class="p">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">Exception</span><span class="p">]</span>
+    <span class="bp">...</span>
+
+<span class="k">class</span> <span class="nc">TestSequence</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
+  
+    <span class="nd">@parameterized.expand</span><span class="p">([</span>
+        <span class="p">[</span><span class="n">test_input1</span><span class="p">,</span> <span class="n">expected_output1</span><span class="p">],</span>
+        <span class="p">[</span><span class="n">test_input2</span><span class="p">,</span> <span class="n">expected_output2</span><span class="p">],</span>
+        <span class="bp">...</span>
+    <span class="p">])</span>
+    <span class="k">def</span> <span class="nf">test_something</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">test_input</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">expected_output</span><span class="p">:</span> <span class="n">TestOutput</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">self</span><span class="p">.</span><span class="nf">_run_test</span><span class="p">(</span><span class="n">test_input</span><span class="p">,</span> <span class="n">expected_output</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">_run_test</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">test_input</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">expected_output</span><span class="p">:</span> <span class="n">TestOutput</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">sut</span> <span class="o">=</span> <span class="nc">SUT</span><span class="p">(...)</span>
+        <span class="nf">prepare_sut_for_tests</span><span class="p">(</span><span class="n">sut</span><span class="p">,</span> <span class="n">test_input</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">sut</span><span class="p">.</span><span class="nf">do_something</span><span class="p">(</span><span class="n">test_input</span><span class="p">)</span>
+        <span class="n">test_output</span> <span class="o">=</span> <span class="nf">make_test_output</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">sut</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="nf">assertEquals</span><span class="p">(</span><span class="n">expected_output</span><span class="p">,</span> <span class="n">test_output</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<p>The above illustration tests the method <code class="language-plaintext highlighter-rouge">do_something</code> for various possible inputs. However, note that the outputs (as illustrated in the class <code class="language-plaintext highlighter-rouge">TestOutput</code> can have a <code class="language-plaintext highlighter-rouge">status</code>, a <code class="language-plaintext highlighter-rouge">return_value</code>, or an <code class="language-plaintext highlighter-rouge">exception</code>). This means that every instantiation (for each parameter) has to content with the possibility of different types of outputs even though any single test only should have to verify against a single type of output. This couples all the tests verifying <code class="language-plaintext highlighter-rouge">do_something</code>, this making it difficult to read and understand. Adding a new test case here becomes tricky because any changes to either <code class="language-plaintext highlighter-rouge">prepare_sut_for_tests</code>, or <code class="language-plaintext highlighter-rouge">make_test_output</code> now affects all the tests!</p>
+
+<h3 id="how-to-decouple-parameterized-tests">How to decouple parameterized tests?</h3>
+
+<p>There are some fairly straightforward ways to decouple such tests. First, is that we should be very conservative about how we organize these tests. For example, we can group all positive tests and group all negative tests separately; similarly, we can further subgroup the tests based on the type of assertions on the output. In the above example, we can have three subgroups: positive tests that verify only output status, positive tests that verify return value, and negative tests that verify exception. Thus you now have three parameterized test classes that look something like this:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">TestDoSomething</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
+  
+    <span class="nd">@parameterized.expand</span><span class="p">([</span>
+        <span class="p">[</span><span class="n">test_status_input1</span><span class="p">,</span> <span class="n">expected_status_output1</span><span class="p">],</span>
+        <span class="p">[</span><span class="n">test_status_input2</span><span class="p">,</span> <span class="n">expected_status_output2</span><span class="p">],</span>
+        <span class="bp">...</span>
+    <span class="p">])</span>
+    <span class="k">def</span> <span class="nf">test_something_status_only</span><span class="p">(</span>
+        <span class="n">self</span><span class="p">,</span> 
+        <span class="n">test_input</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> 
+        <span class="n">expected_output</span><span class="p">:</span> <span class="n">StatusEnum</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="c1"># Arrange
+</span>        <span class="n">sut</span> <span class="o">=</span> <span class="nc">SUT</span><span class="p">(...)</span>
+        <span class="p">...</span>  <span class="c1"># More 'arrange' code
+</span>        
+        <span class="c1"># Act
+</span>        <span class="n">output</span> <span class="o">=</span> <span class="n">sut</span><span class="p">.</span><span class="nf">do_something</span><span class="p">(</span><span class="n">test_input</span><span class="p">)</span>
+        <span class="n">output_status</span> <span class="o">=</span> <span class="n">output</span><span class="p">.</span><span class="n">status</span>
+        
+        <span class="c1"># Assert
+</span>        <span class="n">self</span><span class="p">.</span><span class="nf">assertEquals</span><span class="p">(</span><span class="n">expected_output</span><span class="p">,</span> <span class="n">output_status</span><span class="p">)</span>
+        
+    <span class="nd">@parameterized.expand</span><span class="p">([</span>
+        <span class="p">[</span><span class="n">test_return_value_input1</span><span class="p">,</span> <span class="n">expected_return_value_output1</span><span class="p">],</span>
+        <span class="p">[</span><span class="n">test_return_value_input2</span><span class="p">,</span> <span class="n">expected_return_value_output2</span><span class="p">],</span>
+        <span class="bp">...</span>
+    <span class="p">])</span>
+    <span class="k">def</span> <span class="nf">test_something_return_value_only</span><span class="p">(</span>
+        <span class="n">self</span><span class="p">,</span> 
+        <span class="n">test_input</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> 
+        <span class="n">expected_output</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="c1"># Arrange
+</span>        <span class="n">sut</span> <span class="o">=</span> <span class="nc">SUT</span><span class="p">(...)</span>
+        <span class="p">...</span>  <span class="c1"># More 'arrange' code
+</span>        
+        <span class="c1"># Act
+</span>        <span class="n">output</span> <span class="o">=</span> <span class="n">sut</span><span class="p">.</span><span class="nf">do_something</span><span class="p">(</span><span class="n">test_input</span><span class="p">)</span>
+        <span class="n">output_status</span> <span class="o">=</span> <span class="n">output</span><span class="p">.</span><span class="n">status</span>
+        <span class="n">output_value</span> <span class="o">=</span> <span class="n">output</span><span class="p">.</span><span class="n">value</span>
+        
+        <span class="c1"># Assert
+</span>        <span class="n">self</span><span class="p">.</span><span class="nf">assertEquals</span><span class="p">(</span><span class="n">SomeEnum</span><span class="p">.</span><span class="n">SUCCESS</span><span class="p">,</span> <span class="n">output_status</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="nf">assertEquals</span><span class="p">(</span><span class="n">expected_output</span><span class="p">,</span> <span class="n">output_value</span><span class="p">)</span>
+
+    <span class="nd">@parameterized.expand</span><span class="p">([</span>
+        <span class="p">[</span><span class="n">test_return_value_input1</span><span class="p">,</span> <span class="n">expected_error_code_output1</span><span class="p">],</span>
+        <span class="p">[</span><span class="n">test_return_value_input2</span><span class="p">,</span> <span class="n">expected_error_code_output2</span><span class="p">],</span>
+        <span class="bp">...</span>
+    <span class="p">])</span>
+    <span class="k">def</span> <span class="nf">test_something_throws_exception</span><span class="p">(</span>
+        <span class="n">self</span><span class="p">,</span>
+        <span class="n">test_input</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">expected_error_code</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="c1"># Arrange
+</span>        <span class="n">sut</span> <span class="o">=</span> <span class="nc">SUT</span><span class="p">(...)</span>
+        <span class="p">...</span>  <span class="c1"># More 'arrange' code
+</span>        
+        <span class="c1"># Act
+</span>        <span class="k">with</span> <span class="n">self</span><span class="p">.</span><span class="nf">assertRaises</span><span class="p">(</span><span class="n">SomeSUTException</span><span class="p">)</span> <span class="k">as</span> <span class="n">exception_context</span><span class="p">:</span>
+            <span class="n">sut</span><span class="p">.</span><span class="nf">do_something</span><span class="p">(</span><span class="n">test_input</span><span class="p">)</span>
+        <span class="n">exception</span> <span class="o">=</span> <span class="n">exception_context</span><span class="p">.</span><span class="n">exception</span>
+        
+        <span class="c1"># Assert
+</span>        <span class="n">self</span><span class="p">.</span><span class="nf">assertEquals</span><span class="p">(</span><span class="n">excepted_error_code</span><span class="p">,</span> <span class="n">exception</span><span class="p">.</span><span class="n">error_code</span><span class="p">)</span>
+</code></pre></div></div>
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="//srikanth.sastry.name/in-unit-tests-favor-detroit-over-london/">
         In unit tests, I favor Detroit over London
       </a>
@@ -455,90 +706,6 @@ To put it differently, if your software was immutable and could not be altered i
 <p><img src="/images/yes-no.png" alt="" /></p>
 
 <p>This is a corollary of the previous observation, but deserves some explanation. Flaky tests have the side effect of undermining the trust in the entire test suite. If a test is flaky, then developers are more likely to ignore red builds, because ‘that flaky test is the culprit, and so the failure can be ignored’. However, inevitably, some legitimate failure does occur. But, at this point, developers have been conditioned to ignore build/test failures. Consequently, a buggy commit makes it’s way to prod and causes a regression, which would never have happened if you didn’t have that flaky test.</p>
-
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="//srikanth.sastry.name/unit-test-the-brains-and-not-the-nerves/">
-        Unit test the brains and not the nerves
-      </a>
-    </h1>
-
-    <span class="post-date">31 May 2022</span>
-
-    <p><em>Note: This is inspired from the book “<a href="https://www.manning.com/books/unit-testing">Unit Testing: Principles, Practices, and Patterns</a>” by Vladimir Khorikov.</em></p>
-
-<p><img src="/images/brain-magnifying-glass.png" alt="brain" /></p>
-
-<p>Unit tests are typically your first line of defense against bugs. So, it is tempting to add unit tests for all functionality that your code supports. But that begs the following question. “Why do we need integration and end-to-end tests?”</p>
-
-<h2 id="categorizing-production-code">Categorizing production code</h2>
-<p>To better understand the primary motivations for unit tests vs. integration (and end-to-end) tests, it is helpful to categorize your production code into four categories along two dimensions: thinking, and talking.</p>
-
-<ul>
-  <li><em>Thinking code.</em> There are parts of your codebase that are focused mostly on the business logic and the complex algorithmic computations. I refer to these as the thinking code.</li>
-  <li><em>Talking code.</em> There are parts of your codebase that are focused mostly on communicating with other dependencies such as key-value stores, log servers, databases, etc. I refer to these as talking code.</li>
-</ul>
-
-<p>Each part of your codebase can be either thinking, talking, or both. Based on that observation, we can categorize each unit of code into one of four categories (in keeping with the biology theme).</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Thinking</th>
-      <th>Talking</th>
-      <th>Category</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Yes</td>
-      <td>No</td>
-      <td><em>Brain</em></td>
-    </tr>
-    <tr>
-      <td>No</td>
-      <td>Yes</td>
-      <td><em>Nerves</em></td>
-    </tr>
-    <tr>
-      <td>Yes</td>
-      <td>Yes</td>
-      <td><em>Ganglia</em></td>
-    </tr>
-    <tr>
-      <td>No</td>
-      <td>No</td>
-      <td><em>Synapse</em></td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="testing-for-each-category">Testing for each category</h2>
-
-<p>Each category needs a distinct approach to testing.</p>
-
-<h3 id="brains--unit-tests">Brains → Unit Tests</h3>
-
-<p>Brains are one of the most complex parts of your codebase that often requires the most technical skill and domain knowledge to author, read, and maintain. Consequently, they are best tested with unit tests. Furthermore, they also have very few direct external dependencies, and as a result require limited use of test doubles.</p>
-
-<h3 id="nerves--integration-tests">Nerves → Integration Tests</h3>
-
-<p>Nerves have very little logic, but focus mostly on external communication with dependencies.
-As a result, there isn’t much to unit test here, except perhaps that the protocol translation from the outside world into the brains is happening correctly.
-By their very nature, the correctness of nerves cannot be tested hermetically, and therefore, are not at all well suited to be unit tested. Nerves should really be tested in your integration tests, where you hook your production code with real test instances of external dependencies.</p>
-
-<h3 id="ganglia--refactor">Ganglia → Refactor</h3>
-
-<p>Ganglia are units of code that have both complex business logic and have significant external dependencies. It is very difficult to unit test them thoroughly because such unit tests require heavy use of test doubles which can make the tests less readable and more brittle. You could try to test ganglia through integration tests, but it becomes very challenging to test low probability code paths, which is usually the source of difficult-to-debug issues. Therefore, my suggestion is to refactor such code into smaller pieces of code each of which are either a <em>brain</em> or a <em>nerve</em>, and tests each of those as described above.</p>
-
-<p>See Chapter 7 of “<a href="https://www.manning.com/books/unit-testing">Unit Testing: Principles, Practices, and Patterns</a>” for suggestions on how to refactor your code to make it more testable.</p>
-
-<h3 id="synapse--ignore">Synapse → Ignore</h3>
-
-<p>Synapses are trivial pieces of code (often utilities) that have neither complex business logic, nor do they have any external dependencies. My recommendation is to simply not focus on testing them. Adding unit tests for them simply increases the cost of testing and maintenance without really providing any benefit. They are often simple enough to be verified visually, and they exist only to serve either the brains or the nerves, and so will be indirectly tested via unit tests or integration tests.</p>
-
 
   </div>
   

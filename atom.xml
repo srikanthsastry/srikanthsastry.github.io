@@ -4,13 +4,88 @@
  <title>Srikanth Sastry</title>
  <link href="//srikanth.sastry.name/atom.xml" rel="self"/>
  <link href="//srikanth.sastry.name/"/>
- <updated>2025-06-18T00:40:03+00:00</updated>
+ <updated>2025-06-18T00:43:00+00:00</updated>
  <id>//srikanth.sastry.name</id>
  <author>
    <name>Srikanth Sastry</name>
    <email>srikanth@sastry.name</email>
  </author>
 
+ 
+ <entry>
+   <title>Cyclomatic Complexity: How Low Can You Go?</title>
+   <link href="//srikanth.sastry.name/reduce-cyclomatic-complexity/"/>
+   <updated>2025-06-17T00:00:00+00:00</updated>
+   <id>//srikanth.sastry.name/reduce-cyclomatic-complexity</id>
+   <content type="html">&lt;p&gt;&lt;img src=&quot;/images/cpu-in-maze-pixel-art.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;h2 id=&quot;what-even-is-cyclomatic-complexity&quot;&gt;What even &lt;em&gt;is&lt;/em&gt; Cyclomatic Complexity?&lt;/h2&gt;
+&lt;p&gt;Ever spend 20 minutes trying to figure out why a config isn’t applying — only to realize you missed a buried branch in someone’s 10-path function? That’s &lt;a href=&quot;https://en.wikipedia.org/wiki/Cyclomatic_complexity&quot;&gt;Cyclomatic Complexity&lt;/a&gt; in action. Intuitively, you can think of Cyclomatic Complexity as the number of possible paths a single execution of a function can take.&lt;/p&gt;
+
+&lt;p&gt;For example, &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;a = b + c&lt;/code&gt; has a cyclomatic complexity of one, and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;a = b + c if foo else d + e&lt;/code&gt; has a cyclomatic complexity of two: one path is when &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;foo&lt;/code&gt; is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;True&lt;/code&gt; and the effective logic is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;a = b + c&lt;/code&gt;, and the other path is when &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;foo&lt;/code&gt; is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;False&lt;/code&gt; and the effective logic is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;a = d + e&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;aint-got-no-time-heres-the-goods&quot;&gt;Ain’t got no time? Here’s the goods.&lt;/h2&gt;
+
+&lt;p&gt;If you take just one thing away from this note, then let it be this.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;Strive to reduce the Cyclomatic Complexity of your code; your team and your future self will thank you!&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;time-to-hit-the-brain-gym-bro&quot;&gt;Time to hit the brain gym, bro&lt;/h2&gt;
+&lt;p&gt;As an exercise, I will let you figure out the cyclomatic complexity of the following piece of code:&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;env_val&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;environ&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;switcher_val&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;env_val&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;None&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;jk_val&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;env_val&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;lower&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;sh&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;sh&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;yes&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]:&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;env_val&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;env_val&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;False&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;env_val&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;switch_name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;sh&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;/switch/name/from/config&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&quot;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;switcher_val&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;switcher&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;check&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;switch_name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;switchval&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;region&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;env_val&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;switcher_val&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;apply_some_config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;job&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;I’ll wait… (Spoiler: It’s not pretty.)&lt;/p&gt;
+
+&lt;p&gt;Give up? Turns out, it is &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;4&lt;/code&gt;: three if-checks contribute to three branching points, and the cyclomatic complexity is one more than that; &lt;em&gt;ergo&lt;/em&gt; &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;4&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Next, by spending no more than 60 seconds looking this code, can you tell me what exactly it is doing? BTW, this is real production code that I ran across when debugging some issue, and it took me a long while to make sure I knew exactly when and how the config is applied. It wasn’t obvious at all. If you can grok this in 60 seconds, take a bow!&lt;/p&gt;
+
+&lt;h2 id=&quot;reeling-yet&quot;&gt;Reeling yet?&lt;/h2&gt;
+
+&lt;p&gt;Anyway, making sense of functions with high cyclomatic complexity is annoying. It’s notoriously difficult to write tests with good coverage for these functions, and in general, they tend to be bug factories.&lt;/p&gt;
+
+&lt;p&gt;And yet — somehow — a lot of senior software engineers don’t seem to grok this. I keep seeing deeply nested &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;if-else&lt;/code&gt; blocks, sometimes inside loops with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;break&lt;/code&gt;s and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;continue&lt;/code&gt;s, and it doesn’t seem to bother anyone! It’s like we’ve collectively normalized this cognitive overhead.&lt;/p&gt;
+
+&lt;p&gt;Why?! Why are we putting up with this crap? It’d never fly in an interview.&lt;/p&gt;
+
+&lt;h2 id=&quot;yo-lets-fix-it-up&quot;&gt;Yo, let’s fix it up!&lt;/h2&gt;
+&lt;p&gt;Coming back to the above example, the confusion and ugliness of this code really got to me. It got so bad I considered dusting off a Karnaugh map. After some much needed grokking, I managed to simplify it down to a cyclomatic complexity of &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;2&lt;/code&gt;! :)&lt;/p&gt;
+
+&lt;p&gt;In the end, here’s what that poor little code snippet was trying to do:&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# Apply config when &apos;...&apos; environment variable is True, else check the switch
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;__ENV_VARIABLE&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;sh&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;...&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&apos;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;__SWITCHER_KEY&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;sh&quot;&gt;&apos;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;/switch/name/from/config&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&apos;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;has_env_override&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;():&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;environ&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;__ENV_VARIABLE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;val&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;not&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;None&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;and&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;val&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;lower&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;sh&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;sh&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;yes&lt;/span&gt;&lt;span class=&quot;sh&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nf&quot;&gt;if &lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;has_env_override&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;or&lt;/span&gt; 
+    &lt;span class=&quot;n&quot;&gt;switcher&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;check&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;__SWITCHER_KEY&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;switchval&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;region&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;apply_some_config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;job&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Fewer paths, fewer bugs. Cleaner code. Happier teammates. What’s not to love?&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>TDD for Bug Fixes</title>

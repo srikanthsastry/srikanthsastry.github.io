@@ -1,4 +1,70 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="//srikanth.sastry.name/feed.xml" rel="self" type="application/atom+xml" /><link href="//srikanth.sastry.name/" rel="alternate" type="text/html" /><updated>2025-06-18T00:40:03+00:00</updated><id>//srikanth.sastry.name/feed.xml</id><title type="html">Srikanth Sastry</title><subtitle>A personal website</subtitle><author><name>Srikanth Sastry</name><email>srikanth@sastry.name</email></author><entry><title type="html">TDD for Bug Fixes</title><link href="//srikanth.sastry.name/tdd-for-bug-fixes/" rel="alternate" type="text/html" title="TDD for Bug Fixes" /><published>2025-06-11T00:00:00+00:00</published><updated>2025-06-11T00:00:00+00:00</updated><id>//srikanth.sastry.name/tdd-for-bug-fixes</id><content type="html" xml:base="//srikanth.sastry.name/tdd-for-bug-fixes/"><![CDATA[<p><img src="/images/bug-stabbing-software-engineer-in-the-back.png" alt="" /></p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="//srikanth.sastry.name/feed.xml" rel="self" type="application/atom+xml" /><link href="//srikanth.sastry.name/" rel="alternate" type="text/html" /><updated>2025-06-18T00:43:00+00:00</updated><id>//srikanth.sastry.name/feed.xml</id><title type="html">Srikanth Sastry</title><subtitle>A personal website</subtitle><author><name>Srikanth Sastry</name><email>srikanth@sastry.name</email></author><entry><title type="html">Cyclomatic Complexity: How Low Can You Go?</title><link href="//srikanth.sastry.name/reduce-cyclomatic-complexity/" rel="alternate" type="text/html" title="Cyclomatic Complexity: How Low Can You Go?" /><published>2025-06-17T00:00:00+00:00</published><updated>2025-06-17T00:00:00+00:00</updated><id>//srikanth.sastry.name/reduce-cyclomatic-complexity</id><content type="html" xml:base="//srikanth.sastry.name/reduce-cyclomatic-complexity/"><![CDATA[<p><img src="/images/cpu-in-maze-pixel-art.png" alt="" /></p>
+<h2 id="what-even-is-cyclomatic-complexity">What even <em>is</em> Cyclomatic Complexity?</h2>
+<p>Ever spend 20 minutes trying to figure out why a config isn’t applying — only to realize you missed a buried branch in someone’s 10-path function? That’s <a href="https://en.wikipedia.org/wiki/Cyclomatic_complexity">Cyclomatic Complexity</a> in action. Intuitively, you can think of Cyclomatic Complexity as the number of possible paths a single execution of a function can take.</p>
+
+<p>For example, <code class="language-plaintext highlighter-rouge">a = b + c</code> has a cyclomatic complexity of one, and <code class="language-plaintext highlighter-rouge">a = b + c if foo else d + e</code> has a cyclomatic complexity of two: one path is when <code class="language-plaintext highlighter-rouge">foo</code> is <code class="language-plaintext highlighter-rouge">True</code> and the effective logic is <code class="language-plaintext highlighter-rouge">a = b + c</code>, and the other path is when <code class="language-plaintext highlighter-rouge">foo</code> is <code class="language-plaintext highlighter-rouge">False</code> and the effective logic is <code class="language-plaintext highlighter-rouge">a = d + e</code>.</p>
+
+<h2 id="aint-got-no-time-heres-the-goods">Ain’t got no time? Here’s the goods.</h2>
+
+<p>If you take just one thing away from this note, then let it be this.</p>
+
+<blockquote>
+  <p><strong>Strive to reduce the Cyclomatic Complexity of your code; your team and your future self will thank you!</strong></p>
+</blockquote>
+
+<h2 id="time-to-hit-the-brain-gym-bro">Time to hit the brain gym, bro</h2>
+<p>As an exercise, I will let you figure out the cyclomatic complexity of the following piece of code:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">env_val</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">'</span><span class="s">...</span><span class="sh">'</span><span class="p">)</span>
+<span class="n">switcher_val</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="k">if</span> <span class="n">env_val</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="n">jk_val</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="k">if</span> <span class="n">env_val</span><span class="p">.</span><span class="nf">lower</span><span class="p">()</span> <span class="ow">is</span> <span class="ow">in</span> <span class="p">[</span><span class="sh">"</span><span class="s">true</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">1</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">yes</span><span class="sh">"</span><span class="p">]:</span>
+        <span class="n">env_val</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">env_val</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">env_val</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="n">switch_name</span> <span class="o">=</span> <span class="sh">"</span><span class="s">/switch/name/from/config</span><span class="sh">"</span>
+    <span class="n">switcher_val</span> <span class="o">=</span> <span class="n">switcher</span><span class="p">.</span><span class="nf">check</span><span class="p">(</span><span class="n">switch_name</span><span class="p">,</span> <span class="n">switchval</span><span class="o">=</span><span class="n">region</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">env_val</span> <span class="ow">or</span> <span class="n">switcher_val</span><span class="p">:</span>
+    <span class="nf">apply_some_config</span><span class="p">(</span><span class="n">job</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>I’ll wait… (Spoiler: It’s not pretty.)</p>
+
+<p>Give up? Turns out, it is <code class="language-plaintext highlighter-rouge">4</code>: three if-checks contribute to three branching points, and the cyclomatic complexity is one more than that; <em>ergo</em> <code class="language-plaintext highlighter-rouge">4</code>.</p>
+
+<p>Next, by spending no more than 60 seconds looking this code, can you tell me what exactly it is doing? BTW, this is real production code that I ran across when debugging some issue, and it took me a long while to make sure I knew exactly when and how the config is applied. It wasn’t obvious at all. If you can grok this in 60 seconds, take a bow!</p>
+
+<h2 id="reeling-yet">Reeling yet?</h2>
+
+<p>Anyway, making sense of functions with high cyclomatic complexity is annoying. It’s notoriously difficult to write tests with good coverage for these functions, and in general, they tend to be bug factories.</p>
+
+<p>And yet — somehow — a lot of senior software engineers don’t seem to grok this. I keep seeing deeply nested <code class="language-plaintext highlighter-rouge">if-else</code> blocks, sometimes inside loops with <code class="language-plaintext highlighter-rouge">break</code>s and <code class="language-plaintext highlighter-rouge">continue</code>s, and it doesn’t seem to bother anyone! It’s like we’ve collectively normalized this cognitive overhead.</p>
+
+<p>Why?! Why are we putting up with this crap? It’d never fly in an interview.</p>
+
+<h2 id="yo-lets-fix-it-up">Yo, let’s fix it up!</h2>
+<p>Coming back to the above example, the confusion and ugliness of this code really got to me. It got so bad I considered dusting off a Karnaugh map. After some much needed grokking, I managed to simplify it down to a cyclomatic complexity of <code class="language-plaintext highlighter-rouge">2</code>! :)</p>
+
+<p>In the end, here’s what that poor little code snippet was trying to do:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Apply config when '...' environment variable is True, else check the switch
+</span><span class="n">__ENV_VARIABLE</span> <span class="o">=</span> <span class="sh">'</span><span class="s">...</span><span class="sh">'</span>
+<span class="n">__SWITCHER_KEY</span> <span class="o">=</span> <span class="sh">'</span><span class="s">/switch/name/from/config</span><span class="sh">'</span>
+<span class="k">def</span> <span class="nf">has_env_override</span><span class="p">():</span>
+    <span class="n">val</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">__ENV_VARIABLE</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">val</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">val</span><span class="p">.</span><span class="nf">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">{</span><span class="sh">"</span><span class="s">true</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">1</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">yes</span><span class="sh">"</span><span class="p">}</span>
+
+<span class="nf">if </span><span class="p">(</span>
+    <span class="nf">has_env_override</span><span class="p">()</span> <span class="ow">or</span> 
+    <span class="n">switcher</span><span class="p">.</span><span class="nf">check</span><span class="p">(</span><span class="n">__SWITCHER_KEY</span><span class="p">,</span> <span class="n">switchval</span><span class="o">=</span><span class="n">region</span><span class="p">)</span>
+<span class="p">):</span>
+    <span class="nf">apply_some_config</span><span class="p">(</span><span class="n">job</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Fewer paths, fewer bugs. Cleaner code. Happier teammates. What’s not to love?</p>]]></content><author><name>Srikanth Sastry</name></author><category term="professional" /><category term="cyclomatic-complexity" /><category term="refactoring" /><category term="best-practices" /><summary type="html"><![CDATA[What even is Cyclomatic Complexity? Ever spend 20 minutes trying to figure out why a config isn’t applying — only to realize you missed a buried branch in someone’s 10-path function? That’s Cyclomatic Complexity in action. Intuitively, you can think of Cyclomatic Complexity as the number of possible paths a single execution of a function can take.]]></summary></entry><entry><title type="html">TDD for Bug Fixes</title><link href="//srikanth.sastry.name/tdd-for-bug-fixes/" rel="alternate" type="text/html" title="TDD for Bug Fixes" /><published>2025-06-11T00:00:00+00:00</published><updated>2025-06-11T00:00:00+00:00</updated><id>//srikanth.sastry.name/tdd-for-bug-fixes</id><content type="html" xml:base="//srikanth.sastry.name/tdd-for-bug-fixes/"><![CDATA[<p><img src="/images/bug-stabbing-software-engineer-in-the-back.png" alt="" /></p>
 
 <p>I have seen way too many ‘senior’ engineers get bug fixing wrong. It is common to see an engineer sent a pull request titled “bug fix: <something>" and the PR has changes to the functional code that fixes the bug and a correspond test case that shows that the bug is fixed. If that sounds reasonable, THINK AGAIN — you’ve walked right into the classic trap!</something></p>
 
@@ -749,74 +815,4 @@ To put it differently, if your software was immutable and could not be altered i
 <h4 id="a-flaky-unit-test-is-the-worst">A flaky unit test is the worst.</h4>
 <p><img src="/images/yes-no.png" alt="" /></p>
 
-<p>This is a corollary of the previous observation, but deserves some explanation. Flaky tests have the side effect of undermining the trust in the entire test suite. If a test is flaky, then developers are more likely to ignore red builds, because ‘that flaky test is the culprit, and so the failure can be ignored’. However, inevitably, some legitimate failure does occur. But, at this point, developers have been conditioned to ignore build/test failures. Consequently, a buggy commit makes it’s way to prod and causes a regression, which would never have happened if you didn’t have that flaky test.</p>]]></content><author><name>Srikanth Sastry</name><email>srikanth@sastry.name</email></author><category term="professional" /><category term="unit tests" /><category term="testing" /><category term="software engineering" /><summary type="html"><![CDATA[The ultimate "why" for unit tests is maintainability. All the arguments for having robust, good quality unit tests comes down to the following. Unit tests help keep your production code maintainable. Looking at maintainability as the primary motivation for unit tests allows us to look at some aspects of unit tests differently.]]></summary></entry><entry><title type="html">Unit test the brains and not the nerves</title><link href="//srikanth.sastry.name/unit-test-the-brains-and-not-the-nerves/" rel="alternate" type="text/html" title="Unit test the brains and not the nerves" /><published>2022-05-31T00:00:00+00:00</published><updated>2022-05-31T00:00:00+00:00</updated><id>//srikanth.sastry.name/unit-test-brains-and-not-nerves</id><content type="html" xml:base="//srikanth.sastry.name/unit-test-the-brains-and-not-the-nerves/"><![CDATA[<p><em>Note: This is inspired from the book “<a href="https://www.manning.com/books/unit-testing">Unit Testing: Principles, Practices, and Patterns</a>” by Vladimir Khorikov.</em></p>
-
-<p><img src="/images/brain-magnifying-glass.png" alt="brain" /></p>
-
-<p>Unit tests are typically your first line of defense against bugs. So, it is tempting to add unit tests for all functionality that your code supports. But that begs the following question. “Why do we need integration and end-to-end tests?”</p>
-
-<h2 id="categorizing-production-code">Categorizing production code</h2>
-<p>To better understand the primary motivations for unit tests vs. integration (and end-to-end) tests, it is helpful to categorize your production code into four categories along two dimensions: thinking, and talking.</p>
-
-<ul>
-  <li><em>Thinking code.</em> There are parts of your codebase that are focused mostly on the business logic and the complex algorithmic computations. I refer to these as the thinking code.</li>
-  <li><em>Talking code.</em> There are parts of your codebase that are focused mostly on communicating with other dependencies such as key-value stores, log servers, databases, etc. I refer to these as talking code.</li>
-</ul>
-
-<p>Each part of your codebase can be either thinking, talking, or both. Based on that observation, we can categorize each unit of code into one of four categories (in keeping with the biology theme).</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Thinking</th>
-      <th>Talking</th>
-      <th>Category</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Yes</td>
-      <td>No</td>
-      <td><em>Brain</em></td>
-    </tr>
-    <tr>
-      <td>No</td>
-      <td>Yes</td>
-      <td><em>Nerves</em></td>
-    </tr>
-    <tr>
-      <td>Yes</td>
-      <td>Yes</td>
-      <td><em>Ganglia</em></td>
-    </tr>
-    <tr>
-      <td>No</td>
-      <td>No</td>
-      <td><em>Synapse</em></td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="testing-for-each-category">Testing for each category</h2>
-
-<p>Each category needs a distinct approach to testing.</p>
-
-<h3 id="brains--unit-tests">Brains → Unit Tests</h3>
-
-<p>Brains are one of the most complex parts of your codebase that often requires the most technical skill and domain knowledge to author, read, and maintain. Consequently, they are best tested with unit tests. Furthermore, they also have very few direct external dependencies, and as a result require limited use of test doubles.</p>
-
-<h3 id="nerves--integration-tests">Nerves → Integration Tests</h3>
-
-<p>Nerves have very little logic, but focus mostly on external communication with dependencies.
-As a result, there isn’t much to unit test here, except perhaps that the protocol translation from the outside world into the brains is happening correctly.
-By their very nature, the correctness of nerves cannot be tested hermetically, and therefore, are not at all well suited to be unit tested. Nerves should really be tested in your integration tests, where you hook your production code with real test instances of external dependencies.</p>
-
-<h3 id="ganglia--refactor">Ganglia → Refactor</h3>
-
-<p>Ganglia are units of code that have both complex business logic and have significant external dependencies. It is very difficult to unit test them thoroughly because such unit tests require heavy use of test doubles which can make the tests less readable and more brittle. You could try to test ganglia through integration tests, but it becomes very challenging to test low probability code paths, which is usually the source of difficult-to-debug issues. Therefore, my suggestion is to refactor such code into smaller pieces of code each of which are either a <em>brain</em> or a <em>nerve</em>, and tests each of those as described above.</p>
-
-<p>See Chapter 7 of “<a href="https://www.manning.com/books/unit-testing">Unit Testing: Principles, Practices, and Patterns</a>” for suggestions on how to refactor your code to make it more testable.</p>
-
-<h3 id="synapse--ignore">Synapse → Ignore</h3>
-
-<p>Synapses are trivial pieces of code (often utilities) that have neither complex business logic, nor do they have any external dependencies. My recommendation is to simply not focus on testing them. Adding unit tests for them simply increases the cost of testing and maintenance without really providing any benefit. They are often simple enough to be verified visually, and they exist only to serve either the brains or the nerves, and so will be indirectly tested via unit tests or integration tests.</p>]]></content><author><name>Srikanth Sastry</name><email>srikanth@sastry.name</email></author><category term="professional" /><category term="testing" /><category term="software engineering" /><category term="integration tests" /><category term="unit tests" /><summary type="html"><![CDATA[Unit tests are typically your first line of defense against bugs. So, it is tempting to add unit tests for all functionality that your code supports. But that begs the following question. "Why do we need integration and end-to-end tests?" Unit tests most benefit the most complex parts of your codebase that often requires the most technical skill and domain knowledge to author, read, and maintain. Integration tests disproportionately benefit the parts of your codebase that communicate with external dependencies.]]></summary></entry></feed>
+<p>This is a corollary of the previous observation, but deserves some explanation. Flaky tests have the side effect of undermining the trust in the entire test suite. If a test is flaky, then developers are more likely to ignore red builds, because ‘that flaky test is the culprit, and so the failure can be ignored’. However, inevitably, some legitimate failure does occur. But, at this point, developers have been conditioned to ignore build/test failures. Consequently, a buggy commit makes it’s way to prod and causes a regression, which would never have happened if you didn’t have that flaky test.</p>]]></content><author><name>Srikanth Sastry</name><email>srikanth@sastry.name</email></author><category term="professional" /><category term="unit tests" /><category term="testing" /><category term="software engineering" /><summary type="html"><![CDATA[The ultimate "why" for unit tests is maintainability. All the arguments for having robust, good quality unit tests comes down to the following. Unit tests help keep your production code maintainable. Looking at maintainability as the primary motivation for unit tests allows us to look at some aspects of unit tests differently.]]></summary></entry></feed>

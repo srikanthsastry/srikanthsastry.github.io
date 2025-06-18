@@ -157,6 +157,112 @@
   
   <div class="post">
     <h1 class="post-title">
+      <a href="//srikanth.sastry.name/follyfuture-ontimeout-and-a-race-condition/">
+        folly:Future, onTimeout(), and a race condition
+      </a>
+    </h1>
+
+    <span class="post-date">18 Jan 2019</span>
+
+    <!-- wp:image {"id":365,"align":"center","width":338,"height":338} -->
+<div class="wp-block-image"><figure class="aligncenter is-resized"><img src="http://srikanth.sastry.name/wp-content/uploads/2019/01/C-programming-in-a-nutshell-Imgur-450x450.png" alt="" class="wp-image-365" width="338" height="338" /></figure></div>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><strong>TL;DR.</strong> The inability to cancel threads in C++ can result in bizarre semantics even in seemingly straightforward (and almost) declarative code. folly::Future is an interesting case in point.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:more -->
+<!--more-->
+<!-- /wp:more -->
+
+<!-- wp:paragraph -->
+<p><a href="https://github.com/facebook/folly/blob/master/folly/docs/Futures.md">Folly Futures</a> is an Async C++ framework from Facebook. It has an interesting function <a href="https://github.com/facebook/folly/blob/8757861f41c4b58ac2948ef3dc91aef9cdc8aba0/folly/futures/Future.h#L1545">onTimeout()</a>, which essentially allows to stop waiting on a Future forever. So you would typically use it as follows.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">provider_.getOperationFuture(Request r)<br />   .then([&amp;](Response response) {<br />     doFoo();  // Accesses variables in the surrounding scope<br />   })<br />   .onTimeout(milliseconds(500), [&amp;]{<br />     doBar();  // Accesses variables in the surrounding scope<br />   })   <br />.get();</pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:paragraph -->
+<p>The semantics that I expected from this piece of code was the following: </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">if there is no response within 500 milliseconds, then<br />   the future throws a timeout, thus executing  doBar()<br />  else<br />   the future executes the then() block, thus executing doFoo(</pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:paragraph -->
+<p>Importantly, I was expecting exactly one of the two function doFoo() or doBar() to be executed. And it turns out not be true!</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>Race Condition</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>It turns out that the Future has a background thread running waiting for the response, and this thread is not cancelled upon timeout because: </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list {"ordered":true} -->
+<ol><li>This thread is spawned first, and that in-turn waits on the timeout, and</li><li>C++ does not support canceling threads.</li></ol>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>So, we now have a race condition between the Future's response and timeout, thus potentially causing memory overruns and segfaults. How do you get around this? How do you use folly::Future with the semantics I outlined above? </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2>Remedies</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>I found two possible ways for this.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3>Swap onTimeout() and then()</h3>
+<!-- /wp:heading -->
+
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">provider_.getOperationFuture(Request r)<br />  .onTimeout(milliseconds(500), [&amp;]{<br />     doBar();  // Accesses variables in the surrounding scope<br />     return Response::onTimeout();<br />   })<br />   .then([&amp;](Response response) {<br />     if (response == Response::onTimeout()) {<br />       return;<br />     }<br />     doFoo();  // Accesses variables in the surrounding scope<br />   })<br />   .get();</pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:paragraph -->
+<p>Essentially, you force the onTimeout block to return a special instance of the Reponse object (called Response::onTimeout() here), this then becomes the input to the then block, and within the then block you can check if the response is valid and proceed accordingly. 
+Yes, I know it's  ugly.
+Worse, what if the Response object is complex enough that you cannot simply build a special instance of it? Or what if every possible instance of the Response object is potentially valid? Then you can go for the next remedy.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3>Open up onTimeout()</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>It is useful to remember that onTimeout() is just syntactic sugar for the following. </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">provider_.getOperationFuture(Request r)<br />   .within(milliseconds(500))<br />   .onError([](const TimedOut&amp; e){<br />      doBar();<br />     return Response::onTimeout();<br />   })<br />   .then(...);</pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:paragraph -->
+<p>So, you can use this to refactor your code to look something like this: </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:preformatted -->
+<pre class="wp-block-preformatted">provider_.getOperationFuture(Request r)<br />   .within(milliseconds(500))<br />   .then([&amp;](Response response) {<br />     doFoo();  // Accesses variables in the surrounding scope<br />   })<br />   .onError([&amp;](const folly::Timeout&amp; ){<br />     doBar();  // Accesses variables in the surrounding scope<br />   })<br />   .get();</pre>
+<!-- /wp:preformatted -->
+
+<!-- wp:paragraph -->
+<p>This essentially, raises an exception after 500 milliseconds of no response, and that exception ensures that the then block is never executed!
+ So, yeah, folly::Future can be tricky.</p>
+<!-- /wp:paragraph -->
+
+  </div>
+  
+  <div class="post">
+    <h1 class="post-title">
       <a href="//srikanth.sastry.name/scripts-and-their-undo/">
         Scripts and their undo
       </a>
@@ -548,121 +654,6 @@ can inject the dependency as follows.</p>
 
 <!-- wp:paragraph -->
 <p>And you can put your implementation through the wringer without breaking a sweat.</p>
-<!-- /wp:paragraph -->
-
-  </div>
-  
-  <div class="post">
-    <h1 class="post-title">
-      <a href="//srikanth.sastry.name/the-merits-of-unit-tests-part-2/">
-        The merits of unit tests — Part 2
-      </a>
-    </h1>
-
-    <span class="post-date">13 Nov 2017</span>
-
-    <!-- wp:paragraph -->
-<p>In the <a href="http://srikanth.sastry.name/merits-of-unit-tests-part-1/">previous post</a>,  we saw how unit tests can serve as a reliable source of documentation  for your code. There is a lot more that unit tests can do for you. In this post I'll talk about a fairly obvious, but often ignored, benefit  to unit testing: Refactoring.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:more -->
-<!--more-->
-<!-- /wp:more -->
-
-<!-- wp:paragraph {"textColor":"very-dark-gray","backgroundColor":"pale-cyan-blue"} -->
-<p class="has-text-color has-background has-very-dark-gray-color has-pale-cyan-blue-background-color">I posted this article on <a href="https://www.linkedin.com/pulse/merits-unit-tests-part-2-srikanth-sastry/">LinkedIn</a> and am reposting it here cuz’ this is the authoritative source for it :)</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:heading {"level":3} -->
-<h3>Refactoring</h3>
-<!-- /wp:heading -->
-
-<!-- wp:paragraph -->
-<p>Refactoring is a less than pleasant, nevertheless, essential part of 
-developing and maintaining high quality software. No matter how well 
-designed your software is, over time a few things happen to it.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>1. The assumptions you made about the environment change, and that triggers unanticipated changes to your code.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:image {"id":375,"linkDestination":"custom"} -->
-<figure class="wp-block-image"><a href="http://dilbert.com/strip/2011-05-16" target="_blank" rel="noreferrer noopener"><img src="http://srikanth.sastry.name/wp-content/uploads/2019/01/dt_c110516-1024x319.gif" alt="Boss: Did I remember to tell you before you finished the coding that the user's specifications changed? Dilbert: AAAIII-YIIIII-YIIII-YIII!!! Boss: So, no-ish? Dilbert: BAM! BAM! BAM! " class="wp-image-375" /></a></figure>
-<!-- /wp:image -->
-
-<!-- wp:paragraph -->
-<p><em>You started with the assumption that every account will have a 
-unique username, but with the introduction of shared family-accounts, 
-this may not be true anymore.</em></p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>2. New/junior engineers make changes to the code that run antithetical to the original design.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:image {"id":376} -->
-<figure class="wp-block-image"><img src="http://srikanth.sastry.name/wp-content/uploads/2019/01/0.jpg" alt="" class="wp-image-376" /></figure>
-<!-- /wp:image -->
-
-<!-- wp:paragraph -->
-<p><em>While you were out on vacation, your colleague's intern made a 
-less-than well thought out change to add an session expiry feature to 
-your code with a bunch of if-checks that see if the session has not 
-already expired. By the the time you returned from your vacation, this 
-code has been in production for two weeks, and you have more important 
-things to do.</em></p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>3. The software is co-opted for something that it was never intended for in the first place.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:image {"id":377,"linkDestination":"custom"} -->
-<figure class="wp-block-image"><a href="http://www.gorillafabrication.com/modifications/16-repurposed-trucks-and-cars/" target="_blank" rel="noreferrer noopener"><img src="http://srikanth.sastry.name/wp-content/uploads/2019/01/0-1.jpg" alt="" class="wp-image-377" /></a></figure>
-<!-- /wp:image -->
-
-<!-- wp:paragraph -->
-<p><em>That awesome geo-spatial indexing service that you wrote for 
-indexing cities became so popular that it is now being used to index 
-stores in malls across the country, and to accommodate that, the schema 
-now includes fields such as 'store name', 'floor number', etc. which 
-make no sense in your original use case; it has just been shoehorned 
-here.</em></p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>Every time any of those things happen, you accrue some tech debt, and
- eventually the tech debt gets so high that it start impeding your 
-ability to make future changes. This is the point at which you have to 
-redesign your software to reflect the new world it is in.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:paragraph -->
-<p>In my experience, one of the most delicate things about refactoring 
-such code is that you often have to rewrite the software but keep all of
- its existing behavior intact. Any failure to do so will start 
-triggering failures in the system-at-large. Having good unit tests can 
-be an indispensable asset. If, throughout the evolution of your 
-software, there has been a diligent effort to keep the unit tests up to 
-date and with sufficient code/path coverage, the task of refactoring 
-becomes a lot easier.</p>
-<!-- /wp:paragraph -->
-
-<!-- wp:pullquote {"className":"is-style-default"} -->
-<figure class="wp-block-pullquote is-style-default"><blockquote><p>
-  The rule of thumb is simply “As long as the unit tests pass, every iteration of your refactor is (most likely) correct.” 
-</p></blockquote></figure>
-<!-- /wp:pullquote -->
-
-<!-- wp:image {"id":379,"align":"center","linkDestination":"custom"} -->
-<div class="wp-block-image"><figure class="aligncenter"><a href="http://upload.wikimedia.org/wikipedia/commons/0/0b/TDD_Global_Lifecycle.png" target="_blank" rel="noreferrer noopener"><img src="http://srikanth.sastry.name/wp-content/uploads/2019/01/refactoringg-884x1024.png" alt="" class="wp-image-379" /></a></figure></div>
-<!-- /wp:image -->
-
-<!-- wp:paragraph -->
-<p>Good unit tests can save you multiple days or even weeks of making 
-incremental changes and testing them out in production in a gingerly 
-fashion in ensure that nothing breaks.</p>
 <!-- /wp:paragraph -->
 
   </div>
