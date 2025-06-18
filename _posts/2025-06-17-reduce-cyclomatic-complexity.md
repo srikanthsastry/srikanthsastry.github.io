@@ -14,7 +14,7 @@ permalink: /reduce-cyclomatic-complexity/
 
 ![](/images/cpu-in-maze-pixel-art.png)
 ## What even _is_ Cyclomatic Complexity?
-Ever spend 20 minutes trying to figure out why a config isn’t applying — only to realize you missed a buried branch in someone’s 10-path function? That’s [Cyclomatic Complexity](https://en.wikipedia.org/wiki/Cyclomatic_complexity) in action. Intuitively, you can think of Cyclomatic Complexity as the number of possible paths a single execution of a function can take. 
+Ever spend 20 minutes trying to figure out why your bug fix or feature code isn't triggering or being executed — only to realize you missed a buried branch in someone’s 10-path function? That’s [Cyclomatic Complexity](https://en.wikipedia.org/wiki/Cyclomatic_complexity) in action. Intuitively, you can think of Cyclomatic Complexity as the number of possible paths a single execution of a function can take. 
 
 For example, `a = b + c` has a cyclomatic complexity of one, and `a = b + c if foo else d + e` has a cyclomatic complexity of two: one path is when `foo` is `True` and the effective logic is `a = b + c`, and the other path is when `foo` is `False` and the effective logic is `a = d + e`.
 
