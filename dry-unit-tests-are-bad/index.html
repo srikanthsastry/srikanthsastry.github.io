@@ -1,162 +1,237 @@
-<!DOCTYPE html>
-<html lang="en-us">
+<!doctype html>
+<html lang="en">
 
-  <head>
-  <link href="http://gmpg.org/xfn/11" rel="profile">
-  <link rel="alternate" type="application/atom+xml" title="Srikanth Sastry" href="/feed.xml">
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-
-  <title>
-    
-      DRY unit tests are bad... mkay &middot; Srikanth Sastry
-    
-  </title>
-
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="/assets/css/dist-style.css" rel="stylesheet" />
+  <link href="/assets/css/fonts.css" rel="stylesheet" />
   
-  <link rel="canonical" href="//srikanth.sastry.name/dry-unit-tests-are-bad/">
-  
-
-  <link rel="stylesheet" href="//srikanth.sastry.name/public/css/poole.css">
-  <link rel="stylesheet" href="//srikanth.sastry.name/public/css/syntax.css">
-  <link rel="stylesheet" href="//srikanth.sastry.name/public/css/lanyon.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
-
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="//srikanth.sastry.name/public/apple-touch-icon-precomposed.png">
-  <link rel="shortcut icon" href="//srikanth.sastry.name/public/favicon.ico">
-
-  <link rel="alternate" type="application/rss+xml" title="RSS" href="//srikanth.sastry.name/atom.xml">
-
-  
+  <script src="https://unpkg.com/typeit@8.8.4/dist/index.umd.js"></script>
+   <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>DRY unit tests are bad… mkay | Srikanth Sastry</title>
+<meta name="generator" content="Jekyll v4.4.1" />
+<meta property="og:title" content="DRY unit tests are bad… mkay" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Simplicity should be a core property of unit tests. This is motivated, both by arguments in this post against DRY unit tests, and by software maintainability as the primary motivation for unit tests. Unit tests should be as simple as reasonable. It should be easy to ready, understand, and modify (it should be easy to modify any single test in isolation). It is perfectly acceptable for this simplicity to come at the expense of code-reuse, performance, and efficiency." />
+<meta property="og:description" content="Simplicity should be a core property of unit tests. This is motivated, both by arguments in this post against DRY unit tests, and by software maintainability as the primary motivation for unit tests. Unit tests should be as simple as reasonable. It should be easy to ready, understand, and modify (it should be easy to modify any single test in isolation). It is perfectly acceptable for this simplicity to come at the expense of code-reuse, performance, and efficiency." />
+<link rel="canonical" href="/dry-unit-tests-are-bad/" />
+<meta property="og:url" content="/dry-unit-tests-are-bad/" />
+<meta property="og:site_name" content="Srikanth Sastry" />
+<meta property="og:image" content="/images/squeeze-cloth.jpg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-05-17T00:00:00+00:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="/images/squeeze-cloth.jpg" />
+<meta property="twitter:title" content="DRY unit tests are bad… mkay" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-05-17T00:00:00+00:00","datePublished":"2022-05-17T00:00:00+00:00","description":"Simplicity should be a core property of unit tests. This is motivated, both by arguments in this post against DRY unit tests, and by software maintainability as the primary motivation for unit tests. Unit tests should be as simple as reasonable. It should be easy to ready, understand, and modify (it should be easy to modify any single test in isolation). It is perfectly acceptable for this simplicity to come at the expense of code-reuse, performance, and efficiency.","headline":"DRY unit tests are bad… mkay","image":"/images/squeeze-cloth.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"/dry-unit-tests-are-bad/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/images/site_logo.png"}},"url":"/dry-unit-tests-are-bad/"}</script>
+<!-- End Jekyll SEO tag -->
+ 
 </head>
 
+<body class="bg-white text-gray-900 dark:bg-gray-700 dark:text-slate-100">
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      new TypeIt("h1", {}).go();
+    });
+  </script>
+   <nav class="absolute top-0 left-0 right-0 flex w-full flex-wrap items-center justify-between py-4">
+  <div class="flex w-full flex-wrap items-center justify-between px-5">
+    <a class="flex" href="/" aria-label="Andres Chacon - Developer">
+      <img src="/images/site_logo.png" alt="webpage logo" class="block h-8 w-auto">
+      <p class="pl-4 hidden md:block text-lg font-bold">Srikanth Sastry <span
+          class="text-mulish text-sm font-normal">~/dry-unit-tests-are-bad/</span>
+      </p>
+    </a>
 
-  <body class="sidebar-overlay theme-base-08">
+    <div class="flex divide-x">
+      
+      
+      
+      
+      <div><a class="px-4 hover:text-sky-400 "
+          href="/archives/">Archives</a></div>
+      
+      
+      
+      
+      
+      <div><a class="px-4 hover:text-sky-400 "
+          href="/publications/">Publications</a></div>
+      
+      
+      
+      <div><a class="px-4 hover:text-sky-400 "
+          href="/touchstone-radio-episodes/">Touchstone Radio Episodes</a></div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
 
-    <!-- Target for toggling the sidebar `.sidebar-checkbox` is for regular
-     styles, `#sidebar-checkbox` for behavior. -->
-<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox">
-
-<!-- Toggleable sidebar -->
-<div class="sidebar" id="sidebar">
-  <div class="sidebar-item">
-    <p>A personal website</p>
+      
+    </div>
   </div>
 
-  <nav class="sidebar-nav">
-    <a class="sidebar-nav-item" href="//srikanth.sastry.name/">Home</a>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const currentLangButton = document.querySelector('.current-language');
+      const dropdownContent = document.querySelector('.dropdown-content');
 
-    
+      if (currentLangButton && dropdownContent) {
+        currentLangButton.addEventListener('click', function () {
+          dropdownContent.classList.toggle('hidden');
+        });
 
-    
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-          <a class="sidebar-nav-item" href="//srikanth.sastry.name/about/">About</a>
-        
-      
-    
-      
-        
-          <a class="sidebar-nav-item" href="//srikanth.sastry.name/archives/">Archives</a>
-        
-      
-    
-      
-    
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-      
-    
-      
-        
-          <a class="sidebar-nav-item" href="//srikanth.sastry.name/publications/">Publications</a>
-        
-      
-    
-      
-        
-          <a class="sidebar-nav-item" href="//srikanth.sastry.name/touchstone-radio-episodes/">Touchstone Radio Episodes</a>
-        
-      
-    
-    <!-- <a class="sidebar-nav-item" href="/archive/v1.1.0.zip">Download</a>
-    <a class="sidebar-nav-item" href="">GitHub project</a>
-    <span class="sidebar-nav-item">Currently v1.1.0</span> -->
-  </nav>
-  <div class="sidebar-item">
-  <p>
-  <a class="navbar-item" href="/feed.xml" target="_blank">Feed</a>
-  </p>
-  </div>
-  <div class="sidebar-item">
-    <p>
-      &copy; 2025. All rights reserved.
-    </p>
-  </div>
+        document.addEventListener('click', function (event) {
+          if (!currentLangButton.contains(event.target) && !dropdownContent.contains(event.target)) {
+            dropdownContent.classList.add('hidden');
+          }
+        });
+      }
+    });
+  </script>
+</nav>
+ <link rel="stylesheet" href="/assets/css/monokai.css">
+<div class="container mx-auto">
+  <div id="post" class="prose max-w-[75ch] prose-neutral mx-auto pb-10 pt-20 lg:pt-[90px] lg:pb-20">
+    <div class="pb-4">
+      <a href="/category/professional"
+        class="no-underline font-mulish text-sm hover:text-sky-400 text-gray-500">
+        PROFESSIONAL
+      </a>
+    </div>
+
+    <h1 class="text-left text-2xl font-bold md:text-5xl text-black">DRY unit tests are bad... mkay</h1>
+
+    <div class="flex flex-col md:flex-row text-sm font-mulish justify-between items-center">
+      <div class="flex">
+        <p></p>
+        <p class="px-2">•</p>
+        <p>17 May 2022</p>
+        <p class="px-2">•</p>
+        <p>
+          
+           11 mins  </p>
+      </div>
+      <div>
+        <div class="sharing-buttons flex  flex-wrap gap-1 justify-center ">
+  <a class="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-2 rounded-full text-white border-slate-600 bg-slate-600 hover:bg-slate-700 hover:border-slate-700"
+    target="_blank" rel="noopener"
+    href="https://facebook.com/sharer/sharer.php?u=/dry-unit-tests-are-bad/"
+    aria-label="Share on Facebook">
+    <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+      class="w-5 h-5">
+      <title>Facebook</title>
+      <path
+        d="M379 22v75h-44c-36 0-42 17-42 41v54h84l-12 85h-72v217h-88V277h-72v-85h72v-62c0-72 45-112 109-112 31 0 58 3 65 4z">
+      </path>
+    </svg>
+  </a>
+  <a class="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-2 rounded-full text-white border-slate-600 bg-slate-600 hover:bg-slate-700 hover:border-slate-700"
+    target="_blank" rel="noopener"
+    href="https://twitter.com/intent/tweet?url=/dry-unit-tests-are-bad/&text=DRY unit tests are bad... mkay"
+    aria-label="Share on Twitter">
+    <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+      class="w-5 h-5">
+      <title>Twitter</title>
+      <path
+        d="m459 152 1 13c0 139-106 299-299 299-59 0-115-17-161-47a217 217 0 0 0 156-44c-47-1-85-31-98-72l19 1c10 0 19-1 28-3-48-10-84-52-84-103v-2c14 8 30 13 47 14A105 105 0 0 1 36 67c51 64 129 106 216 110-2-8-2-16-2-24a105 105 0 0 1 181-72c24-4 47-13 67-25-8 24-25 45-46 58 21-3 41-8 60-17-14 21-32 40-53 55z">
+      </path>
+    </svg>
+  </a>
+  <a class="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-2 rounded-full text-white border-slate-600 bg-slate-600 hover:bg-slate-700 hover:border-slate-700"
+    target="_blank" rel="noopener"
+    href="https://www.linkedin.com/shareArticle?mini=true&url=/dry-unit-tests-are-bad/&title=DRY unit tests are bad... mkay&summary=DRY unit tests are bad... mkay&source="
+    aria-label="Share on Linkedin">
+    <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+      class="w-5 h-5">
+      <title>Linkedin</title>
+      <path
+        d="M136 183v283H42V183h94zm6-88c1 27-20 49-53 49-32 0-52-22-52-49 0-28 21-49 53-49s52 21 52 49zm333 208v163h-94V314c0-38-13-64-47-64-26 0-42 18-49 35-2 6-3 14-3 23v158h-94V183h94v41c12-20 34-48 85-48 62 0 108 41 108 127z">
+      </path>
+    </svg>
+  </a>
+  <a class="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-2 rounded-full text-white border-slate-600 bg-slate-600 hover:bg-slate-700 hover:border-slate-700"
+    target="_blank" rel="noopener"
+    href="https://pinterest.com/pin/create/button/?url=/dry-unit-tests-are-bad/&media=&description=DRY unit tests are bad... mkay"
+    aria-label="Share on Pinterest" draggable="false">
+    <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+      class="w-5 h-5">
+      <title>Pinterest</title>
+      <path
+        d="M268 6C165 6 64 75 64 186c0 70 40 110 64 110 9 0 15-28 15-35 0-10-24-30-24-68 0-81 62-138 141-138 68 0 118 39 118 110 0 53-21 153-90 153-25 0-46-18-46-44 0-38 26-74 26-113 0-67-94-55-94 25 0 17 2 36 10 51-14 60-42 148-42 209 0 19 3 38 4 57 4 3 2 3 7 1 51-69 49-82 72-173 12 24 44 36 69 36 106 0 154-103 154-196C448 71 362 6 268 6z">
+      </path>
+    </svg>
+  </a>
+  <a class="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-2 rounded-full text-white border-slate-600 bg-slate-600 hover:bg-slate-700 hover:border-slate-700"
+    target="_blank" rel="noopener"
+    href="https://reddit.com/submit/?url=/dry-unit-tests-are-bad/&resubmit=true&title=DRY unit tests are bad... mkay"
+    aria-label="Share on Reddit" draggable="false">
+    <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+      class="w-5 h-5">
+      <title>Reddit</title>
+      <path
+        d="M440 204c-15 0-28 6-38 15-35-24-83-40-137-42l28-125 88 20c0 22 18 39 39 39 22 0 40-18 40-39s-17-40-40-40c-15 0-28 9-35 22l-97-22c-5-1-10 3-11 7l-31 138c-53 2-100 18-136 43a53 53 0 0 0-38-16c-56 0-74 74-23 100l-3 24c0 84 95 152 210 152 117 0 211-68 211-152 0-8-1-17-3-25 50-25 32-99-24-99zM129 309a40 40 0 1 1 80 0 40 40 0 0 1-80 0zm215 93c-37 37-139 37-176 0-4-3-4-9 0-13s10-4 13 0c28 28 120 29 149 0 4-4 10-4 14 0s4 10 0 13zm-1-54c-22 0-39-17-39-39a39 39 0 1 1 39 39z">
+      </path>
+    </svg>
+  </a>
+  <a class="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-2 rounded-full text-white border-slate-600 bg-slate-600 hover:bg-slate-700 hover:border-slate-700"
+    target="_blank" rel="noopener"
+    href="https://wa.me/?text=DRY%20unit%20tests%20are%20bad...%20mkay%20"
+    aria-label="Share on Whatsapp" draggable="false">
+    <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+      class="w-5 h-5">
+      <title>Whatsapp</title>
+      <path
+        d="M413 97A222 222 0 0 0 64 365L31 480l118-31a224 224 0 0 0 330-195c0-59-25-115-67-157zM256 439c-33 0-66-9-94-26l-7-4-70 18 19-68-4-7a185 185 0 0 1 287-229c34 36 56 82 55 131 1 102-84 185-186 185zm101-138c-5-3-33-17-38-18-5-2-9-3-12 2l-18 22c-3 4-6 4-12 2-32-17-54-30-75-66-6-10 5-10 16-31 2-4 1-7-1-10l-17-41c-4-10-9-9-12-9h-11c-4 0-9 1-15 7-5 5-19 19-19 46s20 54 23 57c2 4 39 60 94 84 36 15 49 17 67 14 11-2 33-14 37-27s5-24 4-26c-2-2-5-4-11-6z">
+      </path>
+    </svg>
+  </a>
+  <a class="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-2 rounded-full text-white border-slate-600 bg-slate-600 hover:bg-slate-700 hover:border-slate-700"
+    target="_blank" rel="noopener"
+    href="https://telegram.me/share/url?text=DRY%20unit%20tests%20are%20bad...%20mkay&url=/dry-unit-tests-are-bad/"
+    aria-label="Share on Telegram" draggable="false">
+    <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+      class="w-5 h-5">
+      <title>Telegram</title>
+      <path
+        d="M256 8a248 248 0 1 0 0 496 248 248 0 0 0 0-496zm115 169c-4 39-20 134-28 178-4 19-10 25-17 25-14 2-25-9-39-18l-56-37c-24-17-8-25 6-40 3-4 67-61 68-67l-1-4-5-1q-4 1-105 70-15 10-27 9c-9 0-26-5-38-9-16-5-28-7-27-16q1-7 18-14l145-62c69-29 83-34 92-34 2 0 7 1 10 3l4 7a43 43 0 0 1 0 10z">
+      </path>
+    </svg>
+  </a>
+  <a class="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-2 rounded-full text-white border-slate-600 bg-slate-600 hover:bg-slate-700 hover:border-slate-700"
+    target="_blank" rel="noopener"
+    href="mailto:?subject=DRY%20unit%20tests%20are%20bad...%20mkay&body=/dry-unit-tests-are-bad/"
+    aria-label="Share by Email" draggable="false">
+    <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+      class="w-5 h-5">
+      <title>Email</title>
+      <path
+        d="M464 64a48 48 0 0 1 29 86L275 314c-11 8-27 8-38 0L19 150a48 48 0 0 1 29-86h416zM218 339c22 17 54 17 76 0l218-163v208c0 35-29 64-64 64H64c-35 0-64-29-64-64V176l218 163z">
+      </path>
+    </svg>
+  </a>
 </div>
 
-
-    <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
-         content to avoid any CSS collisions with our real content. -->
-    <div class="wrap">
-      <div class="masthead">
-        <div class="container">
-          <h3 class="masthead-title">
-            <a href="/" title="Home">Srikanth Sastry</a>
-            <small>A Techie in Boston</small>
-          </h3>
-        </div>
       </div>
+    </div>
 
-      <div class="container content">
-        <div class="post">
-  <h1 class="post-title">DRY unit tests are bad... mkay</h1>
-  <span class="post-date">17 May 2022</span>
-  <p><img src="/images/squeeze-cloth.jpg" alt="DRY" /></p>
+    <img class="w-full" src="/images/squeeze-cloth.jpg" alt="DRY unit tests are bad... mkay">
+
+    <div class="my-6">
+      <!-- ![DRY](/images/squeeze-cloth.jpg) -->
 
 <p><a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself">“Don’t Repeat Yourself” (DRY)</a> is arguably one of the most important principles in software engineering. It is considered a truism among many. A consequence of such dogmatic allegiance to DRYness is that we see a lot of DRY unit tests; this is where the utility of the DRY principle breaks downs and starts causing more problems that it solves.</p>
 
@@ -193,13 +268,13 @@ Most code is read more often than is written/edited. Unsurprisingly, it is impor
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">TestInput</span><span class="p">(</span><span class="n">typing</span><span class="p">.</span><span class="n">NamedTuple</span><span class="p">):</span>
     <span class="n">param1</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">param2</span><span class="p">:</span> <span class="n">typing</span><span class="p">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>
-    <span class="bp">...</span>
+    <span class="p">...</span>
 
 <span class="k">class</span> <span class="nc">TestOutput</span><span class="p">(</span><span class="n">typing</span><span class="p">.</span><span class="n">NamedTuple</span><span class="p">):</span>
     <span class="n">status</span><span class="p">:</span> <span class="n">SomeEnum</span>
     <span class="n">return_value</span><span class="p">:</span> <span class="n">typing</span><span class="p">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>
     <span class="n">exception</span><span class="p">:</span> <span class="n">typing</span><span class="p">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">Exception</span><span class="p">]</span>
-    <span class="bp">...</span>
+    <span class="p">...</span>
 
 <span class="k">class</span> <span class="nc">TestCase</span><span class="p">(</span><span class="n">typing</span><span class="p">.</span><span class="n">NamedTuple</span><span class="p">):</span>
     <span class="nb">input</span><span class="p">:</span> <span class="n">TestInput</span>
@@ -207,35 +282,35 @@ Most code is read more often than is written/edited. Unsurprisingly, it is impor
         
 <span class="k">class</span> <span class="nc">TestSequence</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
     
-    <span class="nd">@parameterized.expand</span><span class="p">([</span>
+    <span class="o">@</span><span class="n">parameterized</span><span class="p">.</span><span class="n">expand</span><span class="p">([</span>
         <span class="p">[</span><span class="n">test_input1</span><span class="p">,</span> <span class="n">expected_output1</span><span class="p">],</span>
         <span class="p">[</span><span class="n">test_input2</span><span class="p">,</span> <span class="n">expected_output2</span><span class="p">],</span>
-        <span class="bp">...</span>
+        <span class="p">...</span>
     <span class="p">])</span>
-    <span class="k">def</span> <span class="nf">test_somethings</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">test_input</span><span class="p">:</span> <span class="n">TestInput</span><span class="p">,</span> <span class="n">expected_output</span><span class="p">:</span> <span class="n">TestOutput</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">self</span><span class="p">.</span><span class="nf">_run_test</span><span class="p">(</span><span class="n">test_input</span><span class="p">,</span> <span class="n">expected_output</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">test_somethings</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">test_input</span><span class="p">:</span> <span class="n">TestInput</span><span class="p">,</span> <span class="n">expected_output</span><span class="p">:</span> <span class="n">TestOutput</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">_run_test</span><span class="p">(</span><span class="n">test_input</span><span class="p">,</span> <span class="n">expected_output</span><span class="p">)</span>
         
-    <span class="k">def</span> <span class="nf">_run_test</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">test_input</span><span class="p">:</span> <span class="n">TestInput</span><span class="p">,</span> <span class="n">expected_output</span><span class="p">:</span> <span class="n">TestOutput</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">sut</span> <span class="o">=</span> <span class="nc">SUT</span><span class="p">(...)</span>
-        <span class="nf">prepare_sut_for_tests</span><span class="p">(</span><span class="n">sut</span><span class="p">,</span> <span class="n">test_input</span><span class="p">)</span>
-        <span class="n">output</span> <span class="o">=</span> <span class="n">sut</span><span class="p">.</span><span class="nf">do_something</span><span class="p">(</span><span class="n">test_input</span><span class="p">.</span><span class="n">param2</span><span class="p">)</span>
-        <span class="n">test_output</span> <span class="o">=</span> <span class="nf">make_test_output</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">sut</span><span class="p">)</span>
-        <span class="n">self</span><span class="p">.</span><span class="nf">assertEquals</span><span class="p">(</span><span class="n">expected_output</span><span class="p">,</span> <span class="n">test_output</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">_run_test</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">test_input</span><span class="p">:</span> <span class="n">TestInput</span><span class="p">,</span> <span class="n">expected_output</span><span class="p">:</span> <span class="n">TestOutput</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">sut</span> <span class="o">=</span> <span class="n">SUT</span><span class="p">(...)</span>
+        <span class="n">prepare_sut_for_tests</span><span class="p">(</span><span class="n">sut</span><span class="p">,</span> <span class="n">test_input</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">sut</span><span class="p">.</span><span class="n">do_something</span><span class="p">(</span><span class="n">test_input</span><span class="p">.</span><span class="n">param2</span><span class="p">)</span>
+        <span class="n">test_output</span> <span class="o">=</span> <span class="n">make_test_output</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">sut</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">expected_output</span><span class="p">,</span> <span class="n">test_output</span><span class="p">)</span>
 </code></pre></div></div>
 <p>On the face of it, it looks like DRY organized code. But for someone reading this test to understand what SUT does, it is very challenging. They have no idea why the set of <code class="language-plaintext highlighter-rouge">test_input</code>s were chosen, what is the material difference among the inputs, what user journeys do each of those test cases represent, what are the preconditions that need to be satisfied for running <code class="language-plaintext highlighter-rouge">sut.do_something()</code>, why is the expected output the specified output, and so on.</p>
 
 <p>Instead, consider a non-DRY alternative.</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">TestSequence</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
     
-    <span class="k">def</span> <span class="nf">test_foo_input_under_bar_condition</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
-        <span class="sh">"""</span><span class="s">
+    <span class="k">def</span> <span class="nf">test_foo_input_under_bar_condition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s">"""
         This test verifies that when condition bar is true, then calling `do_something()`
         with input foo results in sigma behavior
-        </span><span class="sh">"""</span>
-        <span class="n">sut</span> <span class="o">=</span> <span class="nc">SUT</span><span class="p">()</span>
-        <span class="nf">ensure_precondition_bar</span><span class="p">(</span><span class="n">sut</span><span class="p">,</span> <span class="n">param1</span><span class="o">=</span><span class="n">bar1</span><span class="p">,</span> <span class="n">param2</span><span class="o">=</span><span class="n">bar2</span><span class="p">)</span>
-        <span class="n">output</span> <span class="o">=</span> <span class="n">sut</span><span class="p">.</span><span class="nf">do_something</span><span class="p">(</span><span class="n">foo</span><span class="p">)</span>
-        <span class="n">self</span><span class="p">.</span><span class="nf">assertEquals</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
+        """</span>
+        <span class="n">sut</span> <span class="o">=</span> <span class="n">SUT</span><span class="p">()</span>
+        <span class="n">ensure_precondition_bar</span><span class="p">(</span><span class="n">sut</span><span class="p">,</span> <span class="n">param1</span><span class="o">=</span><span class="n">bar1</span><span class="p">,</span> <span class="n">param2</span><span class="o">=</span><span class="n">bar2</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">sut</span><span class="p">.</span><span class="n">do_something</span><span class="p">(</span><span class="n">foo</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
 </code></pre></div></div>
 <p>This code tests one user journey and is human readable at a glance by something who does not have in-depth understanding of SUT. We can similarly define all the other test cases with code duplication and greater readability, with negligible negative impact.</p>
 
@@ -262,41 +337,243 @@ Most code is read more often than is written/edited. Unsurprisingly, it is impor
 
 <p>DRY’d out tests not only impede developer velocity, they also make it less easy to review code/diffs/pull requests. This is a second order effect of DRYing out your test code. Let’s revisit the example where we are adding a new feature to an existing piece of code, and this is a pure addition in behavior (not modification to existing behavior). If the tests were not DRY’d out, then adding tests for this new feature would involve just adding new test cases, and thus, just green lines in the generated diff. In contrast, recall from the previous subsection that adding tests with DRY test code is likely going to involve modifying existing code and then adding new test cases. In the former case, reviewing the tests is much easier, and as a result, reviewing that the new feature is behaving correctly is also that much easier. Reviewing the diff in the latter case is cognitively more taxing because not only does the reviewer need to verify that the new feature is implemented correctly, they also have to verify that the changes to the test code is also correct, and is not introducing new holes for bugs to escape testing. This can significantly slow down code reviews in two ways (1) it requires more time to review the code, and (2) because it requires longer to review the code, the reviewers are more likely to delay even starting the code review.</p>
 
-</div>
-
-
-<div class="related">
-  <h2>Posts mentioning this post (backlinks)</h2>
-  <ul class="related-posts">
-    
-    <li>
-      <h3>
-        <a href="/the-big-why-about-unit-tests/">The big WHY about unit tests</a>
-      </h3>
-    </li>
-    
-    <li>
-      <h3>
-        <a href="/tests-should-be-isolated-not-coupled/">Tests should be isolated from each other; not coupled</a>
-      </h3>
-    </li>
-    
-    <li>
-      <h3>
-        <a href="/law-of-demeter-and-unit-tests/">The Law of Demeter and unit tests</a>
-      </h3>
-    </li>
-    
-  </ul>
-</div>
-
-
-
-      </div>
     </div>
 
-    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+    <div class="mx-auto py-8">
+      <p class="text-center font-extrabold italic">
+        Like it? Share it!
+      </p>
+      <div class="sharing-buttons flex  flex-wrap gap-1 justify-center ">
+  <a class="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-2 rounded-full text-white border-slate-600 bg-slate-600 hover:bg-slate-700 hover:border-slate-700"
+    target="_blank" rel="noopener"
+    href="https://facebook.com/sharer/sharer.php?u=/dry-unit-tests-are-bad/"
+    aria-label="Share on Facebook">
+    <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+      class="w-5 h-5">
+      <title>Facebook</title>
+      <path
+        d="M379 22v75h-44c-36 0-42 17-42 41v54h84l-12 85h-72v217h-88V277h-72v-85h72v-62c0-72 45-112 109-112 31 0 58 3 65 4z">
+      </path>
+    </svg>
+  </a>
+  <a class="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-2 rounded-full text-white border-slate-600 bg-slate-600 hover:bg-slate-700 hover:border-slate-700"
+    target="_blank" rel="noopener"
+    href="https://twitter.com/intent/tweet?url=/dry-unit-tests-are-bad/&text=DRY unit tests are bad... mkay"
+    aria-label="Share on Twitter">
+    <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+      class="w-5 h-5">
+      <title>Twitter</title>
+      <path
+        d="m459 152 1 13c0 139-106 299-299 299-59 0-115-17-161-47a217 217 0 0 0 156-44c-47-1-85-31-98-72l19 1c10 0 19-1 28-3-48-10-84-52-84-103v-2c14 8 30 13 47 14A105 105 0 0 1 36 67c51 64 129 106 216 110-2-8-2-16-2-24a105 105 0 0 1 181-72c24-4 47-13 67-25-8 24-25 45-46 58 21-3 41-8 60-17-14 21-32 40-53 55z">
+      </path>
+    </svg>
+  </a>
+  <a class="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-2 rounded-full text-white border-slate-600 bg-slate-600 hover:bg-slate-700 hover:border-slate-700"
+    target="_blank" rel="noopener"
+    href="https://www.linkedin.com/shareArticle?mini=true&url=/dry-unit-tests-are-bad/&title=DRY unit tests are bad... mkay&summary=DRY unit tests are bad... mkay&source="
+    aria-label="Share on Linkedin">
+    <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+      class="w-5 h-5">
+      <title>Linkedin</title>
+      <path
+        d="M136 183v283H42V183h94zm6-88c1 27-20 49-53 49-32 0-52-22-52-49 0-28 21-49 53-49s52 21 52 49zm333 208v163h-94V314c0-38-13-64-47-64-26 0-42 18-49 35-2 6-3 14-3 23v158h-94V183h94v41c12-20 34-48 85-48 62 0 108 41 108 127z">
+      </path>
+    </svg>
+  </a>
+  <a class="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-2 rounded-full text-white border-slate-600 bg-slate-600 hover:bg-slate-700 hover:border-slate-700"
+    target="_blank" rel="noopener"
+    href="https://pinterest.com/pin/create/button/?url=/dry-unit-tests-are-bad/&media=&description=DRY unit tests are bad... mkay"
+    aria-label="Share on Pinterest" draggable="false">
+    <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+      class="w-5 h-5">
+      <title>Pinterest</title>
+      <path
+        d="M268 6C165 6 64 75 64 186c0 70 40 110 64 110 9 0 15-28 15-35 0-10-24-30-24-68 0-81 62-138 141-138 68 0 118 39 118 110 0 53-21 153-90 153-25 0-46-18-46-44 0-38 26-74 26-113 0-67-94-55-94 25 0 17 2 36 10 51-14 60-42 148-42 209 0 19 3 38 4 57 4 3 2 3 7 1 51-69 49-82 72-173 12 24 44 36 69 36 106 0 154-103 154-196C448 71 362 6 268 6z">
+      </path>
+    </svg>
+  </a>
+  <a class="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-2 rounded-full text-white border-slate-600 bg-slate-600 hover:bg-slate-700 hover:border-slate-700"
+    target="_blank" rel="noopener"
+    href="https://reddit.com/submit/?url=/dry-unit-tests-are-bad/&resubmit=true&title=DRY unit tests are bad... mkay"
+    aria-label="Share on Reddit" draggable="false">
+    <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+      class="w-5 h-5">
+      <title>Reddit</title>
+      <path
+        d="M440 204c-15 0-28 6-38 15-35-24-83-40-137-42l28-125 88 20c0 22 18 39 39 39 22 0 40-18 40-39s-17-40-40-40c-15 0-28 9-35 22l-97-22c-5-1-10 3-11 7l-31 138c-53 2-100 18-136 43a53 53 0 0 0-38-16c-56 0-74 74-23 100l-3 24c0 84 95 152 210 152 117 0 211-68 211-152 0-8-1-17-3-25 50-25 32-99-24-99zM129 309a40 40 0 1 1 80 0 40 40 0 0 1-80 0zm215 93c-37 37-139 37-176 0-4-3-4-9 0-13s10-4 13 0c28 28 120 29 149 0 4-4 10-4 14 0s4 10 0 13zm-1-54c-22 0-39-17-39-39a39 39 0 1 1 39 39z">
+      </path>
+    </svg>
+  </a>
+  <a class="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-2 rounded-full text-white border-slate-600 bg-slate-600 hover:bg-slate-700 hover:border-slate-700"
+    target="_blank" rel="noopener"
+    href="https://wa.me/?text=DRY%20unit%20tests%20are%20bad...%20mkay%20"
+    aria-label="Share on Whatsapp" draggable="false">
+    <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+      class="w-5 h-5">
+      <title>Whatsapp</title>
+      <path
+        d="M413 97A222 222 0 0 0 64 365L31 480l118-31a224 224 0 0 0 330-195c0-59-25-115-67-157zM256 439c-33 0-66-9-94-26l-7-4-70 18 19-68-4-7a185 185 0 0 1 287-229c34 36 56 82 55 131 1 102-84 185-186 185zm101-138c-5-3-33-17-38-18-5-2-9-3-12 2l-18 22c-3 4-6 4-12 2-32-17-54-30-75-66-6-10 5-10 16-31 2-4 1-7-1-10l-17-41c-4-10-9-9-12-9h-11c-4 0-9 1-15 7-5 5-19 19-19 46s20 54 23 57c2 4 39 60 94 84 36 15 49 17 67 14 11-2 33-14 37-27s5-24 4-26c-2-2-5-4-11-6z">
+      </path>
+    </svg>
+  </a>
+  <a class="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-2 rounded-full text-white border-slate-600 bg-slate-600 hover:bg-slate-700 hover:border-slate-700"
+    target="_blank" rel="noopener"
+    href="https://telegram.me/share/url?text=DRY%20unit%20tests%20are%20bad...%20mkay&url=/dry-unit-tests-are-bad/"
+    aria-label="Share on Telegram" draggable="false">
+    <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+      class="w-5 h-5">
+      <title>Telegram</title>
+      <path
+        d="M256 8a248 248 0 1 0 0 496 248 248 0 0 0 0-496zm115 169c-4 39-20 134-28 178-4 19-10 25-17 25-14 2-25-9-39-18l-56-37c-24-17-8-25 6-40 3-4 67-61 68-67l-1-4-5-1q-4 1-105 70-15 10-27 9c-9 0-26-5-38-9-16-5-28-7-27-16q1-7 18-14l145-62c69-29 83-34 92-34 2 0 7 1 10 3l4 7a43 43 0 0 1 0 10z">
+      </path>
+    </svg>
+  </a>
+  <a class="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-2 rounded-full text-white border-slate-600 bg-slate-600 hover:bg-slate-700 hover:border-slate-700"
+    target="_blank" rel="noopener"
+    href="mailto:?subject=DRY%20unit%20tests%20are%20bad...%20mkay&body=/dry-unit-tests-are-bad/"
+    aria-label="Share by Email" draggable="false">
+    <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+      class="w-5 h-5">
+      <title>Email</title>
+      <path
+        d="M464 64a48 48 0 0 1 29 86L275 314c-11 8-27 8-38 0L19 150a48 48 0 0 1 29-86h416zM218 339c22 17 54 17 76 0l218-163v208c0 35-29 64-64 64H64c-35 0-64-29-64-64V176l218 163z">
+      </path>
+    </svg>
+  </a>
+</div>
 
-    <script src='/public/js/script.js'></script>
-  </body>
+    </div>
+
+    <div class="font-mulish flex justify-center mb-10">
+      
+      <a class="pr-2" href="/do-not-index-in-test-coverage/">&laquo; Do not index on test coverage metrics</a>
+      
+      
+      <a class="pl-2" href="/mocks-stubs-andhow-to-use-them/">Mocks, Stubs, and how to use them &raquo;</a>
+      
+    </div>
+
+    
+  </div>
+</div>
+ 
+
+<footer class="w-full bottom-0">
+  <hr class="my-8 border-zinc-200" />
+  <div class="container mx-auto">
+    <div class="flex flex-wrap text-left">
+      <div class="w-full md:w-6/12 md:px-4">
+        <p class="text-3xl font-semibold">
+          Let's keep in touch!
+        </p>
+        <p class="font-mulish text-lg dark:text-zinc-300 mt-2 mb-2">
+           Find me on any of these platforms. 
+        </p>
+         <div class="flex justify-center md:justify-start pt-2 gap-6">
+   
+  <a
+    class="transition hover:scale-110 duration-300"
+    href="mailto:srikanth@sastry.name"
+  >
+    <img
+      class="h-6 w-6"
+      src="/assets/images/contact_channels/email.svg"
+      alt="Email Icon"
+    />
+  </a>
+   
+  <a
+    class="transition hover:scale-110 duration-300"
+    href="https://github.com/srikanthsastry"
+    target="_blank"
+  >
+    <img
+      class="h-6 w-6"
+      src="/assets/images/contact_channels/github-mark.svg"
+      alt="Github Icon"
+    />
+  </a>
+      
+</div>
+ 
+      </div>
+      <div class="w-full md:w-6/12 md:text-right py-4 md:py-0">
+        <div class="flex flex-wrap items-top mb-6">
+          <div class="w-full lg:w-4/12 md:px-4 ml-auto">
+            <span class="text-lg block text-gray-800 mb-2">
+              Pages
+            </span>
+            <ul>
+                 
+              <li>
+                <a class="font-mulish text-slate-600 hover:text-sky-400 dark:text-slate-300 dark:hover:text-slate-200"
+                  href="/archives/">Archives</a>
+              </li>
+                
+              <li>
+                <a class="font-mulish text-slate-600 hover:text-sky-400 dark:text-slate-300 dark:hover:text-slate-200"
+                  href="/">Home</a>
+              </li>
+                
+              <li>
+                <a class="font-mulish text-slate-600 hover:text-sky-400 dark:text-slate-300 dark:hover:text-slate-200"
+                  href="/publications/">Publications</a>
+              </li>
+                
+              <li>
+                <a class="font-mulish text-slate-600 hover:text-sky-400 dark:text-slate-300 dark:hover:text-slate-200"
+                  href="/touchstone-radio-episodes/">Touchstone Radio Episodes</a>
+              </li>
+                           
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="font-mulish flex flex-wrap items-center md:justify-between justify-center my-8">
+      <div class="w-full md:w-4/12 px-4 mx-auto text-center">
+        
+        <a href="/feed.xml" class="p-2">
+          <svg fill="#000000" viewBox="-3 0 19 19" xmlns="http://www.w3.org/2000/svg" class="w-10 mx-auto">
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+            <g id="SVGRepo_iconCarrier">
+              <path
+                d="M.926 12.818a1.403 1.403 0 1 1 0 1.984 1.402 1.402 0 0 1 0-1.984zm10.531 2.357a1.03 1.03 0 0 1-1.029-1.03 8.775 8.775 0 0 0-.694-3.438A8.826 8.826 0 0 0 1.591 5.31a1.03 1.03 0 1 1 0-2.059 10.817 10.817 0 0 1 4.24.857 10.893 10.893 0 0 1 3.463 2.334 10.867 10.867 0 0 1 3.19 7.703 1.027 1.027 0 0 1-1.027 1.029zm-4.538 0a1.03 1.03 0 0 1-1.029-1.03 4.297 4.297 0 0 0-4.299-4.298 1.03 1.03 0 0 1 0-2.059 6.362 6.362 0 0 1 5.857 3.883 6.298 6.298 0 0 1 .5 2.475 1.03 1.03 0 0 1-1.029 1.029z">
+              </path>
+            </g>
+          </svg>
+        </a>
+        
+        <div class="text-sm text-blueGray-500 font-semibold py-1">
+          © <span id="get-current-year">2025</span>
+          <a href="https://www.creative-tim.com/product/notus-js" class="text-blueGray-500 hover:text-gray-800"
+            target="_blank" aria-label="Creative C">Srikanth Sastry.</a>
+          All rights reserved.
+          <p class="text-xs pt-4">
+            Built with ❤️ using the
+            <a class="hover:text-sky-400" href="https://github.com/a-chacon/awesome-jekyll-theme">Awesome Jekyll
+              Theme</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  <script>
+    document.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function (event) {
+        event.preventDefault(); // Prevent the default link action temporarily
+        link.classList.add("gentle-clicked");
+
+        setTimeout(function () {
+          link.classList.remove("gentle-clicked");
+          window.location.href = link.href; // Navigate to the link after the animation
+        }, 300); // Duration of the gentle bounce animation
+      });
+    });
+  </script>
+</body>
+
 </html>
