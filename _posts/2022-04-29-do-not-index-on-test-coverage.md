@@ -14,9 +14,10 @@ categories:
 excerpt: >
   We live in a data driven world.
   The temptation, therefore, is to measure everything. Even the quality of your unit tests, and there where the trouble usually begins. For an detailed explanation of why indexing on the test coverage metrics is a bad idea, I highly recommend Jason Rudolph's collection of posts on this topic (https://jasonrudolph.com/blog/testing-anti-patterns-how-to-fail-with-100-test-coverage/). To drive home the point more explicitly (and motivate you to actually go read Jason's posts), here are some illustrative explanations.
+image: /images/chart-coverage.png
 ...
 
-![Coverage Chart](/images/chart-coverage.png)
+<!-- ![Coverage Chart](/images/chart-coverage.png) -->
 
 We live in a data driven world, and as the saying goes "[…] What is not measured, cannot be improved. […]"
 > What is not defined cannot be measured. What is not measured, cannot be improved. What is not improved, is always degraded. 

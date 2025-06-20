@@ -14,8 +14,10 @@ excerpt: >
   At 23, I was working as a young software engineer in Bangalore. 
   I needed the house deep cleaned, and a contractor said that he would send a couple of people over who would take care of it for us. 
   I was about to get my first glimpse into the privilege that I had enjoyed all my life.
+
+image: /images/handcuffed.jpg
 ...
-![Oppressed](/images/handcuffed.jpg)
+<!-- ![Oppressed](/images/handcuffed.jpg) -->
 
 Ironically, a sure marker of privilege is not realizing your own privilege. I grew up being told that I am a Brahmin, which is the highest caste, and that it makes us superior and better than others. Unsurprisingly, I was taught that we were, in fact, an oppressed minority. The government reservations for the so-called Scheduled Castes and Scheduled Tribes were often cited as evidence of such oppression. So, naturally, I grew up knowing nothing about the privilege that I enjoyed. 
 
