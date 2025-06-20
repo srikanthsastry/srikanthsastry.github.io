@@ -18,15 +18,15 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="My recent work titled “Leader Election Using Loneliness Detection” is accepted for presentation at the 25th International Symposium on DIStributed Computing (DISC) in Rome, and in the journal Distributed Computing. Briefly, the work focuses on the ‘gap in the computational power’ in single-hop wireless systems when the information about message loss in the system is varied. We assume that the cause of message loss in wireless networks is collision, which happens when multiple nodes in the system transmit concurrently. We consider two models — weak collision detection (WCD) and strong collision detection (SCD) — which differ only with respect to the information that they provide about message loss. Specifically, when message collision occurs, in WCD systems, all the nodes that are not transmitting (and therefore listening) receive information about the collision whereas the transmitting processes do not receive any such information, and in SCD systems, all the nodes (both transmitting and receiving nodes) receive information about the collision. Intuitively, it makes sense to argue that SCD systems are more `powerful’ than WCD systems because SCD systems provide more information about message collision than WCD systems; however, that does not answer the question: How much more powerful are SCD systems than WCD systems; how can the ‘gap’ be characterized? Alternatively, we may ask: how do we quantify the amount of information that is provided to transmitting processes when they are notified of a message collision? We showed that the ‘gap’ between SCD and WCD systems is captured by the answer to the question: Is there exactly one node in the system? In other words, if WCD systems were to be augmented with an oracle that provides the answer to the foregoing question, then such a system would be able to solve all the problems solvable in SCD systems with the same time and message complexity (modulo a constant factor). We call such an oracle a Loneliness Detector (or LD, for short). We showed that LD can be implemented in WCD systems in O(log u - log n) time deterministically (where u is an upper bound on the number of nodes in the system and n is the actual number of nodes in the system) and in O(1) time with high probability. We then used LD to compare the time complexity of solving leader election in SCD and WCD systems. We showed that in both SCD and WCD systems, leader election may be solved in O(log u) time deterministically and in O(loglog n + log(1/epsilon)) time probabilistically, where epsilon is the error probability. We also provided matching lower bounds for each of the upper bounds presented, thus demonstrating the efficiency of our algorithms. Abstract: We consider the problem of leader election (LE) in single-hop radio networks with synchronized time slots for transmitting and receiving messages. We assume that the actual number n of processes is unknown, while the size u of the ID space is known, but is possibly much larger. We consider two types of collision detection: strong (SCD), whereby all processes detect collisions, and weak (WCD), whereby only non-transmitting processes detect collisions. We introduce loneliness detection (LD) as a key subproblem for solving LE in WCD systems. LD informs all processes whether the system contains exactly one process or more than one. We show that LD captures the difference in power between SCD and WCD, by providing an implementation of SCD over WCD and LD. We present two algorithms that solve deterministic and probabilistic LD in WCD systems with time costs of O(log u/n ) and O(min(log u/n , log(1/epsilon)/n)), respectively, where epsilon is the error probability. We also provide matching lower bounds. We present two algorithms that solve deterministic and probabilistic LE in SCD systems with time costs of O(log u) and O(min(log u, log log n + log( 1/epsilon ))), respectively, where epsilon is the error probability. We provide matching lower bounds. The full version of the paper may be found here [link]." />
 <meta property="og:description" content="My recent work titled “Leader Election Using Loneliness Detection” is accepted for presentation at the 25th International Symposium on DIStributed Computing (DISC) in Rome, and in the journal Distributed Computing. Briefly, the work focuses on the ‘gap in the computational power’ in single-hop wireless systems when the information about message loss in the system is varied. We assume that the cause of message loss in wireless networks is collision, which happens when multiple nodes in the system transmit concurrently. We consider two models — weak collision detection (WCD) and strong collision detection (SCD) — which differ only with respect to the information that they provide about message loss. Specifically, when message collision occurs, in WCD systems, all the nodes that are not transmitting (and therefore listening) receive information about the collision whereas the transmitting processes do not receive any such information, and in SCD systems, all the nodes (both transmitting and receiving nodes) receive information about the collision. Intuitively, it makes sense to argue that SCD systems are more `powerful’ than WCD systems because SCD systems provide more information about message collision than WCD systems; however, that does not answer the question: How much more powerful are SCD systems than WCD systems; how can the ‘gap’ be characterized? Alternatively, we may ask: how do we quantify the amount of information that is provided to transmitting processes when they are notified of a message collision? We showed that the ‘gap’ between SCD and WCD systems is captured by the answer to the question: Is there exactly one node in the system? In other words, if WCD systems were to be augmented with an oracle that provides the answer to the foregoing question, then such a system would be able to solve all the problems solvable in SCD systems with the same time and message complexity (modulo a constant factor). We call such an oracle a Loneliness Detector (or LD, for short). We showed that LD can be implemented in WCD systems in O(log u - log n) time deterministically (where u is an upper bound on the number of nodes in the system and n is the actual number of nodes in the system) and in O(1) time with high probability. We then used LD to compare the time complexity of solving leader election in SCD and WCD systems. We showed that in both SCD and WCD systems, leader election may be solved in O(log u) time deterministically and in O(loglog n + log(1/epsilon)) time probabilistically, where epsilon is the error probability. We also provided matching lower bounds for each of the upper bounds presented, thus demonstrating the efficiency of our algorithms. Abstract: We consider the problem of leader election (LE) in single-hop radio networks with synchronized time slots for transmitting and receiving messages. We assume that the actual number n of processes is unknown, while the size u of the ID space is known, but is possibly much larger. We consider two types of collision detection: strong (SCD), whereby all processes detect collisions, and weak (WCD), whereby only non-transmitting processes detect collisions. We introduce loneliness detection (LD) as a key subproblem for solving LE in WCD systems. LD informs all processes whether the system contains exactly one process or more than one. We show that LD captures the difference in power between SCD and WCD, by providing an implementation of SCD over WCD and LD. We present two algorithms that solve deterministic and probabilistic LD in WCD systems with time costs of O(log u/n ) and O(min(log u/n , log(1/epsilon)/n)), respectively, where epsilon is the error probability. We also provide matching lower bounds. We present two algorithms that solve deterministic and probabilistic LE in SCD systems with time costs of O(log u) and O(min(log u, log log n + log( 1/epsilon ))), respectively, where epsilon is the error probability. We provide matching lower bounds. The full version of the paper may be found here [link]." />
-<link rel="canonical" href="/leader-election-using-loneliness-detection/" />
-<meta property="og:url" content="/leader-election-using-loneliness-detection/" />
+<link rel="canonical" href="https://srikanth.sastry.name/leader-election-using-loneliness-detection/" />
+<meta property="og:url" content="https://srikanth.sastry.name/leader-election-using-loneliness-detection/" />
 <meta property="og:site_name" content="Srikanth Sastry" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2012-10-11T23:23:04+00:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Leader Election Using Loneliness Detection" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Srikanth Sastry"},"dateModified":"2012-10-11T23:23:04+00:00","datePublished":"2012-10-11T23:23:04+00:00","description":"My recent work titled “Leader Election Using Loneliness Detection” is accepted for presentation at the 25th International Symposium on DIStributed Computing (DISC) in Rome, and in the journal Distributed Computing. Briefly, the work focuses on the ‘gap in the computational power’ in single-hop wireless systems when the information about message loss in the system is varied. We assume that the cause of message loss in wireless networks is collision, which happens when multiple nodes in the system transmit concurrently. We consider two models — weak collision detection (WCD) and strong collision detection (SCD) — which differ only with respect to the information that they provide about message loss. Specifically, when message collision occurs, in WCD systems, all the nodes that are not transmitting (and therefore listening) receive information about the collision whereas the transmitting processes do not receive any such information, and in SCD systems, all the nodes (both transmitting and receiving nodes) receive information about the collision. Intuitively, it makes sense to argue that SCD systems are more `powerful’ than WCD systems because SCD systems provide more information about message collision than WCD systems; however, that does not answer the question: How much more powerful are SCD systems than WCD systems; how can the ‘gap’ be characterized? Alternatively, we may ask: how do we quantify the amount of information that is provided to transmitting processes when they are notified of a message collision? We showed that the ‘gap’ between SCD and WCD systems is captured by the answer to the question: Is there exactly one node in the system? In other words, if WCD systems were to be augmented with an oracle that provides the answer to the foregoing question, then such a system would be able to solve all the problems solvable in SCD systems with the same time and message complexity (modulo a constant factor). We call such an oracle a Loneliness Detector (or LD, for short). We showed that LD can be implemented in WCD systems in O(log u - log n) time deterministically (where u is an upper bound on the number of nodes in the system and n is the actual number of nodes in the system) and in O(1) time with high probability. We then used LD to compare the time complexity of solving leader election in SCD and WCD systems. We showed that in both SCD and WCD systems, leader election may be solved in O(log u) time deterministically and in O(loglog n + log(1/epsilon)) time probabilistically, where epsilon is the error probability. We also provided matching lower bounds for each of the upper bounds presented, thus demonstrating the efficiency of our algorithms. Abstract: We consider the problem of leader election (LE) in single-hop radio networks with synchronized time slots for transmitting and receiving messages. We assume that the actual number n of processes is unknown, while the size u of the ID space is known, but is possibly much larger. We consider two types of collision detection: strong (SCD), whereby all processes detect collisions, and weak (WCD), whereby only non-transmitting processes detect collisions. We introduce loneliness detection (LD) as a key subproblem for solving LE in WCD systems. LD informs all processes whether the system contains exactly one process or more than one. We show that LD captures the difference in power between SCD and WCD, by providing an implementation of SCD over WCD and LD. We present two algorithms that solve deterministic and probabilistic LD in WCD systems with time costs of O(log u/n ) and O(min(log u/n , log(1/epsilon)/n)), respectively, where epsilon is the error probability. We also provide matching lower bounds. We present two algorithms that solve deterministic and probabilistic LE in SCD systems with time costs of O(log u) and O(min(log u, log log n + log( 1/epsilon ))), respectively, where epsilon is the error probability. We provide matching lower bounds. The full version of the paper may be found here [link].","headline":"Leader Election Using Loneliness Detection","mainEntityOfPage":{"@type":"WebPage","@id":"/leader-election-using-loneliness-detection/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/images/site_logo.png"},"name":"Srikanth Sastry"},"url":"/leader-election-using-loneliness-detection/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Srikanth Sastry"},"dateModified":"2012-10-11T23:23:04+00:00","datePublished":"2012-10-11T23:23:04+00:00","description":"My recent work titled “Leader Election Using Loneliness Detection” is accepted for presentation at the 25th International Symposium on DIStributed Computing (DISC) in Rome, and in the journal Distributed Computing. Briefly, the work focuses on the ‘gap in the computational power’ in single-hop wireless systems when the information about message loss in the system is varied. We assume that the cause of message loss in wireless networks is collision, which happens when multiple nodes in the system transmit concurrently. We consider two models — weak collision detection (WCD) and strong collision detection (SCD) — which differ only with respect to the information that they provide about message loss. Specifically, when message collision occurs, in WCD systems, all the nodes that are not transmitting (and therefore listening) receive information about the collision whereas the transmitting processes do not receive any such information, and in SCD systems, all the nodes (both transmitting and receiving nodes) receive information about the collision. Intuitively, it makes sense to argue that SCD systems are more `powerful’ than WCD systems because SCD systems provide more information about message collision than WCD systems; however, that does not answer the question: How much more powerful are SCD systems than WCD systems; how can the ‘gap’ be characterized? Alternatively, we may ask: how do we quantify the amount of information that is provided to transmitting processes when they are notified of a message collision? We showed that the ‘gap’ between SCD and WCD systems is captured by the answer to the question: Is there exactly one node in the system? In other words, if WCD systems were to be augmented with an oracle that provides the answer to the foregoing question, then such a system would be able to solve all the problems solvable in SCD systems with the same time and message complexity (modulo a constant factor). We call such an oracle a Loneliness Detector (or LD, for short). We showed that LD can be implemented in WCD systems in O(log u - log n) time deterministically (where u is an upper bound on the number of nodes in the system and n is the actual number of nodes in the system) and in O(1) time with high probability. We then used LD to compare the time complexity of solving leader election in SCD and WCD systems. We showed that in both SCD and WCD systems, leader election may be solved in O(log u) time deterministically and in O(loglog n + log(1/epsilon)) time probabilistically, where epsilon is the error probability. We also provided matching lower bounds for each of the upper bounds presented, thus demonstrating the efficiency of our algorithms. Abstract: We consider the problem of leader election (LE) in single-hop radio networks with synchronized time slots for transmitting and receiving messages. We assume that the actual number n of processes is unknown, while the size u of the ID space is known, but is possibly much larger. We consider two types of collision detection: strong (SCD), whereby all processes detect collisions, and weak (WCD), whereby only non-transmitting processes detect collisions. We introduce loneliness detection (LD) as a key subproblem for solving LE in WCD systems. LD informs all processes whether the system contains exactly one process or more than one. We show that LD captures the difference in power between SCD and WCD, by providing an implementation of SCD over WCD and LD. We present two algorithms that solve deterministic and probabilistic LD in WCD systems with time costs of O(log u/n ) and O(min(log u/n , log(1/epsilon)/n)), respectively, where epsilon is the error probability. We also provide matching lower bounds. We present two algorithms that solve deterministic and probabilistic LE in SCD systems with time costs of O(log u) and O(min(log u, log log n + log( 1/epsilon ))), respectively, where epsilon is the error probability. We provide matching lower bounds. The full version of the paper may be found here [link].","headline":"Leader Election Using Loneliness Detection","mainEntityOfPage":{"@type":"WebPage","@id":"https://srikanth.sastry.name/leader-election-using-loneliness-detection/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://srikanth.sastry.name/images/site_logo.png"},"name":"Srikanth Sastry"},"url":"https://srikanth.sastry.name/leader-election-using-loneliness-detection/"}</script>
 <!-- End Jekyll SEO tag -->
  
 </head>
@@ -108,7 +108,7 @@
 <div class="container mx-auto">
   <div id="post" class="prose max-w-[75ch] prose-neutral mx-auto pb-10 pt-20 lg:pt-[90px] lg:pb-20">
     <div class="pb-4">
-      <a href="/category/research"
+      <a href="https://srikanth.sastry.name/category/research"
         class="no-underline font-mulish text-sm hover:text-sky-400 text-gray-500">
         RESEARCH
       </a>
@@ -130,7 +130,7 @@
         <div class="sharing-buttons flex  flex-wrap gap-1 justify-center ">
   <a class="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-2 rounded-full text-white border-slate-600 bg-slate-600 hover:bg-slate-700 hover:border-slate-700"
     target="_blank" rel="noopener"
-    href="https://facebook.com/sharer/sharer.php?u=/leader-election-using-loneliness-detection/"
+    href="https://facebook.com/sharer/sharer.php?u=https://srikanth.sastry.name/leader-election-using-loneliness-detection/"
     aria-label="Share on Facebook">
     <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
       class="w-5 h-5">
@@ -142,7 +142,7 @@
   </a>
   <a class="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-2 rounded-full text-white border-slate-600 bg-slate-600 hover:bg-slate-700 hover:border-slate-700"
     target="_blank" rel="noopener"
-    href="https://twitter.com/intent/tweet?url=/leader-election-using-loneliness-detection/&text=Leader Election Using Loneliness Detection"
+    href="https://twitter.com/intent/tweet?url=https://srikanth.sastry.name/leader-election-using-loneliness-detection/&text=Leader Election Using Loneliness Detection"
     aria-label="Share on Twitter">
     <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
       class="w-5 h-5">
@@ -154,7 +154,7 @@
   </a>
   <a class="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-2 rounded-full text-white border-slate-600 bg-slate-600 hover:bg-slate-700 hover:border-slate-700"
     target="_blank" rel="noopener"
-    href="https://www.linkedin.com/shareArticle?mini=true&url=/leader-election-using-loneliness-detection/&title=Leader Election Using Loneliness Detection&summary=Leader Election Using Loneliness Detection&source="
+    href="https://www.linkedin.com/shareArticle?mini=true&url=https://srikanth.sastry.name/leader-election-using-loneliness-detection/&title=Leader Election Using Loneliness Detection&summary=Leader Election Using Loneliness Detection&source=https://srikanth.sastry.name"
     aria-label="Share on Linkedin">
     <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
       class="w-5 h-5">
@@ -166,7 +166,7 @@
   </a>
   <a class="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-2 rounded-full text-white border-slate-600 bg-slate-600 hover:bg-slate-700 hover:border-slate-700"
     target="_blank" rel="noopener"
-    href="https://pinterest.com/pin/create/button/?url=/leader-election-using-loneliness-detection/&media=&description=Leader Election Using Loneliness Detection"
+    href="https://pinterest.com/pin/create/button/?url=https://srikanth.sastry.name/leader-election-using-loneliness-detection/&media=https://srikanth.sastry.name&description=Leader Election Using Loneliness Detection"
     aria-label="Share on Pinterest" draggable="false">
     <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
       class="w-5 h-5">
@@ -178,7 +178,7 @@
   </a>
   <a class="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-2 rounded-full text-white border-slate-600 bg-slate-600 hover:bg-slate-700 hover:border-slate-700"
     target="_blank" rel="noopener"
-    href="https://reddit.com/submit/?url=/leader-election-using-loneliness-detection/&resubmit=true&title=Leader Election Using Loneliness Detection"
+    href="https://reddit.com/submit/?url=https://srikanth.sastry.name/leader-election-using-loneliness-detection/&resubmit=true&title=Leader Election Using Loneliness Detection"
     aria-label="Share on Reddit" draggable="false">
     <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
       class="w-5 h-5">
@@ -190,7 +190,7 @@
   </a>
   <a class="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-2 rounded-full text-white border-slate-600 bg-slate-600 hover:bg-slate-700 hover:border-slate-700"
     target="_blank" rel="noopener"
-    href="https://wa.me/?text=Leader%20Election%20Using%20Loneliness%20Detection%20"
+    href="https://wa.me/?text=Leader%20Election%20Using%20Loneliness%20Detection%20https://srikanth.sastry.name"
     aria-label="Share on Whatsapp" draggable="false">
     <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
       class="w-5 h-5">
@@ -202,7 +202,7 @@
   </a>
   <a class="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-2 rounded-full text-white border-slate-600 bg-slate-600 hover:bg-slate-700 hover:border-slate-700"
     target="_blank" rel="noopener"
-    href="https://telegram.me/share/url?text=Leader%20Election%20Using%20Loneliness%20Detection&url=/leader-election-using-loneliness-detection/"
+    href="https://telegram.me/share/url?text=Leader%20Election%20Using%20Loneliness%20Detection&url=https://srikanth.sastry.name/leader-election-using-loneliness-detection/"
     aria-label="Share on Telegram" draggable="false">
     <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
       class="w-5 h-5">
@@ -214,7 +214,7 @@
   </a>
   <a class="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-2 rounded-full text-white border-slate-600 bg-slate-600 hover:bg-slate-700 hover:border-slate-700"
     target="_blank" rel="noopener"
-    href="mailto:?subject=Leader%20Election%20Using%20Loneliness%20Detection&body=/leader-election-using-loneliness-detection/"
+    href="mailto:?subject=Leader%20Election%20Using%20Loneliness%20Detection&body=https://srikanth.sastry.name/leader-election-using-loneliness-detection/"
     aria-label="Share by Email" draggable="false">
     <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
       class="w-5 h-5">
@@ -253,7 +253,7 @@
       <div class="sharing-buttons flex  flex-wrap gap-1 justify-center ">
   <a class="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-2 rounded-full text-white border-slate-600 bg-slate-600 hover:bg-slate-700 hover:border-slate-700"
     target="_blank" rel="noopener"
-    href="https://facebook.com/sharer/sharer.php?u=/leader-election-using-loneliness-detection/"
+    href="https://facebook.com/sharer/sharer.php?u=https://srikanth.sastry.name/leader-election-using-loneliness-detection/"
     aria-label="Share on Facebook">
     <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
       class="w-5 h-5">
@@ -265,7 +265,7 @@
   </a>
   <a class="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-2 rounded-full text-white border-slate-600 bg-slate-600 hover:bg-slate-700 hover:border-slate-700"
     target="_blank" rel="noopener"
-    href="https://twitter.com/intent/tweet?url=/leader-election-using-loneliness-detection/&text=Leader Election Using Loneliness Detection"
+    href="https://twitter.com/intent/tweet?url=https://srikanth.sastry.name/leader-election-using-loneliness-detection/&text=Leader Election Using Loneliness Detection"
     aria-label="Share on Twitter">
     <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
       class="w-5 h-5">
@@ -277,7 +277,7 @@
   </a>
   <a class="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-2 rounded-full text-white border-slate-600 bg-slate-600 hover:bg-slate-700 hover:border-slate-700"
     target="_blank" rel="noopener"
-    href="https://www.linkedin.com/shareArticle?mini=true&url=/leader-election-using-loneliness-detection/&title=Leader Election Using Loneliness Detection&summary=Leader Election Using Loneliness Detection&source="
+    href="https://www.linkedin.com/shareArticle?mini=true&url=https://srikanth.sastry.name/leader-election-using-loneliness-detection/&title=Leader Election Using Loneliness Detection&summary=Leader Election Using Loneliness Detection&source=https://srikanth.sastry.name"
     aria-label="Share on Linkedin">
     <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
       class="w-5 h-5">
@@ -289,7 +289,7 @@
   </a>
   <a class="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-2 rounded-full text-white border-slate-600 bg-slate-600 hover:bg-slate-700 hover:border-slate-700"
     target="_blank" rel="noopener"
-    href="https://pinterest.com/pin/create/button/?url=/leader-election-using-loneliness-detection/&media=&description=Leader Election Using Loneliness Detection"
+    href="https://pinterest.com/pin/create/button/?url=https://srikanth.sastry.name/leader-election-using-loneliness-detection/&media=https://srikanth.sastry.name&description=Leader Election Using Loneliness Detection"
     aria-label="Share on Pinterest" draggable="false">
     <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
       class="w-5 h-5">
@@ -301,7 +301,7 @@
   </a>
   <a class="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-2 rounded-full text-white border-slate-600 bg-slate-600 hover:bg-slate-700 hover:border-slate-700"
     target="_blank" rel="noopener"
-    href="https://reddit.com/submit/?url=/leader-election-using-loneliness-detection/&resubmit=true&title=Leader Election Using Loneliness Detection"
+    href="https://reddit.com/submit/?url=https://srikanth.sastry.name/leader-election-using-loneliness-detection/&resubmit=true&title=Leader Election Using Loneliness Detection"
     aria-label="Share on Reddit" draggable="false">
     <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
       class="w-5 h-5">
@@ -313,7 +313,7 @@
   </a>
   <a class="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-2 rounded-full text-white border-slate-600 bg-slate-600 hover:bg-slate-700 hover:border-slate-700"
     target="_blank" rel="noopener"
-    href="https://wa.me/?text=Leader%20Election%20Using%20Loneliness%20Detection%20"
+    href="https://wa.me/?text=Leader%20Election%20Using%20Loneliness%20Detection%20https://srikanth.sastry.name"
     aria-label="Share on Whatsapp" draggable="false">
     <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
       class="w-5 h-5">
@@ -325,7 +325,7 @@
   </a>
   <a class="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-2 rounded-full text-white border-slate-600 bg-slate-600 hover:bg-slate-700 hover:border-slate-700"
     target="_blank" rel="noopener"
-    href="https://telegram.me/share/url?text=Leader%20Election%20Using%20Loneliness%20Detection&url=/leader-election-using-loneliness-detection/"
+    href="https://telegram.me/share/url?text=Leader%20Election%20Using%20Loneliness%20Detection&url=https://srikanth.sastry.name/leader-election-using-loneliness-detection/"
     aria-label="Share on Telegram" draggable="false">
     <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
       class="w-5 h-5">
@@ -337,7 +337,7 @@
   </a>
   <a class="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-2 rounded-full text-white border-slate-600 bg-slate-600 hover:bg-slate-700 hover:border-slate-700"
     target="_blank" rel="noopener"
-    href="mailto:?subject=Leader%20Election%20Using%20Loneliness%20Detection&body=/leader-election-using-loneliness-detection/"
+    href="mailto:?subject=Leader%20Election%20Using%20Loneliness%20Detection&body=https://srikanth.sastry.name/leader-election-using-loneliness-detection/"
     aria-label="Share by Email" draggable="false">
     <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
       class="w-5 h-5">

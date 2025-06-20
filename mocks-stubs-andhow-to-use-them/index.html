@@ -17,17 +17,17 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="Test doubles are the standard mechanism to isolate your System-Under-Test (SUT) from external dependencies in unit tests. Unsurprisingly, it is important to use the right test double for each use case for a maintainable and robust test suite. However, I have seen a lot of misuse of test doubles, and suffered through the consequences of it enough number of times to want to write down some (admittedly subjective) guidelines on when an how to use test doubles." />
 <meta property="og:description" content="Test doubles are the standard mechanism to isolate your System-Under-Test (SUT) from external dependencies in unit tests. Unsurprisingly, it is important to use the right test double for each use case for a maintainable and robust test suite. However, I have seen a lot of misuse of test doubles, and suffered through the consequences of it enough number of times to want to write down some (admittedly subjective) guidelines on when an how to use test doubles." />
-<link rel="canonical" href="/mocks-stubs-andhow-to-use-them/" />
-<meta property="og:url" content="/mocks-stubs-andhow-to-use-them/" />
+<link rel="canonical" href="https://srikanth.sastry.name/mocks-stubs-andhow-to-use-them/" />
+<meta property="og:url" content="https://srikanth.sastry.name/mocks-stubs-andhow-to-use-them/" />
 <meta property="og:site_name" content="Srikanth Sastry" />
-<meta property="og:image" content="/images/masquerade-masks.png" />
+<meta property="og:image" content="https://srikanth.sastry.name/images/masquerade-masks.png" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2022-05-25T00:00:00+00:00" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta property="twitter:image" content="/images/masquerade-masks.png" />
+<meta property="twitter:image" content="https://srikanth.sastry.name/images/masquerade-masks.png" />
 <meta property="twitter:title" content="Mocks, Stubs, and how to use them" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-05-25T00:00:00+00:00","datePublished":"2022-05-25T00:00:00+00:00","description":"Test doubles are the standard mechanism to isolate your System-Under-Test (SUT) from external dependencies in unit tests. Unsurprisingly, it is important to use the right test double for each use case for a maintainable and robust test suite. However, I have seen a lot of misuse of test doubles, and suffered through the consequences of it enough number of times to want to write down some (admittedly subjective) guidelines on when an how to use test doubles.","headline":"Mocks, Stubs, and how to use them","image":"/images/masquerade-masks.png","mainEntityOfPage":{"@type":"WebPage","@id":"/mocks-stubs-andhow-to-use-them/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"/images/site_logo.png"}},"url":"/mocks-stubs-andhow-to-use-them/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-05-25T00:00:00+00:00","datePublished":"2022-05-25T00:00:00+00:00","description":"Test doubles are the standard mechanism to isolate your System-Under-Test (SUT) from external dependencies in unit tests. Unsurprisingly, it is important to use the right test double for each use case for a maintainable and robust test suite. However, I have seen a lot of misuse of test doubles, and suffered through the consequences of it enough number of times to want to write down some (admittedly subjective) guidelines on when an how to use test doubles.","headline":"Mocks, Stubs, and how to use them","image":"https://srikanth.sastry.name/images/masquerade-masks.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://srikanth.sastry.name/mocks-stubs-andhow-to-use-them/"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"https://srikanth.sastry.name/images/site_logo.png"}},"url":"https://srikanth.sastry.name/mocks-stubs-andhow-to-use-them/"}</script>
 <!-- End Jekyll SEO tag -->
  
 </head>
@@ -109,7 +109,7 @@
 <div class="container mx-auto">
   <div id="post" class="prose max-w-[75ch] prose-neutral mx-auto pb-10 pt-20 lg:pt-[90px] lg:pb-20">
     <div class="pb-4">
-      <a href="/category/professional"
+      <a href="https://srikanth.sastry.name/category/professional"
         class="no-underline font-mulish text-sm hover:text-sky-400 text-gray-500">
         PROFESSIONAL
       </a>
@@ -131,7 +131,7 @@
         <div class="sharing-buttons flex  flex-wrap gap-1 justify-center ">
   <a class="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-2 rounded-full text-white border-slate-600 bg-slate-600 hover:bg-slate-700 hover:border-slate-700"
     target="_blank" rel="noopener"
-    href="https://facebook.com/sharer/sharer.php?u=/mocks-stubs-andhow-to-use-them/"
+    href="https://facebook.com/sharer/sharer.php?u=https://srikanth.sastry.name/mocks-stubs-andhow-to-use-them/"
     aria-label="Share on Facebook">
     <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
       class="w-5 h-5">
@@ -143,7 +143,7 @@
   </a>
   <a class="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-2 rounded-full text-white border-slate-600 bg-slate-600 hover:bg-slate-700 hover:border-slate-700"
     target="_blank" rel="noopener"
-    href="https://twitter.com/intent/tweet?url=/mocks-stubs-andhow-to-use-them/&text=Mocks, Stubs, and how to use them"
+    href="https://twitter.com/intent/tweet?url=https://srikanth.sastry.name/mocks-stubs-andhow-to-use-them/&text=Mocks, Stubs, and how to use them"
     aria-label="Share on Twitter">
     <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
       class="w-5 h-5">
@@ -155,7 +155,7 @@
   </a>
   <a class="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-2 rounded-full text-white border-slate-600 bg-slate-600 hover:bg-slate-700 hover:border-slate-700"
     target="_blank" rel="noopener"
-    href="https://www.linkedin.com/shareArticle?mini=true&url=/mocks-stubs-andhow-to-use-them/&title=Mocks, Stubs, and how to use them&summary=Mocks, Stubs, and how to use them&source="
+    href="https://www.linkedin.com/shareArticle?mini=true&url=https://srikanth.sastry.name/mocks-stubs-andhow-to-use-them/&title=Mocks, Stubs, and how to use them&summary=Mocks, Stubs, and how to use them&source=https://srikanth.sastry.name"
     aria-label="Share on Linkedin">
     <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
       class="w-5 h-5">
@@ -167,7 +167,7 @@
   </a>
   <a class="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-2 rounded-full text-white border-slate-600 bg-slate-600 hover:bg-slate-700 hover:border-slate-700"
     target="_blank" rel="noopener"
-    href="https://pinterest.com/pin/create/button/?url=/mocks-stubs-andhow-to-use-them/&media=&description=Mocks, Stubs, and how to use them"
+    href="https://pinterest.com/pin/create/button/?url=https://srikanth.sastry.name/mocks-stubs-andhow-to-use-them/&media=https://srikanth.sastry.name&description=Mocks, Stubs, and how to use them"
     aria-label="Share on Pinterest" draggable="false">
     <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
       class="w-5 h-5">
@@ -179,7 +179,7 @@
   </a>
   <a class="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-2 rounded-full text-white border-slate-600 bg-slate-600 hover:bg-slate-700 hover:border-slate-700"
     target="_blank" rel="noopener"
-    href="https://reddit.com/submit/?url=/mocks-stubs-andhow-to-use-them/&resubmit=true&title=Mocks, Stubs, and how to use them"
+    href="https://reddit.com/submit/?url=https://srikanth.sastry.name/mocks-stubs-andhow-to-use-them/&resubmit=true&title=Mocks, Stubs, and how to use them"
     aria-label="Share on Reddit" draggable="false">
     <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
       class="w-5 h-5">
@@ -191,7 +191,7 @@
   </a>
   <a class="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-2 rounded-full text-white border-slate-600 bg-slate-600 hover:bg-slate-700 hover:border-slate-700"
     target="_blank" rel="noopener"
-    href="https://wa.me/?text=Mocks,%20Stubs,%20and%20how%20to%20use%20them%20"
+    href="https://wa.me/?text=Mocks,%20Stubs,%20and%20how%20to%20use%20them%20https://srikanth.sastry.name"
     aria-label="Share on Whatsapp" draggable="false">
     <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
       class="w-5 h-5">
@@ -203,7 +203,7 @@
   </a>
   <a class="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-2 rounded-full text-white border-slate-600 bg-slate-600 hover:bg-slate-700 hover:border-slate-700"
     target="_blank" rel="noopener"
-    href="https://telegram.me/share/url?text=Mocks,%20Stubs,%20and%20how%20to%20use%20them&url=/mocks-stubs-andhow-to-use-them/"
+    href="https://telegram.me/share/url?text=Mocks,%20Stubs,%20and%20how%20to%20use%20them&url=https://srikanth.sastry.name/mocks-stubs-andhow-to-use-them/"
     aria-label="Share on Telegram" draggable="false">
     <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
       class="w-5 h-5">
@@ -215,7 +215,7 @@
   </a>
   <a class="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-2 rounded-full text-white border-slate-600 bg-slate-600 hover:bg-slate-700 hover:border-slate-700"
     target="_blank" rel="noopener"
-    href="mailto:?subject=Mocks,%20Stubs,%20and%20how%20to%20use%20them&body=/mocks-stubs-andhow-to-use-them/"
+    href="mailto:?subject=Mocks,%20Stubs,%20and%20how%20to%20use%20them&body=https://srikanth.sastry.name/mocks-stubs-andhow-to-use-them/"
     aria-label="Share by Email" draggable="false">
     <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
       class="w-5 h-5">
@@ -377,7 +377,7 @@ Examples where mocks are useful include the SUT logging to a log server, or send
       <div class="sharing-buttons flex  flex-wrap gap-1 justify-center ">
   <a class="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-2 rounded-full text-white border-slate-600 bg-slate-600 hover:bg-slate-700 hover:border-slate-700"
     target="_blank" rel="noopener"
-    href="https://facebook.com/sharer/sharer.php?u=/mocks-stubs-andhow-to-use-them/"
+    href="https://facebook.com/sharer/sharer.php?u=https://srikanth.sastry.name/mocks-stubs-andhow-to-use-them/"
     aria-label="Share on Facebook">
     <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
       class="w-5 h-5">
@@ -389,7 +389,7 @@ Examples where mocks are useful include the SUT logging to a log server, or send
   </a>
   <a class="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-2 rounded-full text-white border-slate-600 bg-slate-600 hover:bg-slate-700 hover:border-slate-700"
     target="_blank" rel="noopener"
-    href="https://twitter.com/intent/tweet?url=/mocks-stubs-andhow-to-use-them/&text=Mocks, Stubs, and how to use them"
+    href="https://twitter.com/intent/tweet?url=https://srikanth.sastry.name/mocks-stubs-andhow-to-use-them/&text=Mocks, Stubs, and how to use them"
     aria-label="Share on Twitter">
     <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
       class="w-5 h-5">
@@ -401,7 +401,7 @@ Examples where mocks are useful include the SUT logging to a log server, or send
   </a>
   <a class="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-2 rounded-full text-white border-slate-600 bg-slate-600 hover:bg-slate-700 hover:border-slate-700"
     target="_blank" rel="noopener"
-    href="https://www.linkedin.com/shareArticle?mini=true&url=/mocks-stubs-andhow-to-use-them/&title=Mocks, Stubs, and how to use them&summary=Mocks, Stubs, and how to use them&source="
+    href="https://www.linkedin.com/shareArticle?mini=true&url=https://srikanth.sastry.name/mocks-stubs-andhow-to-use-them/&title=Mocks, Stubs, and how to use them&summary=Mocks, Stubs, and how to use them&source=https://srikanth.sastry.name"
     aria-label="Share on Linkedin">
     <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
       class="w-5 h-5">
@@ -413,7 +413,7 @@ Examples where mocks are useful include the SUT logging to a log server, or send
   </a>
   <a class="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-2 rounded-full text-white border-slate-600 bg-slate-600 hover:bg-slate-700 hover:border-slate-700"
     target="_blank" rel="noopener"
-    href="https://pinterest.com/pin/create/button/?url=/mocks-stubs-andhow-to-use-them/&media=&description=Mocks, Stubs, and how to use them"
+    href="https://pinterest.com/pin/create/button/?url=https://srikanth.sastry.name/mocks-stubs-andhow-to-use-them/&media=https://srikanth.sastry.name&description=Mocks, Stubs, and how to use them"
     aria-label="Share on Pinterest" draggable="false">
     <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
       class="w-5 h-5">
@@ -425,7 +425,7 @@ Examples where mocks are useful include the SUT logging to a log server, or send
   </a>
   <a class="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-2 rounded-full text-white border-slate-600 bg-slate-600 hover:bg-slate-700 hover:border-slate-700"
     target="_blank" rel="noopener"
-    href="https://reddit.com/submit/?url=/mocks-stubs-andhow-to-use-them/&resubmit=true&title=Mocks, Stubs, and how to use them"
+    href="https://reddit.com/submit/?url=https://srikanth.sastry.name/mocks-stubs-andhow-to-use-them/&resubmit=true&title=Mocks, Stubs, and how to use them"
     aria-label="Share on Reddit" draggable="false">
     <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
       class="w-5 h-5">
@@ -437,7 +437,7 @@ Examples where mocks are useful include the SUT logging to a log server, or send
   </a>
   <a class="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-2 rounded-full text-white border-slate-600 bg-slate-600 hover:bg-slate-700 hover:border-slate-700"
     target="_blank" rel="noopener"
-    href="https://wa.me/?text=Mocks,%20Stubs,%20and%20how%20to%20use%20them%20"
+    href="https://wa.me/?text=Mocks,%20Stubs,%20and%20how%20to%20use%20them%20https://srikanth.sastry.name"
     aria-label="Share on Whatsapp" draggable="false">
     <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
       class="w-5 h-5">
@@ -449,7 +449,7 @@ Examples where mocks are useful include the SUT logging to a log server, or send
   </a>
   <a class="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-2 rounded-full text-white border-slate-600 bg-slate-600 hover:bg-slate-700 hover:border-slate-700"
     target="_blank" rel="noopener"
-    href="https://telegram.me/share/url?text=Mocks,%20Stubs,%20and%20how%20to%20use%20them&url=/mocks-stubs-andhow-to-use-them/"
+    href="https://telegram.me/share/url?text=Mocks,%20Stubs,%20and%20how%20to%20use%20them&url=https://srikanth.sastry.name/mocks-stubs-andhow-to-use-them/"
     aria-label="Share on Telegram" draggable="false">
     <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
       class="w-5 h-5">
@@ -461,7 +461,7 @@ Examples where mocks are useful include the SUT logging to a log server, or send
   </a>
   <a class="border-2 duration-200 ease inline-flex items-center mb-1 mr-1 transition p-2 rounded-full text-white border-slate-600 bg-slate-600 hover:bg-slate-700 hover:border-slate-700"
     target="_blank" rel="noopener"
-    href="mailto:?subject=Mocks,%20Stubs,%20and%20how%20to%20use%20them&body=/mocks-stubs-andhow-to-use-them/"
+    href="mailto:?subject=Mocks,%20Stubs,%20and%20how%20to%20use%20them&body=https://srikanth.sastry.name/mocks-stubs-andhow-to-use-them/"
     aria-label="Share by Email" draggable="false">
     <svg aria-hidden="true" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
       class="w-5 h-5">
