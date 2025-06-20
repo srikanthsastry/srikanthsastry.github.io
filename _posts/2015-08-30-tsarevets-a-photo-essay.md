@@ -9,9 +9,11 @@ permalink: /tsarevets-a-photo-essay/
 fplayout:
     - fullwidth
 categories:
-    - Bulgaria
     - Travel
 format: image
+tags:
+    - Bulgaria
+image: /wp-content/uploads/2015/08/IMG_20150829_110825-e1440950848706.jpg
 ---
 
 <!-- wp:paragraph {"className":"firstHeading"} -->

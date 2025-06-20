@@ -14,10 +14,11 @@ tags:
 excerpt: >
   We all know of the importance of code reuse and DRY code.
   It is important to remember that this applies to code, and not to objects!
+image: /wp-content/uploads/2021/07/pexels-photo-5218009-edited.jpeg
 ---
 
 <!-- wp:image {"id":666} -->
-<figure class="wp-block-image"><img src="https://srikanth.sastry.name/wp-content/uploads/2021/07/pexels-photo-5218009-edited.jpeg" alt="" class="wp-image-666"/></figure>
+<!-- <figure class="wp-block-image"><img src="https://srikanth.sastry.name/wp-content/uploads/2021/07/pexels-photo-5218009-edited.jpeg" alt="" class="wp-image-666"/></figure> -->
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->

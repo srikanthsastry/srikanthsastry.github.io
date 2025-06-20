@@ -11,10 +11,11 @@ categories:
 tags:
     - 'software development process'
     - 'software engineering'
+image: /wp-content/uploads/2019/08/maxresdefault-450x253.jpg
 ---
 
 <!-- wp:image {"id":453} -->
-<figure class="wp-block-image"><img src="https://srikanth.sastry.name/wp-content/uploads/2019/08/maxresdefault-1024x576.jpg" alt="" class="wp-image-453"/><figcaption>Source: https://www.youtube.com/attribution?v=oW2i6QpnmyY</figcaption></figure>
+<!-- <figure class="wp-block-image"><img src="https://srikanth.sastry.name/wp-content/uploads/2019/08/maxresdefault-1024x576.jpg" alt="" class="wp-image-453"/><figcaption>Source: https://www.youtube.com/attribution?v=oW2i6QpnmyY</figcaption></figure> -->
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->

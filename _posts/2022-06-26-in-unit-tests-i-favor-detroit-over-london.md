@@ -10,11 +10,12 @@ tags:
   - "classical school"
   - "mockist school"
 categories:
-  - professional
+  - Professional
 layout: post
 permalink: /in-unit-tests-favor-detroit-over-london/
+image: /images/detroit-wall-frame.jpg
 ...
-![](/images/detroit-wall-frame.jpg)
+<!-- ![](/images/detroit-wall-frame.jpg) -->
 
 [Recall]({%post_url 2022-06-18-defining-unit-tests-two-schools-of-thought %}) the two schools of thought around unit test: Detroit, and London. Briefly, the Detroit school considers a 'unit' of software to be tested as a 'behavior' that consists of one or more classes, and unit tests replace only shared and/or external dependencies with test doubles. In contrast, the London school consider a 'unit' to be a single class, and replaces all dependencies with test doubles. 
 

@@ -4,15 +4,15 @@ title: "Cyclomatic Complexity: How Low Can You Go?"
 date: 2025-06-17
 author: 'Srikanth Sastry'
 categories:
-  - professional
+  - Professional
 tags: 
   - cyclomatic-complexity
   - refactoring
   - best-practices
 permalink: /reduce-cyclomatic-complexity/
+image: /images/cpu-in-maze-pixel-art.png
 ---
 
-![](/images/cpu-in-maze-pixel-art.png)
 ## What even _is_ Cyclomatic Complexity?
 Ever spend 20 minutes trying to figure out why your bug fix or feature code isn't triggering or being executed — only to realize you missed a buried branch in someone’s 10-path function? That’s [Cyclomatic Complexity](https://en.wikipedia.org/wiki/Cyclomatic_complexity) in action. Intuitively, you can think of Cyclomatic Complexity as the number of possible paths a single execution of a function can take. 
 
