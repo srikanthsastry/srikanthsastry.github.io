@@ -21,6 +21,7 @@
 title: Srikanth Sastry
 email: srikanth@sastry.name
 logo: /images/site_logo.png
+favicon: /images/favicon.ico
 description: >- # this means to ignore newlines until "baseurl:"
   This is Srikanth Sastry's personal blog, where I share my thoughts on technology, programming, and life in general. 
   Join me on this journey of exploration and learning.
@@ -38,6 +39,8 @@ contact_channels:
   # stackoverflow: "https://stackoverflow.com/users/16847024/andr%c3%a9s"
   # discord: "https://discord.com/users/673943171369140252"
   # mastodon: "https://lile.cl/@achacon"
+  linkedin: "https://www.linkedin.com/in/srikanthsastry/"
+  threads: "https://www.threads.com/@sri.sastry"
 
 # Build settings
 # theme: minima
