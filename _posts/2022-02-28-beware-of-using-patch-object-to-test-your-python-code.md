@@ -14,8 +14,9 @@ excerpt: >
   Liskov substitution principle states that a class and its subclass must be interchangeable without breaking the program.
   Unfortunately, Python's `patch.object` breaks this principle in a big way. 
   In fact, this can make your tests untrustworthy and become a maintenance headache with failures every time you extended your base class.
+image: /images/software-testing.jpg
 ...
-![Software Testing](/images/software-testing.jpg)
+<!-- ![Software Testing](/images/software-testing.jpg) -->
 
 [Liskov substitution principle](https://en.wikipedia.org/wiki/Liskov_substitution_principle) states that a class and its subclass must be interchangeable without breaking the program. Unfortunately, Python's [`patch.object`](https://docs.python.org/3/library/unittest.mock.html#patch-object) breaks this principle in a big way. In fact, **this can make your tests untrustworthy and become a maintenance headache with failures every time you extended your base class**. Here is a contrived, but concrete example.
 

@@ -7,6 +7,9 @@ layout: page
 guid: 'http://sastry.hcoop.net/srikanthwp/?page_id=60'
 fplayout:
     - default
+nav: true
+footer: true
+permalink: /touchstone-radio-episodes/
 ---
 
 These interviews were conducted by me as a part of a long running radio shorts called "Touchstone Radio" on KEOS 89.1FM in College Station/Bryan area. The dates on these interviews are between 2007 and 2009.

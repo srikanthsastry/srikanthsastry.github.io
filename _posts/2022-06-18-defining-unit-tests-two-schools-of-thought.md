@@ -9,15 +9,16 @@ tags:
   - "detroit school"
   - "london school"
 categories:
-  - professional
+  - Professional
 layout: post
 permalink: /defining-unit-tests-two-schools-of-thought/
 excerpt: >
   A unit test is a piece of code that verifies a "unit" of software, in "isolation", and quickly.
   There are two schools of thought on the notion of "unit" and "isolation", and that makes all the difference.
+image: /images/london-detroit.jpg
 ...
 
-![](/images/london-detroit.jpg)
+<!-- ![](/images/london-detroit.jpg) -->
 
 ## Definitions: What is a unit test?
 

@@ -13,6 +13,7 @@ tags:
     - script
     - software
     - 'software engineering'
+image: /wp-content/uploads/2019/01/bash-logo-672x372.png
 ---
 
 <!-- wp:cover {"url":"http://srikanth.sastry.name/wp-content/uploads/2019/01/bash-logo-672x372.png","id":313} -->

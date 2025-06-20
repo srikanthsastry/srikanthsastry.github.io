@@ -11,6 +11,9 @@ panels_data:
     - 'a:0:{}'
 fplayout:
     - default
+nav: true
+footer: true
+permalink: /publications/
 ---
 
 <h4>Journal Publications</h4>

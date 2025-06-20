@@ -11,10 +11,11 @@ categories:
 tags:
     - 'software development process'
     - 'software engineering'
+image: /wp-content/uploads/2019/08/Are-You-Succeeding-Blog-thegem-blog-default-1024x512.jpg
 ---
 
 <!-- wp:image {"align":"center","id":463} -->
-<div class="wp-block-image"><figure class="aligncenter"><img src="https://srikanth.sastry.name/wp-content/uploads/2019/08/Are-You-Succeeding-Blog-thegem-blog-default-1024x512.jpg" alt="" class="wp-image-463"/><!-- <figcaption>source: http://beaconbusinessmarketing.com/success-vs-survival/</figcaption> --> </figure></div>
+<!-- <div class="wp-block-image"><figure class="aligncenter"><img src="https://srikanth.sastry.name/wp-content/uploads/2019/08/Are-You-Succeeding-Blog-thegem-blog-default-1024x512.jpg" alt="" class="wp-image-463"/><!-- <figcaption>source: http://beaconbusinessmarketing.com/success-vs-survival/</figcaption> --> </figure></div> -->
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->

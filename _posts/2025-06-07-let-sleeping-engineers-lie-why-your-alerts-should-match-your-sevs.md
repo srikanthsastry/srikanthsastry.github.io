@@ -3,15 +3,16 @@ layout: post
 title: "Let Sleeping Engineers Lie: Why Your Alerts Should Match Your SEVs"
 date: 2025-06-07
 categories:
-  - professional
+  - Professional
 tags:
   - alerts
   - monitoring
   - SEV
 author: Srikanth Sastry
 permalink: /sync-your-alerts-to-your-sev-criteria/
+image: /images/sleepy-engineer-cursing-laptop.png
 ...
-![](/images/sleepy-engineer-cursing-laptop.png)
+<!-- ![](/images/sleepy-engineer-cursing-laptop.png) -->
 At work, I had a customer team that aspired to be *“customer first.”* To them, that meant fixing issues *before* they became SEVs. That was all and good, except that the way they went about it was to fire alerts well *before* their SLOs were close to being breached. Of course, I knew nothing about it until I was the receiving end of their 'aspiration'.
 
 

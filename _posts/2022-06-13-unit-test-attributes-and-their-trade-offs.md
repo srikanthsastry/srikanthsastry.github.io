@@ -6,15 +6,16 @@ tags:
   - "unit tests"
   - "software engineering"
 categories:
-  - professional
+  - Professional
 layout: post
 permalink: /unit-test-attributes-and-their-trade-offs/
 excerpt: >
   Unit test suites have three attributes: accuracy, completeness, and speed. 
   You can maximize any two, but not all three. 
   So how do you choose what to maximize?
+image: /images/accuracy-completeness-speed.png
 ...
-![](/images/accuracy-completeness-speed.png)
+<!-- ![](/images/accuracy-completeness-speed.png) -->
 Unit test suites have three primary attributes.
 
 1. accuracy, 

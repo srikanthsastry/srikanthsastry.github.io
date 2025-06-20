@@ -3,16 +3,17 @@ title: "TDD for Bug Fixes"
 date: 2025-06-11
 layout: post
 categories: 
-  - professional
+  - Professional
 tags:
   - test driven development
   - tdd
   - bug fixing
   - testing
 permalink: /tdd-for-bug-fixes/
+image: /images/bug-stabbing-software-engineer-in-the-back.png
 ...
 
-![](/images/bug-stabbing-software-engineer-in-the-back.png)
+<!-- ![](/images/bug-stabbing-software-engineer-in-the-back.png) -->
 
 I have seen way too many 'senior' engineers get bug fixing wrong. It is common to see an engineer sent a pull request titled "bug fix: <something>" and the PR has changes to the functional code that fixes the bug and a correspond test case that shows that the bug is fixed. If that sounds reasonable, THINK AGAIN — you’ve walked right into the classic trap! 
 

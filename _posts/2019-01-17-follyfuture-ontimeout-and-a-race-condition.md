@@ -11,10 +11,11 @@ categories:
 tags:
     - c++
     - 'software engineering'
+image: /wp-content/uploads/2019/01/C-programming-in-a-nutshell-Imgur-450x450.png
 ---
 
 <!-- wp:image {"id":365,"align":"center","width":338,"height":338} -->
-<div class="wp-block-image"><figure class="aligncenter is-resized"><img src="http://srikanth.sastry.name/wp-content/uploads/2019/01/C-programming-in-a-nutshell-Imgur-450x450.png" alt="" class="wp-image-365" width="338" height="338"/></figure></div>
+<!-- <div class="wp-block-image"><figure class="aligncenter is-resized"><img src="http://srikanth.sastry.name/wp-content/uploads/2019/01/C-programming-in-a-nutshell-Imgur-450x450.png" alt="" class="wp-image-365" width="338" height="338"/></figure></div> -->
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->

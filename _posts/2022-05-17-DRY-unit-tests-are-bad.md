@@ -11,9 +11,9 @@ permalink: /dry-unit-tests-are-bad/
 layout: post
 excerpt: >
   Simplicity should be a core property of unit tests. This is motivated, both by arguments in this post against DRY unit tests, and by software maintainability as the primary motivation for unit tests. Unit tests should be as simple as reasonable. It should be easy to ready, understand, and modify (it should be easy to modify any single test in isolation). It is perfectly acceptable for this simplicity to come at the expense of code-reuse, performance, and efficiency.
-
+image: /images/squeeze-cloth.jpg
 ...
-![DRY](/images/squeeze-cloth.jpg)
+<!-- ![DRY](/images/squeeze-cloth.jpg) -->
 
 ["Don't Repeat Yourself" (DRY)](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) is arguably one of the most important principles in software engineering. It is considered a truism among many. A consequence of such dogmatic allegiance to DRYness is that we see a lot of DRY unit tests; this is where the utility of the DRY principle breaks downs and starts causing more problems that it solves.
 
