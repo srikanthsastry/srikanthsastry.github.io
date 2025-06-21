@@ -267,19 +267,19 @@
 <p>First, you create a PR that demonstrates the bug by invoking your SUT with the offending input, and sets the expected value to be <em>incorrect</em> so that the test case actually <em>passes</em> with this incorrect value; thus demonstrating the bug.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">TestSUT</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
-    <span class="p">...</span>
-    <span class="k">def</span> <span class="nf">test_bug_b12345</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="s">'''
+    <span class="bp">...</span>
+    <span class="k">def</span> <span class="nf">test_bug_b12345</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="sh">'''</span><span class="s">
         Test to expose bug b12345
-        '''</span>
+        </span><span class="sh">'''</span>
         <span class="c1"># Arrange
-</span>        <span class="n">sut</span> <span class="o">=</span> <span class="n">SUT</span><span class="p">(...)</span>
+</span>        <span class="n">sut</span> <span class="o">=</span> <span class="nc">SUT</span><span class="p">(...)</span>
         
         <span class="c1"># Act
-</span>        <span class="n">actual</span> <span class="o">=</span> <span class="n">sut</span><span class="p">.</span><span class="n">test_method</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="s">"bad-input"</span><span class="p">)</span>
+</span>        <span class="n">actual</span> <span class="o">=</span> <span class="n">sut</span><span class="p">.</span><span class="nf">test_method</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="sh">"</span><span class="s">bad-input</span><span class="sh">"</span><span class="p">)</span>
 
         <span class="c1"># Assert
-</span>        <span class="bp">self</span><span class="p">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">actual</span><span class="p">,</span> <span class="s">"bad buggy output"</span><span class="p">)</span>
+</span>        <span class="n">self</span><span class="p">.</span><span class="nf">assertEqual</span><span class="p">(</span><span class="n">actual</span><span class="p">,</span> <span class="sh">"</span><span class="s">bad buggy output</span><span class="sh">"</span><span class="p">)</span>
         <span class="c1"># The assertion above demonstartes the bug b12345
 </span>        <span class="c1"># The right expected value should be "correct output".
 </span>        <span class="c1"># self.assertEqual(actual, "correct output")
@@ -298,8 +298,8 @@
         
         # Act
         actual = sut.test_method(input="bad-input")
-
-        # Assert
+<span class="err">
+</span>        # Assert
 <span class="gd">-       self.assertEqual(actual, "bad buggy output")
 -       # The assertion above demonstartes the bug b12345
 -       # The right expected value should be "correct output".

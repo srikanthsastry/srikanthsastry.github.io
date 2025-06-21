@@ -250,20 +250,20 @@
 <h2 id="time-to-hit-the-brain-gym-bro">Time to hit the brain gym, bro</h2>
 <p>As an exercise, I will let you figure out the cyclomatic complexity of the following piece of code:</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">env_val</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="s">'...'</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">env_val</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="sh">'</span><span class="s">...</span><span class="sh">'</span><span class="p">)</span>
 <span class="n">switcher_val</span> <span class="o">=</span> <span class="bp">False</span>
 <span class="k">if</span> <span class="n">env_val</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
     <span class="n">jk_val</span> <span class="o">=</span> <span class="bp">True</span>
-    <span class="k">if</span> <span class="n">env_val</span><span class="p">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">is</span> <span class="ow">in</span> <span class="p">[</span><span class="s">"true"</span><span class="p">,</span> <span class="s">"1"</span><span class="p">,</span> <span class="s">"yes"</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="n">env_val</span><span class="p">.</span><span class="nf">lower</span><span class="p">()</span> <span class="ow">is</span> <span class="ow">in</span> <span class="p">[</span><span class="sh">"</span><span class="s">true</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">1</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">yes</span><span class="sh">"</span><span class="p">]:</span>
         <span class="n">env_val</span> <span class="o">=</span> <span class="bp">True</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">env_val</span> <span class="o">=</span> <span class="bp">False</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="n">env_val</span> <span class="o">=</span> <span class="bp">True</span>
-    <span class="n">switch_name</span> <span class="o">=</span> <span class="s">"/switch/name/from/config"</span>
-    <span class="n">switcher_val</span> <span class="o">=</span> <span class="n">switcher</span><span class="p">.</span><span class="n">check</span><span class="p">(</span><span class="n">switch_name</span><span class="p">,</span> <span class="n">switchval</span><span class="o">=</span><span class="n">region</span><span class="p">)</span>
+    <span class="n">switch_name</span> <span class="o">=</span> <span class="sh">"</span><span class="s">/switch/name/from/config</span><span class="sh">"</span>
+    <span class="n">switcher_val</span> <span class="o">=</span> <span class="n">switcher</span><span class="p">.</span><span class="nf">check</span><span class="p">(</span><span class="n">switch_name</span><span class="p">,</span> <span class="n">switchval</span><span class="o">=</span><span class="n">region</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">env_val</span> <span class="ow">or</span> <span class="n">switcher_val</span><span class="p">:</span>
-    <span class="n">apply_some_config</span><span class="p">(</span><span class="n">job</span><span class="p">)</span>
+    <span class="nf">apply_some_config</span><span class="p">(</span><span class="n">job</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>I’ll wait… (Spoiler: It’s not pretty.)</p>
@@ -286,17 +286,17 @@
 <p>In the end, here’s what that poor little code snippet was trying to do:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Apply config when '...' environment variable is True, else check the switch
-</span><span class="n">__ENV_VARIABLE</span> <span class="o">=</span> <span class="s">'...'</span>
-<span class="n">__SWITCHER_KEY</span> <span class="o">=</span> <span class="s">'/switch/name/from/config'</span>
+</span><span class="n">__ENV_VARIABLE</span> <span class="o">=</span> <span class="sh">'</span><span class="s">...</span><span class="sh">'</span>
+<span class="n">__SWITCHER_KEY</span> <span class="o">=</span> <span class="sh">'</span><span class="s">/switch/name/from/config</span><span class="sh">'</span>
 <span class="k">def</span> <span class="nf">has_env_override</span><span class="p">():</span>
-    <span class="n">val</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">__ENV_VARIABLE</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">val</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">val</span><span class="p">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">{</span><span class="s">"true"</span><span class="p">,</span> <span class="s">"1"</span><span class="p">,</span> <span class="s">"yes"</span><span class="p">}</span>
+    <span class="n">val</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">environ</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">__ENV_VARIABLE</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">val</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">val</span><span class="p">.</span><span class="nf">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">{</span><span class="sh">"</span><span class="s">true</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">1</span><span class="sh">"</span><span class="p">,</span> <span class="sh">"</span><span class="s">yes</span><span class="sh">"</span><span class="p">}</span>
 
-<span class="k">if</span> <span class="p">(</span>
-    <span class="n">has_env_override</span><span class="p">()</span> <span class="ow">or</span> 
-    <span class="n">switcher</span><span class="p">.</span><span class="n">check</span><span class="p">(</span><span class="n">__SWITCHER_KEY</span><span class="p">,</span> <span class="n">switchval</span><span class="o">=</span><span class="n">region</span><span class="p">)</span>
+<span class="nf">if </span><span class="p">(</span>
+    <span class="nf">has_env_override</span><span class="p">()</span> <span class="ow">or</span> 
+    <span class="n">switcher</span><span class="p">.</span><span class="nf">check</span><span class="p">(</span><span class="n">__SWITCHER_KEY</span><span class="p">,</span> <span class="n">switchval</span><span class="o">=</span><span class="n">region</span><span class="p">)</span>
 <span class="p">):</span>
-    <span class="n">apply_some_config</span><span class="p">(</span><span class="n">job</span><span class="p">)</span>
+    <span class="nf">apply_some_config</span><span class="p">(</span><span class="n">job</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>Fewer paths, fewer bugs. Cleaner code. Happier teammates. What’s not to love?</p>

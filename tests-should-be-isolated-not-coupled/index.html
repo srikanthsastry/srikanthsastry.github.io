@@ -257,68 +257,68 @@
 <p>Say, your SUT has a dependency called <code class="language-plaintext highlighter-rouge">Helper</code>, and initially, for the two tests in your unit tests for the SUT, you initialize your <code class="language-plaintext highlighter-rouge">Helper</code> stub with contents <code class="language-plaintext highlighter-rouge">valueA</code>, and <code class="language-plaintext highlighter-rouge">valueB</code>. Since both tests share the same initial state, you include the initialization code in the <code class="language-plaintext highlighter-rouge">SetUp</code> of the unit tests.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">SUTTestCase</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">helper</span> <span class="o">=</span> <span class="n">StubHelper</span><span class="p">()</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">helper</span><span class="p">.</span><span class="n">add_contents</span><span class="p">([</span><span class="n">valueA</span><span class="p">,</span> <span class="n">valueB</span><span class="p">])</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">sut</span> <span class="o">=</span> <span class="n">SUT</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">helper</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">helper</span> <span class="o">=</span> <span class="nc">StubHelper</span><span class="p">()</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">helper</span><span class="p">.</span><span class="nf">add_contents</span><span class="p">([</span><span class="n">valueA</span><span class="p">,</span> <span class="n">valueB</span><span class="p">])</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">sut</span> <span class="o">=</span> <span class="nc">SUT</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">helper</span><span class="p">)</span>
         
-    <span class="k">def</span> <span class="nf">test_behavior1</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">test_behavior1</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
         <span class="p">...</span>  <span class="c1"># Assumes self.helper set with contents=[valueA, valueB]
 </span>    
-    <span class="k">def</span> <span class="nf">test_behavior2</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">test_behavior2</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
         <span class="p">...</span>  <span class="c1"># Assumes self.helper set with contents=[valueA, valueB]
 </span></code></pre></div></div>
 
 <p>Next, you modify SUT to add features to it. In order to test those features, the <code class="language-plaintext highlighter-rouge">Helper</code> stub needs to include <code class="language-plaintext highlighter-rouge">controllerA</code>. But these are useful only in the new tests being added. However, looking at the unit test you already have, it is easiest to to simply add <code class="language-plaintext highlighter-rouge">controllerA</code> to <code class="language-plaintext highlighter-rouge">self.helper</code>. So, your unit tests look as follows:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">SUTTestCase</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">helper</span> <span class="o">=</span> <span class="n">StubHelper</span><span class="p">()</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">helper</span><span class="p">.</span><span class="n">add_contents</span><span class="p">([</span><span class="n">valueA</span><span class="p">,</span> <span class="n">valueB</span><span class="p">])</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">helper</span><span class="p">.</span><span class="n">add_controller</span><span class="p">(</span><span class="n">controllerA</span><span class="p">)</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">sut</span> <span class="o">=</span> <span class="n">SUT</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">helper</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">helper</span> <span class="o">=</span> <span class="nc">StubHelper</span><span class="p">()</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">helper</span><span class="p">.</span><span class="nf">add_contents</span><span class="p">([</span><span class="n">valueA</span><span class="p">,</span> <span class="n">valueB</span><span class="p">])</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">helper</span><span class="p">.</span><span class="nf">add_controller</span><span class="p">(</span><span class="n">controllerA</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">sut</span> <span class="o">=</span> <span class="nc">SUT</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">helper</span><span class="p">)</span>
         
-    <span class="k">def</span> <span class="nf">test_behavior1</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">test_behavior1</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
         <span class="p">...</span>  <span class="c1"># Assumes self.helper set with contents=[valueA, valueB]
 </span>             <span class="c1"># But this test assumes nothing about self.helper's controller
 </span>
-    <span class="k">def</span> <span class="nf">test_behavior2</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">test_behavior2</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
         <span class="p">...</span>  <span class="c1"># Assumes self.helper set with contents=[valueA, valueB]
 </span>             <span class="c1"># But this test assumes nothing about self.helper's controller
 </span>
-    <span class="k">def</span> <span class="nf">test_behavior3</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">test_behavior3</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
         <span class="p">...</span>  <span class="c1"># Assumes self.helper set with contents=[valueA, valueB], and controller=controllerA
 </span>
-    <span class="k">def</span> <span class="nf">test_behavior4</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">test_behavior4</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
         <span class="p">...</span>  <span class="c1"># Assumes self.helper set with contents=[valueA, valueB], and controller=controllerA
 </span></code></pre></div></div>
 
 <p>Then you discover a gap in testing that requires the initial state of the <code class="language-plaintext highlighter-rouge">Helper</code> stub to have just the content <code class="language-plaintext highlighter-rouge">valueA</code> and include <code class="language-plaintext highlighter-rouge">controllerA</code>. Now, when adding this new unit test to suite, the simplest way to do this would be to remove <code class="language-plaintext highlighter-rouge">valueB</code> from <code class="language-plaintext highlighter-rouge">self.helper</code> at the start of the new test. So, now, your test suite looks as follows:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">SUTTestCase</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">helper</span> <span class="o">=</span> <span class="n">StubHelper</span><span class="p">()</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">helper</span><span class="p">.</span><span class="n">add_contents</span><span class="p">([</span><span class="n">valueA</span><span class="p">,</span> <span class="n">valueB</span><span class="p">])</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">helper</span><span class="p">.</span><span class="n">add_controller</span><span class="p">(</span><span class="n">controllerA</span><span class="p">)</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">sut</span> <span class="o">=</span> <span class="n">SUT</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">helper</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">helper</span> <span class="o">=</span> <span class="nc">StubHelper</span><span class="p">()</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">helper</span><span class="p">.</span><span class="nf">add_contents</span><span class="p">([</span><span class="n">valueA</span><span class="p">,</span> <span class="n">valueB</span><span class="p">])</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">helper</span><span class="p">.</span><span class="nf">add_controller</span><span class="p">(</span><span class="n">controllerA</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">sut</span> <span class="o">=</span> <span class="nc">SUT</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">helper</span><span class="p">)</span>
         
-    <span class="k">def</span> <span class="nf">test_behavior1</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">test_behavior1</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
         <span class="p">...</span>  <span class="c1"># Assumes self.helper set with contents=[valueA, valueB]
 </span>             <span class="c1"># But this test assumes nothing about self.helper's controller
 </span>
-    <span class="k">def</span> <span class="nf">test_behavior2</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">test_behavior2</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
         <span class="p">...</span>  <span class="c1"># Assumes self.helper set with contents=[valueA, valueB]
 </span>             <span class="c1"># But this test assumes nothing about self.helper's controller
 </span>
-    <span class="k">def</span> <span class="nf">test_behavior3</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">test_behavior3</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
         <span class="p">...</span>  <span class="c1"># Assumes self.helper set with contents=[valueA, valueB], and controller=controllerA
 </span>
-    <span class="k">def</span> <span class="nf">test_behavior4</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">test_behavior4</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
         <span class="p">...</span>  <span class="c1"># Assumes self.helper set with contents=[valueA, valueB], and controller=controllerA
 </span>
-    <span class="k">def</span> <span class="nf">test_behavior5</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">test_behavior5</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
         <span class="c1"># Assumes self.helper set with contents=[valueA, valueB] (because of other tests' setup)
-</span>        <span class="bp">self</span><span class="p">.</span><span class="n">helper</span><span class="p">.</span><span class="n">remove_content</span><span class="p">(</span><span class="n">valueB</span><span class="p">)</span>
+</span>        <span class="n">self</span><span class="p">.</span><span class="n">helper</span><span class="p">.</span><span class="nf">remove_content</span><span class="p">(</span><span class="n">valueB</span><span class="p">)</span>
         <span class="c1"># Now assumes self.helper set with contents=[valueA]
 </span>        <span class="p">...</span>  
 </code></pre></div></div>
@@ -334,40 +334,40 @@
 <p>Use the <code class="language-plaintext highlighter-rouge">setUp</code> method to simply set up your dependencies, but not to enforce any precondition. Instead, make setting preconditions part of the <em>arrange</em> step of each unit test. You can even encapsulate the precondition setting into a function (with the right parameters) so that the <em>arrange</em> section does not get too bloated, and yet the test code is readable. Consider the following refactoring of the tests:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">SUTTestCase</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">helper</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">StubHelper</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">sut</span> <span class="o">=</span> <span class="n">SUT</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">helper</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">helper</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">StubHelper</span><span class="p">]</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">sut</span> <span class="o">=</span> <span class="nc">SUT</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">helper</span><span class="p">)</span>
         
-    <span class="k">def</span> <span class="nf">prepare_helper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">contents</span><span class="p">:</span><span class="n">List</span><span class="p">[</span><span class="n">Value</span><span class="p">],</span> <span class="n">controller</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Controller</span><span class="p">]</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">helper</span> <span class="o">=</span> <span class="n">StubHelper</span><span class="p">()</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">helper</span><span class="p">.</span><span class="n">add_contents</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">prepare_helper</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">contents</span><span class="p">:</span><span class="n">List</span><span class="p">[</span><span class="n">Value</span><span class="p">],</span> <span class="n">controller</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Controller</span><span class="p">]</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">helper</span> <span class="o">=</span> <span class="nc">StubHelper</span><span class="p">()</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">helper</span><span class="p">.</span><span class="nf">add_contents</span><span class="p">(</span><span class="n">contents</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">controller</span><span class="p">:</span>
-            <span class="bp">self</span><span class="p">.</span><span class="n">helper</span><span class="p">.</span><span class="n">add_controller</span><span class="p">(</span><span class="n">controller</span><span class="p">)</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">helper</span><span class="p">.</span><span class="nf">add_controller</span><span class="p">(</span><span class="n">controller</span><span class="p">)</span>
         
-    <span class="k">def</span> <span class="nf">test_behavior1</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">test_behavior1</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
         <span class="c1"># Assumes self.helper is a fresh object.
-</span>        <span class="bp">self</span><span class="p">.</span><span class="n">prepare_helper</span><span class="p">(</span><span class="n">contents</span><span class="o">=</span><span class="p">[</span><span class="n">valueA</span><span class="p">,</span> <span class="n">valueB</span><span class="p">])</span>
-        <span class="p">...</span>
+</span>        <span class="n">self</span><span class="p">.</span><span class="nf">prepare_helper</span><span class="p">(</span><span class="n">contents</span><span class="o">=</span><span class="p">[</span><span class="n">valueA</span><span class="p">,</span> <span class="n">valueB</span><span class="p">])</span>
+        <span class="bp">...</span>
 
-    <span class="k">def</span> <span class="nf">test_behavior2</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">test_behavior2</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
         <span class="c1"># Assumes self.helper is a fresh object.
-</span>        <span class="bp">self</span><span class="p">.</span><span class="n">prepare_helper</span><span class="p">(</span><span class="n">contents</span><span class="o">=</span><span class="p">[</span><span class="n">valueA</span><span class="p">,</span> <span class="n">valueB</span><span class="p">])</span>
+</span>        <span class="n">self</span><span class="p">.</span><span class="nf">prepare_helper</span><span class="p">(</span><span class="n">contents</span><span class="o">=</span><span class="p">[</span><span class="n">valueA</span><span class="p">,</span> <span class="n">valueB</span><span class="p">])</span>
         <span class="p">...</span>    
 
-    <span class="k">def</span> <span class="nf">test_behavior3</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">test_behavior3</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
         <span class="c1"># Assumes self.helper is a fresh object.
-</span>        <span class="bp">self</span><span class="p">.</span><span class="n">prepare_helper</span><span class="p">(</span><span class="n">contents</span><span class="o">=</span><span class="p">[</span><span class="n">valueA</span><span class="p">,</span> <span class="n">valueB</span><span class="p">],</span> <span class="n">controller</span><span class="o">=</span><span class="n">controllerA</span><span class="p">)</span>
-        <span class="p">...</span>
+</span>        <span class="n">self</span><span class="p">.</span><span class="nf">prepare_helper</span><span class="p">(</span><span class="n">contents</span><span class="o">=</span><span class="p">[</span><span class="n">valueA</span><span class="p">,</span> <span class="n">valueB</span><span class="p">],</span> <span class="n">controller</span><span class="o">=</span><span class="n">controllerA</span><span class="p">)</span>
+        <span class="bp">...</span>
 
-    <span class="k">def</span> <span class="nf">test_behavior4</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">test_behavior4</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
         <span class="c1"># Assumes self.helper is a fresh object.
-</span>        <span class="bp">self</span><span class="p">.</span><span class="n">prepare_helper</span><span class="p">(</span><span class="n">contents</span><span class="o">=</span><span class="p">[</span><span class="n">valueA</span><span class="p">,</span> <span class="n">valueB</span><span class="p">],</span> <span class="n">controller</span><span class="o">=</span><span class="n">controllerA</span><span class="p">)</span>
-        <span class="p">...</span>
+</span>        <span class="n">self</span><span class="p">.</span><span class="nf">prepare_helper</span><span class="p">(</span><span class="n">contents</span><span class="o">=</span><span class="p">[</span><span class="n">valueA</span><span class="p">,</span> <span class="n">valueB</span><span class="p">],</span> <span class="n">controller</span><span class="o">=</span><span class="n">controllerA</span><span class="p">)</span>
+        <span class="bp">...</span>
 
-    <span class="k">def</span> <span class="nf">test_behavior5</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">test_behavior5</span><span class="p">(</span><span class="n">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
         <span class="c1"># Assumes self.helper is a fresh object.
-</span>        <span class="bp">self</span><span class="p">.</span><span class="n">prepare_helper</span><span class="p">(</span><span class="n">contents</span><span class="o">=</span><span class="p">[</span><span class="n">valueA</span><span class="p">],</span> <span class="n">controller</span><span class="o">=</span><span class="n">controllerA</span><span class="p">)</span>
-        <span class="p">...</span>
+</span>        <span class="n">self</span><span class="p">.</span><span class="nf">prepare_helper</span><span class="p">(</span><span class="n">contents</span><span class="o">=</span><span class="p">[</span><span class="n">valueA</span><span class="p">],</span> <span class="n">controller</span><span class="o">=</span><span class="n">controllerA</span><span class="p">)</span>
+        <span class="bp">...</span>
 </code></pre></div></div>
 
 <h2 id="coupling-in-parameterized-tests">Coupling in parameterized tests</h2>
@@ -378,24 +378,24 @@
     <span class="n">status</span><span class="p">:</span> <span class="n">StatusEnum</span>
     <span class="n">return_value</span><span class="p">:</span> <span class="n">typing</span><span class="p">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>
     <span class="n">exception</span><span class="p">:</span> <span class="n">typing</span><span class="p">.</span><span class="n">Optional</span><span class="p">[</span><span class="nb">Exception</span><span class="p">]</span>
-    <span class="p">...</span>
+    <span class="bp">...</span>
 
 <span class="k">class</span> <span class="nc">TestSequence</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
   
-    <span class="o">@</span><span class="n">parameterized</span><span class="p">.</span><span class="n">expand</span><span class="p">([</span>
+    <span class="nd">@parameterized.expand</span><span class="p">([</span>
         <span class="p">[</span><span class="n">test_input1</span><span class="p">,</span> <span class="n">expected_output1</span><span class="p">],</span>
         <span class="p">[</span><span class="n">test_input2</span><span class="p">,</span> <span class="n">expected_output2</span><span class="p">],</span>
-        <span class="p">...</span>
+        <span class="bp">...</span>
     <span class="p">])</span>
-    <span class="k">def</span> <span class="nf">test_something</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">test_input</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">expected_output</span><span class="p">:</span> <span class="n">TestOutput</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">_run_test</span><span class="p">(</span><span class="n">test_input</span><span class="p">,</span> <span class="n">expected_output</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">test_something</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">test_input</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">expected_output</span><span class="p">:</span> <span class="n">TestOutput</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">self</span><span class="p">.</span><span class="nf">_run_test</span><span class="p">(</span><span class="n">test_input</span><span class="p">,</span> <span class="n">expected_output</span><span class="p">)</span>
     
-    <span class="k">def</span> <span class="nf">_run_test</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">test_input</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">expected_output</span><span class="p">:</span> <span class="n">TestOutput</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">sut</span> <span class="o">=</span> <span class="n">SUT</span><span class="p">(...)</span>
-        <span class="n">prepare_sut_for_tests</span><span class="p">(</span><span class="n">sut</span><span class="p">,</span> <span class="n">test_input</span><span class="p">)</span>
-        <span class="n">output</span> <span class="o">=</span> <span class="n">sut</span><span class="p">.</span><span class="n">do_something</span><span class="p">(</span><span class="n">test_input</span><span class="p">)</span>
-        <span class="n">test_output</span> <span class="o">=</span> <span class="n">make_test_output</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">sut</span><span class="p">)</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">expected_output</span><span class="p">,</span> <span class="n">test_output</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">_run_test</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">test_input</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">expected_output</span><span class="p">:</span> <span class="n">TestOutput</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">sut</span> <span class="o">=</span> <span class="nc">SUT</span><span class="p">(...)</span>
+        <span class="nf">prepare_sut_for_tests</span><span class="p">(</span><span class="n">sut</span><span class="p">,</span> <span class="n">test_input</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">sut</span><span class="p">.</span><span class="nf">do_something</span><span class="p">(</span><span class="n">test_input</span><span class="p">)</span>
+        <span class="n">test_output</span> <span class="o">=</span> <span class="nf">make_test_output</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">sut</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="nf">assertEquals</span><span class="p">(</span><span class="n">expected_output</span><span class="p">,</span> <span class="n">test_output</span><span class="p">)</span>
 
 </code></pre></div></div>
 
@@ -406,71 +406,71 @@
 <p>There are some fairly straightforward ways to decouple such tests. First, is that we should be very conservative about how we organize these tests. For example, we can group all positive tests and group all negative tests separately; similarly, we can further subgroup the tests based on the type of assertions on the output. In the above example, we can have three subgroups: positive tests that verify only output status, positive tests that verify return value, and negative tests that verify exception. Thus you now have three parameterized test classes that look something like this:</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">TestDoSomething</span><span class="p">(</span><span class="n">unittest</span><span class="p">.</span><span class="n">TestCase</span><span class="p">):</span>
   
-    <span class="o">@</span><span class="n">parameterized</span><span class="p">.</span><span class="n">expand</span><span class="p">([</span>
+    <span class="nd">@parameterized.expand</span><span class="p">([</span>
         <span class="p">[</span><span class="n">test_status_input1</span><span class="p">,</span> <span class="n">expected_status_output1</span><span class="p">],</span>
         <span class="p">[</span><span class="n">test_status_input2</span><span class="p">,</span> <span class="n">expected_status_output2</span><span class="p">],</span>
-        <span class="p">...</span>
+        <span class="bp">...</span>
     <span class="p">])</span>
     <span class="k">def</span> <span class="nf">test_something_status_only</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> 
+        <span class="n">self</span><span class="p">,</span> 
         <span class="n">test_input</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> 
         <span class="n">expected_output</span><span class="p">:</span> <span class="n">StatusEnum</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
         <span class="c1"># Arrange
-</span>        <span class="n">sut</span> <span class="o">=</span> <span class="n">SUT</span><span class="p">(...)</span>
+</span>        <span class="n">sut</span> <span class="o">=</span> <span class="nc">SUT</span><span class="p">(...)</span>
         <span class="p">...</span>  <span class="c1"># More 'arrange' code
 </span>        
         <span class="c1"># Act
-</span>        <span class="n">output</span> <span class="o">=</span> <span class="n">sut</span><span class="p">.</span><span class="n">do_something</span><span class="p">(</span><span class="n">test_input</span><span class="p">)</span>
+</span>        <span class="n">output</span> <span class="o">=</span> <span class="n">sut</span><span class="p">.</span><span class="nf">do_something</span><span class="p">(</span><span class="n">test_input</span><span class="p">)</span>
         <span class="n">output_status</span> <span class="o">=</span> <span class="n">output</span><span class="p">.</span><span class="n">status</span>
         
         <span class="c1"># Assert
-</span>        <span class="bp">self</span><span class="p">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">expected_output</span><span class="p">,</span> <span class="n">output_status</span><span class="p">)</span>
+</span>        <span class="n">self</span><span class="p">.</span><span class="nf">assertEquals</span><span class="p">(</span><span class="n">expected_output</span><span class="p">,</span> <span class="n">output_status</span><span class="p">)</span>
         
-    <span class="o">@</span><span class="n">parameterized</span><span class="p">.</span><span class="n">expand</span><span class="p">([</span>
+    <span class="nd">@parameterized.expand</span><span class="p">([</span>
         <span class="p">[</span><span class="n">test_return_value_input1</span><span class="p">,</span> <span class="n">expected_return_value_output1</span><span class="p">],</span>
         <span class="p">[</span><span class="n">test_return_value_input2</span><span class="p">,</span> <span class="n">expected_return_value_output2</span><span class="p">],</span>
-        <span class="p">...</span>
+        <span class="bp">...</span>
     <span class="p">])</span>
     <span class="k">def</span> <span class="nf">test_something_return_value_only</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> 
+        <span class="n">self</span><span class="p">,</span> 
         <span class="n">test_input</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> 
         <span class="n">expected_output</span><span class="p">:</span> <span class="nb">int</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
         <span class="c1"># Arrange
-</span>        <span class="n">sut</span> <span class="o">=</span> <span class="n">SUT</span><span class="p">(...)</span>
+</span>        <span class="n">sut</span> <span class="o">=</span> <span class="nc">SUT</span><span class="p">(...)</span>
         <span class="p">...</span>  <span class="c1"># More 'arrange' code
 </span>        
         <span class="c1"># Act
-</span>        <span class="n">output</span> <span class="o">=</span> <span class="n">sut</span><span class="p">.</span><span class="n">do_something</span><span class="p">(</span><span class="n">test_input</span><span class="p">)</span>
+</span>        <span class="n">output</span> <span class="o">=</span> <span class="n">sut</span><span class="p">.</span><span class="nf">do_something</span><span class="p">(</span><span class="n">test_input</span><span class="p">)</span>
         <span class="n">output_status</span> <span class="o">=</span> <span class="n">output</span><span class="p">.</span><span class="n">status</span>
         <span class="n">output_value</span> <span class="o">=</span> <span class="n">output</span><span class="p">.</span><span class="n">value</span>
         
         <span class="c1"># Assert
-</span>        <span class="bp">self</span><span class="p">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">SomeEnum</span><span class="p">.</span><span class="n">SUCCESS</span><span class="p">,</span> <span class="n">output_status</span><span class="p">)</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">expected_output</span><span class="p">,</span> <span class="n">output_value</span><span class="p">)</span>
+</span>        <span class="n">self</span><span class="p">.</span><span class="nf">assertEquals</span><span class="p">(</span><span class="n">SomeEnum</span><span class="p">.</span><span class="n">SUCCESS</span><span class="p">,</span> <span class="n">output_status</span><span class="p">)</span>
+        <span class="n">self</span><span class="p">.</span><span class="nf">assertEquals</span><span class="p">(</span><span class="n">expected_output</span><span class="p">,</span> <span class="n">output_value</span><span class="p">)</span>
 
-    <span class="o">@</span><span class="n">parameterized</span><span class="p">.</span><span class="n">expand</span><span class="p">([</span>
+    <span class="nd">@parameterized.expand</span><span class="p">([</span>
         <span class="p">[</span><span class="n">test_return_value_input1</span><span class="p">,</span> <span class="n">expected_error_code_output1</span><span class="p">],</span>
         <span class="p">[</span><span class="n">test_return_value_input2</span><span class="p">,</span> <span class="n">expected_error_code_output2</span><span class="p">],</span>
-        <span class="p">...</span>
+        <span class="bp">...</span>
     <span class="p">])</span>
     <span class="k">def</span> <span class="nf">test_something_throws_exception</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">self</span><span class="p">,</span>
         <span class="n">test_input</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">expected_error_code</span><span class="p">:</span> <span class="nb">int</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
         <span class="c1"># Arrange
-</span>        <span class="n">sut</span> <span class="o">=</span> <span class="n">SUT</span><span class="p">(...)</span>
+</span>        <span class="n">sut</span> <span class="o">=</span> <span class="nc">SUT</span><span class="p">(...)</span>
         <span class="p">...</span>  <span class="c1"># More 'arrange' code
 </span>        
         <span class="c1"># Act
-</span>        <span class="k">with</span> <span class="bp">self</span><span class="p">.</span><span class="n">assertRaises</span><span class="p">(</span><span class="n">SomeSUTException</span><span class="p">)</span> <span class="k">as</span> <span class="n">exception_context</span><span class="p">:</span>
-            <span class="n">sut</span><span class="p">.</span><span class="n">do_something</span><span class="p">(</span><span class="n">test_input</span><span class="p">)</span>
+</span>        <span class="k">with</span> <span class="n">self</span><span class="p">.</span><span class="nf">assertRaises</span><span class="p">(</span><span class="n">SomeSUTException</span><span class="p">)</span> <span class="k">as</span> <span class="n">exception_context</span><span class="p">:</span>
+            <span class="n">sut</span><span class="p">.</span><span class="nf">do_something</span><span class="p">(</span><span class="n">test_input</span><span class="p">)</span>
         <span class="n">exception</span> <span class="o">=</span> <span class="n">exception_context</span><span class="p">.</span><span class="n">exception</span>
         
         <span class="c1"># Assert
-</span>        <span class="bp">self</span><span class="p">.</span><span class="n">assertEquals</span><span class="p">(</span><span class="n">excepted_error_code</span><span class="p">,</span> <span class="n">exception</span><span class="p">.</span><span class="n">error_code</span><span class="p">)</span>
+</span>        <span class="n">self</span><span class="p">.</span><span class="nf">assertEquals</span><span class="p">(</span><span class="n">excepted_error_code</span><span class="p">,</span> <span class="n">exception</span><span class="p">.</span><span class="n">error_code</span><span class="p">)</span>
 </code></pre></div></div>
 
     </div>

@@ -238,42 +238,42 @@
 
 <h2 id="object-chains">Object Chains</h2>
 
-<p>This is the more classic violation of the Law of Demeter<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup>. This happens when a class <code class="language-plaintext highlighter-rouge">C</code> has a dependency <code class="language-plaintext highlighter-rouge">D</code>, and <code class="language-plaintext highlighter-rouge">D</code> has method <code class="language-plaintext highlighter-rouge">m</code> that returns an instance of another class <code class="language-plaintext highlighter-rouge">A</code>. The violation happens when <code class="language-plaintext highlighter-rouge">C</code> accesses <code class="language-plaintext highlighter-rouge">A</code> and calls a method in <code class="language-plaintext highlighter-rouge">A</code>. Note that only <code class="language-plaintext highlighter-rouge">D</code> is the ‘immediate’ collaborator/dependency of <code class="language-plaintext highlighter-rouge">C</code>, and not <code class="language-plaintext highlighter-rouge">A</code>. The Law of Demeter says that <code class="language-plaintext highlighter-rouge">C</code> should not be accessing the method in <code class="language-plaintext highlighter-rouge">A</code>.</p>
+<p>This is the more classic violation of the Law of Demeter<sup id="fnref:1"><a href="#fn:1" class="footnote" rel="footnote" role="doc-noteref">1</a></sup>. This happens when a class <code class="language-plaintext highlighter-rouge">C</code> has a dependency <code class="language-plaintext highlighter-rouge">D</code>, and <code class="language-plaintext highlighter-rouge">D</code> has method <code class="language-plaintext highlighter-rouge">m</code> that returns an instance of another class <code class="language-plaintext highlighter-rouge">A</code>. The violation happens when <code class="language-plaintext highlighter-rouge">C</code> accesses <code class="language-plaintext highlighter-rouge">A</code> and calls a method in <code class="language-plaintext highlighter-rouge">A</code>. Note that only <code class="language-plaintext highlighter-rouge">D</code> is the ‘immediate’ collaborator/dependency of <code class="language-plaintext highlighter-rouge">C</code>, and not <code class="language-plaintext highlighter-rouge">A</code>. The Law of Demeter says that <code class="language-plaintext highlighter-rouge">C</code> should not be accessing the method in <code class="language-plaintext highlighter-rouge">A</code>.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># A violation of the Law of Demeter looks as follows.
 ## Example 1:
-</span><span class="n">c</span><span class="p">.</span><span class="n">d</span><span class="p">.</span><span class="n">m</span><span class="p">().</span><span class="n">methodInA</span><span class="p">()</span>
+</span><span class="n">c</span><span class="p">.</span><span class="n">d</span><span class="p">.</span><span class="nf">m</span><span class="p">().</span><span class="nf">methodInA</span><span class="p">()</span>
 
 <span class="c1">## Example 2:
 </span><span class="n">d</span><span class="p">:</span> <span class="n">D</span> <span class="o">=</span> <span class="n">c</span><span class="p">.</span><span class="n">d</span>
-<span class="n">a</span><span class="p">:</span> <span class="n">A</span> <span class="o">=</span> <span class="n">d</span><span class="p">.</span><span class="n">m</span><span class="p">()</span>
-<span class="n">a</span><span class="p">.</span><span class="n">methodInA</span><span class="p">()</span>
+<span class="n">a</span><span class="p">:</span> <span class="n">A</span> <span class="o">=</span> <span class="n">d</span><span class="p">.</span><span class="nf">m</span><span class="p">()</span>
+<span class="n">a</span><span class="p">.</span><span class="nf">methodInA</span><span class="p">()</span>
 </code></pre></div></div>
 
 <p>What is the problem with violating the Law of Demeter?  Consider the following production code:</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">UpdateKVStore</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client</span><span class="p">:</span> <span class="n">KVStoreClient</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">client</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">client</span><span class="p">:</span> <span class="n">KVStoreClient</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">client</span>
         
     <span class="k">def</span> <span class="nf">update_value</span><span class="p">(</span><span class="n">new_content</span><span class="p">:</span> <span class="n">Content</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Status</span><span class="p">:</span>
-        <span class="n">transaction</span><span class="p">:</span> <span class="n">KVStoreClient</span><span class="p">.</span><span class="n">Transaction</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="n">new_transaction</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">transaction</span><span class="p">.</span><span class="n">get_content</span><span class="p">()</span> <span class="o">==</span> <span class="n">new_content</span><span class="p">:</span>
+        <span class="n">transaction</span><span class="p">:</span> <span class="n">KVStoreClient</span><span class="p">.</span><span class="n">Transaction</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="nf">new_transaction</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">transaction</span><span class="p">.</span><span class="nf">get_content</span><span class="p">()</span> <span class="o">==</span> <span class="n">new_content</span><span class="p">:</span>
             <span class="c1"># Nothing to update
-</span>            <span class="n">transaction</span><span class="p">.</span><span class="n">end</span><span class="p">()</span>
+</span>            <span class="n">transaction</span><span class="p">.</span><span class="nf">end</span><span class="p">()</span>
             <span class="k">return</span> <span class="n">Status</span><span class="p">.</span><span class="n">SUCCESS_UNCHANGED</span>
         <span class="n">mutation_request</span><span class="p">:</span> <span class="n">KVStoreClient</span><span class="p">.</span><span class="n">MutationRequest</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">transaction</span><span class="p">.</span><span class="n">mutation_request</span><span class="p">().</span><span class="n">set_content</span><span class="p">(</span><span class="n">new_content</span><span class="p">)</span>
+            <span class="n">transaction</span><span class="p">.</span><span class="nf">mutation_request</span><span class="p">().</span><span class="nf">set_content</span><span class="p">(</span><span class="n">new_content</span><span class="p">)</span>
         <span class="p">)</span>
-        <span class="n">mutation</span> <span class="o">=</span> <span class="n">mutation_request</span><span class="p">.</span><span class="n">prepare</span><span class="p">()</span>
-        <span class="n">status</span><span class="p">:</span> <span class="n">KVStoreClient</span><span class="p">.</span><span class="n">Mutation</span> <span class="o">=</span> <span class="n">mutation</span><span class="p">.</span><span class="n">land</span><span class="p">()</span>
+        <span class="n">mutation</span> <span class="o">=</span> <span class="n">mutation_request</span><span class="p">.</span><span class="nf">prepare</span><span class="p">()</span>
+        <span class="n">status</span><span class="p">:</span> <span class="n">KVStoreClient</span><span class="p">.</span><span class="n">Mutation</span> <span class="o">=</span> <span class="n">mutation</span><span class="p">.</span><span class="nf">land</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">status</span>
 </code></pre></div></div>
 
 <p>Now how would you unit test this? The test doubles for testing this code will look something like this</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mock_client</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">spec</span><span class="o">=</span><span class="n">KVStoreClient</span><span class="p">)</span>
-<span class="n">mock_transaction</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">spec</span><span class="o">=</span><span class="n">KVStoreClient</span><span class="p">.</span><span class="n">Transaction</span><span class="p">)</span>
-<span class="n">mock_mutation_request</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">spec</span><span class="o">=</span><span class="n">KVStoreClient</span><span class="p">.</span><span class="n">MutationRequest</span><span class="p">)</span>
-<span class="n">mock_mutation</span> <span class="o">=</span> <span class="n">MagicMock</span><span class="p">(</span><span class="n">spec</span><span class="o">=</span><span class="n">KVStoreClient</span><span class="p">.</span><span class="n">Mutation</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mock_client</span> <span class="o">=</span> <span class="nc">MagicMock</span><span class="p">(</span><span class="n">spec</span><span class="o">=</span><span class="n">KVStoreClient</span><span class="p">)</span>
+<span class="n">mock_transaction</span> <span class="o">=</span> <span class="nc">MagicMock</span><span class="p">(</span><span class="n">spec</span><span class="o">=</span><span class="n">KVStoreClient</span><span class="p">.</span><span class="n">Transaction</span><span class="p">)</span>
+<span class="n">mock_mutation_request</span> <span class="o">=</span> <span class="nc">MagicMock</span><span class="p">(</span><span class="n">spec</span><span class="o">=</span><span class="n">KVStoreClient</span><span class="p">.</span><span class="n">MutationRequest</span><span class="p">)</span>
+<span class="n">mock_mutation</span> <span class="o">=</span> <span class="nc">MagicMock</span><span class="p">(</span><span class="n">spec</span><span class="o">=</span><span class="n">KVStoreClient</span><span class="p">.</span><span class="n">Mutation</span><span class="p">)</span>
 
 <span class="n">mock_client</span><span class="p">.</span><span class="n">new_transaction</span><span class="p">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="n">mock_transaction</span>
 <span class="n">mock_transaction</span><span class="p">.</span><span class="n">mutation_request</span><span class="p">.</span><span class="n">return_value</span> <span class="o">=</span> <span class="n">mock_mutation_request</span>
@@ -285,16 +285,16 @@
 <p>There are a few ways to address this. Instead, if <code class="language-plaintext highlighter-rouge">KVStoreClient</code> could be recast as a <code class="language-plaintext highlighter-rouge">Transaction</code> factory, and then encapsulate all operations associated with the transactions within the <code class="language-plaintext highlighter-rouge">Transaction</code> class, then <code class="language-plaintext highlighter-rouge">UpdateKVStore</code> can be modified as follows:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">UpdateKVStore</span><span class="p">:</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client</span><span class="p">:</span> <span class="n">KVStoreClient</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">client</span>  <span class="c1"># Now a Factory class for Transaction.
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">client</span><span class="p">:</span> <span class="n">KVStoreClient</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">self</span><span class="p">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">client</span>  <span class="c1"># Now a Factory class for Transaction.
 </span>        
     <span class="k">def</span> <span class="nf">update_value</span><span class="p">(</span><span class="n">new_content</span><span class="p">:</span> <span class="n">Content</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Status</span><span class="p">:</span>
-        <span class="n">transaction</span><span class="p">:</span> <span class="n">KVStoreClient</span><span class="p">.</span><span class="n">Transaction</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="n">new_transaction</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">transaction</span><span class="p">.</span><span class="n">get_content</span><span class="p">()</span> <span class="o">==</span> <span class="n">new_content</span><span class="p">:</span>
+        <span class="n">transaction</span><span class="p">:</span> <span class="n">KVStoreClient</span><span class="p">.</span><span class="n">Transaction</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="nf">new_transaction</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">transaction</span><span class="p">.</span><span class="nf">get_content</span><span class="p">()</span> <span class="o">==</span> <span class="n">new_content</span><span class="p">:</span>
             <span class="c1"># Nothing to update
-</span>            <span class="n">transaction</span><span class="p">.</span><span class="n">end</span><span class="p">()</span>
+</span>            <span class="n">transaction</span><span class="p">.</span><span class="nf">end</span><span class="p">()</span>
             <span class="k">return</span> <span class="n">Status</span><span class="p">.</span><span class="n">SUCCESS_UNCHANGED</span>
-        <span class="n">status</span> <span class="o">=</span> <span class="n">transaction</span><span class="p">.</span><span class="n">update_and_land</span><span class="p">(</span><span class="n">new_content</span><span class="p">)</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="n">transaction</span><span class="p">.</span><span class="nf">update_and_land</span><span class="p">(</span><span class="n">new_content</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">status</span>
 </code></pre></div></div>
 
@@ -306,33 +306,33 @@
 
 <p>For instance, say you have a class <code class="language-plaintext highlighter-rouge">EmailDispatcher</code> whose method <code class="language-plaintext highlighter-rouge">setRecipient</code> only needs a customer name and email address. The method signature for <code class="language-plaintext highlighter-rouge">setRecipient</code> should only require the name and email, and not the entire <code class="language-plaintext highlighter-rouge">Customer</code> object that contains a whole lot more.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">@</span><span class="n">dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">Customer</span><span class="p">:</span>
     <span class="p">...</span> <span class="c1"># data class members.
-</span>    <span class="k">def</span> <span class="nf">getFullName</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="p">...</span>
-    <span class="k">def</span> <span class="nf">getEmail</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="p">...</span>
-    <span class="k">def</span> <span class="nf">getPhysicalAddress</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="p">...</span>
-    <span class="k">def</span> <span class="nf">getPostalCode</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="p">...</span>
-    <span class="k">def</span> <span class="nf">getCountry</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="p">...</span>
-    <span class="k">def</span> <span class="nf">getState</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="p">...</span>
-    <span class="k">def</span> <span class="nf">getCustomerId</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="p">...</span>
+</span>    <span class="k">def</span> <span class="nf">getFullName</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="bp">...</span>
+    <span class="k">def</span> <span class="nf">getEmail</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="bp">...</span>
+    <span class="k">def</span> <span class="nf">getPhysicalAddress</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="bp">...</span>
+    <span class="k">def</span> <span class="nf">getPostalCode</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="bp">...</span>
+    <span class="k">def</span> <span class="nf">getCountry</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="bp">...</span>
+    <span class="k">def</span> <span class="nf">getState</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="bp">...</span>
+    <span class="k">def</span> <span class="nf">getCustomerId</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+        <span class="bp">...</span>
     <span class="c1"># and so on.
 </span>    
  <span class="k">class</span> <span class="nc">EmailDispatcher</span><span class="p">:</span>
-     <span class="p">...</span>
+     <span class="bp">...</span>
      <span class="k">def</span> <span class="nf">setRecipient</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">email</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-         <span class="p">...</span>
+         <span class="bp">...</span>
      <span class="k">def</span> <span class="nf">setRecipientWithFatParameter</span><span class="p">(</span><span class="n">customer</span><span class="p">:</span> <span class="n">Customer</span><span class="p">):</span>
-         <span class="p">...</span>
-     <span class="k">def</span> <span class="nf">sendMessage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">):</span>
-         <span class="p">...</span>
+         <span class="bp">...</span>
+     <span class="k">def</span> <span class="nf">sendMessage</span><span class="p">(</span><span class="n">self</span><span class="p">,</span> <span class="n">message</span><span class="p">:</span> <span class="n">Message</span><span class="p">):</span>
+         <span class="bp">...</span>
 </code></pre></div></div>
 
 <p>In the pseudocode above, the class <code class="language-plaintext highlighter-rouge">EmailDispatcher</code> has two methods <code class="language-plaintext highlighter-rouge">setRecipient</code> and <code class="language-plaintext highlighter-rouge">setRecipientWithFatParameter</code>. The former uses only the information it needs, and the latter passed in the entire <code class="language-plaintext highlighter-rouge">Customer</code> object as a fat parameter.</p>
@@ -340,33 +340,33 @@
 <p>The convenience of passing in the entire <code class="language-plaintext highlighter-rouge">Customer</code> object is straightforward. It allows gives you a simple method signature. It makes it easier for the method to evolve to use richer information about the customer without needing to change its API contract. It allows you to define a common <code class="language-plaintext highlighter-rouge">Dispatcher</code> interface with multiple <code class="language-plaintext highlighter-rouge">Dispatcher</code>s that use different properties of the <code class="language-plaintext highlighter-rouge">Customer</code> class.</p>
 
 <p>However, when it comes to unit testing, such fat parameters present a problem. Consider how you would test the <code class="language-plaintext highlighter-rouge">EmailDispatcher</code>’s <code class="language-plaintext highlighter-rouge">setRecipientWithFatParameter</code> method. The tests will need to create fake <code class="language-plaintext highlighter-rouge">Customer</code> objects. So, your fake <code class="language-plaintext highlighter-rouge">Customers</code> might look like this:</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fakeCustomer</span> <span class="o">=</span> <span class="n">Customer</span><span class="p">(</span>
-    <span class="n">first_name</span><span class="o">=</span><span class="s">"bob"</span><span class="p">,</span>
-    <span class="n">last_name</span><span class="o">=</span><span class="s">"marley"</span><span class="p">,</span> 
-    <span class="n">email</span><span class="o">=</span><span class="s">"bob@doobie.com"</span><span class="p">,</span> 
-    <span class="n">address</span><span class="o">=</span><span class="n">Address</span><span class="p">(</span>
-        <span class="s">"420 High St."</span><span class="p">,</span> 
-      <span class="s">""</span><span class="p">,</span> 
-      <span class="s">"Mary Jane"</span><span class="p">,</span> 
-      <span class="s">"Ganga Nation"</span><span class="p">,</span> 
-      <span class="s">"7232"</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fakeCustomer</span> <span class="o">=</span> <span class="nc">Customer</span><span class="p">(</span>
+    <span class="n">first_name</span><span class="o">=</span><span class="sh">"</span><span class="s">bob</span><span class="sh">"</span><span class="p">,</span>
+    <span class="n">last_name</span><span class="o">=</span><span class="sh">"</span><span class="s">marley</span><span class="sh">"</span><span class="p">,</span> 
+    <span class="n">email</span><span class="o">=</span><span class="sh">"</span><span class="s">bob@doobie.com</span><span class="sh">"</span><span class="p">,</span> 
+    <span class="n">address</span><span class="o">=</span><span class="nc">Address</span><span class="p">(</span>
+        <span class="sh">"</span><span class="s">420 High St.</span><span class="sh">"</span><span class="p">,</span> 
+      <span class="sh">""</span><span class="p">,</span> 
+      <span class="sh">"</span><span class="s">Mary Jane</span><span class="sh">"</span><span class="p">,</span> 
+      <span class="sh">"</span><span class="s">Ganga Nation</span><span class="sh">"</span><span class="p">,</span> 
+      <span class="sh">"</span><span class="s">7232</span><span class="sh">"</span>
     <span class="p">),</span> 
     <span class="nb">id</span><span class="o">=</span><span class="mi">12345</span><span class="p">,</span> 
-    <span class="n">postal_code</span><span class="o">=</span><span class="s">"7232"</span><span class="p">,</span> 
-    <span class="p">...</span>
+    <span class="n">postal_code</span><span class="o">=</span><span class="sh">"</span><span class="s">7232</span><span class="sh">"</span><span class="p">,</span> 
+    <span class="bp">...</span>
 <span class="p">)</span>
 </code></pre></div></div>
 
 <p>When someone reads this unit test, do they know what is relevant here? Does it matter that the second parameter of <code class="language-plaintext highlighter-rouge">address</code> is empty string? Should the last parameter of <code class="language-plaintext highlighter-rouge">address</code> match the value of <code class="language-plaintext highlighter-rouge">postal_code</code>? While we might be able to guess it in this case, it gets more confusing in cases where the fat parameter is encapsulating a much more complicated entity, such as a database table.</p>
 
-<p>When refactoring or making changes to the <code class="language-plaintext highlighter-rouge">EmailDispatcher</code>, if the unit test fails, then figuring out why the test failed becomes a non-trivial exercise, and could end up slowing you down a lot more than you expected. All this just leads to high maintenance costs for tests, low readability <sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote" rel="footnote">2</a></sup>, poor DevX, and limited benefits.</p>
+<p>When refactoring or making changes to the <code class="language-plaintext highlighter-rouge">EmailDispatcher</code>, if the unit test fails, then figuring out why the test failed becomes a non-trivial exercise, and could end up slowing you down a lot more than you expected. All this just leads to high maintenance costs for tests, low readability <sup id="fnref:2"><a href="#fn:2" class="footnote" rel="footnote" role="doc-noteref">2</a></sup>, poor DevX, and limited benefits.</p>
 
 <div class="footnotes" role="doc-endnotes">
   <ol>
-    <li id="fn:1" role="doc-endnote">
+    <li id="fn:1">
       <p>You can read about it <a href="https://wouterdekort.com/2012/03/27/unit-testing-hell-or-heaven/">here</a>, <a href="https://hermanradtke.com/2010/01/17/unit-testing-and-the-law-of-demeter.html/">here</a>, <a href="https://wiki.c2.com/?LawOfDemeterMakesUnitTestsEasier">here</a>, and <a href="https://testing.googleblog.com/2008/07/breaking-law-of-demeter-is-like-looking.html">here</a>, and really just search for “Law of Demeter” on the Internet <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
-    <li id="fn:2" role="doc-endnote">
+    <li id="fn:2">
       <p>For more details on why we should care about readability, see the section on Readability <a href="https://srikanth.sastry.name/dry-unit-tests-are-bad/">here</a>. <a href="#fnref:2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>
