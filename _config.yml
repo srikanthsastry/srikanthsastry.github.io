@@ -44,7 +44,7 @@ contact_channels:
 
 # Build settings
 # theme: minima
-theme: awesome-jekyll-theme
+theme: wind-theme
 plugins:
   - jekyll-feed
 
