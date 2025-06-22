@@ -9,7 +9,10 @@ permalink: /wait-free-stabilizing-dining-using-regular-registers/
 fplayout:
     - default
 categories:
-    - Research
+    - Professional
+tags:
+    - research
+    - academia
 ---
 
 This paper was presented at OPODIS 2012.

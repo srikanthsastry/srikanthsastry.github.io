@@ -9,7 +9,10 @@ permalink: /asynchronous-failure-detectors/
 fplayout:
     - default
 categories:
-    - Research
+    - Professional
+tags:
+    - research
+    - academia
 ---
 
 My latest work on a modeling framework for a special variant of failure detectors is accepted at the 31st Annual ACM SIGACT-SIGOPS Symposium on Principles of Distributed Computing. <a title="Asynchronous Failure Detectors" href="/documents/research/AFD-podc2012.pdf">A preprint of the submission is available [here]</a>.
