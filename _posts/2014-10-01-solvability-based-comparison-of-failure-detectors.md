@@ -9,7 +9,9 @@ permalink: /solvability-based-comparison-of-failure-detectors/
 fplayout:
     - default
 categories:
-    - Research
+    - Professional
+tags:
+    - research
 ---
 
 New paper in NCA 2014, with Josef Widder.
