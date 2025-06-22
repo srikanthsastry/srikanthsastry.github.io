@@ -7,9 +7,10 @@ layout: post
 guid: 'http://srikanth.sastry.name/?p=258'
 permalink: /troyan-monastery/
 categories:
-    - Travel
+    - Personal
 tags:
     - Bulgaria
+    - travel
 format: image
 ---
 

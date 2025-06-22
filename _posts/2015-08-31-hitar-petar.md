@@ -7,9 +7,10 @@ layout: post
 guid: 'http://srikanth.sastry.name/?p=244'
 permalink: /hitar-petar/
 categories:
-    - Travel
+    - Personal
 tags:
     - Bulgaria
+    - travel
 format: image
 ---
 

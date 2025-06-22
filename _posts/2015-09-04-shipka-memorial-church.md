@@ -7,10 +7,11 @@ layout: post
 guid: 'http://srikanth.sastry.name/?p=282'
 permalink: /shipka-memorial-church/
 categories:
-    - Travel
+    - Personal
 format: image
 tags:
     - Bulgaria
+    - travel
 ---
 
 <!-- wp:paragraph -->
