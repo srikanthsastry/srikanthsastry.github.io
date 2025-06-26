@@ -71,7 +71,7 @@ rigorous about unit tests.</p>
 <!-- /wp:heading -->
 
 <!-- wp:image {"id":370,"align":"center","linkDestination":"custom"} -->
-<div class="wp-block-image"><figure class="aligncenter"><a href="http://www.quickmeme.com/meme/3t1i87" target="_blank" rel="noreferrer noopener"><img src="/wp-content/uploads/2019/01/a0a8c4ab0bec170a748228f0982da6795e6af515a8048b11c2b4c9e794d7b4f9.jpg" alt="" class="wp-image-370"/></a></figure></div>
+<div class="wp-block-image"><figure class="aligncenter"><a href="http://www.quickmeme.com/meme/3t1i87" target="_blank" rel="noreferrer noopener"><img src="/assets/images/2019/01/a0a8c4ab0bec170a748228f0982da6795e6af515a8048b11c2b4c9e794d7b4f9.jpg" alt="" class="wp-image-370"/></a></figure></div>
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->

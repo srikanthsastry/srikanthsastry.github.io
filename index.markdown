@@ -5,7 +5,7 @@
 layout: home
 footer: true
 title: Home
-image: /wp-content/uploads/2021/07/img_2471-copy-1024x1024.jpg
+image: /assets/images/2021/07/img_2471-copy-1024x1024.jpg
 main_content: >
   I am Srikanth Sastry. I am currently an engineering lead at [Meta](https://meta.com) working on privacy infrastructure. Before joining Facebook, I was a software engineer at Google in Cambridge, MA, and before that I was a postdoctoral associate with Nancy Lynch at [CSAIL, MIT](https://csail.mit.edu). Prior to that, I received my PhD from [Texas A&M University](https://www.tamu.edu).
 

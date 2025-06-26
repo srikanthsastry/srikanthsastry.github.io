@@ -19,7 +19,7 @@ tags:
 <!-- /wp:paragraph -->
 
 <!-- wp:image {"id":283,"align":"center","linkDestination":"attachment"} -->
-<div class="wp-block-image"><figure class="aligncenter"><a href="http://srikanth.sastry.name/shipka-memorial-church/img_20150901_134154/"><img src="/wp-content/uploads/2015/09/IMG_20150901_134154-334x450.jpg" alt="The front of the Shipka Memorial Church" class="wp-image-283"/></a><figcaption>The front of the Shipka Memorial Church</figcaption></figure></div>
+<div class="wp-block-image"><figure class="aligncenter"><a href="http://srikanth.sastry.name/shipka-memorial-church/img_20150901_134154/"><img src="/assets/images/2015/09/IMG_20150901_134154-334x450.jpg" alt="The front of the Shipka Memorial Church" class="wp-image-283"/></a><figcaption>The front of the Shipka Memorial Church</figcaption></figure></div>
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->
@@ -31,7 +31,7 @@ tags:
 <!-- /wp:more -->
 
 <!-- wp:gallery {"ids":[284,285,286],"columns":1,"linkTo":"attachment"} -->
-<ul class="wp-block-gallery columns-1 is-cropped"><li class="blocks-gallery-item"><figure><img src="/wp-content/uploads/2015/09/IMG_20150901_134301.jpg" alt="" data-id="284" class="wp-image-284"/></figure></li><li class="blocks-gallery-item"><figure><img src="/wp-content/uploads/2015/09/IMG_20150901_135548.jpg" alt="" data-id="285" class="wp-image-285"/></figure></li><li class="blocks-gallery-item"><figure><img src="/wp-content/uploads/2015/09/IMG_20150901_135851.jpg" alt="" data-id="286" class="wp-image-286"/></figure></li></ul>
+<ul class="wp-block-gallery columns-1 is-cropped"><li class="blocks-gallery-item"><figure><img src="/assets/images/2015/09/IMG_20150901_134301.jpg" alt="" data-id="284" class="wp-image-284"/></figure></li><li class="blocks-gallery-item"><figure><img src="/assets/images/2015/09/IMG_20150901_135548.jpg" alt="" data-id="285" class="wp-image-285"/></figure></li><li class="blocks-gallery-item"><figure><img src="/assets/images/2015/09/IMG_20150901_135851.jpg" alt="" data-id="286" class="wp-image-286"/></figure></li></ul>
 <!-- /wp:gallery -->
 
 <!-- wp:paragraph -->
@@ -39,7 +39,7 @@ tags:
 <!-- /wp:paragraph -->
 
 <!-- wp:gallery {"ids":[290,289,291],"columns":1,"linkTo":"attachment"} -->
-<ul class="wp-block-gallery columns-1 is-cropped"><li class="blocks-gallery-item"><figure><img src="/wp-content/uploads/2015/09/IMG_20150901_135343.jpg" alt="" data-id="290" class="wp-image-290"/></figure></li><li class="blocks-gallery-item"><figure><img src="/wp-content/uploads/2015/09/IMG_20150901_135329.jpg" alt="" data-id="289" class="wp-image-289"/></figure></li><li class="blocks-gallery-item"><figure><img src="/wp-content/uploads/2015/09/IMG_20150901_135423.jpg" alt="" data-id="291" class="wp-image-291"/></figure></li></ul>
+<ul class="wp-block-gallery columns-1 is-cropped"><li class="blocks-gallery-item"><figure><img src="/assets/images/2015/09/IMG_20150901_135343.jpg" alt="" data-id="290" class="wp-image-290"/></figure></li><li class="blocks-gallery-item"><figure><img src="/assets/images/2015/09/IMG_20150901_135329.jpg" alt="" data-id="289" class="wp-image-289"/></figure></li><li class="blocks-gallery-item"><figure><img src="/assets/images/2015/09/IMG_20150901_135423.jpg" alt="" data-id="291" class="wp-image-291"/></figure></li></ul>
 <!-- /wp:gallery -->
 
 <!-- wp:paragraph -->
@@ -47,5 +47,5 @@ tags:
 <!-- /wp:paragraph -->
 
 <!-- wp:gallery {"ids":[294,293],"columns":1,"linkTo":"attachment"} -->
-<ul class="wp-block-gallery columns-1 is-cropped"><li class="blocks-gallery-item"><figure><img src="/wp-content/uploads/2015/09/IMG_20150901_135137.jpg" alt="" data-id="294" class="wp-image-294"/></figure></li><li class="blocks-gallery-item"><figure><img src="/wp-content/uploads/2015/09/IMG_20150901_135040.jpg" alt="" data-id="293" class="wp-image-293"/></figure></li></ul>
+<ul class="wp-block-gallery columns-1 is-cropped"><li class="blocks-gallery-item"><figure><img src="/assets/images/2015/09/IMG_20150901_135137.jpg" alt="" data-id="294" class="wp-image-294"/></figure></li><li class="blocks-gallery-item"><figure><img src="/assets/images/2015/09/IMG_20150901_135040.jpg" alt="" data-id="293" class="wp-image-293"/></figure></li></ul>
 <!-- /wp:gallery -->
