@@ -6,7 +6,7 @@ author: 'Srikanth Sastry'
 layout: post
 guid: 'https://srikanth.sastry.name/?p=485'
 permalink: /git-may-not-be-the-best-for-saas-companies/
-image: /wp-content/uploads/2020/02/img_0147-740x430.jpg
+image: /assets/images/2020/02/img_0147-740x430.jpg
 categories:
     - Professional
 tags:
@@ -15,7 +15,7 @@ tags:
 ---
 
 <!-- wp:image {"id":492,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="https://srikanth.sastry.name/wp-content/uploads/2019/12/2C08C1F4-1EF1-44F7-90FA-DB1030628817.jpeg" alt="" class="wp-image-492"/></figure>
+<figure class="wp-block-image size-large"><img src="/assets/images/2019/12/2C08C1F4-1EF1-44F7-90FA-DB1030628817.jpeg" alt="" class="wp-image-492"/></figure>
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->
@@ -43,7 +43,7 @@ tags:
 <!-- /wp:heading -->
 
 <!-- wp:image {"align":"center","id":498,"sizeSlug":"medium"} -->
-<div class="wp-block-image"><figure class="aligncenter size-medium"><img src="https://srikanth.sastry.name/wp-content/uploads/2019/12/WjxpQc4-450x395.jpg" alt="" class="wp-image-498"/><figcaption>Git branches for large teams</figcaption></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-medium"><img src="/assets/images/2019/12/WjxpQc4-450x395.jpg" alt="" class="wp-image-498"/><figcaption>Git branches for large teams</figcaption></figure></div>
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->
@@ -59,7 +59,7 @@ tags:
 <!-- /wp:heading -->
 
 <!-- wp:image {"align":"center","id":496,"sizeSlug":"medium"} -->
-<div class="wp-block-image"><figure class="aligncenter size-medium"><img src="https://srikanth.sastry.name/wp-content/uploads/2019/12/4994396370_c118bbce78_o-450x318.jpg" alt="" class="wp-image-496"/><figcaption>Source:https://flic.kr/p/8BkA3f<br>License: https://creativecommons.org/licenses/by-nc-sa/2.0/</figcaption></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-medium"><img src="/assets/images/2019/12/4994396370_c118bbce78_o-450x318.jpg" alt="" class="wp-image-496"/><figcaption>Source:https://flic.kr/p/8BkA3f<br>License: https://creativecommons.org/licenses/by-nc-sa/2.0/</figcaption></figure></div>
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->
@@ -83,7 +83,7 @@ tags:
 <!-- /wp:heading -->
 
 <!-- wp:image {"align":"center","id":497,"sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://srikanth.sastry.name/wp-content/uploads/2019/12/push-rejected-rebaseor-merge-38-git-push-force-git-commit-amend-git-25695648.png" alt="" class="wp-image-497"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="/assets/images/2019/12/push-rejected-rebaseor-merge-38-git-push-force-git-commit-amend-git-25695648.png" alt="" class="wp-image-497"/></figure></div>
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->
@@ -103,7 +103,7 @@ tags:
 <!-- /wp:heading -->
 
 <!-- wp:image {"align":"center","id":499,"sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://srikanth.sastry.name/wp-content/uploads/2019/12/32n8q6.jpg" alt="" class="wp-image-499"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="/assets/images/2019/12/32n8q6.jpg" alt="" class="wp-image-499"/></figure></div>
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->

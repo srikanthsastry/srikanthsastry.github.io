@@ -10,7 +10,7 @@ tags:
   - refactoring
   - best-practices
 permalink: /reduce-cyclomatic-complexity/
-image: /images/cpu-in-maze-pixel-art.png
+image: /assets/images/cpu-in-maze-pixel-art.png
 ---
 
 ## What even _is_ Cyclomatic Complexity?

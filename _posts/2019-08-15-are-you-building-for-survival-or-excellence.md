@@ -11,11 +11,11 @@ categories:
 tags:
     - 'software development process'
     - 'software engineering'
-image: /wp-content/uploads/2019/08/maxresdefault-450x253.jpg
+image: /assets/images/2019/08/maxresdefault-450x253.jpg
 ---
 
 <!-- wp:image {"id":453} -->
-<!-- <figure class="wp-block-image"><img src="https://srikanth.sastry.name/wp-content/uploads/2019/08/maxresdefault-1024x576.jpg" alt="" class="wp-image-453"/><figcaption>Source: https://www.youtube.com/attribution?v=oW2i6QpnmyY</figcaption></figure> -->
+<!-- <figure class="wp-block-image"><img src="/assets/images/2019/08/maxresdefault-1024x576.jpg" alt="" class="wp-image-453"/><figcaption>Source: https://www.youtube.com/attribution?v=oW2i6QpnmyY</figcaption></figure> -->
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->
@@ -43,7 +43,7 @@ image: /wp-content/uploads/2019/08/maxresdefault-450x253.jpg
 <!-- /wp:heading -->
 
 <!-- wp:image {"align":"center","id":454,"width":220,"height":309} -->
-<div class="wp-block-image"><figure class="aligncenter is-resized"><img src="https://srikanth.sastry.name/wp-content/uploads/2019/08/6028945055_2271b47a5b_m.jpg" alt="" class="wp-image-454" width="220" height="309"/><figcaption>Source: https://www.flickr.com/photos/bandrews/6028945055</figcaption></figure></div>
+<div class="wp-block-image"><figure class="aligncenter is-resized"><img src="/assets/images/2019/08/6028945055_2271b47a5b_m.jpg" alt="" class="wp-image-454" width="220" height="309"/><figcaption>Source: https://www.flickr.com/photos/bandrews/6028945055</figcaption></figure></div>
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->
@@ -87,7 +87,7 @@ image: /wp-content/uploads/2019/08/maxresdefault-450x253.jpg
 <!-- /wp:heading -->
 
 <!-- wp:image {"align":"center","id":455} -->
-<div class="wp-block-image"><figure class="aligncenter"><img src="https://srikanth.sastry.name/wp-content/uploads/2019/08/1ijN1lAVtTBPmh2hCwDWozw.png" alt="" class="wp-image-455"/><figcaption>source: https://medium.com/deliberate-data-science/deliberate-data-science-intro-eac1b1a06568</figcaption></figure></div>
+<div class="wp-block-image"><figure class="aligncenter"><img src="/assets/images/2019/08/1ijN1lAVtTBPmh2hCwDWozw.png" alt="" class="wp-image-455"/><figcaption>source: https://medium.com/deliberate-data-science/deliberate-data-science-intro-eac1b1a06568</figcaption></figure></div>
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->

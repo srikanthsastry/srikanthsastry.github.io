@@ -10,7 +10,7 @@ categories:
   - Professional
 layout: post
 permalink: /privatize-your-classes-for-better-unit-testing/
-image: /images/amber-iceberg-under-water.jpg
+image: /assets/images/amber-iceberg-under-water.jpg
 ...
 <!-- ![](images/amber-iceberg-under-water.jpg) -->
 You service may be massive, but it's public API surface is pretty small; it has just a handful of APIs/endpoints. Everything else behind those APIs are 'private' and 'implementation details'. It is highly advisable to follow this pattern even when designing the implementation of your service, almost like a fractal. This will pay dividends in the quality of your test suite.

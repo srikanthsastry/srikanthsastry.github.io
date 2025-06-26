@@ -10,10 +10,10 @@ tags:
   - bug fixing
   - testing
 permalink: /tdd-for-bug-fixes/
-image: /images/bug-stabbing-software-engineer-in-the-back.png
+image: /assets/images/bug-stabbing-software-engineer-in-the-back.png
 ...
 
-<!-- ![](/images/bug-stabbing-software-engineer-in-the-back.png) -->
+<!-- ![](/assets/images/bug-stabbing-software-engineer-in-the-back.png) -->
 
 I have seen way too many 'senior' engineers get bug fixing wrong. It is common to see an engineer sent a pull request titled "bug fix: <something>" and the PR has changes to the functional code that fixes the bug and a correspond test case that shows that the bug is fixed. If that sounds reasonable, THINK AGAIN — you’ve walked right into the classic trap! 
 
@@ -34,7 +34,7 @@ Here are simple steps to fixing bugs using TDD:
 
 3. 💰 Justice is served! PROFIT!
 
-![](/images/tdd-bug-lifecycle.png)
+![](/assets/images/tdd-bug-lifecycle.png)
 
 Still not sure? Let's demonstrate this with an example. Say, there is a bug that you discovered and know how to fix it. 
 

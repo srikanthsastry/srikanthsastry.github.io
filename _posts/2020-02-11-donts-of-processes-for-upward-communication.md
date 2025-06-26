@@ -6,7 +6,7 @@ author: 'Srikanth Sastry'
 layout: post
 guid: 'https://srikanth.sastry.name/?p=536'
 permalink: /donts-of-processes-for-upward-communication/
-image: /wp-content/uploads/2020/01/img_0526-740x430.jpg
+image: /assets/images/2020/01/img_0526-740x430.jpg
 categories:
     - Professional
 tags:
@@ -14,7 +14,7 @@ tags:
 ---
 
 <!-- wp:image {"align":"center","id":566,"sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://srikanth.sastry.name/wp-content/uploads/2020/02/pexels-photo-3532005-1024x682.jpg" alt="" class="wp-image-566"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="/assets/images/2020/02/pexels-photo-3532005-1024x682.jpg" alt="" class="wp-image-566"/></figure></div>
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->
@@ -38,7 +38,7 @@ tags:
 <!-- /wp:heading -->
 
 <!-- wp:image {"align":"center","id":568,"sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://srikanth.sastry.name/wp-content/uploads/2020/02/img_0141.jpg" alt="" class="wp-image-568"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="/assets/images/2020/02/img_0141.jpg" alt="" class="wp-image-568"/></figure></div>
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->
@@ -66,7 +66,7 @@ tags:
 <!-- /wp:heading -->
 
 <!-- wp:image {"align":"center","id":569,"sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://srikanth.sastry.name/wp-content/uploads/2020/02/img_0142.jpg" alt="" class="wp-image-569"/></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="/assets/images/2020/02/img_0142.jpg" alt="" class="wp-image-569"/></figure></div>
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->
@@ -90,7 +90,7 @@ tags:
 <!-- /wp:heading -->
 
 <!-- wp:image {"id":571,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="https://srikanth.sastry.name/wp-content/uploads/2020/02/pexels-photo-1669158-1024x682.jpg" alt="" class="wp-image-571"/></figure>
+<figure class="wp-block-image size-large"><img src="/assets/images/2020/02/pexels-photo-1669158-1024x682.jpg" alt="" class="wp-image-571"/></figure>
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->
@@ -110,7 +110,7 @@ tags:
 <!-- /wp:heading -->
 
 <!-- wp:image {"id":572,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="https://srikanth.sastry.name/wp-content/uploads/2020/02/pexels-photo-791765-1024x682.jpg" alt="" class="wp-image-572"/></figure>
+<figure class="wp-block-image size-large"><img src="/assets/images/2020/02/pexels-photo-791765-1024x682.jpg" alt="" class="wp-image-572"/></figure>
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->

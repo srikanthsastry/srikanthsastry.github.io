@@ -15,7 +15,7 @@ tags:
     - academia
 ---
 
-The full version of my OPODIS 2010 paper "Failure Detectors Encapsulate Fairness" (<a href="documents/research/opodis2010.pdf" target="_blank">preprint</a>) has been accepted for publication with the journal Distributed Computing. You can find a <a href="/documents/research/journal/FD_encapsulate_fairness_preprint.pdf" target="_blank">preprint of the paper here [pdf]</a>.
+The full version of my OPODIS 2010 paper "Failure Detectors Encapsulate Fairness" (<a href="documents/research/opodis2010.pdf" target="_blank">preprint</a>) has been accepted for publication with the journal Distributed Computing. You can find a <a href="/assets/documents/research/journal/FD_encapsulate_fairness_preprint.pdf" target="_blank">preprint of the paper here [pdf]</a>.
 
 <!--more-->
 

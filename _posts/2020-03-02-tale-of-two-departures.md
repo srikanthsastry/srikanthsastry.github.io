@@ -6,7 +6,7 @@ author: 'Srikanth Sastry'
 layout: post
 guid: 'https://srikanth.sastry.name/?p=549'
 permalink: /tale-of-two-departures/
-image: /wp-content/uploads/2020/02/137FABBE-C7DC-4401-B0AB-299AA800D039-740x430.jpeg
+image: /assets/images/2020/02/137FABBE-C7DC-4401-B0AB-299AA800D039-740x430.jpeg
 categories:
     - Professional
 tags:
@@ -15,7 +15,7 @@ tags:
 ---
 
 <!-- wp:image {"align":"center","id":580,"sizeSlug":"large"} -->
-<div class="wp-block-image"><figure class="aligncenter size-large"><img src="https://srikanth.sastry.name/wp-content/uploads/2020/02/img_0143-1024x683.jpg" alt="" class="wp-image-580"/><figcaption>Image by <a href="https://pixabay.com/users/MIH83-464187/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1478118">Maret Hosemann</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1478118">Pixabay</a></figcaption></figure></div>
+<div class="wp-block-image"><figure class="aligncenter size-large"><img src="/assets/images/2020/02/img_0143-1024x683.jpg" alt="" class="wp-image-580"/><figcaption>Image by <a href="https://pixabay.com/users/MIH83-464187/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1478118">Maret Hosemann</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1478118">Pixabay</a></figcaption></figure></div>
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->
@@ -31,7 +31,7 @@ tags:
 <!-- /wp:heading -->
 
 <!-- wp:image {"id":581,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="https://srikanth.sastry.name/wp-content/uploads/2020/02/img_0144-1024x553.jpg" alt="" class="wp-image-581"/><figcaption>Image by <a href="https://pixabay.com/users/pixel2013-2364555/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2934257">S. Hermann &amp; F. Richter</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2934257">Pixabay</a></figcaption></figure>
+<figure class="wp-block-image size-large"><img src="/assets/images/2020/02/img_0144-1024x553.jpg" alt="" class="wp-image-581"/><figcaption>Image by <a href="https://pixabay.com/users/pixel2013-2364555/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2934257">S. Hermann &amp; F. Richter</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2934257">Pixabay</a></figcaption></figure>
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->
@@ -47,7 +47,7 @@ tags:
 <!-- /wp:heading -->
 
 <!-- wp:image {"id":582,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="https://srikanth.sastry.name/wp-content/uploads/2020/02/img_0145-1024x645.jpg" alt="" class="wp-image-582"/><figcaption>Image by <a href="https://pixabay.com/users/Alexas_Fotos-686414/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3109992">Alexas_Fotos</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3109992">Pixabay</a></figcaption></figure>
+<figure class="wp-block-image size-large"><img src="/assets/images/2020/02/img_0145-1024x645.jpg" alt="" class="wp-image-582"/><figcaption>Image by <a href="https://pixabay.com/users/Alexas_Fotos-686414/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3109992">Alexas_Fotos</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3109992">Pixabay</a></figcaption></figure>
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->

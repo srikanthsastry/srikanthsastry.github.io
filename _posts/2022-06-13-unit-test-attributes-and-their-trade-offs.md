@@ -13,9 +13,9 @@ excerpt: >
   Unit test suites have three attributes: accuracy, completeness, and speed. 
   You can maximize any two, but not all three. 
   So how do you choose what to maximize?
-image: /images/accuracy-completeness-speed.png
+image: /assets/images/accuracy-completeness-speed.png
 ...
-<!-- ![](/images/accuracy-completeness-speed.png) -->
+<!-- ![](/assets/images/accuracy-completeness-speed.png) -->
 Unit test suites have three primary attributes.
 
 1. accuracy, 
@@ -44,7 +44,7 @@ Among accuracy, completeness, and speed, you cannot maximize all three; that is,
 - A test suite with very high coverage is often made 'fast' through extensive use of test doubles and ends up coupling tests with the implementation details, which makes the tests brittle, and therefore inaccurate.
 
 ### What's the right trade off?
-![Image not found: /images/balance-scale.jpg](/images/balance-scale.jpg "Image not found: /images/balance-scale.jpg")
+![Image not found: /assets/images/balance-scale.jpg](/assets/images/balance-scale.jpg "Image not found: /assets/images/balance-scale.jpg")
 
 A natural follow up to the trade offs among accuracy, completeness, and speed is _"What is the right trade off?"_. It helps to notice that, empirically, we are always making this trade off and naturally settling on some point in the trade-off surface. What is this natural resting point for these trade offs? Let's examine a few things to help us answer the above question.
 

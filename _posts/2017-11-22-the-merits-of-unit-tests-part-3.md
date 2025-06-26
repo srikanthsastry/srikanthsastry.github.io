@@ -49,7 +49,7 @@ injection hygiene.</p>
 <!-- /wp:heading -->
 
 <!-- wp:image {"id":386} -->
-<figure class="wp-block-image"><img src="http://srikanth.sastry.name/wp-content/uploads/2019/01/0-2.jpg" alt="" class="wp-image-386"/></figure>
+<figure class="wp-block-image"><img src="/assets/images/2019/01/0-2.jpg" alt="" class="wp-image-386"/></figure>
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->
@@ -106,7 +106,7 @@ modular, easier to read, and much easier to maintain.</p>
 <!-- /wp:heading -->
 
 <!-- wp:image {"id":387} -->
-<figure class="wp-block-image"><img src="http://srikanth.sastry.name/wp-content/uploads/2019/01/0-3.jpg" alt="" class="wp-image-387"/></figure>
+<figure class="wp-block-image"><img src="/assets/images/2019/01/0-3.jpg" alt="" class="wp-image-387"/></figure>
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->

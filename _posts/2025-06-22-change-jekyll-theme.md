@@ -6,7 +6,7 @@ categories:
   - Personal
 tags: [jekyll, theme, customization, migration, "site migration"]
 draft: true
-image: /images/jekyll-new-suit-makeover.png
+image: /assets/images/jekyll-new-suit-makeover.png
 ---
 After I moved my website from Wordpress to [Jekyll](https://jekyllrb.com), I hadn't changed the theme for nearly 5 years. When I finally decided to change the theme recently, it turned out to be a lot more complicated than I expected. After a lot of trial and error, and searching the internet, and asking ChatGPT, I managed to get the theme changed. As a note to my future self, and to anyone else who might be struggling to update their Jekyll theme, I am outlining the steps here that will make it relatively straightforward for you to move from one theme to another.
 
@@ -124,7 +124,7 @@ Once merged to main, you should be good to go. Congratulations, you have success
 If you want to install a regular theme that is not gem-based, then instead of following the "Install New Theme" section's instructions, do the following.
 
 1. **Download the regular theme files.** You can fork them from github and clone it locally, if you want. That is what many repos suggest, but I prefer not to do that because those instructions assume that you will be installing your entire site on top of that repo. But that is not what you want. Presumably you want all of your content and associated commit history. So, don't clone the repo. Just download it to a new directory (say) `~/tmp/new_theme`. 
-![Download from github image](/images/github-download-repo.png)
+![Download from github image](/assets/images/github-download-repo.png)
 
 2. **Copy over the theme files to your site directory (`~/github/website`).** This include directories such as `_includes`, `_layouts`, `_data`, `assets`, and typically any other directory that starts with `_` (except for `_site`). There might also be `.js` or other files in the main directory that you might have to copy.
 

@@ -6,7 +6,7 @@ author: 'Srikanth Sastry'
 layout: post
 guid: 'https://srikanth.sastry.name/?p=503'
 permalink: /responding-to-concerns-as-a-people-manager/
-image: /wp-content/uploads/2019/12/unhappy-389944_1920-740x430.jpg
+image: /assets/images/2019/12/unhappy-389944_1920-740x430.jpg
 categories:
     - Professional
 tags:
@@ -34,7 +34,7 @@ tags:
 <!-- /wp:heading -->
 
 <!-- wp:image {"align":"left","id":510,"sizeSlug":"full"} -->
-<div class="wp-block-image"><figure class="alignleft size-full"><img src="https://srikanth.sastry.name/wp-content/uploads/2019/12/what-kids-hear.jpg" alt="" class="wp-image-510"/><figcaption>Source: https://richmondmom.com/2017/02/22/what-i-say-and-what-my-kids-hear/</figcaption></figure></div>
+<div class="wp-block-image"><figure class="alignleft size-full"><img src="/assets/images/2019/12/what-kids-hear.jpg" alt="" class="wp-image-510"/><figcaption>Source: https://richmondmom.com/2017/02/22/what-i-say-and-what-my-kids-hear/</figcaption></figure></div>
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->
@@ -46,7 +46,7 @@ tags:
 <!-- /wp:heading -->
 
 <!-- wp:image {"id":512,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="https://srikanth.sastry.name/wp-content/uploads/2019/12/pxfuel.com_-1024x683.jpg" alt="" class="wp-image-512"/><figcaption>source: https://www.pxfuel.com/en/free-photo-qwnsc</figcaption></figure>
+<figure class="wp-block-image size-large"><img src="/assets/images/2019/12/pxfuel.com_-1024x683.jpg" alt="" class="wp-image-512"/><figcaption>source: https://www.pxfuel.com/en/free-photo-qwnsc</figcaption></figure>
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->
@@ -58,7 +58,7 @@ tags:
 <!-- /wp:heading -->
 
 <!-- wp:image {"id":514,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="https://srikanth.sastry.name/wp-content/uploads/2019/12/Untitled-presentation.png" alt="" class="wp-image-514"/><figcaption>Original Image by <a href="https://pixabay.com/users/StartupStockPhotos-690514/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=593333">StartupStockPhotos</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=593333">Pixabay</a></figcaption></figure>
+<figure class="wp-block-image size-large"><img src="/assets/images/2019/12/Untitled-presentation.png" alt="" class="wp-image-514"/><figcaption>Original Image by <a href="https://pixabay.com/users/StartupStockPhotos-690514/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=593333">StartupStockPhotos</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=593333">Pixabay</a></figcaption></figure>
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->
@@ -78,7 +78,7 @@ tags:
 <!-- /wp:heading -->
 
 <!-- wp:image {"id":515,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="https://srikanth.sastry.name/wp-content/uploads/2019/12/apple-1594742_1920-1024x378.jpg" alt="" class="wp-image-515"/><figcaption>Image by <a href="https://pixabay.com/users/geralt-9301/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1594742">Gerd Altmann</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1594742">Pixabay</a></figcaption></figure>
+<figure class="wp-block-image size-large"><img src="/assets/images/2019/12/apple-1594742_1920-1024x378.jpg" alt="" class="wp-image-515"/><figcaption>Image by <a href="https://pixabay.com/users/geralt-9301/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1594742">Gerd Altmann</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1594742">Pixabay</a></figcaption></figure>
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->
@@ -93,9 +93,9 @@ tags:
 <h2>Check with others</h2>
 <!-- /wp:heading -->
 
-<!-- <figure><img src="https://srikanth.sastry.name/wp-content/uploads/2019/12/listen-1702648_1920-1024x682.jpg" alt="" data-id="517" data-full-url="https://srikanth.sastry.name/wp-content/uploads/2019/12/listen-1702648_1920.jpg" data-link="https://srikanth.sastry.name/?attachment_id=517" class="wp-image-517" /><figcaption class="blocks-gallery-item__caption">Image by <a href="https://pixabay.com/users/jamesoladujoye-3409212/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1702648">jamesoladujoye</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1702648">Pixabay</a></figcaption></figure>
-<figure><img src="https://srikanth.sastry.name/wp-content/uploads/2019/12/people-2557396_1920-1024x683.jpg" alt="" data-id="518" data-full-url="https://srikanth.sastry.name/wp-content/uploads/2019/12/people-2557396_1920.jpg" data-link="https://srikanth.sastry.name/?attachment_id=518" class="wp-image-518" /><figcaption class="blocks-gallery-item__caption">Image by <a href="https://pixabay.com/users/StockSnap-894430/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2557396">StockSnap</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2557396">Pixabay</a></figcaption></figure> -->
-<figure><img src="https://srikanth.sastry.name/wp-content/uploads/2019/12/workplace-1245776_1920-1024x683.jpg" alt="" data-id="519" data-full-url="https://srikanth.sastry.name/wp-content/uploads/2019/12/workplace-1245776_1920.jpg" data-link="https://srikanth.sastry.name/?attachment_id=519" class="wp-image-519" /><figcaption class="blocks-gallery-item__caption">Image by <a href="https://pixabay.com/photos/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1245776">Free-Photos</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1245776">Pixabay</a></figcaption></figure>
+<!-- <figure><img src="/assets/images/2019/12/listen-1702648_1920-1024x682.jpg" alt="" data-id="517" data-full-url="/assets/images/2019/12/listen-1702648_1920.jpg" data-link="https://srikanth.sastry.name/?attachment_id=517" class="wp-image-517" /><figcaption class="blocks-gallery-item__caption">Image by <a href="https://pixabay.com/users/jamesoladujoye-3409212/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1702648">jamesoladujoye</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1702648">Pixabay</a></figcaption></figure>
+<figure><img src="/assets/images/2019/12/people-2557396_1920-1024x683.jpg" alt="" data-id="518" data-full-url="/assets/images/2019/12/people-2557396_1920.jpg" data-link="https://srikanth.sastry.name/?attachment_id=518" class="wp-image-518" /><figcaption class="blocks-gallery-item__caption">Image by <a href="https://pixabay.com/users/StockSnap-894430/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2557396">StockSnap</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2557396">Pixabay</a></figcaption></figure> -->
+<figure><img src="/assets/images/2019/12/workplace-1245776_1920-1024x683.jpg" alt="" data-id="519" data-full-url="/assets/images/2019/12/workplace-1245776_1920.jpg" data-link="https://srikanth.sastry.name/?attachment_id=519" class="wp-image-519" /><figcaption class="blocks-gallery-item__caption">Image by <a href="https://pixabay.com/photos/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1245776">Free-Photos</a> from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1245776">Pixabay</a></figcaption></figure>
 
 <!-- wp:paragraph -->
 <p>So, you listened, empathized, kept your focus on the issue at hand. Next, we start trying to resolve it no? No! Don’t try to solve the issue yet. Check with others to see the issue is more widespread than the single individual. </p>
@@ -114,7 +114,7 @@ tags:
 <!-- /wp:heading -->
 
 <!-- wp:image {"id":522,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="https://srikanth.sastry.name/wp-content/uploads/2019/12/F6A7AB0B-9B1F-4081-8F7A-5C1E36C3123D-1024x683.jpeg" alt="" class="wp-image-522"/></figure>
+<figure class="wp-block-image size-large"><img src="/assets/images/2019/12/F6A7AB0B-9B1F-4081-8F7A-5C1E36C3123D-1024x683.jpeg" alt="" class="wp-image-522"/></figure>
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->
@@ -126,7 +126,7 @@ tags:
 <!-- /wp:heading -->
 
 <!-- wp:image {"id":528,"sizeSlug":"large"} -->
-<figure class="wp-block-image size-large"><img src="https://srikanth.sastry.name/wp-content/uploads/2019/12/77DCDE52-6137-447C-92B4-CB09E82F11C0-1024x678.jpeg" alt="" class="wp-image-528"/></figure>
+<figure class="wp-block-image size-large"><img src="/assets/images/2019/12/77DCDE52-6137-447C-92B4-CB09E82F11C0-1024x678.jpeg" alt="" class="wp-image-528"/></figure>
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->
