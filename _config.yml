@@ -20,8 +20,8 @@
 
 title: Srikanth Sastry
 email: srikanth@sastry.name
-logo: /images/site_logo.png
-favicon: /images/favicon.ico
+logo: /assets/images/site_logo.png
+favicon: /assets/images/favicon.ico
 description: >- # this means to ignore newlines until "baseurl:"
   This is Srikanth Sastry's personal blog, where I share my thoughts on technology, programming, and life in general. 
   Join me on this journey of exploration and learning.

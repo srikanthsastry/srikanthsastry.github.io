@@ -18,10 +18,10 @@ categories:
     - Professional
 permalink: /mocks-stubs-andhow-to-use-them/
 layout: post
-image: /images/masquerade-masks.png
+image: /assets/images/masquerade-masks.png
 ---
 
-<!-- ![Photo by Polina Kovaleva from Pexels](/images/masquerade-masks.png) -->
+<!-- ![Photo by Polina Kovaleva from Pexels](/assets/images/masquerade-masks.png) -->
 _Photo by [Polina Kovaleva](https://www.pexels.com/@polina-kovaleva?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels) from [Pexels](https://www.pexels.com/photo/close-up-of-masquerade-masks-on-purple-background-8404608/?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels)_
 
 [Test doubles](https://en.wikipedia.org/wiki/Test_double) are the standard mechanism to isolate your System-Under-Test (SUT) from external dependencies in unit tests. Unsurprisingly, it is important to use the right test double for each use case for a maintainable and robust test suite. However, I have seen a lot of misuse of test doubles, and suffered through the consequences of it enough number of times to want to write down some (admittedly subjective) guidelines on when an how to use test doubles. 
@@ -30,7 +30,7 @@ Briefly, test doubles are [replacements for a production object used for testing
 
 ## Mocks
 
-![woman wearing an emoji mask](/images/woman-wearing-emoji-mask.jpg)
+![woman wearing an emoji mask](/assets/images/woman-wearing-emoji-mask.jpg)
 
 _Image by [Andii Samperio](https://pixabay.com/users/5697702-5697702/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2428737) from [Pixabay](https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2428737)_
 
@@ -58,7 +58,7 @@ Note that in the above illustration, we verify that the message is sent to the t
 
 ## Stubs
 
-![Robot imitating family](/images/robot-imitating-family.jpg)
+![Robot imitating family](/assets/images/robot-imitating-family.jpg)
 
 Unlike mocks, stubs verify 'inbound' interactions from external dependencies to the SUT. Stubs are useful when replacing external dependencies that 'send' data to the SUT in order for the SUT to satisfy its specification. Examples include key value stores, databases, event listeners, etc. The important note here is that the outbound interaction to the stub _should not be asserted_ in the tests; that's an anti pattern (it results in over-specification)! Here is an illustration.
 
@@ -125,7 +125,7 @@ The advantage of using a fake is that the test becomes much more robust and is m
 
 ## But my dependency has both inbound and outbound interactions!
 
-![Photograph of man double exposure](/images/man-double-exposed-photo.jpg)
+![Photograph of man double exposure](/assets/images/man-double-exposed-photo.jpg)
 
 Despite all your efforts to separate out the test cases that need stubs and the ones that need mocks, you will inevitably find yourself needing to test a scenario in which you need to verify both inbound and outbound interactions with an external dependency. How do we address that? 
 

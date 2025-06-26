@@ -11,9 +11,9 @@ permalink: /dry-unit-tests-are-bad/
 layout: post
 excerpt: >
   Simplicity should be a core property of unit tests. This is motivated, both by arguments in this post against DRY unit tests, and by software maintainability as the primary motivation for unit tests. Unit tests should be as simple as reasonable. It should be easy to ready, understand, and modify (it should be easy to modify any single test in isolation). It is perfectly acceptable for this simplicity to come at the expense of code-reuse, performance, and efficiency.
-image: /images/squeeze-cloth.jpg
+image: /assets/images/squeeze-cloth.jpg
 ...
-<!-- ![DRY](/images/squeeze-cloth.jpg) -->
+<!-- ![DRY](/assets/images/squeeze-cloth.jpg) -->
 
 ["Don't Repeat Yourself" (DRY)](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) is arguably one of the most important principles in software engineering. It is considered a truism among many. A consequence of such dogmatic allegiance to DRYness is that we see a lot of DRY unit tests; this is where the utility of the DRY principle breaks downs and starts causing more problems that it solves.
 
@@ -31,7 +31,7 @@ Presumably, we are all convinced of the benefits of DRYing your code (interested
 Let's explore each one in more detail.
 
 ### DRYness and Abstraction
-![Abstract](/images/triangles-abstract.png)
+![Abstract](/assets/images/triangles-abstract.png)
 In practice, DRYing out code results in building abstractions that _represents a collection of semantically identical operations_ into common procedure. If done prematurely, then DRYing can result in poorer software. In fact, premature DRYing is the motivation for advocating the [AHA](https://kentcdodds.com/blog/aha-programming) principle. While that argument against DRYness works well in production code, it does not apply for test code.
 
 Test code is often a collection of procedures, and each procedure steps the System-Under-Test (SUT) through a distinct user journey and compares the SUT's behavior against pre-defined expectations. Thus, almost by design, test code does not yield itself semantically similar abstractions. The mistake that I have seen software engineers make is to mistake syntactic similarly for semantic similarity. Just because the tests' 'Arrange' sections look similar does not mean that they are doing semantically the same thing in both places; in fact, they are almost certainly doing semantically different things because otherwise, the tests are duplicates of each other!
@@ -39,7 +39,7 @@ Test code is often a collection of procedures, and each procedure steps the Syst
 By DRYing out such test code, you are effectively forcing abstractions where none exist, and that leads to the same issues that DRYness leads to in production code (See [\[1\]](https://kentcdodds.com/blog/aha-programming), [\[2\]](https://sandimetz.com/blog/2016/1/20/the-wrong-abstraction), [\[3\]](https://evhaus.medium.com/using-dry-wet-damp-code-6ab3c8245bb2), [\[4\]](https://startup-cto.net/moist-code-why-code-should-not-be-completely-dry/) for examples).
 
 ### Readability
-![Abstract](/images/glasses-letters-clear.jpg)
+![Abstract](/assets/images/glasses-letters-clear.jpg)
 Most code is read more often than is written/edited. Unsurprisingly, it is important to favor code readability, even in production code. However, in production code, if this comes at a steep cost in performance and/or efficiency, then it is common (and prudent) to favor performance over readability. Test code, on the other hand, is less subject to the (potential) tension between readability and performance. Yes, unit tests need to be 'fast', but given the minuscule amount of data/inputs that unit tests process, speed is not an issue with hermetic unit tests. The upshot here is that there is no practical drawback to keeping test code readable. 
 
 DRYing out test code directly affects its readability. Why? Remember that we read unit tests to understand the expected behavior of the system-under-test (SUT), and we do so in the context of a user journey. So, a readable unit test needs to explain the user journey it is executing, the role played by the SUT in realizing that user journey, and what a successful user journey looks like. This is reflected in the [Arrange-Act-Assert](https://java-design-patterns.com/patterns/arrange-act-assert/) structure of the unit test. When you DRY out your unit tests, you are also obfuscating at least one of those sections in your unit test. This is better illustrated with an example.
@@ -105,7 +105,7 @@ Production code has the luxury of being fine tuned, optimized, DRY'd out, and su
 DRY code inevitably asks the reader to jump from one function to another and requires the reader to keep the previous context when navigating these functions. In other words, it increases the cognitive burden on the reader compared to straight line duplicated code. That makes it difficult to verify the correctness of the test code quickly and easily. So, when you DRY out your test code, you are increasing the odds that bugs creep into your test suite, and developers lose confidence in the tests, which in turn significantly reduces the utility if your tests.
 
 ### Developer Velocity
-![Woman developer](/images/woman-developer-frustrated.jpg)
+![Woman developer](/assets/images/woman-developer-frustrated.jpg)
 
 Recall from the previous section that while tests might have duplicate code, they do not actually represent semantic abstractions replicated in multiple places. If you do mistake them for common semantic abstractions and DRY them out, then eventually there will an addition to the production code whose test breaks this semantic abstraction. At this point, the developer who is adding this feature will run into issues when trying to modify the existing test code to add the new test case. For instance, consider a class that is hermetic, stateless, and does not throw exceptions. It would not be surprising to organize DRY tests for this class that assumes that exceptions are never thrown. Now there is a new feature added to this class that requires an external dependency, and now can throw exceptions. Added a new test case into the DRY'd out unit test suite will not be easy or straightforward. The sunk cost fallacy associated with the existing test framework makes it more likely that the developer will try to force-fit the new test case(s) into existing framework. As a result:
 
@@ -113,6 +113,6 @@ Recall from the previous section that while tests might have duplicate code, the
 2. Thanks to poor abstractions, you have now incurred more technical debt in your test code.
 
 ### Code Reviews
-![Developers doing code reviews](/images/black-women-developers.jpg)
+![Developers doing code reviews](/assets/images/black-women-developers.jpg)
 
 DRY'd out tests not only impede developer velocity, they also make it less easy to review code/diffs/pull requests. This is a second order effect of DRYing out your test code. Let's revisit the example where we are adding a new feature to an existing piece of code, and this is a pure addition in behavior (not modification to existing behavior). If the tests were not DRY'd out, then adding tests for this new feature would involve just adding new test cases, and thus, just green lines in the generated diff. In contrast, recall from the previous subsection that adding tests with DRY test code is likely going to involve modifying existing code and then adding new test cases. In the former case, reviewing the tests is much easier, and as a result, reviewing that the new feature is behaving correctly is also that much easier. Reviewing the diff in the latter case is cognitively more taxing because not only does the reviewer need to verify that the new feature is implemented correctly, they also have to verify that the changes to the test code is also correct, and is not introducing new holes for bugs to escape testing. This can significantly slow down code reviews in two ways (1) it requires more time to review the code, and (2) because it requires longer to review the code, the reviewers are more likely to delay even starting the code review.

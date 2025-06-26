@@ -16,11 +16,11 @@ excerpt: >
   So, it is tempting to add unit tests for all functionality that your code supports. 
   But that begs the following question. "Why do we need integration and end-to-end tests?"
   Unit tests most benefit the most complex parts of your codebase that often requires the most technical skill and domain knowledge to author, read, and maintain. Integration tests disproportionately benefit the parts of your codebase that communicate with external dependencies.
-image: /images/brain-magnifying-glass.png
+image: /assets/images/brain-magnifying-glass.png
 ...
 _Note: This is inspired from the book "[Unit Testing: Principles, Practices, and Patterns](https://www.manning.com/books/unit-testing)" by Vladimir Khorikov._
 
-<!-- ![brain](/images/brain-magnifying-glass.png) -->
+<!-- ![brain](/assets/images/brain-magnifying-glass.png) -->
 
 Unit tests are typically your first line of defense against bugs. So, it is tempting to add unit tests for all functionality that your code supports. But that begs the following question. "Why do we need integration and end-to-end tests?"
 

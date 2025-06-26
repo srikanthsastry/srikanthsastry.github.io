@@ -21,7 +21,7 @@ You can check out part 1 [here](https://www.youtube.com/watch?v=GunPvoASf3A).
 
 {% include youtube_player.html id='GunPvoASf3A' %}
 <!-- Alternative (change the placeholder image):
- {% youtube GunPvoASf3A /images/youtube-logo-red.png %} 
+ {% youtube GunPvoASf3A /assets/images/youtube-logo-red.png %} 
  -->
 
 In the second part, I get into the computer sciency details of the complexity of airfare search (even the simplest versions of this problem are NP-hard), and provide a (over)simplified description of QPX --- the engine that Google uses to search and price airfare tickets. This talk is targeted at computer science students and professional.
@@ -30,5 +30,5 @@ Check out part 2 [here](https://www.youtube.com/watch?v=5t49HQIHoJw).
 
 {% include youtube_player.html id='5t49HQIHoJw' %}
 <!-- Alternative (change the placeholder image):
- {% youtube 5t49HQIHoJw /images/youtube-logo-red.png %} 
+ {% youtube 5t49HQIHoJw /assets/images/youtube-logo-red.png %} 
  -->

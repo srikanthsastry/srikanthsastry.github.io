@@ -10,9 +10,9 @@ tags:
   - SEV
 author: Srikanth Sastry
 permalink: /sync-your-alerts-to-your-sev-criteria/
-image: /images/sleepy-engineer-cursing-laptop.png
+image: /assets/images/sleepy-engineer-cursing-laptop.png
 ...
-<!-- ![](/images/sleepy-engineer-cursing-laptop.png) -->
+<!-- ![](/assets/images/sleepy-engineer-cursing-laptop.png) -->
 At work, I had a customer team that aspired to be *“customer first.”* To them, that meant fixing issues *before* they became SEVs. That was all and good, except that the way they went about it was to fire alerts well *before* their SLOs were close to being breached. Of course, I knew nothing about it until I was the receiving end of their 'aspiration'.
 
 
@@ -30,7 +30,7 @@ So now *I’m* awake, trying to make sense of a 30-minute p99 latency increase t
 > **“Where's the SEV'?**
 
 I imagine the scene something like this.
-![](/images/where-sev-where-impact.jpg)
+![](/assets/images/where-sev-where-impact.jpg)
 
 Silence. Five minutes later, "Here is the SEV number..." The SEV was created two minutes ago. Facepalm!
 
