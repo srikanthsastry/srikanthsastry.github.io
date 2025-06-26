@@ -1,6 +1,6 @@
 ---
 title: "Const Refs vs. Raw Pointers: Fixing Shared Pointer Reads"
-date: 2025-06-25
+date: 2025-06-26
 layout: post
 categories: 
     - Professional
