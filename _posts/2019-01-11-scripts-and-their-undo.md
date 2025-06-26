@@ -16,7 +16,7 @@ tags:
 image: /wp-content/uploads/2019/01/bash-logo-672x372.png
 ---
 
-<!-- wp:cover {"url":"http://srikanth.sastry.name/wp-content/uploads/2019/01/bash-logo-672x372.png","id":313} -->
+<!-- wp:cover {"url":"/wp-content/uploads/2019/01/bash-logo-672x372.png","id":313} -->
 <div class="wp-block-cover has-background-dim"><p class="wp-block-cover-text"><strong>TL;DR.</strong> <em>Scripts are a great way to automate the mundane. But be sure you give yourself a way out --- an undo -- when running them.</em></p></div>
 <!-- /wp:cover -->
 

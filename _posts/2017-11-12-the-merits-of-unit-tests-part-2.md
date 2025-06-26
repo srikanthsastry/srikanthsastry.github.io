@@ -41,7 +41,7 @@ designed your software is, over time a few things happen to it.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:image {"id":375,"linkDestination":"custom"} -->
-<figure class="wp-block-image"><a href="http://dilbert.com/strip/2011-05-16" target="_blank" rel="noreferrer noopener"><img src="http://srikanth.sastry.name/wp-content/uploads/2019/01/dt_c110516-1024x319.gif" alt="Boss: Did I remember to tell you before you finished the coding that the user's specifications changed? Dilbert: AAAIII-YIIIII-YIIII-YIII!!! Boss: So, no-ish? Dilbert: BAM! BAM! BAM! " class="wp-image-375"/></a></figure>
+<figure class="wp-block-image"><a href="http://dilbert.com/strip/2011-05-16" target="_blank" rel="noreferrer noopener"><img src="/wp-content/uploads/2019/01/dt_c110516-1024x319.gif" alt="Boss: Did I remember to tell you before you finished the coding that the user's specifications changed? Dilbert: AAAIII-YIIIII-YIIII-YIII!!! Boss: So, no-ish? Dilbert: BAM! BAM! BAM! " class="wp-image-375"/></a></figure>
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->
@@ -55,7 +55,7 @@ this may not be true anymore.</em></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:image {"id":376} -->
-<figure class="wp-block-image"><img src="http://srikanth.sastry.name/wp-content/uploads/2019/01/0.jpg" alt="" class="wp-image-376"/></figure>
+<figure class="wp-block-image"><img src="/wp-content/uploads/2019/01/0.jpg" alt="" class="wp-image-376"/></figure>
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->
@@ -72,7 +72,7 @@ things to do.</em></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:image {"id":377,"linkDestination":"custom"} -->
-<figure class="wp-block-image"><a href="http://www.gorillafabrication.com/modifications/16-repurposed-trucks-and-cars/" target="_blank" rel="noreferrer noopener"><img src="http://srikanth.sastry.name/wp-content/uploads/2019/01/0-1.jpg" alt="" class="wp-image-377"/></a></figure>
+<figure class="wp-block-image"><a href="http://www.gorillafabrication.com/modifications/16-repurposed-trucks-and-cars/" target="_blank" rel="noreferrer noopener"><img src="/wp-content/uploads/2019/01/0-1.jpg" alt="" class="wp-image-377"/></a></figure>
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->
@@ -109,7 +109,7 @@ becomes a lot easier.</p>
 <!-- /wp:pullquote -->
 
 <!-- wp:image {"id":379,"align":"center","linkDestination":"custom"} -->
-<div class="wp-block-image"><figure class="aligncenter"><a href="http://upload.wikimedia.org/wikipedia/commons/0/0b/TDD_Global_Lifecycle.png" target="_blank" rel="noreferrer noopener"><img src="http://srikanth.sastry.name/wp-content/uploads/2019/01/refactoringg-884x1024.png" alt="" class="wp-image-379"/></a></figure></div>
+<div class="wp-block-image"><figure class="aligncenter"><a href="http://upload.wikimedia.org/wikipedia/commons/0/0b/TDD_Global_Lifecycle.png" target="_blank" rel="noreferrer noopener"><img src="/wp-content/uploads/2019/01/refactoringg-884x1024.png" alt="" class="wp-image-379"/></a></figure></div>
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->
