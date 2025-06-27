@@ -13,6 +13,6 @@ main_content: >
   My professional interests include distributed system design, software engineering processes, and building engineering teams.
   
 
-  In a previous life, during my years in academia, I worked on distributed systems, networking, fault tolerance, and algorithm design and analysis. My list of publications are available on [DBLP](http://www.informatik.uni-trier.de/~ley/pers/hd/s/Sastry:Srikanth).
+  In a previous life, during my years in academia, I worked on distributed systems, networking, fault tolerance, and algorithm design and analysis. My list of [publications](/publications) are available on [DBLP](https://dblp.org/pid/39/1050.html).
 
 ---
