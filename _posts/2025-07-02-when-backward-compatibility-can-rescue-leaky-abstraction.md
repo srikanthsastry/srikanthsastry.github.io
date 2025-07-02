@@ -16,7 +16,7 @@ excerpt: >
     This is a story about how I wrangled backward compatibility, tamed a leaky abstraction, and kept my data flowing.
 ---
 
-I ran into one of those delightful bugs that only show up in large-scale data pipelines — the kind that teach you exactly how your abstraction leaks by smashing you in the face.
+I ran into one of those delightful bugs that only show up in dynamic task generation of your data pipelines — the kind that teach you how a leaky abstraction in your pipeline platform can have you scratching your head in confusion.
 
 The short version:
 I made a simple function signature change, assuming only future runs would care. Instead, my pipeline broke days later when an old task serialized under the previous signature collided with the new code. The fix? Classic backward compatibility tricks that saved me from rewriting half the pipeline.
