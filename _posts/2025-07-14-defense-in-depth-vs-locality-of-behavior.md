@@ -1,10 +1,13 @@
 ---
 title: "Defense in Depth vs Locality of Behavior"
 date: 2025-07-14
+layout: post
 categories:
     - Professional
 tags:
     - software engineering
+permalink: /defense-in-depth-vs-locality-of-behavior/
+image: /assets/images/naked-knight-with-helmet-and-shield.jpg
 excerpt: >
     A story about how defense-in-depth and locality of behavior collide, and how blindly relying on fallback mechanisms can backfire.
 ---
