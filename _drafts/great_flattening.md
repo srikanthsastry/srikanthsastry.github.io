@@ -10,7 +10,7 @@ tags:
 permalink: /the-great-flattening-ai-slop/
 image: //todo
 excerpt: |
-  new excerpt
+  From the Code of Hammurabi to Generative AI, humanity has spent 2,500 years on a project of "legibility"—coercing the irreducible complexity of reality to fit our simplified models. AI Slop is not a glitch or a technological failure; it is the final, logical victory of the model over the territory.
 ---
 
 Reality is an entity of vast, irreducible complexity. 
