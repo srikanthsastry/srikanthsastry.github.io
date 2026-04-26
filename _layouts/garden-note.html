@@ -32,11 +32,11 @@ layout: default
     </div>
 
     {% if page.tags.size > 0 %}
-    <div class="flex flex-wrap gap-2 mb-8" data-motion="fadeInUp" data-motion-delay="0.6">
+    <div class="flex flex-wrap mb-8" style="gap: 0.5rem;" data-motion="fadeInUp" data-motion-delay="0.6">
       {% for tag in page.tags %}
-        <a href="{{ '/garden/' | relative_url }}#{{ tag | slugify }}" class="no-underline text-xs font-mulish px-3 py-1 rounded-full bg-neutral-200 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-300 dark:hover:bg-neutral-700">
+        <span class="text-xs font-mulish rounded-full bg-neutral-200 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300" style="padding: 0.25rem 0.75rem;">
           {{ tag }}
-        </a>
+        </span>
       {% endfor %}
     </div>
     {% endif %}
