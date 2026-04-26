@@ -1,6 +1,6 @@
 ---
 id: 202205311934
-title: Archives
+title: Stream
 author: 'Srikanth Sastry'
 layout: blog
 permalink: /archives/

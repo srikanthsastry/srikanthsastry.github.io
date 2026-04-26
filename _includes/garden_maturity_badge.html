@@ -1,0 +1,12 @@
+{% assign m = include.maturity | default: "seedling" %}
+{% if include.inline %}
+  {% if m == "seedling" %}<span title="Seedling — early idea">🌱</span>
+  {% elsif m == "budding" %}<span title="Budding — developing">🌿</span>
+  {% elsif m == "evergreen" %}<span title="Evergreen — stable reference">🌳</span>
+  {% endif %}
+{% else %}
+  {% if m == "seedling" %}<span class="garden-badge garden-badge--seedling">🌱 Seedling</span>
+  {% elsif m == "budding" %}<span class="garden-badge garden-badge--budding">🌿 Budding</span>
+  {% elsif m == "evergreen" %}<span class="garden-badge garden-badge--evergreen">🌳 Evergreen</span>
+  {% endif %}
+{% endif %}

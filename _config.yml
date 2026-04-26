@@ -48,6 +48,20 @@ theme: awesome-jekyll-theme
 plugins:
   - jekyll-feed
 
+# Digital Garden collection
+collections:
+  garden:
+    output: true
+    permalink: /garden/:slug/
+
+# Default frontmatter
+defaults:
+  - scope:
+      path: ""
+      type: "garden"
+    values:
+      layout: "garden-note"
+
 # Exclude from processing.
 # The following items will not be processed, by default.
 # Any item listed under the `exclude:` key here will be automatically added to
