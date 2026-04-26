@@ -13,6 +13,8 @@ related_notes:
   - directive-gap
   - confabulation-is-plausible
   - susceptibility-peaks-at-failure
+  - ambient-to-local
+  - friction-requires-intent
 excerpt_text: >
   The suggestible actor is defined by four properties: goal-oriented, locally reasoning, susceptible to local
   context, and confabulates under uncertainty. Confabulation is the convergent failure mode of the other three.

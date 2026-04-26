@@ -11,6 +11,7 @@ related_notes:
   - suggestible-actor-properties
   - susceptibility-peaks-at-failure
   - friction-requires-intent
+  - confabulation-is-plausible
 excerpt_text: >
   The core design principle for the suggestible actor: convert ambient knowledge into local context.
   Human developers carry implicit knowledge the AI agent cannot access. Make it explicit and local.

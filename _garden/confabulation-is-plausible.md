@@ -10,6 +10,7 @@ related_notes:
   - suggestible-actor-properties
   - directive-gap
   - susceptibility-peaks-at-failure
+  - ambient-to-local
 excerpt_text: >
   AI agent confabulation is not random. It is plausible-looking wrongness — output constructed from pattern
   and proximity rather than knowledge. The danger is not that these errors are spectacular; it is that they
