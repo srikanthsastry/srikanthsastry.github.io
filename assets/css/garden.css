@@ -65,3 +65,20 @@
   text-decoration: none;
   transition: background-color 0.2s ease;
 }
+
+
+/* ── Garden popover preview ─────────────────────────────────────── */
+.garden-popover {
+  /* Base styles applied via inline JS for Tailwind purge safety.
+     These are overrides / additions only. */
+}
+
+/* Subtle underline hint on garden links that have previews */
+a[data-garden-link] {
+  text-decoration-style: dotted;
+  text-underline-offset: 3px;
+}
+
+a[data-garden-link]:hover {
+  text-decoration-style: solid;
+}
