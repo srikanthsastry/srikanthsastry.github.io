@@ -1,0 +1,93 @@
+---
+layout: default
+---
+
+<link rel="stylesheet" href="{{ '/assets/css/monokai.css' | relative_url }}">
+<link rel="stylesheet" href="{{ '/assets/css/garden.css' | relative_url }}">
+<div class="container mx-auto">
+  <div id="garden-note" class="prose md:prose-lg dark:prose-invert prose-img:rounded-lg max-w-[75ch] mx-auto pb-10 pt-20 lg:pt-[90px] lg:pb-20">
+
+    <div class="pb-2" data-motion="fadeInRight">
+      <a href="{{ '/garden/' | relative_url }}" class="no-underline font-mulish text-sm hover:underline text-neutral-700 dark:text-neutral-300">
+        ← GARDEN
+      </a>
+    </div>
+
+    <h1 class="text-left text-2xl font-bold md:text-5xl text-neutral-900 dark:text-neutral-100" data-motion="fadeInRight">
+      {{ page.title }}
+    </h1>
+
+    <div data-motion="fadeInLeft" data-motion-delay="0.4" data-motion-duration="0.4" class="flex flex-col md:flex-row text-sm font-mulish justify-between items-center mb-6">
+      <div class="flex items-center gap-4 flex-wrap">
+        {% include garden_maturity_badge.html maturity=page.maturity %}
+        <span class="text-neutral-500">•</span>
+        <span class="text-neutral-600 dark:text-neutral-400">{{ page.garden_type | capitalize }}</span>
+        <span class="text-neutral-500">•</span>
+        <span class="text-neutral-600 dark:text-neutral-400">Planted {{ page.created | date: "%-d %B %Y" }}</span>
+        {% if page.updated and page.updated != page.created %}
+          <span class="text-neutral-500">•</span>
+          <span class="text-neutral-600 dark:text-neutral-400">Updated {{ page.updated | date: "%-d %B %Y" }}</span>
+        {% endif %}
+      </div>
+    </div>
+
+    {% if page.tags.size > 0 %}
+    <div class="flex flex-wrap gap-2 mb-8" data-motion="fadeInUp" data-motion-delay="0.6">
+      {% for tag in page.tags %}
+        <a href="{{ '/garden/' | relative_url }}#{{ tag | slugify }}" class="no-underline text-xs font-mulish px-3 py-1 rounded-full bg-neutral-200 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-300 dark:hover:bg-neutral-700">
+          {{ tag }}
+        </a>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <div data-motion="fadeInUp" data-motion-onscroll="false" data-motion-delay="0.8" data-motion-duration="0.2" class="my-6">
+      {{ content }}
+    </div>
+
+    {% if page.related_posts.size > 0 %}
+    <div class="my-8 p-4 rounded-lg bg-neutral-100 dark:bg-neutral-900">
+      <h3 class="text-lg font-bold mb-2">📝 Related Blog Posts</h3>
+      <ul class="list-none pl-0">
+        {% for post_permalink in page.related_posts %}
+          {% assign rel_post = site.posts | where: "permalink", post_permalink | first %}
+          {% if rel_post %}
+            <li><a href="{{ rel_post.url | relative_url }}">{{ rel_post.title }}</a></li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+    {% if page.related_notes.size > 0 %}
+    <div class="my-8 p-4 rounded-lg bg-neutral-100 dark:bg-neutral-900">
+      <h3 class="text-lg font-bold mb-2">🌿 Related Notes</h3>
+      <ul class="list-none pl-0">
+        {% for note_slug in page.related_notes %}
+          {% assign rel_note = site.garden | where: "slug", note_slug | first %}
+          {% if rel_note %}
+            <li>
+              {% include garden_maturity_badge.html maturity=rel_note.maturity inline=true %}
+              <a href="{{ rel_note.url | relative_url }}">{{ rel_note.title }}</a>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+    {% include garden_backlinks.html %}
+
+    {% if page.garden_type == "source" and page.source_url %}
+    <div class="my-8 p-4 rounded-lg border border-neutral-300 dark:border-neutral-700">
+      <p class="text-sm font-mulish text-neutral-600 dark:text-neutral-400">
+        📚 <strong>Source:</strong>
+        {% if page.source_author %}{{ page.source_author }}{% endif %}
+        {% if page.source_year %}({{ page.source_year }}){% endif %}
+        — <a href="{{ page.source_url }}">{{ page.source_url | truncate: 60 }}</a>
+      </p>
+    </div>
+    {% endif %}
+
+  </div>
+</div>

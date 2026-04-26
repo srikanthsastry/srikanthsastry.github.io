@@ -1,0 +1,74 @@
+---
+layout: default
+---
+
+<link rel="stylesheet" href="{{ '/assets/css/garden.css' | relative_url }}">
+<section class="container mx-auto pb-10 pt-20 lg:pt-[90px] lg:pb-20">
+
+  <h1 class="text-3xl md:text-5xl font-bold text-neutral-800 dark:text-neutral-200 mb-4" data-motion="fadeInRight">
+    {{ page.title }}
+  </h1>
+  <p class="font-mulish text-lg text-neutral-600 dark:text-neutral-400 mb-8 max-w-[75ch]" data-motion="fadeInLeft">
+    {{ page.description }}
+  </p>
+
+  <div class="flex gap-6 mb-8 text-sm font-mulish" data-motion="fadeInUp">
+    <span>🌱 Seedling — early idea</span>
+    <span>🌿 Budding — developing</span>
+    <span>🌳 Evergreen — stable reference</span>
+  </div>
+
+  {% assign all_tags = "" | split: "" %}
+  {% for note in site.garden %}
+    {% for tag in note.tags %}
+      {% unless all_tags contains tag %}
+        {% assign all_tags = all_tags | push: tag %}
+      {% endunless %}
+    {% endfor %}
+  {% endfor %}
+  {% assign all_tags = all_tags | sort %}
+
+  <div class="flex flex-wrap gap-2 mb-12" data-motion="fadeInUp">
+    {% for tag in all_tags %}
+      <a href="#{{ tag | slugify }}" id="{{ tag | slugify }}"
+         class="text-xs font-mulish px-3 py-1 rounded-full bg-neutral-200 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-300 dark:hover:bg-neutral-700 no-underline">
+        {{ tag }}
+      </a>
+    {% endfor %}
+  </div>
+
+  {% assign types = "note,source,thought" | split: "," %}
+  {% assign type_labels = "Notes,Sources,Thoughts" | split: "," %}
+  {% assign type_icons = "📝,📚,💭" | split: "," %}
+
+  {% for type in types %}
+    {% assign idx = forloop.index0 %}
+    {% assign typed_notes = site.garden | where: "garden_type", type | sort: "title" %}
+    {% if typed_notes.size > 0 %}
+    <div class="mb-12" data-motion="fadeInUp">
+      <h2 class="text-2xl font-bold text-neutral-800 dark:text-neutral-200 mb-6">
+        {{ type_icons[idx] }} {{ type_labels[idx] }}
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for note in typed_notes %}
+          <a href="{{ note.url | relative_url }}" class="garden-card no-underline block p-4 rounded-lg border border-neutral-200 dark:border-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-600 transition">
+            <div class="flex items-start gap-2 mb-2">
+              {% include garden_maturity_badge.html maturity=note.maturity inline=true %}
+              <h3 class="text-lg font-semibold text-neutral-900 dark:text-neutral-100">{{ note.title }}</h3>
+            </div>
+            {% if note.excerpt_text %}
+              <p class="text-sm text-neutral-600 dark:text-neutral-400 line-clamp-2">{{ note.excerpt_text }}</p>
+            {% endif %}
+            <div class="flex flex-wrap gap-1 mt-2">
+              {% for tag in note.tags limit:3 %}
+                <span class="text-xs px-2 py-1 rounded bg-neutral-100 dark:bg-neutral-900 text-neutral-500">{{ tag }}</span>
+              {% endfor %}
+            </div>
+          </a>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+  {% endfor %}
+
+</section>

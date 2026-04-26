@@ -1,0 +1,67 @@
+/* Garden maturity badges — plain CSS since Tailwind purge may remove unused utility classes */
+.garden-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+}
+
+.garden-badge--seedling {
+  background-color: #dcfce7;
+  color: #166534;
+}
+
+.dark .garden-badge--seedling {
+  background-color: #14532d;
+  color: #bbf7d0;
+}
+
+.garden-badge--budding {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.dark .garden-badge--budding {
+  background-color: #064e3b;
+  color: #a7f3d0;
+}
+
+.garden-badge--evergreen {
+  background-color: #ccfbf1;
+  color: #115e59;
+}
+
+.dark .garden-badge--evergreen {
+  background-color: #134e4a;
+  color: #99f6e4;
+}
+
+/* Garden note card hover effects */
+.garden-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.garden-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Line clamp for note excerpts */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Garden index tag pills */
+.garden-tag-pill {
+  display: inline-block;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}

@@ -19,13 +19,13 @@ excerpt: >
 
 Every software system is designed around an assumption about its actors; the ones who use the system, and what drives their behavior. This assumption, the *actor model*, determines API surfaces, error handling, defaults, and guardrails.
 
-There are two actor models in software design, each an archetype at one end of the **intent spectrum**. The well-intentioned actor on one end, the malicious actor on the other. Some systems mix both along the user journey (the login flow assumes a malicious actor, the dashboard assumes a well-intentioned one) but at any given point, the design caters to one or the other. That binary held for decades. But not anymore.
+There are two actor models in software design, each an archetype at one end of the [intent spectrum](/garden/intent-spectrum/). The well-intentioned actor on one end, the malicious actor on the other. Some systems mix both along the user journey (the login flow assumes a malicious actor, the dashboard assumes a well-intentioned one) but at any given point, the design caters to one or the other. That binary held for decades. But not anymore.
 
 ## The Well-Intentioned Actor
 
 This model assumes that the actor intends to use the system as designed and follow the happy path of the user journey. They want to work within the boundaries, satisfy the preconditions for calling the right APIs, and follow conventions. When they violate a rule, it is accidental and not intentional.
 
-The design paradigm that follows from this model is [**the pit of success**](https://ricomariani.medium.com/the-pit-of-success-cfefc6cb64c8). Make correct usage easy and incorrect usage ergonomically painful. Examples include Rust's borrow checker, builder patterns that enforce required fields, type systems that make illegal states unrepresentable, _etc_. All of these rely on the actor to interpret ergonomic friction as a signal to stop and reassess. When a well-intentioned actor encounters resistance, they read it as: _I am probably doing something wrong_.
+The design paradigm that follows from this model is [**the pit of success**](https://ricomariani.medium.com/the-pit-of-success-cfefc6cb64c8). Make correct usage easy and incorrect usage ergonomically painful. Examples include Rust's borrow checker, builder patterns that enforce required fields, type systems that make illegal states unrepresentable, _etc_. All of these rely on the actor to interpret [ergonomic friction](/garden/friction-requires-intent/) as a signal to stop and reassess. When a well-intentioned actor encounters resistance, they read it as: _I am probably doing something wrong_.
 
 This paradigm rests on a specific assumption: the actor has **judgment**. They can interpret signals beyond the literal content of an error message, drawing on context and system-wide invariants. The system does not need to spell out every correct behavior; it only needs to make incorrect behavior uncomfortable, and the actor's judgment does the rest.
 
@@ -86,13 +86,13 @@ A human developer operates with ambient knowledge: team conventions, institution
 
 ### Susceptible to local context
 
-Every input the agent receives during execution (compiler errors, test results, code comments, documentation) influences its subsequent behavior. This susceptibility is not uniform. When the agent has a working path toward its goal, external inputs have relatively weak influence. When the agent is _stuck_, the next piece of feedback it encounters has outsized influence on what it does next. **The agent is most susceptible at the point of failure.**
+Every input the agent receives during execution (compiler errors, test results, code comments, documentation) influences its subsequent behavior. This susceptibility is not uniform. When the agent has a working path toward its goal, external inputs have relatively weak influence. When the agent is _stuck_, the next piece of feedback it encounters has outsized influence on what it does next. **The agent is [most susceptible at the point of failure](/garden/susceptibility-peaks-at-failure/).**
 
 This is the primary design lever. The agent's behavior can be steered, but only if guidance is placed where the agent will encounter it at the moments it is most receptive.
 
 ### Confabulates under uncertainty
 
-When local context is insufficient to determine a next step, the agent does not stop and request clarification. It confabulates: it generates a plausible structure and proceeds as if that structure were real. A call to an API that does not exist. A convention that was never established. A security bypass that "should work based on the patterns in this codebase."
+When local context is insufficient to determine a next step, the agent does not stop and request clarification. It [confabulates](/garden/confabulation-is-plausible/): it generates a plausible structure and proceeds as if that structure were real. A call to an API that does not exist. A convention that was never established. A security bypass that "should work based on the patterns in this codebase."
 
 This is the convergent failure mode of the other three properties. The result is not random behavior. It is _plausible-looking wrongness_: output that fits the shape of what should be there, constructed from pattern and proximity, not knowledge. The danger is not that these errors are spectacular. It is that they look correct.
 
@@ -100,7 +100,7 @@ This is the convergent failure mode of the other three properties. The result is
 
 Neither the pit of success nor the fortress was designed for an actor without intent. The suggestible actor paradigm starts from a different assumption: the actor is **susceptible to local context and confabulates when that context is insufficient**.
 
-Because the agent is goal-oriented but locally reasoning, a gap always exists between the goal as the human understood it and the reality the agent encounters. The human had ambient knowledge that was never made local. This **directive gap** is the root cause of most suggestible-actor failures. The prescriptions below are all strategies for closing it.
+Because the agent is goal-oriented but locally reasoning, a gap always exists between the goal as the human understood it and the reality the agent encounters. The human had ambient knowledge that was never made local. This [directive gap](/garden/directive-gap/) is the root cause of most suggestible-actor failures. The prescriptions below are all strategies for closing it.
 
 ### Make every error a call to action
 
@@ -134,7 +134,7 @@ When the directive gap is wide, the agent confabulates. Close it.
 
 CI/CD gates should report not just what failed but what to do about it. Pre-commit hooks should provide the correct alternative, not just reject the incorrect one. An `AGENTS.md` or `CONTRIBUTING.md` should encode the ambient knowledge that a human developer would carry. Example code near the API surface, type signatures that make the correct shape unambiguous, factory methods with correct defaults, named parameters that make intent explicit at the call site: all of these make the correct answer locally available so the agent never needs to invent one.
 
-Principle: Convert ambient knowledge into local context.
+Principle: [Convert ambient knowledge into local context](/garden/ambient-to-local/).
 
 ---
 
