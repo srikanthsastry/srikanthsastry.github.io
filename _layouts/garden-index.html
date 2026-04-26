@@ -18,38 +18,32 @@ layout: default
     <span>🌳 Evergreen — stable reference</span>
   </div>
 
-  {% assign types = "note,source,thought" | split: "," %}
-  {% assign type_labels = "Notes,Sources,Thoughts" | split: "," %}
-  {% assign type_icons = "📝,📚,💭" | split: "," %}
-
-  {% for type in types %}
-    {% assign idx = forloop.index0 %}
-    {% assign typed_notes = site.garden | where: "garden_type", type | sort: "title" %}
-    {% if typed_notes.size > 0 %}
-    <div style="margin-top: 3rem; margin-bottom: 3rem;" data-motion="fadeInUp">
-      <h2 class="text-2xl font-bold text-neutral-800 dark:text-neutral-200 mb-6">
-        {{ type_icons[idx] }} {{ type_labels[idx] }}
-      </h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {% for note in typed_notes %}
-          <a href="{{ note.url | relative_url }}" class="garden-card no-underline block p-4 rounded-lg border border-neutral-200 dark:border-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-600 transition">
-            <div class="flex items-start gap-2 mb-2">
-              {% include garden_maturity_badge.html maturity=note.maturity inline=true %}
-              <h3 class="text-lg font-semibold text-neutral-900 dark:text-neutral-100">{{ note.title }}</h3>
-            </div>
-            {% if note.excerpt_text %}
-              <p class="text-sm text-neutral-600 dark:text-neutral-400 line-clamp-2">{{ note.excerpt_text }}</p>
-            {% endif %}
-            <div class="flex flex-wrap gap-1 mt-2">
-              {% for tag in note.tags limit:3 %}
-                <span class="text-xs px-2 py-1 rounded bg-neutral-100 dark:bg-neutral-900 text-neutral-500">{{ tag }}</span>
-              {% endfor %}
-            </div>
-          </a>
-        {% endfor %}
-      </div>
-    </div>
-    {% endif %}
+  {% assign maturity_order = "evergreen,budding,seedling" | split: "," %}
+  {% assign all_notes = "" | split: "" %}
+  {% for m in maturity_order %}
+    {% assign notes_at_maturity = site.garden | where: "maturity", m | sort: "title" %}
+    {% for n in notes_at_maturity %}
+      {% assign all_notes = all_notes | push: n %}
+    {% endfor %}
   {% endfor %}
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" data-motion="fadeInUp">
+    {% for note in all_notes %}
+      <a href="{{ note.url | relative_url }}" class="garden-card no-underline block p-4 rounded-lg border border-neutral-200 dark:border-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-600 transition">
+        <div class="flex items-start gap-2 mb-2">
+          {% include garden_maturity_badge.html maturity=note.maturity inline=true %}
+          <h3 class="text-lg font-semibold text-neutral-900 dark:text-neutral-100">{{ note.title }}</h3>
+        </div>
+        {% if note.excerpt_text %}
+          <p class="text-sm text-neutral-600 dark:text-neutral-400 line-clamp-2">{{ note.excerpt_text }}</p>
+        {% endif %}
+        <div class="flex flex-wrap gap-1 mt-2">
+          {% for tag in note.tags limit:3 %}
+            <span class="text-xs px-2 py-1 rounded bg-neutral-100 dark:bg-neutral-900 text-neutral-500">{{ tag }}</span>
+          {% endfor %}
+        </div>
+      </a>
+    {% endfor %}
+  </div>
 
 </section>
