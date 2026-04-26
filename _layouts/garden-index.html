@@ -12,7 +12,7 @@ layout: default
     {{ page.description }}
   </p>
 
-  <div class="flex gap-6 mb-16 text-sm font-mulish" data-motion="fadeInUp">
+  <div class="flex gap-6 text-sm font-mulish" style="margin-bottom: 4rem;" data-motion="fadeInUp">
     <span>🌱 Seedling — early idea</span>
     <span>🌿 Budding — developing</span>
     <span>🌳 Evergreen — stable reference</span>
@@ -26,7 +26,7 @@ layout: default
     {% assign idx = forloop.index0 %}
     {% assign typed_notes = site.garden | where: "garden_type", type | sort: "title" %}
     {% if typed_notes.size > 0 %}
-    <div class="mt-16 mb-12" data-motion="fadeInUp">
+    <div style="margin-top: 3rem; margin-bottom: 3rem;" data-motion="fadeInUp">
       <h2 class="text-2xl font-bold text-neutral-800 dark:text-neutral-200 mb-6">
         {{ type_icons[idx] }} {{ type_labels[idx] }}
       </h2>
