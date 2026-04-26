@@ -73,12 +73,24 @@
      These are overrides / additions only. */
 }
 
-/* Subtle underline hint on garden links that have previews */
+/* Garden links — visible green underline to signal "this is a garden note" */
 a[data-garden-link] {
-  text-decoration-style: dotted;
+  text-decoration: underline;
+  text-decoration-color: #86efac;
+  text-decoration-thickness: 2px;
   text-underline-offset: 3px;
+  text-decoration-skip-ink: auto;
 }
 
 a[data-garden-link]:hover {
-  text-decoration-style: solid;
+  text-decoration-color: #22c55e;
+  text-decoration-thickness: 2.5px;
+}
+
+.dark a[data-garden-link] {
+  text-decoration-color: #4ade80;
+}
+
+.dark a[data-garden-link]:hover {
+  text-decoration-color: #22c55e;
 }
