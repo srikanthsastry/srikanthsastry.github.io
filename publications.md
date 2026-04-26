@@ -11,7 +11,7 @@ panels_data:
     - 'a:0:{}'
 fplayout:
     - default
-nav: true
+nav: false
 footer: true
 permalink: /publications/
 ---
