@@ -1,6 +1,6 @@
 ---
 title: "Cargo Cult Governance"
-date: 2026-04-26
+date: 2026-03-26
 layout: post
 categories:
     - Professional
