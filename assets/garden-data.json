@@ -1,0 +1,13 @@
+---
+layout: null
+permalink: /assets/garden-data.json
+---
+{
+  {% for note in site.garden %}"{{ note.slug }}": {
+    "title": {{ note.title | jsonify }},
+    "maturity": {{ note.maturity | default: "seedling" | jsonify }},
+    "excerpt": {{ note.excerpt_text | jsonify }},
+    "url": "{{ note.url | relative_url }}"
+  }{% unless forloop.last %},{% endunless %}
+  {% endfor %}
+}
