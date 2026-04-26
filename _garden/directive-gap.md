@@ -1,7 +1,7 @@
 ---
 title: "The Directive Gap"
 garden_type: thought
-maturity: seedling
+maturity: budding
 tags: [ai, software-design, failure-modes]
 created: 2026-04-24
 related_posts:

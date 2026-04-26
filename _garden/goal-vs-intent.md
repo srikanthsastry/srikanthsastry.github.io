@@ -1,7 +1,7 @@
 ---
 title: "Goal vs. Intent"
 garden_type: thought
-maturity: seedling
+maturity: evergreen
 tags: [ai, definitions, mental-models]
 created: 2026-04-24
 related_posts:

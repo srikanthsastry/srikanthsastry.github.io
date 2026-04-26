@@ -1,7 +1,7 @@
 ---
 title: "The AI Agent Category Error"
 garden_type: thought
-maturity: seedling
+maturity: budding
 tags: [ai, software-design, actor-models, category-error]
 created: 2026-04-24
 related_posts:

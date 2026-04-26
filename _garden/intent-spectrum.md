@@ -1,7 +1,7 @@
 ---
 title: "The Intent Spectrum"
 garden_type: thought
-maturity: seedling
+maturity: evergreen
 tags: [software-design, actor-models, mental-models]
 created: 2026-04-24
 related_posts:

@@ -1,7 +1,7 @@
 ---
 title: "Confabulation Is Plausible"
 garden_type: thought
-maturity: seedling
+maturity: budding
 tags: [ai, failure-modes, hallucination]
 created: 2026-04-24
 related_posts:

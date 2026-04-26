@@ -1,7 +1,7 @@
 ---
 title: "Susceptibility Peaks at Failure"
 garden_type: thought
-maturity: seedling
+maturity: budding
 tags: [ai, software-design, design-levers]
 created: 2026-04-24
 related_posts:

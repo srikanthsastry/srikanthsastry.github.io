@@ -1,7 +1,7 @@
 ---
 title: "Convert Ambient Knowledge into Local Context"
 garden_type: thought
-maturity: seedling
+maturity: budding
 tags: [ai, software-design, prescriptions]
 created: 2026-04-24
 related_posts:
