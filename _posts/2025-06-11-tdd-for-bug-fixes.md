@@ -22,7 +22,7 @@ I have seen way too many 'senior' engineers get bug fixing wrong. It is common t
 The crux of the problem is the following: HOW DO YOU *KNOW* YOU’RE SMASHING THAT BUG? HOW CAN YOU BE SURE YOUR TEST ISN’T A DUD?! Your answer better not be *VIBE CHECKS* or just *STARING REALLY HARD*! If you are having to deploy your entire service/library and run an end-to-end test to demonstrate correctness, then you are doing too much, and you still haven't demonstrated that the unit test actually captures the previously errneous behavior.
 
 
-There is this shiny little concept called [Test Driven Development (TDD)](https://en.wikipedia.org/wiki/Test-driven_development) that is mighty useful here. You can peruse the wikipedia link to figure out what TDD is exactly. This note will show you how to use TDD for bug fixes.
+There is this shiny little concept called [Test Driven Development (TDD)](https://en.wikipedia.org/wiki/Test-driven_development) that is mighty useful here. You can peruse the wikipedia link to figure out what TDD is exactly. This note will show you how to <a href="/garden/tdd-for-bug-fixes/">use TDD for bug fixes</a>.
 
 Here are simple steps to fixing bugs using TDD:
 
