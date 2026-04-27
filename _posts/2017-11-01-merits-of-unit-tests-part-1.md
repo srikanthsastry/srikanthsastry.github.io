@@ -75,7 +75,7 @@ rigorous about unit tests.</p>
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->
-<p>Unit tests makes the best documentation for your code. We were all 
+<p>Unit tests makes the best <a href="/garden/tests-as-executable-documentation/">documentation</a> for your code. We were all 
 hired as software engineers because we can write good software. That 
 means a lot of us are not very good at technical writing, and for many 
 of us, English isn't our native tongue. This creates barriers for us in 
