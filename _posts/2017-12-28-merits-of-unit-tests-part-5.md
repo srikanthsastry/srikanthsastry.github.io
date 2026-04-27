@@ -41,8 +41,8 @@ topic of discussion in its own right).</p>
 
 <!-- wp:paragraph -->
 <p>The reason for my claim is simple, by writing extensive unit tests 
-that account for all your use cases, you effectively become your own 
-first customer. This forces you you to wear your customer's hat and 
+that account for all your use cases, you effectively <a href="/garden/tests-as-first-customer/">become your own 
+first customer</a>. This forces you you to wear your customer's hat and 
 really probe the user experience of your API. In fact, it is not 
 uncommon for me to iterate on my APIs multiple times simply because I am
  not happy with how difficult it is to set up and execute my unit tests.</p>
