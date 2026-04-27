@@ -19,7 +19,7 @@ excerpt: >
 I ran into one of those delightful bugs that only show up in dynamic task generation of your data pipelines — the kind that teach you how a leaky abstraction in your pipeline platform can have you scratching your head in confusion.
 
 The short version:
-I made a simple function signature change, assuming only future runs would care. Instead, my pipeline broke days later when an old task serialized under the previous signature collided with the new code. The fix? Classic backward compatibility tricks that saved me from babysitting all existing task runs when making changes in the future.
+I made a simple function signature change, assuming only future runs would care. Instead, my pipeline broke days later when an old task serialized under the previous signature collided with the new code. The fix? Classic <a href="/garden/backward-compatibility-for-leaky-abstractions/">backward compatibility tricks</a> that saved me from babysitting all existing task runs when making changes in the future.
 
 Here’s the story — and how to avoid learning this lesson the hard way.
 
