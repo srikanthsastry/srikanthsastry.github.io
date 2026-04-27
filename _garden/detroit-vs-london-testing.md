@@ -11,15 +11,9 @@ related_notes:
   - mocks-vs-stubs
   - test-behavior-not-implementation
 excerpt_text: >
-  Two schools define "unit test" differently, and the difference drives fundamentally different testing strategies:
+  The Detroit and London schools define "unit test" differently, driving fundamentally different testing strategies.
 ---
 
-Two schools define "unit test" differently, and the difference drives fundamentally different testing strategies:
+**The Detroit and London schools define "unit test" differently, driving fundamentally different strategies.** Detroit treats a unit as a *unit of behavior* — one or more classes collaborating to produce an observable result, using real collaborators wherever practical and only stubbing external dependencies. London treats a unit as a *single class*, replacing all collaborators with [mocks](/garden/mocks-vs-stubs/) and verifying interaction patterns.
 
-**Detroit (Classical) school:** A unit is a *unit of behavior* — one or more classes collaborating to produce an observable result. Tests use real collaborators wherever practical; only external dependencies (databases, APIs) get test doubles. Tests are coupled to behavior, not structure.
-
-**London (Mockist) school:** A unit is a *single class*. All collaborators are replaced with mocks. Tests verify interactions between the class and its collaborators. Tests are coupled to the class's internal communication patterns.
-
-The Detroit approach produces more resilient tests that survive refactoring, because they test outcomes rather than interactions. The London approach provides faster fault localization (a failing test points to exactly one class) but creates brittle tests that break when you reorganize code without changing behavior.
-
-The trade-off is between refactoring resilience (Detroit) and fault localization precision (London). For most codebases, refactoring resilience is more valuable — you refactor far more often than you need pinpoint fault localization.
+Detroit produces more resilient tests that survive refactoring because they test outcomes rather than interactions. London provides faster fault localization but creates brittle tests that break when you reorganize code without changing behavior. For most codebases, refactoring resilience wins — you refactor far more often than you need pinpoint localization.

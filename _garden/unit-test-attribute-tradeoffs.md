@@ -11,18 +11,9 @@ related_notes:
   - detroit-vs-london-testing
   - test-behavior-not-implementation
 excerpt_text: >
-  Unit test suites have three primary attributes in tension with each other:
+  Unit test suites have three attributes in tension: accuracy, completeness, and speed. You cannot maximize all three.
 ---
 
-Unit test suites have three primary attributes in tension with each other:
+**Unit test suites have three attributes in tension: accuracy (if a test fails, is there a real bug?), completeness (if there's a bug, will a test catch it?), and speed.** You cannot maximize all three — high accuracy + completeness yields a huge, slow suite; accuracy + speed sacrifices completeness; completeness + speed requires over-mocking that tanks accuracy.
 
-1. **Accuracy** — If a test fails, how likely is it that there's a real bug? Low accuracy means brittle tests that cry wolf, eroding trust in the suite.
-2. **Completeness** — If there's a bug, how likely is it that a test will catch it? Coverage metrics attempt to proxy this but are often misleading.
-3. **Speed** — How quickly does the suite run? Slow suites discourage frequent testing and increase iteration time.
-
-You cannot maximize all three simultaneously. Maximizing any two minimizes the third:
-- High accuracy + high completeness → huge, slow suite
-- High accuracy + fast → incomplete (only common paths tested)
-- High completeness + fast → over-mocked, brittle (low accuracy)
-
-The practical priority: **never sacrifice accuracy**. Accurate tests are the bedrock of a trustworthy suite. Once accuracy is maximized, trade off between completeness and speed based on your tolerance for production failures. The quality of a test suite is determined by its weakest attribute.
+**Never sacrifice accuracy.** Accurate tests are the bedrock of a trustworthy suite. Once accuracy is locked in, trade off completeness against speed based on your tolerance for production failures. [Coverage metrics](/garden/coverage-metrics-are-misleading/) attempt to proxy completeness but fail at it. The quality of a suite is determined by its weakest attribute.

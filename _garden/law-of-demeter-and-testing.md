@@ -10,13 +10,9 @@ related_notes:
   - minimize-public-surface-for-testability
   - testability-drives-design
 excerpt_text: >
-  The Law of Demeter ("only talk to your immediate friends") takes two forms relevant to testability:
+  Demeter violations in production code become mock chains and bloated test fixtures in test code.
 ---
 
-The Law of Demeter ("only talk to your immediate friends") takes two forms relevant to testability:
+**Demeter violations in production code become mock chains and bloated test fixtures in test code.** The Law of Demeter ("only talk to your immediate friends") surfaces two testing problems. Object chains like `a.getB().getC().doThing()` force tests to mock the entire chain, and changing any link cascades failures. Fat parameters — passing a whole `Customer` when you need two fields — create test noise where every test constructs a complete object with irrelevant fields.
 
-**Object chains:** Code like `a.getB().getC().doThing()` forces tests to set up the entire chain of collaborators as mocks. Each link requires another mock, and changing any link cascades test failures. The fix: push behavior toward the object that owns the data — encapsulate operations within the immediate dependency.
-
-**Fat parameters:** Passing a large data object (e.g., an entire `Customer`) when the function only needs two fields (name, email) creates test noise. Every test must construct a complete object with irrelevant fields, making it unclear which fields matter. The fix: accept only the data the function needs.
-
-Both forms create the same testing problem: tests that know too much about collaborator structure, making them brittle and hard to read. Demeter violations in production code become mock chains and bloated test fixtures in test code — the test is telling you the design needs work.
+Both forms force tests to know too much about collaborator structure. The test is telling you the [design needs work](/garden/testability-drives-design/): push behavior toward the object that owns the data, accept only the data the function needs.

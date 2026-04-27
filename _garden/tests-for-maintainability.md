@@ -14,11 +14,6 @@ excerpt_text: >
   The fundamental purpose of unit tests is not verification — it is sustainable software maintenance.
 ---
 
-The fundamental purpose of unit tests is not verification — it is sustainable software maintenance. Verification is a side effect. The real value proposition: unit tests enable a codebase to evolve over time without degrading.
+**The fundamental purpose of unit tests is not verification — it is sustainable software maintenance.** Verification is a side effect. The real value: unit tests enable a codebase to evolve over time without degrading. Tests that verify behavior but are themselves unmaintainable defeat the purpose; tests so complex nobody dares modify them are net negative.
 
-This reframing has practical consequences:
-- Tests that verify behavior but are themselves unmaintainable defeat the purpose
-- Tests that pass but are so complex nobody dares modify them are net negative
-- The test suite's value is proportional to the confidence it gives developers to change code, not to the number of assertions it contains
-
-When maintenance is the north star, every testing decision follows: simplicity over cleverness, behavior over implementation, independence over shared infrastructure, readability over DRY.
+When maintenance is the north star, every testing decision follows: [simplicity over cleverness](/garden/simplicity-over-dry-in-tests/), [behavior over implementation](/garden/test-behavior-not-implementation/), independence over shared infrastructure, [readability over DRY](/garden/tests-as-executable-documentation/).

@@ -8,21 +8,9 @@ related_posts:
   - /responding-to-concerns-as-a-people-manager/
 related_notes: []
 excerpt_text: >
-  A seven-step framework for how managers should respond when a team member raises a concern.
+  When a team member raises a concern, the manager's job is to understand it first — resolution is situation-specific, but the approach to understanding should be consistent.
 ---
 
-A seven-step framework for how managers should respond when a team member raises a concern. The framework focuses on *understanding the issue* rather than *resolving* it — resolution is situation-specific, but the approach to understanding should be consistent.
+**When a team member raises a concern, the manager's job is to understand the issue — resolution is situation-specific, but the approach to understanding should be consistent.** Listen fully and repeat back until they confirm you've captured it. Empathize even when you disagree — failing here guarantees they'll stop sharing and eventually leave. Don't take notes: they impede listening, undermine empathy, and chill candor. Stay in the particular — solve the concrete problem first, address systemic patterns separately.
 
-1. **Listen** — Really listen. Take what they say at face value. Resist the impulse to connect dots or form hypotheses. Repeat back in your own words until they confirm you've captured it.
-
-2. **Empathize** — Even if you disagree, understand where they're coming from. The person must feel validated, not diminished. Failing here guarantees they'll stop sharing and eventually leave.
-
-3. **Don't take notes** — Notes impede listening, undermine empathy, and create a chilling effect on candor. The conversation came with an implicit expectation of confidentiality; putting things "on the record" makes the speaker guarded.
-
-4. **Descend into the particular** — Stay focused on the specific issue. Do not generalize or abstract. Solve the concrete problem first; address systemic patterns separately.
-
-5. **Check with others** — Before attempting resolution, determine if the issue is isolated or widespread. Do this urgently — delay signals indifference.
-
-6. **Socialize if common** — If the issue affects multiple people, make it visible. The organization must demonstrate willingness to engage in difficult conversations.
-
-7. **Never become an apologist** — Do not justify the status quo. Explaining away someone's concern is victim-blaming in professional clothing. Whatever resolution follows will land better if you don't.
+Before attempting resolution, check whether the issue is isolated or widespread — and do so urgently, because delay signals indifference. If common, make it visible. And never become an apologist: explaining away someone's concern is victim-blaming in professional clothing.

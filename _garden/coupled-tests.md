@@ -10,19 +10,9 @@ related_notes:
   - simplicity-over-dry-in-tests
   - unit-test-attribute-tradeoffs
 excerpt_text: >
-  Coupled tests are tests whose outcomes depend on other tests — through shared mutable state, execution ordering, or shared test infrastructure.
+  Coupled tests — tests whose outcomes depend on other tests — are one of the most corrosive anti-patterns in a test suite.
 ---
 
-Coupled tests are tests whose outcomes depend on other tests — through shared mutable state, execution ordering, or shared test infrastructure. They are one of the most corrosive anti-patterns in a test suite.
+**Coupled tests — tests whose outcomes depend on other tests through shared mutable state, execution ordering, or shared infrastructure — are one of the most corrosive anti-patterns in a test suite.** Tests that pass in isolation but fail together, that change results with execution order, or that break in cascades when one test is modified all signal coupling. The two most pervasive sources are precondition bloat in test fixtures (setUp accumulates state for multiple tests) and heterogeneous parameterized tests (cramming different assertion types into shared infrastructure).
 
-Symptoms:
-- Tests pass in isolation but fail together (or vice versa)
-- Test results change with execution order
-- Modifying one test causes unrelated tests to fail
-- Shared setup/teardown accumulates complexity that obscures each test's actual preconditions
-
-Two subtle but pervasive sources of coupling:
-1. **Precondition bloat in test fixtures** — setUp methods accumulate state for multiple tests, creating hidden dependencies between tests that share the fixture.
-2. **Heterogeneous parameterized tests** — cramming different assertion types into one parameterized test couples all parameters through shared test infrastructure.
-
-The fix: each test should own its preconditions. Use setUp for dependency instantiation only; move precondition setting into each test's arrange step. Accept the duplication — independent tests are worth the repetition.
+The fix: each test owns its preconditions. Use setUp for dependency instantiation only; move precondition-setting into each test's arrange step. Accept the [duplication](/garden/simplicity-over-dry-in-tests/) — independent tests are worth the repetition.

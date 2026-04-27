@@ -13,15 +13,6 @@ excerpt_text: >
   Writing unit tests makes you your own first customer.
 ---
 
-Writing unit tests makes you your own first customer. By covering all use cases in tests, you are forced to wear the consumer's hat and probe the user experience of your API. This is distinct from [testability as a design heuristic](/garden/testability-drives-design/) — that's about internal structure, while this is about the external interface.
+**Writing unit tests makes you your own first customer.** By covering all use cases in tests, you probe the user experience of your API before anyone else does. This is distinct from [testability as a design heuristic](/garden/testability-drives-design/) — that's about internal structure, while this is about the external interface. If your test setup is awkward, your API is awkward: combinatorial constructors, nonsensical method calls, ambiguous entry points all surface as pain during test writing.
 
-The diagnostic is practical: if your test setup is awkward, your API is awkward. Combinatorial constructor variants, nonsensical method calls on certain configurations, ambiguous entry points — these all surface as pain during test writing before they surface as pain for real consumers.
-
-The pattern that emerges:
-
-1. Write tests for the first API draft
-2. Notice friction (too many constructor variants, ambiguous state combinations, methods that shouldn't be callable in certain configurations)
-3. Redesign the API to eliminate the friction
-4. Repeat until the tests read cleanly
-
-A simpler, more usable API also constrains code paths, making the code more testable and less bug-prone. API usability and testability form a virtuous cycle: each improvement in one feeds the other.
+API usability and testability form a virtuous cycle: simplifying the API constrains code paths, which makes it more testable, which reveals further simplifications. The tests become a feedback loop that polishes the interface from the consumer's perspective.

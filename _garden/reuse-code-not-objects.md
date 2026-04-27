@@ -8,18 +8,9 @@ related_posts:
   - /reuse-code-not-objects/
 related_notes: []
 excerpt_text: >
-  DRY (Don't Repeat Yourself) applies to code, not to object instances.
+  DRY applies to code, not to object instances. Reusing stateful objects across iterations introduces subtle state leakage bugs.
 ---
 
-DRY (Don't Repeat Yourself) applies to *code*, not to *object instances*. Reusing stateful objects across iterations is a common anti-pattern that introduces subtle, hard-to-debug state leakage bugs.
+**DRY applies to *code*, not to *object instances*.** Reusing stateful objects across iterations — creating once and calling `init()` or `reset()` each time — introduces subtle state leakage bugs. When one iteration throws partway through, some fields retain stale values from the previous iteration. The next consumer reads corrupted state that is type-correct (no crash, just silently wrong), only manifests when a preceding iteration fails in a specific way, and appears in iteration N despite being caused by iteration N-1.
 
-The pattern: a stateful object is created once and reused in a loop via an `init()` or `reset()` method. When processing one iteration throws an exception partway through, some fields retain stale values from the *previous* iteration. The next consumer of those fields reads corrupted state without any indication that it's stale.
-
-These bugs are particularly dangerous because:
-- The stale state is *type-correct* — it won't cause a crash, just silently wrong behavior
-- The bug only manifests when a preceding iteration fails in a specific way
-- The failure mode is non-local: the bug appears in iteration N but was caused by iteration N-1
-
-The fix is simple: create new instances and discard them when done. If object creation is expensive, that's a separate optimization problem — don't let it drive you into reusing mutable state.
-
-The general principle: prefer immutable, disposable objects over mutable, long-lived ones. When you must have state, make it explicit and contained rather than accumulated across uses.
+The fix: create new instances and discard them. Prefer immutable, disposable objects over mutable, long-lived ones.
