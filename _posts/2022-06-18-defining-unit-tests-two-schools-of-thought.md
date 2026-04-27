@@ -30,7 +30,7 @@ I like Vladimir Khorikov's definition of a unit test in his book [Unit Testing P
 
 In fact, there are two schools of thought around how the above two terms should be defined. The 'original/classic/Detroit' school, and the 'mockist/London' school. Not surprisingly, the school of thought you subscribe to has a significant impact on how you write unit tests. For a more detailed treatment of the two schools of thought, I suggest Martin Folwer's [excellent article on the subject of Mocks and Stubs](https://martinfowler.com/articles/mocksArentStubs.html#ClassicalAndMockistTesting). Chapter 2 of Khorikov's book [Unit Testing Principles, Practices, and Patterns](https://www.manning.com/books/unit-testing) also has some good insights into it. I have distilled their contents as it pertains to unit test definitions.
 
-### The Detroit School
+### [The Detroit School](/garden/detroit-school-testing/)
 
 The Classical or Detroit school of thought originated with Kent Beck's "[Test Driven Development](https://www.oreilly.com/library/view/test-driven-development/0321146530/)".
 
@@ -40,7 +40,7 @@ Thus, a unit of software cannot include external entities such as databases, log
 
 **Isolation.** Given the above notion of a "unit" of software, isolation simply means that the test is not dependent on anything outside that unit of software. In practical terms, it means that a unit test needs to replace all external and shared dependencies with [test doubles]({% post_url 2022-05-25-mocks-stubs-and-how-to-use-them %}).
 
-### The London School
+### [The London School](/garden/london-school-testing/)
 
 The mockist or London school of thought was popularized by [Steve Freeman](https://www.linkedin.com/in/stevefreeman) ([twitter](https://twitter.com/sf105)) and [Nat Pryce](http://www.natpryce.com/bio.html) in their book "[Growing Object- Oriented Software, Guided by Tests](http://growing-object-oriented-software.com/)".
 

@@ -28,7 +28,7 @@ _Photo by [Polina Kovaleva](https://www.pexels.com/@polina-kovaleva?utm_content=
 
 Briefly, test doubles are [replacements for a production object used for testing](https://martinfowler.com/bliki/TestDouble.html). Depending on who you ask, there are multiple different categorizations of test doubles; but two categories that appears in all of these categorizations are [mocks](https://en.wikipedia.org/wiki/Mock_object) and [stubs](https://en.wikipedia.org/wiki/Test_stub). So I will focus on on these two. I have seen mocks and stubs often conflated together. The problem is made worse by all the test-double frameworks' terminology: they are often referred to as 'mocking' frameworks, and the test doubles they generate are all called 'mocks'. 
 
-## Mocks
+## [Mocks](/garden/mocks-in-testing/)
 
 ![woman wearing an emoji mask](/assets/images/woman-wearing-emoji-mask.jpg)
 
@@ -56,7 +56,7 @@ class TestSUT(unittest.TestCase):
 
 Note that in the above illustration, we verify that the message is sent to the the log server exactly once. This is an important part of the SUT's specification. It the SUT were to start logging multiple messages/records for the request, then it could pollute the logs or even overwhelm the log server. Here, even though logging appears to be a side effect of `test_method`, this side effect is almost certainly part of SUT's specification, and needs to be verified correctly. Mocks play a central role in such verifications.
 
-## Stubs
+## [Stubs](/garden/stubs-in-testing/)
 
 ![Robot imitating family](/assets/images/robot-imitating-family.jpg)
 
