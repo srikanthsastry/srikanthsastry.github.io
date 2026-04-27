@@ -114,11 +114,10 @@ derive_maturity() {
         return
     fi
     case "$status" in
-        connected|stable) echo "evergreen" ;;
-        developing)       echo "budding" ;;
-        draft)            echo "budding" ;;
-        raw|"")           echo "seedling" ;;
-        *)                echo "seedling" ;;
+        evergreen|connected|stable) echo "evergreen" ;;
+        budding|developing|draft)   echo "budding" ;;
+        seedling|raw|"")            echo "seedling" ;;
+        *)                          echo "seedling" ;;
     esac
 }
 
