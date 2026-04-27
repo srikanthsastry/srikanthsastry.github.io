@@ -43,4 +43,4 @@ Here’s what actually happened:
 We could’ve all just slept through it and looked at it with fresh eyes in the morning. Instead, two engineers got pulled into zombie mode to stare at graphs that improved all by themselves. It was like debugging a ghost.
 
 ### Moral of the story:
-If your alert is going to wake someone up at 4 AM, it better be for something that *actually* matters. If there's no SEV, no SLO breach, and no clear user impact — maybe let sleeping engineers lie.
+If your <a href="/garden/align-alerts-to-sev-criteria/">alert is going to wake someone up at 4 AM</a>, it better be for something that *actually* matters. If there's no SEV, no SLO breach, and no clear user impact — maybe let sleeping engineers lie.
