@@ -9,7 +9,7 @@ related_posts:
 related_notes:
   - testability-drives-design
 excerpt_text: >
-  Cyclomatic complexity measures independent execution paths through a function. High complexity means more branches, more bugs, more cognitive load.
+  Cyclomatic complexity measures independent execution paths through a function. Always strive to reduce cyclomatic complexity for maintainable tests.
 ---
 
 **Cyclomatic complexity measures independent execution paths through a function.** High complexity means more branches, more test scenarios for coverage, and more cognitive load. Functions with deeply nested conditionals and multiple branching paths are bug factories. Hard to read, hard to [test](/garden/testability-drives-design/), hard to maintain.
