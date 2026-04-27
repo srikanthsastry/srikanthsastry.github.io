@@ -22,7 +22,7 @@ For example, `a = b + c` has a cyclomatic complexity of one, and `a = b + c if f
 
 If you take just one thing away from this note, then let it be this.
 
-> **Strive to reduce the Cyclomatic Complexity of your code; your team and your future self will thank you!**
+> **Strive to reduce the <a href="/garden/reduce-cyclomatic-complexity/">Cyclomatic Complexity</a> of your code; your team and your future self will thank you!**
 
 ## Time to hit the brain gym, bro
 As an exercise, I will let you figure out the cyclomatic complexity of the following piece of code:
