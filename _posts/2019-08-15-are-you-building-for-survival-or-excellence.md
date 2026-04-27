@@ -19,7 +19,7 @@ image: /assets/images/2019/08/maxresdefault-450x253.jpg
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->
-<p>In my experience, the approach to building a software artifact often falls into one of two types: <em>building for survival</em>, or <em>building for success</em>.</p>
+<p>In my experience, the approach to building a software artifact often falls into one of two types: <em><a href="/garden/survival-vs-excellence-modes/">building for survival</a></em>, or <em>building for success</em>.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
