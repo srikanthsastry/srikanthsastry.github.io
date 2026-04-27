@@ -21,7 +21,7 @@ image: /assets/images/2019/01/bash-logo-672x372.png
 <!-- /wp:cover -->
 
 <!-- wp:paragraph -->
-<p>Some time ago, I had to carry out a long sequence of manual changes in the deployment of my ‘cloud’ service, and so like a good software engineer, I automated large chunks of these changes with shell scripts. Here I learned the importance of building and ‘undo’ in all your shell scripts that mutate the state of world.</p>
+<p>Some time ago, I had to carry out a long sequence of manual changes in the deployment of my ‘cloud’ service, and so like a good software engineer, I automated large chunks of these changes with shell scripts. Here I learned the importance of building an <a href="/garden/every-mutation-needs-an-undo/">‘undo’ in all your shell scripts</a> that mutate the state of world.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:more {"customText":"Read more"} -->
