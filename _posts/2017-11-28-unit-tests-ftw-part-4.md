@@ -41,9 +41,9 @@ tests are often a lot more lines of code than the actual production code
 <!-- wp:paragraph -->
 <p>If your unit tests cover sufficiently many code paths (which any good
  unit test suite should do), then when an issue arises in production, 
-and you narrow it down to your code, then you know that the offending 
-code path could not have been the several code paths that your unit 
-tests already covered. This pruning makes your debugging a lot simpler 
+and you narrow it down to your code, then you know that the <a href="/garden/tests-prune-debugging-search-space/">offending
+ code path could not have been the several code paths that your unit 
+tests already covered</a>. This pruning makes your debugging a lot simpler 
 than before.</p>
 <!-- /wp:paragraph -->
 
