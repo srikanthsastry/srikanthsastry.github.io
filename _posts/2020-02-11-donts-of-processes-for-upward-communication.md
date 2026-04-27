@@ -18,7 +18,7 @@ tags:
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->
-<p>Upward communication critical to organizational well-being and effectiveness. It is also notoriously difficult to get right due to the inherent power/authority differential involved in the hierarchy of any organization. Almost every place that I have seen upward communication done right focuses on mitigating this differential. Unfortunately, many organizations seem to be completely oblivious of how the existing power differential within a hierarchy can jeopardize upward communication. </p>
+<p>Upward communication critical to organizational well-being and effectiveness. It is also notoriously difficult to get right due to the inherent power/authority differential involved in the hierarchy of any organization. Almost every place that I have seen upward communication done right focuses on mitigating this differential. Unfortunately, many organizations seem to be completely oblivious of how the existing power differential within a hierarchy can <a href="/garden/upward-communication-anti-patterns/">jeopardize upward communication</a>. </p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
