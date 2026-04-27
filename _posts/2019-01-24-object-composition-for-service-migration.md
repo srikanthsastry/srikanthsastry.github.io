@@ -45,7 +45,7 @@ tags:
 <!-- /wp:preformatted -->
 
 <!-- wp:paragraph -->
-<p>The goal is to migrate your code from using OldAndBusted to NewHotness. There are several ways to do this wrong. So it is easier if I demonstrate a right way to do this using Object Composition.</p>
+<p>The goal is to migrate your code from using OldAndBusted to NewHotness. There are several ways to do this wrong. So it is easier if I demonstrate a right way to do this using Object Composition via the <a href="/garden/shadow-verify-migrate-pattern/">shadow-verify-migrate pattern</a>.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:heading -->
