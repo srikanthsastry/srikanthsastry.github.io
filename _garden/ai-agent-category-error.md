@@ -13,7 +13,7 @@ related_notes:
   - friction-requires-intent
 excerpt_text: >
   Placing the AI coding agent on the intent spectrum is a category error. The spectrum assumes the actor
-  has intent. The AI agent has none — it is orthogonal to the entire axis.
+  has intent. The AI agent has none. It is orthogonal to the entire axis.
 ---
 
 Placing the AI coding agent on the [intent spectrum](/garden/intent-spectrum/) is a category error. The spectrum assumes the actor has intent. The AI agent has none. It has an externally set objective, no motivation, and no values. It is orthogonal to the intent axis, not somewhere in the middle of it.

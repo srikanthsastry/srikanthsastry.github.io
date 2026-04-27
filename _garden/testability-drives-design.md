@@ -10,27 +10,9 @@ related_notes:
   - tests-as-executable-documentation
   - tests-as-refactoring-safety-net
 excerpt_text: >
-  The act of writing unit tests exerts design pressure that improves software quality in two complementary ways: enforcing modularity and forcing healthy dependency injection.
+  Hard-to-test code is a design smell.
 ---
 
-The act of writing unit tests exerts design pressure that improves software quality in two complementary ways: enforcing modularity and forcing healthy dependency injection.
+**Hard-to-test code is a design smell.** Writing unit tests exerts pressure that improves software in two ways. First, modularity: if a class is hard to test, it's doing too much: too many input combinations, too many side effects, too many conflated concerns. The cure is extraction. Second, dependency injection: code that constructs its own dependencies internally is untestable without expensive integration infrastructure, so tests force you to inject from outside, making dependencies explicit and swappable.
 
-## Modularity pressure
-
-If a class or method is hard to test, it's doing too much. The symptoms are diagnostic:
-
-- **Too many input combinations** → methods have too many responsibilities
-- **Too many operation orderings** → methods have too many side effects
-- **Combinatorial explosion of test cases** → the class conflates concerns that should be separate
-
-The cure is extraction. When an anonymous inner class makes a containing class untestable, pulling it into its own class with its own tests makes both components simpler, more readable, and more maintainable.
-
-## Dependency injection pressure
-
-Code that constructs its own dependencies internally (e.g., `new ExternalService(...)` inside a method) is effectively untestable without expensive integration infrastructure. Writing tests forces you to inject dependencies from outside, which:
-
-1. Makes the code testable with mock/stub substitutions
-2. Makes the code more flexible for production use (swap implementations)
-3. Makes dependencies explicit rather than hidden
-
-This is testability as a *design heuristic*, not just a verification mechanism. Hard-to-test code is a code smell. The tests aren't just checking behavior — they're revealing structural problems.
+This is [testability as a design heuristic](/garden/tests-as-first-customer/), not just a verification mechanism. The tests aren't checking behavior. They're revealing structural problems.

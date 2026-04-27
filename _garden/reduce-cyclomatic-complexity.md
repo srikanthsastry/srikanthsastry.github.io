@@ -9,11 +9,9 @@ related_posts:
 related_notes:
   - testability-drives-design
 excerpt_text: >
-  Cyclomatic complexity measures the number of independent execution paths through a function.
+  Cyclomatic complexity measures independent execution paths through a function. Always strive to reduce cyclomatic complexity for maintainable tests.
 ---
 
-Cyclomatic complexity measures the number of independent execution paths through a function. High complexity means more branches, more test scenarios needed for coverage, and more cognitive load to understand the code.
+**Cyclomatic complexity measures independent execution paths through a function.** High complexity means more branches, more test scenarios for coverage, and more cognitive load. Functions with deeply nested conditionals and multiple branching paths are bug factories. Hard to read, hard to [test](/garden/testability-drives-design/), hard to maintain.
 
-Functions with deeply nested if-else blocks, loops with breaks/continues, and multiple branching paths are bug factories — hard to read, hard to test, hard to maintain. Yet engineers routinely normalize this overhead.
-
-The fix is usually straightforward: extract branching logic into well-named helper functions, flatten nested conditionals, and simplify boolean expressions. A function with cyclomatic complexity 4 can often be reduced to 2 with 60 seconds of refactoring — fewer paths, fewer bugs, happier teammates.
+The fix is usually straightforward: extract branching logic into well-named helpers, flatten nested conditionals, simplify boolean expressions. A function with cyclomatic complexity 4 can often be reduced to 2 with 60 seconds of refactoring. Fewer paths, fewer bugs, happier teammates.

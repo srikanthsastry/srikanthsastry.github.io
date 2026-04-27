@@ -8,11 +8,9 @@ related_posts:
   - /sync-your-alerts-to-your-sev-criteria/
 related_notes: []
 excerpt_text: >
-  Alerts should fire at or near the threshold where an SLO breach (and therefore a SEV) would occur — not well before.
+  Alerts should fire at or near the threshold where an SLO breach would occur, not well before.
 ---
 
-Alerts should fire at or near the threshold where an SLO breach (and therefore a SEV) would occur — not well before. Premature alerts create noise, erode trust in the alerting system, and burn out on-call engineers with false urgency.
+**Alerts should fire at or near the threshold where an SLO breach would occur, not well before.** Premature alerts create noise, erode trust in the alerting system, and burn out on-call engineers with false urgency. When alerts fire for conditions that don't correspond to real severity criteria, the on-call workflow degrades: engineers distrust pages, investigate phantom issues, and escalate reflexively rather than with judgment.
 
-When alerts fire for conditions that don't correspond to real severity criteria, the on-call workflow degrades: engineers learn to distrust pages, investigate phantom issues, and escalate reflexively rather than with judgment.
-
-The rule: if an alert wakes someone at 4 AM, there should be a clear SEV, an SLO breach, or measurable user impact. If none of those exist, the alert threshold needs recalibration.
+The rule: if an alert wakes someone at 4 AM, there should be a clear SEV, an SLO breach, or measurable user impact. If none exist, the threshold needs recalibration.

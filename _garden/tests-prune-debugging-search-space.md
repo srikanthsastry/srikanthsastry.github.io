@@ -10,13 +10,9 @@ related_notes:
   - testability-drives-design
   - tests-as-refactoring-safety-net
 excerpt_text: >
-  When a production issue arises and you narrow it to your code, unit tests perform a crucial elimination function: every code path covered by a passing test is a code path you can rule out as the offender.
+  Every code path covered by a passing test is a path you can rule out during debugging.
 ---
 
-When a production issue arises and you narrow it to your code, unit tests perform a crucial elimination function: every code path covered by a passing test is a code path you can rule out as the offender. This pruning makes debugging tractable where it would otherwise be combinatorial.
+**Every code path covered by a passing test is a path you can rule out during debugging.** Code paths grow exponentially with code size, making root-cause analysis combinatorial. A good test suite eliminates most of the haystack, leaving a manageable set of plausible causes where you can form a directed hypothesis rather than speculating blindly.
 
-The number of code paths in a class often grows exponentially with code size. A good test suite covers sufficiently many of these paths that the remaining search space — the set of plausible root causes — becomes manageable. Without tests, you're searching a haystack. With tests, you've already removed most of the hay.
-
-This is more than convenience. Once the search space is pruned, you can form a strong hypothesis about the root cause (e.g., "this is probably a race condition in the `allResponses()` function"). From there, reproducing and verifying the bug is straightforward — not necessarily easy, but directed rather than speculative.
-
-The implication: unit tests have value even for code you're confident is correct *today*, because they pre-invest in debugging speed for the inevitable production issue *tomorrow*.
+Unit tests have value even for code you're confident is correct *today*, because they pre-invest in debugging speed for the inevitable production issue *tomorrow*. [Refactoring safety](/garden/tests-as-refactoring-safety-net/) and documentation are the more commonly cited benefits, but pruning the debugging search space is the one you'll appreciate most at 3 AM.

@@ -9,17 +9,9 @@ related_posts:
 related_notes:
   - concern-response-framework
 excerpt_text: >
-  Upward communication is critical to organizational health but notoriously difficult due to inherent power differentials in hierarchies.
+  Upward communication fails because organizations ignore the power differential that makes it fragile.
 ---
 
-Upward communication is critical to organizational health but notoriously difficult due to inherent power differentials in hierarchies. Most failures share four anti-patterns:
+**Upward communication fails because organizations ignore the power differential that makes it fragile.** Four anti-patterns recur: obsessing over format (the template becomes the goal, substance gets lost), asymmetric commitment (leadership asks for upward comms but doesn't reciprocate downward), unresponsiveness (information flows up and vanishes, teaching contributors the process is performative), and no engineer buy-in (the process was designed for management without consulting the people doing the communicating).
 
-1. **Format over framework** — Organizations obsess over the template (weekly email, status doc, particular form) instead of establishing *why* the communication exists and *what* should flow through it. The format becomes the goal; the substance gets lost.
-
-2. **Asymmetric commitment** — Leadership asks for upward communication but doesn't reciprocate with downward communication of equal substance and frequency. Engineers notice the one-way street and disengage.
-
-3. **No response to content** — Information flows up and disappears into a void. When leadership never acknowledges, responds to, or acts on what they receive, contributors learn that the communication is performative and stop putting real signal into it.
-
-4. **No engineer buy-in** — The process was designed by and for management without consulting the people who must actually do the communicating. Without buy-in from contributors, the process becomes compliance theater.
-
-The common thread: every failure stems from ignoring the power differential that makes upward communication fragile in the first place. Successful upward communication actively mitigates this differential rather than pretending it doesn't exist.
+Every failure stems from pretending the power differential doesn't exist. Successful upward communication, like good [concern response](/garden/concern-response-framework/), actively mitigates it.
