@@ -92,7 +92,7 @@ redesign your software to reflect the new world it is in.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>In my experience, one of the most delicate things about refactoring 
+<p>In my experience, one of the most delicate things about <a href="/garden/tests-as-refactoring-safety-net/">refactoring</a> 
 such code is that you often have to rewrite the software but keep all of
  its existing behavior intact. Any failure to do so will start 
 triggering failures in the system-at-large. Having good unit tests can 
