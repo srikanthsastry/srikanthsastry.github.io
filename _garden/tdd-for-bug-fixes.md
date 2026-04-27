@@ -10,7 +10,7 @@ related_notes:
   - tests-as-executable-documentation
   - tests-for-maintainability
 excerpt_text: >
-  Bug fixes should follow a TDD workflow split across two PRs.
+  Bug fixes should follow a TDD workflow split across two PRs: one exposes the bug and the next one fixes the bug.
 ---
 
 **Bug fixes should follow a TDD workflow split across two PRs.** The first PR proves the bug: write a test that invokes the code with the offending input and asserts the *incorrect* (current buggy) output. This test passes, confirming the bug is reproducible. The second PR fixes the code and flips the assertion to expect the *correct* output.
