@@ -74,6 +74,7 @@
 }
 
 /* Garden links — visible green underline to signal "this is a garden note" */
+/* Only in prose contexts (blog posts, garden notes), not on index/home cards */
 a[data-garden-link] {
   text-decoration: underline;
   text-decoration-color: #86efac;
@@ -93,4 +94,17 @@ a[data-garden-link]:hover {
 
 .dark a[data-garden-link]:hover {
   text-decoration-color: #22c55e;
+}
+
+/* Suppress green underline on garden cards (home page, garden index) */
+.garden-card[data-garden-link],
+.garden-card a[data-garden-link],
+#garden a[data-garden-link] {
+  text-decoration: none;
+}
+
+.garden-card[data-garden-link]:hover,
+.garden-card a[data-garden-link]:hover,
+#garden a[data-garden-link]:hover {
+  text-decoration: none;
 }
