@@ -10,7 +10,7 @@ related_notes:
   - three-assumptions-framework
   - isomorphic-mimicry-in-tech-governance
 excerpt_text: >
-  Eliminating formal hierarchy does not eliminate hierarchy. It eliminates accountable hierarchy. The answer to C&C's failure is not flattening — it is redesigning where decisions happen.
+  Eliminating formal hierarchy does not eliminate hierarchy. It eliminates accountable hierarchy. The answer to C&C's failure is not flattening. It is redesigning where decisions happen.
 ---
 
 **Eliminating formal hierarchy does not eliminate hierarchy. It eliminates *accountable* hierarchy.**

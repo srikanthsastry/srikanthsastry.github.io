@@ -17,7 +17,7 @@ excerpt_text: >
   Human developers carry implicit knowledge the AI agent cannot access. Make it explicit and local.
 ---
 
-The core design principle for the [suggestible actor](/garden/suggestible-actor-properties/): convert ambient knowledge into local context. Human developers carry ambient knowledge — org norms, conventions, institutional history, an understanding of *why* the system is structured the way it is — that the AI agent cannot access. Making that knowledge explicit and local is how you steer an actor that has no judgment and no cultural awareness.
+The core design principle for the [suggestible actor](/garden/suggestible-actor-properties/): convert ambient knowledge into local context. Human developers carry ambient knowledge (org norms, conventions, institutional history, an understanding of *why* the system is structured the way it is) that the AI agent cannot access. Making that knowledge explicit and local is how you steer an actor that has no judgment and no cultural awareness.
 
 This means: inline comments adjacent to the code the agent will modify. Docstrings on the functions it will call. Unit test failure messages that tell the agent what to do, not just what went wrong. READMEs precise enough for the agent to follow step by step. `AGENTS.md` files that encode the ambient knowledge a human developer would carry. Project templates, linters, and consistent directory structure that encode convention at the tooling level.
 

@@ -15,4 +15,4 @@ excerpt_text: >
 
 **DRY is near-universal in production code, but applying it dogmatically to test code causes more problems than it solves.** Each test verifies a specific scenario where the "common" parts are coincidental, not essential; shared infrastructure becomes a maintenance bottleneck; abstracted setup obscures intent; and complex shared helpers make failures harder to diagnose. Test code has different properties than production code, and simplicity matters more than reuse.
 
-The alternative is DAMP (Descriptive And Meaningful Phrases): accept repetition in exchange for each test being self-contained, readable, and independently modifiable. The cost of repetition is low — test code changes less frequently — while the cost of tangled test infrastructure is high.
+The alternative is DAMP (Descriptive And Meaningful Phrases): accept repetition in exchange for each test being self-contained, readable, and independently modifiable. The cost of repetition is low. Test code changes less frequently. The cost of tangled test infrastructure is high.
