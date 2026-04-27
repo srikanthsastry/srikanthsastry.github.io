@@ -22,7 +22,7 @@ tags:
 <!-- /wp:list -->
 
 <!-- wp:paragraph -->
-<p>Note that this doesn’t talk about the resolution for the issue. That is very specific to the issue at hand. What I have is more of an approach to understanding the issue in a manner that is respectful of the stakeholders. With that disclaimer, let’s unpack each of those bullet points.</p>
+<p>Note that this doesn’t talk about the resolution for the issue. That is very specific to the issue at hand. What I have is more of an <a href="/garden/concern-response-framework/">approach to understanding the issue</a> in a manner that is respectful of the stakeholders. With that disclaimer, let’s unpack each of those bullet points.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:more -->
