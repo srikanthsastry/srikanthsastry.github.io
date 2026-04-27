@@ -22,7 +22,7 @@ image: /assets/images/2021/07/pexels-photo-5218009-edited.jpeg
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->
-<p>We all know of the importance of <a href="https://en.wikipedia.org/wiki/Code_reuse">code reuse</a> and <a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself">DRY</a> code. It is important to remember that this applies to code, and <em>not</em> to objects!<br>A common anti-pattern I see in stateful classes is something along the following lines:</p>
+<p>We all know of the importance of <a href="https://en.wikipedia.org/wiki/Code_reuse">code reuse</a> and <a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself">DRY</a> code. It is important to remember that this applies to code, and <em>not</em> to <a href="/garden/reuse-code-not-objects/">objects</a>!<br>A common anti-pattern I see in stateful classes is something along the following lines:</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:code -->
