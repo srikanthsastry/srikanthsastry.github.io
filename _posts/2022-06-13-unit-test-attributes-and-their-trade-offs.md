@@ -16,7 +16,7 @@ excerpt: >
 image: /assets/images/accuracy-completeness-speed.png
 ...
 <!-- ![](/assets/images/accuracy-completeness-speed.png) -->
-Unit test suites have three primary attributes.
+Unit test suites have <a href="/garden/unit-test-attribute-tradeoffs/">three primary attributes</a>.
 
 1. accuracy, 
 2. completeness, and
