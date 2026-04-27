@@ -34,4 +34,4 @@ Ironically, the fallback meant we never fixed the root issue. Our supposed resil
 
 So next time you violate locality of behavior for defense-in-depth, think hard. And always alert aggressively when deeper defenses kick in.
 
-Building on these well-trodden ideas, this incident is just one more caution: defense-in-depth only works if every fallback is visible and monitored. Otherwise, your “resilience” may just be hiding decay.
+Building on these well-trodden ideas, this incident is just one more caution: <a href="/garden/defense-in-depth-needs-visibility/">defense-in-depth only works if every fallback is visible and monitored</a>. Otherwise, your “resilience” may just be hiding decay.
