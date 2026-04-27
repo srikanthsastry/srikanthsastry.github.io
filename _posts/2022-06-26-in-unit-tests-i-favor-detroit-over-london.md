@@ -26,7 +26,7 @@ image: /assets/images/detroit-wall-frame.jpg
 
 See this [note]({%post_url 2022-06-18-defining-unit-tests-two-schools-of-thought %}) for a more detailed discussion on the two schools.
 
-Each school have it's proponents and each school of thought has it's advantages. I, personally, prefer the Detroit school over the London school. I have noticed that following the Detroit school has made my test suite more [accurate and complete]({%post_url 2022-06-13-unit-test-attributes-and-their-trade-offs %}).
+Each school have it's proponents and each school of thought has it's advantages. I, personally, prefer the <a href="/garden/detroit-vs-london-testing/">Detroit school</a> over the London school. I have noticed that following the Detroit school has made my test suite more [accurate and complete]({%post_url 2022-06-13-unit-test-attributes-and-their-trade-offs %}).
 
 ##  Improved Accuracy (when refactoring)
 
