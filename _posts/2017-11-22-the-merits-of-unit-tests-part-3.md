@@ -37,7 +37,7 @@ modularity in your software.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>Unit tests help you with software design in two complementary ways. 
+<p>Unit tests help you with <a href="/garden/testability-drives-design/">software design</a> in two complementary ways. 
 First, they help you establish optimal boundaries of modularity in terms
  of methods, and classes, and second, they help you understand your 
 dependencies better and almost force you to use good dependency 
