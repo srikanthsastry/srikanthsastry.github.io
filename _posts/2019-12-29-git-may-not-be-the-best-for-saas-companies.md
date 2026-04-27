@@ -23,7 +23,7 @@ tags:
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>In the past half decade or so, Git has sky rocketed in popularity and is becoming the defacto choice for version control. While I understand its popularity, I have found it to be a poor fit for one specific, but popular, environment: SaaS development in a medium to large size enterprise.</p>
+<p>In the past half decade or so, Git has sky rocketed in popularity and is becoming the defacto choice for version control. While I understand its popularity, I have found it to be a <a href="/garden/vcs-should-match-development-model/">poor fit for one specific, but popular, environment</a>: SaaS development in a medium to large size enterprise.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
