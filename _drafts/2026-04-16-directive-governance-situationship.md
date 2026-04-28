@@ -1,6 +1,6 @@
 ---
 title: "Tech Companies and Directive Governance: A Situationship"
-date: 2026-04-28
+date: 2026-04-16
 layout: post
 categories:
     - Professional
@@ -12,7 +12,7 @@ tags:
 permalink: /directive-governance-situationship/
 image: /assets/images/directive-governance-situationship-cover.jpg
 excerpt: >
-    Directive governance is structurally wrong for software engineering. So why do tech companies persist with it? The answer is a ratchet: companies centralize quickly during crisis and decentralize very slowly afterward. Three compounding layers make this asymmetry sticky.
+    Directive (top-down) governance is structurally wrong for software engineering. So why do tech companies persist with it? The answer is a ratchet: companies centralize quickly during crisis and decentralize very slowly afterward. Three compounding layers make this asymmetry sticky.
 ---
 
 
