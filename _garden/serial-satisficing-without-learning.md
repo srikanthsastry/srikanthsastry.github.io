@@ -12,13 +12,9 @@ related_notes:
   - data-pipeline-is-achilles-heel
   - directive-governance
 excerpt_text: >
-  Serial satisficing without learning.
+  Organizations make bounded decisions in sequence, each correcting the last under equally incomplete information, without ever building feedback mechanisms to improve the next decision.
 ---
 
-**Serial satisficing without learning.**
+**Organizations make bounded decisions in sequence, each correcting the last under equally incomplete information, without ever building feedback mechanisms to improve the next decision.** Hire aggressively, then lay off aggressively, then pivot to AI. Each correction is presented as the rational fix to the previous one. But the information constraints are identical each time. Nobody checks whether the correction worked. Nobody builds the instrumentation that would let you check next time.
 
-The pattern: a decision is made under uncertainty (mass hiring), then corrected under equal uncertainty (mass layoffs), then corrected again (pivot to AI) — each presented as the rational fix to the previous bounded decision. But the information constraints are identical each time. The organization never builds feedback mechanisms to make the next decision less bounded. Pfeffer's data shows the layoffs aren't even independent decisions — they're social contagion, companies imitating each other. The honest version nobody says at an earnings call: "We're making this correction with equally incomplete information, and we have no way of knowing if it's better than what it replaced."
-
-## The Counterfactual Problem
-
-The claim that corrections are rational ("we overhired, so layoffs are the right fix") is not falsifiable — we can't test the counterfactual. But neither is the claim that they're wrong. The unfalsifiability itself is the point. Executives assert rationality without evidence; they can't test whether the correction worked any more than critics can test whether it didn't. Pfeffer's data (companies that didn't lay off performed equally well) provides the closest thing to empirical traction: the "rational correction" narrative doesn't hold up against the available natural experiment. The serial satisficing frame doesn't claim the corrections are wrong — it claims nobody knows, nobody checks, and nobody builds the feedback mechanisms that would let you find out next time.
+The unfalsifiability is the point. You cannot test whether the correction was right any more than you can test whether it was wrong. [Pfeffer's research](https://www.gsb.stanford.edu/insights/why-copycat-layoffs-wont-help-tech-companies-or-their-employees) provides the closest empirical traction: companies that did not lay off performed equally well, suggesting the "rational correction" narrative does not hold up against the available natural experiment.
