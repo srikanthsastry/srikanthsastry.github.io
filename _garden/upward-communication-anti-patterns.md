@@ -1,5 +1,5 @@
 ---
-title: "Upward Communication Anti-Patterns"
+title: "Upward Communication Anti Patterns"
 garden_type: note
 maturity: evergreen
 tags: [people-management, leadership, communication, organizational-design]
@@ -8,10 +8,12 @@ related_posts:
   - /donts-of-processes-for-upward-communication/
 related_notes:
   - concern-response-framework
+  - upward-comms-asymmetric-commitment
+  - upward-comms-format-obsession
+  - upward-comms-no-engineer-buy-in
+  - upward-comms-unresponsiveness
 excerpt_text: >
-  Upward communication fails because organizations ignore the power differential that makes it fragile.
+  Upward communication fails because organizations ignore the power differential that makes it inherently fragile.
 ---
 
-**Upward communication fails because organizations ignore the power differential that makes it fragile.** Four anti-patterns recur: obsessing over format (the template becomes the goal, substance gets lost), asymmetric commitment (leadership asks for upward comms but doesn't reciprocate downward), unresponsiveness (information flows up and vanishes, teaching contributors the process is performative), and no engineer buy-in (the process was designed for management without consulting the people doing the communicating).
-
-Every failure stems from pretending the power differential doesn't exist. Successful upward communication, like good [concern response](/garden/concern-response-framework/), actively mitigates it.
+**Upward communication fails because organizations ignore the power differential that makes it inherently fragile.** Every failure mode in upward communication processes stems from pretending the power differential does not exist. The person communicating upward bears all the risk: they can be punished for bad news, ignored without recourse, or dismissed as not following procedure. Successful upward communication actively mitigates this asymmetry rather than ignoring it.

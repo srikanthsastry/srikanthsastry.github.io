@@ -1,18 +1,18 @@
 ---
-title: "Testability Drives Design"
+title: "Testability Forces Modularity"
 garden_type: note
 maturity: evergreen
-tags: [software-testing, unit-tests, software-design, modularity, dependency-injection]
+tags: [software-testing, unit-tests, software-design, modularity]
 created: 2026-04-27
 related_posts:
   - /the-merits-of-unit-tests-part-3/
 related_notes:
+  - testability-forces-dependency-injection
   - tests-as-executable-documentation
+  - tests-as-first-customer
   - tests-as-refactoring-safety-net
 excerpt_text: >
-  Hard-to-test code is a design smell.
+  Hard-to-test code is a design smell: if a class is hard to test, it is doing too much.
 ---
 
-**Hard-to-test code is a design smell.** Writing unit tests exerts pressure that improves software in two ways. First, modularity: if a class is hard to test, it's doing too much: too many input combinations, too many side effects, too many conflated concerns. The cure is extraction. Second, dependency injection: code that constructs its own dependencies internally is untestable without expensive integration infrastructure, so tests force you to inject from outside, making dependencies explicit and swappable.
-
-This is [testability as a design heuristic](/garden/tests-as-first-customer/), not just a verification mechanism. The tests aren't checking behavior. They're revealing structural problems.
+**Hard-to-test code is a design smell: if a class is hard to test, it is doing too much.** Too many input combinations, too many side effects, too many conflated concerns. The cure is extraction. Writing unit tests exerts pressure toward smaller, focused modules because the test demands a unit small enough to exercise in isolation.
