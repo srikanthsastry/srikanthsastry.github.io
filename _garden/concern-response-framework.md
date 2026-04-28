@@ -1,16 +1,17 @@
 ---
-title: "Concern Response Framework for Managers"
+title: "Listen Before Solving Concerns"
 garden_type: note
 maturity: evergreen
 tags: [people-management, leadership, communication]
 created: 2026-04-27
 related_posts:
   - /responding-to-concerns-as-a-people-manager/
-related_notes: []
+related_notes:
+  - check-if-concern-is-systemic
+  - explaining-away-concerns-is-victim-blaming
+  - upward-communication-anti-patterns
 excerpt_text: >
-  When a team member raises a concern, the manager's job is to understand it first. Resolution is situation-specific, but the approach to understanding should be consistent.
+  When a team member raises a concern, the manager's first job is to understand, not to solve.
 ---
 
-**When a team member raises a concern, the manager's job is to understand the issue. Resolution is situation-specific, but the approach to understanding should be consistent.** Listen fully and repeat back until they confirm you've captured it. Empathize even when you disagree. Failing here guarantees they'll stop sharing and eventually leave. Don't take notes: they impede listening, undermine empathy, and chill candor. Stay in the particular. Solve the concrete problem first, address systemic patterns separately.
-
-Before attempting resolution, check whether the issue is isolated or widespread. Do so urgently, because delay signals indifference. If common, make it visible. And never become an apologist: explaining away someone's concern is victim-blaming in professional clothing.
+**When a team member raises a concern, the manager's first job is to understand, not to solve.** Listen fully and repeat back until they confirm you have captured it. Empathize even when you disagree. Failing here guarantees they will stop sharing and eventually leave. Do not take notes during the conversation: they impede listening, undermine empathy, and chill candor. Stay in the particular. Solve the concrete problem first; address systemic patterns separately.

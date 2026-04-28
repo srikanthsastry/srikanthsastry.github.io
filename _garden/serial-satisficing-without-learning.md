@@ -8,13 +8,10 @@ related_posts:
 related_notes:
   - cc-thread4-tectonic-self-sabotage
   - cc-thread5-bounded-rationality-as-crutch
-  - crisis-centralization-ratchet
   - data-pipeline-is-achilles-heel
-  - directive-governance
+  - unfalsifiable-organizational-corrections
 excerpt_text: >
-  Organizations make bounded decisions in sequence, each correcting the last under equally incomplete information, without ever building feedback mechanisms to improve the next decision.
+  Organizations serial-satisfice without learning: each correction is made under the same information constraints as the decision it corrects.
 ---
 
-**Organizations make bounded decisions in sequence, each correcting the last under equally incomplete information, without ever building feedback mechanisms to improve the next decision.** Hire aggressively, then lay off aggressively, then pivot to AI. Each correction is presented as the rational fix to the previous one. But the information constraints are identical each time. Nobody checks whether the correction worked. Nobody builds the instrumentation that would let you check next time.
-
-The unfalsifiability is the point. You cannot test whether the correction was right any more than you can test whether it was wrong. [Pfeffer's research](https://www.gsb.stanford.edu/insights/why-copycat-layoffs-wont-help-tech-companies-or-their-employees) provides the closest empirical traction: companies that did not lay off performed equally well, suggesting the "rational correction" narrative does not hold up against the available natural experiment.
+**Organizations serial-satisfice without learning: each correction is made under the same information constraints as the decision it corrects.** A decision is made under uncertainty (mass hiring), then corrected under equal uncertainty (mass layoffs), then corrected again (pivot to AI). Each is presented as the rational fix to the previous bounded decision. But the information constraints are identical each time. The organization never builds feedback mechanisms to make the next decision less bounded. Pfeffer's data shows the layoffs are not even independent decisions. They are social contagion, companies imitating each other.
