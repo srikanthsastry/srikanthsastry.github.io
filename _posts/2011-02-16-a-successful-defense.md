@@ -4,10 +4,7 @@ title: 'A successful defense'
 date: '2011-02-16T19:25:50-05:00'
 author: 'Srikanth Sastry'
 layout: post
-guid: 'http://sastry.hcoop.net/srikanthwp/?p=34'
 permalink: /a-successful-defense/
-fplayout:
-    - default
 categories:
     - Professional
 ---
@@ -26,4 +23,4 @@ Demonstrating our results requires solving three open problems. (1) We propose 
 
 I thank my advisors Scott Pike and Jennifer Welch for all their help, support, and guidance.
 
-A copy of my dissertation (in PDF format) can be accessed [here](documents/research/srikanthSastryDissertation.pdf).
+A copy of my dissertation (in PDF format) can be accessed [here](/assets/documents/research/srikanthSastryDissertation.pdf).
