@@ -1,7 +1,7 @@
 ---
 title: "Command Control Misnomer"
 garden_type: note
-maturity: budding
+maturity: evergreen
 tags: [governance, directive-governance, terminology]
 created: 2026-04-27
 related_posts:
