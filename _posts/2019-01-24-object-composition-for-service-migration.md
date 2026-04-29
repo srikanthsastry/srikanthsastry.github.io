@@ -4,7 +4,6 @@ title: 'Object Composition for Service Migration'
 date: '2019-01-24T16:13:37-05:00'
 author: 'Srikanth Sastry'
 layout: post
-guid: 'https://srikanth.sastry.name/?p=403'
 permalink: /object-composition-for-service-migration/
 categories:
     - Professional

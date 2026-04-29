@@ -5,7 +5,6 @@ date: '2019-01-11T17:46:42-05:00'
 author: 'Srikanth Sastry'
 excerpt: 'TL;DR. Scripts are a great way to automate the mundane. But be sure you give yourself a way out --- an undo -- when running them.'
 layout: post
-guid: 'http://srikanth.sastry.name/?p=312'
 permalink: /scripts-and-their-undo/
 categories:
     - Professional

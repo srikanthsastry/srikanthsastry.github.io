@@ -4,7 +4,6 @@ title: 'folly:Future, onTimeout(), and a race condition'
 date: '2019-01-17T19:38:48-05:00'
 author: 'Srikanth Sastry'
 layout: post
-guid: 'http://srikanth.sastry.name/?p=348'
 permalink: /follyfuture-ontimeout-and-a-race-condition/
 categories:
     - Professional

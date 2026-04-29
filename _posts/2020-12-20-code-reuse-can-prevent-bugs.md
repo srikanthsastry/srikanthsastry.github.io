@@ -4,7 +4,6 @@ title: 'Code reuse can prevent bugs'
 date: '2020-12-20T13:43:09-05:00'
 author: 'Srikanth Sastry'
 layout: post
-guid: 'https://srikanth.sastry.name/?p=646'
 permalink: /code-reuse-can-prevent-bugs/
 image: /assets/images/2020/12/arrow-2756728_1280-740x430.png
 categories:

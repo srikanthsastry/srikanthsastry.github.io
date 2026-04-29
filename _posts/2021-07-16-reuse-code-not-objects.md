@@ -4,7 +4,6 @@ title: 'Reuse Code, Not Objects'
 date: '2021-07-16T22:01:41-04:00'
 author: 'Srikanth Sastry'
 layout: post
-guid: 'https://srikanth.sastry.name/?p=664'
 permalink: /reuse-code-not-objects/
 categories:
     - Professional

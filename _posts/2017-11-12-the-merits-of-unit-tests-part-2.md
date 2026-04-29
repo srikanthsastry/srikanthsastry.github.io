@@ -4,7 +4,6 @@ title: 'The merits of unit tests — Part 2'
 date: '2017-11-12T19:04:46-05:00'
 author: 'Srikanth Sastry'
 layout: post
-guid: 'http://srikanth.sastry.name/?p=374'
 permalink: /the-merits-of-unit-tests-part-2/
 categories:
     - Professional

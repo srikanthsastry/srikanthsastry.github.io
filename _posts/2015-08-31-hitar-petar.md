@@ -4,7 +4,6 @@ title: 'Hitar Petar'
 date: '2015-08-31T15:28:06-04:00'
 author: 'Srikanth Sastry'
 layout: post
-guid: 'http://srikanth.sastry.name/?p=244'
 permalink: /hitar-petar/
 categories:
     - Personal

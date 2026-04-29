@@ -4,7 +4,6 @@ title: 'My code is bugfree! Why should I unit test?'
 date: '2017-11-01T16:33:01-04:00'
 author: 'Srikanth Sastry'
 layout: post
-guid: 'http://srikanth.sastry.name/?p=368'
 permalink: /merits-of-unit-tests-part-1/
 categories:
     - Professional

@@ -4,7 +4,6 @@ title: 'Are you building for Survival or Excellence?'
 date: '2019-08-15T15:53:45-04:00'
 author: 'Srikanth Sastry'
 layout: post
-guid: 'https://srikanth.sastry.name/?p=444'
 permalink: /are-you-building-for-survival-or-excellence/
 categories:
     - Professional

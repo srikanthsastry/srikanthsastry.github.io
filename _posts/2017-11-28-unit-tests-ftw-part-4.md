@@ -4,7 +4,6 @@ title: 'Unit tests FTW! — Part 4'
 date: '2017-11-28T16:21:11-05:00'
 author: 'Srikanth Sastry'
 layout: post
-guid: 'http://srikanth.sastry.name/?p=390'
 permalink: /unit-tests-ftw-part-4/
 categories:
     - Professional

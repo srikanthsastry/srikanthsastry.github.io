@@ -4,7 +4,6 @@ title: 'Tale of two departures'
 date: '2020-03-02T10:00:00-05:00'
 author: 'Srikanth Sastry'
 layout: post
-guid: 'https://srikanth.sastry.name/?p=549'
 permalink: /tale-of-two-departures/
 image: /assets/images/2020/02/137FABBE-C7DC-4401-B0AB-299AA800D039-740x430.jpeg
 categories:

@@ -4,10 +4,7 @@ title: 'Leader Election Using Loneliness Detection'
 date: '2012-10-11T19:23:04-04:00'
 author: 'Srikanth Sastry'
 layout: post
-guid: 'http://sastry.hcoop.net/srikanthwp/?p=29'
 permalink: /leader-election-using-loneliness-detection/
-fplayout:
-    - default
 categories:
     - Professional
 tags:
@@ -24,4 +21,4 @@ We showed that the 'gap' between SCD and WCD systems is captured by the answer t
 
 > We consider the problem of leader election (LE) in single-hop radio networks with synchronized time slots for transmitting and receiving messages. We assume that the actual number n of processes is unknown, while the size u of the ID space is known, but is possibly much larger. We consider two types of collision detection: strong (SCD), whereby all processes detect collisions, and weak (WCD), whereby only non-transmitting processes detect collisions. We introduce loneliness detection (LD) as a key subproblem for solving LE in WCD systems. LD informs all processes whether the system contains exactly one process or more than one. We show that LD captures the difference in power between SCD and WCD, by providing an implementation of SCD over WCD and LD. We present two algorithms that solve deterministic and probabilistic LD in WCD systems with time costs of O(log u/n ) and O(min(log u/n , log(1/epsilon)/n)), respectively, where epsilon is the error probability. We also provide matching lower bounds. We present two algorithms that solve deterministic and probabilistic LE in SCD systems with time costs of O(log u) and O(min(log u, log log n + log( 1/epsilon ))), respectively, where epsilon is the error probability. We provide matching lower bounds.
 
-The full version of the paper may be [found here [link]](http://hdl.handle.net/1721.1/66224).
+The full version of the paper may be [found here [link]](http://hdl.handle.net/1721.1/66224).
