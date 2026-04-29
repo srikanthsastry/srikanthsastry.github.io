@@ -1,7 +1,7 @@
 ---
 title: "Subsidiarity"
 garden_type: note
-maturity: budding
+maturity: evergreen
 tags: [governance, subsidiarity, organizational-theory, decision-making]
 created: 2026-04-27
 related_posts:
