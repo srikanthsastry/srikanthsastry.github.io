@@ -14,16 +14,13 @@ tags:
 format: image
 ---
 
-<a href="http://hitar-petar.com/">Hitar Pitar</a> is a quaint little restaurant and hotel in the village of Beli Osam in Bulgaria (close to the Troyan Monastery). It has a neat collection of decorative artifacts that make for an interesting collection of photos.
+[Hitar Pitar](http://hitar-petar.com/) is a quaint little restaurant and hotel in the village of Beli Osam in Bulgaria (close to the Troyan Monastery). It has a neat collection of decorative artifacts that make for an interesting collection of photos.
 
 The restaurant is located on the banks of the Beli Osam river.
 [![Hitar Petar restaurant as seen from across the river](/images/2015/08/IMG_20150831_140829.jpg)](/images/2015/08/IMG_20150831_140829.jpg)
 *Hitar Petar restaurant as seen from across the river*
 
-<!--more-->
-
 Across the river, on the other bank, we see an interesting decoration; it is a 2.5D fresco/mural of a house, a man on a donkey, a water wheel, and a wooden window A/C unit. Check it out.
-
 
 [![ 2.5D mural/fresco of Aahouse and a man on a donkey](/images/2015/08/IMG_20150831_135241.jpg "2.5D mural/fresco of Aahouse and a man on a donkey")](/images/2015/08/IMG_20150831_135241.jpg)
 *2.5D mural/fresco of Aahouse and a man on a donkey*
