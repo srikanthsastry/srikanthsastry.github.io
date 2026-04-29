@@ -6,6 +6,8 @@ created: 2026-04-25
 related_posts:
   - /directive-governance-situationship/
 related_notes:
+  - cc-thread4-tectonic-self-sabotage
+  - cc-thread5-bounded-rationality-as-crutch
   - data-pipeline-is-achilles-heel
   - unfalsifiable-organizational-corrections
 excerpt_text: >

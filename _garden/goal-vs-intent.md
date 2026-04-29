@@ -11,7 +11,7 @@ related_notes:
   - ai-agent-category-error
   - suggestible-actor-properties
 excerpt_text: >
-  **Goal and intent are not the same thing.** Intent implies motivation: the actor wants an outcome, understands
+  Goal and intent are not the same thing. Intent implies motivation: the actor wants an outcome, understands
   why it matters, and can evaluate trade-offs against their own values. A goal is just a target.
 ---
 

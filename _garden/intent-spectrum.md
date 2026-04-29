@@ -11,7 +11,7 @@ related_notes:
   - goal-vs-intent
   - friction-requires-intent
 excerpt_text: >
-  **All software design assumes an actor with intent.** The well-intentioned actor and the malicious actor are
+  All software design assumes an actor with intent. The well-intentioned actor and the malicious actor are
   archetypes at opposite ends of an intent spectrum. Every design paradigm is a response to where the
   designer places the actor on that spectrum.
 ---

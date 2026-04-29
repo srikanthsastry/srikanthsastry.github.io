@@ -20,11 +20,14 @@ excerpt_text: >
   context, and confabulates under uncertainty. Confabulation is the convergent failure mode of the other three.
 ---
 
-**The suggestible actor is defined by four properties that together predict its failure modes.**
+The suggestible actor model describes how AI coding agents actually behave when operating in a codebase. It is defined by four properties:
 
-1. **Goal-oriented.** The actor has a target but no motivation, no values, no comprehension of what it is pointed at or why.
-2. **Locally reasoning.** The actor reasons only over what is immediately available in its context window.
-3. **Susceptible to local context.** Every input during execution influences subsequent behavior, with [susceptibility peaking at failure](/garden/susceptibility-peaks-at-failure/).
-4. **Confabulates under uncertainty.** When local context is insufficient, the agent generates plausible structure and proceeds as if it were real.
+1. **Goal-oriented.** The actor has a goal, externally set by the human who dispatched it. This is not the same as [intent](/garden/goal-vs-intent/). It has a target but no motivation, no values, no comprehension of what it is pointed at or why.
 
-Confabulation is the convergent failure mode: the agent must produce something (goal-oriented), can only draw from what is nearby (locally reasoning), and pattern-matches from whatever is available (susceptible). When the [directive gap](/garden/directive-gap/) is wide, the result is plausible-looking wrongness.
+2. **Locally reasoning.** The actor reasons only over what is immediately available: the contents of its context window, the file it is modifying, the output of the last command it ran. Global invariants and architectural constraints outside its immediate context do not factor into its decisions.
+
+3. **Susceptible to local context.** Every input the agent receives during execution influences its subsequent behavior. This susceptibility is not uniform. It [peaks at the point of failure](/garden/susceptibility-peaks-at-failure/), making error messages and failure outputs the primary design lever.
+
+4. **Confabulates under uncertainty.** When local context is insufficient, the agent does not stop and request clarification. It [confabulates](/garden/confabulation-is-plausible/): it generates a plausible structure and proceeds as if that structure were real.
+
+Confabulation is the convergent failure mode of the other three. The agent must produce something (goal-oriented), can only draw from what's nearby (locally reasoning), and pattern-matches from whatever is available (susceptible to local context). When the [directive gap](/garden/directive-gap/) is wide, the result is plausible-looking wrongness.
