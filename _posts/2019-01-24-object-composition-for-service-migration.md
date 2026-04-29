@@ -25,7 +25,7 @@ Say you have an existing backend service that your code currently uses. It has e
 
 Say, the two client implementations looks something like the following:
 
-```python
+```java
 class OldAndBusted implements ServiceClient {
   @override
   Response process(Request request) {
@@ -64,7 +64,7 @@ There are really four steps to such a migration.
 
 The goal here is to ensure that before we start migration, the new service is functionally identical to the old service. We accomplish this through composition of old and new service as sketched out next.
 
-```python
+```java
 class ClientWithShadow implements ServiceClient {
   ClientWithShadow(ServiceClient oldAndBusted,
                    ServiceClient newHotness) {
@@ -94,7 +94,7 @@ After you have determined that the two services are indeed functionally alike, w
 
 Pseudocode for setting up such a migration follows next. Here, I assume that there is a Config object that contains the migration related config.
 
-```python
+```java
 class MigrationClient implements ServiceClient {
   MigrationClient(ServiceClient oldAndBusted,
                   ServiceClient newHotness,

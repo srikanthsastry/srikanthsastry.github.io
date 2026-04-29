@@ -34,7 +34,7 @@ The use of branches in Git brings me to the next issue that I have seen with Git
 
 ## Git encourages branching despite conceptually not needing it
 
-![Source:https://flic.kr/p/8BkA3fLicense: https://creativecommons.org/licenses/by-nc-sa/2.0/](/assets/images/2019/12/4994396370_c118bbce78_o-450x318.jpg)
+![Source: https://flic.kr/p/8BkA3f — License: https://creativecommons.org/licenses/by-nc-sa/2.0/](/assets/images/2019/12/4994396370_c118bbce78_o-450x318.jpg)
 
 Anyone who has used Git has heard "never commit directly to master". The common pattern is to create a feature branch for development. Let's consider this for a minute. In a SaaS deployment with continuous release, you want every diff to go into master asap, and have it deployed so that you can iterate faster. With Git, you end up doing this with creating a new branch, committing changes to it, getting it reviewed, and then (if you are smart) squash merging it to master. Now, if a team is developing a feature together, the pattern becomes that of creating a feature branch that everyone commits to, and after the feature is complete, you merge into master. Conceptually, you really just want to "commit directly to master", but in Git bad things can happen with less than well-seasoned developers if you allow it. So you create branches. Effectively, Git is forcing you to create branches.
 

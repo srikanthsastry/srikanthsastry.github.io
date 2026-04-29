@@ -49,7 +49,7 @@ Let's start with my favorite.
 
 ### Documentation
 
-![](/assets/images/2019/01/a0a8c4ab0bec170a748228f0982da6795e6af515a8048b11c2b4c9e794d7b4f9.jpg)
+[![](/assets/images/2019/01/a0a8c4ab0bec170a748228f0982da6795e6af515a8048b11c2b4c9e794d7b4f9.jpg)](http://www.quickmeme.com/meme/3t1i87)
 
 Unit tests makes the best [documentation](/garden/tests-as-executable-documentation/) for your code. We were all
 hired as software engineers because we can write good software. That

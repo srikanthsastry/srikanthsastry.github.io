@@ -58,10 +58,9 @@ Building for success is a much more deliberate process that includes grokking th
 There are lots of ways building for success is different from building for survival.
 
 - You deliberate before execution. You ask questions such as:
-
-- What is the problem we are solving?
-- Are we solving the right problem?
-- Is our proposal the right way to solve the problem?
+    - What is the problem we are solving?
+    - Are we solving the right problem?
+    - Is our proposal the right way to solve the problem?
 - You deconstruct the problem to understand the larger context and nature of the sub-problems you are solving. You tease out the incidental nature of how these sub-problems combine versus the essential nature of the overall problem to be solved.
 - Your execution is heavily informed by the aforementioned analysis. You apply the deconstruction and analysis to each sub-problem recursively until the actual act of writing the code becomes a rote exercise. The 'magic' and 'innovation' in your execution is really in how you compose such 'simple pieces of code' to solve your non-trivial problem across layers of abstractions (which are translated directly from your deconstructions).
 - The code paths within your subsystems and modules are constrained to the supported use cases, but that is the result of intentional plumbing across the data flow. Addition of new use cases and flows is often a matter of easily understandable and incremental changes.
@@ -74,10 +73,9 @@ Despite it not being the 'fast' way to build software. There is a lot of be said
 - The deliberation process before you build should result in a decent understanding of the context within which you are solving your problem. This often means, your team and the software is now in a much better position to solve more problems faster. Effectively you have expanded your 'pie'.
 - Almost always, problems do not occur/manifest in isolation. They are part of a larger landscape of issues, utilities, and benefits. Deconstructing the problem through this lens will help you build a solution that is more likely to have reusable and sustainable components and modules that will lower the incremental effort associated with the evolution of your systems and their adaptation to solve proximate and associated problem.
 - A well thought out design allows you to shard your development across multiple developers. This will help in three ways:
-
-1. You can 'move fast' with concurrent execution.
-2. Each developer can work on multiple workstreams, and is less likely to be completely stuck.
-3. Your software's [bus factor](https://en.wikipedia.org/wiki/Bus_factor) is much improved with more engineers on the code.
+    1. You can 'move fast' with concurrent execution.
+    2. Each developer can work on multiple workstreams, and is less likely to be completely stuck.
+    3. Your software's [bus factor](https://en.wikipedia.org/wiki/Bus_factor) is much improved with more engineers on the code.
 - You can pivot better and faster because a lot of what you wrote is reusable and reconfigurable. You can [migrate from one upstream dependency to another](https://srikanth.sastry.name/object-composition-for-service-migration/) much more smoothly. A good composition-based design allows you to make disruptive changes without actually disrupting :)
 
 ### What it doesn't give you

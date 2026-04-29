@@ -41,7 +41,7 @@ that could potentially need to be authenticated as a specific user, and
 it can do so periodically. Here is a first crack at the API and usage
 for it.
 
-```python
+```
 class UrlRetriever {
    // Unauthenticated, one-time
    UrlRetriever(Handle handle);
@@ -72,7 +72,7 @@ Making an honest attempt at writing unit tests can actually help you
 detect such usability issues! Consider the next iteration for the same
 use case, informed (or constrained) by the unit tests.
 
-```python
+```
 class UrlRetriever {
    UrlRetriever(Handle handle);
    AuthenticatedUrlRetriever withAuth(String user);

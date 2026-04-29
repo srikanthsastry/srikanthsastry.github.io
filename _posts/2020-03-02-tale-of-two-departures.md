@@ -14,6 +14,7 @@ tags:
 ---
 
 ![Image by Maret Hosemann from Pixabay](/assets/images/2020/02/img_0143-1024x683.jpg)
+*Image by [Maret Hosemann](https://pixabay.com/users/MIH83-464187/) from [Pixabay](https://pixabay.com/)*
 
 Saying goodbye to a workplace where you have spent a considerable amount of time is never easy. But it can be made into a positive experience by the organization, or be made miserable. Netflix is famous for celebrating when an employee leaves by thanking them and wishing them well, and in contrast, Hubspot is know for firing something and calling it a ‘graduation’.
 
@@ -22,6 +23,7 @@ I have two stories to share on how my departure from two different organizations
 ## **First** story: I said goodbye, and they said Au **Revoir**
 
 ![Image by S. Hermann & F. Richter from Pixabay](/assets/images/2020/02/img_0144-1024x553.jpg)
+*Image by [S. Hermann & F. Richter](https://pixabay.com/users/pixel2013-2364555/) from [Pixabay](https://pixabay.com/)*
 
 In the first story, I had a meeting with my manager and told him that I accepted an offer with another company, and so was leaving. His immediate response was to check with me if there was anything he could do that will make me change my mind (he also prefaced that by saying that he thinks that the answer is ‘no’). After I said that my mind was made up, he thanked me for everything I had done so far, and said that he will set up meetings with various folks to help me transition my responsibilities.
 
@@ -30,6 +32,7 @@ With my consent, he immediately and discretely told members of my team, set up t
 ## Second Story: I said goodbye, and they said uh.. wait, what?
 
 ![Image by Alexas_Fotos from Pixabay](/assets/images/2020/02/img_0145-1024x645.jpg)
+*Image by [Alexas_Fotos](https://pixabay.com/users/Alexas_Fotos-686414/) from [Pixabay](https://pixabay.com/)*
 
 In the second story, I had a meeting with my manager and told him that I did not see my skills fitting the role, and that it doesn’t play to my strengths. So, I think serves both the org and me well to plan a transition for me to move on. He tried to convince me otherwise, and this went on for some time. I indulged his thoughts and arguments and made a good faith effort to pursue the avenues he suggested, but it only served to strengthen my initial proposition.
 

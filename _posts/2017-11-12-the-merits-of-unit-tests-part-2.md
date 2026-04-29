@@ -25,7 +25,7 @@ designed your software is, over time a few things happen to it.
 
 1. The assumptions you made about the environment change, and that triggers unanticipated changes to your code.
 
-![Boss: Did I remember to tell you before you finished the coding that the user's specifications changed? Dilbert: AAAIII-YIIIII-YIIII-YIII!!! Boss: So, no-ish? Dilbert: BAM! BAM! BAM!](/assets/images/2019/01/dt_c110516-1024x319.gif)
+[![Boss: Did I remember to tell you before you finished the coding that the user's specifications changed? Dilbert: AAAIII-YIIIII-YIIII-YIII!!! Boss: So, no-ish? Dilbert: BAM! BAM! BAM!](/assets/images/2019/01/dt_c110516-1024x319.gif)](http://dilbert.com/strip/2011-05-16)
 
 *You started with the assumption that every account will have a
 unique username, but with the introduction of shared family-accounts,
@@ -44,7 +44,7 @@ things to do.*
 
 3. The software is co-opted for something that it was never intended for in the first place.
 
-![](/assets/images/2019/01/0-1.jpg)
+[![](/assets/images/2019/01/0-1.jpg)](http://www.gorillafabrication.com/modifications/16-repurposed-trucks-and-cars/)
 
 *That awesome geo-spatial indexing service that you wrote for
 indexing cities became so popular that it is now being used to index
@@ -69,7 +69,7 @@ becomes a lot easier.
 
 > The rule of thumb is simply “As long as the unit tests pass, every iteration of your refactor is (most likely) correct.”
 
-![](http://upload.wikimedia.org/wikipedia/commons/0/0b/TDD_Global_Lifecycle.png)
+[![](/assets/images/2019/01/refactoringg-884x1024.png)](http://upload.wikimedia.org/wikipedia/commons/0/0b/TDD_Global_Lifecycle.png)
 
 Good unit tests can save you multiple days or even weeks of making
 incremental changes and testing them out in production in a gingerly

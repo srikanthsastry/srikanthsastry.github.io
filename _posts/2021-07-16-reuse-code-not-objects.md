@@ -74,3 +74,9 @@ public void process(List<Request> requests) {
 ```
 
 The issue here is subtle, but dangerous. Consider what happens if one of the requests in the list of requests passed to `process()` causes `statefulObject`to throw an exception inside `computeResponse()`. Dutifully, this exception is caught by `process()` and it returns `null`. However, note that the value of `responseType` in `statefulObject` was never modified by processing of this request, and therefore, it still hold the `ResponseType` of the previous request! Therefore, the line `appendResponse(response, statefulObject.getResponseType());` is now passing in a null response and the response type of the previous request!
+
+These types of bugs are subtle and a pain to track down.
+
+And this happened because we chose to reuse the `statefulObject`. If we were to use a new instance each time, this would not really be an issue.
+
+**Moral: If feasible, do not reuse objects; create new instances and throw them away when done!**

@@ -99,7 +99,7 @@ modular, easier to read, and much easier to maintain.
 
 ![](/assets/images/2019/01/0-3.jpg)
 
-If your code does not do a decent job of[injecting its dependencies](https://en.wikipedia.org/wiki/Dependency_injection)
+If your code does not do a decent job of [injecting its dependencies](https://en.wikipedia.org/wiki/Dependency_injection)
  from outside, you are gonna have a bad time! Having good unit tests
 will actually keep you from getting into this pitfall pretty
 effectively. Consider the following contrived example. You have a piece
@@ -107,7 +107,7 @@ of code that writes to an external service, and your code throttles the
 rate of writes because going over your approved rate/quota can be pretty
  expensive. So, your code could look something like this:
 
-```python
+```cpp
 class RateLimiter {
    void writeToExternalService(const vector<Entries>& stuff) {
      auto service = new ExternalService(ConnectionParameters foo);
@@ -132,7 +132,7 @@ established is expensive! Well, this is where unit testing it will force
  you into healthy dependency injection. For this contrived example, you
 can inject the dependency as follows.
 
-```python
+```cpp
 class RateLimiter {
    void writeToExternalService(
        const vector<Entries>& stuff,
