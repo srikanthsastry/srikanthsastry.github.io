@@ -7,7 +7,6 @@ related_posts:
   - /directive-governance-situationship/
 related_notes:
   - directive-governance
-  - missionary-culture-as-prerequisite
   - serial-satisficing-without-learning
   - subsidiarity
 excerpt_text: >
