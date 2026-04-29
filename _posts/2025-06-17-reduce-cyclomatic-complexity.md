@@ -14,7 +14,7 @@ image: /assets/images/cpu-in-maze-pixel-art.png
 ---
 
 ## What even _is_ Cyclomatic Complexity?
-Ever spend 20 minutes trying to figure out why your bug fix or feature code isn't triggering or being executed — only to realize you missed a buried branch in someone’s 10-path function? That’s [Cyclomatic Complexity](https://en.wikipedia.org/wiki/Cyclomatic_complexity) in action. Intuitively, you can think of Cyclomatic Complexity as the number of possible paths a single execution of a function can take. 
+Ever spend 20 minutes trying to figure out why your bug fix or feature code isn't triggering or being executed — only to realize you missed a buried branch in someone’s 10-path function? That’s [Cyclomatic Complexity](https://en.wikipedia.org/wiki/Cyclomatic_complexity) in action. Intuitively, you can think of Cyclomatic Complexity as the number of possible paths a single execution of a function can take.
 
 For example, `a = b + c` has a cyclomatic complexity of one, and `a = b + c if foo else d + e` has a cyclomatic complexity of two: one path is when `foo` is `True` and the effective logic is `a = b + c`, and the other path is when `foo` is `False` and the effective logic is `a = d + e`.
 
@@ -22,7 +22,7 @@ For example, `a = b + c` has a cyclomatic complexity of one, and `a = b + c if f
 
 If you take just one thing away from this note, then let it be this.
 
-> **Strive to reduce the <a href="/garden/reduce-cyclomatic-complexity/">Cyclomatic Complexity</a> of your code; your team and your future self will thank you!**
+> **Strive to reduce the [Cyclomatic Complexity](/garden/reduce-cyclomatic-complexity/) of your code; your team and your future self will thank you!**
 
 ## Time to hit the brain gym, bro
 As an exercise, I will let you figure out the cyclomatic complexity of the following piece of code:
@@ -54,10 +54,9 @@ Next, by spending no more than 60 seconds looking this code, can you tell me wha
 
 Anyway, making sense of functions with high cyclomatic complexity is annoying. It’s notoriously difficult to write tests with good coverage for these functions, and in general, they tend to be bug factories.
 
-And yet — somehow — a lot of senior software engineers don’t seem to grok this. I keep seeing deeply nested `if-else` blocks, sometimes inside loops with `break`s and `continue`s, and it doesn’t seem to bother anyone! It’s like we’ve collectively normalized this cognitive overhead. 
+And yet — somehow — a lot of senior software engineers don’t seem to grok this. I keep seeing deeply nested `if-else` blocks, sometimes inside loops with `break`s and `continue`s, and it doesn’t seem to bother anyone! It’s like we’ve collectively normalized this cognitive overhead.
 
 Why?! Why are we putting up with this crap? It’d never fly in an interview.
-
 
 ## Yo, let's fix it up!
 Coming back to the above example, the confusion and ugliness of this code really got to me. It got so bad I considered dusting off a Karnaugh map. After some much needed grokking, I managed to simplify it down to a cyclomatic complexity of `2`! :)
@@ -73,7 +72,7 @@ def has_env_override():
     return val is not None and val.lower() in {"true", "1", "yes"}
 
 if (
-    has_env_override() or 
+    has_env_override() or
     switcher.check(__SWITCHER_KEY, switchval=region)
 ):
     apply_some_config(job)

@@ -11,6 +11,7 @@ image: /assets/images/naked-knight-with-helmet-and-shield.jpg
 excerpt: >
     A story about how defense-in-depth and locality of behavior collide, and how blindly relying on fallback mechanisms can backfire.
 ---
+
 Defense-in-depth—borrowed from military and security strategy—means layering safeguards so that if one fails, another takes over ([Cloudflare](https://www.cloudflare.com/learning/security/glossary/what-is-defense-in-depth/), [Wikipedia](https://en.wikipedia.org/wiki/Defense_in_depth_(computing))). Defensive programming is a software take on the same idea: add checks and fallbacks so bugs don't escalate.
 
 Meanwhile, the principle of [locality of behavior](https://alexkondov.com/locality-of-behavior-react/) (or “locality of behaviour” in htmx) says that "the behavior of a unit of code should be obvious by looking only at that unit" [[source](https://htmx.org/essays/locality-of-behaviour/)]. It draws on older ideas of cohesion: keep related logic together.
@@ -23,7 +24,6 @@ So when should you favor layering defenses, and when should you co-locate behavi
 
 Asking around, I learned this was an intentional fallback. It was a defensive programming safeguard in case minor compactions failed. Everyone thought this was great resilience.
 
-
 **Increasingly brittle.** Then I asked: why did minor compactions fail in the first place? Silence. No alerts, no monitoring; no one knew.
 
 Logs revealed major compactions had been quietly running on small datasets for ages due to a bug in minor compaction discovery. The problem stayed hidden because small datasets finished quickly. When larger ones arrived, everything blew up.
@@ -34,4 +34,4 @@ Ironically, the fallback meant we never fixed the root issue. Our supposed resil
 
 So next time you violate locality of behavior for defense-in-depth, think hard. And always alert aggressively when deeper defenses kick in.
 
-Building on these well-trodden ideas, this incident is just one more caution: <a href="/garden/defense-in-depth-needs-visibility/">defense-in-depth only works if every fallback is visible and monitored</a>. Otherwise, your “resilience” may just be hiding decay.
+Building on these well-trodden ideas, this incident is just one more caution: [defense-in-depth only works if every fallback is visible and monitored](/garden/defense-in-depth-needs-visibility/). Otherwise, your “resilience” may just be hiding decay.

@@ -19,7 +19,7 @@ excerpt: >
 I ran into one of those delightful bugs that only show up in dynamic task generation of your data pipelines — the kind that teach you how a leaky abstraction in your pipeline platform can have you scratching your head in confusion.
 
 The short version:
-I made a simple function signature change, assuming only future runs would care. Instead, my pipeline broke days later when an old task serialized under the previous signature collided with the new code. The fix? Classic <a href="/garden/backward-compatibility-for-leaky-abstractions/">backward compatibility tricks</a> that saved me from babysitting all existing task runs when making changes in the future.
+I made a simple function signature change, assuming only future runs would care. Instead, my pipeline broke days later when an old task serialized under the previous signature collided with the new code. The fix? Classic [backward compatibility tricks](/garden/backward-compatibility-for-leaky-abstractions/) that saved me from babysitting all existing task runs when making changes in the future.
 
 Here’s the story — and how to avoid learning this lesson the hard way.
 
@@ -87,12 +87,12 @@ First, we need to ensure that passing in parameters from the previous version of
 - def task_generator(arg1, arg2) -> List[Task]:
 + def task_generator(
 +    *,
-+    arg1=None, 
++    arg1=None,
 +    arg2=None,
 +    **kwargs
 + ) -> List[Task]:
 +    if kwargs:
-+        LOG.warning(f"Found unspecified arguments {kwargs.keys()}")        
++        LOG.warning(f"Found unspecified arguments {kwargs.keys()}")
     ...
 ```
 
@@ -110,7 +110,7 @@ Now you are ready to make changes to your function signature without breaking ex
 ```diff
 def task_generator(
     *,
-    arg1=None, 
+    arg1=None,
 -   arg2=None,
 +   arg3=None,
     **kwargs
@@ -137,7 +137,7 @@ After all your old task instances have completed execution, you are now ready to
 ```diff
 def task_generator(
     *,
-    arg1=None, 
+    arg1=None,
 -   arg3=None,
     **kwargs
 ) -> List[Task]:
