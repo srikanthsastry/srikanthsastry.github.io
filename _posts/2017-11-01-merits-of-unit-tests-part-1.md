@@ -24,10 +24,10 @@ issues in your code and fix them before they hit the trunk.” Ok, so that
  argument sounded a little weak. Here is a much stronger version of the
 same argument.
 
-*You have to write unit tests because unit tests are a*[*scientific*](https://l.facebook.com/l.php?u=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FScientific_method&h=ATNU99lLyWx55l8BBlgT8AIDwdfUHBUjrSOtbRUQbP42vH_k7pVzTOXviC2N0Ze44RbFVdkFCWKSsvNoCovWLh8gaOuHG9eEAsu4GKloIbcHKwPbQdRFAdhFdNCPSDHmdBjCaYcBKEXAxhC-i735nThHQPOCEuD39p2iuu6K8bulWw)
+*You have to write unit tests because unit tests are a*[*scientific*](https://en.wikipedia.org/wiki/Scientific_method)
 *mechanism to verify that your implementation satisfies the
 specification (that is, you code does what you say it does). To
-elaborate, your claim of what your code does is a*[*falsifiable*](https://l.facebook.com/l.php?u=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FFalsifiability&h=ATPEcKK4eeXOCNWcc8BCYwdplxHx1zCDAuE74Z4TapMJOVwgCqukHCEuH21QaLSEGYvUA1ouxan-XttxS4n2cgnjJBzJY5CWV-quFVTNq18bpJSTq2l3NZyjuw2yd1-O3mWdupeKygwazafitDpYrhAWIt8nLBIlTkuxKG0nTn0oSA)
+elaborate, your claim of what your code does is a*[*falsifiable*](https://en.wikipedia.org/wiki/Falsifiability)
 *hypothesis in that it is possible to conceive of an observation that
 could negate your claim. Unit tests are the experiments that can be
 performed to test your hypothesis. If all your unit tests pass, then it
@@ -81,7 +81,7 @@ So, if anyone wants to use the code that your wrote, all they need to do
 
 **EXAMPLE**
 
-A great example is the [folly](https://github.com/facebook/folly) library. Let's take folly Futures for instance. The primary header file [Future.h](https://github.com/facebook/folly/blob/master/folly/futures/Future.h) tells you the API, but figuring out how to use it is not straightforward from there. However, go over to the unit tests at [FutureTest.cpp](https://l.facebook.com/l.php?u=https%3A%2F%2Fgithub.com%2Ffacebook%2Ffolly%2Fblob%2Fmaster%2Ffolly%2Ffutures%2Ftest%2FFutureTest.cpp&h=ATNiTV-rdTNS1lEjxiC29ETboF-w94bQpQhXUxFugGI897McF_YyCo-jvJX_kzLzDyVSjokYlYY9wbhcS4dJsTQlrgkVGXW8Fw7BBKx537cGoHDELiJcF4gBHMQq2CzZXV158ToPWPV0j0Xbt4WNDiLY13bFtRv7cWPEgKLJZsHe0Q),
+A great example is the [folly](https://github.com/facebook/folly) library. Let's take folly Futures for instance. The primary header file [Future.h](https://github.com/facebook/folly/blob/master/folly/futures/Future.h) tells you the API, but figuring out how to use it is not straightforward from there. However, go over to the unit tests at [FutureTest.cpp](https://github.com/facebook/folly/blob/master/folly/futures/test/FutureTest.cpp),
  and you will come away knowing how to use Futures for your use case in a
  matter of minutes. For each minute spent by a folly developer to write
 these unit tests, it has saved thousands of developers countless hours.
