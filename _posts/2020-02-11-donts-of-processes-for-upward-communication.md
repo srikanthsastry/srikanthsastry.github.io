@@ -30,7 +30,7 @@ tags:
 <!-- /wp:paragraph -->
 
 <!-- wp:list -->
-<ul><li>Focusing on the format instead of a well thought out framework</li><li>Asymmetric commitment from the leadership on communciation</li><li>No reacting/responding to the contents of the communication</li><li>Not getting engineers’ buy-in</li></ul>
+<ul><li><a href="/garden/upward-comms-format-obsession/">Focusing on the format instead of a well thought out framework</a></li><li><a href="/garden/upward-comms-asymmetric-commitment/">Asymmetric commitment</a> from the leadership on communciation</li><li><a href="/garden/upward-comms-unresponsiveness/">No reacting/responding to the contents of the communication</a></li><li><a href="/garden/upward-comms-no-engineer-buy-in/">Not getting engineers’ buy-in</a></li></ul>
 <!-- /wp:list -->
 
 <!-- wp:heading -->

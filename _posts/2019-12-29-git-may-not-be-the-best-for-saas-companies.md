@@ -31,7 +31,7 @@ tags:
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p>While Git has been used in such environments with varying degrees of success, I have seen teams really trying to work around Git rather than Git just work for them. I have seen Git get in the way when teams get large, when teams get siloed into their own branches, when teams starts working with junior developers, and when having to develop across multiple services. While there are mechanisms in Git workflows and tools to mitigate this, it only adds additional complexity to developing software instead of taking it away.</p>
+<p>While Git has been used in such environments with varying degrees of success, I have seen teams really trying to <a href="/garden/git-conflicts-with-trunk-based-saas/">work around Git</a> rather than Git just work for them. I have seen Git get in the way when teams get large, when teams get siloed into their own branches, when teams starts working with junior developers, and when having to develop across multiple services. While there are mechanisms in Git workflows and tools to mitigate this, it only adds additional complexity to developing software instead of taking it away.</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:more -->

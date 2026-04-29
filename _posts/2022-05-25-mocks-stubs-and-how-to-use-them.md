@@ -84,7 +84,7 @@ In the above illustration, we create a stub for the key value store (note that t
 
 ### Fakes, instead of stubs
 
-A small detour here. When using a stub, always consider if you can use a fake instead. There are multiple definitions of a fake, and the one I am referring to is the following. A fake is a special kind of stub that implements the same API as the production dependency, but the implementation is much more lightweight. This implementation may be correct only within the context of the unit tests where it is used. Let's reuse the previous illustration of using a stub, and replace the stub with a fake. Recall that we stubbed out the `get` method of `KeyValueStoreClass` to return the canned value `"user@special_domain.com"`. Instead, we can implement a fake `KeyValueStoreClass` that uses a `Dict` as follows.
+A small detour here. When using a stub, always consider if you can use a [fake](/garden/fakes-over-stubs/) instead. There are multiple definitions of a fake, and the one I am referring to is the following. A fake is a special kind of stub that implements the same API as the production dependency, but the implementation is much more lightweight. This implementation may be correct only within the context of the unit tests where it is used. Let's reuse the previous illustration of using a stub, and replace the stub with a fake. Recall that we stubbed out the `get` method of `KeyValueStoreClass` to return the canned value `"user@special_domain.com"`. Instead, we can implement a fake `KeyValueStoreClass` that uses a `Dict` as follows.
 
 ```python
 from unittest.mock import MagicMock
