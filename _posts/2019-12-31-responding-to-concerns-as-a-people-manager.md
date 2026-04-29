@@ -18,7 +18,7 @@ tags:
 <!-- /wp:paragraph -->
 
 <!-- wp:list {"ordered":true} -->
-<ol><li>Listen</li><li>Empathize</li><li>Don't take notes</li><li>Descend into the particular</li><li>Check with others</li><li>Socialize, if the issue is common</li><li>DO NOT become an apologist for status quo</li></ol>
+<ol><li>Listen</li><li>Empathize</li><li>Don't take notes</li><li>Descend into the particular</li><li><a href="/garden/check-if-concern-is-systemic/">Check with others</a></li><li>Socialize, if the issue is common</li><li>DO NOT become an <a href="/garden/explaining-away-concerns-is-victim-blaming/">apologist for status quo</a></li></ol>
 <!-- /wp:list -->
 
 <!-- wp:paragraph -->

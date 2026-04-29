@@ -11,7 +11,7 @@ related_notes:
   - ai-agent-category-error
   - suggestible-actor-properties
 excerpt_text: >
-  Ergonomic friction as a design tool only works when the actor has intent and judgment. Friction is a signal,
+  **Ergonomic friction as a design tool only works when the actor has intent and judgment.** Friction is a signal,
   and signals require an interpreter. The AI agent encounters friction as an obstacle and routes around it.
 ---
 
