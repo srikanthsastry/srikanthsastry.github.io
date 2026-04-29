@@ -74,22 +74,56 @@ layout: default
       Evolving notes and ideas at various stages of development — from raw seedlings to stable references.
     </p>
     <div
+      id="garden-home-grid"
       class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-x-12 gap-y-8 py-8 md:py-16"
-      data-motion="stagger-cards"
     >
-      {% assign garden_sorted = site.garden | sort: "title" %}
-      {% for note in garden_sorted limit:6 %}
-      <a href="{{ note.url | relative_url }}" class="garden-card no-underline block p-4 rounded-lg border border-neutral-200 dark:border-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-600 transition">
-        <div class="flex items-start gap-2 mb-2">
-          {% include garden_maturity_badge.html maturity=note.maturity inline=true %}
-          <h3 class="text-lg font-semibold text-neutral-900 dark:text-neutral-100">{{ note.title }}</h3>
-        </div>
-        {% if note.excerpt_text %}
-          <p class="text-sm text-neutral-600 dark:text-neutral-400 line-clamp-2">{{ note.excerpt_text }}</p>
-        {% endif %}
-      </a>
-      {% endfor %}
     </div>
+    <script>
+      (function () {
+        var MATURITY = {
+          seedling:  { emoji: '\u{1F331}', title: 'Seedling \u2014 early idea' },
+          budding:   { emoji: '\u{1F33F}', title: 'Budding \u2014 developing' },
+          evergreen: { emoji: '\u{1F333}', title: 'Evergreen \u2014 stable reference' }
+        };
+
+        function renderCard(note) {
+          var m = MATURITY[note.maturity] || MATURITY.seedling;
+          var card = document.createElement('a');
+          card.href = note.url;
+          card.className = 'garden-card no-underline block p-4 rounded-lg border border-neutral-200 dark:border-neutral-800 hover:border-neutral-400 dark:hover:border-neutral-600 transition';
+
+          var header = '<div class="flex items-start gap-2 mb-2">'
+            + '<span title="' + m.title + '">' + m.emoji + '</span>'
+            + '<h3 class="text-lg font-semibold text-neutral-900 dark:text-neutral-100">'
+            + (note.title || '') + '</h3></div>';
+
+          var excerpt = note.excerpt
+            ? '<p class="text-sm text-neutral-600 dark:text-neutral-400 line-clamp-2">'
+              + note.excerpt + '</p>'
+            : '';
+
+          card.innerHTML = header + excerpt;
+          return card;
+        }
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', '/assets/garden-data.json', true);
+        xhr.onload = function () {
+          if (xhr.status !== 200) return;
+          try { var data = JSON.parse(xhr.responseText); } catch (e) { return; }
+          var notes = Object.keys(data).map(function (k) { return data[k]; });
+          for (var i = notes.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));
+            var t = notes[i]; notes[i] = notes[j]; notes[j] = t;
+          }
+          var grid = document.getElementById('garden-home-grid');
+          if (!grid) return;
+          var picked = notes.slice(0, 6);
+          picked.forEach(function (n) { grid.appendChild(renderCard(n)); });
+        };
+        xhr.send();
+      })();
+    </script>
     <div class="pt-4 text-end" data-motion="fadeInUp">
       <a
         class="font-mulish text-lg hover:text-sky-400 hover:underline font-bold"
