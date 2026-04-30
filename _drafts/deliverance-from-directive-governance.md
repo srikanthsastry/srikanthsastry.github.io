@@ -41,7 +41,11 @@ This doesn't go far enough. A good leader is necessary, but not sufficient. Jobs
 
 What is the alternative to directive governance? Turns out, the alternative has already been done. No, not by [The Simpsons](https://en.wikipedia.org/wiki/Simpsons_Already_Did_It); by [the Catholic Church](https://en.wikipedia.org/wiki/Subsidiarity_%28Catholicism%29)!
 
-The principle can be traced back to Christian philosophers [Thomas Aquinas](https://en.wikipedia.org/wiki/Thomas_Aquinas) and [Johannes Althusius](https://en.wikipedia.org/wiki/Johannes_Althusius), and the principle is called *subsidiarity*. In 1931, Pope Pius XI formalized it in [*Quadragesimo Anno*](https://www.vatican.va/content/pius-xi/en/encyclicals/documents/hf_p-xi_enc_19310515_quadragesimo-anno.html): "It is an injustice and at the same time a grave evil and disturbance of right order to assign to a greater and higher association what lesser and subordinate organizations can do." I have co-opted it as follows.
+The principle can be traced back to Christian philosophers [Thomas Aquinas](https://en.wikipedia.org/wiki/Thomas_Aquinas) and [Johannes Althusius](https://en.wikipedia.org/wiki/Johannes_Althusius), and the principle is called *subsidiarity*. In 1931, Pope Pius XI formalized it in [*Quadragesimo Anno*](https://www.vatican.va/content/pius-xi/en/encyclicals/documents/hf_p-xi_enc_19310515_quadragesimo-anno.html):
+
+> "It is an injustice and at the same time a grave evil and disturbance of right order to assign to a greater and higher association what lesser and subordinate organizations can do."
+
+I have co-opted it as follows.
 
 **[Subsidiarity](/garden/subsidiarity/): decisions should be made at the lowest level competent to make them. Higher levels sit behind, providing context, guardrails, and intervening only when lower levels cannot handle the issue.**
 
