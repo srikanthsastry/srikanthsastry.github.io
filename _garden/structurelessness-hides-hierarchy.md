@@ -6,7 +6,7 @@ tags: [governance, organizational-design, hierarchy, directive-governance]
 created: 2026-04-26
 related_posts:
   - /cargo-cult-governance/
-  - /the-escape-from-directive-governance/
+  - /deliverance-from-directive-governance/
 related_notes:
   - three-assumptions-framework
   - isomorphic-mimicry-in-tech-governance

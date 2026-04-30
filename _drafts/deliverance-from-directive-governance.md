@@ -1,5 +1,5 @@
 ---
-title: "The Escape from Directive Governance"
+title: "Deliverance from Directive Governance"
 date: 2026-04-30
 layout: post
 categories:
@@ -10,8 +10,8 @@ tags:
     - tech-industry
     - organizational-theory
     - subsidiarity
-permalink: /the-escape-from-directive-governance/
-image: /assets/images/the-escape-from-directive-governance-cover.png
+permalink: /deliverance-from-directive-governance/
+image: /assets/images/deliverance-from-directive-governance-cover.png
 excerpt: >
     Directive governance is structurally wrong for software and a structural ratchet keeps it in place. The escape is subsidiarity, decisions made at the lowest competent level, sustained by missionary culture that resists re-centralization under pressure.
 ---

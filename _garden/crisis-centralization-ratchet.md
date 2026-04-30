@@ -5,7 +5,7 @@ maturity: budding
 created: 2026-04-25
 related_posts:
   - /directive-governance-situationship/
-  - /the-escape-from-directive-governance/
+  - /deliverance-from-directive-governance/
 related_notes:
   - directive-governance
   - serial-satisficing-without-learning
