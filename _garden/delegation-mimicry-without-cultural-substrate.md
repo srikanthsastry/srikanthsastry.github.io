@@ -6,6 +6,7 @@ tags: [governance, directive-governance, delegation, isomorphism]
 created: 2026-04-26
 related_posts:
   - /cargo-cult-governance/
+  - /the-escape-from-directive-governance/
 related_notes:
   - directive-governance
   - isomorphic-mimicry-in-tech-governance

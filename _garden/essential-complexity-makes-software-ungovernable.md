@@ -6,6 +6,7 @@ tags: [governance, software-engineering, essential-complexity, brooks]
 created: 2026-04-25
 related_posts:
   - /cargo-cult-governance/
+  - /the-escape-from-directive-governance/
 related_notes:
   - three-assumptions-framework
   - in-software-execution-is-decision-making
