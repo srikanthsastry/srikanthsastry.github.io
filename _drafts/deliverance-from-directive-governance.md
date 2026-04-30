@@ -61,7 +61,7 @@ What separates the existence proofs from the illusions is [**missionary culture*
 
 Subsidiarity alone does not produce this. An SRE team with full decision-making freedom might internalize their role (keep the fleet humming) without caring about the organization's mission to "connect people" or "organize the world's information." That is functional, but fragile. When the next crisis hits, a team that owns its role but not the mission has no reason to resist centralization. The ratchet finds less resistance.
 
-Missionaries are different. When a top-down decision runs counter to the mission, they push back. They challenge it, introduce friction, make centralization costly. That friction is the ballast against the ratchet. If you have internalized the mission, a directive that violates it feels viscerally wrong.
+Missionaries are different. When a top-down decision runs counter to the mission, they push back. They challenge it, acting as a governor on the ratchet of centralization. If you have internalized the mission, a directive that violates it feels viscerally wrong.
 
 Netflix's stock crashed 70% in 2022. They did not re-centralize. Their [2024 culture revision](https://www.hrgrapevine.com/us/content/article/2024-06-26-netflix-announces-rare-revision-of-iconic-culture-playbook) doubled down on "context not control." The people making decisions were not waiting for permission. They had a shared understanding of what Netflix exists to do, and a stock crash did not change that. The mission was the coordination mechanism. Not the reporting chain.
 
