@@ -238,7 +238,7 @@ Mr. Rana was now the acting principal of the school. When I walked into the prin
 
 I spent the rest of the morning walking around in the school premises. I started with the assembly hall that was next to the basket ball court. The assembly hall doubled as the school auditorium as well. It was the venue for all morning assemblies (when it wasn't bright and sunny outside). All the kids assembled every morning there for the daily prayer. Girls on the right half, boys on the left; the smallest class in the front and the oldest class in the back. The prayer was secular (i.e., no reference to any particular religion) except for the mention of God in it. This was followed by the thought for the day, and then came a one minute silence. To this day I haven't been able to figure out why we had to observe that one minute silence. It was never explained to us, and we didn't ask. Following the silence was the National Pledge that went something like this:
 
-* India is my country.
+*India is my country.
 All Indians are my brothers and sisters. I love my country, and I am proud of its rich and varied heritage.
 I shall always strive to be worthy of it.
 I shall give my parents, teachers and all elders respect and treat everyone with courtesy.

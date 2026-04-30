@@ -18,27 +18,17 @@ I was in Tunisia in the second week of December in 2010. Just a week before the 
 
 ![The southern entrance to the Tunis Medina](/assets/images/stories/travels/tunisia2010/IMG_2662.JPG)
 
-*The southern entrance to the Tunis Medina*
-
 
 ![Walking around the medina, the place reminded me so much of India](/assets/images/stories/travels/tunisia2010/IMG_2665.JPG)
-
-*Walking around the medina, the place reminded me so much of India*
 
 
 ![Including Poorly Spelt Signs :-)](/assets/images/stories/travels/tunisia2010/IMG_2666.JPG)
 
-*Including Poorly Spelt Signs :-)*
-
 
 ![Some public spaces and buildings were rather beautiful](/assets/images/stories/travels/tunisia2010/IMG_2668.JPG)
 
-*Some public spaces and buildings were rather beautiful*
-
 
 ![Of course, Ben Ali saved the best for himself. This is as close as I could get to the presidential palace overlooking the Mediterranean.](/assets/images/stories/travels/tunisia2010/IMG_2935.JPG)
-
-*Of course, Ben Ali saved the best for himself. This is as close as I could get to the presidential palace overlooking the Mediterranean.*
 
 
 ![](/assets/images/stories/travels/tunisia2010/IMG_2908.JPG)
@@ -58,37 +48,23 @@ Next, we move to Sidi Bou Said.
 
 ![Sidi Bou Said is a beautiful (rich) neighborhood not far from Tunis. The blue and white colors look a lot like the villages in Greece.](/assets/images/stories/travels/tunisia2010/IMG_2887.JPG)
 
-*Sidi Bou Said is a beautiful (rich) neighborhood not far from Tunis. The blue and white colors look a lot like the villages in Greece.*
-
 
 ![This point marks the beginning of Sidi Bou Said, and curiously, everything up through this point was relatively dusty and the eat outs where cheap. A few paces to the other side of the street and the entire picture changes.](/assets/images/stories/travels/tunisia2010/IMG_2906.JPG)
-
-*This point marks the beginning of Sidi Bou Said, and curiously, everything up through this point was relatively dusty and the eat outs where cheap. A few paces to the other side of the street and the entire picture changes.*
 
 
 ![All the houses that I saw there maintained the same color scheme and style.](/assets/images/stories/travels/tunisia2010/IMG_2895.JPG)
 
-*All the houses that I saw there maintained the same color scheme and style.*
-
 
 ![The similarity of the houses is down to the window grills and the lintel over the windows too.](/assets/images/stories/travels/tunisia2010/IMG_2891.JPG)
-
-*The similarity of the houses is down to the window grills and the lintel over the windows too.*
 
 
 ![The clean streets and relatively expensive cars betrayed the wealth of the residents here.](/assets/images/stories/travels/tunisia2010/IMG_2899.JPG)
 
-*The clean streets and relatively expensive cars betrayed the wealth of the residents here.*
-
 
 ![All the streets were really just cobble-stoned pathways. It looked like a quiet village while I was there. Nevertheless beautiful.](/assets/images/stories/travels/tunisia2010/IMG_2894.JPG)
 
-*All the streets were really just cobble-stoned pathways. It looked like a quiet village while I was there. Nevertheless beautiful.*
-
 
 ![It is hard to believe that sleepy pathways much like this witnessed a massive uprising against the dictatorship.](/assets/images/stories/travels/tunisia2010/IMG_2901.JPG)
-
-*It is hard to believe that sleepy pathways much like this witnessed a massive uprising against the dictatorship.*
 
 
 ![](/assets/images/stories/travels/tunisia2010/IMG_2904.JPG)
@@ -110,12 +86,8 @@ The Roman baths were, no doubt, magnificent. But very little of it's super struc
 
 ![The beautiful pathway to the ruins gives you an inkling of the magnificence that the people of antiquity enjoyed here.](/assets/images/stories/travels/tunisia2010/IMG_2915.JPG)
 
-*The beautiful pathway to the ruins gives you an inkling of the magnificence that the people of antiquity enjoyed here.*
-
 
 ![Yet, it can't prepare you to be awestruck when you actually see the ruins. Although the superstructure is completely gone, you can't help but admire the opulence of what once was.](/assets/images/stories/travels/tunisia2010/IMG_2920.JPG)
-
-*Yet, it can't prepare you to be awestruck when you actually see the ruins. Although the superstructure is completely gone, you can't help but admire the opulence of what once was.*
 
 
 ![Hard as you may try, photographs simply don't do justice to the feast that your eyes relish here.](/assets/images/stories/travels/tunisia2010/IMG_2918.JPG)
@@ -125,12 +97,8 @@ Hard as you may try, photographs simply don't do justice to the sight.
 
 ![The underground/basement floors were seldom seen by the patrons of these baths. All the of the basement was for operations that made the hot water, the heated walls, and the steam, possible.](/assets/images/stories/travels/tunisia2010/IMG_2922.JPG)
 
-*The underground/basement floors were seldom seen by the patrons of these baths. All the of the basement was for operations that made the hot water, the heated walls, and the steam, possible.*
-
 
 ![And that basement was HUGE. Almost as large as the bath complex above the ground.](/assets/images/stories/travels/tunisia2010/IMG_2924.JPG)
-
-*And that basement was HUGE. Almost as large as the bath complex above the ground.*
 
 
 ![](/assets/images/stories/travels/tunisia2010/IMG_2930.JPG)
@@ -146,8 +114,6 @@ The amphitheater didn't fare any better either.
 
 
 ![The Roman villas have met the same fate, and curiously, these ruins overlook the president's palace.](/assets/images/stories/travels/tunisia2010/IMG_2941.JPG)
-
-*The Roman villas have met the same fate, and curiously, these ruins overlook the president's palace.*
 
 
 ![But overlooking these ruins, is a magnificent mosque. Obviously. It's an Islamic country afterall!](/assets/images/stories/travels/tunisia2010/IMG_2949.JPG)
@@ -169,37 +135,23 @@ There isn't much in Tozeur itself. But it is a great starting place for visiting
 
 ![We were told that the sunrise over the salt lake is beautiful, so we got there just in time before the sun rose.](/assets/images/stories/travels/tunisia2010/IMG_2738.JPG)
 
-*We were told that the sunrise over the salt lake is beautiful, so we got there just in time before the sun rose.*
-
 
 ![And saw this. In fact, it was the most beautiful just before the sunrise.](/assets/images/stories/travels/tunisia2010/IMG_2746.JPG)
-
-*And saw this. In fact, it was the most beautiful just before the sunrise.*
 
 
 ![But the sunrise was pretty too.](/assets/images/stories/travels/tunisia2010/IMG_2748.JPG)
 
-*But the sunrise was pretty too.*
-
 
 ![Of course, we took some time to smell the salt.](/assets/images/stories/travels/tunisia2010/IMG_2742.JPG)
-
-*Of course, we took some time to smell the salt.*
 
 
 ![And yes, there was some salt there... In fact, lots of it!](/assets/images/stories/travels/tunisia2010/IMG_2745.JPG)
 
-*And yes, there was some salt there... In fact, lots of it!*
-
 
 ![But life is tenacious, and manages to find a way to survive even in such harsh, saline conditions. Mind you, the lake dries up to become a salt bed in the summer.](/assets/images/stories/travels/tunisia2010/IMG_2743.JPG)
 
-*But life is tenacious, and manages to find a way to survive even in such harsh, saline conditions. Mind you, the lake dries up to become a salt bed in the summer.*
-
 
 ![And then I saw this! Who in their right mind thought it smart to place a bus in the middle of a salt lake?!?](/assets/images/stories/travels/tunisia2010/IMG_2756.JPG)
-
-*And then I saw this! Who in their right mind thought it smart to place a bus in the middle of a salt lake?!?*
 
 Anyway, moving on... next, we come to the mountain oasis Chebika.
 
@@ -211,12 +163,8 @@ Anyway, moving on... next, we come to the mountain oasis Chebika.
 
 ![We had to drive 30 minutes or so into the Saharan desert to get to Chebika.](/assets/images/stories/travels/tunisia2010/IMG_2694.JPG)
 
-*We had to drive 30 minutes or so into the Saharan desert to get to Chebika.*
-
 
 ![What we found was that a stream of this size....](/assets/images/stories/travels/tunisia2010/IMG_2805.JPG)
-
-*What we found was that a stream of this size....*
 
 
 ![...feeds an Oasis this large! ](/assets/images/stories/travels/tunisia2010/IMG_2778.JPG)
@@ -225,34 +173,22 @@ Anyway, moving on... next, we come to the mountain oasis Chebika.
 
 ![A tribe owns the whole oasis and divides it among its people. And this, I assume is their mascot or some sort of identity symbol. Though I could be completely wrong.](/assets/images/stories/travels/tunisia2010/IMG_2772.JPG)
 
-*A tribe owns the whole oasis and divides it among its people. And this, I assume is their mascot or some sort of identity symbol. Though I could be completely wrong.*
-
 
 ![There is evidence of some massive tectonic activity in this region, which could well have thrown up...](/assets/images/stories/travels/tunisia2010/IMG_2797.JPG)
 
-*There is evidence of some massive tectonic activity in this region, which could well have thrown up...*
-
 
 ![Lots of fossils, quartz, and curious looking crystals (such as the desert rose) that the villagers collect, and they make a living off of selling them to tourists like us.](/assets/images/stories/travels/tunisia2010/IMG_2806.JPG)
-
-*Lots of fossils, quartz, and curious looking crystals (such as the desert rose) that the villagers collect, and they make a living off of selling them to tourists like us.*
 
 
 From Chebika, we wanted to make it to another oasis, Medis, but it was getting pretty late.
 
 ![But we did manage to get some breathtaking views in our futile attempt to get to Medis before sundown.](/assets/images/stories/travels/tunisia2010/IMG_2706.JPG)
 
-*But we did manage to get some breathtaking views in our futile attempt to get to Medis before sundown.*
-
 
 ![It was getting pretty late, but higher up in the mountains, the sun sets later than down there.](/assets/images/stories/travels/tunisia2010/IMG_2715.JPG)
 
-*It was getting pretty late, but higher up in the mountains, the sun sets later than down there.*
-
 
 ![We almost made it there, but not quite. We were just a couple of miles away. This road leads straight to Algeria, and Medis was just before the international border. But then, we ran out of time.](/assets/images/stories/travels/tunisia2010/IMG_2720.JPG)
-
-*We almost made it there, but not quite. We were just a couple of miles away. This road leads straight to Algeria, and Medis was just before the international border. But then, we ran out of time.*
 
 
 After an unsuccessful drive to Medis, we headed out to the dunes and the nerd in me could not  miss out on what was coming next.
@@ -264,8 +200,6 @@ After an unsuccessful drive to Medis, we headed out to the dunes and the nerd in
 ### The set of Phantom Menace
 
 ![The set of the movie The Phantom Menace](/assets/images/stories/travels/tunisia2010/IMG_2857.JPG)
-
-*The set of the movie The Phantom Menace*
 
 
 ![](/assets/images/stories/travels/tunisia2010/IMG_2863.JPG)
@@ -282,18 +216,12 @@ kind of trinkets that they can. Only they can survive in this harsh landscape.
 
 ![This is the kind of dwelling they live in, in the middle of high desert!](/assets/images/stories/travels/tunisia2010/IMG_2851.JPG)
 
-*This is the kind of dwelling they live in, in the middle of high desert!*
-
 Of course, the desert held other charms as well.
 
 ![Like this magnificent landscape.](/assets/images/stories/travels/tunisia2010/IMG_2831.JPG)
 
-*Like this magnificent landscape.*
-
 
 ![And an alien sense of desolation.](/assets/images/stories/travels/tunisia2010/IMG_2843.JPG)
-
-*And an alien sense of desolation.*
 
 
 But alas, like eveything else. This visit too had to come to an end. And thank god it did in the nick of time. I flew out of Tunis on December 19th. The [self immolation](http://en.wikipedia.org/wiki/Mohamed_Bouazizi) that triggered the revolution was on December 17th in Sidi Bouzid (not to be confused with Sidi Bou Said).
