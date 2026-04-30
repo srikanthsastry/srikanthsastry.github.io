@@ -4,269 +4,224 @@ title: 'Tunisia, December 2010'
 date: '2011-02-23T17:00:43-05:00'
 author: 'Srikanth Sastry'
 layout: post
-guid: 'http://sastry.hcoop.net/srikanthwp/?p=12'
 permalink: /tunisia-december-2010/
-fplayout:
-    - default
 categories:
     - Personal
 tags:
     - travel
 ---
 
-I was in Tunisia in the second week of December in 2010. Just a week before the popular uprising ripped the political system apart and dethroned the dictator <a title="Wikipedia Article on Ben Ali" href="http://en.wikipedia.org/wiki/Zine_El_Abidine_Ben_Ali">Ben Ali</a>. I have tried to capture my visit as a photo essay of Tunisia just before the <a href="http://en.wikipedia.org/wiki/2010%E2%80%932011_Tunisian_revolution">revolution</a>. The essay is divided into multiple parts: Tunis, Carthage, Sidi Bou Said, photographs from the subsharan desert near Tozeur, the nearby mountain oases, a salt lake, and a visit to the sets of the Phantom Menace.
+I was in Tunisia in the second week of December in 2010. Just a week before the popular uprising ripped the political system apart and dethroned the dictator [Ben Ali](http://en.wikipedia.org/wiki/Zine_El_Abidine_Ben_Ali). I have tried to capture my visit as a photo essay of Tunisia just before the [revolution](http://en.wikipedia.org/wiki/2010%E2%80%932011_Tunisian_revolution). The essay is divided into multiple parts: Tunis, Carthage, Sidi Bou Said, photographs from the subsharan desert near Tozeur, the nearby mountain oases, a salt lake, and a visit to the sets of the Phantom Menace.
 
-&nbsp;
-<h3>Tunis</h3>
-<img title="The southern entrance to the Tunis Medina" src="/assets/images/stories/travels/tunisia2010/IMG_2662.JPG" alt="" width="800" height="533" border="0" /> The southern entrance to the Tunis Medina
 
-<!--more-->
+### Tunis
 
-<img title="Walking around the medina, the place reminded me so much of India" src="/assets/images/stories/travels/tunisia2010/IMG_2665.JPG" alt="" width="800" height="533" border="0" /> Walking around the medina, the place reminded me so much of India
+![The southern entrance to the Tunis Medina](/assets/images/stories/travels/tunisia2010/IMG_2662.JPG)
 
-&nbsp;
 
-<img title="Including Poorly Spelt Signs :-)" src="/assets/images/stories/travels/tunisia2010/IMG_2666.JPG" alt="" width="800" height="533" border="0" /> Including Poorly Spelt Signs :-)
+![Walking around the medina, the place reminded me so much of India](/assets/images/stories/travels/tunisia2010/IMG_2665.JPG)
 
-&nbsp;
 
-<img title="Some public spaces and buildings were rather beautiful" src="/assets/images/stories/travels/tunisia2010/IMG_2668.JPG" alt="" width="800" height="533" border="0" /> Some public spaces and buildings were rather beautiful
+![Including Poorly Spelt Signs :-)](/assets/images/stories/travels/tunisia2010/IMG_2666.JPG)
 
-&nbsp;
 
-<img title="Of course, Ben Ali saved the best for himself. This is as close as I could get to the presidential palace overlooking the Mediterranean." src="/assets/images/stories/travels/tunisia2010/IMG_2935.JPG" alt="" width="800" height="533" border="0" /> Of course, Ben Ali saved the best for himself. This is as close as I could get to the presidential palace overlooking the Mediterranean.
+![Some public spaces and buildings were rather beautiful](/assets/images/stories/travels/tunisia2010/IMG_2668.JPG)
 
-&nbsp;
-<table border="0" width="100%">
-<tbody>
-<tr>
-<td><img src="/assets/images/stories/travels/tunisia2010/IMG_2908.JPG" alt="" width="270px" align="left" border="0" /></td>
-<td><img src="/assets/images/stories/travels/tunisia2010/IMG_2956.JPG" alt="" width="270px" align="left" border="0" /></td>
-<td><img src="/assets/images/stories/travels/tunisia2010/IMG_2911.JPG" alt="" width="270px" align="left" border="0" /></td>
-</tr>
-<tr>
-<td colspan="3">Just so that everyone knows who the boss around is, Ben Ali's photographs were everywhere!</td>
-</tr>
-</tbody>
-</table>
+
+![Of course, Ben Ali saved the best for himself. This is as close as I could get to the presidential palace overlooking the Mediterranean.](/assets/images/stories/travels/tunisia2010/IMG_2935.JPG)
+
+
+![](/assets/images/stories/travels/tunisia2010/IMG_2908.JPG)
+
+![](/assets/images/stories/travels/tunisia2010/IMG_2956.JPG)
+
+![](/assets/images/stories/travels/tunisia2010/IMG_2911.JPG)
+
+Just so that everyone knows who the boss around is, Ben Ali's photographs were everywhere!
 Next, we move to Sidi Bou Said.
-<!--more-->
 
-<hr title="Sidi Bou Said" />
 
-<h3>Sidi Bou Said</h3>
-<img title="Sidi Bou Said is a beautiful (rich) neighborhood not far from Tunis. The blue and white colors look a lot like the villages in Greece." src="/assets/images/stories/travels/tunisia2010/IMG_2887.JPG" alt="" width="800" height="533" border="0" /> Sidi Bou Said is a beautiful (rich) neighborhood not far from Tunis. The blue and white colors look a lot like the villages in Greece.
+---
 
-&nbsp;
 
-<img title="This point marks the beginning of Sidi Bou Said, and curiously, everything up through this point was relatively dusty and the eat outs where cheap. A few paces to the other side of the street and the entire picture changes." src="/assets/images/stories/travels/tunisia2010/IMG_2906.JPG" alt="" width="800" height="533" border="0" /> This point marks the beginning of Sidi Bou Said, and curiously, everything up through this point was relatively dusty and the eat outs where cheap. A few paces to the other side of the street and the entire picture changes.
+### Sidi Bou Said
 
-&nbsp;
+![Sidi Bou Said is a beautiful (rich) neighborhood not far from Tunis. The blue and white colors look a lot like the villages in Greece.](/assets/images/stories/travels/tunisia2010/IMG_2887.JPG)
 
-<img title="All the houses that I saw there maintained the same color scheme and style." src="/assets/images/stories/travels/tunisia2010/IMG_2895.JPG" alt="" width="800" height="533" border="0" /> All the houses that I saw there maintained the same color scheme and style.
 
-&nbsp;
+![This point marks the beginning of Sidi Bou Said, and curiously, everything up through this point was relatively dusty and the eat outs where cheap. A few paces to the other side of the street and the entire picture changes.](/assets/images/stories/travels/tunisia2010/IMG_2906.JPG)
 
-<img title="The similarity of the houses is down to the window grills and the lintel over the windows too." src="/assets/images/stories/travels/tunisia2010/IMG_2891.JPG" alt="" width="800" height="533" border="0" /> The similarity of the houses is down to the window grills and the lintel over the windows too.
 
-&nbsp;
+![All the houses that I saw there maintained the same color scheme and style.](/assets/images/stories/travels/tunisia2010/IMG_2895.JPG)
 
-<img title="The clean streets and relatively expensive cars betrayed the wealth of the residents here." src="/assets/images/stories/travels/tunisia2010/IMG_2899.JPG" alt="" width="800" height="533" border="0" /> The clean streets and relatively expensive cars betrayed the wealth of the residents here.
 
-&nbsp;
+![The similarity of the houses is down to the window grills and the lintel over the windows too.](/assets/images/stories/travels/tunisia2010/IMG_2891.JPG)
 
-<img title="All the streets were really just cobble-stoned pathways. It looked like a quiet village while I was there. Nevertheless beautiful." src="/assets/images/stories/travels/tunisia2010/IMG_2894.JPG" alt="" width="533" height="800" border="0" /> All the streets were really just cobble-stoned pathways. It looked like a quiet village while I was there. Nevertheless beautiful.
 
-&nbsp;
+![The clean streets and relatively expensive cars betrayed the wealth of the residents here.](/assets/images/stories/travels/tunisia2010/IMG_2899.JPG)
 
-<img title="It is hard to believe that sleepy pathways much like this witnessed a massive uprising against the dictatorship." src="/assets/images/stories/travels/tunisia2010/IMG_2901.JPG" alt="" width="533" height="800" border="0" /> It is hard to believe that sleepy pathways much like this witnessed a massive uprising against the dictatorship.
 
-&nbsp;
-<table border="0" width="100%">
-<tbody>
-<tr>
-<td><img src="/assets/images/stories/travels/tunisia2010/IMG_2904.JPG" alt="" width="270px" border="0" /></td>
-<td><img src="/assets/images/stories/travels/tunisia2010/IMG_2905.JPG" alt="" width="270px" border="0" /></td>
-<td><img src="/assets/images/stories/travels/tunisia2010/IMG_2940.JPG" alt="" width="270px" border="0" /></td>
-</tr>
-<tr>
-<td colspan="3">And for all you cat lovers out here, Sidi Bou Said, and Tunis, in general, is so cat friendly. I saw dozens of them walking about tame and unafraid.</td>
-</tr>
-</tbody>
-</table>
-&nbsp;
+![All the streets were really just cobble-stoned pathways. It looked like a quiet village while I was there. Nevertheless beautiful.](/assets/images/stories/travels/tunisia2010/IMG_2894.JPG)
+
+
+![It is hard to believe that sleepy pathways much like this witnessed a massive uprising against the dictatorship.](/assets/images/stories/travels/tunisia2010/IMG_2901.JPG)
+
+
+![](/assets/images/stories/travels/tunisia2010/IMG_2904.JPG)
+
+![](/assets/images/stories/travels/tunisia2010/IMG_2905.JPG)
+
+![](/assets/images/stories/travels/tunisia2010/IMG_2940.JPG)
+
+And for all you cat lovers out here, Sidi Bou Said, and Tunis, in general, is so cat friendly. I saw dozens of them walking about tame and unafraid.
+
 
 Of course, no visit to Tunisia is complete without a visit to the famous Roman baths. So that's where we head next.
 
-&nbsp;
 
-<hr title="Roman Baths" />
+---
+
 
 The Roman baths were, no doubt, magnificent. But very little of it's super structure remains.
 
-<img title="The beautiful pathway to the ruins gives you an inkling of the magnificence that the people of antiquity enjoyed here." src="/assets/images/stories/travels/tunisia2010/IMG_2915.JPG" alt="" width="800" height="533" border="0" /> The beautiful pathway to the ruins gives you an inkling of the magnificence that the people of antiquity enjoyed here.
+![The beautiful pathway to the ruins gives you an inkling of the magnificence that the people of antiquity enjoyed here.](/assets/images/stories/travels/tunisia2010/IMG_2915.JPG)
 
-&nbsp;
 
-<img title="Yet, it can't prepare you to be awestruck when you actually see the ruins. Although the superstructure is completely gone, you can't help but admire the opulence of what once was." src="/assets/images/stories/travels/tunisia2010/IMG_2920.JPG" alt="" width="800" height="533" border="0" /> Yet, it can't prepare you to be awestruck when you actually see the ruins. Although the superstructure is completely gone, you can't help but admire the opulence of what once was.
+![Yet, it can't prepare you to be awestruck when you actually see the ruins. Although the superstructure is completely gone, you can't help but admire the opulence of what once was.](/assets/images/stories/travels/tunisia2010/IMG_2920.JPG)
 
-&nbsp;
 
-<img title="Hard as you may try, photographs simply don't do justice to the feast that your eyes relish here." src="/assets/images/stories/travels/tunisia2010/IMG_2918.JPG" alt="" width="800" height="533" border="0" /> Hard as you may try, photographs simply don't do justice to the sight.
+![Hard as you may try, photographs simply don't do justice to the feast that your eyes relish here.](/assets/images/stories/travels/tunisia2010/IMG_2918.JPG)
 
-&nbsp;
+Hard as you may try, photographs simply don't do justice to the sight.
 
-<img title="The underground/basement floors were seldom seen by the patrons of these baths. All the of the basement was for operations that made the hot water, the heated walls, and the steam, possible." src="/assets/images/stories/travels/tunisia2010/IMG_2922.JPG" alt="" width="800" height="533" border="0" /> The underground/basement floors were seldom seen by the patrons of these baths. All the of the basement was for operations that made the hot water, the heated walls, and the steam, possible.
 
-&nbsp;
+![The underground/basement floors were seldom seen by the patrons of these baths. All the of the basement was for operations that made the hot water, the heated walls, and the steam, possible.](/assets/images/stories/travels/tunisia2010/IMG_2922.JPG)
 
-<img title="And that basement was HUGE. Almost as large as the bath complex above the ground." src="/assets/images/stories/travels/tunisia2010/IMG_2924.JPG" alt="" width="800" height="533" border="0" /> And that basement was HUGE. Almost as large as the bath complex above the ground.
 
-&nbsp;
-<table border="0">
-<tbody>
-<tr>
-<td><img src="/assets/images/stories/travels/tunisia2010/IMG_2930.JPG" alt="" width="395" border="0" /></td>
-<td><img src="/assets/images/stories/travels/tunisia2010/IMG_2932.JPG" alt="" width="395" border="0" /></td>
-</tr>
-<tr>
-<td colspan="2">This is all that remains of the decadent bath complex</td>
-</tr>
-</tbody>
-</table>
-&nbsp;
+![And that basement was HUGE. Almost as large as the bath complex above the ground.](/assets/images/stories/travels/tunisia2010/IMG_2924.JPG)
 
-<img title="The amphitheater didn't fare any better either. " src="/assets/images/stories/travels/tunisia2010/IMG_2938.JPG" alt="" width="800" height="533" border="0" /> The amphitheater didn't fare any better either.
 
-&nbsp;
+![](/assets/images/stories/travels/tunisia2010/IMG_2930.JPG)
 
-<img title="The Roman villas have met the same fate, and curiously, these ruins overlook the president's palace." src="/assets/images/stories/travels/tunisia2010/IMG_2941.JPG" alt="" width="800" height="533" border="0" /> The Roman villas have met the same fate, and curiously, these ruins overlook the president's palace.
+![](/assets/images/stories/travels/tunisia2010/IMG_2932.JPG)
 
-&nbsp;
+This is all that remains of the decadent bath complex
 
-<img title="But overlooking these ruins, is a magnificent mosque. Obviously. It's an Islamic country afterall!" src="/assets/images/stories/travels/tunisia2010/IMG_2949.JPG" alt="" width="800" height="533" border="0" /> But overlooking these ruins, is a magnificent mosque. Obviously. It's an Islamic country after all!
 
-&nbsp;
+![The amphitheater didn't fare any better either. ](/assets/images/stories/travels/tunisia2010/IMG_2938.JPG)
+
+The amphitheater didn't fare any better either.
+
+
+![The Roman villas have met the same fate, and curiously, these ruins overlook the president's palace.](/assets/images/stories/travels/tunisia2010/IMG_2941.JPG)
+
+
+![But overlooking these ruins, is a magnificent mosque. Obviously. It's an Islamic country afterall!](/assets/images/stories/travels/tunisia2010/IMG_2949.JPG)
+
+But overlooking these ruins, is a magnificent mosque. Obviously. It's an Islamic country after all!
+
 
 From Tunis, my visit took me to Tozeur, a desert village in southern Tunisia.
 
-&nbsp;
 
-<hr title="Tozeur" />
+---
 
-<h3>Tozeur</h3>
-There isn't much in Tozeur itself. But it is a great starting place for visiting some beautiful locations including  the salt lake Chott el-Jerid, a few mountain oases including Chebika, and of course, the set of the Star Wars movie The Phantom Menace.
 
-&nbsp;
-<h4>Chott el-Jerid</h4>
-<img title="We were told that the sunrise over the salt lake is beautiful, so we got there just in time before the sun rose." src="/assets/images/stories/travels/tunisia2010/IMG_2738.JPG" alt="" width="800" height="533" border="0" /> We were told that the sunrise over the salt lake is beautiful, so we got there just in time before the sun rose.
+### Tozeur
+There isn't much in Tozeur itself. But it is a great starting place for visiting some beautiful locations including  the salt lake Chott el-Jerid, a few mountain oases including Chebika, and of course, the set of the Star Wars movie The Phantom Menace.
 
-&nbsp;
 
-<img title="And saw this. In fact, it was the most beautiful just before the sunrise." src="/assets/images/stories/travels/tunisia2010/IMG_2746.JPG" alt="" width="800" height="533" border="0" /> And saw this. In fact, it was the most beautiful just before the sunrise.
+#### Chott el-Jerid
 
-&nbsp;
+![We were told that the sunrise over the salt lake is beautiful, so we got there just in time before the sun rose.](/assets/images/stories/travels/tunisia2010/IMG_2738.JPG)
 
-<img title="But the sunrise was pretty too." src="/assets/images/stories/travels/tunisia2010/IMG_2748.JPG" alt="" width="800" height="533" border="0" /> But the sunrise was pretty too.
 
-&nbsp;
+![And saw this. In fact, it was the most beautiful just before the sunrise.](/assets/images/stories/travels/tunisia2010/IMG_2746.JPG)
 
-<img title="Of course, we took some time to smell the salt." src="/assets/images/stories/travels/tunisia2010/IMG_2742.JPG" alt="" width="800" height="533" border="0" /> Of course, we took some time to smell the salt.
 
-&nbsp;
+![But the sunrise was pretty too.](/assets/images/stories/travels/tunisia2010/IMG_2748.JPG)
 
-<img title="And yes, there was some salt there... In fact, lots of it!" src="/assets/images/stories/travels/tunisia2010/IMG_2745.JPG" alt="" width="800" height="533" border="0" /> And yes, there was some salt there... In fact, lots of it!
 
-&nbsp;
+![Of course, we took some time to smell the salt.](/assets/images/stories/travels/tunisia2010/IMG_2742.JPG)
 
-<img title="But life is tenacious, and manages to find a way to survive even in such harsh, saline conditions. Mind you, the lake dries up to become a salt bed in the summer." src="/assets/images/stories/travels/tunisia2010/IMG_2743.JPG" alt="" width="800" height="533" border="0" /> But life is tenacious, and manages to find a way to survive even in such harsh, saline conditions. Mind you, the lake dries up to become a salt bed in the summer.
 
-&nbsp;
+![And yes, there was some salt there... In fact, lots of it!](/assets/images/stories/travels/tunisia2010/IMG_2745.JPG)
 
-<img title="And then I saw this! Who in their right mind thought it smart to place a bus in the middle of a salt lake?!?" src="/assets/images/stories/travels/tunisia2010/IMG_2756.JPG" alt="" width="800" height="533" border="0" /> And then I saw this! Who in their right mind thought it smart to place a bus in the middle of a salt lake?!?
+
+![But life is tenacious, and manages to find a way to survive even in such harsh, saline conditions. Mind you, the lake dries up to become a salt bed in the summer.](/assets/images/stories/travels/tunisia2010/IMG_2743.JPG)
+
+
+![And then I saw this! Who in their right mind thought it smart to place a bus in the middle of a salt lake?!?](/assets/images/stories/travels/tunisia2010/IMG_2756.JPG)
 
 Anyway, moving on... next, we come to the mountain oasis Chebika.
 
-&nbsp;
 
-<hr title="Chebika" />
+---
 
-&nbsp;
-<h3>Chebika</h3>
-<img title="We had to drive 30 minutes or so into the Saharan desert to get to Chebika." src="/assets/images/stories/travels/tunisia2010/IMG_2694.JPG" alt="" width="800" height="533" border="0" /> We had to drive 30 minutes or so into the Saharan desert to get to Chebika.
 
-&nbsp;
+### Chebika
 
-<img title="What we found was that a stream of this size...." src="/assets/images/stories/travels/tunisia2010/IMG_2805.JPG" alt="" width="533" height="800" border="0" /> What we found was that a stream of this size....
+![We had to drive 30 minutes or so into the Saharan desert to get to Chebika.](/assets/images/stories/travels/tunisia2010/IMG_2694.JPG)
 
-&nbsp;
 
-<img title="...feeds an Oasis this large! " src="/assets/images/stories/travels/tunisia2010/IMG_2778.JPG" alt="" width="800" height="533" border="0" /> ...feeds an Oasis this large!
+![What we found was that a stream of this size....](/assets/images/stories/travels/tunisia2010/IMG_2805.JPG)
 
-<img title="A tribe owns the whole oasis and divides it among its people. And this, I assume is their mascot or some sort of identity symbol. Though I could be completely wrong." src="/assets/images/stories/travels/tunisia2010/IMG_2772.JPG" alt="" width="800" height="533" border="0" /> A tribe owns the whole oasis and divides it among its people. And this, I assume is their mascot or some sort of identity symbol. Though I could be completely wrong.
 
-&nbsp;
+![...feeds an Oasis this large! ](/assets/images/stories/travels/tunisia2010/IMG_2778.JPG)
 
-<img title="There is evidence of some massive tectonic activity in this region, which could well have thrown up..." src="/assets/images/stories/travels/tunisia2010/IMG_2797.JPG" alt="" width="800" height="533" border="0" /> There is evidence of some massive tectonic activity in this region, which could well have thrown up...
+...feeds an Oasis this large!
 
-&nbsp;
+![A tribe owns the whole oasis and divides it among its people. And this, I assume is their mascot or some sort of identity symbol. Though I could be completely wrong.](/assets/images/stories/travels/tunisia2010/IMG_2772.JPG)
 
-<img title="Lots of fossils, quartz, and curious looking crystals (such as the desert rose) that the villagers collect, and they make a living off of selling them to tourists like us." src="/assets/images/stories/travels/tunisia2010/IMG_2806.JPG" alt="" width="800" height="533" border="0" /> Lots of fossils, quartz, and curious looking crystals (such as the desert rose) that the villagers collect, and they make a living off of selling them to tourists like us.
 
-&nbsp;
+![There is evidence of some massive tectonic activity in this region, which could well have thrown up...](/assets/images/stories/travels/tunisia2010/IMG_2797.JPG)
+
+
+![Lots of fossils, quartz, and curious looking crystals (such as the desert rose) that the villagers collect, and they make a living off of selling them to tourists like us.](/assets/images/stories/travels/tunisia2010/IMG_2806.JPG)
+
 
 From Chebika, we wanted to make it to another oasis, Medis, but it was getting pretty late.
 
-<img title="But we did manage to get some breathtaking views in our futile attempt to get to Medis before sundown." src="/assets/images/stories/travels/tunisia2010/IMG_2706.JPG" alt="" width="800" height="533" border="0" /> But we did manage to get some breathtaking views in our futile attempt to get to Medis before sundown.
+![But we did manage to get some breathtaking views in our futile attempt to get to Medis before sundown.](/assets/images/stories/travels/tunisia2010/IMG_2706.JPG)
 
-&nbsp;
 
-<img title="It was getting pretty late, but higher up in the mountains, the sun sets later than down there." src="/assets/images/stories/travels/tunisia2010/IMG_2715.JPG" alt="" width="800" height="533" border="0" /> It was getting pretty late, but higher up in the mountains, the sun sets later than down there.
+![It was getting pretty late, but higher up in the mountains, the sun sets later than down there.](/assets/images/stories/travels/tunisia2010/IMG_2715.JPG)
 
-&nbsp;
 
-<img title="We almost made it there, but not quite. We were just a couple of miles away. This road leads straight to Algeria, and Medis was just before the international border. But then, we ran out of time." src="/assets/images/stories/travels/tunisia2010/IMG_2720.JPG" alt="" width="800" height="533" border="0" /> We almost made it there, but not quite. We were just a couple of miles away. This road leads straight to Algeria, and Medis was just before the international border. But then, we ran out of time.
+![We almost made it there, but not quite. We were just a couple of miles away. This road leads straight to Algeria, and Medis was just before the international border. But then, we ran out of time.](/assets/images/stories/travels/tunisia2010/IMG_2720.JPG)
 
-&nbsp;
 
-After an unsuccessful drive to Medis, we headed out to the dunes and the nerd in me could not  miss out on what was coming next.
+After an unsuccessful drive to Medis, we headed out to the dunes and the nerd in me could not  miss out on what was coming next.
 
-&nbsp;
 
-<hr title="Sets of The Phantom Menace" />
+---
 
-<h3>The set of Phantom Menace</h3>
-<img title="The set of the movie The Phantom Menace" src="/assets/images/stories/travels/tunisia2010/IMG_2857.JPG" alt="" width="800" height="533" border="0" /> The set of the movie The Phantom Menace
 
-&nbsp;
-<table border="0">
-<tbody>
-<tr>
-<td><img src="/assets/images/stories/travels/tunisia2010/IMG_2863.JPG" alt="" width="395px" border="0" /></td>
-<td width="395px"><img src="/assets/images/stories/travels/tunisia2010/IMG_2869.JPG" alt="" width="395px" border="0" /></td>
-</tr>
-<tr>
-<td width="395px"><img src="/assets/images/stories/travels/tunisia2010/IMG_2871.JPG" alt="" width="395px" border="0" /></td>
-<td width="395px"><img src="/assets/images/stories/travels/tunisia2010/IMG_2868.JPG" alt="" width="395px" border="0" /></td>
-</tr>
-<tr>
-<td colspan="2">The set was in a remarkably good condition. This place must have a steady stream of tourists. The local people here make their living selling any
-kind of trinkets that they can. Only they can survive in this harsh landscape.</td>
-</tr>
-</tbody>
-</table>
-&nbsp;
+### The set of Phantom Menace
 
-<img title="This is the kind of dwelling they live in, in the middle of high desert!" src="/assets/images/stories/travels/tunisia2010/IMG_2851.JPG" alt="" width="800" height="533" border="0" /> This is the kind of dwelling they live in, in the middle of high desert!
+![The set of the movie The Phantom Menace](/assets/images/stories/travels/tunisia2010/IMG_2857.JPG)
+
+
+![](/assets/images/stories/travels/tunisia2010/IMG_2863.JPG)
+
+![](/assets/images/stories/travels/tunisia2010/IMG_2869.JPG)
+
+![](/assets/images/stories/travels/tunisia2010/IMG_2871.JPG)
+
+![](/assets/images/stories/travels/tunisia2010/IMG_2868.JPG)
+
+The set was in a remarkably good condition. This place must have a steady stream of tourists. The local people here make their living selling any
+kind of trinkets that they can. Only they can survive in this harsh landscape.
+
+
+![This is the kind of dwelling they live in, in the middle of high desert!](/assets/images/stories/travels/tunisia2010/IMG_2851.JPG)
 
 Of course, the desert held other charms as well.
 
-<img title="Like this magnificent landscape." src="/assets/images/stories/travels/tunisia2010/IMG_2831.JPG" alt="" width="800" height="533" border="0" /> Like this magnificent landscape.
+![Like this magnificent landscape.](/assets/images/stories/travels/tunisia2010/IMG_2831.JPG)
 
-&nbsp;
 
-<img title="And an alien sense of desolation." src="/assets/images/stories/travels/tunisia2010/IMG_2843.JPG" alt="" width="800" height="533" border="0" /> And an alien sense of desolation.
+![And an alien sense of desolation.](/assets/images/stories/travels/tunisia2010/IMG_2843.JPG)
 
-&nbsp;
 
-But alas, like eveything else. This visit too had to come to an end. And thank god it did in the nick of time. I flew out of Tunis on December 19th. The <a title="Wikipedia article: Mohamed Bouazizi, who set himself on fire" href="http://en.wikipedia.org/wiki/Mohamed_Bouazizi">self immolation</a> that triggered the revolution was on December 17th in Sidi Bouzid (not to be confused with Sidi Bou Said).
+But alas, like eveything else. This visit too had to come to an end. And thank god it did in the nick of time. I flew out of Tunis on December 19th. The [self immolation](http://en.wikipedia.org/wiki/Mohamed_Bouazizi) that triggered the revolution was on December 17th in Sidi Bouzid (not to be confused with Sidi Bou Said).
