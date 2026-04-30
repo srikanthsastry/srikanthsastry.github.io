@@ -37,7 +37,7 @@ But here’s the rub. [Essential complexity](/garden/essential-complexity-makes-
 
 This doesn't go far enough. A good leader is necessary, but not sufficient. Jobs is the strongest case: Apple under his leadership was extraordinary. Apple after Jobs coasts on the momentum of his decisions, increasingly centralized, increasingly directive. The stock goes up and to the right. The pace of category-defining products has slowed. The kingdom did not survive the king. And the leaders who *did* build something lasting all made structural changes, not just better decisions. [Marquet](https://en.wikipedia.org/wiki/David_Marquet) took the [worst-performing submarine in the fleet](https://davidmarquet.com/turn-the-ship-around-book/) and turned it around by replacing "permission to" with "I intend to." Nadella spent a decade restructuring how decisions get made at Microsoft. In every case, the escape was structural, not personal.
 
-## The rescue: subsidiarity
+## The deliverance: subsidiarity
 
 What is the alternative to directive governance? Turns out, the alternative has already been done. No, not by [The Simpsons](https://en.wikipedia.org/wiki/Simpsons_Already_Did_It); by [the Catholic Church](https://en.wikipedia.org/wiki/Subsidiarity_%28Catholicism%29)!
 
