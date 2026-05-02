@@ -1,6 +1,6 @@
 ---
 title: "Subsidiarity is not Hayek"
-date: 2026-05-01
+date: 2026-05-03
 layout: post
 categories:
     - Professional
@@ -17,7 +17,7 @@ excerpt: >
     The mapping from Keynes/Hayek to directive governance/subsidiarity is tempting but wrong. Hayek's epistemic insight is a genuine ancestor of the directive governance critique, but private profit-seeking organizations and the nature of software engineering break the analogy in six distinct ways.
 ---
 
-I've been writing about [directive governance](/garden/directive-governance/) and [subsidiarity](/garden/subsidiarity/) in software organizations. The reaction I keep getting: "Isn't this just Hayek?"
+I've been writing about [directive governance](/garden/directive-governance/) and [subsidiarity](/garden/subsidiarity/) in software organizations. The objection I get is: "Isn't this just Hayek?"
 
 The steelman goes something like this. [Hayek](https://www.jstor.org/stable/1809376) argued that knowledge is distributed, tacit, and cannot be aggregated by a central planner. He was arguing against the central planning of Keynes, which was in vogue during his time. Analogously, directive governance centralizes decisions, and subsidiarity distributes them. So, directive governance looks Keynesian, subsidiarity is Hayek, and I just spent [three](/cargo-cult-governance/) [posts](/directive-governance-situationship/) [reinventing](/deliverance-from-directive-governance/) [*The Use of Knowledge in Society*](https://www.jstor.org/stable/1809376).
 
