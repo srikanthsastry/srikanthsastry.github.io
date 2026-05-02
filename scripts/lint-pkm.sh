@@ -278,8 +278,8 @@ for filepath in "${FILES[@]}"; do
         for pi in "${published_in_raw[@]}"; do
             [[ -z "$pi" ]] && continue
             # Strip leading/trailing slashes to get the slug
-            pi_slug=$(echo "$pi" | sed 's|^/||;s|/$||')
-            if ! ls "$POSTS_DIR/"*"${pi_slug}"* >/dev/null 2>&1; then
+            # Check if any post in _posts/ has this permalink in its frontmatter
+            if ! grep -rl "^permalink: ${pi}$" "$POSTS_DIR/" >/dev/null 2>&1; then
                 add_error "$bname" "[UNPUBLISHED_IN_PUBLISHED_IN] published_in '$pi' has no matching post in _posts/"
             fi
         done

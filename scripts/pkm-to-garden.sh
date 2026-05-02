@@ -53,6 +53,17 @@ fi
 
 mkdir -p "$GARDEN_DIR"
 
+# ── Build published-post permalink index ──────────────────────────
+# Scan all _posts/ files for their permalink: frontmatter values.
+# This is used to validate published_in entries.
+declare -A PUBLISHED_PERMALINKS
+while IFS= read -r pfile; do
+    plink=$(sed -n '/^---$/,/^---$/p' "$pfile" | grep -m1 '^permalink:' | sed 's/^permalink:[[:space:]]*//' || true)
+    if [ -n "$plink" ]; then
+        PUBLISHED_PERMALINKS["$plink"]=1
+    fi
+done < <(find "$REPO_DIR/_posts" -name '*.md' -type f 2>/dev/null)
+
 # ── Helper functions ──────────────────────────────────────────────
 
 # Extract a YAML frontmatter value by key (first match, single-line values only)
@@ -293,10 +304,8 @@ for pkm_file in "${FILES[@]}"; do
     while IFS= read -r pi; do
         [ -z "$pi" ] && continue
         pi=$(echo "$pi" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
-        # Strip leading/trailing slashes to get the slug
-        pi_slug=$(echo "$pi" | sed 's|^/||;s|/$||')
-        # Check if a matching post exists in _posts/
-        if ls "$REPO_DIR/_posts/"*"${pi_slug}"* >/dev/null 2>&1; then
+        # Validate against the published-post permalink index
+        if [[ -n "${PUBLISHED_PERMALINKS[$pi]+x}" ]]; then
             related_posts+=("$pi")
         else
             echo "   ⚠  Skipping published_in '$pi' (no published post found in _posts/)"
