@@ -2,7 +2,7 @@
 title: "Command Control Misnomer"
 garden_type: note
 maturity: evergreen
-tags: [governance, directive-governance, terminology]
+tags: [governance, directive-governance, terminology, military]
 created: 2026-04-27
 related_posts:
   - /cargo-cult-governance/

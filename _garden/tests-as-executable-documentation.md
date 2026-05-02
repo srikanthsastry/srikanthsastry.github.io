@@ -14,4 +14,4 @@ excerpt_text: >
 
 **Unit tests are the best documentation for code.** They're discoverable (they live alongside the code), written in the developer's native tongue (code, not prose), and self-correcting (CI ensures they never become obsolete). Each test is a how-to example. Anyone wanting to understand an API can read its tests and come away with working knowledge faster than from any wiki or Javadoc.
 
-This reframes unit tests from verification to communication. Verification is the least interesting reason to write tests; [documentation that stays honest](/garden/tests-as-first-customer/) is the most enduring.
+This reframes unit tests from verification to communication. Verification is the least interesting reason to write tests; [tests-as-first-customer](/garden/tests-as-first-customer/) is the most enduring.
