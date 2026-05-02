@@ -6,6 +6,7 @@ tags: [governance, directive-governance, preconditions]
 created: 2026-04-27
 related_posts:
   - /directive-governance-situationship/
+  - /subsidiarity-is-not-hayek/
 related_notes:
   - essential-complexity-makes-software-ungovernable
   - in-software-execution-is-decision-making

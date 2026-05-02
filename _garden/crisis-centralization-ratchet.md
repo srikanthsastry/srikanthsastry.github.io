@@ -5,6 +5,7 @@ maturity: budding
 created: 2026-04-25
 related_posts:
   - /directive-governance-situationship/
+  - /subsidiarity-is-not-hayek/
 related_notes:
   - directive-governance
   - serial-satisficing-without-learning

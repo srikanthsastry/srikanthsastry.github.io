@@ -7,6 +7,7 @@ created: 2026-04-27
 related_posts:
   - /cargo-cult-governance/
   - /directive-governance-situationship/
+  - /subsidiarity-is-not-hayek/
 related_notes:
   - directive-governance
   - essential-complexity-makes-software-ungovernable
