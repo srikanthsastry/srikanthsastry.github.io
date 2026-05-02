@@ -5,6 +5,7 @@ tags: [governance, directive-governance, mechanistic-organization, organizationa
 created: 2026-04-27
 related_posts:
   - /directive-governance-situationship/
+  - /deliverance-from-directive-governance/
 related_notes:
   - command-control-misnomer
   - data-pipeline-is-achilles-heel

@@ -5,6 +5,7 @@ tags: [governance, software-engineering, brooks, essential-complexity]
 created: 2026-04-25
 related_posts:
   - /cargo-cult-governance/
+  - /deliverance-from-directive-governance/
 related_notes:
   - in-software-execution-is-decision-making
   - isomorphic-mimicry-in-tech-governance

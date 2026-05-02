@@ -5,6 +5,7 @@ tags: [governance, centralization, crisis, tech-industry, wartime-ceo]
 created: 2026-04-25
 related_posts:
   - /directive-governance-situationship/
+  - /deliverance-from-directive-governance/
 related_notes:
   - directive-governance
   - serial-satisficing-without-learning

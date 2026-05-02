@@ -5,6 +5,7 @@ tags: [governance, directive-governance, preconditions]
 created: 2026-04-27
 related_posts:
   - /directive-governance-situationship/
+  - /deliverance-from-directive-governance/
 related_notes:
   - directive-governance
   - essential-complexity-makes-software-ungovernable
