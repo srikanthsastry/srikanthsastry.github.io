@@ -53,17 +53,6 @@ fi
 
 mkdir -p "$GARDEN_DIR"
 
-# ── Build published-post permalink index ──────────────────────────
-# Scan all _posts/ files for their permalink: frontmatter values.
-# This is used to validate published_in entries.
-declare -A PUBLISHED_PERMALINKS
-while IFS= read -r pfile; do
-    plink=$(sed -n '/^---$/,/^---$/p' "$pfile" | grep -m1 '^permalink:' | sed 's/^permalink:[[:space:]]*//' || true)
-    if [ -n "$plink" ]; then
-        PUBLISHED_PERMALINKS["$plink"]=1
-    fi
-done < <(find "$REPO_DIR/_posts" -name '*.md' -type f 2>/dev/null)
-
 # ── Helper functions ──────────────────────────────────────────────
 
 # Extract a YAML frontmatter value by key (first match, single-line values only)
@@ -300,16 +289,10 @@ for pkm_file in "${FILES[@]}"; do
     related_posts=()
 
     # 1. Read published_in from PKM → related_posts (permalink format)
-    #    Validate each permalink against actual published posts in _posts/
     while IFS= read -r pi; do
         [ -z "$pi" ] && continue
         pi=$(echo "$pi" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
-        # Validate against the published-post permalink index
-        if [[ -n "${PUBLISHED_PERMALINKS[$pi]+x}" ]]; then
-            related_posts+=("$pi")
-        else
-            echo "   ⚠  Skipping published_in '$pi' (no published post found in _posts/)"
-        fi
+        related_posts+=("$pi")
     done < <(get_fm_list "$pkm_file" "published_in")
 
     # 2. Process 'connects_to' (multi-line list)
@@ -554,7 +537,7 @@ for pkm_file in "${FILES[@]}"; do
     {
         echo "---"
         echo "title: \"$title\""
-
+        echo "garden_type: $pkm_type"
         echo "maturity: $maturity"
         if [ -n "$tags_line" ]; then
             echo "tags: $tags_line"
