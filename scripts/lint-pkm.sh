@@ -6,6 +6,7 @@
 #   2. Missing wikilink detection (advisory)
 #   3. published_in validation against garden files
 #   4. connects_to format / dangling reference check
+#   5. published_in entries point to actual published posts
 #
 # Exit 0 if no errors (warnings OK), exit 1 if any errors.
 
@@ -69,6 +70,15 @@ if [[ -z "$GARDEN_DIR" ]]; then
             break
         fi
     done
+fi
+
+# ── Auto-detect posts dir (for published_in validation) ──────────────────────
+POSTS_DIR=""
+if [[ -n "$GARDEN_DIR" ]]; then
+    candidate="$(cd "$(dirname "$GARDEN_DIR")" && pwd)/_posts"
+    if [[ -d "$candidate" ]]; then
+        POSTS_DIR="$candidate"
+    fi
 fi
 
 # ── Collect target files ─────────────────────────────────────────────────────
@@ -261,6 +271,18 @@ for filepath in "${FILES[@]}"; do
                 add_error "$bname" "[MISSING_PUBLISHED_IN] garden file exists at ${garden_file} but no published_in in PKM"
             fi
         fi
+    fi
+
+    # ── Check 5: published_in entries point to actual published posts ─────
+    if [[ -n "$POSTS_DIR" ]] && [[ ${#published_in_raw[@]} -gt 0 ]]; then
+        for pi in "${published_in_raw[@]}"; do
+            [[ -z "$pi" ]] && continue
+            # Strip leading/trailing slashes to get the slug
+            # Check if any post in _posts/ has this permalink in its frontmatter
+            if ! grep -rl "^permalink: ${pi}$" "$POSTS_DIR/" >/dev/null 2>&1; then
+                add_error "$bname" "[UNPUBLISHED_IN_PUBLISHED_IN] published_in '$pi' has no matching post in _posts/"
+            fi
+        done
     fi
 
     # ── Check 2: Missing wikilink detection (advisory) ────────────────────
