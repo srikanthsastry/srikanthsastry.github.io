@@ -16,6 +16,8 @@ excerpt: >
     Directive governance is structurally wrong for software and a structural ratchet keeps it in place. The escape is subsidiarity, decisions made at the lowest competent level, sustained by missionary culture that resists re-centralization under pressure.
 ---
 
+{% include governance_series_nav.html %}
+
 
 This is the third post in the series about [directive governance](/garden/directive-governance/). The [first post](/cargo-cult-governance/) diagnosed the problem with governance in the tech industry as directive governance applied where it doesn't belong. Directive governance is top-down governance: decisions flow down, information travels up. It works in Pharma and manufacturing because three [preconditions](/garden/directive-governance-preconditions/) hold. (1) Information can be compressed without losing signal. (2) Metrics are good proxies for what the organization cares about. And (3) execution is distinct from decision-making. [None of this holds](/garden/essential-complexity-makes-software-ungovernable/) for software.
 

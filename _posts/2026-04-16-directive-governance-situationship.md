@@ -15,6 +15,8 @@ excerpt: >
     Directive (top-down) governance is structurally wrong for software engineering. So why do tech companies persist with it? The answer is a ratchet: companies centralize quickly during crisis and decentralize very slowly afterward. Three compounding layers make this asymmetry sticky.
 ---
 
+{% include governance_series_nav.html %}
+
 
 Most large tech companies operate top-down. Information flows up through a reporting chain. Decisions are made centrally. Directives flow back down. This is true regardless of what their culture decks say. Unfortunately, it is the wrong way to govern for software engineering. Top-down governance works when information flowing upstream is compressible, the metrics that decision makers see are a good proxy for org health and success, and decision-making and execution are distinct from each other. None of these hold for software engineering. I have detailed all the wrongness in ["Cargo Cult Governance".](https://srikanth.sastry.name/cargo-cult-governance/)
 
