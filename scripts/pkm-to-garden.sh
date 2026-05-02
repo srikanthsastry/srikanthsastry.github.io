@@ -265,7 +265,19 @@ for pkm_file in "${FILES[@]}"; do
     # Tags: parse inline array format [a, b, c]
     tags_line=""
     if [ -n "$pkm_tags" ]; then
+        # Inline array format: tags: [a, b, c]
         tags_line="$pkm_tags"
+    else
+        # Multi-line list format: tags:\n  - a\n  - b
+        ml_tags=()
+        while IFS= read -r tag; do
+            [ -z "$tag" ] && continue
+            tag=$(echo "$tag" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+            ml_tags+=("$tag")
+        done < <(get_fm_list "$pkm_file" "tags")
+        if [ ${#ml_tags[@]} -gt 0 ]; then
+            tags_line="[$(printf '%s' "${ml_tags[0]}"; for t in "${ml_tags[@]:1}"; do printf ', %s' "$t"; done)]"
+        fi
     fi
 
     # Created date: prefer 'created', fallback to 'date_added'
@@ -289,7 +301,8 @@ for pkm_file in "${FILES[@]}"; do
         ref=$(echo "$ref" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
         resolved=$(ref_to_slug "$ref")
         if [[ "$resolved" == PUBLISHED:* ]]; then
-            related_posts+=("${resolved#PUBLISHED:}")
+            # Skip: published_in is canonical source for related_posts
+            continue
         else
             related_notes+=("$resolved")
         fi
@@ -303,7 +316,8 @@ for pkm_file in "${FILES[@]}"; do
                 [ -z "$ref" ] && continue
                 resolved=$(ref_to_slug "$ref")
                 if [[ "$resolved" == PUBLISHED:* ]]; then
-                    related_posts+=("${resolved#PUBLISHED:}")
+                    # Skip: published_in is canonical source for related_posts
+            continue
                 else
                     related_notes+=("$resolved")
                 fi
@@ -316,7 +330,8 @@ for pkm_file in "${FILES[@]}"; do
         ref=$(echo "$ref" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
         resolved=$(ref_to_slug "$ref")
         if [[ "$resolved" == PUBLISHED:* ]]; then
-            related_posts+=("${resolved#PUBLISHED:}")
+            # Skip: published_in is canonical source for related_posts
+            continue
         else
             related_notes+=("$resolved")
         fi
@@ -326,7 +341,8 @@ for pkm_file in "${FILES[@]}"; do
     if [ -n "$pkm_source" ]; then
         resolved=$(ref_to_slug "$pkm_source")
         if [[ "$resolved" == PUBLISHED:* ]]; then
-            related_posts+=("${resolved#PUBLISHED:}")
+            # Skip: published_in is canonical source for related_posts
+            continue
         else
             related_notes+=("$resolved")
         fi
@@ -339,7 +355,8 @@ for pkm_file in "${FILES[@]}"; do
                 [ -z "$ref" ] && continue
                 resolved=$(ref_to_slug "$ref")
                 if [[ "$resolved" == PUBLISHED:* ]]; then
-                    related_posts+=("${resolved#PUBLISHED:}")
+                    # Skip: published_in is canonical source for related_posts
+            continue
                 else
                     related_notes+=("$resolved")
                 fi
@@ -347,7 +364,8 @@ for pkm_file in "${FILES[@]}"; do
         else
             resolved=$(ref_to_slug "$pkm_inspired_by")
             if [[ "$resolved" == PUBLISHED:* ]]; then
-                related_posts+=("${resolved#PUBLISHED:}")
+                # Skip: published_in is canonical source for related_posts
+            continue
             else
                 related_notes+=("$resolved")
             fi
@@ -359,7 +377,8 @@ for pkm_file in "${FILES[@]}"; do
         ref=$(echo "$ref" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
         resolved=$(ref_to_slug "$ref")
         if [[ "$resolved" == PUBLISHED:* ]]; then
-            related_posts+=("${resolved#PUBLISHED:}")
+            # Skip: published_in is canonical source for related_posts
+            continue
         else
             related_notes+=("$resolved")
         fi
