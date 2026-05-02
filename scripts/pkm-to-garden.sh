@@ -341,8 +341,7 @@ for pkm_file in "${FILES[@]}"; do
     if [ -n "$pkm_source" ]; then
         resolved=$(ref_to_slug "$pkm_source")
         if [[ "$resolved" == PUBLISHED:* ]]; then
-            # Skip: published_in is canonical source for related_posts
-            continue
+            : # Skip: published_in is canonical source for related_posts
         else
             related_notes+=("$resolved")
         fi
@@ -364,8 +363,7 @@ for pkm_file in "${FILES[@]}"; do
         else
             resolved=$(ref_to_slug "$pkm_inspired_by")
             if [[ "$resolved" == PUBLISHED:* ]]; then
-                # Skip: published_in is canonical source for related_posts
-            continue
+                : # Skip: published_in is canonical source for related_posts
             else
                 related_notes+=("$resolved")
             fi
