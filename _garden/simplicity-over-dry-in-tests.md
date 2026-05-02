@@ -1,6 +1,5 @@
 ---
 title: "Simplicity Over DRY in Tests"
-garden_type: note
 maturity: evergreen
 tags: [software-testing, unit-tests, DRY, test-design]
 created: 2026-04-27

@@ -1,13 +1,14 @@
 ---
 title: "Directive Governance Preconditions"
-garden_type: note
 maturity: budding
 tags: [governance, directive-governance, preconditions]
 created: 2026-04-27
 related_posts:
   - /directive-governance-situationship/
   - /subsidiarity-is-not-hayek/
+  - /deliverance-from-directive-governance/
 related_notes:
+  - directive-governance
   - essential-complexity-makes-software-ungovernable
   - in-software-execution-is-decision-making
   - metrics-measure-maintenance-not-creation

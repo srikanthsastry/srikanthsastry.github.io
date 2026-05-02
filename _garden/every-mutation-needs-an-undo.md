@@ -1,6 +1,5 @@
 ---
 title: "Every Mutation Needs an Undo"
-garden_type: note
 maturity: evergreen
 tags: [operations, scripts, software-engineering, safety]
 created: 2026-04-27

@@ -1,6 +1,5 @@
 ---
 title: "Stubs in Testing"
-garden_type: note
 maturity: evergreen
 tags: [software-testing, unit-tests, test-doubles, stubs]
 created: 2026-04-27

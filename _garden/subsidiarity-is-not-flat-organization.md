@@ -1,10 +1,11 @@
 ---
 title: "Subsidiarity Is Not Flat Organization"
-garden_type: note
 maturity: evergreen
+tags: [governance, subsidiarity, organizational-theory, hierarchy]
 created: 2026-04-27
 related_posts:
   - /cargo-cult-governance/
+  - /deliverance-from-directive-governance/
 related_notes:
   - directive-governance
   - subsidiarity

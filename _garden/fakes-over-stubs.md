@@ -1,6 +1,5 @@
 ---
 title: "Fakes Over Stubs"
-garden_type: note
 maturity: evergreen
 tags: [software-testing, unit-tests, test-doubles, fakes]
 created: 2026-04-27

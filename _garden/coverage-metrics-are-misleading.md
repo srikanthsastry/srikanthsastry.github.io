@@ -1,6 +1,5 @@
 ---
 title: "Coverage Metrics Are Misleading"
-garden_type: note
 maturity: evergreen
 tags: [software-testing, unit-tests, metrics, test-coverage]
 created: 2026-04-27

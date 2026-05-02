@@ -1,6 +1,5 @@
 ---
 title: "Upward Communication Anti Patterns"
-garden_type: note
 maturity: evergreen
 tags: [people-management, leadership, communication, organizational-design]
 created: 2026-04-27

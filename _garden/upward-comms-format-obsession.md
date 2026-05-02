@@ -1,6 +1,5 @@
 ---
 title: "Upward Comms Format Obsession"
-garden_type: note
 maturity: evergreen
 tags: [people-management, leadership, communication, anti-pattern]
 created: 2026-04-27

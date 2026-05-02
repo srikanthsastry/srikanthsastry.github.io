@@ -1,6 +1,5 @@
 ---
 title: "Testability Forces Modularity"
-garden_type: note
 maturity: evergreen
 tags: [software-testing, unit-tests, software-design, modularity]
 created: 2026-04-27

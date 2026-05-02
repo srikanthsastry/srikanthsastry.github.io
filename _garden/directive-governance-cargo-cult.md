@@ -1,8 +1,7 @@
 ---
 title: "Directive Governance Cargo Cult"
-garden_type: note
 maturity: budding
-tags: [governance, directive-governance, cargo-cult]
+tags: [governance, directive-governance, mechanistic-organization, cargo-cult]
 created: 2026-04-27
 related_posts:
   - /cargo-cult-governance/

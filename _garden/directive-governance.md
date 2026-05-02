@@ -1,11 +1,12 @@
 ---
 title: "Directive Governance"
-garden_type: note
 maturity: evergreen
+tags: [governance, directive-governance, mechanistic-organization, organizational-theory, decision-making]
 created: 2026-04-27
 related_posts:
   - /directive-governance-situationship/
   - /subsidiarity-is-not-hayek/
+  - /deliverance-from-directive-governance/
 related_notes:
   - command-control-misnomer
   - data-pipeline-is-achilles-heel

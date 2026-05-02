@@ -1,18 +1,17 @@
 ---
 title: "The Detroit School of Unit Testing"
-garden_type: note
 maturity: evergreen
 tags: [software-testing, unit-tests, test-design, detroit-school]
 created: 2026-04-27
 related_posts:
   - /defining-unit-tests-two-schools-of-thought/
-  - /in-unit-tests-i-favor-detroit-over-london/
+  - /in-unit-tests-favor-detroit-over-london/
 related_notes:
-  - london-school-testing
   - detroit-vs-london-testing
+  - london-school-testing
   - mocks-vs-stubs
 excerpt_text: >
-  The Detroit school defines a unit as a unit of behavior: one or more classes collaborating to produce an observable result.
+  The Detroit (classical) school defines a unit as a unit of behavior: one or more classes collaborating to produce an observable result.
 ---
 
 **The Detroit (classical) school defines a unit as a *unit of behavior*: one or more classes collaborating to produce an observable result.** Code in a unit must be internal, connected in the dependency tree, and not shared with other parts of the software. Isolation means replacing only shared and external dependencies with test doubles. Private, non-shared dependencies participate as real collaborators.

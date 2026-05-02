@@ -1,6 +1,5 @@
 ---
 title: "Shadow-Verify-Migrate Pattern"
-garden_type: note
 maturity: evergreen
 tags: [software-engineering, design-patterns, migration, object-composition]
 created: 2026-04-27
