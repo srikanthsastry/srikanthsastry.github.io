@@ -289,10 +289,18 @@ for pkm_file in "${FILES[@]}"; do
     related_posts=()
 
     # 1. Read published_in from PKM → related_posts (permalink format)
+    #    Validate each permalink against actual published posts in _posts/
     while IFS= read -r pi; do
         [ -z "$pi" ] && continue
         pi=$(echo "$pi" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
-        related_posts+=("$pi")
+        # Strip leading/trailing slashes to get the slug
+        pi_slug=$(echo "$pi" | sed 's|^/||;s|/$||')
+        # Check if a matching post exists in _posts/
+        if ls "$REPO_DIR/_posts/"*"${pi_slug}"* >/dev/null 2>&1; then
+            related_posts+=("$pi")
+        else
+            echo "   ⚠  Skipping published_in '$pi' (no published post found in _posts/)"
+        fi
     done < <(get_fm_list "$pkm_file" "published_in")
 
     # 2. Process 'connects_to' (multi-line list)
