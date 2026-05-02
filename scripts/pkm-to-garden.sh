@@ -216,6 +216,16 @@ for pkm_file in "${FILES[@]}"; do
         continue
     fi
 
+    # Preserve existing related_posts before overwriting
+    existing_related_posts=()
+    if [ -f "$garden_file" ]; then
+        while IFS= read -r rp; do
+            [ -z "$rp" ] && continue
+            rp=$(echo "$rp" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+            existing_related_posts+=("$rp")
+        done < <(get_fm_list "$garden_file" "related_posts")
+    fi
+
     echo "🌱 Converting: $basename → _garden/${slug}.md"
 
     # ── Extract PKM frontmatter ──
@@ -308,7 +318,7 @@ for pkm_file in "${FILES[@]}"; do
         fi
     fi
 
-    # Process 'inspired_by' (single value or inline array)
+    # Process 'inspired_by' (single value, inline array, or multi-line list)
     if [ -n "$pkm_inspired_by" ]; then
         if [[ "$pkm_inspired_by" == \[* ]]; then
             while IFS= read -r ref; do
@@ -329,11 +339,33 @@ for pkm_file in "${FILES[@]}"; do
             fi
         fi
     fi
+    # Also check multi-line inspired_by list
+    while IFS= read -r ref; do
+        [ -z "$ref" ] && continue
+        ref=$(echo "$ref" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+        resolved=$(ref_to_slug "$ref")
+        if [[ "$resolved" == PUBLISHED:* ]]; then
+            related_posts+=("${resolved#PUBLISHED:}")
+        else
+            related_notes+=("$resolved")
+        fi
+    done < <(get_fm_list "$pkm_file" "inspired_by")
 
     # Deduplicate related_notes
     if [ ${#related_notes[@]} -gt 0 ]; then
         mapfile -t related_notes < <(printf '%s\n' "${related_notes[@]}" | sort -u)
     fi
+
+    # Validate related_notes: only keep slugs that exist in _garden/
+    validated_notes=()
+    for rn in "${related_notes[@]}"; do
+        if [ -f "$GARDEN_DIR/${rn}.md" ]; then
+            validated_notes+=("$rn")
+        else
+            echo "   ⚠  Dropping related_note '$rn' (no garden file exists)"
+        fi
+    done
+    related_notes=("${validated_notes[@]+"${validated_notes[@]}"}")
 
     # ── Extract and process body ──
 
@@ -343,6 +375,28 @@ for pkm_file in "${FILES[@]}"; do
 
     # Extract excerpt (first sentence of body, stripped of markdown)
     excerpt=$(first_sentence "$body")
+
+    # ── Compute related_posts (preserve existing + merge newly derived) ──
+
+    all_related_posts=()
+    for rp in "${existing_related_posts[@]+"${existing_related_posts[@]}"}"; do
+        [ -n "$rp" ] && all_related_posts+=("$rp")
+    done
+    for rp in "${related_posts[@]+"${related_posts[@]}"}"; do
+        [ -n "$rp" ] && all_related_posts+=("$rp")
+    done
+    # Deduplicate
+    if [ ${#all_related_posts[@]} -gt 0 ]; then
+        mapfile -t all_related_posts < <(printf '%s\n' "${all_related_posts[@]}" | sort -u)
+    fi
+
+    # ── Gate: garden notes require at least one linked post ──
+
+    if [ ${#all_related_posts[@]} -eq 0 ]; then
+        echo "⏭  Skipping $slug (no related_posts — garden notes require at least one linked post)"
+        skipped_count=$((skipped_count + 1))
+        continue
+    fi
 
     # ── Write garden file ──
 
@@ -358,8 +412,11 @@ for pkm_file in "${FILES[@]}"; do
             echo "created: $created"
         fi
 
-        # Related posts (empty by default — user fills in permalinks)
-        echo "related_posts: []"
+        # Related posts
+        echo "related_posts:"
+        for rp in "${all_related_posts[@]}"; do
+            echo "  - $rp"
+        done
 
         # Related notes
         if [ ${#related_notes[@]} -gt 0 ]; then
