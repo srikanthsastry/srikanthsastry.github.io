@@ -11,7 +11,6 @@ related_notes:
   - essential-complexity-makes-software-ungovernable
   - in-software-execution-is-decision-making
   - metrics-measure-maintenance-not-creation
-  - subsidiarity-is-not-hayek
 excerpt_text: >
   The argument that directive governance fails in software is conditional, not universal like Hayek's.
 ---

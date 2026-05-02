@@ -9,7 +9,6 @@ related_posts:
 related_notes:
   - subsidiarity
   - subsidiarity-is-not-flat-organization
-  - subsidiarity-is-not-hayek
 excerpt_text: >
   Subsidiarity preserves hierarchy; Hayek's market does not.
 ---

@@ -8,7 +8,6 @@ related_posts:
   - /subsidiarity-is-not-hayek/
 related_notes:
   - subsidiarity
-  - subsidiarity-is-not-hayek
 excerpt_text: >
   Subsidiarity is a third position, not a pole on the Keynes-to-Hayek spectrum.
 ---

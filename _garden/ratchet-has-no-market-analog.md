@@ -9,7 +9,6 @@ related_posts:
 related_notes:
   - crisis-centralization-ratchet
   - directive-governance
-  - subsidiarity-is-not-hayek
 excerpt_text: >
   The crisis-centralization ratchet has no analog in markets.
 ---

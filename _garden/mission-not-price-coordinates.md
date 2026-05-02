@@ -10,7 +10,6 @@ related_notes:
   - crisis-centralization-ratchet
   - delegation-mimicry-without-cultural-substrate
   - subsidiarity
-  - subsidiarity-is-not-hayek
 excerpt_text: >
   Subsidiarity coordinates through shared mission, not price signals.
 ---

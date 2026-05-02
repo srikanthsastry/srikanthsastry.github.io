@@ -9,7 +9,6 @@ related_posts:
 related_notes:
   - directive-governance
   - directive-governance-preconditions
-  - subsidiarity-is-not-hayek
 excerpt_text: >
   Directive governance is not Keynesian central planning.
 ---
