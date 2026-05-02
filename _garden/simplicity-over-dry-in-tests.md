@@ -6,6 +6,7 @@ tags: [software-testing, unit-tests, DRY, test-design]
 created: 2026-04-27
 related_posts:
   - /dry-unit-tests-are-bad/
+  - dry-unit-tests-are-bad
 related_notes:
   - coverage-metrics-are-misleading
   - tests-as-executable-documentation

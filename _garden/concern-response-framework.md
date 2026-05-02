@@ -6,6 +6,7 @@ tags: [people-management, leadership, communication]
 created: 2026-04-27
 related_posts:
   - /responding-to-concerns-as-a-people-manager/
+  - responding-to-concerns-as-a-people-manager
 related_notes:
   - check-if-concern-is-systemic
   - explaining-away-concerns-is-victim-blaming

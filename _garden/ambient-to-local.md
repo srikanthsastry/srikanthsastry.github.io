@@ -1,20 +1,20 @@
 ---
 title: "Convert Ambient Knowledge into Local Context"
-garden_type: thought
+garden_type: note
 maturity: evergreen
 tags: [ai, software-design, prescriptions]
 created: 2026-04-24
 related_posts:
   - /the-suggestible-actor/
+  - actor-model-ai-coding
 related_notes:
+  - confabulation-is-plausible
   - directive-gap
+  - friction-requires-intent
   - suggestible-actor-properties
   - susceptibility-peaks-at-failure
-  - friction-requires-intent
-  - confabulation-is-plausible
 excerpt_text: >
   The core design principle for the suggestible actor: convert ambient knowledge into local context.
-  Human developers carry implicit knowledge the AI agent cannot access. Make it explicit and local.
 ---
 
 **The core design principle for the suggestible actor: convert ambient knowledge into local context.** Human developers carry implicit knowledge (org norms, conventions, institutional history) that the AI agent cannot access. Making that knowledge explicit and local is how you steer an actor that has no judgment.

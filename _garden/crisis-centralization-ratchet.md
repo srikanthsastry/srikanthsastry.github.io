@@ -4,6 +4,7 @@ garden_type: note
 maturity: budding
 created: 2026-04-25
 related_posts:
+  - /deliverance-from-directive-governance/
   - /directive-governance-situationship/
 related_notes:
   - directive-governance
@@ -13,6 +14,4 @@ excerpt_text: >
   Tech companies centralize decision-making during crisis and almost never decentralize afterward.
 ---
 
-**Tech companies centralize decision-making quickly during crisis and decentralize very slowly afterward. The asymmetry compounds over time.** If crises arrive faster than the loosening rate, centralization accumulates.
-
-The ratchet has three compounding layers. First, mechanical asymmetry: centralizing is a single directive, but decentralizing requires building judgment and context at every level, which takes years. Second, loss aversion: organizations avoid starting the transition because being caught mid-shift when the next crisis hits feels worse than staying centralized. Third, reactive loosening: when competitive pressure does force decentralization, it produces shallow structural changes (federated org charts, squad models) rather than deep cultural ones. Shallow changes snap back the moment crisis returns.
+**Tech companies centralize decision-making during crisis and almost never decentralize afterward. The asymmetry is structural: centralizing is fast, decentralizing is slow, and loss aversion fills the gap.** Centralization is a single directive. Decentralization requires building judgment, trust, and context at every level. You cannot directive your way into subsidiarity. Even with runway, organizations avoid loosening because being caught mid-transition when the next crisis arrives feels worse than staying centralized. When competitive pressure finally forces loosening, it produces shallow structural changes (squad models, federated org charts) that snap back at the first sign of trouble. If crises come faster than the loosening rate, centralization accumulates.

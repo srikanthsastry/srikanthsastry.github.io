@@ -6,6 +6,7 @@ tags: [software-engineering, version-control, development-model]
 created: 2026-04-27
 related_posts:
   - /git-may-not-be-the-best-for-saas-companies/
+  - git-may-not-be-the-best-for-saas-companies
 related_notes:
   - git-conflicts-with-trunk-based-saas
   - survival-vs-excellence-modes

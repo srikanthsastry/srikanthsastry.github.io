@@ -6,6 +6,7 @@ tags: [software-testing, unit-tests, software-design, dependency-injection]
 created: 2026-04-27
 related_posts:
   - /the-merits-of-unit-tests-part-3/
+  - the-merits-of-unit-tests-part-3
 related_notes:
   - testability-drives-design
   - tests-as-first-customer

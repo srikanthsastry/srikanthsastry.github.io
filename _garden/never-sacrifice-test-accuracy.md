@@ -6,6 +6,7 @@ tags: [software-testing, unit-tests, test-design, accuracy]
 created: 2026-04-27
 related_posts:
   - /unit-test-attributes-and-their-trade-offs/
+  - unit-test-attributes-and-their-trade-offs
 related_notes:
   - coverage-metrics-are-misleading
   - unit-test-attribute-tradeoffs

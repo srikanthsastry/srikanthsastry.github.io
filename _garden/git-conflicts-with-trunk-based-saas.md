@@ -6,6 +6,7 @@ tags: [software-engineering, version-control, git, trunk-based-development]
 created: 2026-04-27
 related_posts:
   - /git-may-not-be-the-best-for-saas-companies/
+  - git-may-not-be-the-best-for-saas-companies
 related_notes:
   - vcs-should-match-development-model
 excerpt_text: >

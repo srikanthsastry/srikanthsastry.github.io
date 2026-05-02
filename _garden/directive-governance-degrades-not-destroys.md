@@ -2,7 +2,6 @@
 title: "Directive Governance Degrades Not Destroys"
 garden_type: note
 maturity: budding
-tags: [governance, directive-governance, monopoly-rents]
 created: 2026-04-26
 related_posts:
   - /directive-governance-situationship/

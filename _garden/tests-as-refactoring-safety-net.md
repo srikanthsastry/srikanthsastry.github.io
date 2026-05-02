@@ -6,6 +6,7 @@ tags: [software-testing, unit-tests, refactoring, tech-debt]
 created: 2026-04-27
 related_posts:
   - /the-merits-of-unit-tests-part-2/
+  - the-merits-of-unit-tests-part-2
 related_notes:
   - tests-as-executable-documentation
 excerpt_text: >

@@ -6,6 +6,7 @@ tags: [operations, alerting, monitoring, SLOs, on-call]
 created: 2026-04-27
 related_posts:
   - /sync-your-alerts-to-your-sev-criteria/
+  - let-sleeping-engineers-lie-why-your-alerts-should-match-your-sevs
 related_notes: []
 excerpt_text: >
   Alerts should fire at or near the threshold where an SLO breach would occur, not well before.

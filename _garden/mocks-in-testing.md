@@ -6,12 +6,13 @@ tags: [software-testing, unit-tests, test-doubles, mocks]
 created: 2026-04-27
 related_posts:
   - /mocks-stubs-andhow-to-use-them/
+  - mocks-stubs-and-how-to-use-them
 related_notes:
-  - stubs-in-testing
   - mocks-vs-stubs
+  - stubs-in-testing
   - test-behavior-not-implementation
 excerpt_text: >
-  Mocks verify outbound interactions from the SUT to its dependencies. Use them when the side effect is part of the specification.
+  Mocks verify outbound interactions from the SUT to its dependencies.
 ---
 
 **Mocks verify outbound interactions from the SUT to its dependencies.** They assert that the SUT communicated correctly: the right method was called, with the right arguments, the right number of times. Use mocks when the side effect *is* part of the specification (logging to a server, sending an email, filing a task).

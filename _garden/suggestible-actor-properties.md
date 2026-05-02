@@ -1,23 +1,23 @@
 ---
 title: "The Suggestible Actor: Four Properties"
-garden_type: thought
+garden_type: note
 maturity: evergreen
 tags: [ai, software-design, actor-models, suggestible-actor]
 created: 2026-04-24
 related_posts:
   - /the-suggestible-actor/
+  - actor-model-ai-coding
 related_notes:
-  - intent-spectrum
   - ai-agent-category-error
-  - goal-vs-intent
-  - directive-gap
-  - confabulation-is-plausible
-  - susceptibility-peaks-at-failure
   - ambient-to-local
+  - confabulation-is-plausible
+  - directive-gap
   - friction-requires-intent
+  - goal-vs-intent
+  - intent-spectrum
+  - susceptibility-peaks-at-failure
 excerpt_text: >
-  The suggestible actor is defined by four properties: goal-oriented, locally reasoning, susceptible to local
-  context, and confabulates under uncertainty. Confabulation is the convergent failure mode of the other three.
+  The suggestible actor is defined by four properties that together predict its failure modes.
 ---
 
 **The suggestible actor is defined by four properties that together predict its failure modes.**

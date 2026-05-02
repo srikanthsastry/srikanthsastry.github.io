@@ -6,6 +6,7 @@ tags: [people-management, leadership, communication, anti-pattern]
 created: 2026-04-27
 related_posts:
   - /donts-of-processes-for-upward-communication/
+  - donts-of-processes-for-upward-communication
 related_notes:
   - upward-communication-anti-patterns
 excerpt_text: >

@@ -6,6 +6,7 @@ tags: [software-engineering, design-patterns, migration, object-composition]
 created: 2026-04-27
 related_posts:
   - /object-composition-for-service-migration/
+  - object-composition-for-service-migration
 related_notes: []
 excerpt_text: >
   Migrate between service implementations in three composed steps: shadow, verify, switch.

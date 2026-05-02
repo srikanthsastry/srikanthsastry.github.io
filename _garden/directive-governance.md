@@ -4,6 +4,7 @@ garden_type: note
 maturity: evergreen
 created: 2026-04-27
 related_posts:
+  - /deliverance-from-directive-governance/
   - /directive-governance-situationship/
 related_notes:
   - command-control-misnomer

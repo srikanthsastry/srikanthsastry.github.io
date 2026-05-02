@@ -6,6 +6,7 @@ tags: [software-testing, unit-tests, test-doubles, stubs]
 created: 2026-04-27
 related_posts:
   - /mocks-stubs-andhow-to-use-them/
+  - mocks-stubs-and-how-to-use-them
 related_notes:
   - fakes-over-stubs
   - mocks-in-testing

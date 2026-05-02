@@ -7,9 +7,10 @@ created: 2026-04-27
 related_posts:
   - /are-you-building-for-survival-or-excellence/
   - /when-should-you-build-for-survival/
+  - are-you-building-for-survival-or-excellence
 related_notes: []
 excerpt_text: >
-  Software development has two modes (survival and excellence) and the choice should be deliberate, not a default.
+  Software development has two modes (survival and excellence), and the choice should be deliberate, not a default.
 ---
 
 **Software development has two modes (survival and excellence), and the choice should be deliberate, not a default.** Survival optimizes for speed to a specific outcome: sacred deadlines, end-to-end functionality for one use case, every shortcut accruing tech debt with compounding interest. Excellence is decomposition-driven: understand the problem space, tease apart essential vs. incidental complexity, build composable abstractions that let you pivot and parallelize.

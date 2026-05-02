@@ -2,15 +2,16 @@
 title: "Subsidiarity"
 garden_type: note
 maturity: evergreen
-tags: [governance, subsidiarity, organizational-theory, decision-making]
 created: 2026-04-27
 related_posts:
   - /cargo-cult-governance/
+  - /deliverance-from-directive-governance/
   - /directive-governance-situationship/
 related_notes:
   - directive-governance
   - essential-complexity-makes-software-ungovernable
   - in-software-execution-is-decision-making
+  - subsidiarity-is-not-flat-organization
 excerpt_text: >
   Decisions should be made at the lowest level competent to make them.
 ---
