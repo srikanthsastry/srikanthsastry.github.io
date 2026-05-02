@@ -1,20 +1,17 @@
 ---
 title: "Susceptibility Peaks at Failure"
-garden_type: thought
 maturity: budding
 tags: [ai, software-design, design-levers]
 created: 2026-04-24
 related_posts:
   - /the-suggestible-actor/
 related_notes:
-  - suggestible-actor-properties
-  - directive-gap
   - ambient-to-local
   - confabulation-is-plausible
+  - directive-gap
+  - suggestible-actor-properties
 excerpt_text: >
-  An AI agent's susceptibility to local context is lowest when it has momentum and highest at the point of
-  failure. Guidance placed at failure points has outsized influence. Error messages become the primary
-  control surface.
+  An AI agent's susceptibility to local context peaks at the point of failure.
 ---
 
 **An AI agent's susceptibility to local context peaks at the point of failure.** Susceptibility is lowest when the agent has momentum and highest when the current approach has failed and no obvious alternative is available. Guidance placed at failure points has outsized influence on the agent's behavior.

@@ -1,7 +1,7 @@
 ---
 title: "Serial Satisficing Without Learning"
-garden_type: note
 maturity: budding
+tags: [bounded-rationality, governance, layoffs, decision-making]
 created: 2026-04-25
 related_posts:
   - /directive-governance-situationship/

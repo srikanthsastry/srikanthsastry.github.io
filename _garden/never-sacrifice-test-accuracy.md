@@ -1,6 +1,5 @@
 ---
 title: "Never Sacrifice Test Accuracy"
-garden_type: note
 maturity: evergreen
 tags: [software-testing, unit-tests, test-design, accuracy]
 created: 2026-04-27

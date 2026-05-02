@@ -1,7 +1,7 @@
 ---
 title: "Three Assumptions Framework"
-garden_type: note
 maturity: budding
+tags: [governance, directive-governance, information-theory, original-framework, tech-industry]
 created: 2026-04-26
 related_posts:
   - /cargo-cult-governance/
@@ -17,8 +17,4 @@ excerpt_text: >
   Directive governance rests on three implicit assumptions about the information pipeline.
 ---
 
-**Directive governance rests on three implicit assumptions about the information pipeline. The tech industry structurally violates all three.**
-
-1. **Compression.** Information summarized upward through the reporting chain preserves the signal that matters for decision-making.
-2. **Proxy validity.** Quantitative metrics available to decision-makers correlate with the reality they are managing.
-3. **Separability.** Decision-making and execution are distinct activities that can be cleanly divided between levels of the hierarchy.
+**Directive governance rests on three implicit assumptions about the information pipeline. The tech industry structurally violates all three.** The three assumptions: (1) Compression: upward information summaries preserve the signal that matters for decisions (Hayek, 1945). (2) Proxy validity: quantitative metrics correlate with the reality being managed (Austin, 1996). (3) Separability: decision-making and execution are distinct activities divisible between hierarchy levels (Brooks, 1986). These hold in manufacturing, pharma, aviation, and military operations. They fail in tech because essential complexity means information resists compression, metrics cannot proxy for craft, and the decision/execution boundary does not exist.

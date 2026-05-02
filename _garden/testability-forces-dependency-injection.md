@@ -1,6 +1,5 @@
 ---
 title: "Testability Forces Dependency Injection"
-garden_type: note
 maturity: evergreen
 tags: [software-testing, unit-tests, software-design, dependency-injection]
 created: 2026-04-27
