@@ -12,6 +12,7 @@ tags:
     - keynes
     - organizational-theory
 permalink: /subsidiarity-is-not-hayek/
+image: /assets/images/subsidiarity-is-not-hayek-cover.jpg
 excerpt: >
     The mapping from Keynes/Hayek to directive governance/subsidiarity is tempting but wrong. Hayek's epistemic insight is a genuine ancestor of the directive governance critique, but private profit-seeking organizations and the nature of software engineering break the analogy in six distinct ways.
 ---
