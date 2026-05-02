@@ -1,6 +1,6 @@
 ---
 title: "Deliverance from Directive Governance"
-date: 2026-05-03
+date: 2026-05-02
 layout: post
 categories:
     - Professional
