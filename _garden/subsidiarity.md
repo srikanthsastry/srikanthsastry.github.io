@@ -1,6 +1,5 @@
 ---
 title: "Subsidiarity"
-garden_type: note
 maturity: evergreen
 tags: [governance, subsidiarity, organizational-theory, catholic-social-teaching, decision-making]
 created: 2026-04-27

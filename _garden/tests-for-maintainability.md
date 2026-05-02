@@ -1,6 +1,5 @@
 ---
 title: "Tests Exist for Maintainability"
-garden_type: note
 maturity: evergreen
 tags: [software-testing, unit-tests, software-maintenance]
 created: 2026-04-27

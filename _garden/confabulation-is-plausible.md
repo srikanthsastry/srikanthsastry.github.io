@@ -1,6 +1,5 @@
 ---
 title: "Confabulation Is Plausible"
-garden_type: note
 maturity: budding
 tags: [ai, failure-modes, hallucination]
 created: 2026-04-24

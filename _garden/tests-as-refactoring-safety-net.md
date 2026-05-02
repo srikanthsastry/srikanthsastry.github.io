@@ -1,6 +1,5 @@
 ---
 title: "Tests as a Refactoring Safety Net"
-garden_type: note
 maturity: evergreen
 tags: [software-testing, unit-tests, refactoring, tech-debt]
 created: 2026-04-27

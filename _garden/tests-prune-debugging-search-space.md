@@ -1,6 +1,5 @@
 ---
 title: "Tests Prune the Debugging Search Space"
-garden_type: note
 maturity: evergreen
 tags: [software-testing, unit-tests, debugging]
 created: 2026-04-27

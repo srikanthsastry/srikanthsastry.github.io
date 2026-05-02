@@ -1,6 +1,5 @@
 ---
 title: "The London School of Unit Testing"
-garden_type: note
 maturity: evergreen
 tags: [software-testing, unit-tests, test-design, london-school]
 created: 2026-04-27

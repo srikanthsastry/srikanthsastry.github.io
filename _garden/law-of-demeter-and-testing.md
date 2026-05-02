@@ -1,6 +1,5 @@
 ---
 title: "Law of Demeter and Testing"
-garden_type: note
 maturity: evergreen
 tags: [software-testing, unit-tests, law-of-demeter, software-design, coupling]
 created: 2026-04-27

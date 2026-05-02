@@ -1,6 +1,5 @@
 ---
 title: "Survival vs. Excellence as Engineering Modes"
-garden_type: note
 maturity: evergreen
 tags: [software-engineering, engineering-culture, tech-debt, decision-making]
 created: 2026-04-27

@@ -1,6 +1,5 @@
 ---
 title: "The Directive Gap"
-garden_type: note
 maturity: evergreen
 tags: [ai, software-design, failure-modes]
 created: 2026-04-24

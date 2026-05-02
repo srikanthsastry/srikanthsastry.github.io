@@ -1,6 +1,5 @@
 ---
 title: "Tooling Advances Prove Brooks Right"
-garden_type: note
 maturity: budding
 tags: [software-engineering, brooks, essential-complexity, tooling]
 created: 2026-04-25

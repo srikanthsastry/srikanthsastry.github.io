@@ -1,6 +1,5 @@
 ---
 title: "Align Alerts to SEV Criteria"
-garden_type: note
 maturity: evergreen
 tags: [operations, alerting, monitoring, SLOs, on-call]
 created: 2026-04-27

@@ -1,6 +1,5 @@
 ---
 title: "Defense in Depth Needs Visibility"
-garden_type: note
 maturity: evergreen
 tags: [software-engineering, defense-in-depth, monitoring, operations]
 created: 2026-04-27

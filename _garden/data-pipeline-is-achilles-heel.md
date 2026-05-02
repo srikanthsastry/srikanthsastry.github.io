@@ -1,6 +1,5 @@
 ---
 title: "Data Pipeline Is Achilles Heel"
-garden_type: note
 maturity: budding
 tags: [governance, bounded-rationality, information-asymmetry, data-quality]
 created: 2026-04-25

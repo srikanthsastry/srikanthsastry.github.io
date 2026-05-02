@@ -1,6 +1,5 @@
 ---
 title: "Tests as Executable Documentation"
-garden_type: note
 maturity: evergreen
 tags: [software-testing, unit-tests, documentation]
 created: 2026-04-27

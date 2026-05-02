@@ -1,6 +1,5 @@
 ---
 title: "Friction Requires Intent"
-garden_type: note
 maturity: evergreen
 tags: [software-design, ergonomics, ai, pit-of-success]
 created: 2026-04-24

@@ -1,6 +1,5 @@
 ---
 title: "Convert Ambient Knowledge into Local Context"
-garden_type: note
 maturity: evergreen
 tags: [ai, software-design, prescriptions]
 created: 2026-04-24

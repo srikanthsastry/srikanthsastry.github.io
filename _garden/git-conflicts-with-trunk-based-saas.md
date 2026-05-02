@@ -1,6 +1,5 @@
 ---
 title: "Git Conflicts with Trunk-Based SaaS Workflows"
-garden_type: note
 maturity: evergreen
 tags: [software-engineering, version-control, git, trunk-based-development]
 created: 2026-04-27

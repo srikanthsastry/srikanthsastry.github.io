@@ -1,6 +1,5 @@
 ---
 title: "Check If Concern Is Systemic"
-garden_type: note
 maturity: evergreen
 tags: [people-management, leadership, communication]
 created: 2026-04-27

@@ -1,6 +1,5 @@
 ---
 title: "Minimize Public Surface for Testability"
-garden_type: note
 maturity: evergreen
 tags: [software-testing, unit-tests, encapsulation, software-design]
 created: 2026-04-27

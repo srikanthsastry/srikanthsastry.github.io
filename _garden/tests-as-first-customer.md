@@ -1,6 +1,5 @@
 ---
 title: "Tests as First Customer"
-garden_type: note
 maturity: evergreen
 tags: [software-testing, unit-tests, api-design, usability]
 created: 2026-04-27

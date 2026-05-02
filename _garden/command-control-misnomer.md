@@ -1,6 +1,5 @@
 ---
 title: "Command Control Misnomer"
-garden_type: note
 maturity: evergreen
 tags: [governance, directive-governance, terminology, military]
 created: 2026-04-27

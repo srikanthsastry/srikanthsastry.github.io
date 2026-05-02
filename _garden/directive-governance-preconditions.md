@@ -1,6 +1,5 @@
 ---
 title: "Directive Governance Preconditions"
-garden_type: note
 maturity: budding
 tags: [governance, directive-governance, preconditions]
 created: 2026-04-27

@@ -1,6 +1,5 @@
 ---
 title: "TDD for Bug Fixes"
-garden_type: note
 maturity: evergreen
 tags: [software-testing, tdd, bug-fixing, test-driven-development]
 created: 2026-04-27

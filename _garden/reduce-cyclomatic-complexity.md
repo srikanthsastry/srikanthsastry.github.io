@@ -1,6 +1,5 @@
 ---
 title: "Reduce Cyclomatic Complexity"
-garden_type: note
 maturity: evergreen
 tags: [software-design, refactoring, code-quality, cyclomatic-complexity]
 created: 2026-04-27

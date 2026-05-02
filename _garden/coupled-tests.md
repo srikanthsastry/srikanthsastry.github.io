@@ -1,6 +1,5 @@
 ---
 title: "Coupled Tests"
-garden_type: note
 maturity: evergreen
 tags: [software-testing, unit-tests, test-design, anti-patterns]
 created: 2026-04-27

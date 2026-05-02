@@ -1,6 +1,5 @@
 ---
 title: "In Software Execution Is Decision Making"
-garden_type: note
 maturity: evergreen
 tags: [software-engineering, governance, brooks, essential-complexity, decision-authority]
 created: 2026-04-25

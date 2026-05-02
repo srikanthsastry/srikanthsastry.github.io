@@ -1,6 +1,5 @@
 ---
 title: "Crisis Centralization Ratchet"
-garden_type: note
 maturity: budding
 tags: [governance, centralization, crisis, tech-industry, wartime-ceo]
 created: 2026-04-25

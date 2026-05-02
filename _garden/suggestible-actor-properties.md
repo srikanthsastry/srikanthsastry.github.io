@@ -1,6 +1,5 @@
 ---
 title: "The Suggestible Actor: Four Properties"
-garden_type: note
 maturity: evergreen
 tags: [ai, software-design, actor-models, suggestible-actor]
 created: 2026-04-24

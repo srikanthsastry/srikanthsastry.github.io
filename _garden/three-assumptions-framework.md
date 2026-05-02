@@ -1,6 +1,5 @@
 ---
 title: "Three Assumptions Framework"
-garden_type: note
 maturity: budding
 tags: [governance, directive-governance, information-theory, original-framework, tech-industry]
 created: 2026-04-26

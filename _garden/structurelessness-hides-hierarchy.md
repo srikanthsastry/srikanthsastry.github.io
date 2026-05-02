@@ -1,6 +1,5 @@
 ---
 title: "Structurelessness Hides Hierarchy"
-garden_type: note
 maturity: evergreen
 tags: [governance, organizational-design, hierarchy, directive-governance]
 created: 2026-04-26

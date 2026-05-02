@@ -1,6 +1,5 @@
 ---
 title: "Backward Compatibility for Leaky Abstractions"
-garden_type: note
 maturity: evergreen
 tags: [software-engineering, backward-compatibility, leaky-abstractions, defensive-programming]
 created: 2026-04-27

@@ -1,6 +1,5 @@
 ---
 title: "Reuse Code, Not Objects"
-garden_type: note
 maturity: evergreen
 tags: [software-engineering, design-patterns, DRY, statefulness]
 created: 2026-04-27

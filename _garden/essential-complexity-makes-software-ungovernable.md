@@ -1,6 +1,5 @@
 ---
 title: "Essential Complexity Makes Software Ungovernable"
-garden_type: note
 maturity: evergreen
 tags: [governance, software-engineering, brooks, essential-complexity]
 created: 2026-04-25

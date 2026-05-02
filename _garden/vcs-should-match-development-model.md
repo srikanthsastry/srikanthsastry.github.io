@@ -1,6 +1,5 @@
 ---
 title: "VCS Should Match Your Development Model"
-garden_type: note
 maturity: evergreen
 tags: [software-engineering, version-control, development-model]
 created: 2026-04-27
