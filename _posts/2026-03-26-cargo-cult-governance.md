@@ -18,6 +18,8 @@ excerpt: >
     assumptions that directive governance depends on: compression, proxy validity, and separability: all fail in software.
 ---
 
+{% include governance_series_nav.html %}
+
 In the tech industry, we have been through a corporate rollercoaster in the last few years. First, it was the hiring mania during COVID, followed by widespread layoffs starting 2023. Then there is the pivot at AI, followed by the "flattening" of middle management. Regardless of whether you were laid off, or you carry the survivor's guilt, or you are shoveling AI slop to get to something useful, the mental scars are very real. So is the cynicism that the leadership may not know what it is doing. The decisions feel callous, short-sighted, even whimsical, and based on [wildly inaccurate information](/garden/data-pipeline-is-achilles-heel/).
 
 But does it *have* to work this way? What's actually driving these decisions, and is there a better mechanism? Because if the answer is "this is just how large companies work," that's one kind of problem. If the answer is "there's a specific, diagnosable flaw in how these decisions get made", then that's a different one. One that might be fixable.
