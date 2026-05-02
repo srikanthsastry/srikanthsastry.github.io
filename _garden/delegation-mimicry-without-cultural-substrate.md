@@ -6,7 +6,6 @@ tags: [governance, directive-governance, delegation, cultural-substrate, isomorp
 created: 2026-04-26
 related_posts:
   - /cargo-cult-governance/
-  - /deliverance-from-directive-governance/
 related_notes:
   - directive-governance
   - isomorphic-mimicry-in-tech-governance

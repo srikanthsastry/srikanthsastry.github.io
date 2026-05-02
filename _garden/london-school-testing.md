@@ -12,7 +12,7 @@ related_notes:
   - detroit-vs-london-testing
   - mocks-in-testing
 excerpt_text: >
-  The London (mockist) school defines a unit as a single class, sometimes a single method.
+  The London school defines a unit as a single class. Everything outside that class must be replaced by test doubles.
 ---
 
 **The London (mockist) school defines a unit as a *single class*, sometimes a single method.** Everything outside that class must be replaced by test doubles. If the class under test instantiates another class internally, that instantiation must use an injected instance or factory so it can be replaced in tests.

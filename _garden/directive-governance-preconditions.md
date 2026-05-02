@@ -5,7 +5,6 @@ maturity: budding
 tags: [governance, directive-governance, preconditions]
 created: 2026-04-27
 related_posts:
-  - /deliverance-from-directive-governance/
   - /directive-governance-situationship/
 related_notes:
   - directive-governance
