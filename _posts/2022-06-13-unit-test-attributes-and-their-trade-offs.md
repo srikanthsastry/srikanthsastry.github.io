@@ -15,6 +15,7 @@ excerpt: >
   So how do you choose what to maximize?
 image: /assets/images/accuracy-completeness-speed.png
 ...
+{% include unit_testing_series_nav.html %}
 <!-- ![](/assets/images/accuracy-completeness-speed.png) -->
 Unit test suites have <a href="/garden/unit-test-attribute-tradeoffs/">three primary attributes</a>.
 

@@ -13,6 +13,7 @@ tags:
     - 'software testing'
     - 'unit test'
 ---
+{% include unit_testing_series_nav.html %}
 
 There are multiple reasons to write unit tests. Verification is only one of them, and the least interesting. This is part 1 of a five part series on why you should write unit tests (apart from the obvious): Documentation!
 

@@ -17,6 +17,7 @@ excerpt: >
   There are two schools of thought on the notion of "unit" and "isolation", and that makes all the difference.
 image: /assets/images/london-detroit.jpg
 ...
+{% include unit_testing_series_nav.html %}
 
 <!-- ![](/assets/images/london-detroit.jpg) -->
 

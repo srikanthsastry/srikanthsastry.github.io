@@ -12,6 +12,7 @@ tags:
     - 'software testing'
     - 'unit test'
 ---
+{% include unit_testing_series_nav.html %}
 
 In the [previous post](http://srikanth.sastry.name/merits-of-unit-tests-part-1/),  we saw how unit tests can serve as a reliable source of documentation  for your code. There is a lot more that unit tests can do for you. In this post I'll talk about a fairly obvious, but often ignored, benefit  to unit testing: Refactoring.
 

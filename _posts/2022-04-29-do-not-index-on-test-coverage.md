@@ -16,6 +16,7 @@ excerpt: >
   The temptation, therefore, is to measure everything. Even the quality of your unit tests, and there where the trouble usually begins. <a href="/garden/coverage-metrics-are-misleading/">Coverage metrics are misleading</a>. For an detailed explanation of why indexing on the test coverage metrics is a bad idea, I highly recommend Jason Rudolph's collection of posts on this topic (https://jasonrudolph.com/blog/testing-anti-patterns-how-to-fail-with-100-test-coverage/). To drive home the point more explicitly (and motivate you to actually go read Jason's posts), here are some illustrative explanations.
 image: /assets/images/chart-coverage.png
 ...
+{% include unit_testing_series_nav.html %}
 
 <!-- ![Coverage Chart](/assets/images/chart-coverage.png) -->
 
