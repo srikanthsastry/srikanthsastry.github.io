@@ -20,6 +20,7 @@ permalink: /mocks-stubs-andhow-to-use-them/
 layout: post
 image: /assets/images/masquerade-masks.png
 ---
+{% include unit_testing_series_nav.html %}
 
 <!-- ![Photo by Polina Kovaleva from Pexels](/assets/images/masquerade-masks.png) -->
 _Photo by [Polina Kovaleva](https://www.pexels.com/@polina-kovaleva?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels) from [Pexels](https://www.pexels.com/photo/close-up-of-masquerade-masks-on-purple-background-8404608/?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels)_

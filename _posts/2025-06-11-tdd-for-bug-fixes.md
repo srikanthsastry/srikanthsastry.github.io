@@ -12,6 +12,7 @@ tags:
 permalink: /tdd-for-bug-fixes/
 image: /assets/images/bug-stabbing-software-engineer-in-the-back.png
 ...
+{% include unit_testing_series_nav.html %}
 
 <!-- ![](/assets/images/bug-stabbing-software-engineer-in-the-back.png) -->
 

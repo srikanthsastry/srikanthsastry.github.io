@@ -18,6 +18,7 @@ excerpt: >
   Unit tests most benefit the most complex parts of your codebase that often requires the most technical skill and domain knowledge to author, read, and maintain. Integration tests disproportionately benefit the parts of your codebase that communicate with external dependencies.
 image: /assets/images/brain-magnifying-glass.png
 ...
+{% include unit_testing_series_nav.html %}
 _Note: This is inspired from the book "[Unit Testing: Principles, Practices, and Patterns](https://www.manning.com/books/unit-testing)" by Vladimir Khorikov._
 
 <!-- ![brain](/assets/images/brain-magnifying-glass.png) -->
