@@ -17,8 +17,6 @@ excerpt: >
     GDPR and the SECURE Data Act define pseudonymous data in nearly identical language. They diverge on what follows. One locates privacy in what is done with data. The other locates it in whether data can be traced back to someone. The same engineer building the same system faces a fundamentally different regulatory question depending on which framework governs.
 ---
 
-# SECURE Data Act: The dilution in pseudonymization
-
 *Disclaimer: I am not a lawyer, and this post is not advising any technical implementation in pursuit of any privacy regulation. The opinions expressed here are my own and do not represent the views of my employer.*
 
 The [SECURE Data Act](https://www.congress.gov/bill/119th-congress/house-bill/8413) was introduced in Congress, and it immediately received a lot of criticism and blowback. The [ACLU](https://statescoop.com/secure-data-act-privacy-bill-not-consumer-friendly/) says it "would entirely destroy the work that states have been doing" on preemption of state privacy laws. The [CDT](https://statescoop.com/secure-data-act-privacy-bill-not-consumer-friendly/) calls out "easily exploitable loopholes" and data minimization that "lacks teeth." [Brookings](https://www.brookings.edu/articles/springtime-in-washington-means-its-time-for-another-round-of-federal-privacy-legislation/) notes the absence of a private right of action. [EPIC](https://www.csoonline.com/article/4163345/new-us-house-privacy-bills-raise-hard-questions-about-enterprise-data-collection.html) calls it "a huge gift to Big Tech." The [California Privacy Protection Agency](https://privacy.ca.gov/2026/04/california-privacy-protection-agency-releases-letter-opposing-the-secure-data-act/) published a formal opposition letter.
