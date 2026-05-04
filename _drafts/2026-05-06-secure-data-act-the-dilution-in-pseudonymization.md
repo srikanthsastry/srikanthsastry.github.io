@@ -69,6 +69,8 @@ This is not a fantastical architecture. Existing large-scale personalization sys
 
 GDPR treats pseudonymized data as personal data subject to the same constraints as identifiable data. Run the same pipeline under GDPR: the user opts out, and the deletion obligation follows the data into the pseudonymous layer. The controller must locate the user's pseudo_id, delete the pseudonymous behavioral records, and address any models trained on them. The hair-splitting around one-way mappings and ID resolution at runtime becomes irrelevant to privacy compliance. If the user opts out, all of their data, including pseudonymized data, is in scope.
 
+![The same data pipeline under three scenarios: no opt-out, opt-out under GDPR, and opt-out under the SECURE Data Act. The first and third pipelines produce identical personalized results. The GDPR pipeline breaks at pseudonymization.](/assets/images/secure-data-act-pipeline.png)
+
 ## What follows from the example
 
 GDPR and the SECURE Data Act start from the same sentence and describe the same technical operation: stripping direct identifiers, separating the mapping, applying technical safeguards. The disagreement is about what follows.
