@@ -53,7 +53,7 @@ When a consumer opts out of personalization, their data, keyed by pseudo_id, has
 
 Did you notice the difference? Neither did I.
 
-![The same data pipeline under three scenarios: no opt-out, opt-out under GDPR, and opt-out under the SECURE Data Act. The first and third pipelines produce identical personalized results. The GDPR pipeline breaks at pseudonymization.](/assets/images/secure-data-act-pipeline.png)
+[![The same data pipeline under three scenarios: no opt-out, opt-out under GDPR, and opt-out under the SECURE Data Act. The first and third pipelines produce identical personalized results. The GDPR pipeline breaks at pseudonymization.](/assets/images/secure-data-act-pipeline.png)](/assets/images/secure-data-act-pipeline.png)
 
 Here is how the bill permits this. At no point was pseudonymous data attributed to an identified person. The system started with a known user and walked forward into the pseudonymous layer. It never walked backward. Forward resolution is not re-identification. The bill's re-identification provisions contemplate the reverse direction. Forward resolution is simply how a personalization system works. The bill does not address it.
 
