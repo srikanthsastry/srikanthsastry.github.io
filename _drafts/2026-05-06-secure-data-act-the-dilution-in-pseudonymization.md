@@ -45,11 +45,11 @@ Now watch what a pipeline built on this architecture can do.
 
 ### Data pipeline for personalization
 
-Assume that all user behavioral data has been pseudonymized by replacing user_id and personally identifiable information (PII) with the pseudo_id. This data trains a machine learning model. The model learns per-user patterns, indexed by pseudo_id. At inference time, a user arrives. They are logged in. The system knows who they are. It performs a forward lookup: user_id to pseudo_id. That pseudo_id selects the right model. The model generates a recommendation. The user sees a personalized result.
+Assume all user behavioral data has been pseudonymized, replacing user_id with pseudo_id. This data trains an ML model indexed by pseudo_id. At inference time, the system performs a forward lookup (user_id to pseudo_id) to select the right model and generate a personalized result.
 
 ### Consumer experience with pseudonymized ML models
 
-If a consumer has not opted out of personalization, when they interact with the product, the ML model personalizes the product for them. Now, let's say that the consumer opts out of personalization. Their data, keyed by pseudo_id, has been exempted from the opt-out, and so makes its way to the ML model. When this opted-out user interacts with the product, the ML model, which continued to be trained on the user's pseudonymized data, continues to personalize the product for them.
+When a consumer opts out of personalization, their data, keyed by pseudo_id, has been exempted from the opt-out, and so makes its way to the ML model. When this opted-out user interacts with the product, the ML model, which continued to be trained on the user's pseudonymized data, continues to personalize the product for them. The consumer experience is identical to that of a user who never opted out.
 
 Did you notice the difference? Neither did I.
 
