@@ -53,6 +53,8 @@ When a consumer opts out of personalization, their data, keyed by pseudo_id, has
 
 Did you notice the difference? Neither did I.
 
+![The same data pipeline under three scenarios: no opt-out, opt-out under GDPR, and opt-out under the SECURE Data Act. The first and third pipelines produce identical personalized results. The GDPR pipeline breaks at pseudonymization.](/assets/images/secure-data-act-pipeline.png)
+
 Here is how the bill permits this. At no point was pseudonymous data attributed to an identified person. The system started with a known user and walked forward into the pseudonymous layer. It never walked backward. Forward resolution is not re-identification. The bill's re-identification provisions contemplate the reverse direction. Forward resolution is simply how a personalization system works. The bill does not address it.
 
 A defender of the bill would point out that the forward lookup operates entirely in the identified layer: the user is logged in, the system derives their pseudo_id from their user_id, and only then touches the pseudonymous data. The pseudonymous data itself is never "attributed to an identified person." The attribution runs from identity to pseudonym, not the reverse. That reading is consistent with the bill's text. It is also consistent with a pipeline that delivers personalized content to a known user based on their behavioral history, with the user having no ability to opt out of the data that powers it.
@@ -68,8 +70,6 @@ This is not a fantastical architecture. Existing large-scale personalization sys
 ### How does GDPR handle this?
 
 GDPR treats pseudonymized data as personal data subject to the same constraints as identifiable data. Run the same pipeline under GDPR: the user opts out, and the deletion obligation follows the data into the pseudonymous layer. The controller must locate the user's pseudo_id, delete the pseudonymous behavioral records, and address any models trained on them. The hair-splitting around one-way mappings and ID resolution at runtime becomes irrelevant to privacy compliance. If the user opts out, all of their data, including pseudonymized data, is in scope.
-
-![The same data pipeline under three scenarios: no opt-out, opt-out under GDPR, and opt-out under the SECURE Data Act. The first and third pipelines produce identical personalized results. The GDPR pipeline breaks at pseudonymization.](/assets/images/secure-data-act-pipeline.png)
 
 ## What follows from the example
 
