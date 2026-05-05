@@ -47,6 +47,7 @@ contact_channels:
 theme: awesome-jekyll-theme
 plugins:
   - jekyll-feed
+  - jekyll-sitemap
 
 # Digital Garden collection
 collections:
