@@ -484,6 +484,7 @@ for pkm_file in "${FILES[@]}"; do
         echo "---"
         echo "title: \"$title\""
 
+        echo "garden_type: $pkm_type"
         echo "maturity: $maturity"
         if [ -n "$tags_line" ]; then
             echo "tags: $tags_line"
