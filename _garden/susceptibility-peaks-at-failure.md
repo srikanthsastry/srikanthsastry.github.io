@@ -3,8 +3,6 @@ title: "Susceptibility Peaks at Failure"
 maturity: budding
 tags: [ai, software-design, design-levers]
 created: 2026-04-24
-related_posts:
-  - /the-suggestible-actor/
 related_notes:
   - ambient-to-local
   - confabulation-is-plausible

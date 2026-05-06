@@ -3,8 +3,6 @@ title: "Every Mutation Needs an Undo"
 maturity: evergreen
 tags: [operations, scripts, software-engineering, safety]
 created: 2026-04-27
-related_posts:
-  - /scripts-and-their-undo/
 related_notes: []
 excerpt_text: >
   Every script that mutates system state should build an undo alongside the forward operation.

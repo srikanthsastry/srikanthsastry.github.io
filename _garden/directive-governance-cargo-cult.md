@@ -3,8 +3,6 @@ title: "Directive Governance Cargo Cult"
 maturity: budding
 tags: [governance, directive-governance, mechanistic-organization, cargo-cult]
 created: 2026-04-27
-related_posts:
-  - /cargo-cult-governance/
 related_notes:
   - directive-governance
   - isomorphic-mimicry-in-tech-governance

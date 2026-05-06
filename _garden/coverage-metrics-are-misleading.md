@@ -3,8 +3,6 @@ title: "Coverage Metrics Are Misleading"
 maturity: evergreen
 tags: [software-testing, unit-tests, metrics, test-coverage]
 created: 2026-04-27
-related_posts:
-  - /do-not-index-in-test-coverage/
 related_notes:
   - testability-drives-design
   - tests-as-executable-documentation

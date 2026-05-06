@@ -3,8 +3,6 @@ title: "Directive Governance Degrades Not Destroys"
 maturity: budding
 tags: [governance, directive-governance, monopoly-rents, rebuttal]
 created: 2026-04-26
-related_posts:
-  - /directive-governance-situationship/
 related_notes:
   - isomorphic-mimicry-in-tech-governance
   - serial-satisficing-without-learning

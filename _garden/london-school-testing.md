@@ -3,9 +3,6 @@ title: "The London School of Unit Testing"
 maturity: evergreen
 tags: [software-testing, unit-tests, test-design, london-school]
 created: 2026-04-27
-related_posts:
-  - /defining-unit-tests-two-schools-of-thought/
-  - /in-unit-tests-favor-detroit-over-london/
 related_notes:
   - detroit-school-testing
   - detroit-vs-london-testing

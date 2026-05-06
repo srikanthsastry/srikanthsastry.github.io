@@ -3,8 +3,6 @@ title: "Reuse Code, Not Objects"
 maturity: evergreen
 tags: [software-engineering, design-patterns, DRY, statefulness]
 created: 2026-04-27
-related_posts:
-  - /reuse-code-not-objects/
 related_notes: []
 excerpt_text: >
   DRY applies to code, not to object instances.

@@ -3,9 +3,6 @@ title: "Survival vs. Excellence as Engineering Modes"
 maturity: evergreen
 tags: [software-engineering, engineering-culture, tech-debt, decision-making]
 created: 2026-04-27
-related_posts:
-  - /are-you-building-for-survival-or-excellence/
-  - /when-should-you-build-for-survival/
 related_notes: []
 excerpt_text: >
   Software development has two modes (survival and excellence), and the choice should be deliberate, not a default.

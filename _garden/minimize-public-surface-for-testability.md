@@ -3,8 +3,6 @@ title: "Minimize Public Surface for Testability"
 maturity: evergreen
 tags: [software-testing, unit-tests, encapsulation, software-design]
 created: 2026-04-27
-related_posts:
-  - /privatize-your-classes-for-better-unit-testing/
 related_notes:
   - test-behavior-not-implementation
   - testability-drives-design

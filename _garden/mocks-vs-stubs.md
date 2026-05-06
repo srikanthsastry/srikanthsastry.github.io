@@ -3,8 +3,6 @@ title: "Mocks vs. Stubs: When to Use Which"
 maturity: evergreen
 tags: [software-testing, unit-tests, test-doubles, mocks, stubs]
 created: 2026-04-27
-related_posts:
-  - /mocks-stubs-andhow-to-use-them/
 related_notes:
   - mocks-in-testing
   - simplicity-over-dry-in-tests

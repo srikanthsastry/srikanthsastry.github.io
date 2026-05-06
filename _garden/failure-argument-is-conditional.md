@@ -4,8 +4,6 @@ garden_type: note
 maturity: evergreen
 tags: [governance, directive-governance, hayek, software-engineering]
 created: 2026-05-01
-related_posts:
-  - /subsidiarity-is-not-hayek/
 related_notes:
   - directive-governance-preconditions
   - essential-complexity-makes-software-ungovernable

@@ -3,8 +3,6 @@ title: "Metrics Measure Maintenance Not Creation"
 maturity: budding
 tags: [metrics, governance, innovation, qualitative-signal-loss]
 created: 2026-04-25
-related_posts:
-  - /directive-governance-situationship/
 related_notes:
   - data-pipeline-is-achilles-heel
   - partial-measurement-worse-than-none

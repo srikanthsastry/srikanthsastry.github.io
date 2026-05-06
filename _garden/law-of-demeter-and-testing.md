@@ -3,8 +3,6 @@ title: "Law of Demeter and Testing"
 maturity: evergreen
 tags: [software-testing, unit-tests, law-of-demeter, software-design, coupling]
 created: 2026-04-27
-related_posts:
-  - /law-of-demeter-and-unit-tests/
 related_notes:
   - minimize-public-surface-for-testability
   - testability-drives-design

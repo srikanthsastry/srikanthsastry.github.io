@@ -3,8 +3,6 @@ title: "In Software Execution Is Decision Making"
 maturity: evergreen
 tags: [software-engineering, governance, brooks, essential-complexity, decision-authority]
 created: 2026-04-25
-related_posts:
-  - /cargo-cult-governance/
 related_notes:
   - data-pipeline-is-achilles-heel
   - essential-complexity-makes-software-ungovernable

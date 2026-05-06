@@ -3,10 +3,6 @@ title: "Delegation Mimicry Without Cultural Substrate"
 maturity: budding
 tags: [governance, directive-governance, delegation, cultural-substrate, isomorphism]
 created: 2026-04-26
-related_posts:
-  - /cargo-cult-governance/
-  - /subsidiarity-is-not-hayek/
-  - /deliverance-from-directive-governance/
 related_notes:
   - directive-governance
   - isomorphic-mimicry-in-tech-governance

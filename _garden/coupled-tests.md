@@ -3,8 +3,6 @@ title: "Coupled Tests"
 maturity: evergreen
 tags: [software-testing, unit-tests, test-design, anti-patterns]
 created: 2026-04-27
-related_posts:
-  - /tests-should-be-isolated-not-coupled/
 related_notes:
   - simplicity-over-dry-in-tests
   - unit-test-attribute-tradeoffs

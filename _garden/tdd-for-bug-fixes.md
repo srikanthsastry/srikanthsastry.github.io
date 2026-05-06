@@ -3,8 +3,6 @@ title: "TDD for Bug Fixes"
 maturity: evergreen
 tags: [software-testing, tdd, bug-fixing, test-driven-development]
 created: 2026-04-27
-related_posts:
-  - /tdd-for-bug-fixes/
 related_notes:
   - tests-as-executable-documentation
   - tests-for-maintainability

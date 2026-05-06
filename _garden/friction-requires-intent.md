@@ -3,8 +3,6 @@ title: "Friction Requires Intent"
 maturity: evergreen
 tags: [software-design, ergonomics, ai, pit-of-success]
 created: 2026-04-24
-related_posts:
-  - /the-suggestible-actor/
 related_notes:
   - ai-agent-category-error
   - intent-spectrum

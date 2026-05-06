@@ -3,8 +3,6 @@ title: "The AI Agent Category Error"
 maturity: evergreen
 tags: [ai, software-design, actor-models, category-error]
 created: 2026-04-24
-related_posts:
-  - /the-suggestible-actor/
 related_notes:
   - friction-requires-intent
   - goal-vs-intent

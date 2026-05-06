@@ -3,8 +3,6 @@ title: "Tests Prune the Debugging Search Space"
 maturity: evergreen
 tags: [software-testing, unit-tests, debugging]
 created: 2026-04-27
-related_posts:
-  - /unit-tests-ftw-part-4/
 related_notes:
   - testability-drives-design
   - tests-as-refactoring-safety-net

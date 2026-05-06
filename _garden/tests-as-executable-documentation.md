@@ -3,8 +3,6 @@ title: "Tests as Executable Documentation"
 maturity: evergreen
 tags: [software-testing, unit-tests, documentation]
 created: 2026-04-27
-related_posts:
-  - /merits-of-unit-tests-part-1/
 related_notes:
   - tests-as-first-customer
 excerpt_text: >

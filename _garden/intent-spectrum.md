@@ -3,8 +3,6 @@ title: "The Intent Spectrum"
 maturity: evergreen
 tags: [software-design, actor-models, mental-models]
 created: 2026-04-24
-related_posts:
-  - /the-suggestible-actor/
 related_notes:
   - ai-agent-category-error
   - friction-requires-intent

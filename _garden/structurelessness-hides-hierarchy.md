@@ -3,9 +3,6 @@ title: "Structurelessness Hides Hierarchy"
 maturity: evergreen
 tags: [governance, organizational-design, hierarchy, directive-governance]
 created: 2026-04-26
-related_posts:
-  - /cargo-cult-governance/
-  - /deliverance-from-directive-governance/
 related_notes:
   - isomorphic-mimicry-in-tech-governance
   - three-assumptions-framework

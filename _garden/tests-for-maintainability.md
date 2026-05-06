@@ -3,8 +3,6 @@ title: "Tests Exist for Maintainability"
 maturity: evergreen
 tags: [software-testing, unit-tests, software-maintenance]
 created: 2026-04-27
-related_posts:
-  - /the-big-why-about-unit-tests/
 related_notes:
   - simplicity-over-dry-in-tests
   - test-behavior-not-implementation
