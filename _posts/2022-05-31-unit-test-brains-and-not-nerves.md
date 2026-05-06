@@ -47,7 +47,7 @@ Each category needs a distinct approach to testing.
 
 ### Brains &rarr; Unit Tests
 
-Brains are one of the most complex parts of your codebase that often requires the most technical skill and domain knowledge to author, read, and maintain. Consequently, they are best tested with unit tests. Furthermore, they also have very few direct external dependencies, and as a result require limited use of test doubles.
+[Brains](/garden/test-behavior-not-implementation/) are one of the most complex parts of your codebase that often requires the most technical skill and domain knowledge to author, read, and maintain. Consequently, they are best tested with unit tests. Furthermore, they also have very few direct external dependencies, and as a result require limited use of test doubles.
 
 ### Nerves &rarr; Integration Tests
 
