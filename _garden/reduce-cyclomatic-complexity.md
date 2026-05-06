@@ -3,8 +3,6 @@ title: "Reduce Cyclomatic Complexity"
 maturity: evergreen
 tags: [software-design, refactoring, code-quality, cyclomatic-complexity]
 created: 2026-04-27
-related_posts:
-  - /reduce-cyclomatic-complexity/
 related_notes:
   - testability-drives-design
 excerpt_text: >

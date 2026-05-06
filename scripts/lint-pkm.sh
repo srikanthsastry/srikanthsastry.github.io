@@ -229,49 +229,9 @@ for filepath in "${FILES[@]}"; do
         fi
     done
 
-    # ── Check 3: published_in validation ──────────────────────────────────
-    if [[ -n "$GARDEN_DIR" ]]; then
-        garden_file="$GARDEN_DIR/${my_slug}.md"
-        if [[ -f "$garden_file" ]]; then
-            # Garden file exists — PKM should have published_in
-            # Extract related_posts from garden file
-            mapfile -t garden_related_posts < <(get_fm_list "$garden_file" "related_posts")
-
-            if [[ ${#garden_related_posts[@]} -gt 0 ]] && [[ -n "${garden_related_posts[0]}" ]]; then
-                # Garden has related_posts — check published_in
-                if [[ ${#published_in_raw[@]} -eq 0 ]] || [[ -z "${published_in_raw[0]}" ]]; then
-                    # Build a readable list of related_posts
-                    rp_display=""
-                    for rp in "${garden_related_posts[@]}"; do
-                        [[ -z "$rp" ]] && continue
-                        if [[ -n "$rp_display" ]]; then
-                            rp_display+=", $rp"
-                        else
-                            rp_display="$rp"
-                        fi
-                    done
-                    add_error "$bname" "[MISSING_PUBLISHED_IN] garden file exists with related_posts [$rp_display] but no published_in in PKM"
-                else
-                    # Both exist — check for mismatches
-                    declare -A pi_set=()
-                    for pi in "${published_in_raw[@]}"; do
-                        [[ -z "$pi" ]] && continue
-                        pi_set["$pi"]=1
-                    done
-                    for rp in "${garden_related_posts[@]}"; do
-                        [[ -z "$rp" ]] && continue
-                        if [[ -z "${pi_set[$rp]+x}" ]]; then
-                            add_error "$bname" "[PUBLISHED_IN_MISMATCH] garden related_posts has '$rp' but PKM published_in does not"
-                        fi
-                    done
-                    unset pi_set
-                fi
-            elif [[ ${#published_in_raw[@]} -eq 0 ]] || [[ -z "${published_in_raw[0]}" ]]; then
-                # Garden exists but no related_posts — still flag missing published_in
-                add_error "$bname" "[MISSING_PUBLISHED_IN] garden file exists at ${garden_file} but no published_in in PKM"
-            fi
-        fi
-    fi
+    # ── Check 3: garden file existence (informational) ─────────────────────
+    # Garden notes no longer store related_posts in frontmatter.
+    # Blog-post backlinks are computed at build time by garden_backlinks.html.
 
     # ── Check 5: published_in entries point to actual published posts ─────
     if [[ -n "$POSTS_DIR" ]] && [[ ${#published_in_raw[@]} -gt 0 ]]; then

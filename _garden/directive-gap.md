@@ -3,8 +3,6 @@ title: "The Directive Gap"
 maturity: evergreen
 tags: [ai, software-design, failure-modes]
 created: 2026-04-24
-related_posts:
-  - /the-suggestible-actor/
 related_notes:
   - ambient-to-local
   - confabulation-is-plausible

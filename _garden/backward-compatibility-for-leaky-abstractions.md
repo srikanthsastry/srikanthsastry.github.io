@@ -3,8 +3,6 @@ title: "Backward Compatibility for Leaky Abstractions"
 maturity: evergreen
 tags: [software-engineering, backward-compatibility, leaky-abstractions, defensive-programming]
 created: 2026-04-27
-related_posts:
-  - /backward-compatibility-where-you-dont-expect/
 related_notes: []
 excerpt_text: >
   When a framework leaks implementation details (like serializing arguments at schedule time but loading code from HEAD at execution time), changing a function signature breaks the assumption that old code calls old signatures.

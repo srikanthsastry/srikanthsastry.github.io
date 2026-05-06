@@ -3,8 +3,6 @@ title: "Tests as First Customer"
 maturity: evergreen
 tags: [software-testing, unit-tests, api-design, usability]
 created: 2026-04-27
-related_posts:
-  - /merits-of-unit-tests-part-5/
 related_notes:
   - testability-drives-design
   - tests-as-executable-documentation

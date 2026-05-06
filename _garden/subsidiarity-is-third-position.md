@@ -4,8 +4,6 @@ garden_type: note
 maturity: evergreen
 tags: [governance, subsidiarity, hayek, keynes, catholic-social-teaching]
 created: 2026-05-01
-related_posts:
-  - /subsidiarity-is-not-hayek/
 related_notes:
   - subsidiarity
 excerpt_text: >

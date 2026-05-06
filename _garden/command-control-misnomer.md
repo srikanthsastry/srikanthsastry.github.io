@@ -3,8 +3,6 @@ title: "Command Control Misnomer"
 maturity: evergreen
 tags: [governance, directive-governance, terminology, military]
 created: 2026-04-27
-related_posts:
-  - /cargo-cult-governance/
 related_notes:
   - directive-governance
 excerpt_text: >

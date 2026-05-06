@@ -3,8 +3,6 @@ title: "Goal vs. Intent"
 maturity: evergreen
 tags: [ai, definitions, mental-models]
 created: 2026-04-24
-related_posts:
-  - /the-suggestible-actor/
 related_notes:
   - ai-agent-category-error
   - intent-spectrum

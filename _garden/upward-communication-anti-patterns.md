@@ -3,8 +3,6 @@ title: "Upward Communication Anti Patterns"
 maturity: evergreen
 tags: [people-management, leadership, communication, organizational-design]
 created: 2026-04-27
-related_posts:
-  - /donts-of-processes-for-upward-communication/
 related_notes:
   - concern-response-framework
   - upward-comms-asymmetric-commitment

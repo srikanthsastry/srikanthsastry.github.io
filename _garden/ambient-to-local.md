@@ -3,8 +3,6 @@ title: "Convert Ambient Knowledge into Local Context"
 maturity: evergreen
 tags: [ai, software-design, prescriptions]
 created: 2026-04-24
-related_posts:
-  - /the-suggestible-actor/
 related_notes:
   - confabulation-is-plausible
   - directive-gap

@@ -3,8 +3,6 @@ title: "Serial Satisficing Without Learning"
 maturity: budding
 tags: [bounded-rationality, governance, layoffs, decision-making]
 created: 2026-04-25
-related_posts:
-  - /directive-governance-situationship/
 related_notes:
   - data-pipeline-is-achilles-heel
   - unfalsifiable-organizational-corrections

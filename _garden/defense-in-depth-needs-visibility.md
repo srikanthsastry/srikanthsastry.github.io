@@ -3,8 +3,6 @@ title: "Defense in Depth Needs Visibility"
 maturity: evergreen
 tags: [software-engineering, defense-in-depth, monitoring, operations]
 created: 2026-04-27
-related_posts:
-  - /defense-in-depth-vs-locality-of-behavior/
 related_notes:
   - align-alerts-to-sev-criteria
 excerpt_text: >

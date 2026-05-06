@@ -3,8 +3,6 @@ title: "Test Behavior, Not Implementation"
 maturity: evergreen
 tags: [software-testing, unit-tests, test-design]
 created: 2026-04-27
-related_posts:
-  - /unit-test-the-brains-and-not-the-nerves/
 related_notes:
   - mocks-vs-stubs
   - tests-as-refactoring-safety-net

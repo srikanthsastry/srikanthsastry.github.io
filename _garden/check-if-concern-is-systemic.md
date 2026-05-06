@@ -3,8 +3,6 @@ title: "Check If Concern Is Systemic"
 maturity: evergreen
 tags: [people-management, leadership, communication]
 created: 2026-04-27
-related_posts:
-  - /responding-to-concerns-as-a-people-manager/
 related_notes:
   - concern-response-framework
 excerpt_text: >

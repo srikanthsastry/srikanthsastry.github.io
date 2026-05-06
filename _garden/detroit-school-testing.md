@@ -3,9 +3,6 @@ title: "The Detroit School of Unit Testing"
 maturity: evergreen
 tags: [software-testing, unit-tests, test-design, detroit-school]
 created: 2026-04-27
-related_posts:
-  - /defining-unit-tests-two-schools-of-thought/
-  - /in-unit-tests-favor-detroit-over-london/
 related_notes:
   - detroit-vs-london-testing
   - london-school-testing

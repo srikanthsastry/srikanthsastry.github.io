@@ -44,20 +44,6 @@ layout: default
       {{ content }}
     </div>
 
-    {% if page.related_posts.size > 0 %}
-    <div class="my-8 p-4 rounded-lg bg-neutral-100 dark:bg-neutral-900">
-      <h3 class="text-lg font-bold mb-2">📝 Related Blog Posts</h3>
-      <ul class="list-none pl-0">
-        {% for post_permalink in page.related_posts %}
-          {% assign rel_post = site.posts | where: "permalink", post_permalink | first %}
-          {% if rel_post %}
-            <li><a href="{{ rel_post.url | relative_url }}">{{ rel_post.title }}</a></li>
-          {% endif %}
-        {% endfor %}
-      </ul>
-    </div>
-    {% endif %}
-
     {% if page.related_notes.size > 0 %}
     <div class="my-8 p-4 rounded-lg bg-neutral-100 dark:bg-neutral-900">
       <h3 class="text-lg font-bold mb-2">🌿 Related Notes</h3>

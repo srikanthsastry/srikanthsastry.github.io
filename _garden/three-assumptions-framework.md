@@ -3,8 +3,6 @@ title: "Three Assumptions Framework"
 maturity: budding
 tags: [governance, directive-governance, information-theory, original-framework, tech-industry]
 created: 2026-04-26
-related_posts:
-  - /cargo-cult-governance/
 related_notes:
   - data-pipeline-is-achilles-heel
   - directive-governance-degrades-not-destroys

@@ -3,8 +3,6 @@ title: "The Suggestible Actor: Four Properties"
 maturity: evergreen
 tags: [ai, software-design, actor-models, suggestible-actor]
 created: 2026-04-24
-related_posts:
-  - /the-suggestible-actor/
 related_notes:
   - ai-agent-category-error
   - ambient-to-local

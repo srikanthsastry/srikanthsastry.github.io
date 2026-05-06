@@ -4,8 +4,6 @@ garden_type: note
 maturity: evergreen
 tags: [governance, subsidiarity, hayek, missionary-culture]
 created: 2026-05-01
-related_posts:
-  - /subsidiarity-is-not-hayek/
 related_notes:
   - crisis-centralization-ratchet
   - delegation-mimicry-without-cultural-substrate

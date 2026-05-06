@@ -3,8 +3,6 @@ title: "Isomorphic Mimicry In Tech Governance"
 maturity: budding
 tags: [governance, directive-governance, institutional-theory, isomorphism, tech-industry]
 created: 2026-04-26
-related_posts:
-  - /cargo-cult-governance/
 related_notes:
   - delegation-mimicry-without-cultural-substrate
   - essential-complexity-makes-software-ungovernable

@@ -53,17 +53,6 @@ fi
 
 mkdir -p "$GARDEN_DIR"
 
-# ── Build published-post permalink index ──────────────────────────
-# Scan all _posts/ files for their permalink: frontmatter values.
-# This is used to validate published_in entries.
-declare -A PUBLISHED_PERMALINKS
-while IFS= read -r pfile; do
-    plink=$(sed -n '/^---$/,/^---$/p' "$pfile" | grep -m1 '^permalink:' | sed 's/^permalink:[[:space:]]*//' || true)
-    if [ -n "$plink" ]; then
-        PUBLISHED_PERMALINKS["$plink"]=1
-    fi
-done < <(find "$REPO_DIR/_posts" -name '*.md' -type f 2>/dev/null)
-
 # ── Helper functions ──────────────────────────────────────────────
 
 # Extract a YAML frontmatter value by key (first match, single-line values only)
@@ -147,7 +136,7 @@ parse_inline_array() {
 # Convert a PKM reference path to a garden slug
 # brain/thoughts/thought-20260424-foo.md → foo
 # thoughts/thought-20260424-foo.md → foo
-# published/actor-model-ai-coding → (skip, these go to related_posts)
+# published/actor-model-ai-coding → (skip, these are blog posts not garden notes)
 # maps/guardrail-erosion → guardrail-erosion-map
 ref_to_slug() {
     local ref="$1"
@@ -161,7 +150,7 @@ ref_to_slug() {
     local dir
     dir=$(dirname "$ref")
 
-    # Skip published refs (those should be related_posts, handled separately)
+    # Skip published refs (blog posts, not garden notes)
     case "$dir" in
         published|*/published) echo "PUBLISHED:$base"; return ;;
     esac
@@ -294,31 +283,18 @@ for pkm_file in "${FILES[@]}"; do
     # Created date: prefer 'created', fallback to 'date_added'
     created="${pkm_created:-$pkm_date_added}"
 
-    # ── Collect related_notes and related_posts ──
+    # ── Collect related_notes ──
+    # (Blog-post relationships are handled by computed backlinks, not frontmatter.)
 
     related_notes=()
-    related_posts=()
 
-    # 1. Read published_in from PKM → related_posts (permalink format)
-    #    Validate each permalink against actual published posts in _posts/
-    while IFS= read -r pi; do
-        [ -z "$pi" ] && continue
-        pi=$(echo "$pi" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
-        # Validate against the published-post permalink index
-        if [[ -n "${PUBLISHED_PERMALINKS[$pi]+x}" ]]; then
-            related_posts+=("$pi")
-        else
-            echo "   ⚠  Skipping published_in '$pi' (no published post found in _posts/)"
-        fi
-    done < <(get_fm_list "$pkm_file" "published_in")
-
-    # 2. Process 'connects_to' (multi-line list)
+    # 1. Process 'connects_to' (multi-line list)
     while IFS= read -r ref; do
         [ -z "$ref" ] && continue
         ref=$(echo "$ref" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
         resolved=$(ref_to_slug "$ref")
         if [[ "$resolved" == PUBLISHED:* ]]; then
-            # Skip: published_in is canonical source for related_posts
+            # Published refs are blog posts, not garden notes — skip
             continue
         else
             related_notes+=("$resolved")
@@ -333,7 +309,7 @@ for pkm_file in "${FILES[@]}"; do
                 [ -z "$ref" ] && continue
                 resolved=$(ref_to_slug "$ref")
                 if [[ "$resolved" == PUBLISHED:* ]]; then
-                    # Skip: published_in is canonical source for related_posts
+                    # Published refs are blog posts, not garden notes — skip
             continue
                 else
                     related_notes+=("$resolved")
@@ -347,7 +323,7 @@ for pkm_file in "${FILES[@]}"; do
         ref=$(echo "$ref" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
         resolved=$(ref_to_slug "$ref")
         if [[ "$resolved" == PUBLISHED:* ]]; then
-            # Skip: published_in is canonical source for related_posts
+            # Published refs are blog posts, not garden notes — skip
             continue
         else
             related_notes+=("$resolved")
@@ -358,7 +334,7 @@ for pkm_file in "${FILES[@]}"; do
     if [ -n "$pkm_source" ]; then
         resolved=$(ref_to_slug "$pkm_source")
         if [[ "$resolved" == PUBLISHED:* ]]; then
-            : # Skip: published_in is canonical source for related_posts
+            : # Published refs are blog posts, not garden notes — skip
         else
             related_notes+=("$resolved")
         fi
@@ -371,7 +347,7 @@ for pkm_file in "${FILES[@]}"; do
                 [ -z "$ref" ] && continue
                 resolved=$(ref_to_slug "$ref")
                 if [[ "$resolved" == PUBLISHED:* ]]; then
-                    # Skip: published_in is canonical source for related_posts
+                    # Published refs are blog posts, not garden notes — skip
             continue
                 else
                     related_notes+=("$resolved")
@@ -380,7 +356,7 @@ for pkm_file in "${FILES[@]}"; do
         else
             resolved=$(ref_to_slug "$pkm_inspired_by")
             if [[ "$resolved" == PUBLISHED:* ]]; then
-                : # Skip: published_in is canonical source for related_posts
+                : # Published refs are blog posts, not garden notes — skip
             else
                 related_notes+=("$resolved")
             fi
@@ -392,7 +368,7 @@ for pkm_file in "${FILES[@]}"; do
         ref=$(echo "$ref" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
         resolved=$(ref_to_slug "$ref")
         if [[ "$resolved" == PUBLISHED:* ]]; then
-            # Skip: published_in is canonical source for related_posts
+            # Published refs are blog posts, not garden notes — skip
             continue
         else
             related_notes+=("$resolved")
@@ -416,20 +392,6 @@ for pkm_file in "${FILES[@]}"; do
         fi
     done
     related_notes=("${validated_notes[@]+"${validated_notes[@]}"}")
-
-    # ── Deduplicate related_posts ──
-
-    if [ ${#related_posts[@]} -gt 0 ]; then
-        mapfile -t related_posts < <(printf '%s\n' "${related_posts[@]}" | sort -u)
-    fi
-
-    # ── Gate: garden notes require at least one linked post ──
-
-    if [ ${#related_posts[@]} -eq 0 ]; then
-        echo "⏭  Skipping $slug (no related_posts — garden notes require at least one linked post)"
-        skipped_count=$((skipped_count + 1))
-        continue
-    fi
 
     # ── Extract and process body ──
 
@@ -482,28 +444,6 @@ for pkm_file in "${FILES[@]}"; do
             fi
         done
 
-        # (c) related_posts loss
-        existing_rposts=()
-        while IFS= read -r erp; do
-            [ -z "$erp" ] && continue
-            erp=$(echo "$erp" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
-            existing_rposts+=("$erp")
-        done < <(get_fm_list "$garden_file" "related_posts")
-
-        missing_rposts=()
-        for erp in "${existing_rposts[@]+"${existing_rposts[@]}"}"; do
-            found=false
-            for rp in "${related_posts[@]+"${related_posts[@]}"}"; do
-                if [ "$rp" = "$erp" ]; then
-                    found=true
-                    break
-                fi
-            done
-            if [ "$found" = false ]; then
-                missing_rposts+=("$erp")
-            fi
-        done
-
         # Report losses and block if any
         has_loss=false
 
@@ -511,9 +451,6 @@ for pkm_file in "${FILES[@]}"; do
             has_loss=true
         fi
         if [ ${#missing_rnotes[@]} -gt 0 ]; then
-            has_loss=true
-        fi
-        if [ ${#missing_rposts[@]} -gt 0 ]; then
             has_loss=true
         fi
 
@@ -535,14 +472,6 @@ for pkm_file in "${FILES[@]}"; do
                 done
                 echo "   Missing connects_to in PKM: $rnotes_display"
             fi
-            if [ ${#missing_rposts[@]} -gt 0 ]; then
-                rposts_display=""
-                for mp in "${missing_rposts[@]}"; do
-                    [ -n "$rposts_display" ] && rposts_display+=", "
-                    rposts_display+="$mp"
-                done
-                echo "   Missing published_in in PKM: $rposts_display"
-            fi
             echo "   Fix the PKM note first, then re-run."
             blocked_count=$((blocked_count + 1))
             continue
@@ -555,6 +484,7 @@ for pkm_file in "${FILES[@]}"; do
         echo "---"
         echo "title: \"$title\""
 
+        echo "garden_type: $pkm_type"
         echo "maturity: $maturity"
         if [ -n "$tags_line" ]; then
             echo "tags: $tags_line"
@@ -562,12 +492,6 @@ for pkm_file in "${FILES[@]}"; do
         if [ -n "$created" ]; then
             echo "created: $created"
         fi
-
-        # Related posts
-        echo "related_posts:"
-        for rp in "${related_posts[@]}"; do
-            echo "  - $rp"
-        done
 
         # Related notes
         if [ ${#related_notes[@]} -gt 0 ]; then
@@ -614,7 +538,6 @@ if [ $created_count -gt 0 ]; then
     echo "Next steps:"
     echo "  1. Review generated files in _garden/"
     echo "  2. Adjust titles, maturity levels, and excerpt_text"
-    echo "  3. Add published_in permalinks to PKM notes for related_posts"
-    echo "  4. Add related_notes slugs for connected garden entries"
-    echo "  5. Add inline wikilinks in PKM body for garden cross-references"
+    echo "  3. Add related_notes slugs for connected garden entries"
+    echo "  4. Add inline wikilinks in PKM body for garden cross-references"
 fi

@@ -3,8 +3,6 @@ title: "Data Pipeline Is Achilles Heel"
 maturity: budding
 tags: [governance, bounded-rationality, information-asymmetry, data-quality]
 created: 2026-04-25
-related_posts:
-  - /directive-governance-situationship/
 related_notes:
   - metrics-measure-maintenance-not-creation
   - serial-satisficing-without-learning

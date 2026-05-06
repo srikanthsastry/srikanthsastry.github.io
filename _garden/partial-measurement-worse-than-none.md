@@ -3,8 +3,6 @@ title: "Partial Measurement Worse Than None"
 maturity: budding
 tags: [metrics, measurement, governance, austin]
 created: 2026-04-25
-related_posts:
-  - /directive-governance-situationship/
 related_notes:
   - metrics-measure-maintenance-not-creation
 excerpt_text: >

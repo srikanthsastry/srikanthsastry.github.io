@@ -4,8 +4,6 @@ garden_type: note
 maturity: evergreen
 tags: [governance, subsidiarity, hayek, organizational-theory]
 created: 2026-05-01
-related_posts:
-  - /subsidiarity-is-not-hayek/
 related_notes:
   - subsidiarity
   - subsidiarity-is-not-flat-organization

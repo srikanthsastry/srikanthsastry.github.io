@@ -3,8 +3,6 @@ title: "Confabulation Is Plausible"
 maturity: budding
 tags: [ai, failure-modes, hallucination]
 created: 2026-04-24
-related_posts:
-  - /the-suggestible-actor/
 related_notes:
   - ambient-to-local
   - directive-gap
