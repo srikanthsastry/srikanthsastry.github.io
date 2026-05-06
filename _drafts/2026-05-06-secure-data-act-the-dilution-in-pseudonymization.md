@@ -29,7 +29,7 @@ As an engineer who builds privacy infrastructure, I am looking at it from a diff
 
 Under GDPR, pseudonymous data is personal data. Period. Pseudonymization does not absolve corporations of the regulatory burden around erasure, access, profiling objections, or any obligations associated with personal data. The SECURE Data Act has a different take. Its pseudonymous data provision (Section 7(c)) suspends consumer rights for data that meets the pseudonymous threshold. The consumer cannot opt out of its use for targeted advertising. Cannot request deletion. Cannot access it. Pseudonymous data is still personal data by the bill's own definition. The bill simply overrides the consumer's ability to act on that fact.
 
-The shared definition also leaves a gap. Both frameworks describe pseudonymous data in terms of records keyed by a pseudonym. But what about a derived artifact? A model trained on pseudonymous inputs, keyed by pseudo_id, encodes behavioral patterns without direct identifiers. It is linkable to an identified person if the controller holds the forward mapping, but the identifying information is "kept separately." The bill defines personal data as information "linked or reasonably linkable" to an identified person. Neither framework cleanly resolves whether the model is pseudonymous data, personal data, or something else. The SECURE Data Act's exemption in Section 7(c) operates on the data layer. Whether the model inherits that exemption is a question the definitions do not answer.
+The shared definition also leaves a gap. Both frameworks describe pseudonymous data in terms of records keyed by a pseudonym. But what about a derived artifact? A model trained on pseudonymous inputs, keyed by a pseudonymous identifier, encodes behavioral patterns without direct identifiers. It is linkable to an identified person if the controller holds the forward mapping, but the identifying information is "kept separately." The bill defines personal data as information "linked or reasonably linkable" to an identified person. Neither framework cleanly resolves whether the model is pseudonymous data, personal data, or something else. The SECURE Data Act's exemption in Section 7(c) operates on the data layer. Whether the model inherits that exemption is a question the definitions do not answer.
 
 The divergence extends further. Under GDPR, a consumer can withdraw consent, and the controller must stop processing. Purpose limitation constrains what can be collected in the first place. The consumer has levers across the full data lifecycle: collection, processing, retention, deletion. The SECURE Data Act's opt-out covers three specific activities: targeted advertising, sale, and certain profiling. Data collection itself is not subject to opt-out. The pipe stays open.
 
@@ -43,7 +43,7 @@ The SECURE Act requires two conditions for the pseudonymous exemption: the ident
 
 *Notice what just changed. Under GDPR, the obligations follow the data regardless of how it is keyed. Under the SECURE Data Act, you can use a one-way function precisely because the obligations don't follow. Same definition. Same data. The architecture diverges at the exact point where obligations either persist or detach.*
 
-Now watch what a pipeline built on this architecture can do.
+Let's see what a pipeline built on this architecture can do.
 
 ### Data pipeline for personalization
 
