@@ -21,17 +21,19 @@ excerpt: >
 
 The [SECURE Data Act](https://www.congress.gov/bill/119th-congress/house-bill/8413) was introduced in Congress, and it immediately received a lot of criticism and blowback. The [ACLU](https://statescoop.com/secure-data-act-privacy-bill-not-consumer-friendly/) says it "would entirely destroy the work that states have been doing" on preemption of state privacy laws. The [CDT](https://statescoop.com/secure-data-act-privacy-bill-not-consumer-friendly/) calls out "easily exploitable loopholes" and data minimization that "lacks teeth." [Brookings](https://www.brookings.edu/articles/springtime-in-washington-means-its-time-for-another-round-of-federal-privacy-legislation/) notes the absence of a private right of action. [EPIC](https://www.csoonline.com/article/4163345/new-us-house-privacy-bills-raise-hard-questions-about-enterprise-data-collection.html) calls it "a huge gift to Big Tech." The [California Privacy Protection Agency](https://privacy.ca.gov/2026/04/california-privacy-protection-agency-releases-letter-opposing-the-secure-data-act/) published a formal opposition letter.
 
-As an engineer who builds privacy infrastructure, I am looking at it from a different lens. How does this bill impact the way personal data can and cannot be used for personalization? My reference is the [GDPR](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679), because I have built infra to support the regulations it mandates. Where does the SECURE Data Act diverge from GDPR, and what does that mean for how companies can use or erase user data post opt-out? The daylight between them is in pseudonymized data.
+As an engineer who builds privacy infrastructure, I am looking at it from a different lens. How does this bill impact the way personal data can and cannot be used for personalization? My reference is the [GDPR](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679), because I have built infra to support the regulations it mandates. Where does the SECURE Data Act diverge from GDPR, and what does that mean for how companies can use or erase user data post opt-out? The daylight between them is in pseudonymous data.
 
-## Pseudonymized data: GDPR vs. SECURE Data Act
+## Pseudonymous data: GDPR vs. SECURE Data Act
 
 [GDPR](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679) and the [SECURE Data Act](https://www.congress.gov/bill/119th-congress/house-bill/8413/text) define pseudonymous data in nearly identical language. Both classify it as personal data. Both require separating the identifying information. Both require technical measures to prevent attribution. You could swap one definition into the other and barely notice. While they share the definition, their treatment of pseudonymous data is very different.
 
 Under GDPR, pseudonymous data is personal data. Period. Pseudonymization does not absolve corporations of the regulatory burden around erasure, access, profiling objections, or any obligations associated with personal data. The SECURE Data Act has a different take. Its pseudonymous data provision (Section 7(c)) suspends consumer rights for data that meets the pseudonymous threshold. The consumer cannot opt out of its use for targeted advertising. Cannot request deletion. Cannot access it. Pseudonymous data is still personal data by the bill's own definition. The bill simply overrides the consumer's ability to act on that fact.
 
+The shared definition also leaves a gap. Both frameworks describe pseudonymous data in terms of records keyed by a pseudonym. But what about a derived artifact? A model trained on pseudonymous inputs, keyed by pseudo_id, encodes behavioral patterns without direct identifiers. It is linkable to an identified person if the controller holds the forward mapping, but the identifying information is "kept separately." The bill defines personal data as information "linked or reasonably linkable" to an identified person. Neither framework cleanly resolves whether the model is pseudonymous data, personal data, or something else. The SECURE Data Act's exemption in Section 7(c) operates on the data layer. Whether the model inherits that exemption is a question the definitions do not answer.
+
 The divergence extends further. Under GDPR, a consumer can withdraw consent, and the controller must stop processing. Purpose limitation constrains what can be collected in the first place. The consumer has levers across the full data lifecycle: collection, processing, retention, deletion. The SECURE Data Act's opt-out covers three specific activities: targeted advertising, sale, and certain profiling. Data collection itself is not subject to opt-out. The pipe stays open.
 
-## Data pipeline with pseudonymized data
+## Data pipeline with pseudonymous data
 
 Starting with the same behavioral data, and going through the same pseudonymization step, GDPR and the SECURE Data Act allow data controllers to offer very different treatments. Here is an example data pipeline to sharpen this difference.
 
@@ -47,9 +49,9 @@ Now watch what a pipeline built on this architecture can do.
 
 Assume all user behavioral data has been pseudonymized, replacing user_id with pseudo_id. This data trains an ML model indexed by pseudo_id. At inference time, the system performs a forward lookup (user_id to pseudo_id) to select the right model and generate a personalized result.
 
-### Consumer experience with pseudonymized ML models
+### Consumer experience with pseudonymous ML models
 
-When a consumer opts out of personalization, their data, keyed by pseudo_id, has been exempted from the opt-out, and so makes its way to the ML model. When this opted-out user interacts with the product, the ML model, which continued to be trained on the user's pseudonymized data, continues to personalize the product for them. The consumer experience is identical to that of a user who never opted out.
+When a consumer opts out of personalization, their data, keyed by pseudo_id, has been exempted from the opt-out, and so makes its way to the ML model. When this opted-out user interacts with the product, the ML model, which continued to be trained on the user's pseudonymous data, continues to personalize the product for them. The consumer experience is identical to that of a user who never opted out.
 
 Did you notice the difference? Neither did I.
 
@@ -59,17 +61,11 @@ Here is how the bill permits this. At no point was pseudonymous data attributed 
 
 A defender of the bill would point out that the forward lookup operates entirely in the identified layer: the user is logged in, the system derives their pseudo_id from their user_id, and only then touches the pseudonymous data. The pseudonymous data itself is never "attributed to an identified person." The attribution runs from identity to pseudonym, not the reverse. That reading is consistent with the bill's text. It is also consistent with a pipeline that delivers personalized content to a known user based on their behavioral history, with the user having no ability to opt out of the data that powers it.
 
-### Nature of the pseudonymized model
-
-Consider the model itself. Is the model pseudonymous data? It is keyed by pseudo_id. Is it personal data? It is linkable to an identified person if the controller holds the forward mapping. Is it de-identified? It encodes behavioral patterns, not direct identifiers. The bill defines personal data as information "linked or reasonably linkable" to an identified person. A model keyed by pseudo_id is linkable if the mapping exists, but the identifying information is "kept separately." The definitions do not resolve which classification applies to a derived artifact trained on pseudonymous inputs.
-
-Note that the pipeline argument does not depend on how the model is classified. Even if the model is personal data subject to consumer rights, the pseudonymous training data that fed it is still exempt under Section 7(c). The exemption operates on the data layer, not the inference layer.
-
 This is not a fantastical architecture. Existing large-scale personalization systems bear more than a passing resemblance to this one. Behavioral features are processed in layers abstracted from direct identity, and identity is resolved at serving time. The SECURE Data Act's pseudonymous data provisions map onto this existing architecture and exempt its core data processing layer from consumer rights. Other obligations (data minimization, data security) still apply to pseudonymous data. But the consumer-facing rights that would let a user see, delete, or opt out of this processing do not.
 
 ### How does GDPR handle this?
 
-GDPR treats pseudonymized data as personal data subject to the same constraints as identifiable data. Run the same pipeline under GDPR: the user opts out, and the deletion obligation follows the data into the pseudonymous layer. The controller must locate the user's pseudo_id, delete the pseudonymous behavioral records, and address any models trained on them. The hair-splitting around one-way mappings and ID resolution at runtime becomes irrelevant to privacy compliance. If the user opts out, all of their data, including pseudonymized data, is in scope.
+GDPR treats pseudonymous data as personal data subject to the same constraints as identifiable data. Run the same pipeline under GDPR: the user opts out, and the deletion obligation follows the data into the pseudonymous layer. The controller must locate the user's pseudo_id, delete the pseudonymous behavioral records, and address any models trained on them. The hair-splitting around one-way mappings and ID resolution at runtime becomes irrelevant to privacy compliance. If the user opts out, all of their data, including pseudonymous data, is in scope.
 
 ## What follows from the example
 
