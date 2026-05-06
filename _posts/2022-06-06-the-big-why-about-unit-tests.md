@@ -30,7 +30,7 @@ There must be a 'higher' cause for writing unit tests. I argue that this cause i
 
 ### Maintainability
 ![Maintainable software](/assets/images/website-wrench-cog.png)
-Here is a potentially provocative statement; "The final cause of unit tests is software maintainability".
+Here is a potentially provocative statement; "The final cause of unit tests is [software maintainability](/garden/tests-for-maintainability/)".
 To put it differently, if your software was immutable and could not be altered in any way, then that software does not need any unit tests.
 
 Given that almost all software is mutable, unit tests exist to ensure that we can mutate the software to improve upon its utility in a sustainable manner. All the aforementioned answers to the question "why do we write unit tests" are ultimately subsumed by the cause of maintainability.

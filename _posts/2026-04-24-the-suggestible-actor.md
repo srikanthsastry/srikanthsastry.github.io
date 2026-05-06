@@ -43,9 +43,9 @@ Both archetypes share a deeper assumption: **the actor has intent**. Whether ali
 
 ## The New Actor: AI coding agent
 
-The **AI coding agent** demands a new model. The natural instinct is to place it somewhere on the intent spectrum, perhaps as a mostly well-intentioned actor with occasional problematic behavior. This is a category error. The entire spectrum is organized around intent, and the AI coding agent has none.
+The **AI coding agent** demands a new model. The natural instinct is to place it somewhere on the intent spectrum, perhaps as a mostly well-intentioned actor with occasional problematic behavior. This is a [category error](/garden/ai-agent-category-error/). The entire spectrum is organized around intent, and the AI coding agent has none.
 
-The AI agent has an objective, which is not the same thing as intent. The objective is set externally by the human who dispatched it. It did not choose its objective; it was told. It has no internal motivation and no values against which to evaluate the task. It is not aligned with the designers' intent. It is not adversarial toward it. It is orthogonal to the entire axis. Both design paradigms fail for this actor.
+The AI agent has an objective, which is [not the same thing as intent](/garden/goal-vs-intent/). The objective is set externally by the human who dispatched it. It did not choose its objective; it was told. It has no internal motivation and no values against which to evaluate the task. It is not aligned with the designers' intent. It is not adversarial toward it. It is orthogonal to the entire axis. Both design paradigms fail for this actor.
 
 ## When the Paradigms Fail
 
@@ -65,7 +65,7 @@ Instead of forcing the AI agent into an existing archetype, we need a model that
 
 ## The Suggestible Actor
 
-I call this actor the **suggestible actor**. It is defined by four properties:
+I call this actor the **suggestible actor**. It is defined by [four properties](/garden/suggestible-actor-properties/):
 
 1. **Goal-oriented.** The actor has a goal that it is trying to accomplish.
 2. **Locally reasoning.** The actor only reasons over what is immediately available to it.
