@@ -5,7 +5,6 @@ maturity: evergreen
 tags: [ai-open-source, copyright, legal-ambiguity, compliance]
 created: 2026-05-07
 related_notes:
-  - ai-forces-velocity-or-openness
   - empty-grant
 related_posts:
   - /ai-vs-open-source-the-empty-grant/
