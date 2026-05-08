@@ -51,7 +51,7 @@ With AI, the cost of generating code has gone down to near zero. Dan Blanchard r
 
 Granted, that is still [legally fraught](https://www.marks-clerk.com/insights/latest-insights/102mp7s-can-ai-legally-clone-open-source-unpacking-clean-room-as-a-service/) because the AI model was trained on open source software, and traditional clean-room doctrine required that the reimplementing team had no access to the original source. Whether the model's transformation of training data into weights constitutes a sufficient "clean room wall" is novel law. No court has ruled.
 
-Regardless, enforcement at scale is near impossible. You cannot sue every MALUS user. You cannot detect every AI-generated clone. The economic bulwark of expensive code writing is gone irrespective of the legal outcome.
+Regardless, enforcement at scale is near impossible. You cannot pursue every clone. You cannot detect every AI-generated clone. The economic bulwark of expensive code writing is gone irrespective of the legal outcome.
 
 ## Rebuilding, or double tap?
 
