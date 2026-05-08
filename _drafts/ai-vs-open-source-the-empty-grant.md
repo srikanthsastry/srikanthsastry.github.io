@@ -11,6 +11,7 @@ tags:
     - licensing
     - software engineering
 permalink: /ai-vs-open-source-the-empty-grant/
+image: /assets/images/ai-vs-open-source-empty-grant-cover.jpg
 excerpt: >
     AI is dismantling the legal scaffolding that gives open source its freedom and its enforcement.
     Every open source license is a conditional grant of copyright. AI-generated code is not
