@@ -19,8 +19,6 @@ excerpt: >
 ---
 
 
-# AI vs. Open Source, Part 1: The Empty Grant
-
 The step function increase in AI's ability to generate code is looming over open source. What frontier models can do today is a warning shot, already enough to dissolve the legal scaffolding that makes open source enforceable. Historically, companies with flagship open-source software have relied on relicensing as a weapon to protect their competitive advantage. [MongoDB](https://www.mongodb.com/legal/licensing/server-side-public-license/faq) moved from AGPL to SSPL in 2018, [CockroachDB](https://changelog.com/news/why-were-relicensing-cockroachdb-EOaR) went from Apache 2.0 to BSL in 2019 to a [custom CockroachDB license](https://github.com/cockroachdb/cockroach/commit/c0274df57a9f8d0086577bcf74c81110db2cea22) in 2024, [Elasticsearch](https://www.elastic.co/blog/why-license-change-aws) followed in 2021, [HashiCorp](https://www.hashicorp.com/en/blog/hashicorp-adopts-business-source-license) switched Terraform and Vault to BSL in 2023, [Sentry](https://blog.sentry.io/introducing-the-functional-source-license-freedom-without-free-riding/) created an entirely new license (FSL) that same year, and [Redis](https://redis.io/blog/redis-adopts-dual-source-available-licensing/) went source-available in 2024, mostly in response to cloud vendors offering their code as managed services. That weapon is now obsolete as AI threatens to make licenses completely irrelevant.
 
 ## AI generated code? No copyright for you!
