@@ -110,7 +110,7 @@ const postUrl = new URL(getPostPath(slug, currentLang), themeConfig.site.url).to
       <!-- Go Back Button On Desktop -->
       <BackButton />
       <!-- Title -->
-      <h1 class="post-title">
+      <h1 class="post-title" data-pagefind-meta="title">
         <span
           transition:name={`post-${slug}${currentLang ? `-${currentLang}` : ''}`}
           data-disable-theme-toggle-transition
