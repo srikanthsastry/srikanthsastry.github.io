@@ -5,6 +5,7 @@ tags:
   - Bulgaria
   - travel
 abbrlink: 'tsarevets-a-photo-essay'
+image: /assets/images/2015/08/IMG_20150829_110825-e1440950848706.jpg
 lang: ''
 ---
 

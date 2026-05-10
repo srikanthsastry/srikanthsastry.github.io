@@ -9,6 +9,7 @@ tags:
   - 'SECURE-Data-Act'
   - GDPR
 abbrlink: 'secure-data-act-the-dilution-in-pseudonymization'
+image: /assets/images/secure-data-act-cover.jpg
 lang: ''
 ---
 

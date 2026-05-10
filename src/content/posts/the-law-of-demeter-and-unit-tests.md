@@ -5,6 +5,7 @@ tags:
   - 'unit tests'
   - 'software engineering'
 abbrlink: 'law-of-demeter-and-unit-tests'
+image: /assets/images/demeter-sketch-bw.jpg
 lang: ''
 ---
 <!-- ![](/assets/images/demeter-sketch-bw.jpg) -->

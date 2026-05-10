@@ -7,6 +7,7 @@ tags:
   - Python
   - 'software engineering'
 abbrlink: 'do-not-index-in-test-coverage'
+image: /assets/images/chart-coverage.png
 lang: ''
 ---
 

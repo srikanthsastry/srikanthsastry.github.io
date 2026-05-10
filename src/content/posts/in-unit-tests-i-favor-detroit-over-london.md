@@ -9,6 +9,7 @@ tags:
   - 'classical school'
   - 'mockist school'
 abbrlink: 'in-unit-tests-favor-detroit-over-london'
+image: /assets/images/detroit-wall-frame.jpg
 lang: ''
 ---
 <!-- ![](/assets/images/detroit-wall-frame.jpg) -->

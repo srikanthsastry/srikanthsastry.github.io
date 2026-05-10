@@ -8,6 +8,7 @@ tags:
   - 'tech-industry'
   - 'organizational-design'
 abbrlink: 'cargo-cult-governance'
+image: /assets/images/cargo-cult-governance-cover.jpg
 lang: ''
 ---
 

@@ -5,6 +5,7 @@ tags:
   - 'unit tests'
   - 'software engineering'
 abbrlink: 'tests-should-be-isolated-not-coupled'
+image: /assets/images/carabiners-connected.jpg
 lang: ''
 ---
 <!-- ![](/assets/images/carabiners-connected.jpg) -->

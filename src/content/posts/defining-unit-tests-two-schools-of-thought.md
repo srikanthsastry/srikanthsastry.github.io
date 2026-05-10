@@ -8,6 +8,7 @@ tags:
   - 'detroit school'
   - 'london school'
 abbrlink: 'defining-unit-tests-two-schools-of-thought'
+image: /assets/images/london-detroit.jpg
 lang: ''
 ---
 

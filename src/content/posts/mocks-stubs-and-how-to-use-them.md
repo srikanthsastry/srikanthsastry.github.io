@@ -9,6 +9,7 @@ tags:
   - mocks
   - stubs
 abbrlink: 'mocks-stubs-andhow-to-use-them'
+image: /assets/images/masquerade-masks.png
 lang: ''
 ---
 

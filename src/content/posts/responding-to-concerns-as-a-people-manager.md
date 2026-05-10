@@ -4,6 +4,7 @@ published: '2019-12-31T20:58:18-05:00'
 tags:
   - 'People management'
 abbrlink: 'responding-to-concerns-as-a-people-manager'
+image: /assets/images/2019/12/unhappy-389944_1920-740x430.jpg
 lang: ''
 ---
 

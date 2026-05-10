@@ -5,6 +5,7 @@ tags:
   - Git
   - 'software engineering'
 abbrlink: 'git-may-not-be-the-best-for-saas-companies'
+image: /assets/images/2020/02/img_0147-740x430.jpg
 lang: ''
 ---
 

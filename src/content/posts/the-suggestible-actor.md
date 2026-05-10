@@ -7,6 +7,7 @@ tags:
   - 'api design'
   - 'mental models'
 abbrlink: 'the-suggestible-actor'
+image: /assets/images/suggestible-actor-cover.jpg
 lang: ''
 ---
 

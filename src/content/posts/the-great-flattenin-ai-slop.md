@@ -5,6 +5,7 @@ tags:
   - philosophy
   - AI
 abbrlink: 'the-great-flattening-ai-slop'
+image: /assets/images/charcoal-image-to-face-outline.png
 lang: ''
 ---
 

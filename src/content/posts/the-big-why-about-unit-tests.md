@@ -6,6 +6,7 @@ tags:
   - testing
   - 'software engineering'
 abbrlink: 'the-big-why-about-unit-tests'
+image: /assets/images/question_mark_person_leaning.png
 lang: ''
 ---
 <!-- ![Why unit test?](/assets/images/question_mark_person_leaning.png) -->

@@ -7,6 +7,7 @@ tags:
   - 'bug fixing'
   - testing
 abbrlink: 'tdd-for-bug-fixes'
+image: /assets/images/bug-stabbing-software-engineer-in-the-back.png
 lang: ''
 ---
 

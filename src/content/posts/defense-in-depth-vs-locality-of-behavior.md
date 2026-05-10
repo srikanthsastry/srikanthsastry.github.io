@@ -4,6 +4,7 @@ published: 2025-07-14
 tags:
   - 'software engineering'
 abbrlink: 'defense-in-depth-vs-locality-of-behavior'
+image: /assets/images/naked-knight-with-helmet-and-shield.jpg
 lang: ''
 ---
 

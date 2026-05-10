@@ -6,6 +6,7 @@ tags:
   - software
   - 'software engineering'
 abbrlink: 'scripts-and-their-undo'
+image: /assets/images/2019/01/bash-logo-672x372.png
 lang: ''
 ---
 

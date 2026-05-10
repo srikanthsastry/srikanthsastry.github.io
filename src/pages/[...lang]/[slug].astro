@@ -114,6 +114,17 @@ const { Content, headings, remarkPluginFrontmatter } = await render(post)
         minutes={remarkPluginFrontmatter.minutes}
       />
     </div>
+    <!-- Cover Image -->
+    {post.data.image && (
+      <figure class="mb-8">
+        <img
+          src={post.data.image}
+          alt={post.data.title}
+          class="w-full rounded"
+          loading="eager"
+        />
+      </figure>
+    )}
     <!-- TOC -->
     {post.data.toc && <TOC headings={headings} />}
     <!-- Content -->

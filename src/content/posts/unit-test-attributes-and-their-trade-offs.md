@@ -5,6 +5,7 @@ tags:
   - 'unit tests'
   - 'software engineering'
 abbrlink: 'unit-test-attributes-and-their-trade-offs'
+image: /assets/images/accuracy-completeness-speed.png
 lang: ''
 ---
 <!-- ![](/assets/images/accuracy-completeness-speed.png) -->

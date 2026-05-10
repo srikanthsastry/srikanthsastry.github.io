@@ -6,6 +6,7 @@ tags:
   - debugging
   - 'best practices'
 abbrlink: 'backward-compatibility-where-you-dont-expect'
+image: /assets/images/usb_c_into_ethernet_port.jpg
 lang: ''
 ---
 

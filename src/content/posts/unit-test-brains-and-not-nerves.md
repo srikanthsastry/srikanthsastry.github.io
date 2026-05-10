@@ -7,6 +7,7 @@ tags:
   - 'integration tests'
   - 'unit tests'
 abbrlink: 'unit-test-the-brains-and-not-the-nerves'
+image: /assets/images/brain-magnifying-glass.png
 lang: ''
 ---
 _Note: This is inspired from the book "[Unit Testing: Principles, Practices, and Patterns](https://www.manning.com/books/unit-testing)" by Vladimir Khorikov._

@@ -5,6 +5,7 @@ tags:
   - 'software development process'
   - 'software engineering'
 abbrlink: 'are-you-building-for-survival-or-excellence'
+image: /assets/images/2019/08/maxresdefault-450x253.jpg
 lang: ''
 ---
 

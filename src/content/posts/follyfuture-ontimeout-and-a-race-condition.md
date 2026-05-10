@@ -5,6 +5,7 @@ tags:
   - c++
   - 'software engineering'
 abbrlink: 'follyfuture-ontimeout-and-a-race-condition'
+image: /assets/images/2019/01/C-programming-in-a-nutshell-Imgur-450x450.png
 lang: ''
 ---
 

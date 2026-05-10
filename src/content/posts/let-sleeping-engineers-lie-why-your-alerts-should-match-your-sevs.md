@@ -6,6 +6,7 @@ tags:
   - monitoring
   - SEV
 abbrlink: 'sync-your-alerts-to-your-sev-criteria'
+image: /assets/images/sleepy-engineer-cursing-laptop.png
 lang: ''
 ---
 <!-- ![](/assets/images/sleepy-engineer-cursing-laptop.png) -->

@@ -9,6 +9,7 @@ tags:
   - keynes
   - 'organizational-theory'
 abbrlink: 'subsidiarity-is-not-hayek'
+image: /assets/images/subsidiarity-is-not-hayek-cover.jpg
 lang: ''
 ---
 

@@ -6,6 +6,7 @@ tags:
   - 'software engineering'
   - refactoring
 abbrlink: 'privatize-your-classes-for-better-unit-testing'
+image: /assets/images/amber-iceberg-under-water.jpg
 lang: ''
 ---
 <!-- ![](images/amber-iceberg-under-water.jpg) -->

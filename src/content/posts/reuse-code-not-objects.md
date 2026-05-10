@@ -5,6 +5,7 @@ tags:
   - 'design pattern'
   - 'software engineering'
 abbrlink: 'reuse-code-not-objects'
+image: /assets/images/2021/07/pexels-photo-5218009-edited.jpeg
 lang: ''
 ---
 

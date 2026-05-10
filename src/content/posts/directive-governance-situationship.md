@@ -7,6 +7,7 @@ tags:
   - 'tech-industry'
   - 'organizational-theory'
 abbrlink: 'directive-governance-situationship'
+image: /assets/images/directive-governance-situationship-cover.jpg
 lang: ''
 ---
 

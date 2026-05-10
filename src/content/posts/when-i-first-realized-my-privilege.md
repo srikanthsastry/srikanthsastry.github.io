@@ -5,6 +5,7 @@ tags:
   - reflection
   - privilege
 abbrlink: 'when-i-first-realized-my-privilege'
+image: /assets/images/handcuffed.jpg
 lang: ''
 ---
 <!-- ![Oppressed](/assets/images/handcuffed.jpg) -->

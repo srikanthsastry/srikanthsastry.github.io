@@ -4,6 +4,7 @@ published: '2020-02-11T10:42:53-05:00'
 tags:
   - 'People management'
 abbrlink: 'donts-of-processes-for-upward-communication'
+image: /assets/images/2020/01/img_0526-740x430.jpg
 lang: ''
 ---
 

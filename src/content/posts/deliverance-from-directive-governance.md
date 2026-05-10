@@ -8,6 +8,7 @@ tags:
   - 'organizational-theory'
   - subsidiarity
 abbrlink: 'deliverance-from-directive-governance'
+image: /assets/images/deliverance-from-directive-governance-cover.png
 lang: ''
 ---
 

@@ -4,6 +4,7 @@ published: '2007-06-24T16:47:21-04:00'
 tags:
   - travel
 abbrlink: 'tryst-with-kudremukh'
+image: /assets/images/stories/travels/kudremukh/IMG_1534.jpg
 lang: ''
 ---
 

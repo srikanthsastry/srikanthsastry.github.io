@@ -7,6 +7,7 @@ tags:
   - pointers
   - 'code quality'
 abbrlink: 'const-ref-vs-raw-ptr-a-fix-for-shared-ptr-reads'
+image: /assets/images/raw-pointer-smoking-gun-const-ref-vest.jpg
 lang: ''
 draft: true
 ---

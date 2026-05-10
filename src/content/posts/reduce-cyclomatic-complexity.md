@@ -6,6 +6,7 @@ tags:
   - refactoring
   - 'best-practices'
 abbrlink: 'reduce-cyclomatic-complexity'
+image: /assets/images/cpu-in-maze-pixel-art.png
 lang: ''
 ---
 

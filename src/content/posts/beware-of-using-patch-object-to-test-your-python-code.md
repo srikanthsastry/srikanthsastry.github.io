@@ -7,6 +7,7 @@ tags:
   - testing
   - 'software engineering'
 abbrlink: 'beware-of-using-patch-object-to-test-your-python-code'
+image: /assets/images/software-testing.jpg
 lang: ''
 ---
 <!-- ![Software Testing](/assets/images/software-testing.jpg) -->

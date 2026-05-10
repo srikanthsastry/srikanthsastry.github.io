@@ -5,6 +5,7 @@ tags:
   - 'software development process'
   - 'software engineering'
 abbrlink: 'when-should-you-build-for-survival'
+image: /assets/images/2019/08/Are-You-Succeeding-Blog-thegem-blog-default-1024x512.jpg
 lang: ''
 ---
 
