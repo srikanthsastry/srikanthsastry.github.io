@@ -29,7 +29,7 @@ export const themeConfig: ThemeConfig = {
   global: {
     locale: 'en',
     moreLocales: [],
-    fontStyle: 'serif',
+    fontStyle: 'sans',
     dateFormat: 'MMM D YYYY',
     toc: true,
     katex: false,
