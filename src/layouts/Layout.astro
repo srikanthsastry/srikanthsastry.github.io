@@ -32,7 +32,7 @@ const { postTitle, postDescription, postSlug, supportedLangs = [] } = Astro.prop
 const { isGardenNote } = getPageInfo(Astro.url.pathname)
 const fontStyle = themeConfig.global.fontStyle === 'serif' ? 'font-serif' : 'font-sans'
 const isContentPage = !!postTitle || isGardenNote
-const hideNavOnMobile = isContentPage
+const hideNavOnMobile = false
 const MarginBottom = isContentPage && themeConfig.comment.enabled
   ? 'mb-10' // Post page with comment
   : 'mb-12' // Other pages without comment
