@@ -196,23 +196,22 @@ pre.mermaid svg {
   --at-apply: 'hidden';
 }
 
-/* Chevron rotation: points up when expanded (default), down when collapsed (checked) */
+/* Chevron rotation: points down when collapsed (default), up when expanded (checked) */
 #toc-chevron {
-  transform: rotate(180deg);
   transition: transform 0.3s ease;
 }
 #toc-toggle:checked ~ div #toc-chevron {
-  transform: rotate(0deg);
+  transform: rotate(180deg);
 }
 
-/* Default state: expanded */
+/* Default state: collapsed */
 #toc-accordion-wrapper {
-  --at-apply: 'grid rows-[1fr]';
+  --at-apply: 'grid rows-[0fr]';
   transition: grid-template-rows 0.3s ease-in-out;
 }
-/* Collapsed when checked */
+/* Expanded when checked */
 #toc-toggle:checked ~ #toc-accordion-wrapper {
-  --at-apply: 'rows-[0fr]';
+  --at-apply: 'rows-[1fr]';
 }
 
 /* Floating TOC button */

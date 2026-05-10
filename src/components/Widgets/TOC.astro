@@ -97,14 +97,6 @@ const filteredHeadings = headings.filter(heading => heading.depth >= 2 && headin
 )}
 
 <script>
-// Auto-collapse TOC on mobile
-function initToc() {
-  const toggle = document.getElementById('toc-toggle') as HTMLInputElement | null
-  if (toggle && window.matchMedia('(max-width: 767px)').matches) {
-    toggle.checked = true
-  }
-}
-
 // Floating button: appears when TOC scrolls out of view
 let tocObserver: IntersectionObserver | null = null
 
@@ -136,6 +128,6 @@ function cleanupFloatBtn() {
   tocObserver = null
 }
 
-document.addEventListener('astro:page-load', () => { initToc(); setupFloatBtn() })
+document.addEventListener('astro:page-load', () => { setupFloatBtn() })
 document.addEventListener('astro:before-swap', cleanupFloatBtn)
 </script>
