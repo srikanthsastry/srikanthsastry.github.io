@@ -36,7 +36,18 @@ export const themeConfig: ThemeConfig = {
     reduceMotion: false,
   },
   comment: {
-    enabled: false,
+    enabled: true,
+    giscus: {
+      repo: 'srikanthsastry/srikanthsastry.github.io',
+      repoId: 'R_kgDOG4l6jA',
+      category: 'Announcements',
+      categoryId: 'DIC_kwDOG4l6jM4C73r_',
+      mapping: 'pathname',
+      strict: '0',
+      reactionsEnabled: '1',
+      emitMetadata: '0',
+      inputPosition: 'bottom',
+    },
   },
   seo: {
     twitterID: '',

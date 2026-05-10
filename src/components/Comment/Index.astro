@@ -1,9 +1,12 @@
 ---
+import Giscus from '@/components/Comment/Giscus.astro'
 import { themeConfig } from '@/config'
 
 const { enabled: enableComment } = themeConfig.comment
 
-// All comment providers disabled — skip imports entirely
+// Giscus
+const giscusRepo = themeConfig.comment.giscus?.repo ?? ''
+const showGiscus = enableComment && Boolean(giscusRepo.trim())
 ---
 
-{/* Comments disabled in config */}
+{showGiscus && <Giscus />}
