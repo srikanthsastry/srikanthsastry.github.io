@@ -1,8 +1,10 @@
 ---
 import PostList from '@/components/PostList.astro'
+import PostDate from '@/components/PostDate.astro'
 import TagList from '@/components/TagList.astro'
 import { allLocales } from '@/config'
 import { getLangFromLocale, getLangRouteParam } from '@/i18n/lang'
+import { getPostPath } from '@/i18n/path'
 import Layout from '@/layouts/Layout.astro'
 import { getAllTags, getPostsByTag, getTagSupportedLangs } from '@/utils/content'
 
@@ -26,6 +28,9 @@ const currentLang = getLangFromLocale(Astro.currentLocale)
 const posts = await getPostsByTag(tag, currentLang)
 const allTags = await getAllTags(currentLang)
 const supportedLangs = await getTagSupportedLangs(tag)
+
+const withImages = posts.filter(p => p.data.image)
+const withoutImages = posts.filter(p => !p.data.image)
 ---
 
 <Layout supportedLangs={supportedLangs}>
@@ -38,9 +43,43 @@ const supportedLangs = await getTagSupportedLangs(tag)
     lang={currentLang}
   />
 
-  <!-- Posts List -->
-  <PostList
-    posts={posts}
-    lang={currentLang}
-  />
+  <!-- Posts with cover images as cards -->
+  {withImages.length > 0 && (
+    <div class="grid grid-cols-1 gap-5 mb-6 sm:grid-cols-2">
+      {withImages.map((post) => {
+        const slug = post.data.abbrlink || post.id
+        return (
+          <a
+            href={getPostPath(slug, currentLang)}
+            class="group block overflow-hidden rounded-lg border border-secondary/10 hover:border-secondary/30 transition-all duration-200"
+          >
+            <div class="aspect-[16/9] overflow-hidden bg-secondary/5">
+              <img
+                src={post.data.image}
+                alt={post.data.title}
+                class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                loading="lazy"
+              />
+            </div>
+            <div class="p-4">
+              <h3 class="font-title font-medium text-4 leading-snug group-hover:c-primary transition-colors mb-1.5">
+                {post.data.title}
+              </h3>
+              <div class="text-3.25 font-time c-secondary/60">
+                <PostDate
+                  date={post.data.published}
+                  minutes={post.remarkPluginFrontmatter.minutes}
+                />
+              </div>
+            </div>
+          </a>
+        )
+      })}
+    </div>
+  )}
+
+  <!-- Posts without images as text list -->
+  {withoutImages.length > 0 && (
+    <PostList posts={withoutImages} lang={currentLang} />
+  )}
 </Layout>
