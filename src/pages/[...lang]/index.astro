@@ -8,7 +8,6 @@ import { allLocales } from '@/config'
 import { getLangFromLocale, getLangRouteParam } from '@/i18n/lang'
 import { getPostPath } from '@/i18n/path'
 import Layout from '@/layouts/Layout.astro'
-import { getPostDescription } from '@/utils/description'
 import { getPinnedPosts, getPosts } from '@/utils/content'
 
 export async function getStaticPaths() {
@@ -100,7 +99,6 @@ const totalNotes = gardenNotes.length
     <!-- Hero: Latest Post -->
     {heroPost && (() => {
       const heroSlug = heroPost.data.abbrlink || heroPost.id
-      const heroExcerpt = getPostDescription(heroPost, 'list')
       return (
         <a
           href={getPostPath(heroSlug, currentLang)}
@@ -120,8 +118,8 @@ const totalNotes = gardenNotes.length
             <h3 class="font-title font-semibold text-5 leading-snug group-hover:c-primary transition-colors mb-2">
               {heroPost.data.title}
             </h3>
-            {heroExcerpt && (
-              <p class="c-secondary/70 text-3.5 leading-relaxed mb-3 line-clamp-2">{heroExcerpt}</p>
+            {heroPost.data.description && (
+              <p class="c-secondary/70 text-3.5 leading-relaxed mb-3 line-clamp-2">{heroPost.data.description}</p>
             )}
             <div class="text-3.25 font-time c-secondary/50">
               <PostDate
