@@ -42,6 +42,16 @@ export function isGardenPage(path: string) {
   return matchPageType(path, 'garden')
 }
 
+export function isGardenNotePage(path: string) {
+  // Matches /garden/some-slug/ but not /garden/ itself
+  const pathWithoutBase = base && path.startsWith(base)
+    ? path.slice(base.length)
+    : path
+  const normalizedPath = pathWithoutBase.replace(/^\/|\/$/g, '')
+  const segments = normalizedPath.split('/')
+  return segments[0] === 'garden' && segments.length > 1 && segments[1] !== ''
+}
+
 export function isAboutPage(path: string) {
   return matchPageType(path, 'about')
 }
@@ -53,6 +63,7 @@ export function getPageInfo(path: string) {
   const isPost = isPostPage(path)
   const isTag = isTagPage(path)
   const isGarden = isGardenPage(path)
+  const isGardenNote = isGardenNotePage(path)
   const isAbout = isAboutPage(path)
 
   return {
@@ -61,6 +72,7 @@ export function getPageInfo(path: string) {
     isPost,
     isTag,
     isGarden,
+    isGardenNote,
     isAbout,
     getLocalizedPath: (targetPath: string) =>
       getLocalizedPath(targetPath, currentLang),

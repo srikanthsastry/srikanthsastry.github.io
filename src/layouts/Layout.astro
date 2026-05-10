@@ -29,8 +29,9 @@ interface Props {
 
 const { postTitle, postDescription, postSlug, supportedLangs = [] } = Astro.props
 const { isPost, isGarden } = getPageInfo(Astro.url.pathname)
+const { isGardenNote } = getPageInfo(Astro.url.pathname)
 const fontStyle = themeConfig.global.fontStyle === 'serif' ? 'font-serif' : 'font-sans'
-const isContentPage = isPost || isGarden
+const isContentPage = isPost || isGardenNote
 const MarginBottom = isContentPage && themeConfig.comment.enabled
   ? 'mb-10' // Post page with comment
   : 'mb-12' // Other pages without comment
