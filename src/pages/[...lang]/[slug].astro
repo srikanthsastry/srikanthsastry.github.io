@@ -139,7 +139,7 @@ const postUrl = new URL(getPostPath(slug, currentLang), themeConfig.site.url).to
         {post.data.tags.map((tag: string) => (
           <a
             href={getTagPath(tag, currentLang)}
-            class="text-3 px-2.5 py-0.75 rounded-full border border-secondary/20 c-secondary/70 no-underline hover:(border-secondary/50 c-primary) transition-colors"
+            class="no-heti text-3 px-2.5 py-0.75 rounded-full border border-secondary/20 c-secondary/70 no-underline hover:(border-secondary/50 c-primary) transition-colors"
           >
             {tag}
           </a>
