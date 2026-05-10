@@ -264,14 +264,14 @@ pre.mermaid svg {
   pointer-events: none;
   transform: translateY(0.75rem);
   transition: opacity 0.25s ease, transform 0.25s ease;
-  background: oklch(var(--un-preset-theme-colors-secondary) / 0.08);
-  color: oklch(var(--un-preset-theme-colors-secondary) / 0.7);
-  border: 1px solid oklch(var(--un-preset-theme-colors-secondary) / 0.15);
+  background: oklch(var(--un-preset-theme-colors-accent) / 0.08);
+  color: oklch(var(--un-preset-theme-colors-accent) / 0.85);
+  border: 1px solid oklch(var(--un-preset-theme-colors-accent) / 0.2);
   backdrop-filter: blur(12px);
 }
 #toc-float-btn:hover {
-  background: oklch(var(--un-preset-theme-colors-secondary) / 0.15);
-  color: oklch(var(--un-preset-theme-colors-secondary) / 1);
+  background: oklch(var(--un-preset-theme-colors-accent) / 0.15);
+  color: oklch(var(--un-preset-theme-colors-accent) / 1);
 }
 #toc-float-btn.toc-float-visible {
   opacity: 1;

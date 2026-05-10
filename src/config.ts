@@ -14,15 +14,17 @@ export const themeConfig: ThemeConfig = {
   color: {
     mode: 'light',
     light: {
-      primary: 'oklch(25% 0.01 60)',
+      primary: 'oklch(25% 0.02 60)',
       secondary: 'oklch(40% 0.008 60)',
       background: 'oklch(97% 0.005 85)',
+      accent: 'oklch(45% 0.1 220)',
       highlight: 'oklch(0.93 0.195089 103.2532 / 0.5)',
     },
     dark: {
-      primary: 'oklch(93% 0.01 85)',
+      primary: 'oklch(93% 0.02 85)',
       secondary: 'oklch(75% 0.008 85)',
       background: 'oklch(20% 0.005 270)',
+      accent: 'oklch(65% 0.1 220)',
       highlight: 'oklch(0.93 0.195089 103.2532 / 0.2)',
     },
   },
