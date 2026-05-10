@@ -1,4 +1,20 @@
-/* STIXTwoText Variable Font */
+/* Source Serif 4 Variable Font — display/titles */
+@font-face {
+  font-family: "SourceSerif4";
+  src: url("/fonts/SourceSerif4-VF.woff2") format("woff2-variations");
+  font-display: swap;
+  font-weight: 200 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: "SourceSerif4";
+  src: url("/fonts/SourceSerif4-Italic-VF.woff2") format("woff2-variations");
+  font-display: swap;
+  font-weight: 200 900;
+  font-style: italic;
+}
+
+/* STIXTwoText Variable Font — body text */
 @font-face {
   font-family: "STIX";
   src: url("/fonts/STIX-VF.woff2") format("woff2-variations");
