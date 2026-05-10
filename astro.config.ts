@@ -26,6 +26,9 @@ export default defineConfig({
   site,
   base,
   trailingSlash: 'always', // Not recommended to change
+  redirects: {
+    '/archives/': '/',
+  },
   prefetch: {
     prefetchAll: true,
     defaultStrategy: 'viewport', // hover, tap, viewport, load
