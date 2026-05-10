@@ -27,7 +27,7 @@ export default defineConfig({
   base,
   trailingSlash: 'always', // Not recommended to change
   redirects: {
-    '/archives/': '/',
+    '/archives/': '/posts/',
   },
   prefetch: {
     prefetchAll: true,
