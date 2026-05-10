@@ -1,0 +1,28 @@
+---
+import PostList from '@/components/PostList.astro'
+import { allLocales } from '@/config'
+import { getLangFromLocale, getLangRouteParam } from '@/i18n/lang'
+import Layout from '@/layouts/Layout.astro'
+import { getPostsByYear } from '@/utils/content'
+
+export async function getStaticPaths() {
+  return allLocales.map(lang => ({
+    params: { lang: getLangRouteParam(lang) },
+  }))
+}
+
+const currentLang = getLangFromLocale(Astro.currentLocale)
+const postsByYear = await getPostsByYear(currentLang)
+---
+
+<Layout>
+  <h1 class="font-title text-10 font-semibold tracking-tight lg:text-11 mb-8">All Posts</h1>
+
+  {Array.from(postsByYear.entries(), ([year, posts]) => (
+    <section class="mb-7.5">
+      <h2 class="font-title text-4.5 font-medium c-secondary/70 mb-3">{year}</h2>
+      <div class="uno-decorative-line" />
+      <PostList posts={posts} lang={currentLang} />
+    </section>
+  ))}
+</Layout>

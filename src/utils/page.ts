@@ -34,6 +34,15 @@ export function isPostPage(path: string) {
   return matchPageType(path, 'posts')
 }
 
+export function isPostsIndexPage(path: string) {
+  // Matches exactly /posts/ but not /posts/some-slug/
+  const pathWithoutBase = base && path.startsWith(base)
+    ? path.slice(base.length)
+    : path
+  const normalizedPath = pathWithoutBase.replace(/^\/|\/$/g, '')
+  return normalizedPath === 'posts'
+}
+
 export function isTagPage(path: string) {
   return matchPageType(path, 'tags')
 }

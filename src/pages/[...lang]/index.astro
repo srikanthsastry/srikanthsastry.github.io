@@ -1,9 +1,11 @@
 ---
+import type { CollectionEntry } from 'astro:content'
+import { getCollection } from 'astro:content'
 import PostList from '@/components/PostList.astro'
 import { allLocales } from '@/config'
 import { getLangFromLocale, getLangRouteParam } from '@/i18n/lang'
 import Layout from '@/layouts/Layout.astro'
-import { getPinnedPosts, getPostsByYear } from '@/utils/content'
+import { getPinnedPosts, getPosts } from '@/utils/content'
 
 export async function getStaticPaths() {
   return allLocales.map(lang => ({
@@ -13,23 +15,95 @@ export async function getStaticPaths() {
 
 const currentLang = getLangFromLocale(Astro.currentLocale)
 const pinnedPosts = await getPinnedPosts(currentLang)
-const postsByYear = await getPostsByYear(currentLang)
+const allPosts = await getPosts(currentLang)
+const recentPosts = allPosts.filter(p => !p.data.pin).slice(0, 8)
+
+// Get garden notes, sorted by title, grouped by maturity
+const gardenNotes: CollectionEntry<'garden'>[] = await getCollection('garden')
+const evergreenNotes = gardenNotes
+  .filter(n => n.data.maturity === 'evergreen')
+  .sort((a, b) => a.data.title.localeCompare(b.data.title))
+  .slice(0, 6)
+const buddingNotes = gardenNotes
+  .filter(n => n.data.maturity === 'budding')
+  .sort((a, b) => a.data.title.localeCompare(b.data.title))
+  .slice(0, 4)
+const featuredNotes = [...evergreenNotes, ...buddingNotes]
+
+const totalPosts = allPosts.length
+const totalNotes = gardenNotes.length
 ---
 
 <Layout>
+  <!-- Intro Section -->
+  <section class="mb-12">
+    <div class="flex flex-col items-start gap-6 lg:(flex-row gap-8)">
+      <img
+        src="/assets/images/2021/07/img_2471-copy-450x450.jpg"
+        alt="Srikanth Sastry"
+        class="w-28 h-28 rounded-full object-cover ring-2 ring-secondary/10 lg:(w-36 h-36)"
+      />
+      <div class="heti">
+        <p class="mb-3 leading-1.8">
+          I'm Srikanth Sastry, an engineering lead at <a href="https://meta.com">Meta</a> working on privacy infrastructure. Before Meta, I was at Google in Cambridge, MA, and before that a postdoctoral associate with Nancy Lynch at <a href="https://csail.mit.edu">CSAIL, MIT</a>.
+        </p>
+        <p class="leading-1.8 c-secondary">
+          I write about software engineering, governance, and the structural forces that shape how we build things. I also keep a <a href="/garden/">digital garden</a> of interconnected notes and evolving ideas.
+        </p>
+      </div>
+    </div>
+  </section>
+
   <!-- Pinned Posts -->
   {pinnedPosts.length > 0 && (
-    <section class="mb-7.5">
+    <section class="mb-10">
       <div class="uno-decorative-line" />
       <PostList posts={pinnedPosts} lang={currentLang} pinned={true} />
     </section>
   )}
 
-  <!-- Regular Posts -->
-  {Array.from(postsByYear.entries(), ([_year, posts]) => (
-    <section class="mb-7.5">
-      <div class="uno-decorative-line" />
-      <PostList posts={posts} lang={currentLang} />
-    </section>
-  ))}
+  <!-- Recent Writing -->
+  <section class="mb-10">
+    <div class="flex items-baseline justify-between mb-5">
+      <h2 class="font-title text-5 font-semibold tracking-tight">Recent Writing</h2>
+      <a href="/posts/" class="font-title text-3.5 c-secondary hover:c-primary transition-colors">
+        All {totalPosts} posts →
+      </a>
+    </div>
+    <div class="uno-decorative-line" />
+    <PostList posts={recentPosts} lang={currentLang} />
+  </section>
+
+  <!-- Garden Preview -->
+  <section class="mb-10">
+    <div class="flex items-baseline justify-between mb-5">
+      <h2 class="font-title text-5 font-semibold tracking-tight">From the Garden</h2>
+      <a href="/garden/" class="font-title text-3.5 c-secondary hover:c-primary transition-colors">
+        All {totalNotes} notes →
+      </a>
+    </div>
+    <div class="uno-decorative-line" />
+    <ul>
+      {featuredNotes.map(note => (
+        <li class="mb-4 lg:mb-5">
+          <h3 class="inline font-title transition-colors hover:c-primary">
+            <a
+              href={`/garden/${note.id}/`}
+              class="lg:font-medium lg:text-4.5"
+            >
+              {note.data.title}
+            </a>
+          </h3>
+          <span class="ml-1.5 text-3 c-secondary/60">
+            {note.data.maturity === 'evergreen' ? '🌳' : '🌿'}
+          </span>
+          {note.data.excerpt_text && (
+            <div class="heti hidden lg:(mt-1.5 block)">
+              <p class="c-secondary text-3.5 leading-1.7">{note.data.excerpt_text}</p>
+            </div>
+          )}
+        </li>
+      ))}
+    </ul>
+  </section>
 </Layout>

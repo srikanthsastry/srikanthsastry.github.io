@@ -28,10 +28,10 @@ interface Props {
 }
 
 const { postTitle, postDescription, postSlug, supportedLangs = [] } = Astro.props
-const { isPost, isGarden } = getPageInfo(Astro.url.pathname)
 const { isGardenNote } = getPageInfo(Astro.url.pathname)
 const fontStyle = themeConfig.global.fontStyle === 'serif' ? 'font-serif' : 'font-sans'
-const isContentPage = isPost || isGardenNote
+const isContentPage = !!postTitle || isGardenNote
+const hideNavOnMobile = isContentPage
 const MarginBottom = isContentPage && themeConfig.comment.enabled
   ? 'mb-10' // Post page with comment
   : 'mb-12' // Other pages without comment
@@ -52,7 +52,7 @@ const MarginBottom = isContentPage && themeConfig.comment.enabled
       lg="mx-[max(5.75rem,calc(50vw-34.25rem))] my-20 max-w-[min(calc(75vw-16rem),44rem)] min-h-full p-0"
     >
       <Header />
-      <Navbar />
+      <Navbar hideOnMobile={hideNavOnMobile} />
       <main class={MarginBottom}>
         <slot />
       </main>
