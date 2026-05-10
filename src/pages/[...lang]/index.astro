@@ -51,11 +51,11 @@ const totalNotes = gardenNotes.length
         class="w-28 h-28 rounded-full object-cover ring-2 ring-secondary/10 lg:(w-36 h-36)"
       />
       <div>
-        <p class="mb-5 text-4 leading-relaxed">
-          I'm Srikanth Sastry, an engineering lead at <a href="https://meta.com" class="font-semibold underline decoration-secondary/80 underline-offset-2 hover:c-primary">Meta</a> working on privacy infrastructure. Before Meta, I was at Google in Cambridge, MA, and before that a postdoctoral associate with Nancy Lynch at <a href="https://csail.mit.edu" class="font-semibold underline decoration-secondary/80 underline-offset-2 hover:c-primary">CSAIL, MIT</a>.
+        <p class="mb-5 text-4 leading-relaxed c-secondary/90">
+          I'm Srikanth Sastry, an engineering lead at <a href="https://meta.com" class="font-semibold underline decoration-secondary/50 underline-offset-3 hover:c-primary transition-colors">Meta</a> working on privacy infrastructure. Before Meta, I was at Google in Cambridge, MA, and before that a postdoctoral associate with Nancy Lynch at <a href="https://csail.mit.edu" class="font-semibold underline decoration-secondary/50 underline-offset-3 hover:c-primary transition-colors">CSAIL, MIT</a>.
         </p>
-        <p class="text-4 leading-relaxed c-secondary">
-          I write about software engineering, governance, and the structural forces that shape how we build things. I also keep a <a href="/garden/" class="font-semibold underline decoration-secondary/80 underline-offset-2 hover:c-primary">digital garden</a> of interconnected notes and evolving ideas.
+        <p class="text-4 leading-relaxed c-secondary/75">
+          I write about software engineering, governance, and the structural forces that shape how we build things. I also keep a <a href="/garden/" class="font-semibold underline decoration-secondary/50 underline-offset-3 hover:c-primary transition-colors">digital garden</a> of interconnected notes and evolving ideas.
         </p>
 
         <!-- Social Icons -->
@@ -103,7 +103,7 @@ const totalNotes = gardenNotes.length
           return (
             <a
               href={getPostPath(slug, currentLang)}
-              class="group block overflow-hidden rounded-lg border border-secondary/10 hover:border-secondary/25 transition-colors"
+              class="group block overflow-hidden rounded-lg border border-secondary/10 hover:border-secondary/30 transition-all duration-200"
             >
               <div class="aspect-[16/9] overflow-hidden bg-secondary/5">
                 <img
@@ -161,7 +161,7 @@ const totalNotes = gardenNotes.length
           </span>
           {note.data.excerpt_text && (
             <div class="heti hidden lg:(mt-1.5 block)">
-              <p class="c-secondary text-3.5 leading-1.7">{note.data.excerpt_text}</p>
+              <p class="c-secondary/75 text-3.5 leading-relaxed">{note.data.excerpt_text}</p>
             </div>
           )}
         </li>

@@ -26,7 +26,7 @@ for (const m of maturityOrder) {
 
 <Layout>
   <h1 class="font-title text-10 font-semibold tracking-tight lg:text-11 mb-4">Garden</h1>
-  <p class="mb-12 c-secondary text-3.75 leading-2">
+  <p class="mb-12 c-secondary text-3.75 leading-relaxed">
     A digital garden of interconnected notes — ideas at various stages of development.
     Evergreen notes are well-developed; budding notes are still growing.
   </p>
@@ -42,13 +42,13 @@ for (const m of maturityOrder) {
         {notes.map(note => (
           <a
             href={`/garden/${note.id}/`}
-            class="group block rounded-lg border border-secondary/10 p-4 hover:border-secondary/25 transition-colors"
+            class="group block rounded-lg border border-secondary/10 p-4 hover:border-secondary/30 transition-all duration-200"
           >
             <h3 class="font-title font-medium text-4 leading-snug group-hover:c-primary transition-colors mb-1.5">
               {note.data.title}
             </h3>
             {note.data.excerpt_text && (
-              <p class="c-secondary text-3.25 leading-1.6 mb-2 line-clamp-2">{note.data.excerpt_text}</p>
+              <p class="c-secondary text-3.25 leading-relaxed mb-2 line-clamp-2">{note.data.excerpt_text}</p>
             )}
             {note.data.tags && note.data.tags.length > 0 && (
               <div class="flex flex-wrap gap-1.5">

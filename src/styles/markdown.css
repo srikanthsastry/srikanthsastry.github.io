@@ -6,29 +6,32 @@
 
 /* Global Styles */
 .heti {
-  --at-apply: 'break-words leading-normal hyphens-auto cjk:tracking-wide';
+  --at-apply: 'break-words leading-relaxed hyphens-auto cjk:tracking-wide';
+  font-size: 1.0625rem; /* 17px — comfortable for long-form reading */
 }
 
 /* Customized Post Title */
 .heti .post-title {
-  --at-apply: 'mb-2 mt-0 text-10 font-semibold lg:text-11 tracking-tight font-title';
+  --at-apply: 'mb-3 mt-0 text-10 font-bold lg:text-11 tracking-tight font-title';
+  letter-spacing: -0.025em;
 }
 
 /* Headings */
 .heti :where(h1, h2, h3, h4, h5, h6) {
-  --at-apply: 'mb-4 mt-1.5em scroll-mt-20 font-semibold';
+  --at-apply: 'mb-4 mt-2em scroll-mt-20 font-semibold';
+  letter-spacing: -0.02em;
 }
 .heti :where(h1) {
-  --at-apply: 'text-7 c-primary';
+  --at-apply: 'text-7.5 c-primary';
 }
 .heti :where(h2) {
-  --at-apply: 'text-6 c-primary';
+  --at-apply: 'text-6.5 c-primary';
 }
 .heti :where(h3) {
-  --at-apply: 'text-5';
+  --at-apply: 'text-5.5';
 }
 .heti :where(h4) {
-  --at-apply: 'text-4.5';
+  --at-apply: 'text-4.75';
 }
 .heti :where(h5) {
   --at-apply: 'text-4';
@@ -45,13 +48,14 @@
 
 /* Paragraphs */
 .heti :where(p:not(.no-heti):not(.no-heti *)) {
-  --at-apply: 'mb-4 text-pretty cjk:text-justify';
+  --at-apply: 'mb-4.5 text-pretty cjk:text-justify';
+  letter-spacing: -0.006em; /* Inter looks better with very slight negative tracking */
 }
 
 /* Links */
 .heti :where(a:not(.no-heti):not(.no-heti *)) {
-  --at-apply: 'font-semibold tracking-normal underline underline-0.075em decoration-secondary/80 underline-offset-0.1em cjk:break-all';
-  --at-apply: 'transition-colors ease-out hover:(c-primary decoration-primary/80) lg:underline-0.1em';
+  --at-apply: 'font-semibold tracking-normal underline underline-0.075em decoration-secondary/50 underline-offset-0.15em cjk:break-all';
+  --at-apply: 'transition-colors ease-out hover:(c-primary decoration-primary/70) lg:underline-0.1em';
 }
 
 /* Images */
@@ -85,7 +89,8 @@
 
 /* Code Blocks */
 .heti :where(pre) {
-  --at-apply: 'overflow-auto uno-round-border px-4 py-3 bg-secondary/5!';
+  --at-apply: 'overflow-auto uno-round-border px-5 py-4 bg-secondary/5!';
+  font-size: 0.9em;
   scrollbar-width: thin;
   scrollbar-color: oklch(var(--un-preset-theme-colors-secondary) / 0) transparent;
   transition: scrollbar-color 0.3s ease-out;
@@ -126,7 +131,7 @@ html.dark .heti pre span {
 
 /* Blockquotes */
 .heti :where(blockquote) {
-  --at-apply: 'my-6 border-l-4 border-secondary/25 border-solid px-4 py-0.5 c-secondary/80';
+  --at-apply: 'my-6 border-l-3 border-secondary/30 border-solid px-5 py-1 c-secondary/85';
 }
 .heti blockquote[class*="admonition-"] {
   --at-apply: 'py-1.5 c-secondary';

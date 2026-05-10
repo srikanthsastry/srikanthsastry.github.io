@@ -40,9 +40,10 @@ export default defineConfig({
       caution: 'oklch(50.5% 0.213 27.518 / 0.8)', // red-700
     },
     fontFamily: {
-      title: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-      navbar: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-      time: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+      sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'sans-serif'],
+      title: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'sans-serif'],
+      navbar: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'sans-serif'],
+      time: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'sans-serif'],
       serif: ['STIX', 'ui-serif', 'Georgia', 'Cambria', 'Times New Roman', 'Times', 'serif'],
     },
   },
