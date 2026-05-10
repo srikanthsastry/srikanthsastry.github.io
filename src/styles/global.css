@@ -101,7 +101,7 @@ html.dark .code-copy-button.copied {
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
   }
 }
 
