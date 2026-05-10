@@ -10,7 +10,7 @@ tags:
 abbrlink: 'change-jekyll-theme'
 image: /assets/images/jekyll-new-suit-makeover.png
 lang: ''
-draft: true
+draft: false
 categories:
   - Personal
 
