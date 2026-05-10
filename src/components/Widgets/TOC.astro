@@ -1,6 +1,5 @@
 ---
 import type { MarkdownHeading } from 'astro'
-import TocIcon from '@/assets/icons/toc-icon.svg'
 import { ui } from '@/i18n/ui'
 import { getPageInfo } from '@/utils/page'
 
@@ -16,10 +15,10 @@ const filteredHeadings = headings.filter(heading => heading.depth >= 2 && headin
 ---
 
 {filteredHeadings.length > 0 && (
-  // TOC Container
+  // Inline TOC
   <div
     id="toc-container"
-    class="mb-6 uno-round-border bg-secondary/5 xl:(fixed left-6 top-44.5 max-w-[min(calc(50vw-24.5rem),15rem)] border-none bg-secondary/0)"
+    class="mb-8 uno-round-border bg-secondary/5"
   >
     {/* Hidden Checkbox */}
     <input
@@ -27,34 +26,36 @@ const filteredHeadings = headings.filter(heading => heading.depth >= 2 && headin
       id="toc-toggle"
       hidden
     />
-    {/* TOC Toggle */}
+    {/* TOC Header */}
     <div class="relative h-12 w-full">
       <label
         for="toc-toggle"
-        class="absolute inset-0 flex cursor-pointer items-center xl:(static flex c-secondary/60 transition-colors ease-out hover:c-primary)"
+        class="absolute inset-0 flex cursor-pointer items-center"
       >
-        {/* Title on Mobile */}
-        <span id="toc-mobile-text">
+        <span id="toc-heading" class="ml-4 font-semibold text-sm c-secondary/70">
           {currentUI.toc}
         </span>
-
-        {/* Icon on Desktop */}
-        <TocIcon
-          id="toc-desktop-icon"
-          aria-hidden="true"
-          class="ml-4 hidden aspect-square w-4.2 xl:(mt-4 block origin-center active:scale-90!)"
-          fill="currentColor"
-        />
+        <svg
+          id="toc-chevron"
+          class="ml-auto mr-4 h-4 w-4 c-secondary/40"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <polyline points="6 9 12 15 18 9" />
+        </svg>
       </label>
     </div>
 
-    {/* Expandable Content Wrapper with Accordion Animation */}
+    {/* Expandable Content */}
     <div id="toc-accordion-wrapper">
       <nav
         id="toc-accordion-content"
         aria-label="Table of Contents"
       >
-        {/* TOC List */}
         <ul id="toc-links-list">
           {filteredHeadings.map(heading => (
             <li
@@ -82,56 +83,59 @@ const filteredHeadings = headings.filter(heading => heading.depth >= 2 && headin
   </div>
 )}
 
+{/* Floating back-to-TOC button */}
+{filteredHeadings.length > 0 && (
+  <button
+    id="toc-float-btn"
+    aria-label="Back to table of contents"
+  >
+    <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15" />
+    </svg>
+    <span>Contents</span>
+  </button>
+)}
+
 <script>
-const isXl = window.matchMedia('(min-width: 1280px)')
-
-let ticking = false
-let lastLink: Element | null = null
-
-// Find and scroll to the active link
-function scrollToActiveLink() {
-  const tocList = document.getElementById('toc-links-list')
-  if (!tocList) {
-    ticking = false
-    return
-  }
-
-  const activeLink = tocList.querySelector('a:target-current')
-  if (activeLink && activeLink !== lastLink) {
-    activeLink.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
-    lastLink = activeLink
-  }
-
-  ticking = false
-}
-
-// Throttle scroll events
-function handleScroll() {
-  if (!ticking && isXl.matches) {
-    window.requestAnimationFrame(scrollToActiveLink)
-    ticking = true
+// Auto-collapse TOC on mobile
+function initToc() {
+  const toggle = document.getElementById('toc-toggle') as HTMLInputElement | null
+  if (toggle && window.matchMedia('(max-width: 767px)').matches) {
+    toggle.checked = true
   }
 }
 
-// Initialize scroll listener
-function setupAutoScroll() {
-  ticking = false
-  lastLink = null
+// Floating button: appears when TOC scrolls out of view
+let tocObserver: IntersectionObserver | null = null
 
-  const tocList = document.getElementById('toc-links-list')
-  if (!tocList || !CSS.supports('selector(:target-current)')) {
-    return
-  }
+function setupFloatBtn() {
+  const tocContainer = document.getElementById('toc-container')
+  const floatBtn = document.getElementById('toc-float-btn')
+  if (!tocContainer || !floatBtn) return
 
-  document.addEventListener('scroll', handleScroll, { passive: true })
+  tocObserver = new IntersectionObserver(
+    ([entry]) => {
+      if (!entry.isIntersecting && entry.boundingClientRect.top < 0) {
+        floatBtn.classList.add('toc-float-visible')
+      } else {
+        floatBtn.classList.remove('toc-float-visible')
+      }
+    },
+    { threshold: 0 }
+  )
+
+  tocObserver.observe(tocContainer)
+
+  floatBtn.addEventListener('click', () => {
+    tocContainer.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  })
 }
 
-// Cleanup listener and reset state
-function cleanupAutoScroll() {
-  document.removeEventListener('scroll', handleScroll)
-  lastLink = null
+function cleanupFloatBtn() {
+  tocObserver?.disconnect()
+  tocObserver = null
 }
 
-document.addEventListener('astro:page-load', setupAutoScroll)
-document.addEventListener('astro:before-swap', cleanupAutoScroll)
+document.addEventListener('astro:page-load', () => { initToc(); setupFloatBtn() })
+document.addEventListener('astro:before-swap', cleanupFloatBtn)
 </script>
