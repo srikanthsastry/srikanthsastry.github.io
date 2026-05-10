@@ -52,12 +52,26 @@ const totalNotes = gardenNotes.length
         <p class="mb-4">
           I am Srikanth Sastry. I am currently an engineering lead at <a href="https://meta.com" class="font-semibold underline decoration-secondary/50 underline-offset-3 hover:c-primary transition-colors">Meta</a> working on privacy infrastructure. Before Meta, I was a software engineer at Google in Cambridge, MA, and before that a postdoctoral associate with Nancy Lynch at <a href="https://csail.mit.edu" class="font-semibold underline decoration-secondary/50 underline-offset-3 hover:c-primary transition-colors">CSAIL, MIT</a>. Prior to that, I received my PhD from <a href="https://www.tamu.edu" class="font-semibold underline decoration-secondary/50 underline-offset-3 hover:c-primary transition-colors">Texas A&amp;M University</a>.
         </p>
-        <p class="mb-4">
-          My professional interests include distributed system design, software engineering processes, and building engineering teams. I also maintain a <a href="/garden/" class="font-semibold underline decoration-secondary/50 underline-offset-3 hover:c-primary transition-colors">digital garden</a> — a collection of evolving ideas and notes that complement my blog posts.
-        </p>
-        <p class="mb-4 c-secondary/75">
-          In a previous life, during my years in academia, I worked on distributed systems, networking, fault tolerance, and algorithm design and analysis. My list of <a href="/publications" class="font-semibold underline decoration-secondary/50 underline-offset-3 hover:c-primary transition-colors">publications</a> are available on <a href="https://dblp.org/pid/39/1050.html" class="font-semibold underline decoration-secondary/50 underline-offset-3 hover:c-primary transition-colors" target="_blank" rel="noopener noreferrer">DBLP</a>.
-        </p>
+
+        {/* Mobile expand toggle */}
+        <input type="checkbox" id="intro-expand" hidden />
+        <label for="intro-expand" class="flex items-center gap-1 cursor-pointer c-secondary/50 text-3.5 mb-3 md:hidden" id="intro-expand-label">
+          <span id="intro-expand-text">More</span>
+          <svg id="intro-chevron" class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </label>
+
+        <div id="intro-more">
+          <div>
+            <p class="mb-4">
+              My professional interests include distributed system design, software engineering processes, and building engineering teams. I also maintain a <a href="/garden/" class="font-semibold underline decoration-secondary/50 underline-offset-3 hover:c-primary transition-colors">digital garden</a> — a collection of evolving ideas and notes that complement my blog posts.
+            </p>
+            <p class="mb-4 c-secondary/75">
+              In a previous life, during my years in academia, I worked on distributed systems, networking, fault tolerance, and algorithm design and analysis. My list of <a href="/publications" class="font-semibold underline decoration-secondary/50 underline-offset-3 hover:c-primary transition-colors">publications</a> are available on <a href="https://dblp.org/pid/39/1050.html" class="font-semibold underline decoration-secondary/50 underline-offset-3 hover:c-primary transition-colors" target="_blank" rel="noopener noreferrer">DBLP</a>.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
 

@@ -1,3 +1,35 @@
+/* Intro Expand (mobile only) */
+@media (max-width: 767px) {
+  #intro-more {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s ease-in-out;
+  }
+  #intro-more > div {
+    overflow: hidden;
+  }
+  #intro-expand:checked ~ #intro-more {
+    grid-template-rows: 1fr;
+  }
+  #intro-chevron {
+    transition: transform 0.3s ease;
+  }
+  #intro-expand:checked ~ #intro-expand-label #intro-chevron {
+    transform: rotate(180deg);
+  }
+  #intro-expand:checked ~ #intro-expand-label #intro-expand-text {
+    display: none;
+  }
+  #intro-expand:checked ~ #intro-expand-label::before {
+    content: 'Less';
+  }
+}
+@media (min-width: 768px) {
+  #intro-expand-label {
+    display: none;
+  }
+}
+
 /* GitHub Card */
 .gc-container {
   --at-apply: 'my-6 block overflow-x-auto uno-round-border bg-secondary/5 px-5 py-4 transition-colors ease-out hover:(bg-secondary/10 c-primary) lg:(px-6 py-5)';
