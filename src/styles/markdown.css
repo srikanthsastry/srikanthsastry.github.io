@@ -56,7 +56,16 @@
 
 /* Images */
 .heti :where(img:not(.no-heti):not(.no-heti *)) {
-  --at-apply: 'mx-auto cursor-zoom-in max-w-full w-full h-auto';
+  --at-apply: 'mx-auto cursor-zoom-in';
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+}
+/* Ensure markdown images fill content width even with higher-specificity resets */
+#post-content img {
+  max-width: 100%;
+  width: 100%;
+  height: auto;
 }
 .heti :where(img:not(figure img):not(.no-heti):not(.no-heti *)) {
   --at-apply: 'my-6';
