@@ -6,6 +6,10 @@ tags:
   - 'software testing'
 abbrlink: 'merits-of-unit-tests-part-5'
 lang: ''
+series: 'unit-testing'
+series_order: 5
+series_label: 'Unit Testing'
+series_section: 'Merits'
 ---
 
 Cross posted on [LinkedIn](https://www.linkedin.com/pulse/merits-unit-tests-part-5-srikanth-sastry/).

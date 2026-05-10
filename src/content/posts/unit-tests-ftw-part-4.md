@@ -6,6 +6,10 @@ tags:
   - 'software testing'
 abbrlink: 'unit-tests-ftw-part-4'
 lang: ''
+series: 'unit-testing'
+series_order: 4
+series_label: 'Unit Testing'
+series_section: 'Merits'
 ---
 
 Cross posted on [LinkedIn](https://www.linkedin.com/pulse/unit-tests-ftw-part-4-srikanth-sastry/)

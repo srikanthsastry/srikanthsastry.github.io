@@ -9,6 +9,10 @@ tags:
 abbrlink: 'do-not-index-in-test-coverage'
 image: /assets/images/chart-coverage.png
 lang: ''
+series: 'unit-testing'
+series_order: 17
+series_label: 'Unit Testing'
+series_section: 'Practices'
 ---
 
 <!-- ![Coverage Chart](/assets/images/chart-coverage.png) -->

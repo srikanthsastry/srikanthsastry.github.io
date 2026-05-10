@@ -9,6 +9,10 @@ tags:
 abbrlink: 'unit-test-the-brains-and-not-the-nerves'
 image: /assets/images/brain-magnifying-glass.png
 lang: ''
+series: 'unit-testing'
+series_order: 10
+series_label: 'Unit Testing'
+series_section: 'Practices'
 ---
 _Note: This is inspired from the book "[Unit Testing: Principles, Practices, and Patterns](https://www.manning.com/books/unit-testing)" by Vladimir Khorikov._
 

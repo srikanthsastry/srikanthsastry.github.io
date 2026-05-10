@@ -8,6 +8,10 @@ tags:
 abbrlink: 'the-big-why-about-unit-tests'
 image: /assets/images/question_mark_person_leaning.png
 lang: ''
+series: 'unit-testing'
+series_order: 6
+series_label: 'Unit Testing'
+series_section: 'Practices'
 ---
 <!-- ![Why unit test?](/assets/images/question_mark_person_leaning.png) -->
 When you ask "why do we write need unit tests?", you will get several answers including

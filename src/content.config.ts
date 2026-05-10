@@ -26,6 +26,11 @@ const posts = defineCollection({
       { message: 'Abbrlink can only contain lowercase letters, numbers and hyphens' },
     ),
     image: z.string().optional(),
+    // Series navigation
+    series: z.string().optional(),
+    series_order: z.number().int().optional(),
+    series_label: z.string().optional(),
+    series_section: z.string().optional(),
   }),
 })
 

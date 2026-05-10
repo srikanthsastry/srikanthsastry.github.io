@@ -9,6 +9,9 @@ tags:
 abbrlink: 'directive-governance-situationship'
 image: /assets/images/directive-governance-situationship-cover.jpg
 lang: ''
+series: 'governance'
+series_order: 2
+series_label: 'Directive Governance'
 ---
 
 

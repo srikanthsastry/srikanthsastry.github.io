@@ -8,6 +8,10 @@ tags:
 abbrlink: 'dry-unit-tests-are-bad'
 image: /assets/images/squeeze-cloth.jpg
 lang: ''
+series: 'unit-testing'
+series_order: 11
+series_label: 'Unit Testing'
+series_section: 'Practices'
 ---
 <!-- ![DRY](/assets/images/squeeze-cloth.jpg) -->
 

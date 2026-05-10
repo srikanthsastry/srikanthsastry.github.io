@@ -11,6 +11,10 @@ tags:
 abbrlink: 'in-unit-tests-favor-detroit-over-london'
 image: /assets/images/detroit-wall-frame.jpg
 lang: ''
+series: 'unit-testing'
+series_order: 9
+series_label: 'Unit Testing'
+series_section: 'Practices'
 ---
 <!-- ![](/assets/images/detroit-wall-frame.jpg) -->
 

@@ -9,6 +9,10 @@ tags:
 abbrlink: 'beware-of-using-patch-object-to-test-your-python-code'
 image: /assets/images/software-testing.jpg
 lang: ''
+series: 'unit-testing'
+series_order: 16
+series_label: 'Unit Testing'
+series_section: 'Practices'
 ---
 <!-- ![Software Testing](/assets/images/software-testing.jpg) -->
 

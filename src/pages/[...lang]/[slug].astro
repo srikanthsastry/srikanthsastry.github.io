@@ -5,6 +5,7 @@ import { getCollection, render } from 'astro:content'
 import Comment from '@/components/Comment/Index.astro'
 import Backlinks from '@/components/Backlinks.astro'
 import PostDate from '@/components/PostDate.astro'
+import SeriesNav from '@/components/SeriesNav.astro'
 import TagList from '@/components/TagList.astro'
 import BackButton from '@/components/Widgets/BackButton.astro'
 import TOC from '@/components/Widgets/TOC.astro'
@@ -126,6 +127,8 @@ const { Content, headings, remarkPluginFrontmatter } = await render(post)
         />
       </figure>
     )}
+    <!-- Series Navigation -->
+    {post.data.series && <SeriesNav currentPost={post} />}
     <!-- TOC -->
     {post.data.toc && <TOC headings={headings} />}
     <!-- Content -->

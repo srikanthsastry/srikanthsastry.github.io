@@ -7,6 +7,10 @@ tags:
 abbrlink: 'law-of-demeter-and-unit-tests'
 image: /assets/images/demeter-sketch-bw.jpg
 lang: ''
+series: 'unit-testing'
+series_order: 15
+series_label: 'Unit Testing'
+series_section: 'Practices'
 ---
 <!-- ![](/assets/images/demeter-sketch-bw.jpg) -->
 The [Law of Demeter](https://en.wikipedia.org/wiki/Law_of_Demeter) essentially says that each unit should only talk to its 'immediate friends' or 'immediate dependencies', and in spirit, it is pointing to the principle that each unit only have the information it needs to meet its purpose. In that spirit, the Law of Demeter takes two forms that are relevant to <a href="/garden/law-of-demeter-and-testing/">making your code more testable</a>: (1) object chains, and (2) fat parameters.

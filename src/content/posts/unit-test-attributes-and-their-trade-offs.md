@@ -7,6 +7,10 @@ tags:
 abbrlink: 'unit-test-attributes-and-their-trade-offs'
 image: /assets/images/accuracy-completeness-speed.png
 lang: ''
+series: 'unit-testing'
+series_order: 7
+series_label: 'Unit Testing'
+series_section: 'Practices'
 ---
 <!-- ![](/assets/images/accuracy-completeness-speed.png) -->
 Unit test suites have <a href="/garden/unit-test-attribute-tradeoffs/">three primary attributes</a>.

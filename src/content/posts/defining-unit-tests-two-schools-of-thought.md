@@ -10,6 +10,10 @@ tags:
 abbrlink: 'defining-unit-tests-two-schools-of-thought'
 image: /assets/images/london-detroit.jpg
 lang: ''
+series: 'unit-testing'
+series_order: 8
+series_label: 'Unit Testing'
+series_section: 'Practices'
 ---
 
 <!-- ![](/assets/images/london-detroit.jpg) -->

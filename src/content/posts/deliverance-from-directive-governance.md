@@ -10,6 +10,9 @@ tags:
 abbrlink: 'deliverance-from-directive-governance'
 image: /assets/images/deliverance-from-directive-governance-cover.png
 lang: ''
+series: 'governance'
+series_order: 3
+series_label: 'Directive Governance'
 ---
 
 

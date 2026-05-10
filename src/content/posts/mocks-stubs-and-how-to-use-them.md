@@ -11,6 +11,10 @@ tags:
 abbrlink: 'mocks-stubs-andhow-to-use-them'
 image: /assets/images/masquerade-masks.png
 lang: ''
+series: 'unit-testing'
+series_order: 13
+series_label: 'Unit Testing'
+series_section: 'Practices'
 ---
 
 <!-- ![Photo by Polina Kovaleva from Pexels](/assets/images/masquerade-masks.png) -->

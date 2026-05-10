@@ -10,6 +10,9 @@ tags:
 abbrlink: 'cargo-cult-governance'
 image: /assets/images/cargo-cult-governance-cover.jpg
 lang: ''
+series: 'governance'
+series_order: 1
+series_label: 'Directive Governance'
 ---
 
 
