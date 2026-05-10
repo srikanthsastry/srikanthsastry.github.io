@@ -30,6 +30,7 @@ interface LinkedItem {
   type: 'garden' | 'post'
   emoji: string
   subtitle?: string
+  image?: string
 }
 
 const linkedItems: LinkedItem[] = []
@@ -58,13 +59,10 @@ while ((match = gardenLinkRegex.exec(body)) !== null) {
 }
 
 // Match post links: [text](/post-slug/) — but not /garden/, /tags/, /publications/, etc.
-// Post slugs are lowercase alphanumeric with hyphens
 const internalLinkRegex = /\[([^\]]*)\]\(\/([a-z0-9][a-z0-9-]*[a-z0-9])\/?(?:#[^\)]*)?\)/g
 while ((match = internalLinkRegex.exec(body)) !== null) {
   const slug = match[2]
-  // Skip known non-post paths
   if (['garden', 'tags', 'posts', 'about', 'publications', 'touchstone-radio-episodes', 'atom.xml'].includes(slug)) continue
-  // Skip self-links
   if (slug === postSlug) continue
 
   const href = `/${slug}/`
@@ -78,18 +76,16 @@ while ((match = internalLinkRegex.exec(body)) !== null) {
       href,
       type: 'post',
       emoji: '📝',
+      image: linkedPost.data.image,
     })
   }
 }
 
-// Sort: garden notes first, then posts; alphabetical within each group
+// Sort: posts first (fewer), then garden notes; alphabetical within each group
 linkedItems.sort((a, b) => {
-  if (a.type !== b.type) return a.type === 'garden' ? -1 : 1
+  if (a.type !== b.type) return a.type === 'post' ? -1 : 1
   return a.title.localeCompare(b.title)
 })
-
-const gardenLinks = linkedItems.filter(i => i.type === 'garden')
-const postLinks = linkedItems.filter(i => i.type === 'post')
 ---
 
 {linkedItems.length > 0 && (
@@ -97,13 +93,23 @@ const postLinks = linkedItems.filter(i => i.type === 'post')
     <div class="uno-decorative-line" />
     <h2 class="mb-4 text-4 font-semibold">Linked in this post</h2>
 
-    {gardenLinks.length > 0 && (
-      <div class="grid grid-cols-1 gap-3 mb-4 sm:grid-cols-2">
-        {gardenLinks.map(item => (
-          <a
-            href={item.href}
-            class="group block rounded-lg border border-secondary/10 p-3 hover:border-secondary/25 transition-colors"
-          >
+    <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+      {linkedItems.map(item => (
+        <a
+          href={item.href}
+          class="group block rounded-lg border border-secondary/10 overflow-hidden hover:border-secondary/25 transition-colors"
+        >
+          {item.image && (
+            <div class="aspect-[16/9] overflow-hidden bg-secondary/5">
+              <img
+                src={item.image}
+                alt={item.title}
+                class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                loading="lazy"
+              />
+            </div>
+          )}
+          <div class="p-3">
             <div class="flex items-start gap-2">
               <span class="text-3.5 flex-shrink-0 mt-0.5">{item.emoji}</span>
               <div class="min-w-0">
@@ -115,22 +121,9 @@ const postLinks = linkedItems.filter(i => i.type === 'post')
                 )}
               </div>
             </div>
-          </a>
-        ))}
-      </div>
-    )}
-
-    {postLinks.length > 0 && (
-      <ul class="list-none p-0">
-        {postLinks.map(item => (
-          <li class="mb-2.5">
-            <a href={item.href} class="transition-colors hover:c-primary">
-              <span class="mr-1 text-3.25">{item.emoji}</span>
-              {item.title}
-            </a>
-          </li>
-        ))}
-      </ul>
-    )}
+          </div>
+        </a>
+      ))}
+    </div>
   </div>
 )}
