@@ -4,6 +4,7 @@ import Button from '@/components/Button.astro'
 import Header from '@/components/Header.astro'
 import Navbar from '@/components/Navbar.astro'
 import PageFooter from '@/components/PageFooter.astro'
+import SearchOverlay from '@/components/SearchOverlay.astro'
 import CodeCopyButton from '@/components/Widgets/CodeCopyButton.astro'
 import GithubCard from '@/components/Widgets/GithubCard.astro'
 import ImageZoom from '@/components/Widgets/ImageZoom.astro'
@@ -59,6 +60,7 @@ const MarginBottom = isContentPage && themeConfig.comment.enabled
       <PageFooter />
     </div>
     <Button supportedLangs={supportedLangs} />
+    <SearchOverlay />
     <SoundEffect />
     <CodeCopyButton />
     <GithubCard />
