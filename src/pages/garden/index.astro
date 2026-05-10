@@ -1,0 +1,62 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import { getCollection } from 'astro:content'
+import Layout from '@/layouts/Layout.astro'
+
+const notes: CollectionEntry<'garden'>[] = await getCollection('garden')
+
+// Group by maturity: evergreen first, then budding, then seedling
+const maturityOrder = ['evergreen', 'budding', 'seedling'] as const
+const maturityLabels: Record<string, string> = {
+  evergreen: '🌳 Evergreen',
+  budding: '🌿 Budding',
+  seedling: '🌱 Seedling',
+}
+
+const grouped = new Map<string, CollectionEntry<'garden'>[]>()
+for (const m of maturityOrder) {
+  const matching = notes
+    .filter(n => n.data.maturity === m)
+    .sort((a, b) => a.data.title.localeCompare(b.data.title))
+  if (matching.length > 0) {
+    grouped.set(m, matching)
+  }
+}
+---
+
+<Layout>
+  <h1 class="post-title mb-6">Garden</h1>
+  <p class="mb-10 c-secondary text-3.75 leading-1.8">
+    A digital garden of interconnected notes — ideas at various stages of development.
+    Evergreen notes are well-developed; budding notes are still growing.
+  </p>
+
+  {Array.from(grouped.entries()).map(([maturity, notes]) => (
+    <section class="mb-10">
+      <h2 class="mb-4 text-4.5 font-semibold">
+        {maturityLabels[maturity]}
+        <span class="ml-1 text-3.5 font-normal c-secondary">({notes.length})</span>
+      </h2>
+      <div class="uno-decorative-line" />
+      <ul>
+        {notes.map(note => (
+          <li class="mb-4 lg:mb-5">
+            <h3 class="inline transition-colors hover:c-primary">
+              <a
+                href={`/garden/${note.id}/`}
+                class="lg:font-medium lg:text-4.5"
+              >
+                {note.data.title}
+              </a>
+            </h3>
+            {note.data.excerpt_text && (
+              <div class="heti hidden lg:(mt-1.5 block)">
+                <p class="c-secondary text-3.5 leading-1.7">{note.data.excerpt_text}</p>
+              </div>
+            )}
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+</Layout>

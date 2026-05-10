@@ -29,6 +29,20 @@ const posts = defineCollection({
   }),
 })
 
+const garden = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/garden' }),
+  schema: z.object({
+    title: z.string(),
+    maturity: z.enum(['evergreen', 'budding', 'seedling']).default('seedling'),
+    tags: z.array(z.string()).optional().default([]),
+    created: z.coerce.date(),
+    related_notes: z.array(z.string()).optional().default([]),
+    related_posts: z.array(z.string()).optional().default([]),
+    excerpt_text: z.string().optional().default(''),
+    garden_type: z.string().optional().default('note'),
+  }),
+})
+
 const about = defineCollection({
   loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/about' }),
   schema: z.object({
@@ -36,4 +50,4 @@ const about = defineCollection({
   }),
 })
 
-export const collections = { posts, about }
+export const collections = { posts, about, garden }

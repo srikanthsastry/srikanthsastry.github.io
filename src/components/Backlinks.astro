@@ -1,0 +1,120 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import { getCollection } from 'astro:content'
+
+interface Props {
+  currentId: string
+  collection: 'garden' | 'posts'
+}
+
+const { currentId, collection } = Astro.props
+
+// Gather all garden notes and posts
+const allNotes: CollectionEntry<'garden'>[] = await getCollection('garden')
+const allPosts: CollectionEntry<'posts'>[] = await getCollection('posts')
+
+interface Backlink {
+  title: string
+  href: string
+  type: 'garden' | 'post'
+}
+
+const backlinks: Backlink[] = []
+
+// Determine the URL pattern for the current content
+const currentSlug = currentId
+const gardenUrlPattern = `/garden/${currentSlug}/`
+const gardenUrlPatternNoTrail = `/garden/${currentSlug}`
+
+// Check garden notes for backlinks
+for (const note of allNotes) {
+  if (note.id === currentId && collection === 'garden') continue
+
+  // Check related_notes frontmatter
+  const relatedNotes = note.data.related_notes || []
+  if (relatedNotes.includes(currentSlug)) {
+    backlinks.push({
+      title: note.data.title,
+      href: `/garden/${note.id}/`,
+      type: 'garden',
+    })
+    continue
+  }
+
+  // Check related_posts frontmatter (for garden→post links)
+  if (collection === 'posts') {
+    const relatedPosts = note.data.related_posts || []
+    const postSlug = currentId
+    // related_posts use format like /slug/ or /the-post-slug/
+    if (relatedPosts.some((rp: string) => {
+      const clean = rp.replace(/^\/|\/$/g, '')
+      return clean === postSlug
+    })) {
+      backlinks.push({
+        title: note.data.title,
+        href: `/garden/${note.id}/`,
+        type: 'garden',
+      })
+      continue
+    }
+  }
+
+  // Check body for inline markdown links to this content
+  if (note.body) {
+    if (note.body.includes(gardenUrlPattern) || note.body.includes(gardenUrlPatternNoTrail)) {
+      // Avoid duplicates
+      if (!backlinks.some(b => b.href === `/garden/${note.id}/`)) {
+        backlinks.push({
+          title: note.data.title,
+          href: `/garden/${note.id}/`,
+          type: 'garden',
+        })
+      }
+    }
+  }
+}
+
+// Check posts for backlinks to garden notes
+if (collection === 'garden') {
+  for (const post of allPosts) {
+    // Check body for inline links to this garden note
+    if (post.body) {
+      if (post.body.includes(gardenUrlPattern) || post.body.includes(gardenUrlPatternNoTrail)) {
+        const postSlug = post.data.abbrlink || post.id
+        backlinks.push({
+          title: post.data.title,
+          href: `/${postSlug}/`,
+          type: 'post',
+        })
+      }
+    }
+  }
+}
+
+// Sort: garden notes first, then posts; alphabetically within each group
+backlinks.sort((a, b) => {
+  if (a.type !== b.type) return a.type === 'garden' ? -1 : 1
+  return a.title.localeCompare(b.title)
+})
+---
+
+{backlinks.length > 0 && (
+  <div class="mt-10">
+    <div class="uno-decorative-line" />
+    <h2 class="mb-4 text-4 font-semibold">Linked from</h2>
+    <ul class="list-none p-0">
+      {backlinks.map(link => (
+        <li class="mb-2.5">
+          <a
+            href={link.href}
+            class="transition-colors hover:c-primary"
+          >
+            {link.type === 'garden' && <span class="mr-1 text-3.25">🌿</span>}
+            {link.type === 'post' && <span class="mr-1 text-3.25">📝</span>}
+            {link.title}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+)}
