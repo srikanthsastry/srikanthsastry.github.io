@@ -1,9 +1,12 @@
 ---
 import PostCard from '@/components/PostCard.astro'
+import PostDate from '@/components/PostDate.astro'
 import { allLocales } from '@/config'
 import { getLangFromLocale, getLangRouteParam } from '@/i18n/lang'
+import { getPostPath } from '@/i18n/path'
 import Layout from '@/layouts/Layout.astro'
 import { getPostsByYear } from '@/utils/content'
+import { getPostDescription } from '@/utils/description'
 
 export async function getStaticPaths() {
   return allLocales.map(lang => ({
@@ -13,20 +16,64 @@ export async function getStaticPaths() {
 
 const currentLang = getLangFromLocale(Astro.currentLocale)
 const postsByYear = await getPostsByYear(currentLang)
+const years = Array.from(postsByYear.entries())
 ---
 
 <Layout>
   <h1 class="font-title text-10 font-semibold tracking-tight lg:text-11 mb-8">All Posts</h1>
 
-  {Array.from(postsByYear.entries(), ([year, posts]) => (
-    <section class="mb-7.5">
-      <h2 class="font-title text-4.5 font-medium c-secondary/70 mb-3">{year}</h2>
-      <div class="uno-decorative-line" />
-      <div class="grid grid-cols-1 gap-5 mb-6 sm:grid-cols-2">
-        {posts.map((post) => (
-          <PostCard post={post} lang={currentLang} />
-        ))}
-      </div>
-    </section>
-  ))}
+  {years.map(([year, posts], yearIndex) => {
+    const isLatestYear = yearIndex === 0
+    const heroPost = isLatestYear ? posts[0] : null
+    const gridPosts = isLatestYear ? posts.slice(1) : posts
+    const heroSlug = heroPost ? (heroPost.data.abbrlink || heroPost.id) : ''
+    const heroExcerpt = heroPost ? getPostDescription(heroPost, 'list') : ''
+
+    return (
+      <section class="mb-7.5">
+        <h2 class="font-title text-4.5 font-medium c-secondary/70 mb-3">{year}</h2>
+        <div class="uno-decorative-line" />
+
+        {heroPost && (
+          <a
+            href={getPostPath(heroSlug, currentLang)}
+            class="group block overflow-hidden rounded-lg border border-secondary/10 hover:border-secondary/30 transition-all duration-200 mb-6"
+          >
+            {heroPost.data.image && (
+              <div class="aspect-[2/1] overflow-hidden bg-secondary/5">
+                <img
+                  src={heroPost.data.image}
+                  alt={heroPost.data.title}
+                  class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  loading="eager"
+                />
+              </div>
+            )}
+            <div class="p-5">
+              <h3 class="font-title font-semibold text-5 leading-snug group-hover:c-primary transition-colors mb-2">
+                {heroPost.data.title}
+              </h3>
+              {heroExcerpt && (
+                <p class="c-secondary/70 text-3.5 leading-relaxed mb-3 line-clamp-2">{heroExcerpt}</p>
+              )}
+              <div class="text-3.25 font-time c-secondary/50">
+                <PostDate
+                  date={heroPost.data.published}
+                  minutes={heroPost.remarkPluginFrontmatter.minutes}
+                />
+              </div>
+            </div>
+          </a>
+        )}
+
+        {gridPosts.length > 0 && (
+          <div class="grid grid-cols-1 gap-5 mb-6 sm:grid-cols-2">
+            {gridPosts.map((post) => (
+              <PostCard post={post} lang={currentLang} />
+            ))}
+          </div>
+        )}
+      </section>
+    )
+  })}
 </Layout>

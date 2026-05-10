@@ -40,7 +40,8 @@ const navItems = [
     transition:name={`site-title-${currentLang}`}
     data-disable-theme-toggle-transition
   >
-    {title}
+    <span class="hidden sm:inline">{title}</span>
+    <span class="sm:hidden">S. Sastry</span>
   </a>
 
   <!-- Nav + utilities -->

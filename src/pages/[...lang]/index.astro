@@ -2,10 +2,13 @@
 import type { CollectionEntry } from 'astro:content'
 import { getCollection } from 'astro:content'
 import PostCard from '@/components/PostCard.astro'
+import PostDate from '@/components/PostDate.astro'
 import PostList from '@/components/PostList.astro'
 import { allLocales } from '@/config'
 import { getLangFromLocale, getLangRouteParam } from '@/i18n/lang'
+import { getPostPath } from '@/i18n/path'
 import Layout from '@/layouts/Layout.astro'
+import { getPostDescription } from '@/utils/description'
 import { getPinnedPosts, getPosts } from '@/utils/content'
 
 export async function getStaticPaths() {
@@ -18,6 +21,8 @@ const currentLang = getLangFromLocale(Astro.currentLocale)
 const pinnedPosts = await getPinnedPosts(currentLang)
 const allPosts = await getPosts(currentLang)
 const recentPosts = allPosts.filter(p => !p.data.pin).slice(0, 8)
+const heroPost = recentPosts[0]
+const gridPosts = recentPosts.slice(1)
 
 // Get garden notes, sorted by title, grouped by maturity
 const gardenNotes: CollectionEntry<'garden'>[] = await getCollection('garden')
@@ -92,8 +97,46 @@ const totalNotes = gardenNotes.length
     </div>
     <div class="uno-decorative-line" />
 
+    <!-- Hero: Latest Post -->
+    {heroPost && (() => {
+      const heroSlug = heroPost.data.abbrlink || heroPost.id
+      const heroExcerpt = getPostDescription(heroPost, 'list')
+      return (
+        <a
+          href={getPostPath(heroSlug, currentLang)}
+          class="group block overflow-hidden rounded-lg border border-secondary/10 hover:border-secondary/30 transition-all duration-200 mb-6"
+        >
+          {heroPost.data.image && (
+            <div class="aspect-[2/1] overflow-hidden bg-secondary/5">
+              <img
+                src={heroPost.data.image}
+                alt={heroPost.data.title}
+                class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                loading="eager"
+              />
+            </div>
+          )}
+          <div class="p-5">
+            <h3 class="font-title font-semibold text-5 leading-snug group-hover:c-primary transition-colors mb-2">
+              {heroPost.data.title}
+            </h3>
+            {heroExcerpt && (
+              <p class="c-secondary/70 text-3.5 leading-relaxed mb-3 line-clamp-2">{heroExcerpt}</p>
+            )}
+            <div class="text-3.25 font-time c-secondary/50">
+              <PostDate
+                date={heroPost.data.published}
+                minutes={heroPost.remarkPluginFrontmatter.minutes}
+              />
+            </div>
+          </div>
+        </a>
+      )
+    })()}
+
+    <!-- Remaining posts grid -->
     <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
-      {recentPosts.map((post) => (
+      {gridPosts.map((post) => (
         <PostCard post={post} lang={currentLang} />
       ))}
     </div>

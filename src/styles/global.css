@@ -92,3 +92,19 @@ html.dark .code-copy-button.copied {
 .code-copy-button.copied .icon-check {
   --at-apply: 'op-100';
 }
+
+/* Subtle entrance animation on initial page load */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+main {
+  animation: fade-in-up 0.3s ease-out both;
+}

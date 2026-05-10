@@ -1,9 +1,9 @@
 ---
-import TagList from '@/components/TagList.astro'
 import { allLocales } from '@/config'
 import { getLangFromLocale, getLangRouteParam } from '@/i18n/lang'
+import { getTagPath } from '@/i18n/path'
 import Layout from '@/layouts/Layout.astro'
-import { getAllTags } from '@/utils/content'
+import { getAllTags, getPostsByTag } from '@/utils/content'
 
 export async function getStaticPaths() {
   return allLocales.map(lang => ({
@@ -13,14 +13,33 @@ export async function getStaticPaths() {
 
 const currentLang = getLangFromLocale(Astro.currentLocale)
 const allTags = await getAllTags(currentLang)
+
+// Get post counts for each tag
+const tagCounts = new Map<string, number>()
+for (const tag of allTags) {
+  const posts = await getPostsByTag(tag, currentLang)
+  tagCounts.set(tag, posts.length)
+}
 ---
 
 <Layout>
-  <!-- Decorative Line -->
-  <div class="uno-decorative-line" />
-  <!-- Tag List -->
-  <TagList
-    tags={allTags}
-    lang={currentLang}
-  />
+  <h1 class="font-title text-10 font-semibold tracking-tight lg:text-11 mb-2">Tags</h1>
+  <p class="mb-8 c-secondary text-3.75 leading-relaxed">
+    {allTags.length} tags across all posts
+  </p>
+
+  <div class="no-heti flex flex-wrap gap-x-3 gap-y-3.2">
+    {allTags.map(tag => {
+      const count = tagCounts.get(tag) || 0
+      return (
+        <a
+          href={getTagPath(tag, currentLang)}
+          class="relative inline-flex items-center gap-1.5 border border-secondary/25 rounded-full px-3.2 py-0.7 ring-secondary/80 transition-[colors,box-shadow] ease-out hover:(border-secondary/80 c-primary font-medium ring-0.2)"
+        >
+          <span>{tag}</span>
+          <span class="text-2.75 c-secondary/40">{count}</span>
+        </a>
+      )
+    })}
+  </div>
 </Layout>

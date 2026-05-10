@@ -14,7 +14,7 @@ import BackButton from '@/components/Widgets/BackButton.astro'
 import TOC from '@/components/Widgets/TOC.astro'
 import { allLocales, themeConfig } from '@/config'
 import { getLangFromLocale, getLangRouteParam } from '@/i18n/lang'
-import { getPostPath } from '@/i18n/path'
+import { getPostPath, getTagPath } from '@/i18n/path'
 import Layout from '@/layouts/Layout.astro'
 import { checkPostSlugDuplication } from '@/utils/content'
 import { getPostDescription } from '@/utils/description'
@@ -123,7 +123,7 @@ const postUrl = new URL(getPostPath(slug, currentLang), themeConfig.site.url).to
     <!-- Date -->
     <div
       id="post-date"
-      class="mb-17.2 block c-primary font-time"
+      class="mb-4 block c-primary font-time"
       transition:name={`time-${slug}${currentLang ? `-${currentLang}` : ''}`}
       data-disable-theme-toggle-transition
     >
@@ -133,6 +133,19 @@ const postUrl = new URL(getPostPath(slug, currentLang), themeConfig.site.url).to
         minutes={remarkPluginFrontmatter.minutes}
       />
     </div>
+    <!-- Tags -->
+    {post.data.tags?.length > 0 && (
+      <div class="mb-10 flex flex-wrap gap-2">
+        {post.data.tags.map((tag: string) => (
+          <a
+            href={getTagPath(tag, currentLang)}
+            class="text-3 px-2.5 py-0.75 rounded-full border border-secondary/20 c-secondary/70 hover:(border-secondary/50 c-primary) transition-colors"
+          >
+            {tag}
+          </a>
+        ))}
+      </div>
+    )}
     <!-- Cover Image -->
     {post.data.image && (
       <figure class="mb-8">
@@ -144,6 +157,10 @@ const postUrl = new URL(getPostPath(slug, currentLang), themeConfig.site.url).to
         />
       </figure>
     )}
+    <!-- Share links at top (desktop only) -->
+    <div class="hidden lg:block mb-8">
+      <ShareLinks title={post.data.title} url={postUrl} />
+    </div>
     <!-- Series Navigation -->
     {post.data.series && <SeriesNav currentPost={post} />}
     <!-- TOC -->
@@ -155,14 +172,6 @@ const postUrl = new URL(getPostPath(slug, currentLang), themeConfig.site.url).to
       <div id="post-copyright" />
       <!-- Share Links -->
       <ShareLinks title={post.data.title} url={postUrl} />
-      <!-- Tag List -->
-      {post.data.tags?.length > 0 && (
-        <div class="mt-12.6 uno-decorative-line" />
-        <TagList
-          tags={post.data.tags}
-          lang={currentLang}
-        />
-      )}
       <!-- Related Content (forward links from this post) -->
       <RelatedContent post={post} />
       <!-- Post Navigation (Prev/Next) -->
