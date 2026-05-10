@@ -1,12 +1,11 @@
 ---
 import PostList from '@/components/PostList.astro'
 import PostDate from '@/components/PostDate.astro'
-import TagList from '@/components/TagList.astro'
 import { allLocales } from '@/config'
 import { getLangFromLocale, getLangRouteParam } from '@/i18n/lang'
 import { getPostPath } from '@/i18n/path'
 import Layout from '@/layouts/Layout.astro'
-import { getAllTags, getPostsByTag, getTagSupportedLangs } from '@/utils/content'
+import { getPostsByTag, getTagSupportedLangs } from '@/utils/content'
 
 export async function getStaticPaths() {
   const paths = await Promise.all(allLocales.map(async (lang) => {
@@ -26,7 +25,6 @@ interface Props {
 const { tag } = Astro.props
 const currentLang = getLangFromLocale(Astro.currentLocale)
 const posts = await getPostsByTag(tag, currentLang)
-const allTags = await getAllTags(currentLang)
 const supportedLangs = await getTagSupportedLangs(tag)
 
 const withImages = posts.filter(p => p.data.image)
@@ -34,14 +32,12 @@ const withoutImages = posts.filter(p => !p.data.image)
 ---
 
 <Layout supportedLangs={supportedLangs}>
-  <!-- Decorative Line -->
-  <div class="uno-decorative-line" />
-  <!-- Tag List -->
-  <TagList
-    tags={allTags}
-    currentTag={tag}
-    lang={currentLang}
-  />
+  <h1 class="font-title text-10 font-semibold tracking-tight lg:text-11 mb-2">
+    {tag}
+  </h1>
+  <p class="mb-8 c-secondary text-3.75 leading-relaxed">
+    {posts.length} {posts.length === 1 ? 'post' : 'posts'} · <a href="/tags/" class="underline decoration-secondary/50 underline-offset-3 hover:c-primary transition-colors">All tags</a>
+  </p>
 
   <!-- Posts with cover images as cards -->
   {withImages.length > 0 && (
