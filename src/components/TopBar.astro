@@ -36,7 +36,7 @@ const navItems = [
   <!-- Site name as home link -->
   <a
     href={getLocalizedPath('/')}
-    class="font-title font-bold text-5 c-primary hover:op-80 transition-opacity lg:text-5.5 tracking-tight"
+    class="font-title font-bold text-4.5 c-primary hover:op-80 transition-opacity sm:text-5 lg:text-5.5 tracking-tight whitespace-nowrap"
     transition:name={`site-title-${currentLang}`}
     data-disable-theme-toggle-transition
   >
@@ -44,7 +44,7 @@ const navItems = [
   </a>
 
   <!-- Nav + utilities -->
-  <nav class="flex items-center gap-5 text-3.5 font-semibold font-navbar lg:(gap-6 text-3.75)" aria-label="Site Navigation">
+  <nav class="flex items-center gap-3.5 text-3.25 font-semibold font-navbar sm:(gap-5 text-3.5) lg:(gap-6 text-3.75)" aria-label="Site Navigation">
     {navItems.map(item => (
       <a
         href={getLocalizedPath(item.href)}
