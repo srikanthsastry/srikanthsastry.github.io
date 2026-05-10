@@ -20,8 +20,8 @@ const pinnedPosts = await getPinnedPosts(currentLang)
 const allPosts = await getPosts(currentLang)
 const recentPosts = allPosts.filter(p => !p.data.pin).slice(0, 8)
 
-// Split: posts with cover images (first 4) as cards, rest as text
-const postsWithImages = recentPosts.filter(p => p.data.image).slice(0, 4)
+// Split: all posts with cover images as cards, rest as text
+const postsWithImages = recentPosts.filter(p => p.data.image)
 const imagePostSlugs = new Set(postsWithImages.map(p => p.data.abbrlink || p.id))
 const remainingPosts = recentPosts.filter(p => !imagePostSlugs.has(p.data.abbrlink || p.id))
 
@@ -145,27 +145,32 @@ const totalNotes = gardenNotes.length
       </a>
     </div>
     <div class="uno-decorative-line" />
-    <ul>
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
       {featuredNotes.map(note => (
-        <li class="mb-4 lg:mb-5">
-          <h3 class="inline font-title transition-colors hover:c-primary">
-            <a
-              href={`/garden/${note.id}/`}
-              class="lg:font-medium lg:text-4.5"
-            >
+        <a
+          href={`/garden/${note.id}/`}
+          class="group block rounded-lg border border-secondary/10 p-4 hover:border-secondary/25 transition-colors"
+        >
+          <div class="flex items-start justify-between gap-2 mb-1.5">
+            <h3 class="font-title font-medium text-4 leading-snug group-hover:c-primary transition-colors">
               {note.data.title}
-            </a>
-          </h3>
-          <span class="ml-1.5 text-3 c-secondary/60">
-            {note.data.maturity === 'evergreen' ? '🌳' : '🌿'}
-          </span>
+            </h3>
+            <span class="text-3 flex-shrink-0">
+              {note.data.maturity === 'evergreen' ? '🌳' : '🌿'}
+            </span>
+          </div>
           {note.data.excerpt_text && (
-            <div class="heti hidden lg:(mt-1.5 block)">
-              <p class="c-secondary/75 text-3.5 leading-relaxed">{note.data.excerpt_text}</p>
+            <p class="c-secondary text-3.25 leading-relaxed mb-2 line-clamp-2">{note.data.excerpt_text}</p>
+          )}
+          {note.data.tags && note.data.tags.length > 0 && (
+            <div class="flex flex-wrap gap-1.5">
+              {note.data.tags.slice(0, 3).map((tag: string) => (
+                <span class="text-2.75 px-1.5 py-0.5 rounded-full bg-secondary/8 c-secondary/70">{tag}</span>
+              ))}
             </div>
           )}
-        </li>
+        </a>
       ))}
-    </ul>
+    </div>
   </section>
 </Layout>
