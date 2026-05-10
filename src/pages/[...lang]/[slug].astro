@@ -6,6 +6,7 @@ import Comment from '@/components/Comment/Index.astro'
 import Backlinks from '@/components/Backlinks.astro'
 import PostDate from '@/components/PostDate.astro'
 import PostNav from '@/components/PostNav.astro'
+import RelatedContent from '@/components/RelatedContent.astro'
 import SeriesNav from '@/components/SeriesNav.astro'
 import ShareLinks from '@/components/ShareLinks.astro'
 import TagList from '@/components/TagList.astro'
@@ -162,6 +163,8 @@ const postUrl = new URL(getPostPath(slug, currentLang), themeConfig.site.url).to
           lang={currentLang}
         />
       )}
+      <!-- Related Content (forward links from this post) -->
+      <RelatedContent post={post} />
       <!-- Backlinks -->
       <Backlinks currentId={slug} collection="posts" />
       <!-- Post Navigation (Prev/Next) -->
