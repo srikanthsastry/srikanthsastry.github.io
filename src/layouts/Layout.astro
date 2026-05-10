@@ -1,8 +1,6 @@
 ---
 import type { Language } from '@/i18n/config'
-import Button from '@/components/Button.astro'
-import Header from '@/components/Header.astro'
-import Navbar from '@/components/Navbar.astro'
+import TopBar from '@/components/TopBar.astro'
 import PageFooter from '@/components/PageFooter.astro'
 import CodeCopyButton from '@/components/Widgets/CodeCopyButton.astro'
 import GithubCard from '@/components/Widgets/GithubCard.astro'
@@ -31,10 +29,9 @@ const { postTitle, postDescription, postSlug, supportedLangs = [] } = Astro.prop
 const { isGardenNote } = getPageInfo(Astro.url.pathname)
 const fontStyle = themeConfig.global.fontStyle === 'serif' ? 'font-serif' : 'font-sans'
 const isContentPage = !!postTitle || isGardenNote
-const hideNavOnMobile = false
 const MarginBottom = isContentPage && themeConfig.comment.enabled
-  ? 'mb-10' // Post page with comment
-  : 'mb-12' // Other pages without comment
+  ? 'mb-10'
+  : 'mb-12'
 ---
 
 <html
@@ -47,18 +44,16 @@ const MarginBottom = isContentPage && themeConfig.comment.enabled
   <Head {postTitle} {postDescription} {postSlug} />
   <body>
     <div
-      class="mx-auto max-w-205.848 min-h-vh w-full min-h-dvh"
-      p="x-[min(7.25vw,3.731rem)] y-10"
-      lg="mx-[max(5.75rem,calc(50vw-34.25rem))] my-20 max-w-[min(calc(75vw-16rem),44rem)] min-h-full p-0"
+      class="mx-auto max-w-44rem min-h-dvh w-full"
+      p="x-[min(7.25vw,3.731rem)]"
+      lg="p-0"
     >
-      <Header />
-      <Navbar hideOnMobile={hideNavOnMobile} />
+      <TopBar supportedLangs={supportedLangs} />
       <main class={MarginBottom}>
         <slot />
       </main>
       <PageFooter />
     </div>
-    <Button supportedLangs={supportedLangs} />
     <SoundEffect />
     <CodeCopyButton />
     <GithubCard />
