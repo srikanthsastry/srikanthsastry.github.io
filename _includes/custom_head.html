@@ -1,7 +1,0 @@
-{%if site.favicon %} <link rel="shortcut icon" type="image/ico" href="{{ site.favicon | relative_url }}" />
-{% endif %}
-<link rel="stylesheet" href="{{ '/assets/css/garden.css' | relative_url }}" />
-<script src="{{ '/assets/js/garden-preview.js' | relative_url }}" defer></script>
-{% if page.layout == 'post' or page.layout == 'garden-note' %}
-<link rel="alternate" type="text/markdown" href="index.md" title="{{ page.title | escape }} (Markdown)" />
-{% endif %}
