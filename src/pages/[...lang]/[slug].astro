@@ -165,8 +165,6 @@ const postUrl = new URL(getPostPath(slug, currentLang), themeConfig.site.url).to
       )}
       <!-- Related Content (forward links from this post) -->
       <RelatedContent post={post} />
-      <!-- Backlinks -->
-      <Backlinks currentId={slug} collection="posts" />
       <!-- Post Navigation (Prev/Next) -->
       <PostNav prevPost={prevPost} nextPost={nextPost} lang={currentLang} />
       <!-- Comment -->
