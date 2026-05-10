@@ -1,17 +1,10 @@
-/* Source Serif 4 Variable Font — display/titles */
+/* Inter Variable Font — display/titles/nav */
 @font-face {
-  font-family: "SourceSerif4";
-  src: url("/fonts/SourceSerif4-VF.woff2") format("woff2-variations");
+  font-family: "Inter";
+  src: url("/fonts/Inter-VF.woff2") format("woff2-variations");
   font-display: swap;
-  font-weight: 200 900;
+  font-weight: 100 900;
   font-style: normal;
-}
-@font-face {
-  font-family: "SourceSerif4";
-  src: url("/fonts/SourceSerif4-Italic-VF.woff2") format("woff2-variations");
-  font-display: swap;
-  font-weight: 200 900;
-  font-style: italic;
 }
 
 /* STIXTwoText Variable Font — body text */

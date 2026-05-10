@@ -40,9 +40,9 @@ export default defineConfig({
       caution: 'oklch(50.5% 0.213 27.518 / 0.8)', // red-700
     },
     fontFamily: {
-      title: ['SourceSerif4', 'ui-serif', 'Georgia', 'Cambria', 'Times New Roman', 'Times', 'serif'],
-      navbar: ['SourceSerif4', 'ui-serif', 'Georgia', 'Cambria', 'Times New Roman', 'Times', 'serif'],
-      time: ['SourceSerif4', 'ui-serif', 'Georgia', 'Cambria', 'Times New Roman', 'Times', 'serif'],
+      title: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+      navbar: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+      time: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       serif: ['STIX', 'ui-serif', 'Georgia', 'Cambria', 'Times New Roman', 'Times', 'serif'],
     },
   },
