@@ -11,6 +11,7 @@ const posts = defineCollection({
     published: z.coerce.date(),
     // optional
     description: z.string().optional().default(''),
+    excerpt: z.string().optional().default(''),
     updated: z.preprocess(
       val => val === '' ? undefined : val,
       z.date().optional(),

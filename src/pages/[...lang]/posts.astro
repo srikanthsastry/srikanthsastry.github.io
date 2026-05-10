@@ -51,8 +51,8 @@ const years = Array.from(postsByYear.entries())
               <h3 class="font-title font-semibold text-5 leading-snug group-hover:c-primary transition-colors mb-2">
                 {heroPost.data.title}
               </h3>
-              {heroPost.data.description && (
-                <p class="c-secondary/70 text-3.5 leading-relaxed mb-3 line-clamp-2">{heroPost.data.description}</p>
+              {heroPost.data.excerpt && (
+                <p class="c-secondary/70 text-3.5 leading-relaxed mb-3 line-clamp-2">{heroPost.data.excerpt}</p>
               )}
               <div class="text-3.25 font-time c-secondary/50">
                 <PostDate
