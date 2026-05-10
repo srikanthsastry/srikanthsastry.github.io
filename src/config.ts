@@ -9,7 +9,7 @@ export const themeConfig: ThemeConfig = {
     author: 'Srikanth Sastry',
     url: 'https://srikanth.sastry.name',
     base: '/',
-    favicon: '/icons/favicon.svg',
+    favicon: '/assets/images/favicon.ico',
   },
   color: {
     mode: 'light',

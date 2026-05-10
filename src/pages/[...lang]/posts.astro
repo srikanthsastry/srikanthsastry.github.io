@@ -16,10 +16,11 @@ export async function getStaticPaths() {
 const currentLang = getLangFromLocale(Astro.currentLocale)
 const postsByYear = await getPostsByYear(currentLang)
 const years = Array.from(postsByYear.entries())
+const totalPosts = years.reduce((sum, [, posts]) => sum + posts.length, 0)
 ---
 
 <Layout>
-  <h1 class="font-title text-10 font-semibold tracking-tight lg:text-11 mb-8">All Posts</h1>
+  <h1 class="font-title text-10 font-semibold tracking-tight lg:text-11 mb-8">All Posts <span class="text-6 font-normal c-secondary/50">({totalPosts})</span></h1>
 
   {years.map(([year, posts], yearIndex) => {
     const isLatestYear = yearIndex === 0

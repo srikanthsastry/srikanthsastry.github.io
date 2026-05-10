@@ -26,10 +26,16 @@ for (const m of maturityOrder) {
 
 <Layout>
   <h1 class="font-title text-10 font-semibold tracking-tight lg:text-11 mb-4">Garden</h1>
-  <p class="mb-12 c-secondary text-3.75 leading-relaxed">
+  <p class="mb-6 c-secondary text-3.75 leading-relaxed">
     A digital garden of interconnected notes — ideas at various stages of development.
-    Evergreen notes are well-developed; budding notes are still growing.
   </p>
+
+  {/* Maturity Legend */}
+  <div class="flex flex-wrap gap-x-5 gap-y-2 mb-10 text-3.5 c-secondary/70">
+    <span>🌱 <strong>Seedling</strong> — just planted</span>
+    <span>🌿 <strong>Budding</strong> — growing, not yet stable</span>
+    <span>🌳 <strong>Evergreen</strong> — well-developed</span>
+  </div>
 
   {Array.from(grouped.entries()).map(([maturity, notes]) => (
     <section class="mb-10">
@@ -38,7 +44,7 @@ for (const m of maturityOrder) {
         <span class="ml-1 text-3.5 font-normal c-secondary">({notes.length})</span>
       </h2>
       <div class="uno-decorative-line" />
-      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {notes.map(note => (
           <a
             href={`/garden/${note.id}/`}
