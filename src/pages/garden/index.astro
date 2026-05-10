@@ -38,25 +38,28 @@ for (const m of maturityOrder) {
         <span class="ml-1 text-3.5 font-normal c-secondary">({notes.length})</span>
       </h2>
       <div class="uno-decorative-line" />
-      <ul>
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
         {notes.map(note => (
-          <li class="mb-4 lg:mb-5">
-            <h3 class="inline transition-colors hover:c-primary">
-              <a
-                href={`/garden/${note.id}/`}
-                class="lg:font-medium lg:text-4.5"
-              >
-                {note.data.title}
-              </a>
+          <a
+            href={`/garden/${note.id}/`}
+            class="group block rounded-lg border border-secondary/10 p-4 hover:border-secondary/25 transition-colors"
+          >
+            <h3 class="font-title font-medium text-4 leading-snug group-hover:c-primary transition-colors mb-1.5">
+              {note.data.title}
             </h3>
             {note.data.excerpt_text && (
-              <div class="heti hidden lg:(mt-1.5 block)">
-                <p class="c-secondary text-3.5 leading-1.7">{note.data.excerpt_text}</p>
+              <p class="c-secondary text-3.25 leading-1.6 mb-2 line-clamp-2">{note.data.excerpt_text}</p>
+            )}
+            {note.data.tags && note.data.tags.length > 0 && (
+              <div class="flex flex-wrap gap-1.5">
+                {note.data.tags.slice(0, 3).map((tag: string) => (
+                  <span class="text-2.75 px-1.5 py-0.5 rounded-full bg-secondary/8 c-secondary/70">{tag}</span>
+                ))}
               </div>
             )}
-          </li>
+          </a>
         ))}
-      </ul>
+      </div>
     </section>
   ))}
 </Layout>

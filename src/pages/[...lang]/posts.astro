@@ -1,7 +1,9 @@
 ---
 import PostList from '@/components/PostList.astro'
+import PostDate from '@/components/PostDate.astro'
 import { allLocales } from '@/config'
 import { getLangFromLocale, getLangRouteParam } from '@/i18n/lang'
+import { getPostPath } from '@/i18n/path'
 import Layout from '@/layouts/Layout.astro'
 import { getPostsByYear } from '@/utils/content'
 
@@ -13,6 +15,8 @@ export async function getStaticPaths() {
 
 const currentLang = getLangFromLocale(Astro.currentLocale)
 const postsByYear = await getPostsByYear(currentLang)
+const years = Array.from(postsByYear.keys())
+const latestYear = years.length > 0 ? years[0] : null
 ---
 
 <Layout>
@@ -22,7 +26,52 @@ const postsByYear = await getPostsByYear(currentLang)
     <section class="mb-7.5">
       <h2 class="font-title text-4.5 font-medium c-secondary/70 mb-3">{year}</h2>
       <div class="uno-decorative-line" />
-      <PostList posts={posts} lang={currentLang} />
+      {year === latestYear ? (
+        /* Latest year: show thumbnails for posts with images */
+        <ul>
+          {posts.map((post) => {
+            const slug = post.data.abbrlink || post.id
+            return (
+              <li class="mb-5.5">
+                <div class="flex gap-4 items-start">
+                  {post.data.image && (
+                    <a href={getPostPath(slug, currentLang)} class="flex-shrink-0 hidden sm:block">
+                      <img
+                        src={post.data.image}
+                        alt=""
+                        class="w-16 h-12 object-cover rounded border border-secondary/10"
+                        loading="lazy"
+                      />
+                    </a>
+                  )}
+                  <div class="min-w-0">
+                    <h3 class="inline font-title transition-colors hover:c-primary">
+                      <a href={getPostPath(slug, currentLang)} class="cjk:tracking-wide">
+                        {post.data.title}
+                      </a>
+                    </h3>
+                    <div class="py-0.8 text-3.5 font-time lg:hidden">
+                      <PostDate
+                        date={post.data.published}
+                        minutes={post.remarkPluginFrontmatter.minutes}
+                      />
+                    </div>
+                    <div class="hidden text-3.65 font-time lg:(ml-2.5 inline)">
+                      <PostDate
+                        date={post.data.published}
+                        minutes={post.remarkPluginFrontmatter.minutes}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </li>
+            )
+          })}
+        </ul>
+      ) : (
+        /* Older years: plain text list */
+        <PostList posts={posts} lang={currentLang} />
+      )}
     </section>
   ))}
 </Layout>

@@ -4,6 +4,7 @@ import Button from '@/components/Button.astro'
 import Footer from '@/components/Footer.astro'
 import Header from '@/components/Header.astro'
 import Navbar from '@/components/Navbar.astro'
+import PageFooter from '@/components/PageFooter.astro'
 import CodeCopyButton from '@/components/Widgets/CodeCopyButton.astro'
 import GithubCard from '@/components/Widgets/GithubCard.astro'
 import ImageZoom from '@/components/Widgets/ImageZoom.astro'
@@ -57,6 +58,7 @@ const MarginBottom = isContentPage && themeConfig.comment.enabled
         <slot />
       </main>
       <Footer />
+      <PageFooter />
     </div>
     <Button supportedLangs={supportedLangs} />
     <SoundEffect />

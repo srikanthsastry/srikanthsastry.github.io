@@ -5,12 +5,15 @@ import { getCollection, render } from 'astro:content'
 import Comment from '@/components/Comment/Index.astro'
 import Backlinks from '@/components/Backlinks.astro'
 import PostDate from '@/components/PostDate.astro'
+import PostNav from '@/components/PostNav.astro'
 import SeriesNav from '@/components/SeriesNav.astro'
+import ShareLinks from '@/components/ShareLinks.astro'
 import TagList from '@/components/TagList.astro'
 import BackButton from '@/components/Widgets/BackButton.astro'
 import TOC from '@/components/Widgets/TOC.astro'
-import { allLocales } from '@/config'
+import { allLocales, themeConfig } from '@/config'
 import { getLangFromLocale, getLangRouteParam } from '@/i18n/lang'
+import { getPostPath } from '@/i18n/path'
 import Layout from '@/layouts/Layout.astro'
 import { checkPostSlugDuplication } from '@/utils/content'
 import { getPostDescription } from '@/utils/description'
@@ -55,31 +58,44 @@ export async function getStaticPaths() {
   }
   // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-  return allLocales.flatMap(lang => posts
-    // Show drafts in dev mode only
-    .filter(post => import.meta.env.DEV || !post.data.draft)
-    // Match current language or universal posts
-    .filter(post => post.data.lang === lang || post.data.lang === '')
-    .map((post) => {
+  return allLocales.flatMap((lang) => {
+    // Get all posts for this language, sorted by date (newest first)
+    const langPosts = posts
+      .filter(post => import.meta.env.DEV || !post.data.draft)
+      .filter(post => post.data.lang === lang || post.data.lang === '')
+      .sort((a, b) => b.data.published.valueOf() - a.data.published.valueOf())
+
+    return langPosts.map((post, index) => {
       const slug = post.data.abbrlink || post.id
+      // Previous = older post (next in array), Next = newer post (prev in array)
+      const olderPost = index < langPosts.length - 1 ? langPosts[index + 1] : null
+      const newerPost = index > 0 ? langPosts[index - 1] : null
       return {
         params: { lang: getLangRouteParam(lang), slug },
-        props: { post, supportedLangs: slugToLangs[slug] },
+        props: {
+          post,
+          supportedLangs: slugToLangs[slug],
+          prevPost: olderPost ? { title: olderPost.data.title, slug: olderPost.data.abbrlink || olderPost.id } : null,
+          nextPost: newerPost ? { title: newerPost.data.title, slug: newerPost.data.abbrlink || newerPost.id } : null,
+        },
       }
-    }),
-  )
+    })
+  })
 }
 
 interface Props {
   post: CollectionEntry<'posts'>
   supportedLangs: Language[]
+  prevPost: { title: string; slug: string } | null
+  nextPost: { title: string; slug: string } | null
 }
 
-const { post, supportedLangs } = Astro.props
+const { post, supportedLangs, prevPost, nextPost } = Astro.props
 const currentLang = getLangFromLocale(Astro.currentLocale)
 const slug = post.data.abbrlink || post.id
 const description = getPostDescription(post, 'meta')
 const { Content, headings, remarkPluginFrontmatter } = await render(post)
+const postUrl = new URL(getPostPath(slug, currentLang), themeConfig.site.url).toString()
 ---
 
 <Layout
@@ -136,6 +152,8 @@ const { Content, headings, remarkPluginFrontmatter } = await render(post)
       <Content />
       <!-- Copyright -->
       <div id="post-copyright" />
+      <!-- Share Links -->
+      <ShareLinks title={post.data.title} url={postUrl} />
       <!-- Tag List -->
       {post.data.tags?.length > 0 && (
         <div class="mt-12.6 uno-decorative-line" />
@@ -146,6 +164,8 @@ const { Content, headings, remarkPluginFrontmatter } = await render(post)
       )}
       <!-- Backlinks -->
       <Backlinks currentId={slug} collection="posts" />
+      <!-- Post Navigation (Prev/Next) -->
+      <PostNav prevPost={prevPost} nextPost={nextPost} lang={currentLang} />
       <!-- Comment -->
       <Comment />
     </div>
