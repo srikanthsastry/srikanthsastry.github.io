@@ -6,6 +6,7 @@ tags:
   - 'software engineering'
   - 'unit tests'
 abbrlink: 'dry-unit-tests-are-bad'
+image: /assets/images/squeeze-cloth.jpg
 lang: ''
 ---
 <!-- ![DRY](/assets/images/squeeze-cloth.jpg) -->
