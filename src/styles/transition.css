@@ -39,7 +39,7 @@ html[data-theme-changing] [data-disable-theme-toggle-transition] {
   }
 }
 
-@media (max-width: 1535px) {
+@media (max-width: 1279px) {
   #toc-container {
     opacity: 0;
     animation: fadeInUp 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
@@ -97,7 +97,7 @@ html[data-theme-changing] [data-disable-theme-toggle-transition] {
   }
 }
 
-@media (min-width: 1535px) {
+@media (min-width: 1280px) {
   #toc-desktop-icon {
     opacity: 0;
     animation: fadeInUpMini 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
