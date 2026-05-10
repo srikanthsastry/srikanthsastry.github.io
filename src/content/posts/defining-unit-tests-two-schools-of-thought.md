@@ -14,6 +14,11 @@ series: 'unit-testing'
 series_order: 8
 series_label: 'Unit Testing'
 series_section: 'Practices'
+excerpt: >
+  A unit test is a piece of code that verifies a "unit" of software, in "isolation", and quickly. There are two schools of thought on the notion of "unit" and "isolation", and that makes all the difference.
+categories:
+  - Professional
+
 ---
 
 <!-- ![](/assets/images/london-detroit.jpg) -->

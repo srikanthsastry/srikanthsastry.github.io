@@ -12,6 +12,11 @@ series: 'unit-testing'
 series_order: 11
 series_label: 'Unit Testing'
 series_section: 'Practices'
+excerpt: >
+  Simplicity should be a core property of unit tests. This is motivated, both by arguments in this post against DRY unit tests, and by software maintainability as the primary motivation for unit tests. Unit tests should be as simple as reasonable. It should be easy to ready, understand, and modify (it should be easy to modify any single test in isolation). It is perfectly acceptable for this simplicity to come at the expense of code-reuse, performance, and efficiency.
+categories:
+  - Professional
+
 ---
 <!-- ![DRY](/assets/images/squeeze-cloth.jpg) -->
 

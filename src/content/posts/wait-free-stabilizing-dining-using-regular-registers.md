@@ -6,6 +6,9 @@ tags:
   - academia
 abbrlink: 'wait-free-stabilizing-dining-using-regular-registers'
 lang: ''
+categories:
+  - Professional
+
 ---
 
 This paper was presented at OPODIS 2012.

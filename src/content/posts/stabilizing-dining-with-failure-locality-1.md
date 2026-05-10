@@ -5,6 +5,9 @@ tags:
   - 'dining philosophers'
 abbrlink: 'stabilizing-dining-with-failure-locality-1'
 lang: ''
+categories:
+  - Professional
+
 ---
 
 This paper was presented in ICDCN 2014.

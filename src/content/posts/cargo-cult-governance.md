@@ -13,6 +13,11 @@ lang: ''
 series: 'governance'
 series_order: 1
 series_label: 'Directive Governance'
+excerpt: >
+  Directive governance dominates the tech industry because it works in pharma, aviation, and manufacturing. But tech copies the form without checking the preconditions. Three structural assumptions that directive governance depends on: compression, proxy validity, and separability: all fail in software.
+categories:
+  - Professional
+
 ---
 
 

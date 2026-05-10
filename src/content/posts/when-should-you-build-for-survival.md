@@ -7,6 +7,9 @@ tags:
 abbrlink: 'when-should-you-build-for-survival'
 image: /assets/images/2019/08/Are-You-Succeeding-Blog-thegem-blog-default-1024x512.jpg
 lang: ''
+categories:
+  - Professional
+
 ---
 
 Previously, I wrote about [building for survival vs. success]({% post_url 2019-08-15-are-you-building-for-survival-or-excellence %}) building for survival vs. success. Briefly, when building for survival, your only goal to get the product working for the specific usecase, and in contrast, when building for success, you are building to solve a bigger class of problems within the broader context of your solution space. In this post, I will talk about when you should be [build for survival, and when for success](/garden/survival-vs-excellence-modes/).

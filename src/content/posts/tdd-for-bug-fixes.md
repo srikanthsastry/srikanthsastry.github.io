@@ -13,6 +13,9 @@ series: 'unit-testing'
 series_order: 18
 series_label: 'Unit Testing'
 series_section: 'Practices'
+categories:
+  - Professional
+
 ---
 
 <!-- ![](/assets/images/bug-stabbing-software-engineer-in-the-back.png) -->

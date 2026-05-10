@@ -5,6 +5,9 @@ tags:
   - travel
 abbrlink: 'tunisia-december-2010'
 lang: ''
+categories:
+  - Personal
+
 ---
 
 I was in Tunisia in the second week of December in 2010. Just a week before the popular uprising ripped the political system apart and dethroned the dictator [Ben Ali](http://en.wikipedia.org/wiki/Zine_El_Abidine_Ben_Ali). I have tried to capture my visit as a photo essay of Tunisia just before the [revolution](http://en.wikipedia.org/wiki/2010%E2%80%932011_Tunisian_revolution). The essay is divided into multiple parts: Tunis, Carthage, Sidi Bou Said, photographs from the subsharan desert near Tozeur, the nearby mountain oases, a salt lake, and a visit to the sets of the Phantom Menace.

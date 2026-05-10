@@ -6,6 +6,9 @@ tags:
   - travel
 abbrlink: 'shipka-memorial-church'
 lang: ''
+categories:
+  - Personal
+
 ---
 
 [Shipka memorial church](https://en.wikipedia.org/wiki/Shipka_Memorial_Church) is a Bulgarian Orthodox church built in the style of a Russian Orthodox church.

@@ -6,6 +6,9 @@ tags:
   - travel
 abbrlink: 'sevlievo'
 lang: ''
+categories:
+  - Personal
+
 ---
 
 I had a really good time visiting Mira's family in [Sevlievo, Bulgaria](https://en.wikipedia.org/wiki/Sevlievo). I am intrigued by the culture and sensibilities in small town Bulgaria.

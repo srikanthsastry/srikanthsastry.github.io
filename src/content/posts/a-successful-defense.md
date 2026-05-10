@@ -3,6 +3,9 @@ title: 'A successful defense'
 published: '2011-02-16T19:25:50-05:00'
 abbrlink: 'a-successful-defense'
 lang: ''
+categories:
+  - Professional
+
 ---
 
 I successfully defended my dissertation titled "A Prescription For Partial Synchrony" on January 21st, 2011. The dissertation was approved and accepted by the Thesis Office on February 2nd, 2011.

@@ -9,6 +9,9 @@ tags:
   - 'software engineering'
 abbrlink: 'object-composition-for-service-migration'
 lang: ''
+categories:
+  - Professional
+
 ---
 
 [Object Composition](https://en.wikipedia.org/wiki/Object_composition) is a very powerful and pervasive software design technique. Yet, paradoxically, it is an underutilized design pattern whose lack of usage is the root of many anti-patterns in software development. One that I continue to come across regularly has to do with not using composition to test and migrate a piece of software from one service to another.

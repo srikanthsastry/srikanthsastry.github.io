@@ -11,6 +11,9 @@ series: 'unit-testing'
 series_order: 12
 series_label: 'Unit Testing'
 series_section: 'Practices'
+categories:
+  - Professional
+
 ---
 <!-- ![](/assets/images/carabiners-connected.jpg) -->
 Almost [by definition]({% post_url 2022-06-18-defining-unit-tests-two-schools-of-thought %}) unit tests should be _isolated_ from its (external, shared) dependencies. But, equally importantly, unit tests should also be isolated _from each other_. When one test starts to affect another test, the two tests are said to be <a href="/garden/coupled-tests/"><em>coupled</em></a>. Alternatively, if changes to one test _can_ negatively impact the correctness of another test, then the two tests are said to be _coupled_.

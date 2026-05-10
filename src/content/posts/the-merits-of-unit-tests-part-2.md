@@ -11,6 +11,9 @@ series: 'unit-testing'
 series_order: 2
 series_label: 'Unit Testing'
 series_section: 'Merits'
+categories:
+  - Professional
+
 ---
 
 In the [previous post](http://srikanth.sastry.name/merits-of-unit-tests-part-1/),  we saw how unit tests can serve as a reliable source of documentation  for your code. There is a lot more that unit tests can do for you. In this post I'll talk about a fairly obvious, but often ignored, benefit  to unit testing: Refactoring.

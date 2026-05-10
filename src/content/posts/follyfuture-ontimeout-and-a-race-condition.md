@@ -7,6 +7,9 @@ tags:
 abbrlink: 'follyfuture-ontimeout-and-a-race-condition'
 image: /assets/images/2019/01/C-programming-in-a-nutshell-Imgur-450x450.png
 lang: ''
+categories:
+  - Professional
+
 ---
 
 **TL;DR.** The inability to cancel threads in C++ can result in bizarre semantics even in seemingly straightforward (and almost) declarative code. folly::Future is an interesting case in point.

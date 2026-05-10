@@ -5,6 +5,9 @@ tags:
   - research
 abbrlink: 'solvability-based-comparison-of-failure-detectors'
 lang: ''
+categories:
+  - Professional
+
 ---
 
 New paper in NCA 2014, with Josef Widder.

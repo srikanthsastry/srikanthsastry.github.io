@@ -8,6 +8,9 @@ tags:
 abbrlink: 'sync-your-alerts-to-your-sev-criteria'
 image: /assets/images/sleepy-engineer-cursing-laptop.png
 lang: ''
+categories:
+  - Professional
+
 ---
 <!-- ![](/assets/images/sleepy-engineer-cursing-laptop.png) -->
 At work, I had a customer team that aspired to be *“customer first.”* To them, that meant fixing issues *before* they became SEVs. That was all and good, except that the way they went about it was to fire alerts well *before* their SLOs were close to being breached. Of course, I knew nothing about it until I was the receiving end of their 'aspiration'.

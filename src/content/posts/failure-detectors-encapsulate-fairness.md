@@ -6,6 +6,9 @@ tags:
   - academia
 abbrlink: 'failure-detectors-encapsulate-fairness'
 lang: ''
+categories:
+  - Professional
+
 ---
 
 The full version of my OPODIS 2010 paper "Failure Detectors Encapsulate Fairness" ([preprint](/assets/documents/research/opodis2010.pdf)) has been accepted for publication with the journal Distributed Computing. You can find a [preprint of the paper here [pdf]](/assets/documents/research/journal/FD_encapsulate_fairness_preprint.pdf).

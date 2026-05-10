@@ -5,6 +5,9 @@ tags:
   - travel
 abbrlink: 'big-bend-nov-07'
 lang: ''
+categories:
+  - Personal
+
 ---
 
 It was the Thankgiving Week in November 2007, and I was not about to make the same mistake I did before. Staying back in College Station over Thanksgiving is one of the most depressing experiences. The entire town and TAMU campus is deserted. You feel like the sole survivor in a post-apocalyptic world. My brother, Shankar, was visiting me for the Thanksgiving break, I and I was not about to subject him to Thanksgiving in College Station. So yeah, I was definitely going out somewhere that wasn't College Station.

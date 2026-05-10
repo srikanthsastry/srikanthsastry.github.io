@@ -11,6 +11,11 @@ tags:
 abbrlink: 'secure-data-act-the-dilution-in-pseudonymization'
 image: /assets/images/secure-data-act-cover.jpg
 lang: ''
+excerpt: >
+  GDPR and the SECURE Data Act define pseudonymous data in nearly identical language. They diverge on what follows. One locates privacy in what is done with data. The other locates it in whether data can be traced back to someone. The same engineer building the same system faces a fundamentally different regulatory question depending on which framework governs.
+categories:
+  - Professional
+
 ---
 
 *Disclaimer: I am not a lawyer, and this post is not advising any technical implementation in pursuit of any privacy regulation. The opinions expressed here are my own and do not represent the views of my employer.*

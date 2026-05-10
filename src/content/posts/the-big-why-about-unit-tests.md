@@ -12,6 +12,11 @@ series: 'unit-testing'
 series_order: 6
 series_label: 'Unit Testing'
 series_section: 'Practices'
+excerpt: >
+  The ultimate "why" for unit tests is maintainability. All the arguments for having robust, good quality unit tests comes down to the following. Unit tests help keep your production code maintainable. Looking at maintainability as the primary motivation for unit tests allows us to look at some aspects of unit tests differently.
+categories:
+  - Professional
+
 ---
 <!-- ![Why unit test?](/assets/images/question_mark_person_leaning.png) -->
 When you ask "why do we write need unit tests?", you will get several answers including

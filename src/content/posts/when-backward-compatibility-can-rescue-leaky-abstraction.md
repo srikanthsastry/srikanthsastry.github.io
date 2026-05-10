@@ -8,6 +8,11 @@ tags:
 abbrlink: 'backward-compatibility-where-you-dont-expect'
 image: /assets/images/usb_c_into_ethernet_port.jpg
 lang: ''
+excerpt: >
+  I thought I was making a simple change; changed a function signature that was only ever called in the same module. I thought it was safe, until my pipeline crashed days later because old tasks serialized with the previous signature tried calling the new code.  This is a story about how I wrangled backward compatibility, tamed a leaky abstraction, and kept my data flowing.
+categories:
+  - Professional
+
 ---
 
 I ran into one of those delightful bugs that only show up in dynamic task generation of your data pipelines — the kind that teach you how a leaky abstraction in your pipeline platform can have you scratching your head in confusion.

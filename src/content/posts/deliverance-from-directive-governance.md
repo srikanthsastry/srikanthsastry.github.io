@@ -13,6 +13,11 @@ lang: ''
 series: 'governance'
 series_order: 3
 series_label: 'Directive Governance'
+excerpt: >
+  Directive governance is structurally wrong for software and a structural ratchet keeps it in place. The escape is subsidiarity, decisions made at the lowest competent level, sustained by missionary culture that resists re-centralization under pressure.
+categories:
+  - Professional
+
 ---
 
 

@@ -11,6 +11,9 @@ abbrlink: 'change-jekyll-theme'
 image: /assets/images/jekyll-new-suit-makeover.png
 lang: ''
 draft: true
+categories:
+  - Personal
+
 ---
 After I moved my website from Wordpress to [Jekyll](https://jekyllrb.com), I hadn't changed the theme for nearly 5 years. When I finally decided to change the theme recently, it turned out to be a lot more complicated than I expected. After a lot of trial and error, and searching the internet, and asking ChatGPT, I managed to get the theme changed. As a note to my future self, and to anyone else who might be struggling to update their Jekyll theme, I am outlining the steps here that will make it relatively straightforward for you to move from one theme to another.
 

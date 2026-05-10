@@ -10,6 +10,9 @@ series: 'unit-testing'
 series_order: 4
 series_label: 'Unit Testing'
 series_section: 'Merits'
+categories:
+  - Professional
+
 ---
 
 Cross posted on [LinkedIn](https://www.linkedin.com/pulse/unit-tests-ftw-part-4-srikanth-sastry/)

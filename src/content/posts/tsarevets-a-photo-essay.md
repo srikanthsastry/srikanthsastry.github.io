@@ -7,6 +7,9 @@ tags:
 abbrlink: 'tsarevets-a-photo-essay'
 image: /assets/images/2015/08/IMG_20150829_110825-e1440950848706.jpg
 lang: ''
+categories:
+  - Personal
+
 ---
 
 [Tsarevets fortress](https://en.wikipedia.org/wiki/Tsarevets_(fortress)) was a medieval stronghold of the erstwhile [Second Bulgarian Empire](https://en.wikipedia.org/wiki/Second_Bulgarian_Empire) located near the city of [Veliko Tarnovo](https://en.wikipedia.org/wiki/Veliko_Tarnovo) (which was also the capital city of that empire). While the fortress is in ruins, the recent reconstructions and restorations make it worth visiting.

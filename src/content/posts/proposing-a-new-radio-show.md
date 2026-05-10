@@ -3,6 +3,9 @@ title: 'Proposing a new radio show'
 published: '2008-08-27T19:40:39-04:00'
 abbrlink: 'proposing-a-new-radio-show'
 lang: ''
+categories:
+  - Personal
+
 ---
 
 I am proposing a new music show on [KEOS 89.1FM](http://www.keos.org/) Community Radio. Below is the proposal I will be submitting to the KEOS mangement team.

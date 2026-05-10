@@ -8,6 +8,11 @@ tags:
 abbrlink: 'scripts-and-their-undo'
 image: /assets/images/2019/01/bash-logo-672x372.png
 lang: ''
+excerpt: >
+  TL;DR. Scripts are a great way to automate the mundane. But be sure you give yourself a way out --- an undo -- when running them.
+categories:
+  - Professional
+
 ---
 
 **TL;DR.** *Scripts are a great way to automate the mundane. But be sure you give yourself a way out --- an undo -- when running them.*

@@ -6,6 +6,9 @@ tags:
   - travel
 abbrlink: 'hitar-petar'
 lang: ''
+categories:
+  - Personal
+
 ---
 
 [Hitar Pitar](http://hitar-petar.com/) is a quaint little restaurant and hotel in the village of Beli Osam in Bulgaria (close to the Troyan Monastery). It has a neat collection of decorative artifacts that make for an interesting collection of photos.

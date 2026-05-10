@@ -8,6 +8,9 @@ tags:
 abbrlink: 'reduce-cyclomatic-complexity'
 image: /assets/images/cpu-in-maze-pixel-art.png
 lang: ''
+categories:
+  - Professional
+
 ---
 
 ## What even _is_ Cyclomatic Complexity?

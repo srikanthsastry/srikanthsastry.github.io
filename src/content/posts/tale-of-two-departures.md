@@ -7,6 +7,9 @@ tags:
 abbrlink: 'tale-of-two-departures'
 image: /assets/images/2020/02/137FABBE-C7DC-4401-B0AB-299AA800D039-740x430.jpeg
 lang: ''
+categories:
+  - Professional
+
 ---
 
 ![Image by Maret Hosemann from Pixabay](/assets/images/2020/02/img_0143-1024x683.jpg)

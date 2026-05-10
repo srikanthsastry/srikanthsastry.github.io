@@ -10,6 +10,9 @@ series: 'unit-testing'
 series_order: 5
 series_label: 'Unit Testing'
 series_section: 'Merits'
+categories:
+  - Professional
+
 ---
 
 Cross posted on [LinkedIn](https://www.linkedin.com/pulse/merits-unit-tests-part-5-srikanth-sastry/).

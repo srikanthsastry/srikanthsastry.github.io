@@ -6,6 +6,11 @@ tags:
 abbrlink: 'defense-in-depth-vs-locality-of-behavior'
 image: /assets/images/naked-knight-with-helmet-and-shield.jpg
 lang: ''
+excerpt: >
+  A story about how defense-in-depth and locality of behavior collide, and how blindly relying on fallback mechanisms can backfire.
+categories:
+  - Professional
+
 ---
 
 Defense-in-depth—borrowed from military and security strategy—means layering safeguards so that if one fails, another takes over ([Cloudflare](https://www.cloudflare.com/learning/security/glossary/what-is-defense-in-depth/), [Wikipedia](https://en.wikipedia.org/wiki/Defense_in_depth_(computing))). Defensive programming is a software take on the same idea: add checks and fallbacks so bugs don't escalate.

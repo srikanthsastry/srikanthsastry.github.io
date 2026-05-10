@@ -11,6 +11,11 @@ series: 'unit-testing'
 series_order: 7
 series_label: 'Unit Testing'
 series_section: 'Practices'
+excerpt: >
+  Unit test suites have three attributes: accuracy, completeness, and speed.  You can maximize any two, but not all three.  So how do you choose what to maximize?
+categories:
+  - Professional
+
 ---
 <!-- ![](/assets/images/accuracy-completeness-speed.png) -->
 Unit test suites have <a href="/garden/unit-test-attribute-tradeoffs/">three primary attributes</a>.

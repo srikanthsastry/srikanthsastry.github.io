@@ -7,6 +7,9 @@ tags:
 abbrlink: 'are-you-building-for-survival-or-excellence'
 image: /assets/images/2019/08/maxresdefault-450x253.jpg
 lang: ''
+categories:
+  - Professional
+
 ---
 
 In my experience, the approach to building a software artifact often falls into one of two types: *[building for survival](/garden/survival-vs-excellence-modes/)*, or *building for success*.

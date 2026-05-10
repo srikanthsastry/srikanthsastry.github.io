@@ -7,6 +7,9 @@ tags:
 abbrlink: 'git-may-not-be-the-best-for-saas-companies'
 image: /assets/images/2020/02/img_0147-740x430.jpg
 lang: ''
+categories:
+  - Professional
+
 ---
 
 ![](/assets/images/2019/12/2C08C1F4-1EF1-44F7-90FA-DB1030628817.jpeg)

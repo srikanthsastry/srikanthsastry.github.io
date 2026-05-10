@@ -7,6 +7,11 @@ tags:
 abbrlink: 'reuse-code-not-objects'
 image: /assets/images/2021/07/pexels-photo-5218009-edited.jpeg
 lang: ''
+excerpt: >
+  We all know of the importance of code reuse and DRY code. It is important to remember that this applies to code, and not to objects!
+categories:
+  - Professional
+
 ---
 
 We all know of the importance of [code reuse](https://en.wikipedia.org/wiki/Code_reuse) and [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) code. It is important to remember that this applies to code, and *not* to [objects](/garden/reuse-code-not-objects/)!

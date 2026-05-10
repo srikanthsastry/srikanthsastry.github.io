@@ -9,6 +9,11 @@ tags:
 abbrlink: 'the-suggestible-actor'
 image: /assets/images/suggestible-actor-cover.jpg
 lang: ''
+excerpt: >
+  All software design assumes actors with intent. The well-intentioned actor falls into the pit of success. The malicious actor meets the fortress. But AI coding agents have no intent at all. Placing them on the intent spectrum is a category error. They need their own model: the suggestible actor.
+categories:
+  - Professional
+
 ---
 
 Every software system is designed around an assumption about its actors; the ones who use the system, and what drives their behavior. This assumption, the *actor model*, determines API surfaces, error handling, defaults, and guardrails.

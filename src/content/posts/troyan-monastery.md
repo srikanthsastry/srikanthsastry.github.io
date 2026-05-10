@@ -6,6 +6,9 @@ tags:
   - travel
 abbrlink: 'troyan-monastery'
 lang: ''
+categories:
+  - Personal
+
 ---
 
 If you are in northern Bulgarian, I recommend stopping by [Troyan Monastery](https://en.wikipedia.org/wiki/Troyan_Monastery). It is definitely worth a couple of hours of your time.

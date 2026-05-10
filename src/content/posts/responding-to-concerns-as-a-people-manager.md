@@ -6,6 +6,9 @@ tags:
 abbrlink: 'responding-to-concerns-as-a-people-manager'
 image: /assets/images/2019/12/unhappy-389944_1920-740x430.jpg
 lang: ''
+categories:
+  - Professional
+
 ---
 
 You are the people manager for a team, and a team member comes to you with a concern. How should you approach it? I have been in this situation multiple times, and have admittedly made some wrong turns. After some corrections and learning, here is what seems to work well for me (although YMMV). If you like lists, here is a snapshot of the path I take.

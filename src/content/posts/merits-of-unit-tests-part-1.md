@@ -12,6 +12,9 @@ series: 'unit-testing'
 series_order: 1
 series_label: 'Unit Testing'
 series_section: 'Merits'
+categories:
+  - Professional
+
 ---
 
 There are multiple reasons to write unit tests. Verification is only one of them, and the least interesting. This is part 1 of a five part series on why you should write unit tests (apart from the obvious): Documentation!

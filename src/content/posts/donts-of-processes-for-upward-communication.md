@@ -6,6 +6,9 @@ tags:
 abbrlink: 'donts-of-processes-for-upward-communication'
 image: /assets/images/2020/01/img_0526-740x430.jpg
 lang: ''
+categories:
+  - Professional
+
 ---
 
 ![](/assets/images/2020/02/pexels-photo-3532005-1024x682.jpg)

@@ -7,6 +7,11 @@ tags:
 abbrlink: 'when-i-first-realized-my-privilege'
 image: /assets/images/handcuffed.jpg
 lang: ''
+excerpt: >
+  For the first 23 years of my life, I was convinced that everything that came my way was hard earned, and it was despite the oppression against our community. At 23, I was working as a young software engineer in Bangalore.  I needed the house deep cleaned, and a contractor said that he would send a couple of people over who would take care of it for us.  I was about to get my first glimpse into the privilege that I had enjoyed all my life.
+categories:
+  - Personal
+
 ---
 <!-- ![Oppressed](/assets/images/handcuffed.jpg) -->
 

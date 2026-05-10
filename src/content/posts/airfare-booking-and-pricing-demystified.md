@@ -3,6 +3,9 @@ title: 'Airfare booking and pricing, demystified!'
 published: '2015-05-16T19:39:29-04:00'
 abbrlink: 'airfare-booking-and-pricing-demystified'
 lang: ''
+categories:
+  - Professional
+
 ---
 
 I work on Google's air travel infrastructure team, which powers [Google Flight Search](https://www.google.com/flights). Last month, I did a #HangoutOnAir with university students in India. The main focus of that talk was to introduce the students to the sort of challenges that we face. The talk is up on Google Plus, and has since been split into two parts.

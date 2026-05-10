@@ -12,6 +12,11 @@ lang: ''
 series: 'governance'
 series_order: 2
 series_label: 'Directive Governance'
+excerpt: >
+  Directive (top-down) governance is structurally wrong for software engineering. So why do tech companies persist with it? The answer is a ratchet: companies centralize quickly during crisis and decentralize very slowly afterward. Three compounding layers make this asymmetry sticky.
+categories:
+  - Professional
+
 ---
 
 

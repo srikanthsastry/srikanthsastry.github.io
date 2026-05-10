@@ -6,6 +6,9 @@ tags:
 abbrlink: 'code-reuse-can-prevent-bugs'
 image: /assets/images/2020/12/arrow-2756728_1280-740x430.png
 lang: ''
+categories:
+  - Professional
+
 ---
 
 I am as surprised as you are at the title. The statement does seem like "Duh!", but much to my embarrassment, I have seen enough code in many code bases to need to reiterate this.

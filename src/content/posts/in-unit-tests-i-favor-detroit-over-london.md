@@ -15,6 +15,9 @@ series: 'unit-testing'
 series_order: 9
 series_label: 'Unit Testing'
 series_section: 'Practices'
+categories:
+  - Professional
+
 ---
 <!-- ![](/assets/images/detroit-wall-frame.jpg) -->
 

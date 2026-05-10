@@ -6,6 +6,9 @@ tags:
 abbrlink: 'tryst-with-kudremukh'
 image: /assets/images/stories/travels/kudremukh/IMG_1534.jpg
 lang: ''
+categories:
+  - Personal
+
 ---
 
 When I received the news that Kudremukh, the place where I grew up, spent all of my childhood and school years was going to be closed down, I was hit by something that had never experienced before. Nostalgia. I was never really a big fan of that place. Its a small mining town with a population of around 10,000. The earliest memory I have of Kudremukh is rain, pouring rain. It spends a good part of the year drenching itself from the spout in the sky right above it. The only thing worth mentioning about the place is the scenic beauty it mars. All around Kudremukh you see beautiful hills, lush green grass lands, wild expanse of thick rain forests, the glisten of the rocks as the even sun shines its amber on the barren hillocks is permanently etched in my memory. After high school and before going to college, we had a vacation that spanned over three months. With nothing to do, our class would meet almost everyday at some argreed upon place and we'd start exploring the woods. It was mostly in these wild escapades that I got to see the magnificence that the national park around Kudremukh hid within it, and made me realize that the only thing that is ruining it is the town itself, and iron ore mine that it supports.

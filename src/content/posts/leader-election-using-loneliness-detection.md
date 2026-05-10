@@ -5,6 +5,9 @@ tags:
   - research
 abbrlink: 'leader-election-using-loneliness-detection'
 lang: ''
+categories:
+  - Professional
+
 ---
 
 My recent work titled "Leader Election Using Loneliness Detection" is accepted for presentation at the 25th International Symposium on DIStributed Computing (DISC) in Rome, and in the journal Distributed Computing. Briefly, the work focuses on the 'gap in the computational power' in single-hop wireless systems when the information about message loss in the system is varied.

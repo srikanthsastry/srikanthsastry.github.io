@@ -10,6 +10,11 @@ abbrlink: 'const-ref-vs-raw-ptr-a-fix-for-shared-ptr-reads'
 image: /assets/images/raw-pointer-smoking-gun-const-ref-vest.jpg
 lang: ''
 draft: true
+excerpt: >
+  Don't pass `shared_ptr<T>` by value unless you need ownership semantics.   Prefer `const T&` for read-only access, or `const std::shared_ptr<T>&` if you need to keep smart pointer semantics—without paying the refcount tax.   Avoid raw pointers unless you're absolutely sure they're the right tool.
+categories:
+  - Professional
+
 ---
 
 ## The problem
