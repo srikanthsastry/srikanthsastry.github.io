@@ -132,6 +132,8 @@ html.dark .heti pre span {
 /* Blockquotes */
 .heti :where(blockquote) {
   --at-apply: 'my-6 border-l-3 border-secondary/30 border-solid px-5 py-1 c-secondary/85';
+  font-family: 'STIX', ui-serif, Georgia, serif;
+  font-style: italic;
 }
 .heti blockquote[class*="admonition-"] {
   --at-apply: 'py-1.5 c-secondary';
