@@ -2,11 +2,11 @@
 lang: ''
 ---
 
-I'm Srikanth Sastry, a software engineer based in the Boston area. I've spent the last nine-plus years working on privacy infrastructure: consent enforcement, consent revocation in data lakes, and petabyte-scale consent filtering.
+I am Srikanth Sastry. I am currently an engineering lead at [Meta](https://meta.com) working on privacy infrastructure. Before joining Facebook, I was a software engineer at Google in Cambridge, MA, and before that I was a postdoctoral associate with Nancy Lynch at [CSAIL, MIT](https://csail.mit.edu). Prior to that, I received my PhD from [Texas A&M University](https://www.tamu.edu).
 
-This blog has been running since 2007. I write about technology, software engineering, organizational governance, and occasionally life. Recent work focuses on how large organizations make decisions (and the structural flaws in those mechanisms), the intersection of AI and open source licensing, and the craft of unit testing.
+My professional interests include distributed system design, software engineering processes, and building engineering teams. I also maintain a [digital garden](/garden/) — a collection of evolving ideas and notes that complement my blog posts.
 
-I also maintain a [digital garden](/garden/) of atomic notes that develop alongside the blog posts.
+In a previous life, during my years in academia, I worked on distributed systems, networking, fault tolerance, and algorithm design and analysis. My list of [publications](/publications) are available on [DBLP](https://dblp.org/pid/39/1050.html).
 
 ## Elsewhere
 
