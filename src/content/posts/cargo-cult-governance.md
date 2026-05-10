@@ -2,9 +2,9 @@
 title: "Cargo Cult Governance"
 published: 2026-03-26
 tags:
-  - governance
+  - 'governance'
   - 'directive-governance'
-  - 'software-engineering'
+  - 'software engineering'
   - 'tech-industry'
   - 'organizational-design'
 abbrlink: 'cargo-cult-governance'

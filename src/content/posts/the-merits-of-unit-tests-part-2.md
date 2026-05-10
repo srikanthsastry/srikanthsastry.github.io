@@ -4,7 +4,7 @@ published: '2017-11-12T19:04:46-05:00'
 tags:
   - 'software engineering'
   - 'software testing'
-  - 'unit test'
+  - 'unit tests'
 abbrlink: 'the-merits-of-unit-tests-part-2'
 lang: ''
 series: 'unit-testing'

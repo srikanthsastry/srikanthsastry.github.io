@@ -2,10 +2,10 @@
 title: 'My code is bugfree! Why should I unit test?'
 published: '2017-11-01T16:33:01-04:00'
 tags:
-  - documentation
+  - 'documentation'
   - 'software engineering'
   - 'software testing'
-  - 'unit test'
+  - 'unit tests'
 abbrlink: 'merits-of-unit-tests-part-1'
 lang: ''
 series: 'unit-testing'

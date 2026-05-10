@@ -3,7 +3,7 @@ title: "The Suggestible Actor: A New Model for AI-Assisted Software Development"
 published: 2026-04-24
 tags:
   - 'software engineering'
-  - ai
+  - 'AI'
   - 'api design'
   - 'mental models'
 abbrlink: 'the-suggestible-actor'

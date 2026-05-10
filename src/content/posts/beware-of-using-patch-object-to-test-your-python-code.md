@@ -2,9 +2,9 @@
 title: Beware of using patch.object to test your Python code
 published: 2022-02-28
 tags:
-  - python
-  - patch
-  - testing
+  - 'Python'
+  - 'patch'
+  - 'testing'
   - 'software engineering'
 abbrlink: 'beware-of-using-patch-object-to-test-your-python-code'
 image: /assets/images/software-testing.jpg
