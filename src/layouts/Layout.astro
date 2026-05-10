@@ -4,6 +4,7 @@ import TopBar from '@/components/TopBar.astro'
 import PageFooter from '@/components/PageFooter.astro'
 import CodeCopyButton from '@/components/Widgets/CodeCopyButton.astro'
 import GithubCard from '@/components/Widgets/GithubCard.astro'
+import GardenPreview from '@/components/GardenPreview.astro'
 import ImageZoom from '@/components/Widgets/ImageZoom.astro'
 import MediaEmbed from '@/components/Widgets/MediaEmbed.astro'
 import SoundEffect from '@/components/Widgets/SoundEffect.astro'
@@ -59,5 +60,6 @@ const MarginBottom = isContentPage && themeConfig.comment.enabled
     <GithubCard />
     <MediaEmbed />
     <ImageZoom />
+    <GardenPreview />
   </body>
 </html>
