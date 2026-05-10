@@ -58,6 +58,11 @@
   --at-apply: 'transition-colors ease-out hover:(c-accent decoration-accent/70) lg:underline-0.1em';
 }
 
+/* Garden note links — dotted underline signals popover behavior */
+.heti :where(a[href*="/garden/"]:not(.no-heti):not(.no-heti *)) {
+  text-decoration-style: dotted;
+}
+
 /* Images */
 .heti :where(img:not(.no-heti):not(.no-heti *)) {
   --at-apply: 'mx-auto cursor-zoom-in';
