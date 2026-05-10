@@ -31,7 +31,7 @@ const badge = maturityBadge[note.data.maturity] ?? maturityBadge.seedling
 ---
 
 <Layout postTitle={note.data.title} postDescription={note.data.excerpt_text}>
-  <article class="heti">
+  <article class="heti" data-pagefind-body>
     <div class="relative">
       <BackButton />
       <h1 class="post-title">{note.data.title}</h1>
