@@ -1,9 +1,7 @@
 ---
-import PostList from '@/components/PostList.astro'
-import PostDate from '@/components/PostDate.astro'
+import PostCard from '@/components/PostCard.astro'
 import { allLocales } from '@/config'
 import { getLangFromLocale, getLangRouteParam } from '@/i18n/lang'
-import { getPostPath } from '@/i18n/path'
 import Layout from '@/layouts/Layout.astro'
 import { getPostsByYear } from '@/utils/content'
 
@@ -20,50 +18,15 @@ const postsByYear = await getPostsByYear(currentLang)
 <Layout>
   <h1 class="font-title text-10 font-semibold tracking-tight lg:text-11 mb-8">All Posts</h1>
 
-  {Array.from(postsByYear.entries(), ([year, posts]) => {
-    const withImages = posts.filter(p => p.data.image)
-    const withoutImages = posts.filter(p => !p.data.image)
-    return (
+  {Array.from(postsByYear.entries(), ([year, posts]) => (
     <section class="mb-7.5">
       <h2 class="font-title text-4.5 font-medium c-secondary/70 mb-3">{year}</h2>
       <div class="uno-decorative-line" />
-      {withImages.length > 0 && (
-        <div class="grid grid-cols-1 gap-5 mb-6 sm:grid-cols-2">
-          {withImages.map((post) => {
-            const slug = post.data.abbrlink || post.id
-            return (
-              <a
-                href={getPostPath(slug, currentLang)}
-                class="group block overflow-hidden rounded-lg border border-secondary/10 hover:border-secondary/30 transition-all duration-200"
-              >
-                <div class="aspect-[16/9] overflow-hidden bg-secondary/5">
-                  <img
-                    src={post.data.image}
-                    alt={post.data.title}
-                    class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                </div>
-                <div class="p-4">
-                  <h3 class="font-title font-medium text-4 leading-snug group-hover:c-primary transition-colors mb-1.5">
-                    {post.data.title}
-                  </h3>
-                  <div class="text-3.25 font-time c-secondary/60">
-                    <PostDate
-                      date={post.data.published}
-                      minutes={post.remarkPluginFrontmatter.minutes}
-                    />
-                  </div>
-                </div>
-              </a>
-            )
-          })}
-        </div>
-      )}
-      {withoutImages.length > 0 && (
-        <PostList posts={withoutImages} lang={currentLang} />
-      )}
+      <div class="grid grid-cols-1 gap-5 mb-6 sm:grid-cols-2">
+        {posts.map((post) => (
+          <PostCard post={post} lang={currentLang} />
+        ))}
+      </div>
     </section>
-    )
-  })}
+  ))}
 </Layout>

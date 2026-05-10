@@ -1,11 +1,10 @@
 ---
 import type { CollectionEntry } from 'astro:content'
 import { getCollection } from 'astro:content'
+import PostCard from '@/components/PostCard.astro'
 import PostList from '@/components/PostList.astro'
-import PostDate from '@/components/PostDate.astro'
 import { allLocales } from '@/config'
 import { getLangFromLocale, getLangRouteParam } from '@/i18n/lang'
-import { getPostPath } from '@/i18n/path'
 import Layout from '@/layouts/Layout.astro'
 import { getPinnedPosts, getPosts } from '@/utils/content'
 
@@ -19,11 +18,6 @@ const currentLang = getLangFromLocale(Astro.currentLocale)
 const pinnedPosts = await getPinnedPosts(currentLang)
 const allPosts = await getPosts(currentLang)
 const recentPosts = allPosts.filter(p => !p.data.pin).slice(0, 8)
-
-// Split: all posts with cover images as cards, rest as text
-const postsWithImages = recentPosts.filter(p => p.data.image)
-const imagePostSlugs = new Set(postsWithImages.map(p => p.data.abbrlink || p.id))
-const remainingPosts = recentPosts.filter(p => !imagePostSlugs.has(p.data.abbrlink || p.id))
 
 // Get garden notes, sorted by title, grouped by maturity
 const gardenNotes: CollectionEntry<'garden'>[] = await getCollection('garden')
@@ -98,45 +92,11 @@ const totalNotes = gardenNotes.length
     </div>
     <div class="uno-decorative-line" />
 
-    <!-- Cover Image Cards Grid -->
-    {postsWithImages.length > 0 && (
-      <div class="grid grid-cols-1 gap-5 mb-8 sm:grid-cols-2">
-        {postsWithImages.map((post) => {
-          const slug = post.data.abbrlink || post.id
-          return (
-            <a
-              href={getPostPath(slug, currentLang)}
-              class="group block overflow-hidden rounded-lg border border-secondary/10 hover:border-secondary/30 transition-all duration-200"
-            >
-              <div class="aspect-[16/9] overflow-hidden bg-secondary/5">
-                <img
-                  src={post.data.image}
-                  alt={post.data.title}
-                  class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                  loading="lazy"
-                />
-              </div>
-              <div class="p-4">
-                <h3 class="font-title font-medium text-4 leading-snug group-hover:c-primary transition-colors mb-1.5">
-                  {post.data.title}
-                </h3>
-                <div class="text-3.25 font-time c-secondary/60">
-                  <PostDate
-                    date={post.data.published}
-                    minutes={post.remarkPluginFrontmatter.minutes}
-                  />
-                </div>
-              </div>
-            </a>
-          )
-        })}
-      </div>
-    )}
-
-    <!-- Remaining Posts as Text List -->
-    {remainingPosts.length > 0 && (
-      <PostList posts={remainingPosts} lang={currentLang} />
-    )}
+    <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+      {recentPosts.map((post) => (
+        <PostCard post={post} lang={currentLang} />
+      ))}
+    </div>
   </section>
 
   <!-- Garden Preview -->
