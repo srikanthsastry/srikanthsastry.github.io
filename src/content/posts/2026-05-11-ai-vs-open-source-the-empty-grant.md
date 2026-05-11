@@ -1,6 +1,6 @@
 ---
 title: "AI vs. Open Source, Part 1: The Empty Grant"
-published: 2026-05-07
+published: 2026-05-11
 tags:
   - 'ai'
   - 'open source'
