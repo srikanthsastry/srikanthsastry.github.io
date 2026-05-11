@@ -225,6 +225,14 @@ for pkm_file in "${FILES[@]}"; do
     slug=$(make_slug "$basename")
     garden_file="$GARDEN_DIR/${slug}.md"
 
+    # Gate: a garden note must be referenced by at least one blog post.
+    # Check for /garden/{slug} in any post body.
+    if ! grep -rlq "/garden/${slug}" "$REPO_DIR/_posts/" 2>/dev/null; then
+        echo "⏭  Skipping $slug (no blog post links to /garden/${slug}/)"
+        skipped_count=$((skipped_count + 1))
+        continue
+    fi
+
     # Check for existing file
     if [ -f "$garden_file" ] && [ "$FORCE" = false ]; then
         echo "⏭  Skipping $slug (already exists in _garden/). Use --force to overwrite."
@@ -484,7 +492,6 @@ for pkm_file in "${FILES[@]}"; do
         echo "---"
         echo "title: \"$title\""
 
-        echo "garden_type: $pkm_type"
         echo "maturity: $maturity"
         if [ -n "$tags_line" ]; then
             echo "tags: $tags_line"

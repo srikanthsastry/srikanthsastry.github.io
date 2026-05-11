@@ -1,0 +1,133 @@
+---
+import type { MarkdownHeading } from 'astro'
+import { ui } from '@/i18n/ui'
+import { getPageInfo } from '@/utils/page'
+
+interface Props {
+  headings: MarkdownHeading[]
+}
+
+const { currentLang } = getPageInfo(Astro.url.pathname)
+const currentUI = ui[currentLang as keyof typeof ui] ?? {}
+
+const { headings = [] } = Astro.props
+const filteredHeadings = headings.filter(heading => heading.depth >= 2 && heading.depth <= 4)
+---
+
+{filteredHeadings.length > 0 && (
+  // Inline TOC
+  <div
+    id="toc-container"
+    class="mb-8 uno-round-border bg-secondary/5"
+  >
+    {/* Hidden Checkbox */}
+    <input
+      type="checkbox"
+      id="toc-toggle"
+      hidden
+    />
+    {/* TOC Header */}
+    <div class="relative h-12 w-full">
+      <label
+        for="toc-toggle"
+        class="absolute inset-0 flex cursor-pointer items-center"
+      >
+        <span id="toc-heading" class="ml-4 font-semibold text-sm c-secondary/70">
+          {currentUI.toc}
+        </span>
+        <svg
+          id="toc-chevron"
+          class="ml-auto mr-4 h-4 w-4 c-secondary/40"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <polyline points="6 9 12 15 18 9" />
+        </svg>
+      </label>
+    </div>
+
+    {/* Expandable Content */}
+    <div id="toc-accordion-wrapper">
+      <nav
+        id="toc-accordion-content"
+        aria-label="Table of Contents"
+      >
+        <ul id="toc-links-list">
+          {filteredHeadings.map(heading => (
+            <li
+              class:list={{
+                'ml-0': heading.depth === 2,
+                'ml-4': heading.depth === 3,
+                'ml-8': heading.depth === 4,
+              }}
+            >
+              <a
+                href={`#${heading.slug}`}
+                class:list={[
+                  { 'no-heti toc-links-h2': heading.depth === 2 },
+                  { 'no-heti toc-links-h3': heading.depth === 3 },
+                  { 'no-heti toc-links-h4': heading.depth === 4 },
+                ]}
+              >
+                {heading.text}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+  </div>
+)}
+
+{/* Floating back-to-TOC button */}
+{filteredHeadings.length > 0 && (
+  <button
+    id="toc-float-btn"
+    aria-label="Back to table of contents"
+  >
+    <svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15" />
+    </svg>
+    <span>Contents</span>
+  </button>
+)}
+
+<script>
+// Floating button: appears when TOC scrolls out of view
+let tocObserver: IntersectionObserver | null = null
+
+function setupFloatBtn() {
+  const tocContainer = document.getElementById('toc-container')
+  const floatBtn = document.getElementById('toc-float-btn')
+  if (!tocContainer || !floatBtn) return
+
+  tocObserver = new IntersectionObserver(
+    ([entry]) => {
+      if (!entry.isIntersecting && entry.boundingClientRect.top < 0) {
+        floatBtn.classList.add('toc-float-visible')
+      } else {
+        floatBtn.classList.remove('toc-float-visible')
+      }
+    },
+    { threshold: 0 }
+  )
+
+  tocObserver.observe(tocContainer)
+
+  floatBtn.addEventListener('click', () => {
+    tocContainer.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  })
+}
+
+function cleanupFloatBtn() {
+  tocObserver?.disconnect()
+  tocObserver = null
+}
+
+document.addEventListener('astro:page-load', () => { setupFloatBtn() })
+document.addEventListener('astro:before-swap', cleanupFloatBtn)
+</script>

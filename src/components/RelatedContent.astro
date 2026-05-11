@@ -1,0 +1,129 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import { getCollection } from 'astro:content'
+
+interface Props {
+  post: CollectionEntry<'posts'>
+}
+
+const { post } = Astro.props
+const postSlug = post.data.abbrlink || post.id
+
+// Get all garden notes and posts for lookup
+const allNotes: CollectionEntry<'garden'>[] = await getCollection('garden')
+const allPosts: CollectionEntry<'posts'>[] = await getCollection('posts')
+
+// Build lookup maps
+const notesBySlug = new Map(allNotes.map(n => [n.id, n]))
+const postsBySlug = new Map<string, CollectionEntry<'posts'>>()
+for (const p of allPosts) {
+  const slug = p.data.abbrlink || p.id
+  postsBySlug.set(slug, p)
+}
+
+// Parse forward links from the post body
+const body = post.body || ''
+
+interface LinkedItem {
+  title: string
+  href: string
+  type: 'garden' | 'post'
+  emoji: string
+  subtitle?: string
+  image?: string
+}
+
+const linkedItems: LinkedItem[] = []
+const seenHrefs = new Set<string>()
+
+// Match garden links: [text](/garden/slug/) or [text](/garden/slug)
+const gardenLinkRegex = /\[([^\]]*)\]\(\/garden\/([a-z0-9-]+)\/?(?:#[^\)]*)?\)/g
+let match: RegExpExecArray | null
+while ((match = gardenLinkRegex.exec(body)) !== null) {
+  const slug = match[2]
+  const href = `/garden/${slug}/`
+  if (seenHrefs.has(href)) continue
+  seenHrefs.add(href)
+
+  const note = notesBySlug.get(slug)
+  if (note) {
+    const maturityEmoji = note.data.maturity === 'evergreen' ? '🌳' : note.data.maturity === 'budding' ? '🌿' : '🌱'
+    linkedItems.push({
+      title: note.data.title,
+      href,
+      type: 'garden',
+      emoji: maturityEmoji,
+      subtitle: note.data.excerpt_text,
+    })
+  }
+}
+
+// Match post links: [text](/post-slug/) — but not /garden/, /tags/, /publications/, etc.
+const internalLinkRegex = /\[([^\]]*)\]\(\/([a-z0-9][a-z0-9-]*[a-z0-9])\/?(?:#[^\)]*)?\)/g
+while ((match = internalLinkRegex.exec(body)) !== null) {
+  const slug = match[2]
+  if (['garden', 'tags', 'posts', 'about', 'publications', 'touchstone-radio-episodes', 'atom.xml'].includes(slug)) continue
+  if (slug === postSlug) continue
+
+  const href = `/${slug}/`
+  if (seenHrefs.has(href)) continue
+  seenHrefs.add(href)
+
+  const linkedPost = postsBySlug.get(slug)
+  if (linkedPost) {
+    linkedItems.push({
+      title: linkedPost.data.title,
+      href,
+      type: 'post',
+      emoji: '🪶',
+      image: linkedPost.data.image,
+    })
+  }
+}
+
+// Sort: posts first (fewer), then garden notes; alphabetical within each group
+linkedItems.sort((a, b) => {
+  if (a.type !== b.type) return a.type === 'post' ? -1 : 1
+  return a.title.localeCompare(b.title)
+})
+---
+
+{linkedItems.length > 0 && (
+  <div class="mt-10">
+    <div class="uno-decorative-line" />
+    <h2 class="mb-4 text-4 font-semibold">Linked in this post</h2>
+
+    <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+      {linkedItems.map(item => (
+        <a
+          href={item.href}
+          class="group block rounded-lg border border-secondary/10 overflow-hidden hover:border-secondary/25 transition-colors"
+        >
+          {item.image && (
+            <div class="aspect-[16/9] overflow-hidden bg-secondary/5">
+              <img
+                src={item.image}
+                alt={item.title}
+                class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                loading="lazy"
+              />
+            </div>
+          )}
+          <div class="p-3">
+            <div class="flex items-start gap-2">
+              <span class="text-3.5 flex-shrink-0 mt-0.5">{item.emoji}</span>
+              <div class="min-w-0">
+                <h3 class="font-title font-medium text-3.5 leading-snug group-hover:c-primary transition-colors">
+                  {item.title}
+                </h3>
+                {item.subtitle && (
+                  <p class="c-secondary/60 text-3 leading-relaxed mt-1 line-clamp-1">{item.subtitle}</p>
+                )}
+              </div>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+)}

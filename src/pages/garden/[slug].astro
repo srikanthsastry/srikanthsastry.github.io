@@ -1,0 +1,72 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import { getCollection, render } from 'astro:content'
+import Backlinks from '@/components/Backlinks.astro'
+import RelatedNotes from '@/components/RelatedNotes.astro'
+import TagList from '@/components/TagList.astro'
+import BackButton from '@/components/Widgets/BackButton.astro'
+import Layout from '@/layouts/Layout.astro'
+
+export async function getStaticPaths() {
+  const notes: CollectionEntry<'garden'>[] = await getCollection('garden')
+  return notes.map(note => ({
+    params: { slug: note.id },
+    props: { note },
+  }))
+}
+
+interface Props {
+  note: CollectionEntry<'garden'>
+}
+
+const { note } = Astro.props
+const { Content } = await render(note)
+
+const maturityBadge: Record<string, { label: string; icon: string }> = {
+  evergreen: { label: 'Evergreen', icon: '🌳' },
+  budding: { label: 'Budding', icon: '🌿' },
+  seedling: { label: 'Seedling', icon: '🌱' },
+}
+const badge = maturityBadge[note.data.maturity] ?? maturityBadge.seedling
+---
+
+<Layout postTitle={note.data.title} postDescription={note.data.excerpt_text}>
+  <article class="heti" data-pagefind-body>
+    <div class="relative">
+      <BackButton />
+      <h1 class="post-title" data-pagefind-meta="title">{note.data.title}</h1>
+    </div>
+
+    <!-- Maturity + Date -->
+    <div class="mb-10 flex items-center gap-3 c-secondary text-3.5 font-time">
+      <span class="inline-flex items-center gap-1">
+        <span>{badge.icon}</span>
+        <span>{badge.label}</span>
+      </span>
+      <span>·</span>
+      <time datetime={note.data.created.toISOString().slice(0, 10)}>
+        {note.data.created.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+      </time>
+    </div>
+
+    <!-- Content -->
+    <div id="post-content">
+      <Content />
+
+      <!-- Tags -->
+      {note.data.tags?.length > 0 && (
+        <div class="mt-12.6 uno-decorative-line" />
+        <TagList tags={note.data.tags} lang="en" />
+      )}
+
+      <!-- Related Notes (authored connections) -->
+      <RelatedNotes
+        relatedNotes={note.data.related_notes || []}
+        relatedPosts={note.data.related_posts || []}
+      />
+
+      <!-- Backlinks (discovered connections) -->
+      <Backlinks currentId={note.id} collection="garden" />
+    </div>
+  </article>
+</Layout>

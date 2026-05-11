@@ -1,0 +1,183 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import type { Language } from '@/i18n/config'
+import { getCollection, render } from 'astro:content'
+import Comment from '@/components/Comment/Index.astro'
+import Backlinks from '@/components/Backlinks.astro'
+import PostDate from '@/components/PostDate.astro'
+import PostNav from '@/components/PostNav.astro'
+import RelatedContent from '@/components/RelatedContent.astro'
+import SeriesNav from '@/components/SeriesNav.astro'
+import ShareLinks from '@/components/ShareLinks.astro'
+import TagList from '@/components/TagList.astro'
+import BackButton from '@/components/Widgets/BackButton.astro'
+import TOC from '@/components/Widgets/TOC.astro'
+import { allLocales, themeConfig } from '@/config'
+import { getLangFromLocale, getLangRouteParam } from '@/i18n/lang'
+import { getPostPath, getTagPath } from '@/i18n/path'
+import Layout from '@/layouts/Layout.astro'
+import { checkPostSlugDuplication } from '@/utils/content'
+import { getPostDescription } from '@/utils/description'
+
+export async function getStaticPaths() {
+  const posts: CollectionEntry<'posts'>[] = await getCollection('posts')
+
+  // Check if there are duplicate post slugs
+  const duplicates = await checkPostSlugDuplication(posts)
+  if (duplicates.length > 0) {
+    throw new Error(`Duplicate post slugs:\n${duplicates.join('\n')}`)
+  }
+
+  // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  // Build a map of post slugs to their supported languages
+  // Handles both specific language posts (e.g., 'en') and universal posts (lang: '')
+  const slugToLangsMap = new Map<string, Set<Language>>()
+
+  for (const post of posts) {
+    const slug = post.data.abbrlink || post.id
+    const lang = post.data.lang
+
+    let langSet = slugToLangsMap.get(slug)
+    if (!langSet) {
+      langSet = new Set()
+      slugToLangsMap.set(slug, langSet)
+    }
+
+    if (lang) {
+      langSet.add(lang as Language)
+    }
+    else {
+      allLocales.forEach(locale => langSet.add(locale))
+    }
+  }
+
+  // Convert the map to a sorted record for the component props
+  // Ensure languages are always sorted by the order defined in config
+  const slugToLangs: Record<string, Language[]> = {}
+  for (const [slug, langs] of slugToLangsMap) {
+    slugToLangs[slug] = [...langs].sort((a, b) => allLocales.indexOf(a) - allLocales.indexOf(b))
+  }
+  // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+  return allLocales.flatMap((lang) => {
+    // Get all posts for this language, sorted by date (newest first)
+    const langPosts = posts
+      .filter(post => import.meta.env.DEV || !post.data.draft)
+      .filter(post => post.data.lang === lang || post.data.lang === '')
+      .sort((a, b) => b.data.published.valueOf() - a.data.published.valueOf())
+
+    return langPosts.map((post, index) => {
+      const slug = post.data.abbrlink || post.id
+      // Previous = older post (next in array), Next = newer post (prev in array)
+      const olderPost = index < langPosts.length - 1 ? langPosts[index + 1] : null
+      const newerPost = index > 0 ? langPosts[index - 1] : null
+      return {
+        params: { lang: getLangRouteParam(lang), slug },
+        props: {
+          post,
+          supportedLangs: slugToLangs[slug],
+          prevPost: olderPost ? { title: olderPost.data.title, slug: olderPost.data.abbrlink || olderPost.id } : null,
+          nextPost: newerPost ? { title: newerPost.data.title, slug: newerPost.data.abbrlink || newerPost.id } : null,
+        },
+      }
+    })
+  })
+}
+
+interface Props {
+  post: CollectionEntry<'posts'>
+  supportedLangs: Language[]
+  prevPost: { title: string; slug: string } | null
+  nextPost: { title: string; slug: string } | null
+}
+
+const { post, supportedLangs, prevPost, nextPost } = Astro.props
+const currentLang = getLangFromLocale(Astro.currentLocale)
+const slug = post.data.abbrlink || post.id
+const description = getPostDescription(post, 'meta')
+const { Content, headings, remarkPluginFrontmatter } = await render(post)
+const postUrl = new URL(getPostPath(slug, currentLang), themeConfig.site.url).toString()
+---
+
+<Layout
+  postTitle={post.data.title}
+  postDescription={description}
+  postSlug={post.id}
+  supportedLangs={supportedLangs}
+>
+  <article class="heti" data-pagefind-body>
+    <div class="relative">
+      <!-- Go Back Button On Desktop -->
+      <BackButton />
+      <!-- Title -->
+      <h1 class="post-title" data-pagefind-meta="title">
+        <span
+          transition:name={`post-${slug}${currentLang ? `-${currentLang}` : ''}`}
+          data-disable-theme-toggle-transition
+        >
+          {post.data.title}
+        </span>
+      </h1>
+    </div>
+
+    <!-- Date -->
+    <div
+      id="post-date"
+      class="mb-4 block c-primary font-time"
+      transition:name={`time-${slug}${currentLang ? `-${currentLang}` : ''}`}
+      data-disable-theme-toggle-transition
+    >
+      <PostDate
+        date={post.data.published}
+        updatedDate={post.data.updated}
+        minutes={remarkPluginFrontmatter.minutes}
+      />
+    </div>
+    <!-- Tags -->
+    {post.data.tags?.length > 0 && (
+      <div class="mb-10 flex flex-wrap gap-2">
+        {post.data.tags.map((tag: string) => (
+          <a
+            href={getTagPath(tag, currentLang)}
+            class="no-heti text-3 px-2.5 py-0.75 rounded-full border border-secondary/20 c-secondary/70 no-underline hover:(border-secondary/50 c-primary) transition-colors"
+          >
+            {tag}
+          </a>
+        ))}
+      </div>
+    )}
+    <!-- Cover Image -->
+    {post.data.image && (
+      <figure class="mb-8">
+        <img
+          src={post.data.image}
+          alt={post.data.title}
+          class="w-full rounded"
+          loading="eager"
+        />
+      </figure>
+    )}
+    <!-- Share links at top (desktop only) -->
+    <div class="hidden lg:block mb-8">
+      <ShareLinks title={post.data.title} url={postUrl} />
+    </div>
+    <!-- Series Navigation -->
+    {post.data.series && <SeriesNav currentPost={post} />}
+    <!-- TOC -->
+    {post.data.toc && <TOC headings={headings} />}
+    <!-- Content -->
+    <div id="post-content">
+      <Content />
+      <!-- Copyright -->
+      <div id="post-copyright" />
+      <!-- Share Links -->
+      <ShareLinks title={post.data.title} url={postUrl} />
+      <!-- Related Content (forward links from this post) -->
+      <RelatedContent post={post} />
+      <!-- Post Navigation (Prev/Next) -->
+      <PostNav prevPost={prevPost} nextPost={nextPost} lang={currentLang} />
+      <!-- Comment -->
+      <Comment />
+    </div>
+  </article>
+</Layout>

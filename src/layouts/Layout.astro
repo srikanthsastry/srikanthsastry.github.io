@@ -1,0 +1,65 @@
+---
+import type { Language } from '@/i18n/config'
+import TopBar from '@/components/TopBar.astro'
+import PageFooter from '@/components/PageFooter.astro'
+import CodeCopyButton from '@/components/Widgets/CodeCopyButton.astro'
+import GithubCard from '@/components/Widgets/GithubCard.astro'
+import GardenPreview from '@/components/GardenPreview.astro'
+import ImageZoom from '@/components/Widgets/ImageZoom.astro'
+import MediaEmbed from '@/components/Widgets/MediaEmbed.astro'
+import SoundEffect from '@/components/Widgets/SoundEffect.astro'
+import { themeConfig } from '@/config'
+import Head from '@/layouts/Head.astro'
+import { getPageInfo } from '@/utils/page'
+import '@/styles/comment.css'
+import '@/styles/extension.css'
+import '@/styles/font.css'
+import '@/styles/global.css'
+import '@/styles/lqip.css'
+import '@/styles/markdown.css'
+import '@/styles/transition.css'
+
+interface Props {
+  postTitle?: string
+  postDescription?: string
+  postSlug?: string
+  supportedLangs?: Language[]
+}
+
+const { postTitle, postDescription, postSlug, supportedLangs = [] } = Astro.props
+const { isGardenNote } = getPageInfo(Astro.url.pathname)
+const fontStyle = themeConfig.global.fontStyle === 'serif' ? 'font-serif' : 'font-sans'
+const isContentPage = !!postTitle || isGardenNote
+const MarginBottom = isContentPage && themeConfig.comment.enabled
+  ? 'mb-10'
+  : 'mb-12'
+---
+
+<html
+  lang={Astro.currentLocale}
+  class:list={[
+    fontStyle,
+    isContentPage ? 'scroll-smooth' : '',
+  ]}
+>
+  <Head {postTitle} {postDescription} {postSlug} />
+  <body>
+    <div
+      class="mx-auto max-w-44rem min-h-dvh w-full"
+      p="x-[min(7.25vw,3.731rem)]"
+      lg="p-0"
+    >
+      <TopBar supportedLangs={supportedLangs} />
+      <main class={MarginBottom}>
+        <slot />
+      </main>
+      <PageFooter />
+    </div>
+    <SoundEffect />
+    <CodeCopyButton />
+    <GithubCard />
+    <MediaEmbed />
+    <ImageZoom />
+    <GardenPreview />
+  </body>
+</html>

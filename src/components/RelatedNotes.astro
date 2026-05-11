@@ -1,0 +1,74 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import { getCollection } from 'astro:content'
+
+interface Props {
+  relatedNotes: string[]
+  relatedPosts: string[]
+}
+
+const { relatedNotes = [], relatedPosts = [] } = Astro.props
+
+interface RelatedItem {
+  title: string
+  href: string
+  type: 'garden' | 'post'
+}
+
+const items: RelatedItem[] = []
+
+if (relatedNotes.length > 0 || relatedPosts.length > 0) {
+  // Resolve garden note titles
+  if (relatedNotes.length > 0) {
+    const allNotes: CollectionEntry<'garden'>[] = await getCollection('garden')
+    const noteMap = new Map(allNotes.map(n => [n.id, n]))
+    for (const slug of relatedNotes) {
+      const note = noteMap.get(slug)
+      if (note) {
+        items.push({
+          title: note.data.title,
+          href: `/garden/${note.id}/`,
+          type: 'garden',
+        })
+      }
+    }
+  }
+
+  // Resolve post titles
+  if (relatedPosts.length > 0) {
+    const allPosts: CollectionEntry<'posts'>[] = await getCollection('posts')
+    for (const postPath of relatedPosts) {
+      const cleanSlug = postPath.replace(/^\/|\/$/g, '')
+      const post = allPosts.find(p => (p.data.abbrlink || p.id) === cleanSlug)
+      if (post) {
+        items.push({
+          title: post.data.title,
+          href: `/${cleanSlug}/`,
+          type: 'post',
+        })
+      }
+    }
+  }
+}
+---
+
+{items.length > 0 && (
+  <div class="mt-10">
+    <div class="uno-decorative-line" />
+    <h2 class="mb-4 text-4 font-semibold">Related</h2>
+    <ul class="list-none p-0">
+      {items.map(item => (
+        <li class="mb-2.5">
+          <a
+            href={item.href}
+            class="transition-colors hover:c-primary"
+          >
+            {item.type === 'garden' && <span class="mr-1 text-3.25">🌿</span>}
+            {item.type === 'post' && <span class="mr-1 text-3.25">📝</span>}
+            {item.title}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+)}

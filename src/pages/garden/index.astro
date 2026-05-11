@@ -1,0 +1,71 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import { getCollection } from 'astro:content'
+import Layout from '@/layouts/Layout.astro'
+
+const notes: CollectionEntry<'garden'>[] = await getCollection('garden')
+
+// Group by maturity: evergreen first, then budding, then seedling
+const maturityOrder = ['evergreen', 'budding', 'seedling'] as const
+const maturityLabels: Record<string, string> = {
+  evergreen: '🌳 Evergreen',
+  budding: '🌿 Budding',
+  seedling: '🌱 Seedling',
+}
+
+const grouped = new Map<string, CollectionEntry<'garden'>[]>()
+for (const m of maturityOrder) {
+  const matching = notes
+    .filter(n => n.data.maturity === m)
+    .sort((a, b) => a.data.title.localeCompare(b.data.title))
+  if (matching.length > 0) {
+    grouped.set(m, matching)
+  }
+}
+---
+
+<Layout>
+  <h1 class="font-title text-10 font-semibold tracking-tight lg:text-11 mb-4">Garden</h1>
+  <p class="mb-6 c-secondary text-3.75 leading-relaxed">
+    A digital garden of interconnected notes — ideas at various stages of development.
+  </p>
+
+  {/* Maturity Legend */}
+  <div class="flex flex-wrap gap-x-5 gap-y-2 mb-10 text-3.5 c-secondary/70">
+    <span>🌱 <strong>Seedling</strong> — just planted</span>
+    <span>🌿 <strong>Budding</strong> — growing, not yet stable</span>
+    <span>🌳 <strong>Evergreen</strong> — well-developed</span>
+  </div>
+
+  {Array.from(grouped.entries()).map(([maturity, notes]) => (
+    <section class="mb-10">
+      <h2 class="mb-4 text-4.5 font-semibold">
+        {maturityLabels[maturity]}
+        <span class="ml-1 text-3.5 font-normal c-secondary">({notes.length})</span>
+      </h2>
+      <div class="uno-decorative-line" />
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {notes.map(note => (
+          <a
+            href={`/garden/${note.id}/`}
+            class="group block rounded-lg border border-secondary/10 p-4 hover:border-secondary/30 transition-all duration-200"
+          >
+            <h3 class="font-title font-medium text-4 leading-snug group-hover:c-primary transition-colors mb-1.5">
+              {note.data.title}
+            </h3>
+            {note.data.excerpt_text && (
+              <p class="c-secondary text-3.25 leading-relaxed mb-2 line-clamp-2">{note.data.excerpt_text}</p>
+            )}
+            {note.data.tags && note.data.tags.length > 0 && (
+              <div class="flex flex-wrap gap-1.5">
+                {note.data.tags.slice(0, 3).map((tag: string) => (
+                  <span class="text-2.75 px-1.5 py-0.5 rounded-full bg-secondary/8 c-secondary/70">{tag}</span>
+                ))}
+              </div>
+            )}
+          </a>
+        ))}
+      </div>
+    </section>
+  ))}
+</Layout>
