@@ -28,6 +28,7 @@ export default defineConfig({
   trailingSlash: 'always', // Not recommended to change
   redirects: {
     '/archives/': '/posts/',
+    '/feed.xml': '/rss.xml',
   },
   prefetch: {
     prefetchAll: true,
