@@ -46,7 +46,6 @@ const garden = defineCollection({
     related_notes: z.array(z.string()).optional().default([]),
     related_posts: z.array(z.string()).optional().default([]),
     excerpt_text: z.string().optional().default(''),
-    garden_type: z.string().optional().default('note'),
   }),
 })
 
