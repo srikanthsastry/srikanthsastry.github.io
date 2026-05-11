@@ -1,6 +1,5 @@
 ---
 title: "The Ratchet Has No Market Analog"
-garden_type: note
 maturity: evergreen
 tags: [governance, directive-governance, crisis-centralization-ratchet, organizational-theory]
 created: 2026-05-01

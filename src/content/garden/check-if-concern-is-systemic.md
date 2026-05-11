@@ -8,5 +8,4 @@ related_notes:
 excerpt_text: >
   Before resolving a concern, check whether it is isolated or systemic.
 ---
-
 **Before resolving a concern, check whether it is isolated or systemic.** Do so urgently, because delay signals indifference. If the issue is common, make it visible. An isolated problem needs a targeted fix. A systemic problem needs structural change. Treating a systemic issue as isolated wastes everyone's time and erodes trust.

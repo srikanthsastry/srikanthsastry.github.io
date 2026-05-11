@@ -12,5 +12,4 @@ related_notes:
 excerpt_text: >
   Upward communication fails because organizations ignore the power differential that makes it inherently fragile.
 ---
-
 **Upward communication fails because organizations ignore the power differential that makes it inherently fragile.** Every failure mode in upward communication processes stems from pretending the power differential does not exist. The person communicating upward bears all the risk: they can be punished for bad news, ignored without recourse, or dismissed as not following procedure. Successful upward communication actively mitigates this asymmetry rather than ignoring it.

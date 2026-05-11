@@ -12,5 +12,4 @@ related_notes:
 excerpt_text: >
   Directive governance fails when its three structural preconditions do not hold: compressibility, proxy validity, and separability.
 ---
-
 **Directive governance fails when its three structural preconditions do not hold: compressibility, proxy validity, and separability.** When these hold (manufacturing, logistics, regulated industries), directive governance works. When they fail (as they structurally do in software, where essential complexity is irreducible, metrics measure maintenance not creation, and execution IS decision-making), the governance model produces systematically bad decisions. The mismatch is inherent in the domain, not fixable by better tools or smarter executives.

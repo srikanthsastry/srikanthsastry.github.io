@@ -9,5 +9,4 @@ related_notes:
 excerpt_text: >
   Testability forces dependency injection: code that constructs its own dependencies internally is untestable without expensive integration infrastructure.
 ---
-
 **Testability forces dependency injection: code that constructs its own dependencies internally is untestable without expensive integration infrastructure.** Tests force you to inject dependencies from outside, making them explicit and swappable. This is not just a testing convenience. It reveals the real dependency graph that was previously hidden inside constructors and factory methods.

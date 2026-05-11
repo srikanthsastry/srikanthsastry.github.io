@@ -1,6 +1,5 @@
 ---
 title: "Mission, Not Price, Coordinates Subsidiarity"
-garden_type: note
 maturity: evergreen
 tags: [governance, subsidiarity, hayek, missionary-culture]
 created: 2026-05-01

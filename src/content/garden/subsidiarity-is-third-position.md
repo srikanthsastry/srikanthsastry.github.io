@@ -1,6 +1,5 @@
 ---
 title: "Subsidiarity Is a Third Position"
-garden_type: note
 maturity: evergreen
 tags: [governance, subsidiarity, hayek, keynes, catholic-social-teaching]
 created: 2026-05-01

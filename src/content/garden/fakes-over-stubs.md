@@ -9,5 +9,4 @@ related_notes:
 excerpt_text: >
   Prefer fakes over stubs when the dependency has stateful behavior.
 ---
-
 **Prefer fakes over stubs when the dependency has stateful behavior.** A fake implements the same API with a lightweight backing store (a Dict instead of a database, for example). Fakes are more robust to refactoring and more extensible than stubs with preconfigured return values, because they do not require resetting or ordered canned responses for different user journeys.

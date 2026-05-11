@@ -1,6 +1,5 @@
 ---
 title: "The Failure Argument Is Conditional"
-garden_type: note
 maturity: evergreen
 tags: [governance, directive-governance, hayek, software-engineering]
 created: 2026-05-01

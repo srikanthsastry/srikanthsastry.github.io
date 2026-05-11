@@ -13,5 +13,4 @@ related_notes:
 excerpt_text: >
   Directive governance is the pattern where information flows up (compressed and lossy), decisions are made centrally based on that compressed information, directives flow down for execution, and accountability is for compliance with directives rather than for outcomes.
 ---
-
 **Directive governance is the pattern where information flows up (compressed and lossy), decisions are made centrally based on that compressed information, directives flow down for execution, and accountability is for compliance with directives rather than for outcomes.** Informally: chain-of-command governance with upward communication.

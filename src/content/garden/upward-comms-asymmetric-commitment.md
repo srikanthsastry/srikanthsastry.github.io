@@ -8,5 +8,4 @@ related_notes:
 excerpt_text: >
   Asymmetric commitment kills upward communication: leadership demands it without reciprocating downward.
 ---
-
 **Asymmetric commitment kills upward communication: leadership demands it without reciprocating downward.** When executives require status reports, risk escalations, and process compliance from below but share nothing meaningful back, the asymmetry teaches contributors that communication is extraction, not exchange. The rational response is to minimize effort and share only what cannot be withheld.
