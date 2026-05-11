@@ -130,6 +130,7 @@ make_slug() {
 # Map: slug → full filename (relative path)
 declare -A SLUG_TO_FILE
 declare -A ALL_SLUGS   # just for quick existence check
+declare -A SLUG_TO_PHRASE  # precomputed slug-to-phrase for wikilink detection
 mapfile -t ALL_NOTE_FILES < <(find "$NOTES_DIR" -maxdepth 1 -name 'note-*.md' -type f | sort)
 
 for f in "${ALL_NOTE_FILES[@]}"; do
@@ -137,6 +138,7 @@ for f in "${ALL_NOTE_FILES[@]}"; do
     s="$(make_slug "$bname")"
     SLUG_TO_FILE["$s"]="$f"
     ALL_SLUGS["$s"]=1
+    SLUG_TO_PHRASE["$s"]="${s//-/ }"
 done
 
 # ── Accumulators ──────────────────────────────────────────────────────────────
@@ -263,12 +265,12 @@ for filepath in "${FILES[@]}"; do
         done
         [[ "$already_linked" -eq 1 ]] && continue
 
-        # Convert slug kebab-case to space-separated words
-        phrase="$(echo "$candidate_slug" | tr '-' ' ')"
+        # Use precomputed phrase (no fork)
+        phrase="${SLUG_TO_PHRASE[$candidate_slug]}"
 
-        # Only flag if the full phrase appears as a word-boundary match
-        # Use grep -w for word boundaries, but multi-word phrases need \b
-        if echo "$body_lower" | grep -qiP "\b\Q${phrase}\E\b" 2>/dev/null; then
+        # Only flag if the full phrase appears in the body (simple substring match,
+        # avoids expensive grep -P forking per candidate)
+        if [[ "$body_lower" == *"$phrase"* ]]; then
             add_warning "$bname" "[POTENTIAL_WIKILINK] body mentions \"$phrase\" which matches note slug '$candidate_slug' but is not wikilinked"
         fi
     done
