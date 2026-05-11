@@ -230,7 +230,17 @@ for filepath in "${FILES[@]}"; do
     # ── Check 4: connects_to dangling references ──────────────────────────
     for ct_path in "${connects_to_raw[@]}"; do
         [[ -z "$ct_path" ]] && continue
-        if [[ ! -f "$ct_path" ]]; then
+        # Strip trailing .md if present for consistency
+        ct_clean="${ct_path%.md}"
+        # Try literal path, with .md, under brain/, and under brain/ with .md
+        found=false
+        for try in "$ct_clean" "$ct_clean.md" "brain/$ct_clean" "brain/$ct_clean.md"; do
+            if [[ -f "$try" ]]; then
+                found=true
+                break
+            fi
+        done
+        if [[ "$found" = false ]]; then
             add_error "$bname" "[DANGLING_CONNECTS_TO] connects_to entry '$ct_path' does not exist"
         fi
     done
@@ -244,8 +254,10 @@ for filepath in "${FILES[@]}"; do
         for pi in "${published_in_raw[@]}"; do
             [[ -z "$pi" ]] && continue
             # Strip leading/trailing slashes to get the slug
-            # Check if any post in src/content/posts/ has this permalink in its frontmatter
-            if ! grep -rl "^permalink: ${pi}$" "$POSTS_DIR/" >/dev/null 2>&1; then
+            pi_slug="${pi#/}"
+            pi_slug="${pi_slug%/}"
+            # Astro posts use abbrlink for URL slugs; value may be bare or quoted
+            if ! grep -rl "^abbrlink:.*${pi_slug}" "$POSTS_DIR/" >/dev/null 2>&1; then
                 add_error "$bname" "[UNPUBLISHED_IN_PUBLISHED_IN] published_in '$pi' has no matching post in src/content/posts/"
             fi
         done
