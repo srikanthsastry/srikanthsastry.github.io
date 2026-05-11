@@ -17,7 +17,7 @@ excerpt: >
 categories:
   - Professional
 series: 'Generative AI vs. Open Source'
-seriesOrder: 1
+series_order: 1
 
 ---
 
