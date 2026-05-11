@@ -4,6 +4,8 @@
 
 Every blog post ships alongside its digital garden notes in the same branch/PR.
 
+> **Astro vs Jekyll:** This repo has migrated from Jekyll to Astro. The workflows below are for Astro. Legacy Jekyll instructions are at the bottom for reference.
+
 ### 1. Identify Garden-Worthy Notes
 
 Review PKM items (thoughts, notes, sources) related to the post. Not everything needs a garden entry — only concepts the post references that benefit from standalone exposition.
@@ -14,11 +16,11 @@ Review PKM items (thoughts, notes, sources) related to the post. Not everything 
 ### 2. Convert PKM to Garden
 
 ```bash
-./scripts/pkm-to-garden.sh ~/workspace/brain/thoughts/thought-20260424-*.md
-./scripts/pkm-to-garden.sh ~/workspace/brain/sources/source-some-reference.md
+./scripts/pkm-to-garden-astro.sh ~/workspace/brain/thoughts/thought-20260424-*.md
+./scripts/pkm-to-garden-astro.sh ~/workspace/brain/sources/source-some-reference.md
 ```
 
-The script generates `_garden/` files with frontmatter derived from your PKM. Review and adjust:
+The script generates `src/content/garden/` files with frontmatter derived from your PKM. Review and adjust:
 - **Title** — auto-derived from the slug if missing; verify it reads well
 - **Maturity** — auto-derived from PKM status; override if wrong
 - **Excerpt** — auto-extracted first sentence; tighten if needed
@@ -75,7 +77,7 @@ Blog post + new garden notes + any updates to existing garden notes — all in o
 git checkout main && git pull
 git checkout -b post/your-post-slug
 # ... make changes ...
-git add -A
+git add src/content/posts/YYYY-MM-DD-your-post-slug.md src/content/garden/*.md
 git commit -m "Add post: Your Title + garden notes"
 git push origin post/your-post-slug
 ```
@@ -89,6 +91,37 @@ After publishing, update the PKM thought `status` fields to match the garden mat
 | `seedling` | `raw` |
 | `budding` | `developing` |
 | `evergreen` | `connected` |
+
+---
+
+## Drafts
+
+In Astro, there is no `_drafts/` directory. Instead, add `draft: true` to frontmatter in `src/content/posts/`:
+
+```yaml
+---
+title: "My Draft Post"
+published: '2026-06-01'
+draft: true
+# ... other frontmatter ...
+---
+```
+
+Drafts are visible in `astro dev` but filtered out of production builds. When ready to publish, remove the `draft: true` line (or set it to `false`).
+
+---
+
+## Blog Post File Naming
+
+Post files in `src/content/posts/` use date-prefixed filenames matching their publication date:
+
+```
+src/content/posts/YYYY-MM-DD-slug.md
+```
+
+For example: `src/content/posts/2026-05-10-my-new-post.md`
+
+The URL slug comes from the `abbrlink` frontmatter field, not the filename. The date prefix is for filesystem organization only.
 
 ---
 
@@ -118,3 +151,39 @@ source_url: "https://..."
 ## Garden URL Pattern
 
 All garden notes live at `/garden/<slug>/`. The slug is the filename without `.md`.
+
+## PKM Scripts
+
+| Script | Purpose |
+|--------|---------|
+| `scripts/pkm-to-garden-astro.sh` | Convert PKM files to `src/content/garden/` entries |
+| `scripts/lint-pkm-astro.sh` | Lint PKM notes (validates against `src/content/garden/` and `src/content/posts/`) |
+
+---
+
+## Jekyll (Legacy)
+
+<details>
+<summary>Expand for legacy Jekyll workflow</summary>
+
+The Jekyll scripts and paths are preserved for reference. They target `_garden/` and `_posts/` which no longer exist on the Astro branch.
+
+### Scripts
+
+| Script | Purpose |
+|--------|---------|
+| `scripts/pkm-to-garden.sh` | Convert PKM files to `_garden/` entries |
+| `scripts/lint-pkm.sh` | Lint PKM notes (validates against `_garden/` and `_posts/`) |
+
+### Convert PKM to Garden (Jekyll)
+
+```bash
+./scripts/pkm-to-garden.sh ~/workspace/brain/thoughts/thought-20260424-*.md
+./scripts/pkm-to-garden.sh ~/workspace/brain/sources/source-some-reference.md
+```
+
+### Drafts (Jekyll)
+
+Jekyll uses a `_drafts/` directory. Place draft posts in `_drafts/` (without date prefix). They won't appear in the built site until moved to `_posts/` with a date prefix.
+
+</details>
