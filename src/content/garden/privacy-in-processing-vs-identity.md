@@ -3,8 +3,6 @@ title: "Privacy in Processing vs. Privacy in Identity"
 maturity: evergreen
 tags: [privacy, legislation, pseudonymization, regulatory-frameworks]
 created: 2026-05-03
-related_posts:
-  - /secure-data-act-the-dilution-in-pseudonymization/
 related_notes: []
 excerpt_text: >
   Privacy frameworks split on where rights attach: to what is done with data (processing) or to whether data can be traced back to a person (identity).
