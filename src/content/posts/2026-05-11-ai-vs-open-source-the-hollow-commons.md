@@ -39,6 +39,8 @@ In practice, Zig experienced [drive-by PRs full of hallucinations, 10,000-line f
 
 This is not about code quality. Even perfect AI-assisted PRs break the model. Community-building requires a human who is an eager participant, not a human proxy for an LLM. The object of the contribution is present, but the subject (a developing engineer with shared mission) is absent.
 
+The pattern is spreading. LLVM's AI policy labels unreviewed AI submissions "[extractive contributions](https://llvm.org/docs/AIToolPolicy.html)" and bans AI from good-first-issue tickets: the ones that exist specifically to onboard new humans. tldraw [shut down external pull requests entirely](https://github.com/tldraw/tldraw/issues/7695) after AI-generated submissions overwhelmed its maintainers. Steve Ruizok: "An open pull request represents a commitment from maintainers... For that commitment to remain meaningful, we need to be more selective." When the bet cannot pay off, you fold the table.
+
 ## A house divided
 
 When communities ban AI contributions, they protect the social contract. They also create a schism.
