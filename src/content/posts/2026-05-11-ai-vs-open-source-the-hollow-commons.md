@@ -16,6 +16,7 @@ categories:
   - Professional
 series: 'Generative AI vs. Open Source'
 series_order: 2
+image: /assets/images/ai-vs-open-source-hollow-commons-cover.jpg
 ---
 
 A [previous post](/ai-vs-open-source-the-empty-grant/) discussed how AI threatens the legal basis and enforcement of open source. Briefly, copyright makes licenses enforceable, and the cost of reimplementation made compliance rational. But AI-generated code is not copyrightable, and AI has made reimplementation cheap.
