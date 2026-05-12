@@ -1,6 +1,6 @@
 ---
 title: "AI vs. Open Source, Part 2: The Hollow Commons"
-published: 2026-05-11
+published: 2026-05-14
 tags:
   - 'ai'
   - 'open source'
