@@ -21,7 +21,7 @@ image: /assets/images/ai-vs-open-source-hollow-commons-cover.jpg
 
 A [previous post](/ai-vs-open-source-the-empty-grant/) discussed how AI threatens the legal basis and enforcement of open source. Briefly, copyright makes licenses enforceable, and the cost of reimplementation made compliance rational. But AI-generated code is not copyrightable, and AI has made reimplementation cheap.
 
-Not everyone is convinced this is actually undercutting open source. The threat may be real, but open source is not out of options.
+Not everyone is convinced this is undercutting open source. The threat may be real, but open source is not out of options.
 
 Joost de Valk [argues](https://joost.blog/open-source-agency/) that open source relevance must shift from cost to agency: the capacity to run, inspect, modify, and migrate software without permission. The cost of creating software is near zero. The cost of serving it is going up (thanks to data center demand and the [RAMpocalypse](https://en.wikipedia.org/wiki/2024%E2%80%93present_global_memory_supply_shortage)). Agency, not cost, is the new value proposition.
 
@@ -31,7 +31,7 @@ Both responses presuppose that the communities which build and maintain the comm
 
 ## You gotta know when to hold 'em, and know when to fold 'em
 
-Loris Cro, VP of Community at the Zig Software Foundation, observed that treating open source projects as mere code repositories misses the point. New contributors may offer up a rough first PR, but with support, they become trusted committers who enrich the community. But not all new contributors last. The maintainers are making a bet on each first PR. The Zig compiler toolchain was built by contributors who grew through such an iterated game. Cro calls this "[contributor poker](/garden/contributor-poker-review-as-investment/)": you [play the person, not the cards](https://kristoff.it/blog/contributor-poker-and-ai/).
+Loris Cro, VP of Community at the Zig Software Foundation, observed that treating open source projects as mere code repositories misses the point. New contributors may offer up a rough first PR, but with support, they become trusted committers who enrich the community. Not all new contributors last. The maintainers are making a bet on each first PR. The Zig compiler toolchain was built by contributors who grew through such an iterated game. Cro calls this "[contributor poker](/garden/contributor-poker-review-as-investment/)": you [play the person, not the cards](https://kristoff.it/blog/contributor-poker-and-ai/).
 
 AI-assisted contributions collapse the iterated game into a single-shot game. The human behind an AI-assisted PR does not need to build codebase intuition, and they may not care to maintain the code post-merge. They may not even be able to handle follow-up discussions that require deep understanding. The maintainers' review effort yields no return.
 
@@ -49,7 +49,7 @@ Bun, the JavaScript runtime, is built on Zig. Bun's team used AI to achieve a [4
 
 [The commons splits](/garden/hollow-commons-schism-pattern/). The AI-accelerated fork iterates faster but becomes cleaved from the larger community. The human-maintained branch preserves community integrity but cannot match the pace. The parts are poorer than the whole.
 
-This is not unique to Zig. [Gentoo](https://itsfoss.com/gentoo-linux-bans-ai-code/), [QEMU](https://allthingsopen.org/articles/open-source-ai-contributions-assisted-by-git-trailer-standard), [Ghostty](https://github.com/ghostty-org/ghostty/pull/10412), and [`curl`](https://www.neowin.net/news/beloved-tool-curl-is-shutting-down-its-bug-bounty-over-ai-slop-reports/) have imposed their own restrictions, from outright bans to shutting down contribution channels entirely. No two projects have drawn the line in the same place. Every project that bans AI contributions and has AI-using downstream dependents faces the same dynamic. The ban protects the social contract. The protection fractures the commons. The fracture weakens both branches.
+[Gentoo](https://itsfoss.com/gentoo-linux-bans-ai-code/), [QEMU](https://allthingsopen.org/articles/open-source-ai-contributions-assisted-by-git-trailer-standard), [Ghostty](https://github.com/ghostty-org/ghostty/pull/10412), and [`curl`](https://www.neowin.net/news/beloved-tool-curl-is-shutting-down-its-bug-bounty-over-ai-slop-reports/) have imposed their own restrictions, from outright bans to shutting down contribution channels entirely. No two projects have drawn the line in the same place, but every project that bans AI contributions and has AI-using downstream dependents faces the same dynamic. The ban protects the social contract. The protection fractures the commons. The fracture weakens both branches.
 
 ## The ouroboros
 
