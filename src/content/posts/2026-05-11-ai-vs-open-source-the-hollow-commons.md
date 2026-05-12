@@ -31,7 +31,7 @@ Both responses presuppose that the communities which build and maintain the comm
 
 ## You gotta know when to hold 'em, and know when to fold 'em
 
-Loris Cro, VP of Community at the Zig Software Foundation, observed that treating open source projects as mere code repositories misses the point. New contributors may offer up a rough first PR, but with support, they become trusted committers who enrich the community. But not all new contributors last. The maintainers are making a bet on each first PR. The Zig compiler toolchain was built by contributors who grew through such an iterated game. Cro calls this "[contributor poker](/garden/contributor-poker-review-as-investment/)": you play the person, not the cards.
+Loris Cro, VP of Community at the Zig Software Foundation, observed that treating open source projects as mere code repositories misses the point. New contributors may offer up a rough first PR, but with support, they become trusted committers who enrich the community. But not all new contributors last. The maintainers are making a bet on each first PR. The Zig compiler toolchain was built by contributors who grew through such an iterated game. Cro calls this "[contributor poker](/garden/contributor-poker-review-as-investment/)": you [play the person, not the cards](https://kristoff.it/blog/contributor-poker-and-ai/).
 
 AI-assisted contributions collapse the iterated game into a single-shot game. The human behind an AI-assisted PR does not need to build codebase intuition, and they may not care to maintain the code post-merge. They may not even be able to handle follow-up discussions that require deep understanding. The maintainers' review effort yields no return.
 
