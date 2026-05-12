@@ -39,7 +39,7 @@ In practice, Zig experienced [drive-by PRs full of hallucinations, 10,000-line f
 
 This is not about code quality. Even perfect AI-assisted PRs break the model. Community-building requires a human who is an eager participant, not a human proxy for an LLM. The object of the contribution is present, but the subject (a developing engineer with shared mission) is absent.
 
-The pattern is spreading. LLVM's AI policy labels unreviewed AI submissions "[extractive contributions](https://llvm.org/docs/AIToolPolicy.html)" and bans AI from good-first-issue tickets: the ones that exist specifically to onboard new humans. tldraw [shut down external pull requests entirely](https://github.com/tldraw/tldraw/issues/7695) after AI-generated submissions overwhelmed its maintainers. Steve Ruizok: "An open pull request represents a commitment from maintainers... For that commitment to remain meaningful, we need to be more selective." When the bet cannot pay off, you fold the table.
+The pattern is spreading. LLVM's AI policy labels unreviewed AI submissions "[extractive contributions](https://llvm.org/docs/AIToolPolicy.html)" and bans AI from good-first-issue tickets: the ones that exist specifically to onboard new humans. `tldraw` [shut down external pull requests entirely](https://github.com/tldraw/tldraw/issues/7695) after AI-generated submissions overwhelmed its maintainers. Steve Ruizok: "An open pull request represents a commitment from maintainers... For that commitment to remain meaningful, we need to be more selective." When the bet cannot pay off, you fold the table.
 
 ## A house divided
 
@@ -49,7 +49,7 @@ Bun, the JavaScript runtime, is built on Zig. Bun's team used AI to achieve a [4
 
 [The commons splits](/garden/hollow-commons-schism-pattern/). The AI-accelerated fork iterates faster but becomes cleaved from the larger community. The human-maintained branch preserves community integrity but cannot match the pace. The parts are poorer than the whole.
 
-This is not unique to Zig. [Gentoo](https://itsfoss.com/gentoo-linux-bans-ai-code/), [QEMU](https://allthingsopen.org/articles/open-source-ai-contributions-assisted-by-git-trailer-standard), [Ghostty](https://github.com/ghostty-org/ghostty/pull/10412), and [curl](https://www.neowin.net/news/beloved-tool-curl-is-shutting-down-its-bug-bounty-over-ai-slop-reports/) have imposed their own restrictions, from outright bans to shutting down contribution channels entirely. No two projects have drawn the line in the same place. Every project that bans AI contributions and has AI-using downstream dependents faces the same dynamic. The ban protects the social contract. The protection fractures the commons. The fracture weakens both branches.
+This is not unique to Zig. [Gentoo](https://itsfoss.com/gentoo-linux-bans-ai-code/), [QEMU](https://allthingsopen.org/articles/open-source-ai-contributions-assisted-by-git-trailer-standard), [Ghostty](https://github.com/ghostty-org/ghostty/pull/10412), and [`curl`](https://www.neowin.net/news/beloved-tool-curl-is-shutting-down-its-bug-bounty-over-ai-slop-reports/) have imposed their own restrictions, from outright bans to shutting down contribution channels entirely. No two projects have drawn the line in the same place. Every project that bans AI contributions and has AI-using downstream dependents faces the same dynamic. The ban protects the social contract. The protection fractures the commons. The fracture weakens both branches.
 
 ## The ouroboros
 
@@ -57,7 +57,7 @@ The AI models undermining open source were [trained on open source](/garden/oss-
 
 The loop tightens. In March 2026, GitHub [announced](https://thenewstack.io/github-copilot-interaction-data/) it would train AI models on Copilot interaction data by default: not just the original repositories, but the prompts developers write and the suggestions they accept. Individual users can opt out. The default is opt-in. Each cycle feeds the next.
 
-curl is the loop made personal. Daniel Stenberg's project trained the models. The models then generated [slop bug reports](https://www.itpro.com/software/open-source/curl-open-source-bug-bounty-program-scrapped) about curl itself, flooding the bug bounty program with fabricated vulnerabilities until Stenberg [shut it down](https://www.neowin.net/news/beloved-tool-curl-is-shutting-down-its-bug-bounty-over-ai-slop-reports/). The project's own contribution to the commons was weaponized against it.
+`curl` is the loop made personal. Daniel Stenberg's project trained the models. The models then generated [slop bug reports](https://www.itpro.com/software/open-source/curl-open-source-bug-bounty-program-scrapped) about `curl` itself, flooding the bug bounty program with fabricated vulnerabilities until Stenberg [shut it down](https://www.neowin.net/news/beloved-tool-curl-is-shutting-down-its-bug-bounty-over-ai-slop-reports/). The project's own contribution to the commons was weaponized against it.
 
 The more code the community produces, the more it feeds the models undermining its sustainability. If it produces less code, it only diminishes itself. Today's landscape offers no equilibrium where open source thrives without a threat from the AI models trained on it.
 
