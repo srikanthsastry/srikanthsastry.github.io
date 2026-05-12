@@ -27,7 +27,7 @@ Joost de Valk [argues](https://joost.blog/open-source-agency/) that open source 
 
 Stefano Maffulli [says AI already provides that ability](https://allthingsopen.org/articles/ai-final-frontier-copyleft-second-liberation). The GPL was a legal hack for source code access. The real barrier was always the know-how to exercise the freedom to modify. AI has shattered that barrier. A non-programmer can now reshape software to their needs. Copyleft is obsolete.
 
-Both responses presuppose that the communities which build and maintain the commons will survive long enough to exercise that agency. But is that a given? What if the community itself is threatened by AI? What if I told you that AI is hollowing out the commons?
+Both responses presuppose that the communities which build and maintain the commons will survive long enough to exercise that agency.
 
 ## You gotta know when to hold 'em, and know when to fold 'em
 
@@ -39,22 +39,24 @@ In practice, Zig experienced [drive-by PRs full of hallucinations, 10,000-line f
 
 This is not about code quality. Even perfect AI-assisted PRs break the model. Community-building requires a human who is an eager participant, not a human proxy for an LLM. The object of the contribution is present, but the subject (a developing engineer with shared mission) is absent.
 
-The legal consequence compounds the social one. Contributors sign Contributor License Agreements or Developer Certificates of Origin asserting they have the right to grant a license to their code. If the code is AI-generated, the assertion is hollow. The project's IP chain rests on claims that cannot be verified and may not be true.
-
 ## A house divided
 
 When communities ban AI contributions, they protect the social contract. They also create a schism.
 
-Bun, the JavaScript runtime, is built on Zig. Bun's team used AI to achieve a [4x compile speedup](https://winbuzzer.com/2026/05/01/zig-llm-contribution-ban-bun-4x-speedup-downstream-xcxwbn) via parallel semantic analysis in their Zig fork. They cannot upstream it. Zig's AI contribution ban makes [the question of technical merit](https://ziggit.dev/t/bun-s-zig-fork-got-4x-faster-compilation-times/15183/19) moot.
+Bun, the JavaScript runtime, is built on Zig. Bun's team used AI to achieve a [4x compile speedup](https://www.opensourceforu.com/2026/05/zig-draws-hard-line-on-ai-bun-chooses-fork-over-upstreaming/) via parallel semantic analysis in their Zig fork. They cannot upstream it. Zig's core team [has technical objections](https://ziggit.dev/t/bun-s-zig-fork-got-4x-faster-compilation-times/15183/19) to the approach (the parallelization skips type resolution changes needed for deterministic compilation), but the AI contribution ban forecloses the collaborative path to resolving them.
 
-[The commons splits](/garden/hollow-commons-schism-pattern/). The AI-accelerated fork iterates faster but becomes more insular and cleaved from the larger community. The human-maintained branch preserves community integrity but cannot match the pace. The parts are poorer than the whole.
+[The commons splits](/garden/hollow-commons-schism-pattern/). The AI-accelerated fork iterates faster but becomes cleaved from the larger community. The human-maintained branch preserves community integrity but cannot match the pace. The parts are poorer than the whole.
 
-This is not unique to Zig. Every project that bans AI contributions and has AI-using downstream dependents faces the same dynamic. The ban protects the social contract. The protection fractures the commons. The fracture weakens both branches.
+This is not unique to Zig. [Gentoo](https://itsfoss.com/gentoo-linux-bans-ai-code/), [QEMU](https://allthingsopen.org/articles/open-source-ai-contributions-assisted-by-git-trailer-standard), [Ghostty](https://github.com/ghostty-org/ghostty/pull/10412), and [curl](https://www.neowin.net/news/beloved-tool-curl-is-shutting-down-its-bug-bounty-over-ai-slop-reports/) have imposed their own restrictions, from outright bans to shutting down contribution channels entirely. No two projects have drawn the line in the same place. Every project that bans AI contributions and has AI-using downstream dependents faces the same dynamic. The ban protects the social contract. The protection fractures the commons. The fracture weakens both branches.
 
 ## The ouroboros
 
 The AI models undermining open source were [trained on open source](/garden/oss-ouroboros-training-data-trap/). GitHub Copilot was built on all publicly available code on GitHub: the vast majority open source, under licenses that never contemplated this use. The models learned to replicate open source code without license obligations. Whether this training constitutes fair use is [actively litigated](https://dockets.justia.com/docket/circuit-courts/ca9/24-7700) and unresolved.
 
-The open source community finds itself between the devil and the deep blue sea. The more code the community produces, the more it feeds the models undermining its sustainability. If it produces less code, it only diminishes itself. Today's landscape offers no equilibrium where open source thrives without a threat from the AI models trained on it.
+The loop tightens. In March 2026, GitHub [announced](https://thenewstack.io/github-copilot-interaction-data/) it would train AI models on Copilot interaction data by default: not just the original repositories, but the prompts developers write and the suggestions they accept. Individual users can opt out. The default is opt-in. Each cycle feeds the next.
+
+curl is the loop made personal. Daniel Stenberg's project trained the models. The models then generated [slop bug reports](https://www.itpro.com/software/open-source/curl-open-source-bug-bounty-program-scrapped) about curl itself, flooding the bug bounty program with fabricated vulnerabilities until Stenberg [shut it down](https://www.neowin.net/news/beloved-tool-curl-is-shutting-down-its-bug-bounty-over-ai-slop-reports/). The project's own contribution to the commons was weaponized against it.
+
+The more code the community produces, the more it feeds the models undermining its sustainability. If it produces less code, it only diminishes itself. Today's landscape offers no equilibrium where open source thrives without a threat from the AI models trained on it.
 
 De Valk and Maffulli are right that open source must find new foundations. But foundations require builders. A new legal framework needs communities to implement and maintain it. Communities need a legal framework that makes sustained contribution rational. Each depends on the other. Both are eroding simultaneously. The code keeps flowing. The commons is hollowing out.
