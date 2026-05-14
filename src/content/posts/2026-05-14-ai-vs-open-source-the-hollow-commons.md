@@ -53,7 +53,7 @@ Bun, the JavaScript runtime, is built on Zig. Bun's team used AI to achieve a [4
 
 ## The ouroboros
 
-The AI models undermining open source were [trained on open source](/garden/oss-ouroboros-training-data-trap/). GitHub Copilot was built on all publicly available code on GitHub: the vast majority open source, under licenses that never contemplated this use. The models learned to replicate open source code without license obligations. Whether this training constitutes fair use is [actively litigated](https://dockets.justia.com/docket/circuit-courts/ca9/24-7700) and unresolved.
+The AI models that are undermining open source were [trained on open source](/garden/oss-ouroboros-training-data-trap/). GitHub Copilot was built on all publicly available code on GitHub: the vast majority open source, under licenses that never contemplated this use. The models learned to replicate open source code without license obligations. Whether this training constitutes fair use is [actively litigated](https://dockets.justia.com/docket/circuit-courts/ca9/24-7700) and unresolved.
 
 The loop tightens. In March 2026, GitHub [announced](https://thenewstack.io/github-copilot-interaction-data/) it would train AI models on Copilot interaction data by default: not just the original repositories, but the prompts developers write and the suggestions they accept. Individual users can opt out. The default is opt-in. Each cycle feeds the next.
 
