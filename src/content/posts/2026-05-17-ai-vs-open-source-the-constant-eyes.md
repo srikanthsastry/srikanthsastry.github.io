@@ -1,24 +1,22 @@
 ---
-
 title: "AI vs. Open Source, Part 3: The Constant Eyes"
 published: 2026-05-17
 tags:
-
-- 'ai'
-- 'open source'
-- 'security'
-- 'software engineering'
+  - 'ai'
+  - 'open source'
+  - 'security'
+  - 'software engineering'
 abbrlink: 'ai-vs-open-source-the-constant-eyes'
+image: /assets/images/ai-vs-open-source-constant-eyes-cover.jpg
 lang: ''
 excerpt: >
   Linus's Law assumed the number of eyes was the bottleneck for security.
   AI removed the bottleneck. When vulnerability discovery runs through a handful
   of frontier models, the "many" in "many eyes" collapses to a constant.
 categories:
-- Professional
+  - Professional
 series: 'Generative AI vs. Open Source'
-series\_order: 3
-image: /assets/images/ai-vs-open-source-constant-eyes-cover.jpg
+series_order: 3
 
 ---
 
@@ -34,7 +32,7 @@ The frontier AI models have shattered this assumption, and with that have opened
 
 With today's frontier models, you can spin up an orchestrator to interrogate a codebase with multiple expert subagents, each with a different specialization. The number of distinct capabilities and skill levels is not bounded by the number of humans, but by the number of models and the amount of tokens. And only a handful of frontier models exist today. A single security team with access to the models and the tokens can run all the same analysis against a codebase that a federated team of five thousand individuals could. The scale comes from the models and compute, and no humans.
 
-The "many" in "many eyes" collapsed to a constant. The bottleneck moved from "how many people are looking" to "how capable is the model."
+The ["many" in "many eyes" collapsed to a constant](/garden/constant-eyes-linus-law-collapse/). The bottleneck moved from "how many people are looking" to "how capable is the model."
 
 Yes, LLMs are probabilistic. Five thousand sessions produce five thousand different outputs. Some sessions might catch a vulnerability that others miss. But five thousand people running Claude is no different from one team running five thousand sessions. The "many eyes" advantage reduces to compute cost. And compute is increasingly cheap.
 
@@ -58,11 +56,11 @@ Firefox CTO Bobby Holley's [response](https://blog.mozilla.org/en/privacy-securi
 
 If defensive coverage is constant regardless of whether source is open or closed, the only remaining variable is attacker access.
 
-In the case of open source, the attacker points a frontier model at the public repository. They incur the floor cost of finding a vulnerability: tokens. Take away the source, but not the binary, and the attacker's cost goes up significantly. They now have to decompile the binary, which is lossy, and perform binary analysis, which is even noisier; the AI models reason less effectively without the source code. Now, take away the binary and provide a service API, and the attacker's cost is now  higher still. All the attackers have access to is a black box of outputs for inputs, and a limited number of attempts before discovery.
+In the case of open source, the attacker points a frontier model at the public repository. They incur the floor cost of finding a vulnerability: tokens. Take away the source, but not the binary, and the attacker's cost goes up significantly. They now have to decompile the binary, which is lossy, and perform binary analysis, which is even noisier; the AI models reason less effectively without the source code. Now, take away the binary and provide a service API, and the attacker's cost is higher still. All the attackers have access to is a black box of outputs for inputs, and a limited number of attempts before discovery.
 
 The defender's posture is equal in all these cases. The defender has access to both the source code and the same AI models. The cost of defense is the floor cost of finding a vulnerability: tokens. What changes is the attacker's cost. Attacking open source software is the cheapest, and attacking a closed source service API is the highest.
 
-This is an inversion of Linus's Law. With open source, the defender no longer has an advantage with "many eyes", and the attacker has all the advantage of "the constant eyes". With closed source, the defender has the advantage of "the constant eyes", and without source access, the attacker's advantage with "the constant eyes" is muted. Closed source wins out.
+This is an [inversion of Linus's Law](/garden/ai-attacker-cost-asymmetry/). With open source, the defender no longer has an advantage with "many eyes", and the attacker has all the advantage of "the constant eyes". With closed source, the defender has the advantage of "the constant eyes", and without source access, the attacker's advantage with "the constant eyes" is muted. Closed source wins out.
 
 ## The Treadmill
 
@@ -70,7 +68,7 @@ When both sides have source access and both sides can throw tokens at the code, 
 
 For closed source, the higher cost of attack affords the defender some breathing room: the option to defend at a pace proportional to the threat level, rather than locked to the maximum offensive capability of every frontier model with full source access. While this is not a free pass, it is as marked a difference as 4-day work week vs. 996.
 
-"Many eyes" was always partly idealistic for many open source projects. A lot of the engineering contributions came from corporate sponsors, not volunteer contributions. For instance, the people running Big Sleep on FFmpeg are Google engineers, not volunteer contributors. The corporations now face the same security engineering challenge against a vastly larger threat surface, with no commensurate increase in the effectiveness of community defense. The marginal security cost of defending open source went up by an order of magnitude, but the marginal benefit of openness barely moved.
+"Many eyes" was always partly idealistic for many open source projects. A lot of the engineering contributions came from corporate sponsors, not volunteer contributions. For instance, the people running Big Sleep on FFmpeg are Google engineers, not volunteer contributors. The corporations now face the same security engineering challenge against a vastly larger threat surface, with no commensurate increase in the effectiveness of community defense. The marginal security cost of defending open source went up dramatically, but the marginal benefit of openness barely moved.
 
 ## The eyes still see
 
@@ -78,6 +76,6 @@ All the above does not automatically mean that the security conscious should be 
 
 ## Where to next?
 
-The three posts in this series map to three structural layers. [Part 1](/ai-vs-open-source-the-empty-grant/): the legal foundation. Copyright is the sole enforcement mechanism for open source licenses, and AI-generated code is not copyrightable. [Part 2](/ai-vs-open-source-the-hollow-commons/): the social contract. Contributor trust, community integrity, and the iterated game that sustains the commons are fracturing. Part 3: the security economics. The cost of defending publicly available code against AI-powered offense increased by an order of magnitude while the benefit of public review collapsed from "many eyes" to "the constant eyes".
+The three posts in this series map to three structural layers. [Part 1](/ai-vs-open-source-the-empty-grant/): the legal foundation. Copyright is the sole enforcement mechanism for open source licenses, and AI-generated code is not copyrightable. [Part 2](/ai-vs-open-source-the-hollow-commons/): the social contract. Contributor trust, community integrity, and the iterated game that sustains the commons are fracturing. Part 3: the security economics. The cost of defending publicly available code against AI-powered offense increased dramatically while the benefit of public review collapsed from "many eyes" to "the constant eyes".
 
 All three are failing simultaneously, and for the same underlying reason: the frameworks that sustain open source were built for a world where humans write, review, and analyze code. That world is ending. The question is not whether open source will adapt. It always has. The question is whether the adaptation can outpace the collapse.
