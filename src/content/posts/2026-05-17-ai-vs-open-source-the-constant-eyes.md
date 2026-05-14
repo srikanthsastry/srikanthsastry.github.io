@@ -42,7 +42,7 @@ This is not security through obscurity, which claims that hiding code *makes* it
 
 The constant eyes are proving to be more capable than many eyes.
 
-Google's [Big Sleep](https://projectzero.google/2024/10/from-naptime-to-big-sleep.html) found [20 previously unknown security flaws](https://www.computing.co.uk/news/2025/security/big-sleep-finds-20-flaws-in-open-source-software) in open source software, including FFmpeg and ImageMagick. Its most notable find: a critical [zero-day in SQLite](https://thehackernews.com/2024/11/googles-ai-tool-big-sleep-finds-zero.html) (CVE-2025-6965, CVSS 7.2) that had survived years of fuzzing, static analysis, and manual review. Big Sleep found it by reasoning about the code's semantics, not by pattern-matching known vulnerability signatures.
+Google's [Big Sleep](https://projectzero.google/2024/10/from-naptime-to-big-sleep.html) found [20 previously unknown security flaws](https://www.computing.co.uk/news/2025/security/big-sleep-finds-20-flaws-in-open-source-software) in open source software, including FFmpeg and ImageMagick. Its most notable find: a critical [zero-day in SQLite](https://thehackernews.com/2024/11/googles-ai-tool-big-sleep-finds-zero.html) that had survived years of fuzzing, static analysis, and manual review. Big Sleep found it by reasoning about the code's semantics, not by pattern-matching known vulnerability signatures.
 
 Microsoft's [Security Copilot](https://www.microsoft.com/en-us/security/blog/2025/03/31/analyzing-open-source-bootloaders-finding-vulnerabilities-faster-with-ai/) identified [20 vulnerabilities in GRUB2, U-Boot, and Barebox](https://www.bleepingcomputer.com/news/security/microsoft-uses-ai-to-find-flaws-in-grub2-u-boot-barebox-bootloaders/) bootloaders: integer overflows, buffer overflows, a cryptographic weakness, several of which could bypass Secure Boot.
 
@@ -72,7 +72,7 @@ For closed source, the higher cost of attack affords the defender some breathing
 
 ## The eyes still see
 
-All the above does not automatically mean that the security conscious should be lobbying against open source. Open source continues to confer several advantages in the security realm. It gives you auditability; you know what you are executing. You get supply chain verification, and so your software provenance is clear (e.g., your device driver was not written by a dodgy North Korean spy network). Your builds are reproducible. You get trust from inspection instead of relying on contracts and blackbox verification. The "many eyes", and the human eyes continue to offer security benefits for open source, just not the kind that the AI models do.
+All the above does not automatically mean that the security conscious should be lobbying against open source. Open source continues to confer several advantages in the security realm. It gives you auditability; you know what you are executing. You get supply chain verification, and so your software provenance is clear (e.g., your device driver was not written by a dodgy North Korean spy network). Your builds are reproducible. You get trust from inspection instead of relying on contracts and blackbox verification. The "many eyes" and the human eyes continue to offer security benefits for open source, just not the kind that the AI models do.
 
 ## Where to next?
 
