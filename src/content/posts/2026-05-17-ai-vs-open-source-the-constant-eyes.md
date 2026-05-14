@@ -1,7 +1,7 @@
 ---
 
 title: "AI vs. Open Source, Part 3: The Constant Eyes"
-published: 2026-05-21
+published: 2026-05-17
 tags:
 
 - 'ai'
