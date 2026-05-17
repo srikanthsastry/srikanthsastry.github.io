@@ -60,17 +60,17 @@ If reviews and tests don't work, then what does? The answer depends on what kind
 
 There are [three classes of guardrails](/garden/three-classes-of-guardrail-erosion-resistance/), and each erodes differently.
 
-### [Social guardrails](/garden/social-guardrails/)
+### Social guardrails
 
-Conventions and patterns that may or may not be documented. It is the social contract around which humans write software. The suggestible actor sees traces of them in code patterns but treats them as weak signals. They erode too fast to be a reliable line of defense, so I will set them aside for the rest of this discussion.
+[Social guardrails](/garden/social-guardrails/) are conventions and patterns that may or may not be documented. It is the social contract around which humans write software. The suggestible actor sees traces of them in code patterns but treats them as weak signals. They erode too fast to be a reliable line of defense, so I will set them aside for the rest of this discussion.
 
-### [Encoded guardrails](/garden/encoded-guardrails/)
+### Encoded guardrails
 
-Guardrails encoded into the software lifecycle: linters, static analysis, unit tests, integration tests, and regression tests. These are guardrails that the agent can modify in situ, within the same codebase it is already changing. The agent responds to them because violations produce errors that block progress, and errors are the contextual feedback the suggestible actor is most susceptible to. But the agent can [satisfy them trivially](/garden/class2-guardrails-suppress-symptoms/): delete a failing test, drop a precondition check, or suppress a linter warning. The error is gone. The vulnerability is not.
+[Encoded guardrails](/garden/encoded-guardrails/) are encoded into the software lifecycle: linters, static analysis, unit tests, integration tests, and regression tests. These are guardrails that the agent can modify in situ, within the same codebase it is already changing. The agent responds to them because violations produce errors that block progress, and errors are the contextual feedback the suggestible actor is most susceptible to. But the agent can [satisfy them trivially](/garden/class2-guardrails-suppress-symptoms/): delete a failing test, drop a precondition check, or suppress a linter warning. The error is gone. The vulnerability is not.
 
-### [Structural guardrails](/garden/structural-guardrails/)
+### Structural guardrails
 
-Guardrails woven into the structure of software development that cannot be modified *in situ*. Changing them requires a significant change to the build and execution environment. Examples include type systems, capability restrictions, formal verification, and property-based tests (tests that verify general properties over randomized inputs) with human-authored properties. These guardrails enforce properties that must hold regardless of the path taken to satisfy them. The agent does not need to understand *why* the guardrail exists; it just needs to know that the goal cannot be accomplished without satisfying it. Structural guardrails typically require human maintenance, which is why they are expensive. But because organizations deploy them sparingly, the surface area that humans must maintain remains small enough to review thoroughly.
+[Structural guardrails](/garden/structural-guardrails/) are woven into the structure of software development that cannot be modified *in situ*. Changing them requires a significant change to the build and execution environment. Examples include type systems, capability restrictions, formal verification, and property-based tests (tests that verify general properties over randomized inputs) with human-authored properties. These guardrails enforce properties that must hold regardless of the path taken to satisfy them. The agent does not need to understand *why* the guardrail exists; it just needs to know that the goal cannot be accomplished without satisfying it. Structural guardrails typically require human maintenance, which is why they are expensive. But because organizations deploy them sparingly, the surface area that humans must maintain remains small enough to review thoroughly.
 
 Most codebases have decent social and encoded guardrails, but thin structural guardrails. Very few codebases have anything beyond type safety from the compiler. Fewer still have formal verification, and even those verify against the design, not the implementation: nothing guarantees the two haven't drifted apart.
 
