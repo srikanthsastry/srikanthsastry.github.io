@@ -31,10 +31,10 @@ In my [Suggestible Actor](https://srikanth.sastry.name/the-suggestible-actor/) p
 
 Such erosion is a structural consequence of the Suggestible Actor properties of an AI agent.
 
-- A goal-oriented agent treats guardrails as obstacles when they produce errors that block progress toward the goal.
-- A locally reasoning agent cannot distinguish between a test that documents current behavior (safe to update) and a test that guards a critical invariant (dangerous to update): both look the same from the local context.
-- An agent susceptible to local context pattern-matches from the surrounding code; if prior iterations have already weakened some guardrails, the context reinforces further weakening.
-- An agent that hallucinates under uncertainty will, when encountering a guardrail it does not understand, resolve the ambiguity in the direction that clears the immediate error: loosening the constraint rather than preserving it.
+- A [goal-oriented](/garden/goal-vs-intent/) agent treats guardrails as obstacles when they produce errors that block progress toward the goal.
+- A [locally reasoning](/garden/ambient-to-local/) agent cannot distinguish between a test that documents current behavior (safe to update) and a test that guards a critical invariant (dangerous to update): both look the same from the local context.
+- An agent [susceptible to local context](/garden/susceptibility-peaks-at-failure/) pattern-matches from the surrounding code; if prior iterations have already weakened some guardrails, the context reinforces further weakening.
+- An agent that [hallucinates under uncertainty](/garden/confabulation-is-plausible/) will, when encountering a guardrail it does not understand, resolve the ambiguity in the direction that clears the immediate error: loosening the constraint rather than preserving it.
 
 A more capable model will not stop eroding guardrails. It will erode them more efficiently, or possibly more convincingly. These properties do not depend on current model limitations. [Hallucination is a proven mathematical limitation](/garden/hallucination-is-mathematically-inevitable/) of autoregressive language models, not an engineering problem awaiting a fix ([Xu et al., 2024](https://arxiv.org/abs/2401.11817)). Hoping for smarter LLMs to solve this problem is wishful thinking.
 
