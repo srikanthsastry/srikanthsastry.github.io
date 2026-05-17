@@ -4,6 +4,7 @@ published: 2026-05-20
 series: 'suggestible-actor'
 series_order: 2
 series_label: 'The Suggestible Actor'
+image: /assets/images/guardrail-erosion-cover.jpg
 tags:
   - 'software engineering'
   - 'AI'
