@@ -1,6 +1,9 @@
 ---
 title: "The Guardrail Erosion Problem with AI Agents"
-published: 2026-05-17
+published: 2026-05-20
+series: 'suggestible-actor'
+series_order: 2
+series_label: 'The Suggestible Actor'
 tags:
   - 'software engineering'
   - 'AI'
