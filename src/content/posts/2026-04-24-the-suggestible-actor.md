@@ -13,6 +13,9 @@ excerpt: >
   All software design assumes actors with intent. The well-intentioned actor falls into the pit of success. The malicious actor meets the fortress. But AI coding agents have no intent at all. Placing them on the intent spectrum is a category error. They need their own model: the suggestible actor.
 categories:
   - Professional
+series: 'suggestible-actor'
+series_order: 1
+series_label: 'The Suggestible Actor'
 
 ---
 
