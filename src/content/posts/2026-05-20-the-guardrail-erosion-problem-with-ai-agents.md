@@ -66,7 +66,7 @@ There are [three classes of guardrails](/garden/three-classes-of-guardrail-erosi
 
 ### Encoded guardrails
 
-[Encoded guardrails](/garden/encoded-guardrails/) are encoded into the software lifecycle: linters, static analysis, unit tests, integration tests, and regression tests. These are guardrails that the agent can modify in situ, within the same codebase it is already changing. The agent responds to them because violations produce errors that block progress, and errors are the contextual feedback the suggestible actor is most susceptible to. But the agent can [satisfy them trivially](/garden/class2-guardrails-suppress-symptoms/): delete a failing test, drop a precondition check, or suppress a linter warning. The error is gone. The vulnerability is not.
+[Encoded guardrails](/garden/encoded-guardrails/) are encoded into the software lifecycle: linters, static analysis, unit tests, integration tests, and regression tests. These are guardrails that the agent can modify in situ, within the same codebase it is already changing. The agent responds to them because violations produce errors that block progress, and errors are the contextual feedback the suggestible actor is most susceptible to. But the agent can [satisfy them trivially](/garden/encoded-guardrails-suppress-symptoms/): delete a failing test, drop a precondition check, or suppress a linter warning. The error is gone. The vulnerability is not.
 
 ### Structural guardrails
 
