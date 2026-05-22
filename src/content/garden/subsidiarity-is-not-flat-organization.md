@@ -9,4 +9,4 @@ related_notes:
 excerpt_text: >
   Subsidiarity preserves hierarchy but changes what it is for.
 ---
-**Subsidiarity preserves hierarchy but changes what it is for.** This is not Burns and Stalker's organic organization, which is flat, network-structured, and expertise-driven. Subsidiarity keeps the hierarchy. The function of hierarchy shifts from commanding to enabling. Accountability aggregates upward for outcomes (team to director to VP to C-suite), but decisions stay where information lives. The prescription is not "move from mechanistic to organic" but "keep the hierarchy, change its function."
+**[Subsidiarity](/garden/subsidiarity/) preserves hierarchy but changes what it is for.** This is not Burns and Stalker's organic organization, which is flat, network-structured, and expertise-driven. Subsidiarity keeps the hierarchy. The function of hierarchy shifts from commanding to enabling. Accountability aggregates upward for outcomes (team to director to VP to C-suite), but decisions stay where information lives. The prescription is not "move from mechanistic to organic" but "keep the hierarchy, change its function."

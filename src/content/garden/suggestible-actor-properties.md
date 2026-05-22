@@ -23,4 +23,4 @@ excerpt_text: >
 3. **Susceptible to local context.** Every input during execution influences subsequent behavior, with [susceptibility peaking at failure](/garden/susceptibility-peaks-at-failure/).
 4. **Confabulates under uncertainty.** When local context is insufficient, the agent generates plausible structure and proceeds as if it were real.
 
-Confabulation is the convergent failure mode: the agent must produce something (goal-oriented), can only draw from what is nearby (locally reasoning), and pattern-matches from whatever is available (susceptible). When the [directive gap](/garden/directive-gap/) is wide, the result is plausible-looking wrongness.
+[Confabulation](/garden/confabulation-is-plausible/) is the convergent failure mode: the agent must produce something (goal-oriented), can only draw from what is nearby (locally reasoning), and pattern-matches from whatever is available (susceptible). When the [directive gap](/garden/directive-gap/) is wide, the result is plausible-looking wrongness.

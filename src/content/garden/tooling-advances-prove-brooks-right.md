@@ -10,4 +10,4 @@ excerpt_text: >
 ---
 **Every advance in software tooling proves Brooks right.**
 
-Each new tool — Agile, CI/CD, cloud infrastructure, AI code generation — eliminates accidental complexity while leaving essential complexity untouched. This makes the craft dimension proportionally *more* dominant over time, not less. The ratio moves against directive governance: as the accidental gets automated away, what remains is increasingly the irreducible design judgment that no reporting chain can transmit and no metric can capture.
+Each new tool — Agile, CI/CD, cloud infrastructure, AI code generation — eliminates accidental complexity while leaving [essential complexity](/garden/essential-complexity-makes-software-ungovernable/) untouched. This makes the craft dimension proportionally *more* dominant over time, not less. The ratio moves against directive governance: as the accidental gets automated away, what remains is increasingly the irreducible design judgment that no reporting chain can transmit and no metric can capture.
