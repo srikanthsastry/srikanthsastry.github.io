@@ -65,13 +65,8 @@ const badge = maturityBadge[note.data.maturity] ?? maturityBadge.seedling
         relatedPosts={note.data.related_posts || []}
       />
 
-      <!-- Backlinks (discovered connections, excluding already-shown related items) -->
-      <Backlinks
-        currentId={note.id}
-        collection="garden"
-        excludeNotes={note.data.related_notes || []}
-        excludePosts={note.data.related_posts || []}
-      />
+      <!-- Backlinks (discovered connections) -->
+      <Backlinks currentId={note.id} collection="garden" />
     </div>
   </article>
 </Layout>

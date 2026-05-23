@@ -260,17 +260,6 @@ for pkm_file in "${FILES[@]}"; do
     pkm_source=$(get_fm "$pkm_file" "source")
     pkm_inspired_by=$(get_fm "$pkm_file" "inspired_by")
 
-    # Collect related_posts (multi-line list of post slugs)
-    related_posts=()
-    while IFS= read -r rp; do
-        [ -z "$rp" ] && continue
-        rp=$(echo "$rp" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
-        # Normalize to /slug/ format
-        rp="${rp#/}"   # strip leading slash if present
-        rp="${rp%/}"   # strip trailing slash if present
-        related_posts+=("/$rp/")
-    done < <(get_fm_list "$pkm_file" "related_posts")
-
     # ── Derive garden fields ──
 
     # Title: use PKM title, or derive from slug
@@ -521,14 +510,6 @@ for pkm_file in "${FILES[@]}"; do
             done
         else
             echo "related_notes: []"
-        fi
-
-        # Related posts
-        if [ ${#related_posts[@]} -gt 0 ]; then
-            echo "related_posts:"
-            for rp in "${related_posts[@]}"; do
-                echo "  - $rp"
-            done
         fi
 
         # Source-specific fields
