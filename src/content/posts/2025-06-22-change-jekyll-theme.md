@@ -2,11 +2,7 @@
 title: "Changing your Jekyll theme without losing your mind (or your content!)"
 published: 2025-06-22
 tags:
-  - jekyll
-  - theme
-  - customization
-  - migration
-  - 'site migration'
+  - 'software engineering'
 abbrlink: 'change-jekyll-theme'
 image: /assets/images/jekyll-new-suit-makeover.png
 lang: ''

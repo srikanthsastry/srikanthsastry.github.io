@@ -2,8 +2,6 @@
 title: 'Scripts and their undo'
 published: '2019-01-11T17:46:42-05:00'
 tags:
-  - script
-  - software
   - 'software engineering'
 abbrlink: 'scripts-and-their-undo'
 image: /assets/images/2019/01/bash-logo-672x372.png

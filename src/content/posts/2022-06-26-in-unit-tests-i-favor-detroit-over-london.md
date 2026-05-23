@@ -2,12 +2,8 @@
 title: "In unit tests, I favor Detroit over London"
 published: 2022-06-26
 tags:
-  - 'unit tests'
+  - 'testing'
   - 'software engineering'
-  - 'london school'
-  - 'detroit school'
-  - 'classical school'
-  - 'mockist school'
 abbrlink: 'in-unit-tests-favor-detroit-over-london'
 image: /assets/images/detroit-wall-frame.jpg
 lang: ''

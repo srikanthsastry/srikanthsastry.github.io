@@ -2,10 +2,8 @@
 title: "Unit test the brains and not the nerves"
 published: 2022-05-31
 tags:
-  - testing
+  - 'testing'
   - 'software engineering'
-  - 'integration tests'
-  - 'unit tests'
 abbrlink: 'unit-test-the-brains-and-not-the-nerves'
 image: /assets/images/brain-magnifying-glass.png
 lang: ''

@@ -2,9 +2,8 @@
 title: DRY unit tests are bad... mkay
 published: 2022-05-17
 tags:
-  - testing
+  - 'testing'
   - 'software engineering'
-  - 'unit tests'
 abbrlink: 'dry-unit-tests-are-bad'
 image: /assets/images/squeeze-cloth.jpg
 lang: ''

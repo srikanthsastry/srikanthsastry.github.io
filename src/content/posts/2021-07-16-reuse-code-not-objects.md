@@ -2,7 +2,6 @@
 title: 'Reuse Code, Not Objects'
 published: '2021-07-16T22:01:41-04:00'
 tags:
-  - 'design pattern'
   - 'software engineering'
 abbrlink: 'reuse-code-not-objects'
 image: /assets/images/2021/07/pexels-photo-5218009-edited.jpeg

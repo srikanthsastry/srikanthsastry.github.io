@@ -3,8 +3,6 @@ title: "When Backward Compatibility Can Rescue a Leaky Abstraction"
 published: 2025-07-02
 tags:
   - 'software engineering'
-  - debugging
-  - 'best practices'
 abbrlink: 'backward-compatibility-where-you-dont-expect'
 image: /assets/images/usb_c_into_ethernet_port.jpg
 lang: ''

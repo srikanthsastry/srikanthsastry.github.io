@@ -2,8 +2,7 @@
 title: 'When I first realized my privilege'
 published: 2022-02-26
 tags:
-  - reflection
-  - privilege
+  - 'personal'
 abbrlink: 'when-i-first-realized-my-privilege'
 image: /assets/images/handcuffed.jpg
 lang: ''

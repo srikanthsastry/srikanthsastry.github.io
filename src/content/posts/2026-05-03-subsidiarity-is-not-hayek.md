@@ -2,12 +2,7 @@
 title: "Subsidiarity is not Hayek"
 published: 2026-05-03
 tags:
-  - governance
-  - subsidiarity
-  - 'directive-governance'
-  - hayek
-  - keynes
-  - 'organizational-theory'
+  - 'governance'
 abbrlink: 'subsidiarity-is-not-hayek'
 image: /assets/images/subsidiarity-is-not-hayek-cover.jpg
 lang: ''

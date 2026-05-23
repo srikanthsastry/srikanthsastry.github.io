@@ -2,8 +2,7 @@
 title: 'Failure Detectors Encapsulate Fairness'
 published: '2012-02-16T19:19:38-05:00'
 tags:
-  - research
-  - academia
+  - 'research'
 abbrlink: 'failure-detectors-encapsulate-fairness'
 lang: ''
 categories:

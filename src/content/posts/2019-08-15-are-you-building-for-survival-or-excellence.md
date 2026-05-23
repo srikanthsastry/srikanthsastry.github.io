@@ -2,7 +2,6 @@
 title: 'Are you building for Survival or Excellence?'
 published: '2019-08-15T15:53:45-04:00'
 tags:
-  - 'software development process'
   - 'software engineering'
 abbrlink: 'are-you-building-for-survival-or-excellence'
 image: /assets/images/2019/08/maxresdefault-450x253.jpg

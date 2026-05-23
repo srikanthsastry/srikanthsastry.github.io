@@ -2,9 +2,8 @@
 title: "'Privatize' your classes for better unit testing"
 published: 2022-07-11
 tags:
-  - 'unit tests'
+  - 'testing'
   - 'software engineering'
-  - refactoring
 abbrlink: 'privatize-your-classes-for-better-unit-testing'
 image: /assets/images/amber-iceberg-under-water.jpg
 lang: ''

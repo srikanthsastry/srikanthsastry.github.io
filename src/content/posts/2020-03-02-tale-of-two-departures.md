@@ -2,8 +2,7 @@
 title: 'Tale of two departures'
 published: '2020-03-02T10:00:00-05:00'
 tags:
-  - 'People management'
-  - Quitting
+  - 'people management'
 abbrlink: 'tale-of-two-departures'
 image: /assets/images/2020/02/137FABBE-C7DC-4401-B0AB-299AA800D039-740x430.jpeg
 lang: ''

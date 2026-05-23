@@ -2,10 +2,7 @@
 title: "Tech Companies and Directive Governance: A Situationship"
 published: 2026-04-16
 tags:
-  - governance
-  - 'directive-governance'
-  - 'tech-industry'
-  - 'organizational-theory'
+  - 'governance'
 abbrlink: 'directive-governance-situationship'
 image: /assets/images/directive-governance-situationship-cover.jpg
 lang: ''

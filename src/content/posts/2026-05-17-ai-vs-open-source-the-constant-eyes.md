@@ -2,9 +2,8 @@
 title: "AI vs. Open Source, Part 3: The Constant Eyes"
 published: 2026-05-17
 tags:
-  - 'ai'
+  - 'AI'
   - 'open source'
-  - 'security'
   - 'software engineering'
 abbrlink: 'ai-vs-open-source-the-constant-eyes'
 image: /assets/images/ai-vs-open-source-constant-eyes-cover.jpg

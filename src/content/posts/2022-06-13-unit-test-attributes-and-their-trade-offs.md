@@ -2,7 +2,7 @@
 title: "Primary attributes of unit test suites and their tradeoffs"
 published: 2022-06-13
 tags:
-  - 'unit tests'
+  - 'testing'
   - 'software engineering'
 abbrlink: 'unit-test-attributes-and-their-trade-offs'
 image: /assets/images/accuracy-completeness-speed.png

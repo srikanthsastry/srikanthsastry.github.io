@@ -2,10 +2,8 @@
 title: "Const Refs vs. Raw Pointers: Fixing Shared Pointer Reads"
 published: 2025-06-26
 tags:
-  - c++
-  - 'const references'
-  - pointers
-  - 'code quality'
+  - 'C++'
+  - 'software engineering'
 abbrlink: 'const-ref-vs-raw-ptr-a-fix-for-shared-ptr-reads'
 image: /assets/images/raw-pointer-smoking-gun-const-ref-vest.jpg
 lang: ''

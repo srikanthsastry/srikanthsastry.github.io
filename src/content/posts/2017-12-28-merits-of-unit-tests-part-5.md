@@ -3,7 +3,7 @@ title: 'Merits of unit tests &#8212; part 5'
 published: '2017-12-28T16:25:49-05:00'
 tags:
   - 'software engineering'
-  - 'software testing'
+  - 'testing'
 abbrlink: 'merits-of-unit-tests-part-5'
 lang: ''
 series: 'unit-testing'
