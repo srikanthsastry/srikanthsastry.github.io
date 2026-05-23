@@ -2,8 +2,7 @@
 title: 'Wait-Free Stabilizing Dining Using Regular Registers'
 published: '2013-01-18T18:28:45-05:00'
 tags:
-  - research
-  - academia
+  - 'research'
 abbrlink: 'wait-free-stabilizing-dining-using-regular-registers'
 lang: ''
 categories:

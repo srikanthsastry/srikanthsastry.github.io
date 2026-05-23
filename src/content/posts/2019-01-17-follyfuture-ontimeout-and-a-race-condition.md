@@ -2,7 +2,7 @@
 title: 'folly:Future, onTimeout(), and a race condition'
 published: '2019-01-17T19:38:48-05:00'
 tags:
-  - c++
+  - 'C++'
   - 'software engineering'
 abbrlink: 'follyfuture-ontimeout-and-a-race-condition'
 image: /assets/images/2019/01/C-programming-in-a-nutshell-Imgur-450x450.png

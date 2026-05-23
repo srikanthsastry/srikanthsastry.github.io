@@ -2,11 +2,7 @@
 title: "Deliverance from Directive Governance"
 published: 2026-05-02
 tags:
-  - governance
-  - 'directive-governance'
-  - 'tech-industry'
-  - 'organizational-theory'
-  - subsidiarity
+  - 'governance'
 abbrlink: 'deliverance-from-directive-governance'
 image: /assets/images/deliverance-from-directive-governance-cover.png
 lang: ''

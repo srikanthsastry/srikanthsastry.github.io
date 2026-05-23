@@ -2,8 +2,7 @@
 title: "The grand flattening: AI Slop is just the next step"
 published: 2025-10-10
 tags:
-  - philosophy
-  - AI
+  - 'AI'
 abbrlink: 'the-great-flattening-ai-slop'
 image: /assets/images/charcoal-image-to-face-outline.png
 lang: ''

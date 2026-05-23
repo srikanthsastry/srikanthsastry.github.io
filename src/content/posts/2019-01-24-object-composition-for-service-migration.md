@@ -2,10 +2,6 @@
 title: 'Object Composition for Service Migration'
 published: '2019-01-24T16:13:37-05:00'
 tags:
-  - 'design pattern'
-  - migration
-  - 'object composition'
-  - services
   - 'software engineering'
 abbrlink: 'object-composition-for-service-migration'
 lang: ''

@@ -2,8 +2,7 @@
 title: 'Asynchronous Failure Detectors'
 published: '2012-05-16T19:16:23-04:00'
 tags:
-  - research
-  - academia
+  - 'research'
 abbrlink: 'asynchronous-failure-detectors'
 lang: ''
 categories:

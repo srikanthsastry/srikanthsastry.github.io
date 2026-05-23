@@ -2,10 +2,7 @@
 title: "TDD for Bug Fixes"
 published: 2025-06-11
 tags:
-  - 'test driven development'
-  - tdd
-  - 'bug fixing'
-  - testing
+  - 'testing'
 abbrlink: 'tdd-for-bug-fixes'
 image: /assets/images/bug-stabbing-software-engineer-in-the-back.png
 lang: ''

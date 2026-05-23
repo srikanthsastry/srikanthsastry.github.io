@@ -4,7 +4,6 @@ published: 2026-04-24
 tags:
   - 'software engineering'
   - 'AI'
-  - 'api design'
   - 'mental models'
 abbrlink: 'the-suggestible-actor'
 series: 'suggestible-actor'

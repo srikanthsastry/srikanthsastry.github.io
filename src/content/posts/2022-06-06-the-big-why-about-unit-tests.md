@@ -2,8 +2,7 @@
 title: "The big WHY about unit tests"
 published: 2022-06-06
 tags:
-  - 'unit tests'
-  - testing
+  - 'testing'
   - 'software engineering'
 abbrlink: 'the-big-why-about-unit-tests'
 image: /assets/images/question_mark_person_leaning.png

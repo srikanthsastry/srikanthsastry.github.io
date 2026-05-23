@@ -2,9 +2,7 @@
 title: "Cyclomatic Complexity: How Low Can You Go?"
 published: 2025-06-17
 tags:
-  - 'cyclomatic-complexity'
-  - 'refactoring'
-  - 'best practices'
+  - 'software engineering'
 abbrlink: 'reduce-cyclomatic-complexity'
 image: /assets/images/cpu-in-maze-pixel-art.png
 lang: ''

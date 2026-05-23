@@ -8,7 +8,6 @@ image: /assets/images/guardrail-erosion-cover.jpg
 tags:
   - 'software engineering'
   - 'AI'
-  - 'guardrail erosion'
   - 'mental models'
 abbrlink: 'the-guardrail-erosion-problem-with-ai-agents'
 lang: ''

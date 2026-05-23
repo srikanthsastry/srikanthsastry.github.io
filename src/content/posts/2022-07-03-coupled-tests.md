@@ -2,7 +2,7 @@
 title: "Tests should be isolated from each other; not coupled"
 published: 2022-07-03
 tags:
-  - 'unit tests'
+  - 'testing'
   - 'software engineering'
 abbrlink: 'tests-should-be-isolated-not-coupled'
 image: /assets/images/carabiners-connected.jpg

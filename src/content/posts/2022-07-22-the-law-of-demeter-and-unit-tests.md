@@ -2,7 +2,7 @@
 title: "The Law of Demeter and unit tests"
 published: 2022-07-22
 tags:
-  - 'unit tests'
+  - 'testing'
   - 'software engineering'
 abbrlink: 'law-of-demeter-and-unit-tests'
 image: /assets/images/demeter-sketch-bw.jpg

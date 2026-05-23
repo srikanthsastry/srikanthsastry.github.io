@@ -2,7 +2,6 @@
 title: 'When should you build for survival?'
 published: '2019-08-21T14:23:48-04:00'
 tags:
-  - 'software development process'
   - 'software engineering'
 abbrlink: 'when-should-you-build-for-survival'
 image: /assets/images/2019/08/Are-You-Succeeding-Blog-thegem-blog-default-1024x512.jpg

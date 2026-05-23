@@ -3,7 +3,7 @@ title: 'Unit tests FTW! — Part 4'
 published: '2017-11-28T16:21:11-05:00'
 tags:
   - 'software engineering'
-  - 'software testing'
+  - 'testing'
 abbrlink: 'unit-tests-ftw-part-4'
 lang: ''
 series: 'unit-testing'

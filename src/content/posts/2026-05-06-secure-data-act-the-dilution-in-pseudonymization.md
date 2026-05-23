@@ -2,12 +2,7 @@
 title: "SECURE Data Act: The dilution in pseudonymization"
 published: 2026-05-06
 tags:
-  - privacy
-  - legislation
-  - pseudonymization
-  - pipelines
-  - 'SECURE-Data-Act'
-  - GDPR
+  - 'privacy'
 abbrlink: 'secure-data-act-the-dilution-in-pseudonymization'
 image: /assets/images/secure-data-act-cover.jpg
 lang: ''

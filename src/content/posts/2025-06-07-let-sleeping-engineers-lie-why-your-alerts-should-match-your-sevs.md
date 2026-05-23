@@ -2,9 +2,7 @@
 title: "Let Sleeping Engineers Lie: Why Your Alerts Should Match Your SEVs"
 published: 2025-06-07
 tags:
-  - alerts
-  - monitoring
-  - SEV
+  - 'operations'
 abbrlink: 'sync-your-alerts-to-your-sev-criteria'
 image: /assets/images/sleepy-engineer-cursing-laptop.png
 lang: ''

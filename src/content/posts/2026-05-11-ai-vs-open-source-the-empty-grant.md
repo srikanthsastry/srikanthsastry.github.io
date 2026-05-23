@@ -2,10 +2,8 @@
 title: "AI vs. Open Source, Part 1: The Empty Grant"
 published: 2026-05-11
 tags:
-  - 'ai'
+  - 'AI'
   - 'open source'
-  - 'copyright'
-  - 'licensing'
   - 'software engineering'
 abbrlink: 'ai-vs-open-source-the-empty-grant'
 image: /assets/images/ai-vs-open-source-empty-grant-cover.jpg

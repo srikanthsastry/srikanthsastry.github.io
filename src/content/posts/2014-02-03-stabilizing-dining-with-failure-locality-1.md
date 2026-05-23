@@ -2,7 +2,7 @@
 title: 'Stabilizing Dining with Failure Locality 1'
 published: '2014-02-03T23:59:08-05:00'
 tags:
-  - 'dining philosophers'
+  - 'research'
 abbrlink: 'stabilizing-dining-with-failure-locality-1'
 lang: ''
 categories:

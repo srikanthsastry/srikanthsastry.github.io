@@ -2,12 +2,8 @@
 title: Mocks, Stubs, and how to use them
 published: 2022-05-25
 tags:
-  - testing
+  - 'testing'
   - 'software engineering'
-  - 'test doubles'
-  - 'unit tests'
-  - mocks
-  - stubs
 abbrlink: 'mocks-stubs-andhow-to-use-them'
 image: /assets/images/masquerade-masks.png
 lang: ''

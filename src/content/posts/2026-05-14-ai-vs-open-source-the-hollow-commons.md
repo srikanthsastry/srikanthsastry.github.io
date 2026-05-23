@@ -2,9 +2,8 @@
 title: "AI vs. Open Source, Part 2: The Hollow Commons"
 published: 2026-05-14
 tags:
-  - 'ai'
+  - 'AI'
   - 'open source'
-  - 'community'
   - 'software engineering'
 abbrlink: 'ai-vs-open-source-the-hollow-commons'
 lang: ''

@@ -2,7 +2,6 @@
 title: 'Git may not be the best for SaaS companies'
 published: '2019-12-29T16:30:07-05:00'
 tags:
-  - Git
   - 'software engineering'
 abbrlink: 'git-may-not-be-the-best-for-saas-companies'
 image: /assets/images/2020/02/img_0147-740x430.jpg

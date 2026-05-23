@@ -2,10 +2,9 @@
 title: 'Do not index on test coverage metrics'
 published: 2022-04-29
 tags:
-  - testing
-  - software
-  - Python
+  - 'testing'
   - 'software engineering'
+  - 'Python'
 abbrlink: 'do-not-index-in-test-coverage'
 image: /assets/images/chart-coverage.png
 lang: ''
