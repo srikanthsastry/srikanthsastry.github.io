@@ -56,13 +56,6 @@ for (const m of maturityOrder) {
             {note.data.excerpt_text && (
               <p class="c-secondary text-3.25 leading-relaxed mb-2 line-clamp-2">{note.data.excerpt_text}</p>
             )}
-            {note.data.tags && note.data.tags.length > 0 && (
-              <div class="flex flex-wrap gap-1.5">
-                {note.data.tags.slice(0, 3).map((tag: string) => (
-                  <span class="text-2.75 px-1.5 py-0.5 rounded-full bg-secondary/8 c-secondary/70">{tag}</span>
-                ))}
-              </div>
-            )}
           </a>
         ))}
       </div>
