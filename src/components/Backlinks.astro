@@ -5,9 +5,14 @@ import { getCollection } from 'astro:content'
 interface Props {
   currentId: string
   collection: 'garden' | 'posts'
+  excludeNotes?: string[]
+  excludePosts?: string[]
 }
 
-const { currentId, collection } = Astro.props
+const { currentId, collection, excludeNotes = [], excludePosts = [] } = Astro.props
+
+// Normalize excludePosts to bare slugs for comparison
+const excludePostSlugs = new Set(excludePosts.map((p: string) => p.replace(/^\/|\/$/g, '')))
 
 // Gather all garden notes and posts
 const allNotes: CollectionEntry<'garden'>[] = await getCollection('garden')
@@ -40,6 +45,9 @@ const gardenUrlPatternNoTrail = `/garden/${currentSlug}`
 // Check garden notes for backlinks
 for (const note of allNotes) {
   if (note.id === currentId && collection === 'garden') continue
+
+  // Skip notes already shown in RelatedNotes
+  if (excludeNotes.includes(note.id)) continue
 
   // Check related_notes frontmatter
   const relatedNotes = note.data.related_notes || []
@@ -91,10 +99,14 @@ for (const note of allNotes) {
 // Check posts for backlinks to garden notes
 if (collection === 'garden') {
   for (const post of allPosts) {
+    const postSlug = post.data.abbrlink || post.id
+
+    // Skip posts already shown in RelatedNotes
+    if (excludePostSlugs.has(postSlug)) continue
+
     // Check body for inline links to this garden note
     if (post.body) {
       if (post.body.includes(gardenUrlPattern) || post.body.includes(gardenUrlPatternNoTrail)) {
-        const postSlug = post.data.abbrlink || post.id
         backlinks.push({
           title: post.data.title,
           href: `/${postSlug}/`,
