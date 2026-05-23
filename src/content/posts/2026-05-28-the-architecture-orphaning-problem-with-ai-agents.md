@@ -1,7 +1,7 @@
 ---
 
 title: "The Architecture Orphaning Problem with AI Agents"
-published: 2026-05-27
+published: 2026-05-28
 series: 'suggestible-actor'
 series_order: 3
 series_label: 'The Suggestible Actor'
