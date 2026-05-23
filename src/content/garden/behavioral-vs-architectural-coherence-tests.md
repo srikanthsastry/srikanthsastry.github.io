@@ -4,6 +4,8 @@ maturity: evergreen
 tags: [software-architecture, AI, testing]
 created: 2026-05-23
 related_notes: []
+related_posts:
+  - /the-architecture-orphaning-problem-with-ai-agents/
 excerpt_text: >
   Behavioral tests and architectural coherence tests serve different governance layers and should not be conflated.
 ---

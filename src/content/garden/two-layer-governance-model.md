@@ -4,6 +4,8 @@ maturity: evergreen
 tags: [software-architecture, AI, spec-driven-development]
 created: 2026-05-23
 related_notes: []
+related_posts:
+  - /the-architecture-orphaning-problem-with-ai-agents/
 excerpt_text: >
   AI-assisted software development requires two distinct, complementary layers of governance: iterative spec convergence and architectural coherence.
 ---

@@ -4,6 +4,8 @@ maturity: evergreen
 tags: [software-architecture, AI, suggestible-actor]
 created: 2026-05-23
 related_notes: []
+related_posts:
+  - /the-architecture-orphaning-problem-with-ai-agents/
 excerpt_text: >
   Architecture orphaning is the phenomenon where architectural decisions fall between layers that neither specs nor AI agents can govern.
 ---
