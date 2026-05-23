@@ -2,7 +2,6 @@
 import type { CollectionEntry } from 'astro:content'
 import { getCollection, render } from 'astro:content'
 import Backlinks from '@/components/Backlinks.astro'
-import TagList from '@/components/TagList.astro'
 import BackButton from '@/components/Widgets/BackButton.astro'
 import Layout from '@/layouts/Layout.astro'
 
@@ -51,12 +50,6 @@ const badge = maturityBadge[note.data.maturity] ?? maturityBadge.seedling
     <!-- Content -->
     <div id="post-content">
       <Content />
-
-      <!-- Tags -->
-      {note.data.tags?.length > 0 && (
-        <div class="mt-12.6 uno-decorative-line" />
-        <TagList tags={note.data.tags} lang="en" />
-      )}
 
       <!-- Connections (forward declarations + discovered backlinks, unified) -->
       <Backlinks
