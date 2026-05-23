@@ -5,16 +5,20 @@ import { getCollection } from 'astro:content'
 interface Props {
   currentId: string
   collection: 'garden' | 'posts'
+  relatedNotes?: string[]
+  relatedPosts?: string[]
 }
 
-const { currentId, collection } = Astro.props
+const { currentId, collection, relatedNotes = [], relatedPosts = [] } = Astro.props
 
 // Gather all garden notes and posts
 const allNotes: CollectionEntry<'garden'>[] = await getCollection('garden')
 const allPosts: CollectionEntry<'posts'>[] = await getCollection('posts')
 
-// Build a maturity lookup for garden notes
+// Build lookups
 const maturityBySlug = new Map(allNotes.map(n => [n.id, n.data.maturity]))
+const noteBySlug = new Map(allNotes.map(n => [n.id, n]))
+const postByAbbrlink = new Map(allPosts.map(p => [p.data.abbrlink || p.id, p]))
 
 function gardenEmoji(slug: string): string {
   const m = maturityBySlug.get(slug)
@@ -23,28 +27,64 @@ function gardenEmoji(slug: string): string {
   return '🌱'
 }
 
-interface Backlink {
+interface Connection {
   title: string
   href: string
   type: 'garden' | 'post'
   slug?: string
 }
 
-const backlinks: Backlink[] = []
+const seen = new Set<string>() // track hrefs to deduplicate
+const connections: Connection[] = []
 
-// Determine the URL pattern for the current content
+function add(conn: Connection) {
+  if (seen.has(conn.href)) return
+  seen.add(conn.href)
+  connections.push(conn)
+}
+
+// ── 1. Forward-declared connections from this note's frontmatter ──
+
+// related_notes: explicit garden↔garden
+for (const slug of relatedNotes) {
+  const note = noteBySlug.get(slug)
+  if (note) {
+    add({
+      title: note.data.title,
+      href: `/garden/${note.id}/`,
+      type: 'garden',
+      slug: note.id,
+    })
+  }
+}
+
+// related_posts: explicit garden→post
+for (const postPath of relatedPosts) {
+  const cleanSlug = postPath.replace(/^\/|\/$/g, '')
+  const post = postByAbbrlink.get(cleanSlug)
+  if (post) {
+    add({
+      title: post.data.title,
+      href: `/${cleanSlug}/`,
+      type: 'post',
+    })
+  }
+}
+
+// ── 2. Discovered backlinks (reverse connections) ──
+
 const currentSlug = currentId
 const gardenUrlPattern = `/garden/${currentSlug}/`
 const gardenUrlPatternNoTrail = `/garden/${currentSlug}`
 
-// Check garden notes for backlinks
+// Garden notes that reference this content
 for (const note of allNotes) {
   if (note.id === currentId && collection === 'garden') continue
 
-  // Check related_notes frontmatter
-  const relatedNotes = note.data.related_notes || []
-  if (relatedNotes.includes(currentSlug)) {
-    backlinks.push({
+  // Check related_notes frontmatter (reverse: they list us)
+  const noteRelated = note.data.related_notes || []
+  if (noteRelated.includes(currentSlug)) {
+    add({
       title: note.data.title,
       href: `/garden/${note.id}/`,
       type: 'garden',
@@ -53,16 +93,14 @@ for (const note of allNotes) {
     continue
   }
 
-  // Check related_posts frontmatter (for garden→post links)
+  // Check related_posts frontmatter (reverse: garden notes pointing at this post)
   if (collection === 'posts') {
-    const relatedPosts = note.data.related_posts || []
-    const postSlug = currentId
-    // related_posts use format like /slug/ or /the-post-slug/
-    if (relatedPosts.some((rp: string) => {
+    const noteRelatedPosts = note.data.related_posts || []
+    if (noteRelatedPosts.some((rp: string) => {
       const clean = rp.replace(/^\/|\/$/g, '')
-      return clean === postSlug
+      return clean === currentSlug
     })) {
-      backlinks.push({
+      add({
         title: note.data.title,
         href: `/garden/${note.id}/`,
         type: 'garden',
@@ -72,30 +110,26 @@ for (const note of allNotes) {
     }
   }
 
-  // Check body for inline markdown links to this content
+  // Check body for inline links
   if (note.body) {
     if (note.body.includes(gardenUrlPattern) || note.body.includes(gardenUrlPatternNoTrail)) {
-      // Avoid duplicates
-      if (!backlinks.some(b => b.href === `/garden/${note.id}/`)) {
-        backlinks.push({
-          title: note.data.title,
-          href: `/garden/${note.id}/`,
-          type: 'garden',
-          slug: note.id,
-        })
-      }
+      add({
+        title: note.data.title,
+        href: `/garden/${note.id}/`,
+        type: 'garden',
+        slug: note.id,
+      })
     }
   }
 }
 
-// Check posts for backlinks to garden notes
+// Posts that link to this garden note in their body
 if (collection === 'garden') {
   for (const post of allPosts) {
-    // Check body for inline links to this garden note
     if (post.body) {
       if (post.body.includes(gardenUrlPattern) || post.body.includes(gardenUrlPatternNoTrail)) {
         const postSlug = post.data.abbrlink || post.id
-        backlinks.push({
+        add({
           title: post.data.title,
           href: `/${postSlug}/`,
           type: 'post',
@@ -106,18 +140,18 @@ if (collection === 'garden') {
 }
 
 // Sort: garden notes first, then posts; alphabetically within each group
-backlinks.sort((a, b) => {
+connections.sort((a, b) => {
   if (a.type !== b.type) return a.type === 'garden' ? -1 : 1
   return a.title.localeCompare(b.title)
 })
 ---
 
-{backlinks.length > 0 && (
+{connections.length > 0 && (
   <div class="mt-10">
     <div class="uno-decorative-line" />
-    <h2 class="mb-4 text-4 font-semibold">Linked from</h2>
+    <h2 class="mb-4 text-4 font-semibold">Connections</h2>
     <ul class="list-none p-0">
-      {backlinks.map(link => (
+      {connections.map(link => (
         <li class="mb-2.5">
           <a
             href={link.href}
