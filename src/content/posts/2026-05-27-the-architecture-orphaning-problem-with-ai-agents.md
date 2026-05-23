@@ -6,12 +6,9 @@ series: 'suggestible-actor'
 series_order: 3
 series_label: 'The Suggestible Actor'
 tags:
-
-- 'software engineering'
-- 'AI'
-- 'software architecture'
-- 'spec-driven development'
-- 'mental models'
+  - 'software engineering'
+  - 'AI'
+  - 'mental models'
 abbrlink: 'the-architecture-orphaning-problem-with-ai-agents'
 image: /assets/images/architecture-orphaning-cover.jpg
 lang: ''
