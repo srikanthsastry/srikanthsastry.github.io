@@ -1,6 +1,6 @@
 ---
 title: "Directive Governance Degrades Not Destroys"
-maturity: budding
+maturity: evergreen
 tags: [governance, directive-governance, monopoly-rents, rebuttal]
 created: 2026-04-26
 related_notes:

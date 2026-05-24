@@ -1,6 +1,6 @@
 ---
 title: "Directive Governance Cargo Cult"
-maturity: budding
+maturity: evergreen
 tags: [governance, directive-governance, mechanistic-organization, cargo-cult]
 created: 2026-04-27
 related_notes:

@@ -1,6 +1,6 @@
 ---
 title: "Crisis Centralization Ratchet"
-maturity: budding
+maturity: evergreen
 tags: [governance, centralization, crisis, tech-industry, wartime-ceo]
 created: 2026-04-25
 related_notes:

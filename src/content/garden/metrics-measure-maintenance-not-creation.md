@@ -1,6 +1,6 @@
 ---
 title: "Metrics Measure Maintenance Not Creation"
-maturity: budding
+maturity: evergreen
 tags: [metrics, governance, innovation, qualitative-signal-loss]
 created: 2026-04-25
 related_notes:

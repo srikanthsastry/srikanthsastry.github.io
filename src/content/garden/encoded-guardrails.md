@@ -1,6 +1,6 @@
 ---
 title: "Encoded Guardrails"
-maturity: budding
+maturity: evergreen
 tags: [guardrail-erosion, suggestible-actor, guardrail-taxonomy]
 created: 2026-05-17
 related_notes:

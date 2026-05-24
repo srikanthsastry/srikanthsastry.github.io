@@ -1,6 +1,6 @@
 ---
 title: "Expected Damage: Severity Times Time to Mitigation"
-maturity: budding
+maturity: evergreen
 tags: [guardrail-erosion, risk-framework, decision-theory]
 created: 2026-05-17
 related_notes:

@@ -1,6 +1,6 @@
 ---
 title: "Directive Governance Preconditions"
-maturity: budding
+maturity: evergreen
 tags: [governance, directive-governance, preconditions]
 created: 2026-04-27
 related_notes:

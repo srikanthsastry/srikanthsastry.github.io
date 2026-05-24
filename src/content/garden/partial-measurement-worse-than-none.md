@@ -1,6 +1,6 @@
 ---
 title: "Partial Measurement Worse Than None"
-maturity: budding
+maturity: evergreen
 tags: [metrics, measurement, governance, austin]
 created: 2026-04-25
 related_notes:
