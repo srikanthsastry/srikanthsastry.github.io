@@ -4,7 +4,6 @@ maturity: evergreen
 tags: [guardrail-erosion, suggestible-actor, guardrail-taxonomy]
 created: 2026-05-17
 related_notes:
-  - encoded-guardrails-suppress-symptoms
   - three-classes-of-guardrail-erosion-resistance
 excerpt_text: >
   Encoded guardrails are guardrails encoded into the software lifecycle that the agent can modify in situ, within the same codebase it is already changing.

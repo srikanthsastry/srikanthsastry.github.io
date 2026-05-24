@@ -5,7 +5,6 @@ tags: [metrics, governance, innovation, qualitative-signal-loss]
 created: 2026-04-25
 related_notes:
   - data-pipeline-is-achilles-heel
-  - partial-measurement-worse-than-none
 excerpt_text: >
   Metrics measure maintenance, not creation.
 ---
