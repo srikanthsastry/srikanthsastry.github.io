@@ -10,7 +10,6 @@ related_notes:
   - in-software-execution-is-decision-making
   - isomorphic-mimicry-in-tech-governance
   - metrics-measure-maintenance-not-creation
-  - partial-measurement-worse-than-none
 excerpt_text: >
   Directive governance rests on three implicit assumptions about the information pipeline.
 ---

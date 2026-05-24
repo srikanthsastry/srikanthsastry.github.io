@@ -7,7 +7,6 @@ related_notes:
   - in-software-execution-is-decision-making
   - isomorphic-mimicry-in-tech-governance
   - three-assumptions-framework
-  - tooling-advances-prove-brooks-right
 excerpt_text: >
   Essential complexity makes software organizations ungovernable from the top.
 ---
