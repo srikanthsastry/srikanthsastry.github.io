@@ -1,6 +1,6 @@
 ---
 title: "Susceptibility Peaks at Failure"
-maturity: budding
+maturity: evergreen
 tags: [ai, software-design, design-levers]
 created: 2026-04-24
 related_notes:

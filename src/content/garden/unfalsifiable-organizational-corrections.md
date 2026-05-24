@@ -1,6 +1,6 @@
 ---
 title: "Unfalsifiable Organizational Corrections"
-maturity: budding
+maturity: evergreen
 tags: [bounded-rationality, governance, epistemology, decision-making]
 created: 2026-04-25
 related_notes:

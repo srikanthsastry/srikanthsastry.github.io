@@ -1,6 +1,6 @@
 ---
 title: "AI Reviewing AI: Shared Blind Spots"
-maturity: budding
+maturity: evergreen
 tags: [guardrail-erosion, ai-review, blind-spots, model-collapse]
 created: 2026-04-24
 related_notes:

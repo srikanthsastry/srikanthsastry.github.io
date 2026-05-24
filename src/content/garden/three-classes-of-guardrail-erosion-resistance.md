@@ -1,6 +1,6 @@
 ---
 title: "Three Classes of Guardrail Erosion Resistance"
-maturity: budding
+maturity: evergreen
 tags: [guardrail-erosion, taxonomy, formal-verification, suggestible-actor]
 created: 2026-04-24
 related_notes:

@@ -1,6 +1,6 @@
 ---
 title: "Delegation Mimicry Without Cultural Substrate"
-maturity: budding
+maturity: evergreen
 tags: [governance, directive-governance, delegation, cultural-substrate, isomorphism]
 created: 2026-04-26
 related_notes:

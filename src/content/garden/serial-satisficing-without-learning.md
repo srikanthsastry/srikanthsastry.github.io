@@ -1,6 +1,6 @@
 ---
 title: "Serial Satisficing Without Learning"
-maturity: budding
+maturity: evergreen
 tags: [bounded-rationality, governance, layoffs, decision-making]
 created: 2026-04-25
 related_notes:

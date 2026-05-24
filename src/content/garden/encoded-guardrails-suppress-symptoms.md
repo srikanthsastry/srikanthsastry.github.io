@@ -1,6 +1,6 @@
 ---
 title: "Encoded Guardrails Suppress Symptoms Without Addressing the Cause"
-maturity: budding
+maturity: evergreen
 tags: [suggestible-actor, guardrail-erosion, security, guardrail-taxonomy]
 created: 2026-04-26
 related_notes:

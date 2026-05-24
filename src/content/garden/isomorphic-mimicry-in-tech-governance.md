@@ -1,6 +1,6 @@
 ---
 title: "Isomorphic Mimicry In Tech Governance"
-maturity: budding
+maturity: evergreen
 tags: [governance, directive-governance, institutional-theory, isomorphism, tech-industry]
 created: 2026-04-26
 related_notes:

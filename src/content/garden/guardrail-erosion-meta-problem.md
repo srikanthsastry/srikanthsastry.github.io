@@ -1,6 +1,6 @@
 ---
 title: "Guardrail Erosion Is a Meta-Problem"
-maturity: budding
+maturity: evergreen
 tags: [guardrail-erosion, suggestible-actor, self-reinforcing]
 created: 2026-04-24
 related_notes:
