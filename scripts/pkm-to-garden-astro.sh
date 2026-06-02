@@ -249,6 +249,7 @@ for pkm_file in "${FILES[@]}"; do
     pkm_id=$(get_fm "$pkm_file" "id")
     pkm_title=$(get_fm "$pkm_file" "title" | sed 's/^"//;s/"$//')
     pkm_status=$(get_fm "$pkm_file" "status")
+    [ -z "$pkm_status" ] && pkm_status=$(get_fm "$pkm_file" "maturity")
     pkm_tags=$(get_fm "$pkm_file" "tags")
     pkm_created=$(get_fm "$pkm_file" "created")
     pkm_date_added=$(get_fm "$pkm_file" "date_added")
