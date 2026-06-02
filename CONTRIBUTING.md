@@ -22,7 +22,7 @@ Review PKM items (thoughts, notes, sources) related to the post. Not everything 
 
 The script generates `src/content/garden/` files with frontmatter derived from your PKM. Review and adjust:
 - **Title** — auto-derived from the slug if missing; verify it reads well
-- **Maturity** — auto-derived from PKM status; override if wrong
+- **Maturity** — auto-derived from PKM `maturity` field; override if wrong
 - **Excerpt** — auto-extracted first sentence; tighten if needed
 - **Related notes** — auto-populated from PKM cross-refs; add any missing
 
@@ -59,13 +59,13 @@ Read each new garden note. For every concept mentioned that has its own garden e
 
 ### 5. Set Maturity Levels
 
-Review each note and assign the right maturity:
+Review each note and assign the right maturity (same `maturity` field in both PKM and garden):
 
-| Maturity | When to use | PKM equivalent |
-|----------|-------------|----------------|
-| 🌱 `seedling` | Early idea, might change substantially | `raw` or no status |
-| 🌿 `budding` | Developed argument with room to grow | `developing` or `draft` |
-| 🌳 `evergreen` | Stable definition/framework, unlikely to change | `connected` or `stable` |
+| Maturity | When to use |
+|----------|-------------|
+| 🌱 `seedling` | Early idea, might change substantially |
+| 🌿 `budding` | Developed argument with room to grow |
+| 🌳 `evergreen` | Stable definition/framework, unlikely to change |
 
 Sources default to `evergreen`.
 
@@ -82,15 +82,9 @@ git commit -m "Add post: Your Title + garden notes"
 git push origin post/your-post-slug
 ```
 
-### 7. Update PKM Status
+### 7. Verify PKM Maturity
 
-After publishing, update the PKM thought `status` fields to match the garden maturity:
-
-| Garden maturity | PKM status |
-|----------------|------------|
-| `seedling` | `raw` |
-| `budding` | `developing` |
-| `evergreen` | `connected` |
+After publishing, verify the PKM `maturity` fields match the garden maturity. Since both use the same vocabulary (`seedling`, `budding`, `evergreen`), they should already be in sync from the conversion step.
 
 ---
 
