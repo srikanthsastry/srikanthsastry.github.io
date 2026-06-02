@@ -9,6 +9,7 @@ abbrlink: 'relational-switching-costs'
 lang: ''
 excerpt: >
   The fatigue from a day of AI pair-programming isn't information overload or decision fatigue. You are unconsciously switching between five relational modes with the AI — director, trainer, partner, student, consumer — dozens of times per session. Each switch costs executive attention, emotional labor compounds the cost, and the AI's lack of emotional reciprocity prevents recovery. Three mechanisms, one conjecture, falsifiable predictions.
+image: /assets/images/relational-switching-costs-cover.jpg
 categories:
   - Professional
 ---
