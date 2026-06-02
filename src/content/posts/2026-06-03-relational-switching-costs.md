@@ -1,6 +1,6 @@
 ---
 title: "You Don't Have a Relationship with Your LLM. You Have Five."
-published: 2026-06-01
+published: 2026-06-03
 tags:
   - 'AI'
   - 'cognitive psychology'
