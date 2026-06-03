@@ -8,7 +8,7 @@ related_notes:
   - relational-mode-oscillation
   - role-switching-frequency-predicts-stress
 related_posts:
-  - /relational-switching-costs/
+  - /you-dont-have-a-relationship-with-your-llm/
 excerpt_text: >
   Human-AI interaction is genuinely social and effortful, but AI provides no emotional reciprocity — so the cognitive depletion from each relational switch accumulates without attenuation.
 ---

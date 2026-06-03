@@ -9,7 +9,7 @@ related_notes:
   - casa-habituation
   - relational-mode-oscillation
 related_posts:
-  - /relational-switching-costs/
+  - /you-dont-have-a-relationship-with-your-llm/
 excerpt_text: >
   AI agents resist relational stabilization because their social cues are rich but inconsistent.
 ---

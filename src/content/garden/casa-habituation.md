@@ -7,7 +7,7 @@ related_notes:
   - casa-framework
   - categorical-ambiguity-of-ai
 related_posts:
-  - /relational-switching-costs/
+  - /you-dont-have-a-relationship-with-your-llm/
 excerpt_text: >
   The CASA effect no longer replicates for people who grew up with desktop computers.
 ---

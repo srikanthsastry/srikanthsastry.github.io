@@ -7,7 +7,7 @@ related_notes:
   - casa-habituation
   - categorical-ambiguity-of-ai
 related_posts:
-  - /relational-switching-costs/
+  - /you-dont-have-a-relationship-with-your-llm/
 excerpt_text: >
   People apply social rules to computers mindlessly — the response is automatic and below conscious awareness, not effortful anthropomorphism.
 ---

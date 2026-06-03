@@ -6,7 +6,7 @@ created: 2026-06-01
 related_notes:
   - relational-mode-oscillation
 related_posts:
-  - /relational-switching-costs/
+  - /you-dont-have-a-relationship-with-your-llm/
 excerpt_text: >
   Social role-switching frequency predicts stress independent of role count.
 ---

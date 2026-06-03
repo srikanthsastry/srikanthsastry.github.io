@@ -8,7 +8,7 @@ related_notes:
   - categorical-ambiguity-of-ai
   - role-switching-frequency-predicts-stress
 related_posts:
-  - /relational-switching-costs/
+  - /you-dont-have-a-relationship-with-your-llm/
 excerpt_text: >
   Users of LLMs unconsciously oscillate between five relational modes — Director, Trainer, Partner, Student, Consumer — within single interactions, often within minutes.
 ---
