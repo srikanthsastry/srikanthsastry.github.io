@@ -18,5 +18,3 @@ excerpt_text: >
 Map this to a typical coding session: you start commanding ("refactor this function"), shift to collaborating ("what if we tried X instead?"), find yourself teaching ("no, the constraint is Y because..."), then deferring ("actually your approach is better"), then passively reviewing output. Five modes. One conversation. You didn't decide to switch. You just did.
 
 Yang & Ma (2025) independently found five *epistemic* relationship types — Instrumental Reliance, Contingent Delegation, Co-agency Collaboration, Authority Displacement, Epistemic Abstention — with the same structural finding: roles are "dynamic and context-dependent." Their lens is epistemological (how do I know things with this entity?) where Gülay's is relational (what am I to this entity?). Multiple groups carving this space with different vocabularies suggests the oscillation phenomenon is real even if the right framework for describing it is unsettled.
-
-**Limitations:** Gülay: N=22, workshop sessions, not daily use. Yang & Ma: epistemic focus, not affective. Converging first evidence, not proof.
