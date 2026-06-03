@@ -110,15 +110,15 @@ kebab_to_title() {
     echo "$1" | sed 's/-/ /g' | awk '{for(i=1;i<=NF;i++){$i=toupper(substr($i,1,1)) tolower(substr($i,2))}}1'
 }
 
-# Derive maturity from PKM status and type
+# Derive maturity from PKM maturity field and type
 derive_maturity() {
-    local pkm_type="$1" status="$2"
+    local pkm_type="$1" pkm_maturity="$2"
     # Sources default to evergreen
     if [ "$pkm_type" = "source" ]; then
         echo "evergreen"
         return
     fi
-    case "$status" in
+    case "$pkm_maturity" in
         evergreen|connected|stable) echo "evergreen" ;;
         budding|developing|draft)   echo "budding" ;;
         seedling|raw|"")            echo "seedling" ;;
@@ -246,7 +246,8 @@ for pkm_file in "${FILES[@]}"; do
 
     pkm_id=$(get_fm "$pkm_file" "id")
     pkm_title=$(get_fm "$pkm_file" "title" | sed 's/^"//;s/"$//')
-    pkm_status=$(get_fm "$pkm_file" "status")
+    pkm_maturity=$(get_fm "$pkm_file" "maturity")
+    [ -z "$pkm_maturity" ] && pkm_maturity=$(get_fm "$pkm_file" "status")
     pkm_tags=$(get_fm "$pkm_file" "tags")
     pkm_created=$(get_fm "$pkm_file" "created")
     pkm_date_added=$(get_fm "$pkm_file" "date_added")
@@ -268,7 +269,7 @@ for pkm_file in "${FILES[@]}"; do
     fi
 
     # Maturity
-    maturity=$(derive_maturity "$pkm_type" "$pkm_status")
+    maturity=$(derive_maturity "$pkm_type" "$pkm_maturity")
 
     # Tags: parse inline array format [a, b, c]
     tags_line=""
