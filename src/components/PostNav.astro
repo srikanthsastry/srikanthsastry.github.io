@@ -1,0 +1,42 @@
+---
+import { getPostPath } from '@/i18n/path'
+import type { Language } from '@/i18n/config'
+
+interface Props {
+  prevPost: { title: string; slug: string } | null
+  nextPost: { title: string; slug: string } | null
+  lang: Language
+}
+
+const { prevPost, nextPost, lang } = Astro.props
+---
+
+{(prevPost || nextPost) && (
+  <nav class="mt-10" aria-label="Post navigation">
+    <div class="uno-decorative-line" />
+    <div class="flex justify-between items-start gap-6 text-3.75">
+      <div class="flex-1 min-w-0">
+        {prevPost && (
+          <a
+            href={getPostPath(prevPost.slug, lang)}
+            class="group block transition-colors hover:c-primary"
+          >
+            <span class="text-3 c-secondary/60 font-navbar">← Previous</span>
+            <span class="block mt-1 font-title font-medium truncate">{prevPost.title}</span>
+          </a>
+        )}
+      </div>
+      <div class="flex-1 min-w-0 text-right">
+        {nextPost && (
+          <a
+            href={getPostPath(nextPost.slug, lang)}
+            class="group block transition-colors hover:c-primary"
+          >
+            <span class="text-3 c-secondary/60 font-navbar">Next →</span>
+            <span class="block mt-1 font-title font-medium truncate">{nextPost.title}</span>
+          </a>
+        )}
+      </div>
+    </div>
+  </nav>
+)}

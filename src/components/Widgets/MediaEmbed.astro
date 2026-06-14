@@ -1,0 +1,76 @@
+---
+import 'lite-youtube-embed/src/lite-yt-embed.css'
+---
+
+<script>
+// Mermaid disabled — package not installed
+async function setupMermaidEmbeds() {}
+
+// Load YouTube embed script
+async function setupYouTubeEmbeds() {
+  const youtube = document.querySelectorAll('lite-youtube')
+  if (youtube.length === 0) {
+    return
+  }
+
+  try {
+    // @ts-expect-error - No type definitions available for lite-youtube-embed
+    await import('lite-youtube-embed')
+  }
+  catch (error) {
+    console.error('[MediaEmbed] Failed to load YouTube embed:', error)
+  }
+}
+
+// Initialize Twitter widgets
+async function setupTweetEmbeds() {
+  const tweets = document.querySelectorAll('.twitter-tweet')
+  if (tweets.length === 0) {
+    return
+  }
+
+  tweets.forEach((tweet) => {
+    tweet.setAttribute('data-theme', document.documentElement.classList.contains('dark') ? 'dark' : 'light')
+  })
+
+  // Inject Twitter script
+  const script = document.createElement('script')
+  script.src = 'https://platform.twitter.com/widgets.js'
+  script.async = true
+  document.head.appendChild(script)
+}
+
+// Initialize all media embeds
+async function setupMediaEmbeds() {
+  await Promise.allSettled([
+    setupYouTubeEmbeds(),
+    setupTweetEmbeds(),
+    setupMermaidEmbeds(),
+  ])
+}
+
+// Mermaid disabled — package not installed
+function updateMermaidTheme() {}
+
+// Handle horizontal scrolling for gallery
+function handleGalleryWheel(e: WheelEvent) {
+  const container = (e.target as Element)?.closest('.gallery-container') as HTMLElement
+  if (!container) {
+    return
+  }
+
+  // Convert vertical scroll to horizontal
+  const previousScrollLeft = container.scrollLeft
+  container.scrollLeft += e.deltaY
+  if (container.scrollLeft === previousScrollLeft) {
+    return
+  }
+
+  // Prevent default scroll only if horizontal scroll occurred
+  e.preventDefault()
+}
+
+document.addEventListener('astro:page-load', setupMediaEmbeds)
+document.addEventListener('theme-changed', updateMermaidTheme)
+document.addEventListener('wheel', handleGalleryWheel, { passive: false })
+</script>

@@ -1,0 +1,134 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import { getCollection } from 'astro:content'
+import { getPostPath } from '@/i18n/path'
+import { defaultLocale } from '@/config'
+
+interface Props {
+  currentPost: CollectionEntry<'posts'>
+}
+
+const { currentPost } = Astro.props
+const series = currentPost.data.series
+const seriesLabel = currentPost.data.series_label
+
+if (!series) {
+  return
+}
+
+// Get all posts in this series
+const allPosts = await getCollection('posts', ({ data }) => {
+  return data.series === series && (import.meta.env.DEV || !data.draft)
+})
+
+// Sort by series_order
+const seriesPosts = allPosts.sort(
+  (a, b) => (a.data.series_order ?? 0) - (b.data.series_order ?? 0)
+)
+
+// Group by section if sections exist
+const sections = new Map<string, typeof seriesPosts>()
+const hasAnySections = seriesPosts.some(p => p.data.series_section)
+
+if (hasAnySections) {
+  for (const post of seriesPosts) {
+    const section = post.data.series_section || 'Other'
+    if (!sections.has(section)) {
+      sections.set(section, [])
+    }
+    sections.get(section)!.push(post)
+  }
+}
+
+const currentSlug = currentPost.data.abbrlink || currentPost.id
+const currentOrder = currentPost.data.series_order ?? 0
+const prevPost = seriesPosts.find(p => (p.data.series_order ?? 0) === currentOrder - 1)
+const nextPost = seriesPosts.find(p => (p.data.series_order ?? 0) === currentOrder + 1)
+const lang = defaultLocale
+---
+
+<aside class="series-nav not-prose mb-10 mt-2 border-l-3 border-secondary/30 bg-secondary/4 py-4 pl-5 pr-4 rounded-r-lg">
+  <div class="mb-3 font-title text-3.8 font-semibold tracking-tight c-primary">
+    Series: {seriesLabel}
+    <span class="ml-1 font-normal c-secondary/60">
+      ({currentOrder} of {seriesPosts.length})
+    </span>
+  </div>
+
+  {hasAnySections ? (
+    /* Sectioned layout (e.g., Unit Testing with Merits + Practices) */
+    [...sections.entries()].map(([sectionName, posts]) => (
+      <div class="mb-2.5 last:mb-0">
+        <div class="mb-1 text-3.2 font-semibold c-secondary/70">{sectionName}</div>
+        <ol class="m-0 list-none space-y-0.5 p-0">
+          {posts.map((post) => {
+            const slug = post.data.abbrlink || post.id
+            const isCurrent = slug === currentSlug
+            return (
+              <li class="m-0 p-0 text-3.4 leading-relaxed">
+                {isCurrent ? (
+                  <span class="font-medium c-primary">
+                    → {post.data.title}
+                  </span>
+                ) : (
+                  <a
+                    href={getPostPath(slug, lang)}
+                    class="c-secondary/70 no-underline transition-colors hover:c-primary"
+                  >
+                    {post.data.title}
+                  </a>
+                )}
+              </li>
+            )
+          })}
+        </ol>
+      </div>
+    ))
+  ) : (
+    /* Flat layout (e.g., Governance) */
+    <ol class="m-0 list-none space-y-0.5 p-0">
+      {seriesPosts.map((post) => {
+        const slug = post.data.abbrlink || post.id
+        const isCurrent = slug === currentSlug
+        return (
+          <li class="m-0 p-0 text-3.4 leading-relaxed">
+            {isCurrent ? (
+              <span class="font-medium c-primary">
+                → {post.data.title}
+              </span>
+            ) : (
+              <a
+                href={getPostPath(slug, lang)}
+                class="c-secondary/70 no-underline transition-colors hover:c-primary"
+              >
+                {post.data.title}
+              </a>
+            )}
+          </li>
+        )
+      })}
+    </ol>
+  )}
+
+  {/* Prev / Next navigation */}
+  {(prevPost || nextPost) && (
+    <div class="mt-3.5 flex items-center justify-between border-t border-secondary/15 pt-3 text-3.2">
+      {prevPost ? (
+        <a
+          href={getPostPath(prevPost.data.abbrlink || prevPost.id, lang)}
+          class="c-secondary/60 no-underline transition-colors hover:c-primary"
+        >
+          ← Prev
+        </a>
+      ) : <span />}
+      {nextPost ? (
+        <a
+          href={getPostPath(nextPost.data.abbrlink || nextPost.id, lang)}
+          class="c-secondary/60 no-underline transition-colors hover:c-primary"
+        >
+          Next →
+        </a>
+      ) : <span />}
+    </div>
+  )}
+</aside>

@@ -1,0 +1,43 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import PostDate from '@/components/PostDate.astro'
+import { getLangFromLocale } from '@/i18n/lang'
+import { getPostPath } from '@/i18n/path'
+
+interface Props {
+  post: CollectionEntry<'posts'>
+  lang?: string
+}
+
+const { post, lang } = Astro.props
+const currentLang = lang || getLangFromLocale(Astro.currentLocale)
+const slug = post.data.abbrlink || post.id
+const hasImage = !!post.data.image
+---
+
+<a
+  href={getPostPath(slug, currentLang)}
+  class="group block overflow-hidden rounded-lg border border-secondary/10 hover:border-secondary/30 transition-all duration-200"
+>
+  {hasImage && (
+    <div class="aspect-[16/9] overflow-hidden bg-secondary/5">
+      <img
+        src={post.data.image}
+        alt={post.data.title}
+        class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+        loading="lazy"
+      />
+    </div>
+  )}
+  <div class="p-4">
+    <h3 class="font-title font-medium text-4 leading-snug group-hover:c-primary transition-colors mb-1.5">
+      {post.data.title}
+    </h3>
+    <div class="text-3.25 font-time c-secondary/60">
+      <PostDate
+        date={post.data.published}
+        minutes={post.remarkPluginFrontmatter.minutes}
+      />
+    </div>
+  </div>
+</a>

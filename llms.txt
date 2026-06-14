@@ -1,0 +1,24 @@
+# Srikanth Sastry
+
+> Personal blog by Srikanth Sastry — software engineer writing about technology governance, AI system design, privacy infrastructure, and organizational dynamics.
+
+## About
+
+Srikanth Sastry is a staff-level software engineer specializing in privacy infrastructure at scale. He writes original frameworks and structural analyses — not opinion pieces or news commentary. His writing argues from mechanism and first principles.
+
+## Key Articles
+
+- [The Suggestible Actor](https://srikanth.sastry.name/the-suggestible-actor/): Software design assumes actors have intent. AI coding agents don't. This is a category error with design consequences.
+- [Cargo Cult Governance](https://srikanth.sastry.name/cargo-cult-governance/): Why copying governance structures without understanding the problem they solve produces organizations that look governed but aren't.
+- [The Situationship](https://srikanth.sastry.name/the-situationship/): The ambiguous relationship between engineering teams and their governance functions — neither fully committed nor fully independent.
+- [Deliverance](https://srikanth.sastry.name/deliverance/): How delivery pressure systematically erodes governance controls through rational local decisions.
+- [Subsidiarity is not Hayek](https://srikanth.sastry.name/subsidiarity-is-not-hayek/): Distinguishing subsidiarity (push decisions down) from Hayekian decentralization (the center cannot know). They look similar but produce different organizational designs.
+- [SECURE Data Act: The Dilution in Pseudonymization](https://srikanth.sastry.name/secure-data-act-pseudonymization/): Close reading of the SECURE Data Act's pseudonymization provisions and where they dilute existing privacy protections.
+
+## Digital Garden
+
+The site includes a [digital garden](https://srikanth.sastry.name/garden/) of interconnected concept notes — atomic ideas linked to published articles. Topics include directive governance, organizational dynamics, AI agent design patterns, and privacy engineering.
+
+## Feed
+
+RSS feed available at: https://srikanth.sastry.name/feed.xml

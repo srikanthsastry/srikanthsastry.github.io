@@ -1,0 +1,22 @@
+/* Inter Variable Font — display/titles/nav/body */
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-VF.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+/* STIXTwoText Variable Font — kept for potential accent use */
+@font-face {
+  font-family: "STIX";
+  src: url("/fonts/STIX-VF.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 400 700;
+}
+@font-face {
+  font-family: "STIX-Italic";
+  src: url("/fonts/STIX-Italic-VF.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 400 700;
+}
