@@ -6,13 +6,10 @@ created: 2026-04-24
 related_notes:
   - ambient-to-local
   - directive-gap
-  - directive-gap-hidden-by-confabulation
-  - hallucination-is-mathematically-inevitable
   - suggestible-actor-properties
   - susceptibility-peaks-at-failure
 related_posts:
   - /the-hidden-directive-gap/
-  - /the-suggestible-actor/
 excerpt_text: >
   AI agent confabulation is not random — it is plausible-looking wrongness constructed from pattern and proximity rather than knowledge.
 ---

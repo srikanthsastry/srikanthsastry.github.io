@@ -1,5 +1,5 @@
 ---
-title: "'The Suggestible Actor: Four Properties'"
+title: "The Suggestible Actor: Four Properties"
 maturity: evergreen
 tags: [ai, software-design, actor-models, suggestible-actor]
 created: 2026-04-24
@@ -7,18 +7,13 @@ related_notes:
   - ai-agent-category-error
   - ambient-to-local
   - confabulation-is-plausible
-  - contributor-poker-review-as-investment
   - directive-gap
-  - directive-gap-hidden-by-confabulation
   - friction-requires-intent
   - goal-vs-intent
-  - hallucination-is-mathematically-inevitable
   - intent-spectrum
   - susceptibility-peaks-at-failure
-  - two-layer-governance-model
 related_posts:
   - /the-hidden-directive-gap/
-  - /the-suggestible-actor/
 excerpt_text: >
   The suggestible actor is defined by four properties that together predict its failure modes.
 ---

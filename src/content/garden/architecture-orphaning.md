@@ -1,6 +1,6 @@
 ---
 title: "Architecture Orphaning"
-maturity: budding
+maturity: evergreen
 tags: [software-architecture, AI, suggestible-actor]
 created: 2026-05-23
 related_notes: []

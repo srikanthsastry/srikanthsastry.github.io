@@ -1,13 +1,9 @@
 ---
 title: "Behavioral Tests vs. Architectural Coherence Tests"
-maturity: budding
+maturity: evergreen
 tags: [software-architecture, AI, testing]
 created: 2026-05-23
-related_notes:
-  - architecture-orphaning
-  - structural-guardrails
-  - test-behavior-not-implementation
-  - two-layer-governance-model
+related_notes: []
 related_posts:
   - /the-hidden-directive-gap/
   - /the-architecture-orphaning-problem-with-ai-agents/
