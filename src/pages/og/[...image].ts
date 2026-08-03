@@ -1,3 +1,4 @@
+export const prerender = false
 import type { CollectionEntry } from 'astro:content'
 import { OGImageRoute } from 'astro-og-canvas'
 import { getCollection } from 'astro:content'
@@ -26,7 +27,7 @@ export const { getStaticPaths, GET } = await OGImageRoute({
     title: page.title,
     description: page.description,
     logo: {
-      path: './public/icons/og-logo.png', // Required local path and PNG format
+      path: './public/icons/og-logo.png',
       size: [250],
     },
     border: {
