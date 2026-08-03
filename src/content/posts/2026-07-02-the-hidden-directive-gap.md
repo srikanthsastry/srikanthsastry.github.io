@@ -1,6 +1,6 @@
 ---
 title: "The Hidden Directive Gap"
-published: 2026-08-03
+published: 2026-07-02
 series: 'suggestible-actor'
 series_order: 4
 series_label: 'The Suggestible Actor'
