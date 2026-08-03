@@ -8,6 +8,8 @@ related_notes:
   - directive-gap
   - suggestible-actor-properties
   - susceptibility-peaks-at-failure
+related_posts:
+  - /the-hidden-directive-gap/
 excerpt_text: >
   AI agent confabulation is not random — it is plausible-looking wrongness constructed from pattern and proximity rather than knowledge.
 ---

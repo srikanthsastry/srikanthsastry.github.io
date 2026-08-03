@@ -8,6 +8,8 @@ related_notes:
   - confabulation-is-plausible
   - suggestible-actor-properties
   - susceptibility-peaks-at-failure
+related_posts:
+  - /the-hidden-directive-gap/
 excerpt_text: >
   The directive gap is the distance between the human's goal (with all their ambient knowledge) and the context actually available to the agent during execution.
 ---

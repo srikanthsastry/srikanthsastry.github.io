@@ -12,6 +12,8 @@ related_notes:
   - goal-vs-intent
   - intent-spectrum
   - susceptibility-peaks-at-failure
+related_posts:
+  - /the-hidden-directive-gap/
 excerpt_text: >
   The suggestible actor is defined by four properties that together predict its failure modes.
 ---
