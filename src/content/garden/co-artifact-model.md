@@ -16,10 +16,4 @@ excerpt_text: >
 
 **Spec alone is unstable across models; the pair (spec, code) is stable relative to a given model and harness.**
 
-Spec-Driven Development converges to a fixed point where tests pass for a given model M1. That fixed point is not "directive gap closed" but "M1's confabulations fill remaining gaps in ways that happen to align with intent" — the [hidden directive gap](/garden/directive-gap-hidden-by-confabulation/).
-
-Treating (spec, code) as co-artifacts makes the stability explicit. Both are committed. For constant M1, the reverse pass observer says "conforms." When model changes to M2, (spec, code) may no longer be stable. The co-artifact evolution is `(spec, code) → (spec, code, deviations, model) → (spec', code')`. This reframes model upgrades as compiler upgrades: existing correct behavior must be re-validated against the new interpreter.
-
-This is the complement to [two-layer governance](/garden/two-layer-governance-model/): spec layer governs functional correctness, co-artifact stability governs model-relative interpretation.
-
-Related: [directive-gap](/garden/directive-gap/), [architecture-orphaning](/garden/architecture-orphaning/)
+Spec-driven development converges where tests pass for M1. That point is not [directive-gap](/garden/directive-gap/) closed. It is M1's confabulations filling gaps in ways that align with intent: the [hidden directive gap](/garden/directive-gap-hidden-by-confabulation/). Treating (spec, code) as co-artifacts makes stability explicit and complements [two-layer-governance-model](/garden/two-layer-governance-model/). [architecture-orphaning](/garden/architecture-orphaning/) shows why specs cannot enforce this layer, so model upgrades become compiler upgrades that must re-validate existing behavior.

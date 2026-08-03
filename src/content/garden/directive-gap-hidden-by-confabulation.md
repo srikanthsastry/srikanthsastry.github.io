@@ -18,14 +18,4 @@ excerpt_text: >
 
 **When iterating on a spec, convergence against a model's confabulation pattern is indistinguishable from convergence against intent.**
 
-The directive gap between spec and intent never fully closes — it goes *invisible* when the model's confabulation happens to fill the remaining gaps in ways that match the author's intent. The author stops iterating because the tests pass, not because the spec is complete. The convergence is real but fragile: it is convergence against *this model's* confabulation pattern, not against a model-independent specification.
-
-When the model changes, different confabulations fill the same gaps differently. Tests break. The directive gap reappears. The spec feels "model-relative" (Wasowski's observation), but the instability was always there — the prior model's confabulations were masking it.
-
-This explains why Wasowski found that one executable test survived four model generations while a 1,500-word spec needed reinterpretation each time: the test encodes behavior formally (model-independent), while the spec relies on the model to fill directive gaps (model-dependent).
-
-Implication: SDD's convergence criterion is wrong. "Tests pass" is necessary but not sufficient — it conflates "the spec is complete" with "the model's confabulations happen to align with intent." A truly complete spec would survive model changes. The gap between those two states is the hidden directive gap.
-
-Potential follow-up post to Act 3. The compiler analogy: imagine if every compiler release changed which language features it supported, so source code needed rewriting each time. That's what model-relative specs feel like — but the instability is in the spec's incompleteness, not in the model.
-
-Related: [suggestible-actor-properties](/garden/suggestible-actor-properties/), [confabulation-is-plausible](/garden/confabulation-is-plausible/), [directive-gap](/garden/directive-gap/)
+The [directive-gap](/garden/directive-gap/) goes invisible when the model's [confabulations](/garden/confabulation-is-plausible/) fill gaps in ways that match intent. Convergence is real but fragile: against this model's pattern, not a model-independent spec. When model changes, the gap reappears. Wasowski's test surviving four generations while a 1,500-word spec needed reinterpretation shows the split: tests are formal, specs are model-dependent. This is the core of [directive-gap-hidden-by-confabulation](/garden/directive-gap-hidden-by-confabulation/) itself, complementary to [co-artifact-model](/garden/co-artifact-model/) and [two-layer-governance-model](/garden/two-layer-governance-model/), diagnosed via [reverse-pass-observer](/garden/reverse-pass-observer/) and rooted in [suggestible-actor-properties](/garden/suggestible-actor-properties/).
