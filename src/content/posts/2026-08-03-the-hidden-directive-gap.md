@@ -13,7 +13,7 @@ abbrlink: 'the-hidden-directive-gap'
 image: /assets/images/hidden-directive-gap-cover.webp
 lang: ''
 excerpt: >
-  Spec-Driven Development shifts the job from writing code to defining what correct means. But it hides a trap: the spec looks stable until you change the model. The fix is to treat spec and code as [co-artifacts](/garden/co-artifact-model/) and use the new model as an [observer](/garden/reverse-pass-observer/).
+  Spec-Driven Development shifts the job from writing code to defining what correct means. But it hides a trap: the spec looks stable until you change the model. The fix is to treat spec and code as co-artifacts and use the new model as an observer.
 categories:
   - Professional
 ---
