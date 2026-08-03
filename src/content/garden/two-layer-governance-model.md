@@ -3,7 +3,14 @@ title: "Two-Layer Governance Model"
 maturity: evergreen
 tags: [software-architecture, AI, spec-driven-development]
 created: 2026-05-23
-related_notes: []
+related_notes:
+  - architecture-orphaning
+  - behavioral-vs-architectural-coherence-tests
+  - directive-gap
+  - directive-gap-hidden-by-confabulation
+  - review-is-the-bottleneck
+  - structural-guardrails
+  - suggestible-actor-properties
 related_posts:
   - /the-hidden-directive-gap/
   - /the-architecture-orphaning-problem-with-ai-agents/
