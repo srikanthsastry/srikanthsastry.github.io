@@ -6,8 +6,13 @@ created: 2026-04-24
 related_notes:
   - ambient-to-local
   - confabulation-is-plausible
+  - directive-gap-hidden-by-confabulation
   - suggestible-actor-properties
   - susceptibility-peaks-at-failure
+  - two-layer-governance-model
+related_posts:
+  - /the-hidden-directive-gap/
+  - /the-suggestible-actor/
 excerpt_text: >
   The directive gap is the distance between the human's goal (with all their ambient knowledge) and the context actually available to the agent during execution.
 ---

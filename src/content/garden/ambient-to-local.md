@@ -9,6 +9,9 @@ related_notes:
   - friction-requires-intent
   - suggestible-actor-properties
   - susceptibility-peaks-at-failure
+related_posts:
+  - /the-hidden-directive-gap/
+  - /the-suggestible-actor/
 excerpt_text: >
   The core design principle for the suggestible actor: convert ambient knowledge into local context.
 ---

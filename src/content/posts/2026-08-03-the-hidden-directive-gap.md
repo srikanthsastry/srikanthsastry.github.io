@@ -13,7 +13,7 @@ abbrlink: 'the-hidden-directive-gap'
 image: /assets/images/hidden-directive-gap-cover.webp
 lang: ''
 excerpt: >
-  Spec-Driven Development shifts the job from writing code to defining what correct means. But it hides a trap: the spec looks stable until you change the model. The fix is to treat spec and code as co-artifacts and use the new model as an observer.
+  Spec-Driven Development shifts the job from writing code to defining what correct means. But it hides a trap: the spec looks stable until you change the model. The fix is to treat spec and code as [co-artifacts](/garden/co-artifact-model/) and use the new model as an [observer](/garden/reverse-pass-observer/).
 categories:
   - Professional
 ---
@@ -48,7 +48,7 @@ The spec is unstable relative to different AI models. But (spec, model) combinat
 
 In some ways, the problem is worse than before. The spec-based development before AI agents exposed the directive gap no matter how nuanced, so that you knew where your spec was deficient. AI agents now hide any directive gap below a threshold and are only revealed when the model changes. This lulls you into a false sense of security with a rude awakening on the other side of a model upgrade.
 
-How do you address this hidden gap? If you try to make the spec detailed enough to be model independent then (a) you have no idea if you have actually succeeded, and (b) spec becomes as detailed as the programming language itself, and is effectively self-defeating. Instead, I suggest a reframed approach: *what if, instead of treating spec as the primary artifact, we treated both spec and code as co-artifacts*, in a [two-layer governance model](/garden/two-layer-governance-model/), *and we measured mutual fidelity using the AI agent?*
+How do you address this hidden gap? If you try to make the spec detailed enough to be model independent then (a) you have no idea if you have actually succeeded, and (b) spec becomes as detailed as the programming language itself, and is effectively self-defeating. Instead, I suggest a reframed approach: *what if, instead of treating spec as the primary artifact, we treated both spec and code as [co-artifacts](/garden/co-artifact-model/)*, in a [two-layer governance model](/garden/two-layer-governance-model/), *and we measured mutual fidelity using the AI agent?*
 
 ## The "reverse pass": AI agent as an observer
 

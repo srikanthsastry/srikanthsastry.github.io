@@ -4,8 +4,10 @@ maturity: budding
 tags: [suggestible-actor, spec-driven-development, directive-gap, confabulation]
 created: 2026-05-22
 related_notes:
+  - co-artifact-model
   - confabulation-is-plausible
   - directive-gap
+  - reverse-pass-observer
   - suggestible-actor-properties
   - two-layer-governance-model
 related_posts:
