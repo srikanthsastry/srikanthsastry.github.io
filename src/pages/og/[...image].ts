@@ -18,8 +18,8 @@ const pages = Object.fromEntries(
 )
 
 // Configure Open Graph image generation route
-// Fonts are local to avoid network fetch at build time (api.fontsource.org timeouts in offline Hatch spaces)
-// astro-og-canvas defaults to fetching Noto Sans from fontsource CDN; we override via local TTFs.
+// Fonts are local via @fontsource/noto-sans to avoid network fetch at build time (api.fontsource.org timeouts in offline Hatch spaces)
+// astro-og-canvas defaults to fetching Noto Sans from fontsource CDN; we override via versioned npm package.
 // eslint-disable-next-line antfu/no-top-level-await
 export const { getStaticPaths, GET } = await OGImageRoute({
   param: 'image',
@@ -27,10 +27,10 @@ export const { getStaticPaths, GET } = await OGImageRoute({
   getImageOptions: (_path, page) => ({
     title: page.title,
     description: page.description,
-    // Local fonts: must be listed here (inside getImageOptions) so they override the default remote URL
+    // Local fonts from @fontsource/noto-sans (woff) - versioned, offline, no remote fetch
     fonts: [
-      './public/fonts/NotoSans-Regular.ttf',
-      './public/fonts/NotoSans-Bold.ttf',
+      './node_modules/@fontsource/noto-sans/files/noto-sans-latin-400-normal.woff',
+      './node_modules/@fontsource/noto-sans/files/noto-sans-latin-700-normal.woff',
     ],
     logo: {
       path: './public/icons/og-logo.png', // Required local path and PNG format
