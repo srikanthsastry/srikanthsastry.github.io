@@ -1,7 +1,7 @@
 ---
 
 title: "The Consenting Adults Problem"
-published: 2026-09-14
+published: 2026-08-15
 series: 'suggestible-actor'
 series_order: 5
 series_label: 'The Suggestible Actor'
