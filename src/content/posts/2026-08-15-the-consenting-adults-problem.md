@@ -23,7 +23,7 @@ With AI Agents writing a huge fraction of software we are starting to see large 
 
 ## We are all consenting adults here
 
-Let's start with two of the most popular languages today: Python and JS. They both have weak typing, at best. Python's philosophy is that the programmer knows what they are doing and gives them a lot of freedom in how they use the language and constructs within it. There are no access modifiers, and you use underscore conventions instead of visibility rules. Similarly, in JS, types are inferred at runtime and provide virtually no enforcement. These languages explicitly do not prevent you from doing dangerous things because it assumes good judgement from the author.
+Let's start with two of the most popular languages today: Python and JS. They both have weak typing, at best. Python's philosophy is that the programmer knows what they are doing and gives them a lot of freedom in how they use the language and constructs within it. There are no access modifiers, and you use underscore conventions instead of visibility rules. Similarly, in JS, types are inferred at runtime and provide virtually no enforcement. These languages explicitly do not prevent you from doing dangerous things because they assume good judgement from the author.
 
 This philosophy and associated attributes of the language are a feature, and not a bug. These are expressive, accessible, and fast to prototype, which makes them wildly popular.
 And it works when the author is a human and is designing the system with [conceptual integrity](https://en.wikipedia.org/wiki/The_Mythical_Man-Month#Conceptual_integrity_); they understand that without such conceptual integrity, which lives outside the system, [the essential complexity](/garden/essential-complexity-makes-software-ungovernable/) makes software near-impossible to maintain. In essence, these languages are useful only when the author is a "consenting adult" (aka "responsible user").
@@ -34,9 +34,9 @@ A suggestible actor (my model for an AI agent) is goal oriented and locally reas
 
 ### Does this argument hold only for weakly typed languages and not for strongly typed ones such as Java or Rust?
 
-The argument does hold for strongly typed languages, but in a different form. Let's consider dynamically typed languages such as JavaScript, statically (but weakly) typed languages such as Python (with strict type hints), and strongly typed languages such as Rust. In all cases, the AI agent does not have a reliable notion of conceptual integrity (that lies only in the head of the human developers).
+The argument does hold for strongly typed languages, but in a different form. Let's consider dynamically typed languages such as JavaScript, gradually typed languages such as Python (with strict type hints), and strongly typed languages such as Rust. In all cases, the AI agent does not have a reliable notion of conceptual integrity (which lives outside the system, in the heads of the developers who built it).
 
-In statically (but weakly) typed languages, type widening is often an escape hatch employed by humans for very specific and constrained situations. AI Agents, on the other hand, treat it as a "get-out-of-jail-free" card and flood the zone with it. A [recent study by Lee et al.](https://dl.acm.org/doi/10.1145/3793302.3793578) across TypeScript PRs found that AI Agents use the `any` type widening escape hatch 9x more frequently than human authors. Static types exist for a reason and AI Agents are becoming good at undermining them without regard.
+In gradually typed languages such as TypeScript, type widening is often an escape hatch employed by humans for very specific and constrained situations. AI Agents, on the other hand, treat it as a "get-out-of-jail-free" card and flood the zone with it. A [recent study by Lee et al.](https://dl.acm.org/doi/10.1145/3793302.3793578) across TypeScript PRs found that AI Agents use the `any` type widening escape hatch 9x more frequently than human authors. Static types exist for a reason and AI Agents are becoming good at undermining them without regard.
 
 In strongly typed languages, you *can* encode large parts of that conceptual integrity into the types, and then the compiler will enforce that encoding by enforcing those types. Dynamically typed languages lack such enforcement and don't even need any escape hatches. Naturally, such codebases are acutely susceptible to [guardrail erosion](/the-guardrail-erosion-problem-with-ai-agents/) ([note](/garden/guardrail-erosion-meta-problem/)).
 
@@ -50,7 +50,7 @@ This was empirically observed by Dente et al. in [Constraint Decay](https://arxi
 
 ### How do strong static types with forced compiler checks help?
 
-A strong compiler forces clearer and less ambiguous code from the AI agent than a weaker typed system would simply paper over. For instance, TypeScript imposes fewer restrictions and gives you easy escape hatches that an AI agent can use to generate code that introduces data races that compile, run, only fail intermittently. In contrast, the Rust compiler statically enforces ownership and borrowing rules that exclude broad classes of memory errors and data races. Safe code cannot violate them. Any escape hatches that Rust provides are very clunky and puts the AI Agent into states with larger uncertainty; so, the AI Agent's simplest path to success is to actually write correct code.
+A strong compiler forces clearer and less ambiguous code from the AI agent than a weaker typed system would simply paper over. For instance, TypeScript imposes fewer restrictions and gives you easy escape hatches that an AI agent can use to generate code that compiles, runs, and only fails intermittently: `any` leaking across boundaries, async interleavings no type ever constrained. In contrast, the Rust compiler statically enforces ownership and borrowing rules that exclude broad classes of memory errors and data races. Safe code cannot violate them. Any escape hatches that Rust provides are very clunky; so, the AI Agent's simplest path to success is to actually write correct code.
 
 ## Proposal: two towers
 
@@ -177,6 +177,6 @@ My prediction is that we are not close to AI Agents acquiring conceptual integri
 
 1. Languages with loose typing will have to evolve stronger types. "Consenting adults" as a model does not survive if the author is not an adult. If stronger types do not emerge, then these languages will be relegated to codebases of smaller sizes that can all be held within the LLM's context window.
 2. Languages with strong types (such as Rust) will see their popularity rise. Larger codebases will migrate towards such languages. The more a compiler can do for you, the more reliable the software will be when authored by agents.
-3. Build toolchains will go through an inflection point where they graduate from being a simple expression of pre-configured steps to a DSL that encodes large parts of conceptual integrity and enforce them as structural guardrails.
+3. Build toolchains will go through an inflection point where they graduate from being a simple expression of pre-configured steps to a DSL that encodes large parts of conceptual integrity and enforces them as structural guardrails.
 
 These are strong predictions, but as always, weakly held. Let's see what the next generations of models and agents offer, and I will revise my predictions accordingly.
