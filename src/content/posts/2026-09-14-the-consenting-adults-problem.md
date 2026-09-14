@@ -10,6 +10,7 @@ tags:
   - 'AI'
   - 'mental models'
 abbrlink: 'the-consenting-adults-problem'
+image: /assets/images/consenting-adults-cover.webp
 lang: ''
 excerpt: >
   Permissive languages assumed a consenting adult at the keyboard. AI agents are not consenting adults. The way out is deterministic enforcement: checkers the agent cannot move, and types that make the disallowed unwritable.
